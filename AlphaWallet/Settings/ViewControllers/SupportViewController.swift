@@ -130,14 +130,14 @@ extension SupportViewController: UITableViewDelegate {
         case .facebook:
             logAccessFacebook()
             openURL(.facebook)
-//        case .blog:
-//            break
-//        case .github:
-//            logAccessGithub()
-//            openURL(.github)
-//        case .email:
-//            let attachments = Features.default.isAvailable(.isAttachingLogFilesToSupportEmailEnabled) ? DDLogger.logFilesAttachments : []
-//            resolver.present(from: self, attachments: attachments)
+        case .blog:
+            break
+        case .github:
+            logAccessGithub()
+            openURL(.github)
+        case .email:
+            let attachments = Features.default.isAvailable(.isAttachingLogFilesToSupportEmailEnabled) ? DDLogger.logFilesAttachments : []
+            resolver.present(from: self, attachments: attachments)
         }
     }
 

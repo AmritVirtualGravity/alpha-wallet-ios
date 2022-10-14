@@ -613,8 +613,7 @@ extension WalletFilter {
         return [
             .all,
             .assets,
-            // Collectibles hidden for now so the enum is commented
-//            .collectiblesOnly,
+            .collectiblesOnly,
             .defi,
             .governance,
         ]

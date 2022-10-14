@@ -35,7 +35,7 @@ extension Constants {
 
     // social
     static let website = "https://alphawallet.com/"
-    static let twitterUsername = "Official_LIF3"
+    static let twitterUsername = "AlphaWallet"
     static let redditGroupName = "r/AlphaWallet/"
     static let facebookUsername = "AlphaWallet"
 

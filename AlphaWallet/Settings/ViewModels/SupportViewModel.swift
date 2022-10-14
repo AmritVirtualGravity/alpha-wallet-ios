@@ -14,7 +14,9 @@ class SupportViewModel: NSObject {
         R.string.localizable.settingsSupportTitle()
     }
 
-    var rows: [SupportRow] = [.telegramCustomer, .discord, .email, .twitter, .github, .faq]
+//    var rows: [SupportRow] = [.telegramCustomer, .discord, .email, .twitter, .github, .faq]
+    
+    var rows: [SupportRow] = [.telegramCustomer, .discord, .twitter, .faq]
 
     func cellViewModel(indexPath: IndexPath) -> SettingTableViewCellViewModel {
         let row = rows[indexPath.row]
@@ -29,10 +31,7 @@ enum SupportRow {
     case reddit
     case facebook
     //TODO remove if unused
-    case blog
     case faq
-    case github
-    case email
 
     var urlProvider: URLServiceProvider? {
         switch self {
@@ -48,10 +47,6 @@ enum SupportRow {
             return URLServiceProvider.facebook
         case .faq:
             return URLServiceProvider.faq
-        case .github:
-            return URLServiceProvider.github
-        case .blog, .email:
-            return nil
         }
     }
 
@@ -69,19 +64,11 @@ enum SupportRow {
             return URLServiceProvider.facebook.title
         case .faq:
             return URLServiceProvider.faq.title
-        case .blog:
-            return R.string.localizable.supportBlogTitle()
-        case .email:
-            return R.string.localizable.supportEmailTitle()
-        case .github:
-            return URLServiceProvider.github.title
         }
     }
 
     var image: UIImage? {
         switch self {
-        case .email:
-            return R.image.iconsSettingsEmail()
         case .discord:
             return URLServiceProvider.discord.image
         case .telegramCustomer:
@@ -94,10 +81,6 @@ enum SupportRow {
             return URLServiceProvider.facebook.image
         case .faq:
             return R.image.settings_faq()
-        case .blog:
-            return R.image.settings_faq()
-        case .github:
-            return URLServiceProvider.github.image
         }
     }
 }

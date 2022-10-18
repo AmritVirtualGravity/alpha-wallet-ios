@@ -24,10 +24,10 @@
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" name="LaunchScreen"/>
                         <constraints>
-                            <constraint firstItem="TLU-Js-ziX" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="XAo-4W-iCx"/>
-                            <constraint firstItem="TLU-Js-ziX" firstAttribute="trailing" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="dCr-P7-iQf"/>
-                            <constraint firstAttribute="bottom" secondItem="TLU-Js-ziX" secondAttribute="bottom" id="jwl-im-vR5"/>
-                            <constraint firstItem="TLU-Js-ziX" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="tOL-hT-pI0"/>
+                            <constraint firstItem="TLU-Js-ziX" firstAttribute="bottom" secondItem="Bcu-3y-fUS" secondAttribute="bottom" constant="34" id="298-gA-b6f"/>
+                            <constraint firstItem="TLU-Js-ziX" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="MQC-5A-Kfk"/>
+                            <constraint firstItem="TLU-Js-ziX" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="-47" id="oDw-Cw-Ii7"/>
+                            <constraint firstItem="TLU-Js-ziX" firstAttribute="trailing" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="vfU-Ij-M6G"/>
                         </constraints>
                     </view>
                 </viewController>

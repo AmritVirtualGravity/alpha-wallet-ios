@@ -216,7 +216,6 @@ public enum RPCServer: Hashable, CaseIterable {
         case .klaytnCypress, .klaytnBaobabTestnet: return nil
         case .phi: return nil
         case .ioTeX, .ioTeXTestnet: return nil
-//        case .tomb_chain: return nil
         }
     }
 
@@ -319,7 +318,7 @@ public enum RPCServer: Hashable, CaseIterable {
             case .ioTeX: return nil
             case .ioTeXTestnet: return nil
             case .candle: return "https://candleexplorer.com/api"
-            case .tomb_chain: return nil
+            case .tomb_chain: return "https://tombscout.com/api"
             }
         }()
         return urlString.flatMap { URL(string: $0) }
@@ -346,8 +345,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .custom(let custom):
             return custom.etherscanCompatibleType
         case .ioTeX, .ioTeXTestnet: return .etherscan
-//        case .tomb_chain:
-//            return .unknown
+            
         }
     }
 
@@ -378,8 +376,8 @@ public enum RPCServer: Hashable, CaseIterable {
     //Optimistic don't allow changing the gas price and limit
     public var canUserChangeGas: Bool {
         switch self {
-        case .main, .ropsten, .rinkeby, .kovan, .goerli, .fantom, .heco, .heco_testnet, .binance_smart_chain, .binance_smart_chain_testnet, .candle, .polygon, .poa, .sokol, .classic, .xDai, .phi, .phi2, .artis_sigma1, .artis_tau1, .mumbai_testnet, .callisto, .cronosTestnet, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .arbitrum, .palm, .palmTestnet: return true
-        case .optimistic, .optimisticKovan, .arbitrumRinkeby, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .tomb_chain: return false
+        case .main, .ropsten, .rinkeby, .kovan, .goerli, .fantom, .heco, .heco_testnet, .binance_smart_chain, .binance_smart_chain_testnet, .candle, .polygon, .poa, .sokol, .classic, .xDai, .phi, .phi2, .artis_sigma1, .artis_tau1, .mumbai_testnet, .callisto, .cronosTestnet, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .arbitrum, .palm, .palmTestnet, .tomb_chain: return true
+        case .optimistic, .optimisticKovan, .arbitrumRinkeby, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet: return false
         }
     }
 
@@ -644,7 +642,7 @@ public enum RPCServer: Hashable, CaseIterable {
             case .ioTeX: return "https://babel-api.mainnet.iotex.io"
             case .ioTeXTestnet: return "https://babel-api.testnet.iotex.io"
             case .candle: return "https://rpc.cndlchain.com"
-            case .tomb_chain: return "https://rpc.tombchain.com/\(Constants.Credentials.infuraKey)"
+            case .tomb_chain: return "https://rpc.tombchain.com"
             }
         }()
         return URL(string: urlString)!

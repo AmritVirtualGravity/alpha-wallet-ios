@@ -78,7 +78,7 @@ extension RPCServer {
         case .ioTeX: return R.image.ioTeX()
         case .ioTeXTestnet: return R.image.ioTeXTestnet()
         case .candle: return R.image.iconsTokensCandle()
-        case .tomb_chain: return R.image.iconsTokensCandle()
+        case .tomb_chain: return R.image.iconsTokensTombChain()
         }
     }
 

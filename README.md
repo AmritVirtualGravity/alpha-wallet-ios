@@ -1,10 +1,10 @@
 # AlphaWallet - Advanced, Open Source Ethereum Mobile Wallet & dApp Browser for iOS
 
 [![Build Status](https://travis-ci.com/AlphaWallet/alpha-wallet-ios.svg?branch=master)](https://github.com/AlphaWallet/alpha-wallet-ios/tree/master)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg )](https://GitHub.com/AlphaWallet/alpha-wallet-ios/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/AlphaWallet/alpha-wallet-ios/graphs/commit-activity)
 [![GitHub contributors](https://img.shields.io/github/contributors/AlphaWallet/alpha-wallet-ios.svg)](https://github.com/AlphaWallet/alpha-wallet-ios/graphs/contributors)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AlphaWallet/alpha-wallet-ios/blob/master/LICENSE)
-[![codecov](https://codecov.io/gh/AlphaWallet/alpha-wallet-ios/branch/master/graph/badge.svg )](https://codecov.io/gh/AlphaWallet/alpha-wallet-ios)
+[![codecov](https://codecov.io/gh/AlphaWallet/alpha-wallet-ios/branch/master/graph/badge.svg)](https://codecov.io/gh/AlphaWallet/alpha-wallet-ios)
 
 AlphaWallet is an open source programmable blockchain apps platform. It's compatible with tokenisation framework TokenScript, offering businesses and their users in-depth token interaction, a clean white label user experience and advanced security options. Supports all Ethereum based networks.
 
@@ -20,12 +20,13 @@ AlphaWallet and TokenScript have been used by tokenisation projects like FIFA an
 
 - [About AlphaWallet — Features](#about-alphawallet---features)
 - [Getting Started](#getting-started)
-    - [Updating GemFile or Podfile](#updating-gemfile-or-podfile)
-    - [ Replace API Keys](#replace-api-keys)
+  - [Updating GemFile or Podfile](#updating-gemfile-or-podfile)
+  - [ Replace API Keys](#replace-api-keys)
 - [How to Contribute](#how-to-contribute)
-    - [Request or submit a feature](#request-or-submit-a-feature-postbox)
+  - [Request or submit a feature](#request-or-submit-a-feature-postbox)
 - [Spread the word](#spread-the-word-hatched_chick)
 - [License](#license)
+- [Lif3 App project setup](#lif3-app-project-setup)
 
 ## About AlphaWallet - Features
 
@@ -134,6 +135,7 @@ We want to connect businesses and consumers with the new digital economic infras
 <a href="http://www.facebook.com/sharer.php?u=https://github.com/AlphaWallet/alpha-wallet-ios"><img src=/resources/share_facebook-btn.svg height="35" alt="share on facebook"></a>
 
 To learn more about us, please check our Blog or join the conversation:
+
 - [Blog](https://medium.com/alphawallet)
 - [Telegram](https://t.me/AlphaWalletGroup)
 - [Twitter](https://twitter.com/AlphaWallet)
@@ -142,6 +144,7 @@ To learn more about us, please check our Blog or join the conversation:
 - [Community forum](https://community.tokenscript.org/)
 
 ## Contributors
+
 Thank you to all the contributors! You are awesome.
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -203,6 +206,29 @@ Thank you to all the contributors! You are awesome.
   </tr>
 </table>
 
-
 ## License
+
 AlphaWallet iOS is available under the [MIT license](https://github.com/AlphaWallet/alpha-wallet-ios/blob/master/LICENSE). Free for commercial and non-commercial use.
+
+## Lif3 App project setup
+
+1. Clone project into your folder.
+
+```sh
+ git clone https://github.com/keanlaurens/lif3-app-ios.git
+```
+
+2. Open `AlphaWallet.xcworkspace` file in xcode
+3. From terminal go to your project folder and run this script in terminal.
+
+```sh
+ pod install
+```
+
+if cocoapods is not installed , run
+
+```sh
+sudo gem install cocoapods
+```
+
+4. You can run the project now.

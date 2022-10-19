@@ -108,14 +108,15 @@ class PromptBackupCoordinator: Coordinator {
 
     //TODO not the best way to watch Ether balance
     func listenToNativeCryptoCurrencyBalance(service: TokenViewModelState) {
-        let etherToken: Token = MultipleChainsTokensDataStore.functional.etherToken(forServer: .main)
-        service.tokenViewModelPublisher(for: etherToken)
-            .map { $0?.balance.currencyAmountWithoutSymbol ?? 0 }
-            .filter { !$0.isZero }
-            .sink { [weak self] dollarValue in
-                guard let strongSelf = self else { return }
-                strongSelf.showCreateBackupAfterExceedThresholdPrompt(valueInUsd: dollarValue)
-            }.store(in: &cancelable)
+//        let etherToken: Token = MultipleChainsTokensDataStore.functional.etherToken(forServer: .main)
+//       
+//        service.tokenViewModelPublisher(for: etherToken)
+//            .map { $0?.balance.currencyAmountWithoutSymbol ?? 0 }
+//            .filter { !$0.isZero }
+//            .sink { [weak self] dollarValue in
+//                guard let strongSelf = self else { return }
+//                strongSelf.showCreateBackupAfterExceedThresholdPrompt(valueInUsd: dollarValue)
+//            }.store(in: &cancelable)
     }
 
     // MARK: Update UI

@@ -47,6 +47,7 @@ extension RPCServer {
         case .ioTeX: return "IoTeX Mainnet"
         case .ioTeXTestnet: return "IoTeX Testnet"
         case .candle: return "Candle"
+        case .tomb_chain: return "Tomb Chain"
         }
     }
 
@@ -77,6 +78,7 @@ extension RPCServer {
         case .ioTeX: return R.image.ioTeX()
         case .ioTeXTestnet: return R.image.ioTeXTestnet()
         case .candle: return R.image.iconsTokensCandle()
+        case .tomb_chain: return R.image.iconsTokensTombChain()
         }
     }
 
@@ -114,6 +116,7 @@ extension RPCServer {
         case .ioTeX: return .init(hex: "00D4D5")
         case .ioTeXTestnet: return .init(hex: "00D4D5")
         case .candle: return .init(red: 0, green: 46, blue: 171)
+        case .tomb_chain: return .red
         }
     }
 
@@ -143,6 +146,7 @@ extension RPCServer {
         case .ioTeX: return R.image.ioTeX()
         case .ioTeXTestnet: return R.image.ioTeXTestnet()
         case .candle: return R.image.iconsNetworkCandle()
+        case .tomb_chain: return R.image.iconsNetworkCandle()
         }
     }
 }

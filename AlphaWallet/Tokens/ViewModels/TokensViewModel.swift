@@ -613,7 +613,8 @@ extension WalletFilter {
         return [
             .all,
             .assets,
-            .collectiblesOnly,
+            //hidden for now
+//            .collectiblesOnly,
             .defi,
             .governance,
         ]

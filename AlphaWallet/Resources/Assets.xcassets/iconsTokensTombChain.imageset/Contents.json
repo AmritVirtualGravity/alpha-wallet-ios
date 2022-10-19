@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Fantom Opera@1x.png",
+      "filename" : "Tomb Chain@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Fantom Opera@2x.png",
+      "filename" : "Tomb Chain@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Fantom Opera@3x.png",
+      "filename" : "Tomb Chain@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }

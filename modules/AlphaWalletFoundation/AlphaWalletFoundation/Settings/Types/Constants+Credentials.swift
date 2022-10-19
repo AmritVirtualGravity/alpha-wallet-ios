@@ -32,7 +32,7 @@ extension Constants {
             }
         }
 
-        static let infuraKey = env("INFURAKEY") ?? "ad6d834b7a1e4d03a7fde92020616149"
+        static let infuraKey = env("INFURAKEY") ?? "fc1e3fb2f41f41e092501bbe63a9e438"
         static let etherscanKey = env("ETHERSCANKEY") ?? "1PX7RG8H4HTDY8X55YRMCAKPZK476M23ZR"
         static let binanceSmartChainExplorerApiKey: String? = env("BINANCESMARTCHAINEXPLORERAPIKEY")
         static let polygonScanExplorerApiKey: String? = env("POLYGONSCANEXPLORERAPIKEY")

@@ -16,20 +16,21 @@ public enum URLServiceProvider {
     public var deepLinkURL: URL? {
         switch self {
         case .discord:
-            return URL(string: "https://discord.com/invite/mx23YWRTYf")
+            return URL(string: "https://discord.com/invite/vANnESmVdz")
         case .telegramCustomer:
-            return URL(string: "https://t.me/AlphaWalletSupport")
+            return URL(string: "https://t.me/Lif3_Official")
         case .twitter:
-            return URL(string: "twitter://user?screen_name=\(Constants.twitterUsername)")
+            return URL(string: "https://twitter.com/Official_LIF3")
         case .reddit:
             return URL(string: "reddit.com\(Constants.redditGroupName)")
         case .facebook:
             return URL(string: "fb://profile?id=\(Constants.facebookUsername)")
-        case .faq, .github:
+        case .github:
             return nil
+        case .faq:
+            return URL(string: "https://lif3.com/faq")
         }
     }
-
     public var remoteURL: URL {
         switch self {
         case .discord:

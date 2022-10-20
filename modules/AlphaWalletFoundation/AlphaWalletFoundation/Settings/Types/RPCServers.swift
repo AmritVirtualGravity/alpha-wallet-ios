@@ -835,33 +835,34 @@ public enum RPCServer: Hashable, CaseIterable {
 
     public var displayOrderPriority: Int {
         switch self {
-        case .main: return 1
-        case .xDai: return 2
-        case .classic: return 3
-        case .poa: return 4
-        case .ropsten: return 5
-        case .kovan: return 6
-        case .rinkeby: return 7
-        case .sokol: return 8
-        case .callisto: return 9
-        case .goerli: return 10
+        case .fantom: return 1
+        case .tomb_chain: return 2
+        case .main: return 3
+        case .binance_smart_chain: return 4
+        case .polygon: return 5
+        case .avalanche:return 6
+        case .arbitrum: return 7
+        case .xDai: return 8
+        case .classic: return 9
+        case .poa: return 10
+        case .ropsten: return 11
+        case .kovan: return 12
+        case .rinkeby: return 13
+        case .sokol: return 14
+        case .callisto: return 15
+        case .goerli: return 16
         case .artis_sigma1: return 246529
         case .artis_tau1: return 246785
-        case .binance_smart_chain: return 12
-        case .binance_smart_chain_testnet: return 13
+        case .binance_smart_chain_testnet: return 17
         case .custom(let custom): return 300000 + custom.chainID
-        case .heco: return 14
-        case .heco_testnet: return 15
-        case .fantom: return 16
-        case .fantom_testnet: return 17
-        case .avalanche: return 18
-        case .avalanche_testnet: return 19
-        case .polygon: return 20
-        case .mumbai_testnet: return 21
-        case .optimistic: return 22
-        case .optimisticKovan: return 23
-        case .cronosTestnet: return 24
-        case .arbitrum: return 25
+        case .heco: return 18
+        case .heco_testnet: return 19
+        case .fantom_testnet: return 20
+        case .avalanche_testnet: return 21
+        case .mumbai_testnet: return 22
+        case .optimistic: return 23
+        case .optimisticKovan: return 24
+        case .cronosTestnet: return 25
         case .arbitrumRinkeby: return 26
         case .palm: return 27
         case .palmTestnet: return 28
@@ -872,7 +873,6 @@ public enum RPCServer: Hashable, CaseIterable {
         case .ioTeX: return 33
         case .ioTeXTestnet: return 34
         case .candle: return 35
-        case .tomb_chain: return 11
         }
     }
 

@@ -53,7 +53,7 @@ struct Configuration {
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.black()!)
             }
             static let primaryButtonTextInactive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.black()!)
             }
             static let primaryButtonBorderActive = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)

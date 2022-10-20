@@ -30,6 +30,13 @@ class RequestViewController: UIViewController {
         label.text = viewModel.instructionText
         return label
     }()
+    
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -38,11 +45,14 @@ class RequestViewController: UIViewController {
 
     private lazy var addressContainerView: UIView = {
         let v = UIView()
-        v.backgroundColor = viewModel.addressBackgroundColor
+        v.backgroundColor = .white
+        v.alpha = 0.1
         v.isUserInteractionEnabled = true
 
         return v
     }()
+    
+  
 
     private lazy var addressLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -57,7 +67,7 @@ class RequestViewController: UIViewController {
 
     private lazy var ensContainerView: UIView = {
         let v = UIView()
-        v.backgroundColor = viewModel.addressBackgroundColor
+        v.backgroundColor = .blue
         v.isHidden = true
         v.isUserInteractionEnabled = true
 
@@ -80,6 +90,11 @@ class RequestViewController: UIViewController {
     private let domainResolutionService: DomainResolutionServiceType
 
     weak var delegate: RequestViewControllerDelegate?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+
 
     init(viewModel: RequestViewModel, domainResolutionService: DomainResolutionServiceType) {
         self.viewModel = viewModel
@@ -87,11 +102,12 @@ class RequestViewController: UIViewController {
 
         super.init(nibName: nil, bundle: nil)
 
-        title = R.string.localizable.aSettingsContentsMyWalletAddress()
-
+//        title = R.string.localizable.aSettingsContentsMyWalletAddress()
         view.backgroundColor = viewModel.backgroundColor
+        
+        view.addSubview(backgroundImageView)
         view.addSubview(roundedBackground)
-
+        
         ensContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(copyEns)))
         addressContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(copyAddress)))
 
@@ -107,9 +123,9 @@ class RequestViewController: UIViewController {
         copyAddressButton.setContentHuggingPriority(.required, for: .horizontal)
 
         let addressStackView = [.spacerWidth(7), addressLabel, .spacerWidth(10), copyAddressButton, .spacerWidth(7)].asStackView(axis: .horizontal)
-        addressStackView.addSubview(forBackgroundColor: viewModel.addressBackgroundColor)
+        addressStackView.addSubview(forBackgroundColor: .clear)
         addressStackView.translatesAutoresizingMaskIntoConstraints = false
-        addressContainerView.addSubview(addressStackView)
+        view.addSubview(addressStackView)
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         roundedBackground.addSubview(scrollView)
@@ -136,6 +152,14 @@ class RequestViewController: UIViewController {
             qrCodeDimensions = 260
         }
         NSLayoutConstraint.activate([
+                
+            
+            // image view constraits for  full screen size
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
+            
             //Leading/trailing anchor needed to make label fit when on narrow iPhones
             ensStackView.anchorsConstraint(to: ensContainerView, edgeInsets: .init(top: 14, left: 20, bottom: 14, right: 20)),
             addressStackView.anchorsConstraint(to: addressContainerView, edgeInsets: .init(top: 14, left: 20, bottom: 14, right: 20)),
@@ -177,9 +201,11 @@ class RequestViewController: UIViewController {
     }
 
     private func configure() {
+        backgroundImageView.image = viewModel.backgroundImage
         copyEnsButton.setImage(R.image.copy(), for: .normal)
+        copyEnsButton.tintColor = .white
         copyAddressButton.setImage(R.image.copy(), for: .normal)
-
+        copyAddressButton.tintColor = .white
         resolveEns()
     }
 

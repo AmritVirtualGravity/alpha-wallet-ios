@@ -19,7 +19,7 @@ class EmptyView: UIView {
 
     init(placement: EmptyViewPlacement = EmptyViewDefaultPlacement()) {
         super.init(frame: .zero)
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = .clear
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
 
@@ -34,7 +34,7 @@ class EmptyView: UIView {
     func configure(title: String?) -> Self {
         let attributedTitle = title.flatMap { value in
             return NSAttributedString.init(string: value, attributes: [
-                .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
+                .foregroundColor: UIColor.white,
                 .font: Fonts.regular(size: 16)
             ])
         }
@@ -63,11 +63,14 @@ class EmptyView: UIView {
         return build()
     }
 
-    func configure(buttonTitle title: String?, width: CGFloat = 180, size: ButtonSize = .large, style: ButtonStyle = .green, buttonSelectionClosure: (() -> Void)?) -> Self {
+    func configure(buttonTitle title: String?, width: CGFloat = 180, size: ButtonSize = .large, style: ButtonStyle = .system, buttonSelectionClosure: (() -> Void)?) -> Self {
         self.buttonSelectionClosure = buttonSelectionClosure
         self.button = title.flatMap { title -> Button in
             let button = Button(size: size, style: style)
             button.translatesAutoresizingMaskIntoConstraints = false
+            button.titleLabel?.textColor = .black
+            button.layer.cornerRadius = 20
+            button.setBackgroundColor(.white, forState: .normal)
             button.setTitle(title, for: .normal)
             button.addTarget(self, action: #selector(buttonSelected), for: .touchUpInside)
             

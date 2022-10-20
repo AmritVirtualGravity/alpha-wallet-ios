@@ -31,7 +31,7 @@ class DappsHomeViewControllerHeaderView: UICollectionReusableView {
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubviews([
-            headerView,
+//            headerView,
             .spacer(height: 30),
             buttonsStackView,
         ])

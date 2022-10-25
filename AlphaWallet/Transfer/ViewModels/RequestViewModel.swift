@@ -32,7 +32,7 @@ struct RequestViewModel {
 	}
 
 	var addressLabelColor: UIColor {
-		return .black
+		return .white
 	}
 
 	var copyButtonsFont: UIFont {
@@ -40,7 +40,7 @@ struct RequestViewModel {
 	}
 
 	var labelColor: UIColor? {
-        return Configuration.Color.Semantic.labelTextActive
+        return .white
 	}
 
 	var addressFont: UIFont {
@@ -48,7 +48,7 @@ struct RequestViewModel {
 	}
 
 	var addressBackgroundColor: UIColor {
-		return UIColor(red: 237, green: 237, blue: 237)
+		return UIColor(red: 255, green: 255, blue: 255)
 	}
 
 	var instructionFont: UIFont {
@@ -58,4 +58,9 @@ struct RequestViewModel {
 	var instructionText: String {
 		return R.string.localizable.aWalletAddressScanInstructions()
 	}
+    
+    var backgroundImage: UIImage {
+        return R.image.lifeBackgroundImage()!
+    }
+
 }

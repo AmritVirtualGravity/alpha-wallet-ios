@@ -91,7 +91,12 @@ extension Data {
             filter.setValue(self, forKey: "inputMessage")
             let transform = CGAffineTransform(scaleX: 7, y: 7)
             if let output = filter.outputImage?.transformed(by: transform) {
-                return UIImage(ciImage: output)
+                let colorParameters = [
+                        "inputColor0": CIColor(color: UIColor.white), // Foreground
+                        "inputColor1": CIColor(color: UIColor.clear) // Background
+                    ]
+                    let colored = output.applyingFilter("CIFalseColor", parameters: colorParameters)
+                return UIImage(ciImage: colored)
             }
         }
         return nil

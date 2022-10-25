@@ -64,7 +64,7 @@ struct Configuration {
             }
             
             static let secondaryButtonHighlightedBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor:UIColor.clear, darkColor: R.color.dusty()!)
+                return colorFrom(trait: trait, lightColor: UIColor.clear, darkColor: R.color.dusty()!)
             }
             static let secondaryButtonBackgroundInactive = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.dusty()!)
@@ -121,11 +121,11 @@ struct Configuration {
             }
 
             static let navigationbarBackgroundColor = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+                return colorFrom(trait: trait, lightColor: UIColor.clear, darkColor: R.color.black()!)
             }
 
             static let navigationbarSeparator = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.mercury()!, darkColor: R.color.venus()!)
+                return colorFrom(trait: trait, lightColor: UIColor.clear, darkColor: R.color.venus()!)
             }
 
             static let navigationbarPrimaryFont = UIColor { trait in

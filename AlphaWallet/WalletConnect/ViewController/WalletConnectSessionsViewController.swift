@@ -22,10 +22,18 @@ class WalletConnectSessionsViewController: UIViewController {
         tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
         tableView.separatorInset = .zero
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = GroupedTable.Color.background
+        tableView.backgroundColor = .clear
 
         return tableView
     }()
+    
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
 
     private let roundedBackground = RoundedBackground()
     
@@ -53,19 +61,28 @@ class WalletConnectSessionsViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
-        roundedBackground.backgroundColor = GroupedTable.Color.background
-
+        roundedBackground.backgroundColor = .clear
+        view.addSubview(backgroundImageView)
         view.addSubview(roundedBackground)
         roundedBackground.addSubview(tableView)
         roundedBackground.addSubview(spinner)
 
         NSLayoutConstraint.activate([
+            
+            
+            // image view constraits for  full screen size
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+       
             tableView.anchorsConstraintSafeArea(to: roundedBackground),
             spinner.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
         ] + roundedBackground.createConstraintsWithContainer(view: view))
 
         navigationItem.rightBarButtonItem = UIBarButtonItem.qrCodeBarButton(self, selector: #selector(qrCodeButtonSelected))
+        navigationItem.rightBarButtonItem?.tintColor = .black
 
         emptyView = EmptyView.walletSessionEmptyView(completion: { [weak self] in
             guard let strongSelf = self else { return }
@@ -97,8 +114,7 @@ class WalletConnectSessionsViewController: UIViewController {
     }
 
     func configure(viewModel: WalletConnectSessionsViewModel) {
-        title = viewModel.natigationTitle
-
+        backgroundImageView.image = viewModel.backgroundImage
         viewModel.stateSubject
             .receive(on: RunLoop.main)
             .sink { [weak self] state in

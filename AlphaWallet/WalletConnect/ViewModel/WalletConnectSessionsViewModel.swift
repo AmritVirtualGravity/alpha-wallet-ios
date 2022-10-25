@@ -55,4 +55,8 @@ class WalletConnectSessionsViewModel {
             return true
         }
     }
+    
+    var backgroundImage: UIImage {
+        return R.image.lifeBackgroundImage()!
+    }
 }

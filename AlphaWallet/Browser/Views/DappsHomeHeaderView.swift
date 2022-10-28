@@ -14,7 +14,7 @@ class DappsHomeHeaderView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubviews([
             logoImage,
-            .spacer(height: 20),
+            .spacer(height: 80),
             titleLabel,
         ])
         addSubview(stackView)

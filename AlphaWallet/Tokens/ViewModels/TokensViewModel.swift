@@ -610,13 +610,13 @@ extension TokensViewModel.ViewModelType: Hashable { }
 
 extension WalletFilter {
     static var orderedTabs: [WalletFilter] {
+       // hidden for now
         return [
-            .all,
-            .assets,
-            //hidden for now
+//            .all,
+//            .assets,
 //            .collectiblesOnly,
-            .defi,
-            .governance,
+//            .defi,
+//            .governance,
         ]
     }
 

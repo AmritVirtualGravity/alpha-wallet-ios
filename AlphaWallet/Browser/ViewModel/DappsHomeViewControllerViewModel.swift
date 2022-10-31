@@ -18,4 +18,8 @@ struct DappsHomeViewControllerViewModel {
     var backgroundColor: UIColor {
         return Colors.appWhite
     }
+    
+    var lifeUrl: String {
+        return "https://www.lif3.com"
+    }
 }

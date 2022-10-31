@@ -12,7 +12,7 @@ protocol DappsHomeViewControllerDelegate: AnyObject {
     func didTapShowDiscoverDappsViewController(inViewController viewController: DappsHomeViewController)
     func didTap(dapp: Bookmark, inViewController viewController: DappsHomeViewController)
     func delete(dapp: Bookmark, inViewController viewController: DappsHomeViewController)
-    func viewControllerWillAppear(_ viewController: DappsHomeViewController)
+    func viewControllerWillAppear(_ viewController: DappsHomeViewController,_  url: String)
     func dismissKeyboard(inViewController viewController: DappsHomeViewController)
 }
 
@@ -102,7 +102,7 @@ class DappsHomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        delegate?.viewControllerWillAppear(self)
+        delegate?.viewControllerWillAppear(self, viewModel.lifeUrl)
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {

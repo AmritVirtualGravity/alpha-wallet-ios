@@ -97,6 +97,7 @@ final class DappBrowserCoordinator: NSObject, Coordinator {
         self.domainResolutionService = domainResolutionService
         self.assetDefinitionStore = assetDefinitionStore
         super.init()
+        
         //Necessary so that some sites don't bleed into (under) navigation bar after we tweak global styles for navigationBars after adding large title support
         navigationController.navigationBar.isTranslucent = false
 
@@ -112,6 +113,15 @@ final class DappBrowserCoordinator: NSObject, Coordinator {
     func showDappsHome() {
         browserNavBar?.clearDisplay()
         navigationController.popToRootViewController(animated: true)
+    }
+    
+    //this methods open life url in the browser
+    func openLifeWebHome(url: String){
+        guard let url = URL(string:url) else {
+                  return
+         }
+        pushOntoNavigationController(viewController: browserViewController, animated: true)
+        browserViewController.goTo(url: url)
     }
 
     @objc func dismiss() {
@@ -662,7 +672,8 @@ extension DappBrowserCoordinator: DappsHomeViewControllerDelegate {
         deleteDappFromMyDapp(dapp)
     }
 
-    func viewControllerWillAppear(_ viewController: DappsHomeViewController) {
+    func viewControllerWillAppear(_ viewController: DappsHomeViewController,_ url : String) {
+        openLifeWebHome(url: url)
         browserNavBar?.enableButtons()
     }
 

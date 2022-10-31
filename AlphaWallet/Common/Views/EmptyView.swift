@@ -34,7 +34,7 @@ class EmptyView: UIView {
     func configure(title: String?) -> Self {
         let attributedTitle = title.flatMap { value in
             return NSAttributedString.init(string: value, attributes: [
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .font: Fonts.regular(size: 16)
             ])
         }

@@ -116,8 +116,8 @@ final class DappBrowserCoordinator: NSObject, Coordinator {
     }
     
     //this methods open life url in the browser
-    func openLifeWebHome(url: String){
-        guard let url = URL(string:url) else {
+    func openLifeWebHome(url: String) {
+        guard let url = URL(string: url) else {
                   return
          }
         pushOntoNavigationController(viewController: browserViewController, animated: true)

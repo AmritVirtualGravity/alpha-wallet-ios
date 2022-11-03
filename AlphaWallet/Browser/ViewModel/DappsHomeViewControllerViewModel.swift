@@ -22,4 +22,5 @@ struct DappsHomeViewControllerViewModel {
     var lifeUrl: String {
         return "https://www.lif3.com"
     }
+
 }

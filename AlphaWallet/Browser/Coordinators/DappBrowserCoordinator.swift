@@ -673,7 +673,9 @@ extension DappBrowserCoordinator: DappsHomeViewControllerDelegate {
     }
 
     func viewControllerWillAppear(_ viewController: DappsHomeViewController,_ url : String) {
-        openLifeWebHome(url: url)
+        if (LifeDateSource.shared().isForSwap == false) {
+            openLifeWebHome(url: url)
+        }
         browserNavBar?.enableButtons()
     }
 

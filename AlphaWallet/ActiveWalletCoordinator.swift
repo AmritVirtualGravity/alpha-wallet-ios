@@ -1177,8 +1177,9 @@ extension ActiveWalletCoordinator: WalletPupupCoordinatorDelegate {
             guard let url = URL(string: "https://lif3.com/swap") else {
                 return
             }
-            let vc = SFSafariViewController(url: url)
-            self.navigationController.present(vc, animated: true)
+            // this singleton set to true for displaying swap url in browser tab.
+            LifeDateSource.shared().isForSwap = true
+            openURLInBrowser(url: url)
             // showTokenSelection(for: .swapToken)
         case .buy:
             buyCrypto(wallet: wallet, server: server, viewController: navigationController, source: .walletTab)

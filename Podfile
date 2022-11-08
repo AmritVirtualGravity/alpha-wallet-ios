@@ -2,7 +2,7 @@ platform :ios, '13.0'
 inhibit_all_warnings!
 source 'https://cdn.cocoapods.org/'
 
-target 'AlphaWallet' do
+target 'Lif3Wallet' do
   use_frameworks!
   pod 'BigInt', '~> 3.1'
   pod 'R.swift'
@@ -32,13 +32,13 @@ target 'AlphaWallet' do
   pod 'xcbeautify'
   pod 'FloatingPanel'
   
-  target 'AlphaWalletTests' do
+  target 'Lif3WalletTests' do
       inherit! :search_paths
       # Pods for testing
       pod 'iOSSnapshotTestCase', '6.2.0'
   end
 
-  target 'AlphaWalletShare' do
+  target 'Lif3WalletShare' do
       inherit! :search_paths
       # Pods for testing
   end

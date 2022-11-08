@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8703FBFC270366DA0062C416"
-               BuildableName = "AlphaWalletSafariExtension.appex"
-               BlueprintName = "AlphaWalletSafariExtension"
-               ReferencedContainer = "container:AlphaWallet.xcodeproj">
+               BuildableName = "Lif3WalletSafariExtension.appex"
+               BlueprintName = "Lif3WalletSafariExtension"
+               ReferencedContainer = "container:Lif3Wallet.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -30,9 +30,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2912CCF41F6A830700C6CBE3"
-               BuildableName = "AlphaWallet.app"
-               BlueprintName = "AlphaWallet"
-               ReferencedContainer = "container:AlphaWallet.xcodeproj">
+               BuildableName = "Lif3Wallet.app"
+               BlueprintName = "Lif3Wallet"
+               ReferencedContainer = "container:Lif3Wallet.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2912CCF41F6A830700C6CBE3"
-            BuildableName = "AlphaWallet.app"
-            BlueprintName = "AlphaWallet"
-            ReferencedContainer = "container:AlphaWallet.xcodeproj">
+            BuildableName = "Lif3Wallet.app"
+            BlueprintName = "Lif3Wallet"
+            ReferencedContainer = "container:Lif3Wallet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -81,9 +81,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2912CCF41F6A830700C6CBE3"
-            BuildableName = "AlphaWallet.app"
-            BlueprintName = "AlphaWallet"
-            ReferencedContainer = "container:AlphaWallet.xcodeproj">
+            BuildableName = "Lif3Wallet.app"
+            BlueprintName = "Lif3Wallet"
+            ReferencedContainer = "container:Lif3Wallet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

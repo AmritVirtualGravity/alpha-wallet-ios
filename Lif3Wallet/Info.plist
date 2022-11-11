@@ -4,8 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-    <key>CFBundleDisplayName</key>
-      <string>Lif3</string>
+	<key>CFBundleDisplayName</key>
+	<string>Lif3</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

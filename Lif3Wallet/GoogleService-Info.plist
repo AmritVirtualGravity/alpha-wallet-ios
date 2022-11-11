@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>659563182697-9vhoedkqo2tcguu0ruq9961f0ks5ns4h.apps.googleusercontent.com</string>
+	<string>966306838404-ao7r6t3lnsibebo8gk34cfq0ujga24m9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.659563182697-9vhoedkqo2tcguu0ruq9961f0ks5ns4h</string>
+	<string>com.googleusercontent.apps.966306838404-ao7r6t3lnsibebo8gk34cfq0ujga24m9</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAY_ZZhfFv3sJU8Wii2wbaqaMYg8-siBMI</string>
+	<string>AIzaSyBRwcjVDHHUjCkcvBvLXFBqJWA5yA087xY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>659563182697</string>
+	<string>966306838404</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.stormbird.alphawallet</string>
+	<string>io.lif3.wallet</string>
 	<key>PROJECT_ID</key>
-	<string>alphawallet-668d1</string>
+	<string>lif3-mobile-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>alphawallet-668d1.appspot.com</string>
+	<string>lif3-mobile-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:659563182697:ios:6c3d5ed76672b8bf03c0f8</string>
+	<string>1:966306838404:ios:33827598ca495ed9704fd1</string>
 </dict>
 </plist>

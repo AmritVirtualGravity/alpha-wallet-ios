@@ -62,6 +62,7 @@
 		02F4E8C42771C07500D89C19 /* SaveCustomRpcBrowseDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4E8C32771C07500D89C19 /* SaveCustomRpcBrowseDataController.swift */; };
 		02FEA8EF280FE1B7006C3CA9 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FEA8EE280FE1B7006C3CA9 /* NSLayoutConstraintExtension.swift */; };
 		101097D52913FA6C0066F1BD /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101097D42913FA6C0066F1BD /* LifeDataSource.swift */; };
+		10A21E0B291E84F8004F1D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10A21E0A291E84F8004F1D78 /* GoogleService-Info.plist */; };
 		290B2B541F8F50030053C83E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 290B2B561F8F50030053C83E /* Localizable.strings */; };
 		290B2B5F1F9177860053C83E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B5E1F9177860053C83E /* UIImage.swift */; };
 		290B2B611F9179880053C83E /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B601F9179880053C83E /* AccountViewModel.swift */; };
@@ -796,7 +797,6 @@
 		87FBAE0124A1EE67005EF293 /* AddressOrEnsNameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FBAE0024A1EE67005EF293 /* AddressOrEnsNameLabel.swift */; };
 		87FBF2B128056AC200616B7D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 87FBF2B028056AC200616B7D /* FirebaseCrashlytics */; };
 		87FBF2B528056B6F00616B7D /* FirebaseReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FBF2B428056B6F00616B7D /* FirebaseReportService.swift */; };
-		87FBF2B728056B8E00616B7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87FBF2B628056B8E00616B7D /* GoogleService-Info.plist */; };
 		98657B0A3C3D288C8204EB04 /* Pods_Lif3Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A723CC93176EC1EAB4AAE4E4 /* Pods_Lif3Wallet.framework */; };
 		AA26C61F20412A1E00318B9B /* NFTCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26C61D20412A1D00318B9B /* NFTCollectionViewController.swift */; };
 		AA26C62320412A4100318B9B /* UIViewInspectableEnhancements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26C62120412A4100318B9B /* UIViewInspectableEnhancements.swift */; };
@@ -924,6 +924,7 @@
 		02F4E8C32771C07500D89C19 /* SaveCustomRpcBrowseDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCustomRpcBrowseDataController.swift; sourceTree = "<group>"; };
 		02FEA8EE280FE1B7006C3CA9 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
 		101097D42913FA6C0066F1BD /* LifeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
+		10A21E0A291E84F8004F1D78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		290B2B551F8F50030053C83E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		290B2B5E1F9177860053C83E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		290B2B601F9179880053C83E /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
@@ -1664,7 +1665,6 @@
 		87F9972724E155280092D262 /* SeedPhraseBackupIntroductionViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseBackupIntroductionViewControllerTests.swift; sourceTree = "<group>"; };
 		87FBAE0024A1EE67005EF293 /* AddressOrEnsNameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressOrEnsNameLabel.swift; sourceTree = "<group>"; };
 		87FBF2B428056B6F00616B7D /* FirebaseReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReportService.swift; sourceTree = "<group>"; };
-		87FBF2B628056B8E00616B7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		95C9751BF0DE029625D99C92 /* Pods-Lif3Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3Wallet.debug.xcconfig"; path = "Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		A0DC82D69606F2E65C70841A /* Pods_Lif3WalletShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3WalletShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A723CC93176EC1EAB4AAE4E4 /* Pods_Lif3Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1909,7 +1909,7 @@
 				29D72A291F6A8D1500CE9209 /* AppCoordinator.swift */,
 				293E626E1FA2ED1400CB0A66 /* ActiveWalletCoordinator.swift */,
 				29850D241F6B27A800791A49 /* R.generated.swift */,
-				87FBF2B628056B8E00616B7D /* GoogleService-Info.plist */,
+				10A21E0A291E84F8004F1D78 /* GoogleService-Info.plist */,
 				2912CD061F6A830700C6CBE3 /* Info.plist */,
 				29AD8A071F93E1F0008E10E7 /* Lif3Wallet.entitlements */,
 				76F1D1936604D6A022E9AE90 /* Market */,
@@ -4464,7 +4464,6 @@
 				021C56362841ACB300A5C987 /* LaunchScreen.xcassets in Resources */,
 				C887C53A2057B703005ACF81 /* termsOfService.html in Resources */,
 				C876FF7D204A79D300B7D0EA /* SourceSansPro-Bold.otf in Resources */,
-				87FBF2B728056B8E00616B7D /* GoogleService-Info.plist in Resources */,
 				C880330D2054371500D73D6F /* non_asset_catalog_redemption_location@2x.png in Resources */,
 				771AA966200D5F1900D25403 /* WordCollectionViewCell.xib in Resources */,
 				87B93B112726C59D00F6EA73 /* BrowserStorageSubscription.js in Resources */,
@@ -4482,6 +4481,7 @@
 				C880332220551DF800D73D6F /* whatIsEthereumInfo.html in Resources */,
 				C80DC77E22AB7FAD009CFA1C /* XDAI-bridge.tsml in Resources */,
 				5E7C73AB79C2C5FC6C76CDFF /* ERC20-TokenScript.tsml in Resources */,
+				10A21E0B291E84F8004F1D78 /* GoogleService-Info.plist in Resources */,
 				5E7C7F906FE07C75F357569B /* DAI.tsml in Resources */,
 				5E7C7F808D0B0B19ECEA6623 /* ETH.tsml in Resources */,
 				5E7C706322B52C0D0CED8018 /* aETH.tsml in Resources */,
@@ -5907,7 +5907,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.lif3wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h ";
 				SWIFT_VERSION = 4.2;
@@ -5947,7 +5947,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.lif3wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h ";
 				SWIFT_VERSION = 4.2;
@@ -5969,7 +5969,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.AlphaWalletTests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lif3Wallet.app/Lif3Wallet";
@@ -6024,7 +6024,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.lif3wallet.Lif3WalletSafariExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletSafariExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -6059,7 +6059,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.lif3wallet.Lif3WalletSafariExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletSafariExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -6088,7 +6088,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.lif3wallet.Lif3WalletShare;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -6113,7 +6113,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_FAST_MATH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.lif3wallet.Lif3WalletShare;
+				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

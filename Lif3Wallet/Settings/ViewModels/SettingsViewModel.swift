@@ -211,12 +211,17 @@ extension SettingsViewModel.functional {
         let walletRows: [SettingsWalletRow]
         if account.allowBackup {
             if account.origin == .hd {
-                walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
+                // blockscanchat hidden for now.
+                 walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect]
+//                walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
             } else {
-                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
+                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect]
+
+//                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
             }
         } else {
-            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
+            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect]
+//            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
         let systemRows: [SettingsSystemRow] = [.passcode, .selectActiveNetworks, .advanced]
         return [

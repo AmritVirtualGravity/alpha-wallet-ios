@@ -5887,8 +5887,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 221114;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W6945M9UKD;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5901,13 +5902,15 @@
 					"\"$(PODS_ROOT)/libsodium/src/libsodium/include\"",
 				);
 				INFOPLIST_FILE = Lif3Wallet/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Lif3;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lif3.lif3wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h ";
 				SWIFT_VERSION = 4.2;
@@ -5929,7 +5932,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 221114;
+				DEVELOPMENT_TEAM = W6945M9UKD;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5942,12 +5946,14 @@
 					"\"$(PODS_ROOT)/libsodium/src/libsodium/include\"",
 				);
 				INFOPLIST_FILE = Lif3Wallet/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Lif3;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lif3.lif3wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h ";
 				SWIFT_VERSION = 4.2;
@@ -6007,7 +6013,8 @@
 				CODE_SIGN_ENTITLEMENTS = Lif3WalletSafariExtension/Lif3WalletSafariExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 221114;
+				DEVELOPMENT_TEAM = W6945M9UKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lif3WalletSafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Lif3WalletSafariExtension;
@@ -6018,13 +6025,14 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletSafariExtensions;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lif3.lif3wallet.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -6043,7 +6051,8 @@
 				CODE_SIGN_ENTITLEMENTS = Lif3WalletSafariExtension/Lif3WalletSafariExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 221114;
+				DEVELOPMENT_TEAM = W6945M9UKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lif3WalletSafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Lif3WalletSafariExtension;
@@ -6054,12 +6063,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletSafariExtensions;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lif3.lif3wallet.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -6078,6 +6088,8 @@
 				CODE_SIGN_ENTITLEMENTS = Lif3WalletShare/Lif3WalletShare.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 221114;
+				DEVELOPMENT_TEAM = W6945M9UKD;
 				INFOPLIST_FILE = Lif3WalletShare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -6085,10 +6097,11 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletShare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lif3.lif3wallet.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -6105,6 +6118,8 @@
 				CODE_SIGN_ENTITLEMENTS = Lif3WalletShare/Lif3WalletShare.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 221114;
+				DEVELOPMENT_TEAM = W6945M9UKD;
 				INFOPLIST_FILE = Lif3WalletShare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -6112,8 +6127,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				MTL_FAST_MATH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletShare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lif3.lif3wallet.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

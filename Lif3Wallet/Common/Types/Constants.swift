@@ -47,6 +47,6 @@ extension Constants {
 
 extension Constants.Credentials {
     static let analyticsKey = ""
-    static let mailChimpListSpecificKey = ""
+    static let mailChimpListSpecificKey = "df306008c71da38ba3940d8643e25362-us21"
     static let walletConnectProjectId = "8ba9ee138960775e5231b70cc5ef1c3a"
 }

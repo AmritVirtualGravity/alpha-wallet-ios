@@ -131,7 +131,7 @@ extension RPCServer {
         case .binance_smart_chain: return R.image.iconsNetworkBsc()
         case .kovan, .ropsten, .rinkeby, .sokol, .goerli, .artis_tau1, .binance_smart_chain_testnet, .cronosTestnet, .custom: return nil
         case .heco, .heco_testnet: return R.image.iconsNetworkHeco()
-        case .fantom, .fantom_testnet: return R.image.iconsNetworkFantom()
+        case .fantom, .fantom_testnet: return R.image.iconsTokensFantom()
         case .avalanche, .avalanche_testnet: return R.image.iconsNetworkAvalanche()
         case .polygon: return R.image.iconsNetworkPolygon()
         case .mumbai_testnet: return nil
@@ -146,7 +146,7 @@ extension RPCServer {
         case .ioTeX: return R.image.ioTeX()
         case .ioTeXTestnet: return R.image.ioTeXTestnet()
         case .candle: return R.image.iconsNetworkCandle()
-        case .tomb_chain: return R.image.iconsNetworkCandle()
+        case .tomb_chain: return R.image.iconsTokensTombChain()
         }
     }
 }

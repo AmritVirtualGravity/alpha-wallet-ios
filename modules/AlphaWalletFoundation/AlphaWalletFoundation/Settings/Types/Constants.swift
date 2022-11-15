@@ -41,7 +41,7 @@ public struct Constants {
     static let ioTeXMagicLinkHost = "ioTeX.aw.app"
     static let ioTeXTestnetMagicLinkHost = "ioTeXTestnet.aw.app"
     static let candleMagicLinkHost = "candle.aw.app"
-    static let tombChainLinkHost = "tomb-chain.aw.app"
+    static let tombChainLinkHost = "tombchain.aw.app"
 
 
     // Magic link networks

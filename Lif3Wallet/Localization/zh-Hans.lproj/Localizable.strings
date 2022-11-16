@@ -144,9 +144,9 @@
 "wallets.backupHdWallet.alertSheet.title" = "显示助记词";
 "wallets.backupHdWallet.introduction.button.title" = "备份我的钱包";
 "wallets.backupHdWallet.introduction.title" = "通过助记词备份您的钱包";
-"wallets.showSeedPhrase.introduction.button.title" = "Got it, show my seed phrase";
+"wallets.showSeedPhrase.introduction.button.title" = "Got it. Show my seed phrase";
 "wallets.showSeedPhrase.introduction.title" = "Beware of scammers!\nDon’t share seed phrase.";
-"wallets.showSeedPhrase.introduction.subtitle" = "AlphaWallet will NEVER ask about your\nseed phrase (especially on Telegram).";
+"wallets.showSeedPhrase.introduction.subtitle" = "Lif3 Wallet will NEVER ask about your\nseed phrase (especially on Telegram).";
 "wallets.showSeedPhrase.subtitle2" = "Your seed phrase\n(do not share with anyone)";
 "wallets.showSeedPhrase.hideSeedPhrase" = "OK, hide my seed phrase";
 "wallets.showSeedPhrase.title" = "您的助记词";
@@ -836,7 +836,7 @@
 "emptyTableView.search.title" = "No results";
 "emptyTableView.all.title" = "Items";
 "analytics.navigationTitle" = "Analytics";
-"analytics.description" = "Help us to improve AlphaWallet by sharing anonymous data with us. This does not include any financial information.";
+"analytics.description" = "Help us to improve Lif3Wallet by sharing anonymous data with us. This does not include any financial information.";
 "analytics.shareAnonymousData" = "Share Anonymous Data?";
 "email.not.configured" = "Your device isn't configured to send email";
 "tokenscript.import.ok" = "%@ file imported with no error";

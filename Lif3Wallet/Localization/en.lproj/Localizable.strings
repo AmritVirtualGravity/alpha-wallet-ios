@@ -144,9 +144,9 @@
 "wallets.backupHdWallet.alertSheet.title" = "Show Seed Phrase";
 "wallets.backupHdWallet.introduction.button.title" = "Back up my Wallet";
 "wallets.backupHdWallet.introduction.title" = "Back up your Wallet\nwith Seed Phrase";
-"wallets.showSeedPhrase.introduction.button.title" = "Got it, show my seed phrase";
+"wallets.showSeedPhrase.introduction.button.title" = "Got it. Show my seed phrase";
 "wallets.showSeedPhrase.introduction.title" = "Beware of scammers!\nDon’t share seed phrase.";
-"wallets.showSeedPhrase.introduction.subtitle" = "AlphaWallet will NEVER ask about your\nseed phrase (especially on Telegram).";
+"wallets.showSeedPhrase.introduction.subtitle" = "Lif3 Wallet will NEVER ask about your\nseed phrase (especially on Telegram).";
 "wallets.showSeedPhrase.subtitle2" = "Your seed phrase\n(do not share with anyone)";
 "wallets.showSeedPhrase.hideSeedPhrase" = "OK, hide my seed phrase";
 "wallets.showSeedPhrase.title" = "Your Seed Phrase";
@@ -512,8 +512,8 @@
 "keystore.accessKey.nonHd.lock" = "To lock your private key to increase security";
 "keystore.lock.wallet.seed.title" = "Lock your Seed Phrase to Increase Security";
 "keystore.lock.wallet.privateKey.title" = "Lock your Private Key to Increase Security";
-"keystore.lock.wallet.seed.description" = "AlphaWallet security is being upgraded to the best achievable. Lock your seed phrase with biometrics";
-"keystore.lock.wallet.privateKey.description" = "AlphaWallet security is being upgraded to the best achievable. Lock your private key with biometrics";
+"keystore.lock.wallet.seed.description" = "Lif3 Wallet security is being upgraded to the best achievable. Lock your seed phrase with biometrics";
+"keystore.lock.wallet.privateKey.description" = "Lif3 Wallet security is being upgraded to the best achievable. Lock your private key with biometrics";
 "keystore.lock.wallet.seed.button" = "Lock Seed Phrase";
 "keystore.lock.wallet.privateKey.button" = "Lock Private Key";
 "wallet.security.level.red" = "BACK UP NOW!";
@@ -836,7 +836,7 @@
 "emptyTableView.search.title" = "No results";
 "emptyTableView.all.title" = "Items";
 "analytics.navigationTitle" = "Analytics";
-"analytics.description" = "Help us to improve AlphaWallet by sharing anonymous data with us. This does not include any financial information.";
+"analytics.description" = "Help us to improve Lif3Wallet by sharing anonymous data with us. This does not include any financial information.";
 "analytics.shareAnonymousData" = "Share Anonymous Data?";
 "email.not.configured" = "Your device isn't configured to send email";
 "tokenscript.import.ok" = "%@ file imported with no error";

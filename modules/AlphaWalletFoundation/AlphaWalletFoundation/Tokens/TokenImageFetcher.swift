@@ -15,6 +15,43 @@ private func programmaticallyGeneratedIconImage(for contractAddress: AlphaWallet
     return UIImage.tokenSymbolBackgroundImage(backgroundColor: backgroundColor)
 }
 
+private func programmaticallyGeneratedURLBasedonAddress(for contractAddress: AlphaWallet.Address, server: RPCServer, colors: [UIColor], blockChainNameColor: UIColor) -> WebImageURL? {
+    let webUrl = "https://assets.lif3.com/wallet/tokens/\(server.symbol)/\(contractAddress.eip55String).svg"
+    guard  let url = URL(string: webUrl) else {return nil}
+    var mimeType = ""
+    getContentType(urlPath: webUrl, completion: { type in
+        mimeType = type
+    })
+    if (mimeType == "image/svg+xml") {
+        if let data = NSData(contentsOf: url) {
+            if let url = WebImageURL(string: webUrl) {
+                return url
+            }
+        }
+    }
+   
+    return nil
+}
+
+
+func getContentType(urlPath: String, completion: @escaping(_ type: String)->()) {
+    if let url = URL(string: urlPath) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "HEAD"
+        let task  = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse , error == nil {
+                if let ct = httpResponse.allHeaderFields["Content-Type"] as? String {
+                    completion(ct)
+                }
+            }
+        })
+        task.resume()
+    }
+}
+
+
+
+
 private func symbolBackgroundColor(for contractAddress: AlphaWallet.Address, server: RPCServer, colors: [UIColor], blockChainNameColor: UIColor) -> UIColor {
     if contractAddress.sameContract(as: Constants.nativeCryptoAddressInDatabase) {
         return blockChainNameColor
@@ -96,8 +133,13 @@ public class TokenImageFetcher {
             rawImage = nil
             _overlayServerIcon = staticOverlayIcon
         case .erc20, .erc875:
-            rawImage = programmaticallyGeneratedIconImage(for: contractAddress, server: server, colors: colors, blockChainNameColor: blockChainNameColor)
-            _overlayServerIcon = staticOverlayIcon
+            if  let webImage = programmaticallyGeneratedURLBasedonAddress(for: contractAddress, server: server, colors: colors, blockChainNameColor: blockChainNameColor) {
+                _overlayServerIcon = staticOverlayIcon
+                return (image: .url(webImage), symbol: symbol, isFinal: false, overlayServerIcon: _overlayServerIcon)
+            } else {
+                rawImage = programmaticallyGeneratedIconImage(for: contractAddress, server: server, colors: colors, blockChainNameColor: blockChainNameColor)
+                _overlayServerIcon = staticOverlayIcon
+            }
         case .nativeCryptocurrency:
             rawImage = programmaticallyGeneratedIconImage(for: contractAddress, server: server, colors: colors, blockChainNameColor: blockChainNameColor)
             _overlayServerIcon = nil

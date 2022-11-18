@@ -14,7 +14,6 @@ private func programmaticallyGeneratedIconImage(for contractAddress: AlphaWallet
     let backgroundColor = symbolBackgroundColor(for: contractAddress, server: server, colors: colors, blockChainNameColor: blockChainNameColor)
     return UIImage.tokenSymbolBackgroundImage(backgroundColor: backgroundColor)
 }
-
 private func symbolBackgroundColor(for contractAddress: AlphaWallet.Address, server: RPCServer, colors: [UIColor], blockChainNameColor: UIColor) -> UIColor {
     if contractAddress.sameContract(as: Constants.nativeCryptoAddressInDatabase) {
         return blockChainNameColor
@@ -154,19 +153,21 @@ public class TokenImageFetcher {
         if let image = generatedImage, image.isFinal {
             return subscribable
         }
-
         firstly {
+           
             TokenImageFetcher
-                .fetchFromAssetGitHubRepo(.alphaWallet, contractAddress: contractAddress)
+                .fetchFromAssetGitHubRepo(.lif3, contractAddress: contractAddress, server: server)
                 .map { image -> TokenImage in
                     return (image: .image(image), symbol: "", isFinal: true, overlayServerIcon: staticOverlayIcon)
                 }
+            
         }.recover { _ -> Promise<TokenImage> in
             let url = try TokenImageFetcher.imageUrlFromOpenSea(type, balance: balance, size: size)
             return .value((image: url, symbol: "", isFinal: true, overlayServerIcon: staticOverlayIcon))
         }.recover { _ -> Promise<TokenImage> in
+          
             return TokenImageFetcher
-                .fetchFromAssetGitHubRepo(.thirdParty, contractAddress: contractAddress)
+                .fetchFromAssetGitHubRepo(.lif3, contractAddress: contractAddress,server: server)
                 .map { image -> TokenImage in
                     return (image: .image(image), symbol: "", isFinal: false, overlayServerIcon: staticOverlayIcon)
                 }
@@ -191,21 +192,25 @@ public class TokenImageFetcher {
         }
     }
 
-    private static func fetchFromAssetGitHubRepo(_ githubAssetsSource: GithubAssetsURLResolver.Source, contractAddress: AlphaWallet.Address) -> Promise<UIImage> {
+    private static func fetchFromAssetGitHubRepo(_ githubAssetsSource: GithubAssetsURLResolver.Source, contractAddress: AlphaWallet.Address, server: RPCServer) -> Promise<UIImage> {
         struct AnyError: Error { }
-        let urlString = githubAssetsSource.url(forContract: contractAddress)
+        let urlString = githubAssetsSource.url(forContract: contractAddress, server: server)
         guard let url = URL(string: urlString) else {
             verboseLog("Loading token icon URL: \(urlString) error")
             return .init(error: AnyError())
         }
 
         guard let fetcher = imageFetcher else { return .init(error: AnyError()) }
+        print(urlString)
         return fetcher.retrieveImage(with: url)
     }
+    
+  
 }
 
 public protocol ImageFetcher: AnyObject {
     func retrieveImage(with url: URL) -> Promise<UIImage>
+//    func loadUrl(with url: URL) -> Promise<WebImageURL>
 }
 
 class GithubAssetsURLResolver {
@@ -214,13 +219,15 @@ class GithubAssetsURLResolver {
     enum Source: String {
         case alphaWallet = "https://raw.githubusercontent.com/AlphaWallet/iconassets/lowercased/"
         case thirdParty = "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/"
-
-        func url(forContract contract: AlphaWallet.Address) -> String {
+        case lif3 = "https://assets.lif3.com/wallet/tokens/"
+        func url(forContract contract: AlphaWallet.Address, server: RPCServer) -> String {
             switch self {
             case .alphaWallet:
                 return rawValue + contract.eip55String.lowercased() + "/" + GithubAssetsURLResolver.file
             case .thirdParty:
                 return rawValue + contract.eip55String + "/" + GithubAssetsURLResolver.file
+            case .lif3:
+                return rawValue + server.symbol + "/" +  contract.eip55String.lowercased() + ".svg"
             }
         }
     }

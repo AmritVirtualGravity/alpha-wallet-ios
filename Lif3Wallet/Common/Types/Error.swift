@@ -106,3 +106,18 @@ extension Error {
         }
     }
 }
+
+enum CustomError: LocalizedError {
+    case tokenOrSwapQuoteNotFound
+    case error(String)
+    
+    var errorDescription: String? {
+        switch self {
+        case .tokenOrSwapQuoteNotFound:
+            return "The operation couldn't be completed."
+        case .error(let message):
+            return message
+        }
+    }
+}
+

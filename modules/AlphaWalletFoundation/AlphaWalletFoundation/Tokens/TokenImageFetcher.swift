@@ -201,7 +201,6 @@ public class TokenImageFetcher {
         }
 
         guard let fetcher = imageFetcher else { return .init(error: AnyError()) }
-        print(urlString)
         return fetcher.retrieveImage(with: url)
     }
     

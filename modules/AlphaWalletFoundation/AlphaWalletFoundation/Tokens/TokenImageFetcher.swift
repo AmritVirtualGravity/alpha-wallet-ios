@@ -29,6 +29,21 @@ private func symbolBackgroundColor(for contractAddress: AlphaWallet.Address, ser
     }
 }
 
+func getContentType(urlPath: String, completion: @escaping(_ type: String)->()) {
+    if let url = URL(string: urlPath) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "HEAD"
+        let task  = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse , error == nil {
+                if let ct = httpResponse.allHeaderFields["Content-Type"] as? String {
+                    completion(ct)
+                }
+            }
+        })
+        task.resume()
+    }
+}
+
 public class RPCServerImageFetcher {
     public static var instance = RPCServerImageFetcher()
 
@@ -154,22 +169,19 @@ public class TokenImageFetcher {
             return subscribable
         }
         firstly {
-           
-            TokenImageFetcher
-                .fetchFromAssetGitHubRepo(.lif3, contractAddress: contractAddress, server: server)
-                .map { image -> TokenImage in
-                    return (image: .image(image), symbol: "", isFinal: true, overlayServerIcon: staticOverlayIcon)
+        TokenImageFetcher
+                .fetchFromAssetLif3Repo(.lif3, contractAddress: contractAddress, server: server)
+                .map { url -> TokenImage in
+                    return (image: .url(url), symbol: "", isFinal: true, overlayServerIcon: staticOverlayIcon)
                 }
-            
         }.recover { _ -> Promise<TokenImage> in
             let url = try TokenImageFetcher.imageUrlFromOpenSea(type, balance: balance, size: size)
             return .value((image: url, symbol: "", isFinal: true, overlayServerIcon: staticOverlayIcon))
         }.recover { _ -> Promise<TokenImage> in
-          
             return TokenImageFetcher
-                .fetchFromAssetGitHubRepo(.lif3, contractAddress: contractAddress,server: server)
-                .map { image -> TokenImage in
-                    return (image: .image(image), symbol: "", isFinal: false, overlayServerIcon: staticOverlayIcon)
+                .fetchFromAssetLif3Repo(.lif3, contractAddress: contractAddress,server: server)
+                .map { url -> TokenImage in
+                    return (image: .url(url), symbol: "", isFinal: false, overlayServerIcon: staticOverlayIcon)
                 }
         }.done { value in
             subscribable.send(value)
@@ -204,8 +216,26 @@ public class TokenImageFetcher {
         return fetcher.retrieveImage(with: url)
     }
     
-  
-}
+    private static func fetchFromAssetLif3Repo(_ githubAssetsSource: GithubAssetsURLResolver.Source, contractAddress: AlphaWallet.Address, server: RPCServer) -> Promise<WebImageURL> {
+        struct AnyError: Error { }
+        let urlString = githubAssetsSource.url(forContract: contractAddress, server: server)
+        guard let url = URL(string: urlString) else {
+            verboseLog("Loading token icon URL: \(urlString) error")
+            return .init(error: AnyError())
+        }
+
+        guard let fetcher = imageFetcher else { return .init(error: AnyError()) }
+        return Promise { seal in
+            getContentType(urlPath: urlString, completion: { type in
+                if type == "image/svg+xml" {
+                    if let webUrl = WebImageURL(string: urlString) {
+                    seal.fulfill(webUrl)
+                    }
+                }
+            })
+            }
+        }
+    }
 
 public protocol ImageFetcher: AnyObject {
     func retrieveImage(with url: URL) -> Promise<UIImage>

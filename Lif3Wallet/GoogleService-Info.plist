@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>966306838404-ao7r6t3lnsibebo8gk34cfq0ujga24m9.apps.googleusercontent.com</string>
+	<string>966306838404-l3n50qskuon9vfnuvvptd9ssr9jc9bg3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.966306838404-ao7r6t3lnsibebo8gk34cfq0ujga24m9</string>
+	<string>com.googleusercontent.apps.966306838404-l3n50qskuon9vfnuvvptd9ssr9jc9bg3</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBRwcjVDHHUjCkcvBvLXFBqJWA5yA087xY</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>io.lif3.wallet</string>
+	<string>com.lif3.lif3wallet</string>
 	<key>PROJECT_ID</key>
 	<string>lif3-mobile-dev</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:966306838404:ios:33827598ca495ed9704fd1</string>
+	<string>1:966306838404:ios:f4c37c041b48dbd0704fd1</string>
 </dict>
 </plist>

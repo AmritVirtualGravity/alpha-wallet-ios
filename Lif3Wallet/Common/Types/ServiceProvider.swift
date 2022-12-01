@@ -11,6 +11,7 @@ public enum URLServiceProvider {
     case facebook
     case faq
     case github
+    case instagram
 
     // TODO should probably change or remove `localURL` since iOS supports deep links now
     public var deepLinkURL: URL? {
@@ -29,6 +30,8 @@ public enum URLServiceProvider {
             return nil
         case .faq:
             return URL(string: "https://lif3.com/faq")
+        case .instagram:
+            return URL(string: "https://www.instagram.com/lif3official/")
         }
     }
     public var remoteURL: URL {
@@ -47,6 +50,9 @@ public enum URLServiceProvider {
             return URL(string: "https://alphawallet.com/faq/")!
         case .github:
             return URL(string: "https://github.com/AlphaWallet/alpha-wallet-ios/issues/new")!
+        case .instagram:
+            return URL(string: "https://www.instagram.com/lif3official/")!
+            
         }
     }
 }

@@ -14,7 +14,7 @@ class SupportViewModel: NSObject {
         R.string.localizable.settingsSupportTitle()
     }
 
-    var rows: [SupportRow] = [.telegramCustomer, .discord, .twitter, .faq]
+    var rows: [SupportRow] = [.telegramCustomer, .discord, .twitter, .instagram, .faq]
 
     func cellViewModel(indexPath: IndexPath) -> SettingTableViewCellViewModel {
         let row = rows[indexPath.row]
@@ -28,11 +28,14 @@ enum SupportRow {
     case twitter
     case reddit
     case facebook
+    
     //TODO remove if unused
     case blog
-    case faq
+    case faq // faq is support for life.
     case github
     case email
+    case instagram
+    
 
     var urlProvider: URLServiceProvider? {
         switch self {
@@ -50,6 +53,8 @@ enum SupportRow {
             return URLServiceProvider.faq
         case .github:
             return URLServiceProvider.github
+        case .instagram:
+            return URLServiceProvider.instagram
         case .blog, .email:
             return nil
         }
@@ -75,6 +80,8 @@ enum SupportRow {
             return R.string.localizable.supportEmailTitle()
         case .github:
             return URLServiceProvider.github.title
+        case .instagram:
+            return URLServiceProvider.instagram.title
         }
     }
 
@@ -98,6 +105,8 @@ enum SupportRow {
             return R.image.settings_faq()
         case .github:
             return URLServiceProvider.github.image
+        case .instagram:
+            return URLServiceProvider.instagram.image
         }
     }
 }
@@ -117,9 +126,11 @@ extension URLServiceProvider {
         case .facebook:
             return R.string.localizable.urlFacebook()
         case .faq:
-            return R.string.localizable.urlFaq().uppercased()
+            return R.string.localizable.urlFaq()
         case .github:
             return R.string.localizable.urlGithub()
+        case .instagram:
+            return R.string.localizable.instagram()
         }
     }
 
@@ -139,6 +150,8 @@ extension URLServiceProvider {
             return R.image.settings_faq()
         case .github:
             return R.image.iconsSettingsGithub()
+        case .instagram:
+            return R.image.settings_instagram()
         }
     }
 }

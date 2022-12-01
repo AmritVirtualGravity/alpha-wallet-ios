@@ -135,6 +135,9 @@ extension SupportViewController: UITableViewDelegate {
         case .github:
             logAccessGithub()
             openURL(.github)
+        case .instagram:
+            logAccessInstagram()
+            openURL(.instagram)
         case .email:
             let attachments = Features.default.isAvailable(.isAttachingLogFilesToSupportEmailEnabled) ? DDLogger.logFilesAttachments : []
             resolver.present(from: self, attachments: attachments)
@@ -174,6 +177,9 @@ extension SupportViewController {
 
     private func logAccessFacebook() {
         analytics.log(navigation: Analytics.Navigation.facebook)
+    }
+    private func logAccessInstagram() {
+        analytics.log(navigation: Analytics.Navigation.instagram)
     }
 
     private func logAccessGithub() {

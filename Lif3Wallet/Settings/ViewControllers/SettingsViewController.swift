@@ -203,6 +203,7 @@ fileprivate extension SettingsViewController {
             case .passcode(let vm):
                 let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
+                cell.isforTheme = false
                 cell.delegate = self
                 return cell
             case .theme(let vm):

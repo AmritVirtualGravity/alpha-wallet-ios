@@ -23,6 +23,10 @@ class RenameWalletViewModel {
     var walletNameTitle: String {
         return R.string.localizable.walletRenameEnterNameTitle()
     }
+    
+    var backgroundColor: UIColor {
+        return Configuration.Color.Semantic.defaultViewBackground
+    }
 
     private let analytics: AnalyticsLogger
     private let domainResolutionService: DomainResolutionServiceType

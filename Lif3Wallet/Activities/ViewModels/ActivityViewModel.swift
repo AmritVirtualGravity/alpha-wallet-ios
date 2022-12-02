@@ -17,7 +17,7 @@ struct ActivityViewModel {
     }
 
     var backgroundColor: UIColor {
-        Screen.TokenCard.Color.background
+        Configuration.Color.Semantic.defaultViewBackground
     }
 
     var titleTextColor: UIColor {

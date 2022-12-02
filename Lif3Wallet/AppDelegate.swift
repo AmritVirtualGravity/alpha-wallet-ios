@@ -11,10 +11,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         crashlytics.register(AlphaWallet.FirebaseCrashlyticsReporter.instance)
-
         applyStyle()
         window = UIWindow(frame: UIScreen.main.bounds)
-
+        if UserDefaults.standard.bool(forKey: "DarkModeOn") {
+            window?.overrideUserInterfaceStyle = .dark
+        }else {
+            window?.overrideUserInterfaceStyle = .light
+        }
         do {
             register(addressStorage: addressStorage)
 

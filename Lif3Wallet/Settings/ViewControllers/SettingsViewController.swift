@@ -166,10 +166,24 @@ extension SettingsViewController: CanOpenURL {
 }
 
 extension SettingsViewController: SwitchTableViewCellDelegate {
+    func didEnableDarkTheme(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool) {
+        guard let _ = cell.indexPath else { return }
+        let userDefault = UserDefaults.standard
+        if (isOn == true) {
+            userDefault.set(true, forKey: "DarkModeOn")
+            let window = UIApplication.shared.windows.first
+                                window?.overrideUserInterfaceStyle = .dark
+        } else {
+            userDefault.set(false, forKey: "DarkModeOn")
+            let window = UIApplication.shared.windows.first
+                                window?.overrideUserInterfaceStyle = .light
+        }
+    }
+    
 
     func cell(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool) {
         guard let indexPath = cell.indexPath else { return }
-
+        
         toggleSelection.send((indexPath, isOn))
     }
 }
@@ -183,7 +197,6 @@ fileprivate extension SettingsViewController {
                 cell.accessoryView = vm.accessoryView
                 cell.accessoryType = vm.accessoryType
                 cell.configure(viewModel: vm)
-
                 return cell
             case .undefined:
                 return UITableViewCell()
@@ -191,7 +204,12 @@ fileprivate extension SettingsViewController {
                 let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
                 cell.delegate = self
-
+                return cell
+            case .theme(let vm):
+                let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.configure(viewModel: vm)
+                cell.delegate = self
+                cell.isforTheme = true
                 return cell
             }
         })
@@ -251,7 +269,7 @@ extension SettingsViewController: UITableViewDelegate {
             switch rows[indexPath.row] {
             case .advanced:
                 delegate?.advancedSettingsSelected(in: self)
-            case .notifications, .passcode:
+            case .notifications, .passcode, .theme:
                 break
             case .selectActiveNetworks:
                 delegate?.activeNetworksSelected(in: self)

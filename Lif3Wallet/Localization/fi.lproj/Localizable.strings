@@ -117,6 +117,7 @@
 "settings.pingInfura.successful" = "Infura toimii";
 "settings.pingInfura.fail" = "Infura-virhe";
 "settings.support.title" = "Tuki";
+"settings.support.darkMode" = "DarkMode";
 "settings.notifications.title" = "Ilmoitukset";
 "settings.passcode.title" = "PIN-koodi";
 "settings.selectActiveNetworks.title" = "Kytketyt verkot";

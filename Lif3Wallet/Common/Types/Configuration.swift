@@ -9,10 +9,10 @@ import UIKit
 
 fileprivate func colorFrom(trait: UITraitCollection, lightColor: UIColor, darkColor: UIColor) -> UIColor {
     switch trait.userInterfaceStyle {
-    case .unspecified, .light:
-        return lightColor
-    case .dark:
+    case .unspecified, .dark:
         return darkColor
+    case .light:
+        return lightColor
     }
 }
 
@@ -211,9 +211,14 @@ struct Configuration {
             static let textViewBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.venus()!)
             }
+            
 
             static let shadow = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)
+            }
+            
+            static let switchViewBackground = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
             }
         }
     }

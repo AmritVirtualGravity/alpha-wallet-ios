@@ -37,9 +37,9 @@ class RenameWalletViewController: UIViewController {
 
     init(viewModel: RenameWalletViewModel) {
         self.viewModel = viewModel
-
+       
         super.init(nibName: nil, bundle: nil)
-
+        view.backgroundColor = viewModel.backgroundColor
         let footerBar = ButtonsBarBackgroundView(buttonsBar: buttonsBar, edgeInsets: .zero, separatorHeight: 0.0)
 
         footerBottomConstraint = footerBar.bottomAnchor.constraint(equalTo: view.bottomAnchor)

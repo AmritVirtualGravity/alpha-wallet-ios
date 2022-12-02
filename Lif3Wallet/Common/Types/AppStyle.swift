@@ -7,30 +7,30 @@ import AlphaWalletFoundation
 func applyStyle() {
     UIBarButtonItem.appearance(whenContainedInInstancesOf: [UIDocumentBrowserViewController.self]).tintColor = Configuration.Color.Semantic.navigationbarButtonItemTint
     UIWindow.appearance().tintColor = Colors.appTint
-
     UINavigationBar.appearance().shadowImage = UIImage(color: Configuration.Color.Semantic.navigationbarSeparator, size: CGSize(width: 0.25, height: 0.25))
     UINavigationBar.appearance().compactAppearance = UINavigationBarAppearance.defaultAppearence
     UINavigationBar.appearance().standardAppearance = UINavigationBarAppearance.defaultAppearence
     UINavigationBar.appearance().scrollEdgeAppearance = UINavigationBarAppearance.defaultAppearence
-
+    
+    
     //We could have set the backBarButtonItem with an empty title for every view controller. Using appearance here, while a hack is still more convenient though, since we don't have to do it for every view controller instance
     UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -200, vertical: 0), for: .default)
     UIBarButtonItem.appearance().tintColor = Configuration.Color.Semantic.navigationbarButtonItemTint
     UIBarButtonItem.appearance(whenContainedInInstancesOf: [UIToolbar.self]).tintColor = Configuration.Color.Semantic.navigationbarButtonItemTint
-
+    
     UIToolbar.appearance().tintColor = Colors.appTint
-
+    
     //Background (not needed in iOS 12.1 on simulator)
     UISearchBar.appearance().backgroundColor = Colors.appBackground
     //Cancel button
     UISearchBar.appearance().tintColor = Configuration.Color.Semantic.searchbarTint
     //Cursor color
     UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = Configuration.Color.Semantic.searchbarTint
-
+    
     UIRefreshControl.appearance().tintColor = Colors.navigationTitleColor
-
+    
     UISwitch.appearance().onTintColor = Colors.appTint
-
+    
     UITableView.appearance().separatorColor = Configuration.Color.Semantic.tableViewSeparator
 }
 
@@ -54,7 +54,7 @@ extension UINavigationBarAppearance {
         appearance.backButtonAppearance.normal.titleTextAttributes = [
             .foregroundColor: UIColor.clear
         ]
-
+        
         return appearance
     }
 }
@@ -62,17 +62,17 @@ extension UINavigationBarAppearance {
 extension UITabBarAppearance {
     static var defaultAppearence: UITabBarAppearance {
         let tabBarAppearance = UITabBarAppearance()
-
+        
         tabBarAppearance.backgroundColor = Configuration.Color.Semantic.tabBarBackground
         tabBarAppearance.shadowColor = Configuration.Color.Semantic.tabBarSeparator
-
+        
         let tabBarItemAppearance = UITabBarItemAppearance()
-
+        
         tabBarItemAppearance.normal.titleTextAttributes = [.font: Style.TabBar.Font.normal, .foregroundColor: Style.TabBar.Color.normal]
         tabBarItemAppearance.selected.titleTextAttributes = [.font: Style.TabBar.Font.selected, .foregroundColor: Style.TabBar.Color.selected]
-
+        
         tabBarAppearance.stackedLayoutAppearance = tabBarItemAppearance
-
+        
         return tabBarAppearance
     }
 }
@@ -83,13 +83,13 @@ extension UITabBarController {
         tabBarController.tabBar.isTranslucent = false
         tabBarController.tabBar.tintColor = Configuration.Color.Semantic.tabBarTint
         tabBarController.tabBar.standardAppearance = tabBarAppearance
-
+        
         if #available(iOS 15.0, *) {
             tabBarController.tabBar.scrollEdgeAppearance = tabBarAppearance
         } else {
             // Fallback on earlier versions
         }
-
+        
         return tabBarController
     }
 }
@@ -159,7 +159,7 @@ enum Metrics {
         static let button = CGFloat(4)
         static let nftBox = CGFloat(8)
     }
-
+    
     enum DappsHome {
         enum Icon {
             static let shadowOffset = CGSize(width: 0, height: 0)
@@ -168,7 +168,7 @@ enum Metrics {
             static let shadowColor = UIColor.black
         }
     }
-
+    
     static let tokenChainOverlayDimension = CGFloat(16)
     static let anArbitraryRowHeightSoAutoSizingCellsWorkIniOS10 = CGFloat(100)
     enum Analytics {
@@ -182,7 +182,7 @@ enum GroupedTable {
         static let cellSpacing = CGFloat(5)
         static let cellSeparatorHeight = CGFloat(1)
     }
-
+    
     enum Color {
         static let title = R.color.black()!
         static let background = R.color.alabaster()!
@@ -193,7 +193,7 @@ enum GroupedTable {
 enum Table {
     enum Metric {
         static let plainLeftMargin = CGFloat(5)
-
+        
     }
 }
 
@@ -202,7 +202,7 @@ enum DataEntry {
     private static var isNarrowScreen: Bool {
         ScreenChecker().isNarrowScreen
     }
-
+    
     enum Color {
         static let border = UIColor(red: 194, green: 194, blue: 194)
         static let text = Colors.appText
@@ -217,16 +217,16 @@ enum DataEntry {
         static let ensText = UIColor(red: 117, green: 185, blue: 67)
         static let searchTextFieldBackground = UIColor(red: 243, green: 244, blue: 245)
     }
-
+    
     enum Metric {
         static let borderThickness = CGFloat(1.0)
         static let cornerRadius = Metrics.CornerRadius.textbox
         static let shadowRadius = CGFloat(2.0)
         static let currencyIconInset = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)
-
+        
         enum TextField {
             static let borderThickness = CGFloat(1.0)
-
+            
             enum Default {
                 static let edgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
                 static let cornerRadius: CGFloat = Metrics.CornerRadius.textbox
@@ -241,56 +241,56 @@ enum DataEntry {
                 static let textInset: CGSize = CGSize(width: 5, height: 0)
             }
         }
-
+        
         enum SendHeader {
             static let iconSide: CGFloat = 40
             static let insets = UIEdgeInsets(top: isNarrowScreen ? 20 : 40, left: 0, bottom: 0, right: 0)
             static let topSpacerHeight: CGFloat = isNarrowScreen ? 10 : 20
-
+            
             enum RecentTransactionsLabel {
                 static let height: CGFloat = isNarrowScreen ? 40 : 50
                 static let edgeInsets: UIEdgeInsets = .init(top: 0, left: isNarrowScreen ? 15 : 30, bottom: 0, right: 0)
             }
         }
-
+        
         enum Tokens {
             enum Filter {
                 static let height: CGFloat = isNarrowScreen ? 40 : 50
             }
         }
-
+        
         enum AddHideToken {
             enum Header {
                 static let height: CGFloat = isNarrowScreen ? 50 : 60
             }
         }
-
+        
         enum TableView {
             static let estimatedRowHeight: CGFloat = 100
             static let headerReferenceSizeWidth: CGFloat = 100
         }
-
+        
         enum ButtonsBar {
             static let insets: UIEdgeInsets = .init(top: 20, left: 0, bottom: 20, right: 0)
             static let separatorHeight: CGFloat = 1.0
         }
-
+        
         enum TransactionConfirmation {
             static let separatorHeight: CGFloat = 1.0
             static let headerHeight: CGFloat = isNarrowScreen ? 50 : 60
             static let footerHeight: CGFloat = isNarrowScreen ? 80 : 120
         }
-
+        
         enum AddressTextField {
             //NOTE: top/bottom insets value to allow shadow displaying
             static let insets: UIEdgeInsets = .init(top: shadowRadius, left: shadowRadius, bottom: shadowRadius, right: shadowRadius)
         }
-
+        
         enum ImageView {
             static let serverIconSize = CGSize(width: 20, height: 20)
         }
     }
-
+    
     enum Font {
         static let text = Fonts.regular(size: isNarrowScreen ? 14: 18)
         static let label = Fonts.bold(size: 13)
@@ -309,11 +309,11 @@ enum Label {
 }
 
 enum Screen {
-
+    
     enum Tokens {
         static let addHideTokenFont = Fonts.semibold(size: 17)
     }
-
+    
     enum Backup {
         static let subtitleFont = ScreenChecker().isNarrowScreen ? Fonts.regular(size: 22) : Fonts.regular(size: 28)
         static let subtitleColor = Colors.darkGray
@@ -321,7 +321,7 @@ enum Screen {
         static let descriptionBoldFont = Fonts.bold(size: ScreenChecker.size(big: 17, medium: 15, small: 15))
         static let descriptionColor = Colors.darkGray
     }
-
+    
     enum Setting {
         enum Font {
             static let title = Fonts.regular(size: 17)
@@ -334,7 +334,7 @@ enum Screen {
             static let image = Colors.appTint
         }
     }
-
+    
     enum TokenCard {
         enum Font {
             static let title: UIFont = Fonts.regular(size: 20)
@@ -344,7 +344,7 @@ enum Screen {
             static let placeholderLabel = Fonts.regular(size: 17)
             static let valueChangeValue = Fonts.semibold(size: 20)
         }
-
+        
         enum Color {
             static let background = Colors.appBackground
             static let title = Colors.appText
@@ -362,13 +362,13 @@ enum Screen {
             }
             static let blockChainName = Colors.appWhite
         }
-
+        
         enum Metric {
             static let blockChainTagCornerRadius = CGFloat(4)
             static let blockChainTagHeight = CGFloat(20)
         }
     }
-
+    
     enum TransactionConfirmation {
         static var transactionRowInfoInsets: UIEdgeInsets {
             let leftRightInset: CGFloat = ScreenChecker().isNarrowScreen ? 10 : 24
@@ -446,7 +446,7 @@ enum Style {
             static let color: UIColor = R.color.mercury()!
         }
     }
-
+    
     enum NavigationBar {
         enum Separator {
             static let color: UIColor = R.color.mercury()!

@@ -90,5 +90,6 @@ class SettingTableViewCell: UITableViewCell {
         subTitleLabel.font = viewModel.subTitleFont
         subTitleLabel.textColor = viewModel.subTitleTextColor
         accessoryView = Style.AccessoryView.chevron
+        self.backgroundColor = viewModel.backgroundColor
     }
 }

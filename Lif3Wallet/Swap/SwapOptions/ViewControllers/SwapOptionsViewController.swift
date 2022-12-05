@@ -41,24 +41,31 @@ class SwapOptionsViewController: UIViewController {
     }()
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = SelfSizingTableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .singleLine
-        tableView.backgroundColor = GroupedTable.Color.background
+        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
         tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
         tableView.register(RPCDisplaySelectableTableViewCell.self)
         tableView.isEditing = false
         tableView.keyboardDismissMode = .onDrag
+        tableView.delegate = self
 
         return tableView
     }()
     private lazy var swapToolsView: SelectedSwapToolsCollectionView = {
-        return SelectedSwapToolsCollectionView(viewModel: viewModel.selectedSwapToolsViewModel, appear: appear.eraseToAnyPublisher())
+        return SelectedSwapToolsCollectionView(viewModel: viewModel.selectedSwapToolsViewModel, willAppear: willAppear.eraseToAnyPublisher())
     }()
-    private lazy var checker = KeyboardChecker(self, resetHeightDefaultValue: 0)
     private var cancelable = Set<AnyCancellable>()
-    private lazy var dataSource: SwapOptionsViewModel.SessionsDiffableDataSource = makeDataSource()
-    private let appear = PassthroughSubject<Void, Never>()
+    private lazy var dataSource: SwapOptionsViewModel.DataSource = makeDataSource()
+    private let willAppear = PassthroughSubject<Void, Never>()
+    private let selection = PassthroughSubject<IndexPath, Never>()
+    private let containerView: ScrollableStackView = {
+        let view = ScrollableStackView()
+        view.stackView.spacing = 0
+
+        return view
+    }()
 
     weak var delegate: SwapOptionsViewControllerDelegate?
 
@@ -66,7 +73,7 @@ class SwapOptionsViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
-        let stackView = [
+        containerView.stackView.addArrangedSubviews([
             .spacer(height: 20),
             slippageHeaderView.adjusted(),
             .spacer(height: 10),
@@ -79,40 +86,30 @@ class SwapOptionsViewController: UIViewController {
             networkHeaderView.adjusted(),
             .spacer(height: 10),
             tableView
-        ].asStackView(axis: .vertical)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        view.addSubview(stackView)
-
-        let bottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            bottomConstraint
         ])
 
-        checker.constraints = [bottomConstraint]
+        view.addSubview(containerView)
+
+        let bottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            bottomConstraint
+        ])
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checker.viewWillAppear()
-        appear.send(())
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        checker.viewWillDisappear()
+        willAppear.send(())
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureDataSource()
-        navigationItem.title = viewModel.title
         navigationItem.leftBarButtonItem = UIBarButtonItem.logoBarButton()
         navigationItem.rightBarButtonItem = UIBarButtonItem.closeBarButton(self, selector: #selector(closeDidSelect))
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
     } 
 
@@ -121,7 +118,7 @@ class SwapOptionsViewController: UIViewController {
     }
 
     @objc private func choseSwapToolSelected(_ sender: UIButton) {
-        self.delegate?.choseSwapToolSelected(in: self)
+        delegate?.choseSwapToolSelected(in: self)
     }
 
     @objc private func closeDidSelect(_ sender: UIButton) {
@@ -129,9 +126,10 @@ class SwapOptionsViewController: UIViewController {
     }
 
     private func bind(viewModel: SwapOptionsViewModel) {
-        let output = viewModel.transform(input: .init())
+        let output = viewModel.transform(input: .init(selection: selection.eraseToAnyPublisher()))
         output.viewState
-            .sink { [weak dataSource] viewState in
+            .sink { [weak dataSource, navigationItem] viewState in
+                navigationItem.title = viewState.title
                 dataSource?.apply(viewState.sessions, animatingDifferences: false)
             }.store(in: &cancelable)
 
@@ -146,26 +144,20 @@ class SwapOptionsViewController: UIViewController {
 }
 
 extension SwapOptionsViewController {
-    private func makeDataSource() -> SwapOptionsViewModel.SessionsDiffableDataSource {
-        SwapOptionsViewModel.SessionsDiffableDataSource(tableView: tableView) { tableView, indexPath, viewModel -> RPCDisplaySelectableTableViewCell? in
+    private func makeDataSource() -> SwapOptionsViewModel.DataSource {
+        SwapOptionsViewModel.DataSource(tableView: tableView) { tableView, indexPath, viewModel -> RPCDisplaySelectableTableViewCell? in
             let cell: RPCDisplaySelectableTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configure(viewModel: viewModel)
 
             return cell
         }
     }
-
-    private func configureDataSource() {
-        tableView.delegate = self
-        tableView.dataSource = dataSource
-    }
 }
 
 extension SwapOptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let session = viewModel.sessions[indexPath.row]
-        viewModel.set(selectedServer: session.server)
+        selection.send(indexPath)
     }
 
     //Hide the header
@@ -186,5 +178,19 @@ extension SwapOptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80.0
+    }
+}
+
+class SelfSizingTableView: UITableView {
+    override var contentSize: CGSize {
+        didSet {
+            invalidateIntrinsicContentSize()
+            setNeedsLayout()
+        }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let height = min(.infinity, contentSize.height)
+        return CGSize(width: contentSize.width, height: height)
     }
 }

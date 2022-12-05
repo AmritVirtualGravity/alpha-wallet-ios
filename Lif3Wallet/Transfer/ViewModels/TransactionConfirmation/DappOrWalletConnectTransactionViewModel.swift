@@ -10,7 +10,7 @@ import BigInt
 import AlphaWalletFoundation
 
 extension TransactionConfirmationViewModel {
-    class DappOrWalletConnectTransactionViewModel: SectionProtocol, CryptoToFiatRateUpdatable, BalanceUpdatable {
+    class DappOrWalletConnectTransactionViewModel: ExpandableSection, CryptoToFiatRateUpdatable, BalanceUpdatable {
         enum Section {
             case balance
             case gas
@@ -83,7 +83,7 @@ extension TransactionConfirmationViewModel {
         var placeholderIcon: UIImage? {
             return requester == nil ? R.image.awLogoSmall() : R.image.walletConnectIcon()
         }
-        let transactionType: TransactionType
+        private let transactionType: TransactionType
         var dappIconUrl: URL? { requester?.iconUrl }
         var ensName: String? { recipientResolver.ensName }
         var addressString: String? { recipientResolver.address?.eip55String }
@@ -104,13 +104,15 @@ extension TransactionConfirmationViewModel {
                 switch token.type {
                 case .nativeCryptocurrency:
                     balance = "\(viewModel.amountShort) \(viewModel.symbol)"
-                    let newAmountShort = EtherNumberFormatter.short.string(from: abs(viewModel.value - configurator.transaction.value))
+                    let newAmountShort = EtherNumberFormatter.short.string(from: BigUInt(viewModel.value) - configurator.transaction.value)
                     newBalance = R.string.localizable.transactionConfirmationSendSectionBalanceNewTitle(newAmountShort, viewModel.symbol)
-                case .erc1155, .erc20, .erc721, .erc721ForTickets, .erc875:
+                case .erc20:
                     let symbol = token.symbolInPluralForm(withAssetDefinitionStore: assetDefinitionStore)
-                    let newAmountShort = EtherNumberFormatter.short.string(from: abs(viewModel.value - configurator.transaction.value), decimals: token.decimals)
+                    let newAmountShort = EtherNumberFormatter.short.string(from: BigUInt(viewModel.value) - configurator.transaction.value, decimals: token.decimals)
                     balance = "\(viewModel.amountShort) \(symbol)"
                     newBalance = R.string.localizable.transactionConfirmationSendSectionBalanceNewTitle(newAmountShort, symbol)
+                case .erc1155, .erc721, .erc721ForTickets, .erc875:
+                    break
                 }
             } else {
                 balance = .none

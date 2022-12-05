@@ -13,15 +13,15 @@ struct ConfigureTransactionViewModel {
     private let transactionType: TransactionType
     private let configurator: TransactionConfigurator
     private let fullFormatter = EtherNumberFormatter.full
-    private var totalFee: BigInt {
+    private var totalFee: BigUInt {
         return configurationToEdit.gasPrice * configurationToEdit.gasLimit
     }
     private var server: RPCServer {
         configurator.session.server
     }
-    private var currencyRate: CurrencyRate? {
+    private var coinTicker: CoinTicker? {
         let etherToken: Token = MultipleChainsTokensDataStore.functional.etherToken(forServer: configurator.session.server)
-        return service.tokenViewModel(for: etherToken)?.balance.ticker?.rate
+        return service.tokenViewModel(for: etherToken)?.balance.ticker
     }
 
     var recoveryMode: RecoveryMode
@@ -50,11 +50,7 @@ struct ConfigureTransactionViewModel {
     }
 
     var gasViewModel: GasViewModel {
-        return GasViewModel(fee: totalFee, symbol: server.symbol, currencyRate: currencyRate, formatter: fullFormatter)
-    }
-
-    var backgroundColor: UIColor {
-        return R.color.alabaster()!
+        return GasViewModel(fee: totalFee, symbol: server.symbol, coinTicker: coinTicker, formatter: fullFormatter)
     }
 
     var title: String {
@@ -65,7 +61,7 @@ struct ConfigureTransactionViewModel {
         switch transactionType {
         case .nativeCryptocurrency, .dapp, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
             return false
-        case .erc20Token, .erc875Token, .erc875TokenOrder, .erc721Token, .erc721ForTicketToken, .erc1155Token:
+        case .erc20Token, .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token:
             return true
         }
     }
@@ -86,20 +82,20 @@ struct ConfigureTransactionViewModel {
         )
     }
 
-    var nonceViewModel: TextFieldViewViewModel {
+    var nonceViewModel: TextFieldViewModel {
         let placeholder = R.string.localizable.configureTransactionNonceLabelTitle()
         let value = configurationToEdit.nonceRawValue.flatMap { String($0) }
 
         return .init(placeholder: placeholder, value: value ?? "", keyboardType: .numberPad)
     }
 
-    var dataViewModel: TextFieldViewViewModel {
+    var dataViewModel: TextFieldViewModel {
         let placeholder = R.string.localizable.configureTransactionDataLabelTitle()
 
         return .init(placeholder: placeholder, value: configurationToEdit.dataRawValue)
     }
 
-    var totalFeeViewModel: TextFieldViewViewModel {
+    var totalFeeViewModel: TextFieldViewModel {
         let placeholder = R.string.localizable.configureTransactionTotalNetworkFeeLabelTitle()
 
         return .init(placeholder: placeholder, value: gasViewModel.feeText, allowEditing: false)
@@ -121,7 +117,7 @@ struct ConfigureTransactionViewModel {
             .field(.nonce)
         ]
 
-        if isDataInputHidden {
+        if !isDataInputHidden {
             views += [.field(.transactionData)]
         }
 

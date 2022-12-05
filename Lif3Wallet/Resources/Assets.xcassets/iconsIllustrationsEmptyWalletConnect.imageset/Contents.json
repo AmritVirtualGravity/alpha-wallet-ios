@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Frame 1589.png",
+      "filename" : "iconsIllustrationsEmptyWalletConnect.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Frame 1589@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Frame 1589@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -21,6 +19,6 @@
     "version" : 1
   },
   "properties" : {
-    "preserves-vector-representation" : true
+      "preserves-vector-representation" : true
   }
 }

@@ -14,17 +14,14 @@ final class SelectSwapToolViewController: UIViewController {
     private let viewModel: SelectSwapToolViewModel
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView.grouped
         tableView.register(SelectableSwapToolTableViewCell.self)
         tableView.estimatedRowHeight = DataEntry.Metric.TableView.estimatedRowHeight
-        tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
         tableView.separatorInset = .zero
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = GroupedTable.Color.background
 
         return tableView
     }()
-    private lazy var dataSource: SelectSwapToolViewModel.ToolsDiffableDataSource = makeDataSource()
+    private lazy var dataSource: SelectSwapToolViewModel.DataSource = makeDataSource()
     private let appear = PassthroughSubject<Void, Never>()
     private let disappear = PassthroughSubject<Void, Never>()
     private let selection = PassthroughSubject<SelectSwapToolViewModel.SwapToolSelection, Never>()
@@ -67,9 +64,9 @@ final class SelectSwapToolViewController: UIViewController {
 
         let output = viewModel.transform(input: input)
         output.viewState
-            .sink { [weak self] state in
-                self?.navigationItem.title = state.title
-                self?.dataSource.apply(state.tools, animatingDifferences: false)
+            .sink { [weak self, navigationItem, dataSource] state in
+                navigationItem.title = state.title
+                dataSource.apply(state.snapshot, animatingDifferences: false)
                 self?.endLoading()
             }.store(in: &cancelable)
     }
@@ -117,8 +114,8 @@ extension SelectSwapToolViewController: UITableViewDelegate {
 }
 
 extension SelectSwapToolViewController {
-    private func makeDataSource() -> SelectSwapToolViewModel.ToolsDiffableDataSource {
-        SelectSwapToolViewModel.ToolsDiffableDataSource(tableView: tableView) { tableView, indexPath, viewModel -> SelectableSwapToolTableViewCell in
+    private func makeDataSource() -> SelectSwapToolViewModel.DataSource {
+        SelectSwapToolViewModel.DataSource(tableView: tableView) { tableView, indexPath, viewModel -> SelectableSwapToolTableViewCell in
             let cell: SelectableSwapToolTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configure(viewModel: viewModel)
 

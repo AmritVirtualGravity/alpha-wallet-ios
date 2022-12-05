@@ -14,14 +14,6 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
     private let roundedBackground = RoundedBackground()
     private let subtitleLabel = UILabel()
     private let imageView = UIImageView()
-    
-    private let backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-   
     // NOTE: internal level, for test cases
     let descriptionLabel1 = UILabel()
     let buttonsBar = HorizontalButtonsBar(configuration: .primary(buttons: 1))
@@ -37,8 +29,8 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         hidesBottomBarWhenPushed = true
+
         roundedBackground.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(backgroundImageView)
         view.addSubview(roundedBackground)
 
         imageView.contentMode = .scaleAspectFit
@@ -62,15 +54,6 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         footerBar.addSubview(buttonsBar)
 
         NSLayoutConstraint.activate([
-            
-            
-            // image view constraits for  full screen size
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
-       
-            
             imageView.heightAnchor.constraint(equalToConstant: imageViewDimension),
 
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -107,16 +90,15 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
     }
 
     func configure() {
-        backgroundImageView.image = viewModel.backgroundImage
+        view.backgroundColor = Colors.appBackground
+
         subtitleLabel.numberOfLines = 0
         subtitleLabel.attributedText = viewModel.attributedSubtitle
-        subtitleLabel.textColor = .white
 
         imageView.image = viewModel.imageViewImage
 
         descriptionLabel1.numberOfLines = 0
         descriptionLabel1.attributedText = viewModel.attributedDescription
-        descriptionLabel1.textColor = .white
 
         buttonsBar.configure()
         let exportButton = buttonsBar.buttons[0]

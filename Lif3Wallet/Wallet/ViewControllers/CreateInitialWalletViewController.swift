@@ -15,10 +15,18 @@ class CreateInitialWalletViewController: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
+
         return imageView
     }()
     private let buttonsBar = VerticalButtonsBar(numberOfButtons: 2)
+    private lazy var titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        return titleLabel
+    }()
+
     weak var delegate: CreateInitialWalletViewControllerDelegate?
 
     init(keystore: Keystore) {
@@ -28,21 +36,26 @@ class CreateInitialWalletViewController: UIViewController {
         let footerBar = UIView()
         footerBar.translatesAutoresizingMaskIntoConstraints = false
         footerBar.backgroundColor = .clear
-        view.addSubview(imageView)
+
         view.addSubview(footerBar)
+        view.addSubview(imageView)
+        view.addSubview(titleLabel)
+
         footerBar.addSubview(buttonsBar)
+
         let footerBottomConstraint = footerBar.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         footerBottomConstraint.constant = -UIApplication.shared.bottomSafeAreaHeight
+
         NSLayoutConstraint.activate([
-            
-            // image view constraits for  full screen size
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
+
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
             buttonsBar.topAnchor.constraint(equalTo: footerBar.topAnchor),
-            buttonsBar.bottomAnchor.constraint(equalTo: footerBar.bottomAnchor, constant: -10),
+            buttonsBar.bottomAnchor.constraint(equalTo: footerBar.bottomAnchor),
             buttonsBar.leadingAnchor.constraint(equalTo: footerBar.leadingAnchor, constant: 20),
             buttonsBar.trailingAnchor.constraint(equalTo: footerBar.trailingAnchor, constant: -20),
 
@@ -67,9 +80,12 @@ class CreateInitialWalletViewController: UIViewController {
 
     func configure() {
         imageView.image = viewModel.imageViewImage
+        titleLabel.attributedText = viewModel.titleAttributedString
+
         let createWalletButton = buttonsBar.buttons[0]
         createWalletButton.setTitle(viewModel.createWalletButtonTitle, for: .normal)
         createWalletButton.addTarget(self, action: #selector(createWalletSelected), for: .touchUpInside)
+
         let alreadyHaveWalletButton = buttonsBar.buttons[1]
         alreadyHaveWalletButton.setTitle(viewModel.alreadyHaveWalletButtonText, for: .normal)
         alreadyHaveWalletButton.addTarget(self, action: #selector(alreadyHaveWalletWallet), for: .touchUpInside)

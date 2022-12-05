@@ -4,9 +4,6 @@ import Alamofire
 import Combine
 import PromiseKit
 
-public protocol AssetDefinitionStoreDelegate: AnyObject {
-    func listOfBadTokenScriptFilesChanged(in: AssetDefinitionStore)
-}
 public typealias XMLFile = String
 public protocol BaseTokenScriptFilesProvider {
     func containsTokenScriptFile(for file: XMLFile) -> Bool
@@ -20,6 +17,15 @@ public class AssetDefinitionStore: NSObject {
         case updated
         case unmodified
         case error
+
+        var isError: Bool {
+            switch self {
+            case .error:
+                return true
+            case .cached, .updated, .unmodified:
+                return false
+            }
+        }
     }
 
     private var httpHeaders: HTTPHeaders = {
@@ -45,11 +51,12 @@ public class AssetDefinitionStore: NSObject {
     private let baseXmlHandlers: AtomicDictionary<String, PrivateXMLHandler> = .init()
     private var signatureChangeSubject: PassthroughSubject<AlphaWallet.Address, Never> = .init()
     private var bodyChangeSubject: PassthroughSubject<AlphaWallet.Address, Never> = .init()
+    private var listOfBadTokenScriptFilesSubject: CurrentValueSubject<[TokenScriptFileIndices.FileName], Never> = .init([])
 
-    public weak var delegate: AssetDefinitionStoreDelegate?
-    public var listOfBadTokenScriptFiles: [TokenScriptFileIndices.FileName] {
-        return backingStore.badTokenScriptFileNames
+    public var listOfBadTokenScriptFiles: AnyPublisher<[TokenScriptFileIndices.FileName], Never> {
+        listOfBadTokenScriptFilesSubject.eraseToAnyPublisher()
     }
+
     public var conflictingTokenScriptFileNames: (official: [TokenScriptFileIndices.FileName], overrides: [TokenScriptFileIndices.FileName], all: [TokenScriptFileIndices.FileName]) {
         return backingStore.conflictingTokenScriptFileNames
     }
@@ -132,6 +139,8 @@ public class AssetDefinitionStore: NSObject {
         self._baseTokenScriptFiles.set(value: baseTokenScriptFiles)
         super.init()
         self.backingStore.delegate = self
+
+        listOfBadTokenScriptFilesSubject.value = backingStore.badTokenScriptFileNames + backingStore.conflictingTokenScriptFileNames.all
     }
 
     func getXmlHandler(for key: AlphaWallet.Address) -> PrivateXMLHandler? {
@@ -197,11 +206,32 @@ public class AssetDefinitionStore: NSObject {
         if useCacheAndFetch && self[contract] != nil {
             completionHandler?(.cached)
         }
+
+        //If we override with a TokenScript file that is for a contract that also has an official TokenScript file but the files are different, we'll enter an infinite recursion where we keep fetching the official TokenScript file, store it, think it has changed, invalid cache, re-download from the official repo and loops. The simple solution is to just not attempt to download or check against the official repo if the there's an overriding TokenScript file
+        if !backingStore.isOfficial(contract: contract) {
+            completionHandler?(.cached)
+            return
+        }
+
         firstly {
             urlToFetch(contract: contract, server: server)
-        }.done { url in
-            guard let url = url else { return }
-            self.fetchXML(forContract: contract, server: server, withUrl: url, useCacheAndFetch: useCacheAndFetch, completionHandler: completionHandler)
+        }.done { result in
+            guard let (url, isScriptUri) = result else { return }
+            self.fetchXML(forContract: contract, server: server, withUrl: url, useCacheAndFetch: useCacheAndFetch) { result in
+                //Try a bit harder if the TokenScript was specified via EIP-5169 (`scriptURI()`)
+                //TODO probably better to convert completionHandler to Promise so we can retry more elegantly
+                if isScriptUri && result.isError {
+                    self.fetchXML(forContract: contract, server: server, withUrl: url, useCacheAndFetch: useCacheAndFetch) { result in
+                        if isScriptUri && result.isError {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                self.fetchXML(forContract: contract, server: server, withUrl: url, useCacheAndFetch: useCacheAndFetch, completionHandler: completionHandler)
+                            }
+                        }
+                    }
+                } else {
+                    completionHandler?(result)
+                }
+            }
         }.catch { error in
             //no-op
             warnLog("[TokenScript] unexpected error while fetching TokenScript file for contract: \(contract.eip55String) error: \(error)")
@@ -209,10 +239,13 @@ public class AssetDefinitionStore: NSObject {
     }
 
     private func fetchXML(forContract contract: AlphaWallet.Address, server: RPCServer?, withUrl url: URL, useCacheAndFetch: Bool = false, completionHandler: ((Result) -> Void)? = nil) {
+        //TODO improve check. We should store the IPFS hash, if the hash is different, download the new file, otherwise it has not changed
+        //IPFS, at least on Infura returns a `304` even though we pass in a timestamp that is older than the creation date for the "IF-Modified-Since" header. So we always download the entire file. This only works decently when we don't have many TokenScript using EIP-5169/`scriptURI()`
+        let includeLastModifiedTimestampHeader: Bool = !url.absoluteString.contains("ipfs")
         Alamofire.request(
                 url,
                 method: .get,
-                headers: httpHeadersWithLastModifiedTimestamp(forContract: contract)
+                headers: httpHeadersWithLastModifiedTimestamp(forContract: contract, includeLastModifiedTimestampHeader: includeLastModifiedTimestampHeader)
         ).response { [weak self] response in
             guard let strongSelf = self else { return }
             if response.response?.statusCode == 304 {
@@ -266,17 +299,18 @@ public class AssetDefinitionStore: NSObject {
         fetchXML(forContract: address, server: nil)
     }
 
-    private func urlToFetch(contract: AlphaWallet.Address, server: RPCServer?) -> Promise<URL?> {
+    private func urlToFetch(contract: AlphaWallet.Address, server: RPCServer?) -> Promise<(url: URL, isScriptUri: Bool)?> {
         if let server = server {
-            return firstly {
+            return firstly { () -> Promise<(url: URL, isScriptUri: Bool)?> in
                 Self.functional.urlToFetchFromScriptUri(contract: contract, server: server)
-            }.map {
-                $0
-            }.recover { _ -> Promise<URL?> in
+                    .map { ($0, true) }
+            }.recover { _ -> Promise<(url: URL, isScriptUri: Bool)?> in
                 Self.functional.urlToFetchFromTokenScriptRepo(contract: contract)
+                    .map { $0.flatMap { ($0, false) } }
             }
         } else {
             return Self.functional.urlToFetchFromTokenScriptRepo(contract: contract)
+                .map { $0.flatMap { ($0, false) } }
         }
     }
 
@@ -284,9 +318,9 @@ public class AssetDefinitionStore: NSObject {
         return backingStore.lastModifiedDateOfCachedAssetDefinitionFile(forContract: contract)
     }
 
-    private func httpHeadersWithLastModifiedTimestamp(forContract contract: AlphaWallet.Address) -> HTTPHeaders {
+    private func httpHeadersWithLastModifiedTimestamp(forContract contract: AlphaWallet.Address, includeLastModifiedTimestampHeader: Bool) -> HTTPHeaders {
         var result = httpHeaders
-        if let lastModified = lastModifiedDateOfCachedAssetDefinitionFile(forContract: contract) {
+        if includeLastModifiedTimestampHeader, let lastModified = lastModifiedDateOfCachedAssetDefinitionFile(forContract: contract) {
             result["IF-Modified-Since"] = string(fromLastModifiedDate: lastModified)
             return result
         } else {
@@ -342,7 +376,7 @@ extension AssetDefinitionStore: AssetDefinitionBackingStoreDelegate {
     public func badTokenScriptFilesChanged(in: AssetDefinitionBackingStore) {
         //Careful to not fire immediately because even though we are on the main thread; while we are modifying the indices, we can't read from it or there'll be a crash
         DispatchQueue.main.async {
-            self.delegate?.listOfBadTokenScriptFilesChanged(in: self)
+            self.listOfBadTokenScriptFilesSubject.value = self.backingStore.badTokenScriptFileNames + self.backingStore.conflictingTokenScriptFileNames.all
         }
     }
 }

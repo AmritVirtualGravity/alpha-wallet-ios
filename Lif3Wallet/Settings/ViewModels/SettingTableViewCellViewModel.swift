@@ -22,16 +22,15 @@ struct SettingTableViewCellViewModel {
     var titleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
     var subTitleFont: UIFont = Fonts.regular(size: 12)
     var subTitleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellSecondaryFont
-    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewBackground
 }
 
 extension SettingTableViewCellViewModel: Hashable {
-    init(settingsSystemRow row: SettingsSystemRow) {
+    init(settingsSystemRow row: SettingsViewModel.SettingsSystemRow) {
         titleText = row.title
         icon = row.icon
     }
 
-    init(settingsWalletRow row: SettingsWalletRow) {
+    init(settingsWalletRow row: SettingsViewModel.SettingsWalletRow) {
         titleText = row.title
         icon = row.icon
     }

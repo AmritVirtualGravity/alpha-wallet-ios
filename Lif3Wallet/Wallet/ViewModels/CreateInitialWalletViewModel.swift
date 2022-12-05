@@ -22,7 +22,7 @@ struct CreateInitialViewModel {
     }
 
     var imageViewImage: UIImage {
-        return R.image.lifeBackgroundImageWithTitle()!
+        return R.image.launchScreen()!
     }
 
     var createWalletButtonTitle: String {

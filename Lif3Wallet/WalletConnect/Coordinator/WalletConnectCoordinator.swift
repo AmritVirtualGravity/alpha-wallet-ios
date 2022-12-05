@@ -183,11 +183,18 @@ class WalletConnectCoordinator: NSObject, Coordinator {
         } else {
             let viewController = WalletConnectSessionsViewController(viewModel: .init(provider: provider, state: state))
             viewController.delegate = self
-
+            viewController.navigationItem.rightBarButtonItem = UIBarButtonItem.qrCodeBarButton(self, selector: #selector(qrCodeButtonSelected))
+            viewController.navigationItem.largeTitleDisplayMode = .never
+            viewController.hidesBottomBarWhenPushed = true
+            
             sessionsViewController = viewController
 
             navigationController.pushViewController(viewController, animated: true, completion: completion)
         }
+    }
+
+    @objc private func qrCodeButtonSelected(_ sender: UIBarButtonItem) {
+        startUniversalScanner()
     }
 
     private func display(session: AlphaWallet.WalletConnect.Session, in navigationController: UINavigationController) {
@@ -290,9 +297,9 @@ extension WalletConnectCoordinator: WalletConnectServerDelegate {
             case .sendTransaction(let transaction):
                 return self.executeTransaction(session: walletSession, requester: requester, transaction: transaction, type: .signThenSend)
             case .signMessage(let hexMessage):
-                return self.signMessage(with: .message(hexMessage.toHexData), account: account, requester: requester)
+                return self.signMessage(with: .message(hexMessage.asSignableMessageData), account: account, requester: requester)
             case .signPersonalMessage(let hexMessage):
-                return self.signMessage(with: .personalMessage(hexMessage.toHexData), account: account, requester: requester)
+                return self.signMessage(with: .personalMessage(hexMessage.asSignableMessageData), account: account, requester: requester)
             case .signTypedMessageV3(let typedData):
                 return self.signMessage(with: .eip712v3And4(typedData), account: account, requester: requester)
             case .typedMessage(let typedData):
@@ -492,7 +499,7 @@ extension WalletConnectCoordinator: WalletConnectServerDelegate {
 
     private func getTransactionCount(session: WalletSession) -> Promise<AlphaWallet.WalletConnect.Response> {
         return firstly {
-            GetNextNonce(server: session.server, wallet: session.account.address, analytics: analytics).promise()
+            GetNextNonce(server: session.server, wallet: session.account.address, analytics: analytics).getNextNonce()
         }.map {
             if let data = Data(fromHexEncodedString: String(format: "%02X", $0)) {
                 return .value(data)
@@ -537,9 +544,6 @@ extension WalletConnectCoordinator: WalletConnectSessionsViewControllerDelegate 
         infoLog("[WalletConnect] didClose")
         //NOTE: even if we haven't sessions view controller pushed to navigation stack, we need to make sure that root NavigationBar will be hidden
         navigationController.setNavigationBarHidden(true, animated: false)
-
-        guard let navigationController = viewController.navigationController else { return }
-        navigationController.popViewController(animated: true)
     }
 
     func didDisconnectSelected(session: AlphaWallet.WalletConnect.Session, in viewController: WalletConnectSessionsViewController) {

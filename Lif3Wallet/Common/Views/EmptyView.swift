@@ -19,7 +19,7 @@ class EmptyView: UIView {
 
     init(placement: EmptyViewPlacement = EmptyViewDefaultPlacement()) {
         super.init(frame: .zero)
-        backgroundColor =  Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
 
@@ -34,7 +34,7 @@ class EmptyView: UIView {
     func configure(title: String?) -> Self {
         let attributedTitle = title.flatMap { value in
             return NSAttributedString.init(string: value, attributes: [
-                .foregroundColor:Configuration.Color.Semantic.defaultForegroundText,
+                .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
                 .font: Fonts.regular(size: 16)
             ])
         }
@@ -63,14 +63,11 @@ class EmptyView: UIView {
         return build()
     }
 
-    func configure(buttonTitle title: String?, width: CGFloat = 180, size: ButtonSize = .large, style: ButtonStyle = .system, buttonSelectionClosure: (() -> Void)?) -> Self {
+    func configure(buttonTitle title: String?, width: CGFloat = 180, size: ButtonSize = .large, style: ButtonStyle = .green, buttonSelectionClosure: (() -> Void)?) -> Self {
         self.buttonSelectionClosure = buttonSelectionClosure
         self.button = title.flatMap { title -> Button in
             let button = Button(size: size, style: style)
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.titleLabel?.textColor = .black
-            button.layer.cornerRadius = 20
-            button.setBackgroundColor(.white, forState: .normal)
             button.setTitle(title, for: .normal)
             button.addTarget(self, action: #selector(buttonSelected), for: .touchUpInside)
             
@@ -153,7 +150,7 @@ final class FilterTokensHoldersEmptyViewDefaultPlacement: EmptyViewPlacement {
 extension EmptyView {
     static func tokensEmptyView(completion: @escaping () -> Void) -> EmptyView {
         EmptyView()
-            .configure(image: R.image.no_transactions_mascot())
+            .configure(image: R.image.empty_list())
             .configure(title: R.string.localizable.emptyViewNoTokensLabelTitle())
             .configure(buttonTitle: R.string.localizable.refresh(), width: 240, buttonSelectionClosure: completion)
             .configure(spacing: 30)
@@ -171,8 +168,24 @@ extension EmptyView {
 
     static func transactionsEmptyView() -> EmptyView {
         EmptyView()
-            .configure(image: R.image.no_transactions_mascot())
-            .configure(title: R.string.localizable.emptyViewNoTokensLabelTitle())
+            .configure(image: R.image.activities_empty_list())
+            .configure(title: R.string.localizable.emptyViewNoTransactionsLabelTitle())
+            .configure(spacing: 24)
+            .configure(insets: .zero)
+    }
+
+    static func consoleEmptyView() -> EmptyView {
+        EmptyView()
+            .configure(image: R.image.activities_empty_list())
+            .configure(title: R.string.localizable.emptyViewNoMessagesLabelTitle())
+            .configure(spacing: 24)
+            .configure(insets: .zero)
+    }
+
+    static func tokenscriptOverridesEmptyView() -> EmptyView {
+        EmptyView()
+            .configure(image: R.image.alerts_empty_list())
+            .configure(title: R.string.localizable.tokenscriptOverridesEmpty())
             .configure(spacing: 30)
             .configure(insets: .zero)
     }
@@ -185,17 +198,17 @@ extension EmptyView {
             .configure(insets: .zero)
     }
 
-    static func priceAlertsEmpryView() -> EmptyView {
+    static func priceAlertsEmptyView() -> EmptyView {
         EmptyView()
-            .configure(image: R.image.iconsIllustrationsAlert2())
-            .configure(title: R.string.localizable.activityEmpty())
+            .configure(image: R.image.alerts_empty_list())
+            .configure(title: "Alerts will appear here")
             .configure(spacing: 0)
-            .configure(insets: .zero)
+            .configure(insets: .init(top: DataEntry.Metric.Tokens.Filter.height, left: 0, bottom: 0, right: 0))
     }
 
     static func filterTokensEmptyView(completion: @escaping () -> Void) -> EmptyView {
         EmptyView(placement: FilterTokensEmptyViewDefaultPlacement())
-            .configure(image: R.image.iconsIllustrationsSearchResults())
+            .configure(image: R.image.empty_list())
             .configure(title: R.string.localizable.seachTokenNoresultsTitle())
             .configure(buttonTitle: R.string.localizable.addCustomTokenTitle(), width: 240, buttonSelectionClosure: completion)
             .configure(spacing: 30)
@@ -204,10 +217,17 @@ extension EmptyView {
 
     static func filterTokenHoldersEmptyView() -> EmptyView {
         EmptyView(placement: FilterTokensHoldersEmptyViewDefaultPlacement(verticalOffset: -20))
-            .configure(image: R.image.iconsIllustrationsSearchResults())
+            .configure(image: R.image.empty_list())
             .configure(title: R.string.localizable.seachTokenNoresultsTitle())
             .configure(spacing: 30)
             .configure(insets: .init(top: Style.SearchBar.height, left: 0, bottom: 0, right: 0))
+    }
+
+    static func nftAssetsEmptyView() -> EmptyView {
+        EmptyView(placement: FilterTokensHoldersEmptyViewDefaultPlacement(verticalOffset: -20))
+            .configure(image: R.image.empty_list())
+            .configure(title: "Nft Assets Not Found")
+            .configure(spacing: 30)
     }
 
     static func swapToolsEmptyView() -> EmptyView {

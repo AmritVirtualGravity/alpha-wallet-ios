@@ -3,17 +3,13 @@
 import Foundation
 import Combine
 
-public enum TransactionError: Error {
-    case failedToFetch
-}
-
 public protocol TransactionsServiceDelegate: AnyObject {
     func didCompleteTransaction(in service: TransactionsService, transaction: TransactionInstance)
     func didExtractNewContracts(in service: TransactionsService, contractsAndServers: [AddressAndRPCServer])
 }
 
 public class TransactionsService {
-    public let transactionDataStore: TransactionDataStore
+    private let transactionDataStore: TransactionDataStore
     private let sessions: ServerDictionary<WalletSession>
     private let tokensService: DetectedContractsProvideble & TokenProvidable & TokenAddable
     private let analytics: AnalyticsLogger
@@ -32,7 +28,7 @@ public class TransactionsService {
     public var transactionsChangeset: AnyPublisher<[TransactionInstance], Never> {
         let servers = sessions.values.map { $0.server }
         return transactionDataStore
-            .transactionsChangeset(forFilter: .all, servers: servers)
+            .transactionsChangeset(filter: .all, servers: servers)
             .map { change -> [TransactionInstance] in
                 switch change {
                 case .initial(let transactions): return transactions
@@ -117,6 +113,12 @@ public class TransactionsService {
         }
     }
 
+    public func transactionPublisher(for transactionId: String, server: RPCServer) -> AnyPublisher<TransactionInstance?, Never> {
+        transactionDataStore.transactionPublisher(for: transactionId, server: server)
+            .replaceError(with: nil)
+            .eraseToAnyPublisher()
+    }
+
     public func transaction(withTransactionId transactionId: String, forServer server: RPCServer) -> TransactionInstance? {
         transactionDataStore.transaction(withTransactionId: transactionId, forServer: server)
     }
@@ -139,8 +141,10 @@ public class TransactionsService {
 
 extension TransactionsService: TokensFromTransactionsFetcherDelegate {
 
-    public func didExtractTokens(in fetcher: TokensFromTransactionsFetcher, contractsAndServers: [AddressAndRPCServer], tokenUpdates: [TokenUpdate]) {
-        tokensService.add(tokenUpdates: tokenUpdates)
+    public func didExtractTokens(in fetcher: TokensFromTransactionsFetcher, contractsAndServers: [AddressAndRPCServer], ercTokens: [ErcToken]) {
+        let actions = ercTokens.map { AddOrUpdateTokenAction.add(ercToken: $0, shouldUpdateBalance: true) }
+        tokensService.addOrUpdate(with: actions)
+
         delegate?.didExtractNewContracts(in: self, contractsAndServers: contractsAndServers)
     }
 }

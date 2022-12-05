@@ -47,6 +47,7 @@ PODS:
     - AlphaWalletCore
     - PromiseKit
     - SwiftyJSON (= 5.0.0)
+  - AlphaWalletTrackAPICalls (1.0.0)
   - AlphaWalletWeb3 (0.0.1):
     - BigInt
     - CryptoSwift
@@ -60,9 +61,10 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - BlockiesSwift (0.1.2)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - CocoaAsyncSocket (7.6.5)
   - CocoaLumberjack (3.7.0):
     - CocoaLumberjack/Core (= 3.7.0)
@@ -83,6 +85,7 @@ PODS:
   - iOSSnapshotTestCase/Core (6.2.0)
   - iOSSnapshotTestCase/SwiftSupport (6.2.0):
     - iOSSnapshotTestCase/Core
+  - IQKeyboardManager (6.5.10)
   - JSONRPCKit (2.0.3):
     - Result (~> 3.0)
   - Kanna (5.0.0)
@@ -125,6 +128,8 @@ PODS:
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
   - StatefulViewController (3.0)
+  - SwiftAlgorithms (1.0.0)
+  - SwiftFormat/CLI (0.50.4)
   - SwiftLint (0.40.3)
   - SwiftProtobuf (1.18.0)
   - SwiftyJSON (5.0.0)
@@ -148,13 +153,15 @@ DEPENDENCIES:
   - AlphaWalletFoundation (from `.`)
   - AlphaWalletGoBack (from `.`)
   - AlphaWalletOpenSea (from `.`)
+  - AlphaWalletTrackAPICalls (from `.`)
   - AlphaWalletWeb3 (from `.`)
   - AlphaWalletWeb3Provider (from `https://github.com/AlphaWallet/AlphaWallet-web3-provider`, commit `9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870`)
   - BigInt (~> 3.1)
-  - Charts (from `https://github.com/AlphaWallet/Charts.git`, commit `85ec4d0f62b97829274c4f628f4840036939de64`)
+  - Charts
   - EthereumABI (from `https://github.com/AlphaWallet/EthereumABI.git`, commit `877b77e8e7cbc54ab0712d509b74fec21b79d1bb`)
   - FloatingPanel
   - iOSSnapshotTestCase (= 6.2.0)
+  - IQKeyboardManager
   - Kanna (from `https://github.com/tid-kijyun/Kanna.git`, commit `06a04bc28783ccbb40efba355dee845a024033e8`)
   - KeychainSwift (from `https://github.com/AlphaWallet/keychain-swift.git`, commit `b797d40a9d08ec509db4335140cf2259b226e6a2`)
   - Kingfisher (~> 7.0)
@@ -166,6 +173,7 @@ DEPENDENCIES:
   - R.swift
   - SAMKeychain
   - StatefulViewController
+  - SwiftFormat/CLI (~> 0.49)
   - SwiftLint (= 0.40.3)
   - TrezorCrypto (from `https://github.com/AlphaWallet/trezor-crypto-ios.git`, commit `50c16ba5527e269bbc838e80aee5bac0fe304cc7`)
   - TrustKeystore (from `https://github.com/AlphaWallet/latest-keystore-snapshot`, commit `c0bdc4f6ffc117b103e19d17b83109d4f5a0e764`)
@@ -178,6 +186,7 @@ SPEC REPOS:
     - Apollo
     - BigInt
     - BlockiesSwift
+    - Charts
     - CocoaAsyncSocket
     - CocoaLumberjack
     - CombineExt
@@ -185,6 +194,7 @@ SPEC REPOS:
     - EthereumAddress
     - FloatingPanel
     - iOSSnapshotTestCase
+    - IQKeyboardManager
     - JSONRPCKit
     - Kingfisher
     - MailchimpSDK
@@ -201,6 +211,8 @@ SPEC REPOS:
     - secp256k1_ios
     - SipHash
     - StatefulViewController
+    - SwiftAlgorithms
+    - SwiftFormat
     - SwiftLint
     - SwiftProtobuf
     - SwiftyJSON
@@ -220,14 +232,13 @@ EXTERNAL SOURCES:
     :path: "."
   AlphaWalletOpenSea:
     :path: "."
+  AlphaWalletTrackAPICalls:
+    :path: "."
   AlphaWalletWeb3:
     :path: "."
   AlphaWalletWeb3Provider:
     :commit: 9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870
     :git: https://github.com/AlphaWallet/AlphaWallet-web3-provider
-  Charts:
-    :commit: 85ec4d0f62b97829274c4f628f4840036939de64
-    :git: https://github.com/AlphaWallet/Charts.git
   EthereumABI:
     :commit: 877b77e8e7cbc54ab0712d509b74fec21b79d1bb
     :git: https://github.com/AlphaWallet/EthereumABI.git
@@ -251,9 +262,6 @@ CHECKOUT OPTIONS:
   AlphaWalletWeb3Provider:
     :commit: 9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870
     :git: https://github.com/AlphaWallet/AlphaWallet-web3-provider
-  Charts:
-    :commit: 85ec4d0f62b97829274c4f628f4840036939de64
-    :git: https://github.com/AlphaWallet/Charts.git
   EthereumABI:
     :commit: 877b77e8e7cbc54ab0712d509b74fec21b79d1bb
     :git: https://github.com/AlphaWallet/EthereumABI.git
@@ -281,13 +289,14 @@ SPEC CHECKSUMS:
   AlphaWalletFoundation: 293660992b787a89476fae2c137672825b3f5097
   AlphaWalletGoBack: 1d55b51e6cfd999740d3cfab09d9fa723ba85ff2
   AlphaWalletOpenSea: 71e255612529b04ae4d66dca54bd181185593b1d
+  AlphaWalletTrackAPICalls: 1e5d1f0a1858bd4d383aa412677a642be7d21e17
   AlphaWalletWeb3: 86d0be33c612d75685a5797ef4492e42c295f1a5
   AlphaWalletWeb3Provider: 7ca1e1c1dc841dc1915f970daace48bf34931655
   APIKit: 9e1a4069608bf0ae5238811e6cfc26928ad4d01e
   Apollo: 204819ea82022fbc59ad05056820df867f19bd02
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   BlockiesSwift: 22d8d56dd187e6bfd16cb8c8fbd4fd4896c3e65d
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   CombineExt: c4daa97ef75754d8ef319bd79edeef82652f3eea
@@ -296,6 +305,7 @@ SPEC CHECKSUMS:
   EthereumAddress: 39fe8e11cf04e4e9902b55ae653dbc4e0aee5f30
   FloatingPanel: 935712d7a8076630135fbbd47f717700913efef9
   iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
+  IQKeyboardManager: 45a1fa55c1a5b02c61ac0fd7fd5b62bb4ad20d97
   JSONRPCKit: b2991f2f242d72022083f9d869140dabd26d65c7
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   KeychainSwift: c0d1b0c2901b9873f07f0e560fde92929069e863
@@ -315,6 +325,8 @@ SPEC CHECKSUMS:
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+  SwiftFormat: 42b2e7e390bffa30ea7a9f2dd8c8872d37f6a093
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   SwiftProtobuf: c3c12645230d9b09c72267e0de89468c5543bd86
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
@@ -323,6 +335,6 @@ SPEC CHECKSUMS:
   TrustWalletCore: a92d85baa15932279cce925559e93695558cafdd
   xcbeautify: b2c6b50c9cab6414296898e94cd153e4ea879662
 
-PODFILE CHECKSUM: 75faef93e7942edeef975241be10650ec28ab921
+PODFILE CHECKSUM: 668109bda96f8575ac352bbbdb3d478d6cb11de2
 
 COCOAPODS: 1.11.3

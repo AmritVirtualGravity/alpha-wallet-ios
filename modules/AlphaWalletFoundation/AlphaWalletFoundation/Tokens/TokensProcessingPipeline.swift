@@ -41,7 +41,32 @@ public final class WalletDataProcessingPipeline: TokensProcessingPipeline {
     private let queue = DispatchQueue(label: "org.alphawallet.swift.walletData.processingPipeline", qos: .utility)
 
     public var tokenViewModels: AnyPublisher<[TokenViewModel], Never> {
-        return tokenViewModelsSubject.eraseToAnyPublisher()
+        let whenTickersChanged = coinTickersFetcher.tickersDidUpdate.dropFirst()
+            .receive(on: queue)
+            .map { [tokensService] _ in tokensService.tokens }
+
+        let whenSignatureOrBodyChanged = assetDefinitionStore.assetsSignatureOrBodyChange
+            .receive(on: queue)
+            .map { [tokensService] _ in tokensService.tokens }
+
+        let whenTokensHasChanged = tokensService.tokensPublisher
+            .dropFirst()
+            .receive(on: queue)
+
+        let whenCollectionHasChanged = Publishers.Merge3(whenTokensHasChanged, whenTickersChanged, whenSignatureOrBodyChanged)
+            .map { $0.map { TokenViewModel(token: $0) } }
+            .flatMapLatest { [weak self] in self?.applyTickers(tokens: $0) ?? .empty() }
+            .flatMapLatest { [weak self] in self?.applyTokenScriptOverrides(tokens: $0) ?? .empty() }
+            .removeAllDuplicates(by: { return $0.hashValue == $1.hashValue })
+            .receive(on: RunLoop.main)
+
+        let initialSnapshot = Just(tokensService.tokens)
+            .map { $0.map { TokenViewModel(token: $0) } }
+            .flatMapLatest { [weak self] in self?.applyTickers(tokens: $0) ?? .empty() }
+            .flatMapLatest { [weak self] in self?.applyTokenScriptOverrides(tokens: $0) ?? .empty() }
+
+        return Publishers.Merge(whenCollectionHasChanged, initialSnapshot)
+            .eraseToAnyPublisher()
     }
 
     public init(wallet: Wallet, tokensService: TokensService, coinTickersFetcher: CoinTickersFetcher, assetDefinitionStore: AssetDefinitionStore, eventsDataStore: NonActivityEventsDataStore) {
@@ -63,12 +88,10 @@ public final class WalletDataProcessingPipeline: TokensProcessingPipeline {
     public func refresh() {
         tokensService.refresh()
     }
-    
+
     public func start() {
-        cancelable.cancellAll()
         tokensService.start()
         startTickersHandling()
-        preparePipeline()
     }
 
     deinit {
@@ -143,20 +166,12 @@ public final class WalletDataProcessingPipeline: TokensProcessingPipeline {
         tokensService.token(for: contract, server: server)
     }
 
-    public func addCustom(tokens: [ERCToken], shouldUpdateBalance: Bool) -> [Token] {
-        tokensService.addCustom(tokens: tokens, shouldUpdateBalance: shouldUpdateBalance)
-    }
-
-    public func add(tokenUpdates updates: [TokenUpdate]) {
-        tokensService.add(tokenUpdates: updates)
-    }
-
     public func addOrUpdate(tokensOrContracts: [TokenOrContract]) -> [Token] {
         tokensService.addOrUpdate(tokensOrContracts: tokensOrContracts)
     }
 
-    public func addOrUpdate(_ actions: [AddOrUpdateTokenAction]) -> Bool? {
-        tokensService.addOrUpdate(actions)
+    public func addOrUpdate(with actions: [AddOrUpdateTokenAction]) -> [Token] {
+        tokensService.addOrUpdate(with: actions)
     }
 
     public func tokenPublisher(for contract: AlphaWallet.Address, server: RPCServer) -> AnyPublisher<Token?, Never> {
@@ -169,36 +184,6 @@ public final class WalletDataProcessingPipeline: TokensProcessingPipeline {
 
     public func addOrUpdateTestsOnly(ticker: CoinTicker?, for token: TokenMappedToTicker) {
         coinTickersFetcher.addOrUpdateTestsOnly(ticker: ticker, for: token)
-    }
-
-    private func preparePipeline() {
-        let whenTickersChanged = coinTickersFetcher.tickersDidUpdate.dropFirst()
-            .receive(on: queue)
-            .map { [tokensService] _ in tokensService.tokens }
-
-        let whenSignatureOrBodyChanged = assetDefinitionStore.assetsSignatureOrBodyChange
-            .receive(on: queue)
-            .map { [tokensService] _ in tokensService.tokens }
-
-        let whenTokensHasChanged = tokensService.tokensPublisher
-            .dropFirst()
-            .receive(on: queue)
-
-        let whenCollectionHasChanged = Publishers.Merge3(whenTokensHasChanged, whenTickersChanged, whenSignatureOrBodyChanged)
-            .map { $0.map { TokenViewModel(token: $0) } }
-            .flatMapLatest { [weak self] in self?.applyTickers(tokens: $0) ?? .empty() }
-            .flatMapLatest { [weak self] in self?.applyTokenScriptOverrides(tokens: $0) ?? .empty() }
-            .removeAllDuplicates(by: { return $0.hashValue == $1.hashValue })
-            .receive(on: RunLoop.main)
-
-        let initialSnapshot = Just(tokensService.tokens)
-            .map { $0.map { TokenViewModel(token: $0) } }
-            .flatMapLatest { [weak self] in self?.applyTickers(tokens: $0) ?? .empty() }
-            .flatMapLatest { [weak self] in self?.applyTokenScriptOverrides(tokens: $0) ?? .empty() }
-
-        Publishers.Merge(whenCollectionHasChanged, initialSnapshot)
-            .assign(to: \.value, on: tokenViewModelsSubject, ownership: .weak)
-            .store(in: &cancelable)
     }
 
     private func startTickersHandling() {
@@ -218,9 +203,9 @@ public final class WalletDataProcessingPipeline: TokensProcessingPipeline {
         coinTickersFetcher.updateTickerIds
             .map { [tokensService] data -> [AddOrUpdateTokenAction] in
                 let v = data.compactMap { i in tokensService.token(for: i.key.address, server: i.key.server).flatMap { ($0, i.tickerId) } }
-                return v.map { AddOrUpdateTokenAction.update(token: $0.0, action: .coinGeckoTickerId($0.1)) }
+                return v.map { AddOrUpdateTokenAction.update(token: $0.0, field: .coinGeckoTickerId($0.1)) }
             }.sink { [tokensService] actions in
-                tokensService.addOrUpdate(actions)
+                tokensService.addOrUpdate(with: actions)
             }.store(in: &cancelable)
     }
 
@@ -249,11 +234,11 @@ public final class WalletDataProcessingPipeline: TokensProcessingPipeline {
         let balance: BalanceViewModel
         switch token.type {
         case .nativeCryptocurrency:
-            balance = .init(balance: NativecryptoBalanceViewModel(token: token, ticker: ticker))
+            balance = .init(balance: NativecryptoBalanceViewModel(balance: token, ticker: ticker))
         case .erc20:
-            balance = .init(balance: Erc20BalanceViewModel(token: token, ticker: ticker))
+            balance = .init(balance: Erc20BalanceViewModel(balance: token, ticker: ticker))
         case .erc875, .erc721, .erc721ForTickets, .erc1155:
-            balance = .init(balance: NFTBalanceViewModel(token: token, ticker: ticker))
+            balance = .init(balance: NFTBalanceViewModel(balance: token, ticker: ticker))
         }
 
         return token.override(balance: balance)

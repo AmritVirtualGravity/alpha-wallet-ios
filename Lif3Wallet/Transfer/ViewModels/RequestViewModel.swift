@@ -3,64 +3,87 @@
 import Foundation
 import UIKit
 import AlphaWalletFoundation
+import Combine
 
-struct RequestViewModel {
-	private let account: Wallet
+struct RequestViewModelInput {
+    let copyEns: AnyPublisher<Void, Never>
+    let copyAddress: AnyPublisher<Void, Never>
+}
 
-	init(account: Wallet) {
-		self.account = account
-	}
+struct RequestViewModelOutput {
+    let copiedToClipboard: AnyPublisher<String, Never>
+    let viewState: AnyPublisher<RequestViewModel.ViewState, Never>
+}
 
-	var myAddressText: String {
-		return account.address.eip55String
-	}
+class RequestViewModel {
+    private let account: Wallet
+    private let domainResolutionService: DomainResolutionServiceType
 
-	var myAddress: AlphaWallet.Address {
-		return account.address
-	}
+    let backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
 
-	var copyWalletText: String {
-		return R.string.localizable.requestCopyWalletButtonTitle()
-	}
-
-	var addressCopiedText: String {
-		return R.string.localizable.requestAddressCopiedTitle()
-	}
-
-	var backgroundColor: UIColor {
-		return Colors.appBackground
-	}
-
-	var addressLabelColor: UIColor {
-		return .white
-	}
-
-	var copyButtonsFont: UIFont {
-		return Fonts.semibold(size: 17)
-	}
-
-	var labelColor: UIColor? {
-        return .white
-	}
-
-	var addressFont: UIFont {
-		return Fonts.semibold(size: 17)
-	}
-
-	var addressBackgroundColor: UIColor {
-		return UIColor(red: 255, green: 255, blue: 255)
-	}
-
-	var instructionFont: UIFont {
-		return Fonts.regular(size: 17)
-	}
-
-	var instructionText: String {
-		return R.string.localizable.aWalletAddressScanInstructions()
-	}
+    var instructionAttributedString: NSAttributedString {
+        NSAttributedString(string: R.string.localizable.aWalletAddressScanInstructions(), attributes: [
+            .font: Fonts.regular(size: 17),
+            .foregroundColor: Configuration.Color.Semantic.labelTextActive
+        ])
+    }
     
-    var backgroundImage: UIImage {
-        return R.image.lifeBackgroundImage()!
+    init(account: Wallet, domainResolutionService: DomainResolutionServiceType) {
+        self.account = account
+        self.domainResolutionService = domainResolutionService
     }
 
+    func transform(input: RequestViewModelInput) -> RequestViewModelOutput {
+        let ensName = resolveEns()
+        let viewState = Publishers.CombineLatest(generateQrCode(), resolveEns())
+            .map { [account] qrCode, ensName -> RequestViewModel.ViewState in
+                let address = account.address.eip55String
+                return .init(title: R.string.localizable.aSettingsContentsMyWalletAddress(), ensName: ensName, address: address, qrCode: qrCode)
+            }.eraseToAnyPublisher()
+
+        let copiedEnsName = input.copyEns
+            .withLatestFrom(ensName)
+            .compactMap { $0 }
+
+        let copiedAddress = input.copyAddress
+            .map { [account] _ in account.address.eip55String }
+
+        let copiedToClipboard = Publishers.Merge(copiedEnsName, copiedAddress)
+            .handleEvents(receiveOutput: { UIPasteboard.general.string = $0 })
+            .map { _ in R.string.localizable.copiedToClipboardTitle(R.string.localizable.address()) }
+            .eraseToAnyPublisher()
+
+        return .init(copiedToClipboard: copiedToClipboard, viewState: viewState)
+    }
+
+    private func resolveEns() -> AnyPublisher<String?, Never> {
+        domainResolutionService.resolveEns(address: account.address)
+            .map { ens -> EnsName? in return ens }
+            .replaceError(with: nil)
+            .prepend(nil)
+            .eraseToAnyPublisher()
+    }
+
+    private func generateQrCode() -> AnyPublisher<UIImage?, Never> {
+        // EIP67 format not being used much yet, use hex value for now
+        // let string = "ethereum:\(account.address.address)?value=\(value)"
+        let qrCode: PassthroughSubject<UIImage?, Never> = .init()
+        DispatchQueue.global(qos: .userInteractive).async { [account] in
+            let image = account.address.eip55String.toQRCode()
+            DispatchQueue.main.async {
+                qrCode.send(image)
+            }
+        }
+
+        return Publishers.Merge(Just(nil), qrCode).eraseToAnyPublisher()
+    }
+}
+
+extension RequestViewModel {
+    struct ViewState {
+        let title: String
+        let ensName: String?
+        let address: String
+        let qrCode: UIImage?
+    }
 }

@@ -9,13 +9,6 @@ import Foundation
 import AlphaWalletFoundation
 
 extension Constants {
-    enum AmountTextField {
-        static let allowedCharacters: String = {
-            let decimalSeparator = Config.locale.decimalSeparator ?? ""
-            return "0123456789" + decimalSeparator + EtherNumberFormatter.decimalPoint
-        }()
-    }
-
     //Misc
     static let etherReceivedNotificationIdentifier = "etherReceivedNotificationIdentifier"
 
@@ -42,11 +35,5 @@ extension Constants {
     // support
     static let supportEmail = "feedback+ios@alphawallet.com"
 
-    static let dappsBrowserURL = "http://aw.app"
-}
-
-extension Constants.Credentials {
-    static let analyticsKey = ""
-    static let mailChimpListSpecificKey = "df306008c71da38ba3940d8643e25362-us21"
-    static let walletConnectProjectId = "8ba9ee138960775e5231b70cc5ef1c3a"
+    static let dappsBrowserURL = URL(string: "http://aw.app")!
 }

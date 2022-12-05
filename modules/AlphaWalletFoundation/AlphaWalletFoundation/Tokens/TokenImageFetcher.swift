@@ -14,6 +14,7 @@ private func programmaticallyGeneratedIconImage(for contractAddress: AlphaWallet
     let backgroundColor = symbolBackgroundColor(for: contractAddress, server: server, colors: colors, blockChainNameColor: blockChainNameColor)
     return UIImage.tokenSymbolBackgroundImage(backgroundColor: backgroundColor)
 }
+
 private func symbolBackgroundColor(for contractAddress: AlphaWallet.Address, server: RPCServer, colors: [UIColor], blockChainNameColor: UIColor) -> UIColor {
     if contractAddress.sameContract(as: Constants.nativeCryptoAddressInDatabase) {
         return blockChainNameColor
@@ -26,21 +27,6 @@ private func symbolBackgroundColor(for contractAddress: AlphaWallet.Address, ser
             index = 0
         }
         return colors[index]
-    }
-}
-
-func getContentType(urlPath: String, completion: @escaping(_ type: String)->()) {
-    if let url = URL(string: urlPath) {
-        var request = URLRequest(url: url)
-        request.httpMethod = "HEAD"
-        let task  = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-            if let httpResponse = response as? HTTPURLResponse , error == nil {
-                if let ct = httpResponse.allHeaderFields["Content-Type"] as? String {
-                    completion(ct)
-                }
-            }
-        })
-        task.resume()
     }
 }
 
@@ -168,20 +154,21 @@ public class TokenImageFetcher {
         if let image = generatedImage, image.isFinal {
             return subscribable
         }
+
         firstly {
-        TokenImageFetcher
-                .fetchFromAssetLif3Repo(.lif3, contractAddress: contractAddress, server: server)
-                .map { url -> TokenImage in
-                    return (image: .url(url), symbol: "", isFinal: true, overlayServerIcon: staticOverlayIcon)
+            TokenImageFetcher
+                .fetchFromAssetGitHubRepo(.alphaWallet, contractAddress: contractAddress)
+                .map { image -> TokenImage in
+                    return (image: .image(image), symbol: "", isFinal: true, overlayServerIcon: staticOverlayIcon)
                 }
         }.recover { _ -> Promise<TokenImage> in
             let url = try TokenImageFetcher.imageUrlFromOpenSea(type, balance: balance, size: size)
             return .value((image: url, symbol: "", isFinal: true, overlayServerIcon: staticOverlayIcon))
         }.recover { _ -> Promise<TokenImage> in
             return TokenImageFetcher
-                .fetchFromAssetLif3Repo(.lif3, contractAddress: contractAddress,server: server)
-                .map { url -> TokenImage in
-                    return (image: .url(url), symbol: "", isFinal: false, overlayServerIcon: staticOverlayIcon)
+                .fetchFromAssetGitHubRepo(.thirdParty, contractAddress: contractAddress)
+                .map { image -> TokenImage in
+                    return (image: .image(image), symbol: "", isFinal: false, overlayServerIcon: staticOverlayIcon)
                 }
         }.done { value in
             subscribable.send(value)
@@ -204,9 +191,9 @@ public class TokenImageFetcher {
         }
     }
 
-    private static func fetchFromAssetGitHubRepo(_ githubAssetsSource: GithubAssetsURLResolver.Source, contractAddress: AlphaWallet.Address, server: RPCServer) -> Promise<UIImage> {
+    private static func fetchFromAssetGitHubRepo(_ githubAssetsSource: GithubAssetsURLResolver.Source, contractAddress: AlphaWallet.Address) -> Promise<UIImage> {
         struct AnyError: Error { }
-        let urlString = githubAssetsSource.url(forContract: contractAddress, server: server)
+        let urlString = githubAssetsSource.url(forContract: contractAddress)
         guard let url = URL(string: urlString) else {
             verboseLog("Loading token icon URL: \(urlString) error")
             return .init(error: AnyError())
@@ -215,48 +202,25 @@ public class TokenImageFetcher {
         guard let fetcher = imageFetcher else { return .init(error: AnyError()) }
         return fetcher.retrieveImage(with: url)
     }
-    
-    private static func fetchFromAssetLif3Repo(_ githubAssetsSource: GithubAssetsURLResolver.Source, contractAddress: AlphaWallet.Address, server: RPCServer) -> Promise<WebImageURL> {
-        struct AnyError: Error { }
-        let urlString = githubAssetsSource.url(forContract: contractAddress, server: server)
-        guard let url = URL(string: urlString) else {
-            verboseLog("Loading token icon URL: \(urlString) error")
-            return .init(error: AnyError())
-        }
-
-        guard let fetcher = imageFetcher else { return .init(error: AnyError()) }
-        return Promise { seal in
-            getContentType(urlPath: urlString, completion: { type in
-                if type == "image/svg+xml" {
-                    if let webUrl = WebImageURL(string: urlString) {
-                    seal.fulfill(webUrl)
-                    }
-                }
-            })
-            }
-        }
-    }
+}
 
 public protocol ImageFetcher: AnyObject {
     func retrieveImage(with url: URL) -> Promise<UIImage>
-//    func loadUrl(with url: URL) -> Promise<WebImageURL>
 }
 
 class GithubAssetsURLResolver {
     static let file = "logo.png"
 
     enum Source: String {
-        case alphaWallet = "https://raw.githubusercontent.com/AlphaWallet/iconassets/lowercased/"
+        case alphaWallet = "https://raw.githubusercontent.com/AlphaWallet/iconassets/master/"
         case thirdParty = "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/"
-        case lif3 = "https://assets.lif3.com/wallet/tokens/"
-        func url(forContract contract: AlphaWallet.Address, server: RPCServer) -> String {
+
+        func url(forContract contract: AlphaWallet.Address) -> String {
             switch self {
             case .alphaWallet:
                 return rawValue + contract.eip55String.lowercased() + "/" + GithubAssetsURLResolver.file
             case .thirdParty:
                 return rawValue + contract.eip55String + "/" + GithubAssetsURLResolver.file
-            case .lif3:
-                return rawValue + server.symbol + "/" +  contract.eip55String.lowercased() + ".svg"
             }
         }
     }

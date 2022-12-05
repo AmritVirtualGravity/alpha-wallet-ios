@@ -9,8 +9,6 @@ import UIKit
 
 protocol SwitchTableViewCellDelegate: AnyObject {
     func cell(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool)
-    func didEnableDarkTheme(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool)
-    
 }
 
 class SwitchTableViewCell: UITableViewCell {
@@ -38,13 +36,12 @@ class SwitchTableViewCell: UITableViewCell {
         get { return switchView.isOn }
         set { switchView.isOn = newValue }
     }
-    
-    var isforTheme = false
+
     weak var delegate: SwitchTableViewCellDelegate?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         switchView.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
 
         selectionStyle = .none
@@ -65,7 +62,7 @@ class SwitchTableViewCell: UITableViewCell {
     }
 
     @objc private func switchChanged(_ sender: UISwitch) {
-        isforTheme == false ?  delegate?.cell(self, switchStateChanged: sender.isOn) : delegate?.didEnableDarkTheme(self, switchStateChanged: sender.isOn)
+        delegate?.cell(self, switchStateChanged: sender.isOn)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -78,6 +75,5 @@ class SwitchTableViewCell: UITableViewCell {
         titleLabel.textColor = viewModel.titleTextColor
         iconImageView.image = viewModel.icon
         switchView.isOn = viewModel.value
-        self.backgroundColor = viewModel.backgroundColor
     }
 }

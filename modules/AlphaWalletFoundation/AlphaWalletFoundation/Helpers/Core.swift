@@ -14,8 +14,8 @@ public func isRunningTests() -> Bool {
     return ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil
 }
 
-public func isLif3App() -> Bool {
-    Bundle.main.bundleIdentifier == "com.lif3.lif3wallet"
+public func isAlphaWallet() -> Bool {
+    Bundle.main.bundleIdentifier == "com.stormbird.alphawallet"
 }
 
 public func isRunningOnMac() -> Bool {

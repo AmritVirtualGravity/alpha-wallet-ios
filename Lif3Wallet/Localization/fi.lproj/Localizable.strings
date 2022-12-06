@@ -119,6 +119,7 @@
 "settings.support.title" = "Tuki";
 "settings.notifications.title" = "Ilmoitukset";
 "settings.passcode.title" = "PIN-koodi";
+"settings.hideToken.title" = "Hide 0 Balance Token";
 "settings.selectActiveNetworks.title" = "Kytketyt verkot";
 "settings.section.help.title" = "Apu";
 "settings.section.system.title" = "Järjestelmä";

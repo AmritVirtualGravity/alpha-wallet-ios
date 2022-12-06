@@ -172,7 +172,13 @@ final class TokensViewModel {
         self.config = config
         self.domainResolutionService = domainResolutionService
         self.blockiesGenerator = blockiesGenerator
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("HideTokenNotification"), object: nil)
     }
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        print("*********TOKEN VIEW CALLED******8")
+        self.reloadData()
+    }
+    
     
     func transform(input: TokensViewModelInput) -> TokensViewModelOutput {
         cancellable.cancellAll()
@@ -457,6 +463,7 @@ final class TokensViewModel {
             return TokensViewModel.SectionViewModel(section: section, views: viewModels)
         }
     }
+  
     
     private func filteredAndSortedTokens() -> [TokenOrRpcServer] {
         let displayedTokens = tokensFilter.filterTokens(tokens: tokens, filter: filter)
@@ -651,26 +658,35 @@ fileprivate extension WalletFilter {
 }
 
 extension TokensViewModel {
+   
+
     class functional {}
 }
 
 extension TokensViewModel.functional {
+    
+    
     static func groupTokensByServers(tokens: [TokenViewModel]) -> [TokensViewModel.TokenOrRpcServer] {
         var servers: [RPCServer] = []
         var results: [TokensViewModel.TokenOrRpcServer] = []
+        var filteredTokens: [TokensViewModel.TokenOrRpcServer] = []
         for each in tokens {
             guard !servers.contains(each.server) else { continue }
             servers.append(each.server)
         }
         
         for each in servers {
-            let tokens = filterTokenWithZeroShortAmt(tokens: tokens).filter { $0.server == each }
-                .map { TokensViewModel.TokenOrRpcServer.token($0) }
-            
+            if (  UserDefaults.standard.bool(forKey: "HideToken") == true )  {
+                filteredTokens = filterTokenWithZeroShortAmt(tokens: tokens).filter { $0.server == each }
+                    .map { TokensViewModel.TokenOrRpcServer.token($0) }
+            } else {
+                filteredTokens = tokens.filter { $0.server == each }
+                    .map { TokensViewModel.TokenOrRpcServer.token($0) }
+            }
             guard !tokens.isEmpty else { continue }
             results.append(.rpcServer(each))
             
-            results.append(contentsOf: tokens)
+            results.append(contentsOf: filteredTokens)
         }
         
         return results
@@ -689,6 +705,9 @@ extension TokensViewModel.functional {
         }
         return filteredTokens
     }
+    
+  
+
 }
 
 fileprivate extension IndexPath {

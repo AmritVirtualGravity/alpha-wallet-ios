@@ -153,7 +153,7 @@ final class SettingsViewModel {
             case .passcode:
                 return .passcode(.init(titleText: passcodeTitle, icon: R.image.biometrics()!, value: lock.isPasscodeSet))
             case .hideToken:
-                return .hideToken(.init(titleText: hideTokenTitle, icon: R.image.biometrics()!, value: UserDefaults.standard.bool(forKey: "HideToken")))
+                return .hideToken(.init(titleText: hideTokenTitle, icon: R.image.iconHideToken()!, value: UserDefaults.standard.bool(forKey: "HideToken")))
             case .notifications, .selectActiveNetworks, .advanced:
                 return .cell(.init(settingsSystemRow: row))
             }

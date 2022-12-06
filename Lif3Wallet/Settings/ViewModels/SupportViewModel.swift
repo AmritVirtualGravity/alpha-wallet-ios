@@ -21,7 +21,7 @@ struct SupportViewModelOutput {
 
 class SupportViewModel: NSObject {
     private let analytics: AnalyticsLogger
-    private let supportedRows: [SupportCase] = [.telegramCustomer, .discord, .email, .twitter, .github, .faq]
+    private let supportedRows: [SupportCase] = [.telegramCustomer, .discord, .twitter, .faq]
 
     init(analytics: AnalyticsLogger) {
         self.analytics = analytics
@@ -240,6 +240,8 @@ extension URLServiceProvider {
             return R.string.localizable.urlFaq().uppercased()
         case .github:
             return R.string.localizable.urlGithub()
+        case .instagram:
+            return R.string.localizable.instagram()
         }
     }
 
@@ -258,6 +260,8 @@ extension URLServiceProvider {
         case .faq:
             return R.image.settings_faq()
         case .github:
+            return R.image.iconsSettingsGithub()
+        case .instagram:
             return R.image.iconsSettingsGithub()
         }
     }

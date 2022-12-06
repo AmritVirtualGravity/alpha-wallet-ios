@@ -48,6 +48,7 @@ extension RPCServer {
         case .ioTeXTestnet: return "IoTeX Testnet"
         case .optimismGoerli: return "Optimism Goerli"
         case .arbitrumGoerli: return "Arbitrum Goerli"
+        case .tomb_chain: return "Tomb Chain"
         }
     }
 
@@ -79,6 +80,7 @@ extension RPCServer {
         case .ioTeXTestnet: return R.image.ioTeXTestnet()
         case .optimismGoerli: return nil
         case .arbitrumGoerli: return nil
+        case .tomb_chain: return R.image.iconsTokensTombChain()
         }
     }
 
@@ -114,6 +116,7 @@ extension RPCServer {
         case .optimismGoerli: return .red
         case .arbitrumGoerli: return .red
         case .custom: return .red
+        case .tomb_chain: return .red
         }
     }
 
@@ -144,6 +147,7 @@ extension RPCServer {
         case .ioTeXTestnet: return R.image.ioTeXTestnet()
         case .optimismGoerli: return nil
         case .arbitrumGoerli: return nil
+        case .tomb_chain: return R.image.iconsTokensTombChain()
         }
     }
 }

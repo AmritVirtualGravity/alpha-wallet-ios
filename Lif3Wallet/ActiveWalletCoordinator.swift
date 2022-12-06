@@ -88,7 +88,8 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
         let tabBarController: UITabBarController = .withOverridenBarAppearence()
         tabBarController.delegate = self
 
-        if Environment.isDebug && Features.default.isAvailable(.isSwapEnabled) {
+        /// removed 'Environment.isDebug' mode checking
+        if Features.default.isAvailable(.isSwapEnabled) {
             tabBarController.tabBar.addSubview(swapButton)
             swapButton.topAnchor.constraint(equalTo: tabBarController.tabBar.topAnchor, constant: 2).isActive = true
             swapButton.centerXAnchor.constraint(equalTo: tabBarController.tabBar.centerXAnchor).isActive = true

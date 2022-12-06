@@ -13,6 +13,8 @@ class ServersCoordinator: Coordinator {
     //Cannot be `let` as the chains can change dynamically without the app being restarted (i.e. killed). The UI can be restarted though (when switching changes)
     static var serversOrdered: [RPCServer] {
         return [
+            .fantom,
+            .tomb_chain,
             .main,
             .xDai,
             .polygon,
@@ -26,7 +28,6 @@ class ServersCoordinator: Coordinator {
             .heco_testnet,
             .artis_sigma1,
             .artis_tau1,
-            .fantom,
             .fantom_testnet,
             .avalanche,
             .avalanche_testnet,

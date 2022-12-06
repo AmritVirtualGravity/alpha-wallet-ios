@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "activities_empty_list.pdf",
-      "idiom" : "universal"
+      "filename" : "Group 2@1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Group 2@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Group 2@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

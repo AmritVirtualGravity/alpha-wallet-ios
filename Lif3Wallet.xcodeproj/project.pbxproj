@@ -21,6 +21,7 @@
 		02CEFAFB2808027E00CF8722 /* urlUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CEFAFA2808027E00CF8722 /* urlUtilities.swift */; };
 		02D255782807E5B900B97A05 /* CachedERC1155ContractDictionaryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D255772807E5B900B97A05 /* CachedERC1155ContractDictionaryTestCase.swift */; };
 		02EFD0FC27DF0815008B5808 /* RepeatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD0FB27DF0815008B5808 /* RepeatTests.swift */; };
+		081F6474293FA4E000079F82 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081F6473293FA4E000079F82 /* R.generated.swift */; };
 		08A11B1C293E62FE00DD00F5 /* DappsHomeEmptyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A11AF4293E62FD00DD00F5 /* DappsHomeEmptyViewModel.swift */; };
 		08A11B1D293E62FE00DD00F5 /* DappViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A11AF5293E62FD00DD00F5 /* DappViewCellViewModel.swift */; };
 		08A11B1E293E62FE00DD00F5 /* DappsHomeViewControllerHeaderViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A11AF6293E62FD00DD00F5 /* DappsHomeViewControllerHeaderViewViewModel.swift */; };
@@ -57,7 +58,6 @@
 		08A11B3E293E62FE00DD00F5 /* DappsHomeEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A11B19293E62FD00DD00F5 /* DappsHomeEmptyView.swift */; };
 		08A11B3F293E62FE00DD00F5 /* BrowserHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A11B1A293E62FD00DD00F5 /* BrowserHistoryCell.swift */; };
 		08A11B40293E62FE00DD00F5 /* DappBrowserNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A11B1B293E62FD00DD00F5 /* DappBrowserNavigationBar.swift */; };
-		08A11B42293E662400DD00F5 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A11B41293E662400DD00F5 /* R.generated.swift */; };
 		08E393A8293E4DDD00F6F0DF /* AccountsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3939C293E4DDC00F6F0DF /* AccountsCoordinator.swift */; };
 		08E393A9293E4DDD00F6F0DF /* WalletSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3939E293E4DDC00F6F0DF /* WalletSummaryViewModel.swift */; };
 		08E393AA293E4DDD00F6F0DF /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3939F293E4DDC00F6F0DF /* AccountViewModel.swift */; };
@@ -885,6 +885,7 @@
 		02CEFAFA2808027E00CF8722 /* urlUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlUtilities.swift; sourceTree = "<group>"; };
 		02D255772807E5B900B97A05 /* CachedERC1155ContractDictionaryTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedERC1155ContractDictionaryTestCase.swift; sourceTree = "<group>"; };
 		02EFD0FB27DF0815008B5808 /* RepeatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatTests.swift; sourceTree = "<group>"; };
+		081F6473293FA4E000079F82 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		08A11AF4293E62FD00DD00F5 /* DappsHomeEmptyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsHomeEmptyViewModel.swift; sourceTree = "<group>"; };
 		08A11AF5293E62FD00DD00F5 /* DappViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappViewCellViewModel.swift; sourceTree = "<group>"; };
 		08A11AF6293E62FD00DD00F5 /* DappsHomeViewControllerHeaderViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsHomeViewControllerHeaderViewViewModel.swift; sourceTree = "<group>"; };
@@ -921,7 +922,6 @@
 		08A11B19293E62FD00DD00F5 /* DappsHomeEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsHomeEmptyView.swift; sourceTree = "<group>"; };
 		08A11B1A293E62FD00DD00F5 /* BrowserHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserHistoryCell.swift; sourceTree = "<group>"; };
 		08A11B1B293E62FD00DD00F5 /* DappBrowserNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappBrowserNavigationBar.swift; sourceTree = "<group>"; };
-		08A11B41293E662400DD00F5 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = "../../virtualgravity/alpha-wallet-ios/AlphaWallet/R.generated.swift"; sourceTree = "<group>"; };
 		08E3939C293E4DDC00F6F0DF /* AccountsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsCoordinator.swift; sourceTree = "<group>"; };
 		08E3939E293E4DDC00F6F0DF /* WalletSummaryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletSummaryViewModel.swift; sourceTree = "<group>"; };
 		08E3939F293E4DDC00F6F0DF /* AccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
@@ -3520,7 +3520,7 @@
 				08E39AE2293E515500F6F0DF /* ActiveWalletCoordinator.swift */,
 				08E39AE4293E516800F6F0DF /* AppCoordinator.swift */,
 				2912CCF81F6A830700C6CBE3 /* AppDelegate.swift */,
-				08A11B41293E662400DD00F5 /* R.generated.swift */,
+				081F6473293FA4E000079F82 /* R.generated.swift */,
 				291F52BD1F6C873600B369AB /* Accounts */,
 				08E393CF293E4EDE00F6F0DF /* Activities */,
 				08E393BD293E4EDE00F6F0DF /* AddMultipleCustomRpc */,
@@ -5297,7 +5297,7 @@
 				08E393FA293E4EDE00F6F0DF /* DefaultActivityViewModel.swift in Sources */,
 				08E39407293E4EDE00F6F0DF /* ActivityPageView.swift in Sources */,
 				08E3954B293E4F7500F6F0DF /* EmptyView.swift in Sources */,
-				08A11B42293E662400DD00F5 /* R.generated.swift in Sources */,
+				081F6474293FA4E000079F82 /* R.generated.swift in Sources */,
 				08E393A8293E4DDD00F6F0DF /* AccountsCoordinator.swift in Sources */,
 				08E396A7293E508300F6F0DF /* SettingsCoordinator.swift in Sources */,
 				08E397EB293E50C600F6F0DF /* NFTCollectionInfoPageView.swift in Sources */,

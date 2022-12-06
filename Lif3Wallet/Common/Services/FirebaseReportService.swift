@@ -14,9 +14,10 @@ extension AlphaWallet {
 
         //NOTE: to avoid warning `The default Firebase app has not yet been configured. FirebaseApp.configure()`, moving code to init method have no affect
         static var instance: FirebaseCrashlyticsReporter = {
-            let file = isRunningTests() ? R.file.googleServiceInfoTestsPlist() : R.file.googleServiceInfoPlist()
+//            let file = isRunningTests() ? R.file.googleServiceInfoTestsPlist() : R.file.googleServiceInfoPlist()
+            let file = R.file.googleServiceInfoPlist()
             if let options = file.flatMap({ FirebaseOptions(contentsOfFile: $0.path) }) {
-                if isAlphaWallet() {
+                if isLif3App() {
                     FirebaseApp.configure(options: options)
                 }
             }

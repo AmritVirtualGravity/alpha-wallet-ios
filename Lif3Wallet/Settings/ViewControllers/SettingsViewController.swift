@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(SettingTableViewCell.self)
         tableView.register(SwitchTableViewCell.self)
+        tableView.register(HideTokenSwitchTableViewCell.self)
         tableView.separatorStyle = .singleLine
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.estimatedRowHeight = Metrics.anArbitraryRowHeightSoAutoSizingCellsWorkIniOS10
@@ -173,6 +174,22 @@ extension SettingsViewController: SwitchTableViewCellDelegate {
         toggleSelection.send((indexPath, isOn))
     }
 }
+extension SettingsViewController: HideTokenSwitchTableViewCellDelegate {
+
+    func cell(_ cell: HideTokenSwitchTableViewCell, switchStateChanged isOn: Bool) {
+        self.view.isUserInteractionEnabled = false
+        let usrDefault = UserDefaults.standard
+        if (usrDefault.bool(forKey: "HideToken") == true) {
+            usrDefault.set(false, forKey: "HideToken")
+        } else {
+            usrDefault.set(true, forKey: "HideToken")
+        }
+        NotificationCenter.default.post(name: Notification.Name("HideTokenNotification"), object: nil)
+        self.view.isUserInteractionEnabled = true
+      
+    }
+}
+
 
 fileprivate extension SettingsViewController {
     func makeDataSource() -> UITableViewDiffableDataSource<SettingsSection, SettingsViewModel.ViewType> {
@@ -189,6 +206,12 @@ fileprivate extension SettingsViewController {
                 return UITableViewCell()
             case .passcode(let vm):
                 let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.configure(viewModel: vm)
+                cell.delegate = self
+
+                return cell
+            case .hideToken(let vm):
+                let cell: HideTokenSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
                 cell.delegate = self
 
@@ -255,6 +278,8 @@ extension SettingsViewController: UITableViewDelegate {
                 break
             case .selectActiveNetworks:
                 delegate?.activeNetworksSelected(in: self)
+            case .hideToken:
+                break
             }
         case .help:
             delegate?.helpSelected(in: self)

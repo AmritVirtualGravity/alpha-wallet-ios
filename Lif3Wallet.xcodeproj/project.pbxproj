@@ -62,6 +62,8 @@
 		02F4E8C42771C07500D89C19 /* SaveCustomRpcBrowseDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F4E8C32771C07500D89C19 /* SaveCustomRpcBrowseDataController.swift */; };
 		02FEA8EF280FE1B7006C3CA9 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FEA8EE280FE1B7006C3CA9 /* NSLayoutConstraintExtension.swift */; };
 		101097D52913FA6C0066F1BD /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101097D42913FA6C0066F1BD /* LifeDataSource.swift */; };
+		102CD8B0293F050100A36057 /* HideTokenSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */; };
+		102CD8B2293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */; };
 		10A21E0B291E84F8004F1D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10A21E0A291E84F8004F1D78 /* GoogleService-Info.plist */; };
 		290B2B541F8F50030053C83E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 290B2B561F8F50030053C83E /* Localizable.strings */; };
 		290B2B5F1F9177860053C83E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B5E1F9177860053C83E /* UIImage.swift */; };
@@ -924,6 +926,8 @@
 		02F4E8C32771C07500D89C19 /* SaveCustomRpcBrowseDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCustomRpcBrowseDataController.swift; sourceTree = "<group>"; };
 		02FEA8EE280FE1B7006C3CA9 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
 		101097D42913FA6C0066F1BD /* LifeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
+		102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		10A21E0A291E84F8004F1D78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		290B2B551F8F50030053C83E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		290B2B5E1F9177860053C83E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -2292,6 +2296,7 @@
 				87D6E5DC2790320500B9DEE3 /* AnalyticsViewModel.swift */,
 				5E7C7F970B01399530F62569 /* ToolsViewModel.swift */,
 				87D7D66027D654A000202861 /* CheckTransactionStateViewModel.swift */,
+				102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -3202,6 +3207,7 @@
 				02D8BF8C277D572600EEE8E9 /* SaveCustomRpcManualEntryView.swift */,
 				028D4E59277309ED00E7418D /* EmptyTableView.swift */,
 				0235A794280D470000E65C61 /* RPCDisplaySelectableTableViewCell.swift */,
+				102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5319,6 +5325,7 @@
 				87741FC527747C5C007F4604 /* TokenInstanceViewConfigurationHelper.swift in Sources */,
 				87F53A012817FF8400BD8017 /* WalletConnectSessionsViewModel.swift in Sources */,
 				8739BB6026CCED010045CFED /* SelectableNFTAssetContainerViewModel.swift in Sources */,
+				102CD8B2293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift in Sources */,
 				022CED7F277B01E10043287F /* ScrollableSegmentedControlHighlightableLineView.swift in Sources */,
 				8726481F27FD975400111C91 /* AmountTextField.swift in Sources */,
 				87584FA527E9DDB0006A7CD1 /* GridStackView.swift in Sources */,
@@ -5381,6 +5388,7 @@
 				87584FAE27EC64FA006A7CD1 /* SelfSizingPanelLayout.swift in Sources */,
 				5E7C70CF44075CF73F03AD4B /* TokensViewControllerTableViewHeader.swift in Sources */,
 				5E7C7233A9A5F9D1A89FF569 /* TokensViewControllerTableViewSectionHeader.swift in Sources */,
+				102CD8B0293F050100A36057 /* HideTokenSwitchTableViewCell.swift in Sources */,
 				8739BBCD26CD298B0045CFED /* NFTAssetSelectionViewModel.swift in Sources */,
 				875B3C34250A75FA0085BD08 /* QRCodeResolutionCoordinator.swift in Sources */,
 				873784FE28DB5D3000CE836F /* SelectedSwapToolsCollectionView.swift in Sources */,

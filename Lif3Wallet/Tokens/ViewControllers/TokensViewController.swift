@@ -193,6 +193,8 @@ final class TokensViewController: UIViewController {
         buttonsBar.buttons[0].addTarget(self, action: #selector(buyCryptoSelected), for: .touchUpInside)
 
         bind(viewModel: viewModel)
+      
+
     }
 
     override func viewWillAppear(_ animated: Bool) {

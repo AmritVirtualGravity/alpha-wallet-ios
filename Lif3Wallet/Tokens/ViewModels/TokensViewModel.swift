@@ -172,10 +172,9 @@ final class TokensViewModel {
         self.config = config
         self.domainResolutionService = domainResolutionService
         self.blockiesGenerator = blockiesGenerator
-        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("HideTokenNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.HideTokenWith0Balance(notification:)), name: Notification.Name("HideTokenNotification"), object: nil)
     }
-    @objc func methodOfReceivedNotification(notification: Notification) {
-        print("*********TOKEN VIEW CALLED******8")
+    @objc func HideTokenWith0Balance(notification: Notification) {
         self.reloadData()
     }
     

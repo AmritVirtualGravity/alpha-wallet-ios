@@ -65,7 +65,6 @@ class SwitchTableViewCell: UITableViewCell {
     }
 
     @objc private func switchChanged(_ sender: UISwitch) {
-        delegate?.cell(self, switchStateChanged: sender.isOn)
         isforTheme == false ?  delegate?.cell(self, switchStateChanged: sender.isOn) : delegate?.didEnableDarkTheme(self, switchStateChanged: sender.isOn)
     }
 

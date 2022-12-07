@@ -21,7 +21,7 @@ struct SupportViewModelOutput {
 
 class SupportViewModel: NSObject {
     private let analytics: AnalyticsLogger
-    private let supportedRows: [SupportCase] = [.telegramCustomer, .discord, .twitter, .faq]
+    private let supportedRows: [SupportCase] = [.telegramCustomer, .discord, .twitter,.instagram, .faq]
 
     init(analytics: AnalyticsLogger) {
         self.analytics = analytics

@@ -196,8 +196,9 @@ fileprivate extension SettingsViewController {
             case .passcode(let vm):
                 let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
-                cell.delegate = self
                 cell.isforTheme = false
+                cell.delegate = self
+               
                 return cell
             case .hideToken(let vm):
                 let cell: HideTokenSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
@@ -207,8 +208,8 @@ fileprivate extension SettingsViewController {
             case .theme(let vm):
                 let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
-                cell.delegate = self
                 cell.isforTheme = true
+                cell.delegate = self
                 return cell
             }
         })

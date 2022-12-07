@@ -45,7 +45,7 @@ class RenameWalletViewController: UIViewController {
         let footerBar = ButtonsBarBackgroundView(buttonsBar: buttonsBar, separatorHeight: 0)
         let nameTextFieldLayout = nameTextField.defaultLayout(edgeInsets: .init(top: 20, left: 16, bottom: 0, right: 16))
 
-        view.addSubview(nameTextFieldLayout)
+        view.addSubview(nameTextFieldLayout)ma a
         view.addSubview(footerBar)
 
         NSLayoutConstraint.activate([

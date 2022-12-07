@@ -174,7 +174,8 @@ final class TokensViewController: UIViewController {
             footerBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             footerBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-
+        
+        footerBar.isHidden = true
     }
 
     override func viewDidLoad() {
@@ -189,10 +190,9 @@ final class TokensViewController: UIViewController {
 
         buttonsBar.configure(.primary(buttons: 1))
         buttonsBar.buttons[0].addTarget(self, action: #selector(buyCryptoSelected), for: .touchUpInside)
+        buttonsBar.isHidden = true
 
         bind(viewModel: viewModel)
-      
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -273,7 +273,7 @@ final class TokensViewController: UIViewController {
 
                 navigationItem.title = state.title
                 self?.isConsoleButtonHidden = state.isConsoleButtonHidden
-                self?.footerBar.isHidden = state.isFooterHidden
+//                self?.footerBar.isHidden = state.isFooterHidden
                 self?.applySnapshot(with: state.sections, animate: false)
             }.store(in: &cancellable)
 

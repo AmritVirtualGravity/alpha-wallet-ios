@@ -15,7 +15,6 @@ class RequestViewController: UIViewController {
         let label = UILabel()
         label.attributedText = viewModel.instructionAttributedString
         label.adjustsFontSizeToFitWidth = true
-
         return label
     }()
     
@@ -78,7 +77,6 @@ class RequestViewController: UIViewController {
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
-            
             
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),

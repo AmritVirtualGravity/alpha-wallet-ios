@@ -21,7 +21,7 @@ class SelectCurrencyButton: UIControl {
     }()
 
     private let expandImageView: UIImageView = {
-        let imageView = UIImageView(image: R.image.expandMore())
+        let imageView = UIImageView(image: R.image.expandMore()?.withRenderingMode(.alwaysTemplate))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -124,7 +124,7 @@ fileprivate class HasNoTokenView: UIControl {
     }()
 
     private let chevronImageView: UIImageView = {
-        let imageView = UIImageView(image: R.image.chevronDown())
+        let imageView = UIImageView(image: R.image.chevronDown()?.withRenderingMode(.alwaysTemplate))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
 
@@ -154,11 +154,11 @@ fileprivate class HasNoTokenView: UIControl {
             chevronImageView.heightAnchor.constraint(equalToConstant: 15),
         ])
 
-        backgroundColor = .black
+        backgroundColor = Configuration.Color.Semantic.defaultForegroundText
         cornerRadius = 20
         titleLabel.attributedText = NSAttributedString.init(string: "Select Token", attributes: [
             .font: Fonts.bold(size: 17),
-            .foregroundColor: Colors.appWhite
+            .foregroundColor: Configuration.Color.Semantic.defaultInverseText
         ])
     }
 

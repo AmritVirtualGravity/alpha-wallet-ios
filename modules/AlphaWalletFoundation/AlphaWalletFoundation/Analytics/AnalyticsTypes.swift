@@ -51,6 +51,7 @@ public enum Analytics {
         case twitter = "Screen: Twitter"
         case reddit = "Screen: Reddit"
         case facebook = "Screen: Facebook"
+        case instagram = "Screen: Instagram"
         case github = "Screen: Github"
         case explorer = "Screen: Explorer"
         case openShortcut = "Screen: Shortcut"

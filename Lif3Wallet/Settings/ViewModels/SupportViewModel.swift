@@ -80,6 +80,9 @@ class SupportViewModel: NSObject {
         case .email:
             let attachments = Features.default.isAvailable(.isAttachingLogFilesToSupportEmailEnabled) ? DDLogger.logFilesAttachments : []
             return .shareAttachments(attachments: attachments)
+        case .instagram:
+            logAccessInstagram()
+            return .openUrl(.instagram)
         }
 
         return nil
@@ -111,6 +114,10 @@ class SupportViewModel: NSObject {
 
     private func logAccessGithub() {
         analytics.log(navigation: Analytics.Navigation.github)
+    }
+    
+    private func logAccessInstagram() {
+        analytics.log(navigation: Analytics.Navigation.instagram)
     }
 }
 
@@ -144,6 +151,7 @@ extension SupportViewModel {
         case faq
         case github
         case email
+        case instagram
     }
 
     enum SupportAction {
@@ -170,6 +178,8 @@ extension SupportViewModel.SupportCase {
             return URLServiceProvider.faq
         case .github:
             return URLServiceProvider.github
+        case .instagram:
+            return URLServiceProvider.instagram
         case .blog, .email:
             return nil
         }
@@ -195,6 +205,8 @@ extension SupportViewModel.SupportCase {
             return R.string.localizable.supportEmailTitle()
         case .github:
             return URLServiceProvider.github.title
+        case .instagram:
+            return URLServiceProvider.instagram.title
         }
     }
 
@@ -218,6 +230,8 @@ extension SupportViewModel.SupportCase {
             return R.image.settings_faq()
         case .github:
             return URLServiceProvider.github.image
+        case .instagram:
+            return URLServiceProvider.instagram.image
         }
     }
 }
@@ -237,7 +251,7 @@ extension URLServiceProvider {
         case .facebook:
             return R.string.localizable.urlFacebook()
         case .faq:
-            return R.string.localizable.urlFaq().uppercased()
+            return R.string.localizable.urlFaq()
         case .github:
             return R.string.localizable.urlGithub()
         case .instagram:
@@ -262,7 +276,7 @@ extension URLServiceProvider {
         case .github:
             return R.image.iconsSettingsGithub()
         case .instagram:
-            return R.image.iconsSettingsGithub()
+            return R.image.settings_instagram()
         }
     }
 }

@@ -58,7 +58,13 @@ final class SelectTokenViewModel {
 
         let snapshot = tokenCollection.tokenViewModels.merge(with: whenAppearOrFetchOrFilterHasChanged)
             .map { [tokensFilter, filter] tokens -> [TokenViewModel] in
-                let displayedTokens = tokensFilter.filterTokens(tokens: tokens, filter: filter)
+                var filteredTokens = [TokenViewModel]()
+                if (  UserDefaults.standard.bool(forKey: "HideToken") == true )  {
+                    filteredTokens = self.filterTokenWithZeroShortAmt(tokens: tokens)
+                } else {
+                    filteredTokens = tokens
+                }
+                let displayedTokens = tokensFilter.filterTokens(tokens: filteredTokens, filter: filter)
                 return tokensFilter.sortDisplayedTokens(tokens: displayedTokens)
             }.handleEvents(receiveOutput: { self.filteredTokens = $0 })
             .map { self.buildViewModels(for: $0) }
@@ -106,6 +112,25 @@ final class SelectTokenViewModel {
                 return .nonFungible(viewModel)
             }
         }
+    }
+
+//    private func accessoryType(for token: TokenViewModel) -> UITableViewCell.AccessoryType {
+//        guard let selectedToken = selectedToken else { return .none }
+//        return selectedToken == token ? .checkmark : .none
+//    }
+    
+     func filterTokenWithZeroShortAmt(tokens: [TokenViewModel]) -> [TokenViewModel] {
+        var filteredTokens = [TokenViewModel]()
+        for token in tokens {
+            if (token.type != .nativeCryptocurrency) {
+                if (token.balance.amountShort != "0") {
+                    filteredTokens.append(token)
+                }
+            } else {
+                filteredTokens.append(token)
+            }
+        }
+        return filteredTokens
     }
 }
 

@@ -16,6 +16,9 @@ struct SeedPhraseBackupIntroductionViewModel {
     var imageViewImage: UIImage {
         return R.image.hdIntroduction()!
     }
+    var backgroundImage: UIImage {
+        return R.image.lifeBackgroundImage()!
+    }
     
     var attributedSubtitle: NSAttributedString {
         let subtitle = R.string.localizable.walletsBackupHdWalletIntroductionTitle()

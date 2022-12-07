@@ -48,28 +48,53 @@ struct Configuration {
                 return colorFrom(trait: trait, lightColor: R.color.azure()!, darkColor: R.color.dodge()!)
             }
 
+//            static let primaryButtonBackground = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)
+//            }
+            
             static let primaryButtonBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)
+                return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.alabaster()!)
             }
+//            static let primaryButtonHighlightedBackground = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.concrete()!)
+//            }
+            
             static let primaryButtonHighlightedBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.concrete()!)
+                return colorFrom(trait: trait, lightColor: R.color.concrete()!, darkColor: R.color.concrete()!)
             }
+//            static let primaryButtonBackgroundInactive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+//            }
+            
             static let primaryButtonBackgroundInactive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+                return colorFrom(trait: trait, lightColor: R.color.mine()!, darkColor: R.color.mine()!)
             }
+//            static let primaryButtonBorderInactive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+//            }
             static let primaryButtonBorderInactive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+                return colorFrom(trait: trait, lightColor: R.color.mine()!, darkColor: R.color.mine()!)
             }
+//            static let primaryButtonTextActive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+//            }
+            
             static let primaryButtonTextActive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.black()!)
             }
+//            static let primaryButtonTextInactive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+//            }
             static let primaryButtonTextInactive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.black()!)
             }
-            static let primaryButtonBorderActive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)
-            }
+//            static let primaryButtonBorderActive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)
+//            }
 
+            static let primaryButtonBorderActive = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.alabaster()!)
+            }
             static let secondaryButtonBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
             }

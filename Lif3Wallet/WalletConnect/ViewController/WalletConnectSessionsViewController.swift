@@ -21,7 +21,7 @@ class WalletConnectSessionsViewController: UIViewController {
         tableView.estimatedRowHeight = DataEntry.Metric.TableView.estimatedRowHeight
         tableView.separatorInset = .zero
         tableView.delegate = self
-
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
@@ -85,20 +85,18 @@ class WalletConnectSessionsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-
+        
         if let host = emptyView {
             spinner.bringSubviewToFront(host)
         }
-
+        backgroundImageView.image = viewModel.backgroundImage
         bind(viewModel: viewModel)
     }
 
     private func bind(viewModel: WalletConnectSessionsViewModel) {
         let input = WalletConnectSessionsViewModelInput()
         let output = viewModel.transform(input: input)
-
+        backgroundImageView.image = viewModel.backgroundImage
         output.viewState
             .sink { [weak self, spinner, navigationItem] viewState in
                 navigationItem.title = viewState.title

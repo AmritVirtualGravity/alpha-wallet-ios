@@ -22,6 +22,10 @@ class WalletConnectSessionsViewModel {
     private let provider: WalletConnectServerProviderType
     private var cancelable = Set<AnyCancellable>()
     private let stateSubject: CurrentValueSubject<State, Never>
+    
+    var backgroundImage: UIImage {
+        return R.image.lifeBackgroundImage()!
+    }
 
     init(provider: WalletConnectServerProviderType, state: State = .sessions) {
         self.provider = provider

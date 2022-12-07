@@ -46,11 +46,11 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
 
         let stackView = [
-            UIView.spacer(height: ScreenChecker.size(big: 32, medium: 22, small: 18)),
+            UIView.spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 18)),
             subtitleLabel,
-            UIView.spacer(height: ScreenChecker.size(big: 24, medium: 20, small: 18)),
+            UIView.spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 18)),
             imageView,
-            UIView.spacer(height: ScreenChecker.size(big: 17, medium: 15, small: 10)),
+            UIView.spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 10)),
             descriptionLabel1,
             ].asStackView(axis: .vertical)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +60,7 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         footerBar.translatesAutoresizingMaskIntoConstraints = false
         footerBar.backgroundColor = .clear
         roundedBackground.addSubview(footerBar)
-
+        
         footerBar.addSubview(buttonsBar)
 
         NSLayoutConstraint.activate([
@@ -106,15 +106,16 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
     }
 
     func configure() {
-        view.backgroundColor = Colors.appBackground
-
+        backgroundImageView.image = viewModel.backgroundImage
         subtitleLabel.numberOfLines = 0
         subtitleLabel.attributedText = viewModel.attributedSubtitle
-
+        subtitleLabel.textColor = .white
         imageView.image = viewModel.imageViewImage
 
         descriptionLabel1.numberOfLines = 0
         descriptionLabel1.attributedText = viewModel.attributedDescription
+        descriptionLabel1.textColor = .white
+
 
         buttonsBar.configure()
         let exportButton = buttonsBar.buttons[0]

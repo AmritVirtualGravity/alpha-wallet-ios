@@ -15,6 +15,7 @@ class RequestViewController: UIViewController {
         let label = UILabel()
         label.attributedText = viewModel.instructionAttributedString
         label.adjustsFontSizeToFitWidth = true
+        label.textColor = .white
         return label
     }()
     
@@ -57,13 +58,13 @@ class RequestViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         let stackView = [
-            .spacer(height: ScreenChecker.size(big: 30, medium: 30, small: 20)),
+            .spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 20)),
             instructionLabel,
-            .spacer(height: ScreenChecker.size(big: 20, medium: 20, small: 15)),
+            .spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 15)),
             imageView,
-            .spacer(height: ScreenChecker.size(big: 20, medium: 20, small: 15)),
+            .spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 15)),
             addressView,
-            .spacer(height: ScreenChecker.size(big: 20, medium: 20, small: 15)),
+            .spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 15)),
             ensNameView
         ].asStackView(axis: .vertical, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false

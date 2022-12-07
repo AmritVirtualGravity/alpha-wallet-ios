@@ -19,7 +19,7 @@ class EmptyView: UIView {
 
     init(placement: EmptyViewPlacement = EmptyViewDefaultPlacement()) {
         super.init(frame: .zero)
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = .clear
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
 
@@ -34,7 +34,7 @@ class EmptyView: UIView {
     func configure(title: String?) -> Self {
         let attributedTitle = title.flatMap { value in
             return NSAttributedString.init(string: value, attributes: [
-                .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
+                .foregroundColor: UIColor.white,
                 .font: Fonts.regular(size: 16)
             ])
         }

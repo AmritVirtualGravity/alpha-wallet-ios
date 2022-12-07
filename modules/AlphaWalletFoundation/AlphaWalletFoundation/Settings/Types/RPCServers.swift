@@ -759,14 +759,17 @@ public enum RPCServer: Hashable, CaseIterable {
         case .fantom: return 1
         case .tomb_chain: return 2
         case .main: return 3
-        case .poa: return 4
-        case .classic: return 5
+        case .binance_smart_chain: return 4
+        case .polygon: return 5
+        case .avalanche:return 6
+        case .arbitrum: return 7
         case .xDai: return 8
-        case .callisto: return 9
-        case .goerli: return 10
+        case .classic: return 9
+        case .poa: return 10
+        case .callisto: return 15
+        case .goerli: return 16
         case .artis_sigma1: return 246529
         case .artis_tau1: return 246785
-        case .binance_smart_chain: return 12
         case .binance_smart_chain_testnet: return 13
         case .custom(let custom): return 300000 + custom.chainID
         case .heco: return 14

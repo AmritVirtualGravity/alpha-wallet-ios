@@ -15,6 +15,8 @@ struct RoundedEnsViewModel {
     }
 
     var labelFont: UIFont = Fonts.semibold(size: ScreenChecker.size(big: 17, medium: 16, small: 14))
-    var labelTextColor: UIColor = Configuration.Color.Semantic.labelTextActive
-    var backgroundColor: UIColor = Configuration.Color.Semantic.roundButtonBackground
+//    var labelTextColor: UIColor = Configuration.Color.Semantic.labelTextActive
+    var labelTextColor: UIColor = .white
+//    var backgroundColor: UIColor = Configuration.Color.Semantic.roundButtonBackground
+    var backgroundColor: UIColor = .white.withAlphaComponent(0.2)
 }

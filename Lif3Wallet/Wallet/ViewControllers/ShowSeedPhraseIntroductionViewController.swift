@@ -98,11 +98,12 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
 
         subtitleLabel.numberOfLines = 0
         subtitleLabel.attributedText = viewModel.attributedSubtitle
-
+        subtitleLabel.textColor = .white
         imageView.image = viewModel.imageViewImage
 
         descriptionLabel1.numberOfLines = 0
         descriptionLabel1.attributedText = viewModel.attributedDescription
+        descriptionLabel1.textColor = .white
 
         buttonsBar.configure()
         let showSeedPhraseButton = buttonsBar.buttons[0]

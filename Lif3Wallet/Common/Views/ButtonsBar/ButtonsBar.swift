@@ -348,6 +348,7 @@ struct ButtonsBarViewModel {
         disabledButtonTitleColor: Configuration.Color.Semantic.primaryButtonTextInactive,
         buttonBorderColor: Configuration.Color.Semantic.primaryButtonBorderActive
     )
+    
 
     static let secondaryButton = ButtonsBarViewModel(
         buttonBackgroundColor: Configuration.Color.Semantic.secondaryButtonBackground,

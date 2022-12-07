@@ -117,6 +117,7 @@ final class SettingsViewModel {
                 case .passcode: return event.isOn
                 case .notifications, .selectActiveNetworks, .advanced: return nil
                 case .hideToken: return nil
+                case .theme: return nil
                 }
             case .help, .tokenStandard, .version, .wallet: return nil
             }
@@ -171,6 +172,9 @@ final class SettingsViewModel {
                 return .hideToken(.init(titleText: hideTokenTitle, icon: R.image.iconHideToken()!, value: UserDefaults.standard.bool(forKey: "HideToken")))
             case .notifications, .selectActiveNetworks, .advanced:
                 return .cell(.init(settingsSystemRow: row))
+            case .theme:
+                let usrDefault = UserDefaults.standard
+                return .theme(.init(titleText: R.string.localizable.settingsSupportDarkMode(), icon: R.image.biometrics()!, value: usrDefault.bool(forKey: "DarkModeOn")))
             }
         case .help:
             return .cell(.init(titleText: R.string.localizable.settingsSupportTitle(), icon: R.image.support()!))
@@ -208,6 +212,7 @@ extension SettingsViewModel {
         case cell(SettingTableViewCellViewModel)
         case undefined
         case hideToken(HideTokenSwitchTableViewCellViewModel)
+        case theme(SwitchTableViewCellViewModel)
     }
 
     struct ViewState {
@@ -233,6 +238,7 @@ extension SettingsViewModel {
         case selectActiveNetworks
         case advanced
         case hideToken
+        case theme
     }
 
     enum SettingsSection {
@@ -262,8 +268,10 @@ extension SettingsViewModel.ViewType: Hashable {
         case (.hideToken(let vm1), .hideToken(let vm2)):
             return vm1 == vm2
         case (.undefined, .cell), (.undefined, .passcode), (.passcode, .undefined), (.cell, .passcode), (.cell, .undefined), (.passcode, .cell),
-            (.undefined, .hideToken), (.hideToken, .undefined), (.passcode, .hideToken), (.hideToken, .passcode), (.cell, .hideToken), (.hideToken, .cell):
+            (.undefined, .hideToken), (.hideToken, .undefined), (.passcode, .hideToken), (.hideToken, .passcode), (.cell, .hideToken), (.hideToken, .cell), (.cell, .theme), (.theme, .cell), (.undefined, .theme), (.theme, .undefined),  (.passcode, .theme), (.theme, .passcode), (.theme, .hideToken), (.hideToken, .theme):
             return false
+        case (.theme(let vm1), .theme(let vm2)):
+            return vm1 == vm2
         }
     }
 }
@@ -284,7 +292,7 @@ extension SettingsViewModel.functional {
             walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect]
 //            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
-        let systemRows: [SettingsViewModel.SettingsSystemRow] = [.passcode, .selectActiveNetworks, .advanced, .hideToken]
+        let systemRows: [SettingsViewModel.SettingsSystemRow] = [.passcode, .selectActiveNetworks, .advanced, .hideToken, .theme]
         
         return [
             .wallet(rows: walletRows),
@@ -389,7 +397,8 @@ extension SettingsViewModel.SettingsSystemRow {
             return R.string.localizable.advanced()
         case .hideToken:
             return R.string.localizable.settingsPasscodeTitle()
-            
+        case .theme:
+            return R.string.localizable.settingsPasscodeTitle()
         }
     }
 
@@ -404,6 +413,8 @@ extension SettingsViewModel.SettingsSystemRow {
         case .advanced:
             return R.image.developerMode()!
         case .hideToken:
+            return R.image.biometrics()!
+        case .theme:
             return R.image.biometrics()!
         }
     }

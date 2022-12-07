@@ -124,6 +124,7 @@
 "settings.pingInfura.successful" = "Infura looks OK";
 "settings.pingInfura.fail" = "Infura Error";
 "settings.support.title" = "Asistencia";
+"settings.support.darkMode" = "DarkMode";
 "settings.notifications.title" = "Notificaciones";
 "settings.passcode.title" = "Código / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";

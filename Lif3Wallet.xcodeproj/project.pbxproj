@@ -683,6 +683,7 @@
 		08A25851294073F100A31193 /* ContactUsBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A255DD294073EF00A31193 /* ContactUsBannerView.swift */; };
 		08A25852294073F100A31193 /* HelpViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A255DE294073EF00A31193 /* HelpViewCell.swift */; };
 		08A25854294073F100A31193 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A255E1294073EF00A31193 /* Localizable.strings */; };
+		08F0AE4C2940D93E00FBF77B /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */; };
 		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
 		290B2B6A1F92C0440053C83E /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B691F92C0440053C83E /* ConfigTests.swift */; };
 		290B2B6C1F92C35B0053C83E /* RPCServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */; };
@@ -1556,6 +1557,7 @@
 		08A255E5294073EF00A31193 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A255E6294073EF00A31193 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A255E7294073EF00A31193 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
 		102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
@@ -2894,6 +2896,7 @@
 		08A25474294073EF00A31193 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				08F0AE4A2940D93D00FBF77B /* Singletons */,
 				08A25475294073EF00A31193 /* Coordinators */,
 				08A2547A294073EF00A31193 /* ViewModels */,
 				08A25483294073EF00A31193 /* Types */,
@@ -3713,6 +3716,14 @@
 				08A255E1294073EF00A31193 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		08F0AE4A2940D93D00FBF77B /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */,
+			);
+			path = Singletons;
 			sourceTree = "<group>";
 		};
 		290B2B681F92C0300053C83E /* Settings */ = {
@@ -5289,6 +5300,7 @@
 				08A257A5294073F000A31193 /* InitialWalletCreationCoordinator.swift in Sources */,
 				08A257AF294073F000A31193 /* SeedPhraseCellViewModel.swift in Sources */,
 				08A2575A294073F000A31193 /* DummySearchView.swift in Sources */,
+				08F0AE4C2940D93E00FBF77B /* LifeDataSource.swift in Sources */,
 				08A25723294073F000A31193 /* TransactionDetailsViewModel.swift in Sources */,
 				08A25632294073EF00A31193 /* SwitchTableViewCell.swift in Sources */,
 				08760C91294079AD00F83AB3 /* SwitchChainRequestViewController.swift in Sources */,

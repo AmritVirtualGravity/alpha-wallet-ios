@@ -115,6 +115,15 @@ final class DappBrowserCoordinator: NSObject, Coordinator {
         browserNavBar?.clearDisplay()
         navigationController.popToRootViewController(animated: true)
     }
+    
+    //this methods open life url in the browser
+    func openLifeWebHome(url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        pushOntoNavigationController(viewController: browserViewController, animated: true)
+        browserViewController.goTo(url: url)
+    }
 
     @objc func dismiss() {
         removeAllCoordinators()
@@ -627,6 +636,9 @@ extension DappBrowserCoordinator: BrowserHomeViewControllerDelegate {
     }
 
     func viewControllerWillAppear(in viewController: BrowserHomeViewController) {
+        if (LifeDateSource.shared().isForSwap == false) {
+            openLifeWebHome(url: "www.lif3.com")
+        }
         browserNavBar?.enableButtons()
     }
 

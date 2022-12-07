@@ -14,6 +14,15 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
     private let roundedBackground = RoundedBackground()
     private let subtitleLabel = UILabel()
     private let imageView = UIImageView()
+    
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = R.image.lifeBackgroundImage()!
+        return imageView
+    }()
+    
     // NOTE: internal level, for test cases
     let descriptionLabel1 = UILabel()
     let buttonsBar = HorizontalButtonsBar(configuration: .primary(buttons: 1))
@@ -31,6 +40,7 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         hidesBottomBarWhenPushed = true
 
         roundedBackground.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(backgroundImageView)
         view.addSubview(roundedBackground)
 
         imageView.contentMode = .scaleAspectFit
@@ -54,6 +64,12 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         footerBar.addSubview(buttonsBar)
 
         NSLayoutConstraint.activate([
+            // image view constraits for  full screen size
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
+            
             imageView.heightAnchor.constraint(equalToConstant: imageViewDimension),
 
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),

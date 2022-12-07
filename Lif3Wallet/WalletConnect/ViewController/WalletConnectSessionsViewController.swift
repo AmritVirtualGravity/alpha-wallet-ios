@@ -24,6 +24,14 @@ class WalletConnectSessionsViewController: UIViewController {
 
         return tableView
     }()
+    
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = R.image.lifeBackgroundImage()!
+        return imageView
+    }()
 
     private lazy var spinner: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
@@ -49,10 +57,17 @@ class WalletConnectSessionsViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
+        view.addSubview(backgroundImageView)
         view.addSubview(tableView)
         view.addSubview(spinner)
 
         NSLayoutConstraint.activate([
+            // image view constraits for  full screen size
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            
             tableView.anchorsIgnoringBottomSafeArea(to: view),
             spinner.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)

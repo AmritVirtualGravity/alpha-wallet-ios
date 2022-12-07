@@ -24,6 +24,14 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
     private var imageViewDimension: CGFloat {
         return ScreenChecker.size(big: 250, medium: 250, small: 250)
     }
+    
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = R.image.lifeBackgroundImage()!
+        return imageView
+    }()
 
     weak var delegate: ShowSeedPhraseIntroductionViewControllerDelegate?
 
@@ -48,12 +56,19 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
 
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(backgroundImageView)
         container.addSubview(stackView)
 
         view.addSubview(container)
         view.addSubview(footerBar)
 
         NSLayoutConstraint.activate([
+            // image view constraits for  full screen size
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
+            
             imageView.heightAnchor.constraint(equalToConstant: imageViewDimension),
 
             stackView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),

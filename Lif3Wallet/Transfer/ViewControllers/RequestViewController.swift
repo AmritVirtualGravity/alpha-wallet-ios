@@ -18,6 +18,14 @@ class RequestViewController: UIViewController {
 
         return label
     }()
+    
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = R.image.lifeBackgroundImage()!
+        return imageView
+    }()
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -60,9 +68,18 @@ class RequestViewController: UIViewController {
             ensNameView
         ].asStackView(axis: .vertical, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(backgroundImageView)
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([
+            // image view constraits for  full screen size
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
+            
+            
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

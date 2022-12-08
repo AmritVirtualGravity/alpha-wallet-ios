@@ -701,7 +701,8 @@ public enum RPCServer: Hashable, CaseIterable {
             //.ioTeX, //TODO: Disabled as non in Phase 1 anymore, need to take a look on transactions, native balances
             //.ioTeXTestnet
             .optimismGoerli,
-            .arbitrumGoerli
+            .arbitrumGoerli,
+            .tomb_chain
         ]
     }
 
@@ -766,7 +767,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .xDai: return 8
         case .classic: return 9
         case .poa: return 10
-        case .callisto: return 15
+        case .callisto: return 11
         case .goerli: return 16
         case .artis_sigma1: return 246529
         case .artis_tau1: return 246785
@@ -774,7 +775,6 @@ public enum RPCServer: Hashable, CaseIterable {
         case .custom(let custom): return 300000 + custom.chainID
         case .heco: return 14
         case .heco_testnet: return 15
-        case .fantom: return 16
         case .fantom_testnet: return 17
         case .avalanche: return 18
         case .avalanche_testnet: return 19

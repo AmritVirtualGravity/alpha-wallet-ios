@@ -107,7 +107,7 @@ struct DefaultActivityCellViewModel {
     }
 
     var subTitleTextColor: UIColor {
-        R.color.dove()!
+        Configuration.Color.Semantic.defaultSubtitleText
     }
 
     var subTitleFont: UIFont {

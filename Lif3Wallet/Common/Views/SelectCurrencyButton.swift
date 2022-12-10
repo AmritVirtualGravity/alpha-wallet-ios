@@ -127,7 +127,7 @@ fileprivate class HasNoTokenView: UIControl {
         let imageView = UIImageView(image: R.image.chevronDown()?.withRenderingMode(.alwaysTemplate))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-
+        imageView.tintColor = Configuration.Color.Semantic.defaultInverseText
         return imageView
     }()
 

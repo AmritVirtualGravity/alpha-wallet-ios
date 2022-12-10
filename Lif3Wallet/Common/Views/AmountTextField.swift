@@ -29,14 +29,14 @@ final class AmountTextField: UIControl {
     private(set) lazy var textField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "0", attributes: [
-            .font: DataEntry.Font.amountTextField, .foregroundColor: Configuration.Color.Semantic.placeholderText
+            .font: Configuration.Font.amountTextField, .foregroundColor: Configuration.Color.Semantic.placeholderText
         ])
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
         textField.keyboardType = .decimalPad
         textField.leftViewMode = .always
         textField.textColor = Configuration.Color.Semantic.defaultForegroundText
-        textField.font = DataEntry.Font.amountTextField
+        textField.font = Configuration.Font.amountTextField
         textField.textAlignment = .right
 
         return textField

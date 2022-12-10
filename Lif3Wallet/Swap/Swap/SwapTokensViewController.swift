@@ -80,33 +80,12 @@ class SwapTokensViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
-        generageLayout()
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        buttonsBar.configure()
-        let continueButton = buttonsBar.buttons[0]
-        continueButton.setTitle(R.string.localizable.continue(), for: .normal)
-        continueButton.addTarget(self, action: #selector(swapTokensSelected), for: .touchUpInside)
-        toAmountTextField.selectCurrencyButton.addTarget(self, action: #selector(chooseTokenSelected), for: .touchUpInside)
-        fromAmountTextField.selectCurrencyButton.addTarget(self, action: #selector(chooseTokenSelected), for: .touchUpInside)
-
-        bind(viewModel: viewModel)
-    }
-
-    required init?(coder: NSCoder) {
-        return nil
-    }
-
-    private func generageLayout() {
         containerView.stackView.addArrangedSubviews([
             fromTokenHeaderView,
-            fromAmountTextField.defaultLayout(edgeInsets: .init(top: 0, left: 16, bottom: 0, right: 16)),
+            fromAmountTextField.defaultLayout(edgeInsets: .init(top: ScreenChecker.size(big: 16, medium: 16, small: 7), left: 16, bottom: 0, right: 16)),
             line,
             toTokenHeaderView,
-            toAmountTextField.defaultLayout(edgeInsets: .init(top: 0, left: 16, bottom: 0, right: 16)),
+            toAmountTextField.defaultLayout(edgeInsets: .init(top: ScreenChecker.size(big: 16, medium: 16, small: 7), left: 16, bottom: 0, right: 16)),
             UIView.separator(),
             quoteDetailsView
         ])
@@ -125,14 +104,32 @@ class SwapTokensViewController: UIViewController {
 
             footerBar.anchorsConstraint(to: view)
         ])
+    }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        buttonsBar.configure()
+        let continueButton = buttonsBar.buttons[0]
+        continueButton.setTitle(R.string.localizable.continue(), for: .normal)
+        continueButton.addTarget(self, action: #selector(swapTokensSelected), for: .touchUpInside)
+        toAmountTextField.selectCurrencyButton.addTarget(self, action: #selector(chooseTokenSelected), for: .touchUpInside)
+        fromAmountTextField.selectCurrencyButton.addTarget(self, action: #selector(chooseTokenSelected), for: .touchUpInside)
+
+        containerView.backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
+        view.backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
+        title = viewModel.title
+        fromTokenHeaderView.configure(viewModel: viewModel.fromHeaderViewModel)
+        toTokenHeaderView.configure(viewModel: viewModel.toHeaderViewModel)
+
+        bind(viewModel: viewModel)
+    }
+
+    required init?(coder: NSCoder) {
+        return nil
     }
 
     private func bind(viewModel: SwapTokensViewModel) {
-        view.backgroundColor = viewModel.backgoundColor
-        containerView.scrollView.backgroundColor = viewModel.backgoundColor
-        title = viewModel.title
-
         fromTokenHeaderView.configure(viewModel: viewModel.fromHeaderViewModel)
         toTokenHeaderView.configure(viewModel: viewModel.toHeaderViewModel)
 
@@ -158,7 +155,7 @@ class SwapTokensViewController: UIViewController {
                 }
             }.store(in: &cancelable)
 
-        output.convertedValue
+        output.convertedValue               
             .sink { [weak toAmountTextField] in toAmountTextField?.set(crypto: $0, useFormatting: false) }
             .store(in: &cancelable)
 

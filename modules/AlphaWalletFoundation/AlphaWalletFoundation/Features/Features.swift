@@ -100,7 +100,7 @@ public enum FeaturesAvailable: String, CaseIterable, Codable {
         switch self {
         case .isActivityEnabled: return true
         case .isSpeedupAndCancelEnabled: return true
-        case .isLanguageSwitcherEnabled: return false
+        case .isLanguageSwitcherEnabled: return true
         case .shouldLoadTokenScriptWithFailedSignatures: return true
         case .isRenameWalletEnabledWhileLongPress: return true
         case .shouldPrintCURLForOutgoingRequest: return false

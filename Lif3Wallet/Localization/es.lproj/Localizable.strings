@@ -153,9 +153,9 @@
 "wallets.backupHdWallet.alertSheet.title" = "Mostrar frase semilla";
 "wallets.backupHdWallet.introduction.button.title" = "Hacer una copia de seguridad de mi monedero";
 "wallets.backupHdWallet.introduction.title" = "Haz una copia de seguridad de tu monedero\n con la frase semilla";
-"wallets.showSeedPhrase.introduction.button.title" = "Got it. Show my seed phrase";
-"wallets.showSeedPhrase.introduction.title" = "Beware of scammers!\nDon’t share seed phrase.";
-"wallets.showSeedPhrase.introduction.subtitle" = "Lif3 Wallet will NEVER ask about your\nseed phrase (especially on Telegram).";
+"wallets.showSeedPhrase.introduction.button.title" = "Entendido. Mostrar mi frase semilla";
+"wallets.showSeedPhrase.introduction.title" = "Ten cuidado con los estafadores!\nNo compartas tu frase semilla";
+"wallets.showSeedPhrase.introduction.subtitle" = "Lif3 Wallet NUNCA preguntara por tu \nfrase semilla (especialmente en Telegram)";
 "wallets.showSeedPhrase.subtitle2" = "Your seed phrase\n(do not share with anyone)";
 "wallets.showSeedPhrase.hideSeedPhrase" = "OK, hide my seed phrase";
 "wallets.showSeedPhrase.title" = "Tu frase semilla";

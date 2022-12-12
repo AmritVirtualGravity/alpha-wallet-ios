@@ -424,11 +424,14 @@ extension SettingsViewModel.SettingsSection {
     var title: String {
         switch self {
         case .wallet:
-            return R.string.localizable.settingsSectionWalletTitle().uppercased()
+//            return R.string.localizable.settingsSectionWalletTitle().uppercased()
+            return R.string.localizable.settingsSectionWalletTitle()
         case .system:
-            return R.string.localizable.settingsSectionSystemTitle().uppercased()
+//            return R.string.localizable.settingsSectionSystemTitle().uppercased()
+            return R.string.localizable.settingsSectionSystemTitle()
         case .help:
-            return R.string.localizable.settingsSectionHelpTitle().uppercased()
+            return R.string.localizable.settingsSectionHelpTitle()
+//            return R.string.localizable.settingsSectionHelpTitle().uppercased()
         case .version:
             return R.string.localizable.settingsVersionLabelTitle()
         case .tokenStandard:

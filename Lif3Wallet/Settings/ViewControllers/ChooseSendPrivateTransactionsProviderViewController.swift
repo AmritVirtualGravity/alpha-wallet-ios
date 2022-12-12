@@ -113,4 +113,14 @@ extension UITableView {
 
         return tableView
     }
+    
+    static var insetGroped: UITableView {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = Configuration.Color.Semantic.tableViewSeparator
+        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }
 }

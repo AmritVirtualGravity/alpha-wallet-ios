@@ -16,7 +16,9 @@ struct SettingViewHeaderViewModel {
     var titleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
     var detailsTextColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
     var detailsTextFont: UIFont = Fonts.regular(size: 13)
-    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewHeaderBackground
+//    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewHeaderBackground
+    var backgroundColor: UIColor = .clear
+    
     var separatorColor: UIColor = Configuration.Color.Semantic.tableViewSeparator
 }
 

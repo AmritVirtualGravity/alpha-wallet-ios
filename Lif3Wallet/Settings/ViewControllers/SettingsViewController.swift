@@ -21,7 +21,7 @@ protocol SettingsViewControllerDelegate: class, CanOpenURL {
 class SettingsViewController: UIViewController {
     private let promptBackupWalletViewHolder = UIView()
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.insetGroped
         tableView.register(SettingTableViewCell.self)
         tableView.register(SwitchTableViewCell.self)
         tableView.register(HideTokenSwitchTableViewCell.self)
@@ -63,9 +63,7 @@ class SettingsViewController: UIViewController {
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-
         view.addSubview(tableView)
-
         NSLayoutConstraint.activate([
             tableView.anchorsIgnoringBottomSafeArea(to: view)
         ])
@@ -73,7 +71,7 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.separatorInset.left = 70
         if promptBackupWalletView == nil {
             hidePromptBackupWalletView()
         }

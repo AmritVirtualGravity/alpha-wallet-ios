@@ -212,7 +212,7 @@ extension SettingsViewModel {
         case cell(SettingTableViewCellViewModel)
         case undefined
         case hideToken(HideTokenSwitchTableViewCellViewModel)
-        case theme(SwitchTableViewCellViewModel)
+        case theme(ThemeSwitchTableViewCellViewModel)
     }
 
     struct ViewState {

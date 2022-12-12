@@ -19,6 +19,7 @@ class SendCoordinator: Coordinator {
     private let analytics: AnalyticsLogger
     private let domainResolutionService: DomainResolutionServiceType
     private var transactionConfirmationResult: ConfirmResult? = .none
+    private let importToken: ImportToken
 
     let navigationController: UINavigationController
     var coordinators: [Coordinator] = []
@@ -36,8 +37,10 @@ class SendCoordinator: Coordinator {
             tokensService: TokenProvidable & TokenAddable & TokenViewModelState & TokenBalanceRefreshable,
             assetDefinitionStore: AssetDefinitionStore,
             analytics: AnalyticsLogger,
-            domainResolutionService: DomainResolutionServiceType
+            domainResolutionService: DomainResolutionServiceType,
+            importToken: ImportToken
     ) {
+        self.importToken = importToken
         self.transactionType = transactionType
         self.navigationController = navigationController
         self.session = session
@@ -49,35 +52,30 @@ class SendCoordinator: Coordinator {
     }
 
     func start() {
-        sendViewController.configure(viewModel: .init(transactionType: sendViewController.transactionType, session: session, service: tokensService))
-
         navigationController.pushViewController(sendViewController, animated: true)
     }
     
     private func makeSendViewController() -> SendViewController {
-        let controller = SendViewController(
-            session: session,
-            service: tokensService,
-            transactionType: transactionType,
-            domainResolutionService: domainResolutionService
-        )
+        let viewModel = SendViewModel(transactionType: transactionType, session: session, tokensService: tokensService, importToken: importToken)
+        let controller = SendViewController(viewModel: viewModel, domainResolutionService: domainResolutionService)
 
         switch transactionType {
         case .nativeCryptocurrency(_, let destination, let amount):
             controller.targetAddressTextField.value = destination?.stringValue ?? ""
             if let amount = amount {
-                controller.amountTextField.ethCost = EtherNumberFormatter.full.string(from: amount, units: .ether)
+                controller.amountTextField.set(crypto: EtherNumberFormatter.full.string(from: amount, units: .ether), useFormatting: true)
             } else {
                 //do nothing, especially not set it to a default BigInt() / 0
             }
         case .erc20Token(_, let destination, let amount):
             controller.targetAddressTextField.value = destination?.stringValue ?? ""
-            controller.amountTextField.ethCost = amount ?? ""
-        case .erc875Token, .erc875TokenOrder, .erc721Token, .erc721ForTicketToken, .erc1155Token, .dapp, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
+            controller.amountTextField.set(crypto: amount ?? "", useFormatting: true)
+        case .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .dapp, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
             break
         }
         controller.delegate = self
         controller.navigationItem.largeTitleDisplayMode = .never
+        controller.hidesBottomBarWhenPushed = true
 
         return controller
     } 
@@ -112,7 +110,7 @@ extension SendCoordinator: SendViewControllerDelegate {
         do {
             let configuration: TransactionType.Configuration = .sendFungiblesTransaction(
                 confirmType: .signThenSend,
-                amount: FungiblesTransactionAmount(value: amount, shortValue: shortValue, isAllFunds: viewController.isAllFunds))
+                amount: FungiblesTransactionAmount(value: amount, shortValue: shortValue, isAllFunds: viewController.amountTextField.viewModel.isAllFunds))
 
             let coordinator = try TransactionConfirmationCoordinator(presentingViewController: navigationController, session: session, transaction: transaction, configuration: configuration, analytics: analytics, domainResolutionService: domainResolutionService, keystore: keystore, assetDefinitionStore: assetDefinitionStore, tokensService: tokensService)
             addCoordinator(coordinator)
@@ -123,10 +121,6 @@ extension SendCoordinator: SendViewControllerDelegate {
                 .presentedViewController(or: navigationController)
                 .displayError(message: error.prettyError)
         }
-    }
-
-    func lookup(contract: AlphaWallet.Address, in viewController: SendViewController, completion: @escaping (ContractData) -> Void) {
-        ContractDataDetector(address: contract, account: session.account, server: session.server, assetDefinitionStore: assetDefinitionStore, analytics: analytics).fetch(completion: completion)
     }
 }
 

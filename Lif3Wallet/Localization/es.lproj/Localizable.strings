@@ -32,8 +32,11 @@
 "transaction.to.label.title" = "A";
 "transaction.time.label.title" = "Hora de la transacción";
 "transaction.id.label.title" = "Transacción n.º";
+"transaction.id" = "Transaction ID";
 "transaction.blockNumber.label.title" = "Bloque n.º";
 "transaction.nonce.label.title" = "Nonce";
+"transaction.amount.label.title" = "Amount";
+"transaction.network.label.title" = "Network";
 "confirmPayment.confirm.button.title" = "Confirmar";
 "confirmPayment.sign.button.title" = "Sign";
 "confirmPayment.reject.button.title" = "Reject";
@@ -47,6 +50,8 @@
 "Copy" = "Copiar";
 "Empty" = "Vacío";
 "emptyView.noTokens.label.title" = "¡Todavía no has recibido ningún token!";
+"emptyView.noMessages.label.title" = "There is nothing logged";
+"emptyView.noTransactions.label.title" = "You haven't received any transactions yet!";
 "errorView.description.label.title" = "Ha habido un problema... Inténtalo de nuevo.";
 "export.backup.button.title" = "Copia de seguridad del monedero";
 "export.controlYourMoney.label.title" = "Como solo tú controlas tu dinero, tendrás que guardar la copia de seguridad del almacén de claves por si se elimina esta aplicación.";
@@ -60,6 +65,8 @@
 "OK" = "OK";
 "Password" = "Contraseña";
 "Refresh" = "Actualizar";
+"copiedToClipboard.title" = "%@ copied";
+"address" = "Address";
 "request.addressCopied.title" = "Dirección copiada";
 "request.copyWallet.button.title" = "Copiar la dirección del monedero";
 "Retry" = "Reintentar";
@@ -80,7 +87,7 @@
 "settings.biometricsEnabled.label.title" = "Código de acceso / %@";
 "settings.error.failedToSendEmail" = "Error al enviar el correo electrónico. Asegúrate de que tienes una aplicación de correo instalada.";
 "settings.network.button.title" = "Red";
-"settings.enabledNetworks.button.title" = "Redes activadas";
+"settings.enabledNetworks.button.title" = "Enabled Networks %@";
 "settings.enabledNetworks.mainnet" = "Mainnet";
 "settings.enabledNetworks.testnet" = "Testnet";
 "settings.enabledNetworks.promptEnableTestnet.title" = "What is Testnet?";
@@ -117,6 +124,7 @@
 "settings.pingInfura.successful" = "Infura looks OK";
 "settings.pingInfura.fail" = "Infura Error";
 "settings.support.title" = "Asistencia";
+"settings.support.darkMode" = "DarkMode";
 "settings.notifications.title" = "Notificaciones";
 "settings.passcode.title" = "Código / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";
@@ -468,6 +476,7 @@
 "blockchain.Mumbai" = "Mumbai Testnet";
 "blockchain.Optimistic" = "Optimistic Testnet";
 "blockchain.Optimistic.Kovan" = "Optimistic Kovan Testnet";
+"blockchain.Cronos.Mainnet" = "Cronos";
 "blockchain.Cronos.Testnet" = "Cronos Testnet";
 "blockchain.arbitrum" = "Arbitrum";
 "blockchain.arbitrum.rinkeby" = "Arbitrum Rinkeby";
@@ -863,3 +872,5 @@
 "accept.deepLink.field.url.title" = "URL";
 "accept.deepLink.field.note.title" = "Note";
 "accept.walletConnect.field.methods.title" = "Methods";
+"currency.navigationTitle" = "Change Fiat Currency";
+"tokenscript.overrides.empty" = "There are no TokenScript overrides";

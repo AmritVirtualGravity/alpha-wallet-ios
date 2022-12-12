@@ -32,12 +32,15 @@ extension Constants {
             }
         }
 
+        public static let analyticsKey = ""
+        public static let mailChimpListSpecificKey = "df306008c71da38ba3940d8643e25362"
+        public static let walletConnectProjectId = "8ba9ee138960775e5231b70cc5ef1c3a"
         static let infuraKey = env("INFURAKEY") ?? "cda4f16979b941298843c90c14dc967f"
         static let etherscanKey = env("ETHERSCANKEY") ?? "JGST1ZY7VTCFDCU5PXTMPCBWCY5JA7QCIA"
         static let binanceSmartChainExplorerApiKey: String? = env("BINANCESMARTCHAINEXPLORERAPIKEY") ?? "BN85QQZAWGTSFPWCU3M4VQ6C7HNXTUBG5F"
         static let polygonScanExplorerApiKey: String? = env("POLYGONSCANEXPLORERAPIKEY") ?? "DI5EXE24AKK6C3HSPP718D4UZHWK92QHXX"
         static let paperTrail = (host: env("PAPERTRAILHOST") ?? "", port: (env("PAPERTRAILPORT") ?? "").toInt() ?? 0)
-        static let openseaKey = env("OPENSEAKEY") ?? "11ba1b4f0c4246aeb07b1f8e5a20525f"
+        static let openseaKey = env("OPENSEAKEY") ?? nil
         static let rampApiKey = env("RAMPAPIKEY") ?? "j5wr7oqktym7z69yyf84bb8a6cqb7qfu5ynmeyvn"
         static let coinbaseAppId = env("COINBASEAPPID") ?? ""
         static let enjinUserName = env("ENJINUSERNAME") ?? "vlad_shepitko@outlook.com"

@@ -32,8 +32,11 @@
 "transaction.to.label.title" = "수취인";
 "transaction.time.label.title" = "거래 시간";
 "transaction.id.label.title" = "거래 번호";
+"transaction.id" = "Transaction ID";
 "transaction.blockNumber.label.title" = "블록 번호";
 "transaction.nonce.label.title" = "Nonce";
+"transaction.amount.label.title" = "Amount";
+"transaction.network.label.title" = "Network";
 "confirmPayment.confirm.button.title" = "확인";
 "confirmPayment.sign.button.title" = "Sign";
 "confirmPayment.reject.button.title" = "Reject";
@@ -47,6 +50,8 @@
 "Copy" = "복사";
 "Empty" = "비어 있음";
 "emptyView.noTokens.label.title" = "아직 받은 토큰이 없습니다!";
+"emptyView.noMessages.label.title" = "There is nothing logged";
+"emptyView.noTransactions.label.title" = "You haven't received any transactions yet!";
 "errorView.description.label.title" = "무언가 잘못되었습니다... 다시 시도하십시오.";
 "export.backup.button.title" = "지갑 백업";
 "export.controlYourMoney.label.title" = "고객님의 돈은 고객님 본인만 통제할 수 있으므로 이 앱이 삭제될 경우에 대비하여 백업 키스토어를 저장해 놓아야 합니다.";
@@ -60,6 +65,8 @@
 "OK" = "확인";
 "Password" = "비밀번호";
 "Refresh" = "새로 고침";
+"copiedToClipboard.title" = "%@ copied";
+"address" = "Address";
 "request.addressCopied.title" = "주소가 복사되었습니다";
 "request.copyWallet.button.title" = "지갑 주소 복사";
 "Retry" = "다시 시도";
@@ -80,7 +87,7 @@
 "settings.biometricsEnabled.label.title" = "암호 / %@";
 "settings.error.failedToSendEmail" = "이메일을 전송하지 못했습니다. 메일 앱이 설치되어 있는지 확인하십시오.";
 "settings.network.button.title" = "네트워크";
-"settings.enabledNetworks.button.title" = "Enabled Networks";
+"settings.enabledNetworks.button.title" = "Enabled Networks %@";
 "settings.enabledNetworks.mainnet" = "Mainnet";
 "settings.enabledNetworks.testnet" = "Testnet";
 "settings.enabledNetworks.promptEnableTestnet.title" = "What is Testnet?";
@@ -116,6 +123,7 @@
 "settings.pingInfura.successful" = "Infura looks OK";
 "settings.pingInfura.fail" = "Infura Error";
 "settings.support.title" = "Support";
+"settings.support.darkMode" = "DarkMode";
 "settings.notifications.title" = "Notifications";
 "settings.passcode.title" = "Passcode / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";
@@ -465,6 +473,7 @@
 "blockchain.Mumbai" = "Mumbai Testnet";
 "blockchain.Optimistic" = "Optimistic Testnet";
 "blockchain.Optimistic.Kovan" = "Optimistic Kovan Testnet";
+"blockchain.Cronos.Mainnet" = "Cronos";
 "blockchain.Cronos.Testnet" = "Cronos Testnet";
 "blockchain.arbitrum" = "Arbitrum";
 "blockchain.arbitrum.rinkeby" = "Arbitrum Rinkeby";
@@ -863,3 +872,5 @@
 "accept.deepLink.field.url.title" = "URL";
 "accept.deepLink.field.note.title" = "Note";
 "accept.walletConnect.field.methods.title" = "Methods";
+"currency.navigationTitle" = "Change Fiat Currency";
+"tokenscript.overrides.empty" = "There are no TokenScript overrides";

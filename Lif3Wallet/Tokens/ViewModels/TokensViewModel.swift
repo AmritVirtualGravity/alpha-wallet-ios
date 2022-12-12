@@ -15,7 +15,7 @@ struct TokensViewModelInput {
 struct TokensViewModelOutput {
     let viewState: AnyPublisher<TokensViewModel.ViewState, Never>
     let selection: AnyPublisher<Token, Never>
-    let pullToRefreshState: AnyPublisher<TokensViewModel.PullToRefreshState, Never>
+    let pullToRefreshState: AnyPublisher<TokensViewModel.RefreshControlState, Never>
     let deletion: AnyPublisher<[IndexPath], Never>
     let applyTableInset: AnyPublisher<TokensViewModel.KeyboardInset, Never>
 }
@@ -26,7 +26,7 @@ final class TokensViewModel {
     private let tokenCollection: TokenCollection
     private let walletConnectCoordinator: WalletConnectCoordinator
     private let walletBalanceService: WalletBalanceService
-    //Must be computed because localization can be overridden by user dynamically
+        //Must be computed because localization can be overridden by user dynamically
     static var segmentedControlTitles: [String] { WalletFilter.orderedTabs.map { $0.title } }
     private var cancellable = Set<AnyCancellable>()
     private let tokensFilter: TokensFilter
@@ -36,8 +36,7 @@ final class TokensViewModel {
     private (set) var walletConnectSessions: Int = 0
     private (set) var sections: [Section] = []
     private var tokenListSection: Section = .tokens
-    private var listOfBadTokenScriptFiles: [TokenScriptFileIndices.FileName] = .init()
-    //TODO: Replace with usage single array of data, instead of using filteredTokens, and collectiblePairs
+        //TODO: Replace with usage single array of data, instead of using filteredTokens, and collectiblePairs
     private var filteredTokens: [TokenOrRpcServer] = []
     private var collectiblePairs: [CollectiblePairs] {
         let tokens = filteredTokens.compactMap { $0.token }
@@ -54,6 +53,7 @@ final class TokensViewModel {
     private let sectionViewModelsSubject = PassthroughSubject<[TokensViewModel.SectionViewModel], Never>()
     private let deletionSubject = PassthroughSubject<[IndexPath], Never>()
     private let wallet: Wallet
+    private let assetDefinitionStore: AssetDefinitionStore
     
     let config: Config
     let largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode = .never
@@ -116,7 +116,7 @@ final class TokensViewModel {
     }
     
     var shouldShowBackupPromptViewHolder: Bool {
-        //TODO show the prompt in both ASSETS and COLLECTIBLES tab too
+            //TODO show the prompt in both ASSETS and COLLECTIBLES tab too
         switch filter {
         case .all, .keyword:
             return true
@@ -129,10 +129,10 @@ final class TokensViewModel {
         return !collectiblePairs.isEmpty
     }
     
-    func set(listOfBadTokenScriptFiles: [TokenScriptFileIndices.FileName]) {
-        self.listOfBadTokenScriptFiles = listOfBadTokenScriptFiles
-        reloadData()
-    }
+//    func set(listOfBadTokenScriptFiles: [TokenScriptFileIndices.FileName]) {
+//        self.listOfBadTokenScriptFiles = listOfBadTokenScriptFiles
+//        reloadData()
+//    }
     
     func heightForHeaderInSection(for section: Int) -> CGFloat {
         switch sections[section] {
@@ -163,7 +163,7 @@ final class TokensViewModel {
         }
     }
     
-    init(wallet: Wallet, tokenCollection: TokenCollection, tokensFilter: TokensFilter, walletConnectCoordinator: WalletConnectCoordinator, walletBalanceService: WalletBalanceService, config: Config, domainResolutionService: DomainResolutionServiceType, blockiesGenerator: BlockiesGenerator) {
+    init(wallet: Wallet, tokenCollection: TokenCollection, tokensFilter: TokensFilter, walletConnectCoordinator: WalletConnectCoordinator, walletBalanceService: WalletBalanceService, config: Config, domainResolutionService: DomainResolutionServiceType, blockiesGenerator: BlockiesGenerator, assetDefinitionStore: AssetDefinitionStore) {
         self.wallet = wallet
         self.tokenCollection = tokenCollection
         self.tokensFilter = tokensFilter
@@ -172,6 +172,7 @@ final class TokensViewModel {
         self.config = config
         self.domainResolutionService = domainResolutionService
         self.blockiesGenerator = blockiesGenerator
+        self.assetDefinitionStore = assetDefinitionStore
         NotificationCenter.default.addObserver(self, selector: #selector(self.HideTokenWith0Balance(notification:)), name: Notification.Name("HideTokenNotification"), object: nil)
     }
     @objc func HideTokenWith0Balance(notification: Notification) {
@@ -191,8 +192,14 @@ final class TokensViewModel {
         
         let fakePullToRefreshState = Just<PullToRefreshState>(PullToRefreshState.idle)
             .merge(with: beginLoading, loadingHasEnded)
-            .eraseToAnyPublisher()
-        
+            .compactMap { state -> TokensViewModel.RefreshControlState? in
+                switch state {
+                case .idle: return nil
+                case .endLoading: return .endLoading
+                case .beginLoading: return .beginLoading
+                }
+            }.eraseToAnyPublisher()
+
         refreshTokens.receive(on: RunLoop.main)
             .sink { [tokenCollection] _ in
                 tokenCollection.refresh()
@@ -212,58 +219,33 @@ final class TokensViewModel {
         
         let walletSummary = walletBalanceService
             .walletBalance(for: wallet)
-            .map { WalletSummary(balances: [$0]) }
+            .map { value in WalletSummary(balances: [value]) }
             .eraseToAnyPublisher()
-        
+
         let title = input.appear.flatMap { [unowned self, walletNameFetcher, wallet] _ -> AnyPublisher<String, Never> in
             walletNameFetcher.assignedNameOrEns(for: wallet.address)
                 .map { $0 ?? self.walletDefaultTitle }
                 .prepend(self.walletDefaultTitle)
                 .eraseToAnyPublisher()
         }.eraseToAnyPublisher()
-        
+
         let blockieImage = input.appear.flatMap { [blockiesGenerator, wallet] _ in
             blockiesGenerator.getBlockieOrEnsAvatarImage(address: wallet.address, fallbackImage: BlockiesImage.defaulBlockieImage)
         }.eraseToAnyPublisher()
-        
-        let selection = input.selection.compactMap { [unowned self, tokenCollection] source -> Token? in
-            switch source {
-            case .gridItem(let indexPath, let isLeftCardSelected):
-                switch self.sections[indexPath.section] {
-                case .collectiblePairs:
-                    let pair = collectiblePairs[indexPath.row]
-                    guard let viewModel: TokenViewModel = isLeftCardSelected ? pair.left : pair.right else { return nil }
-                    guard let token = tokenCollection.token(for: viewModel.contractAddress, server: viewModel.server) else { return nil }
-                    return token
-                case .tokens, .testnetTokens, .activeWalletSession, .filters, .search, .walletSummary:
-                    return nil
-                }
-            case .cell(let indexPath):
-                let tokenOrServer = self.tokenOrServer(at: indexPath)
-                switch (self.sections[indexPath.section], tokenOrServer) {
-                case (.tokens, .token(let viewModel)):
-                    guard let token: Token = tokenCollection.token(for: viewModel.contractAddress, server: viewModel.server) else { return nil }
-                    return token
-                case (_, _):
-                    return nil
-                }
-            }
-        }.eraseToAnyPublisher()
-        
-        let viewState = Publishers.CombineLatest4(sectionViewModelsSubject, walletSummary, blockieImage, title)
-            .map { sections, summary, blockiesImage, title -> TokensViewModel.ViewState in
-                let isConsoleButtonHidden = self.listOfBadTokenScriptFiles.isEmpty
-                
-                return TokensViewModel.ViewState(title: title, summary: summary, blockiesImage: blockiesImage, isConsoleButtonHidden: isConsoleButtonHidden, isFooterHidden: self.isFooterHidden, sections: sections)
+
+        let selection = selection(trigger: input.selection)
+
+        let titleWithListOfBadTokenScriptFiles = Publishers.CombineLatest(title, assetDefinitionStore.listOfBadTokenScriptFiles)
+        let viewState = Publishers.CombineLatest4(sectionViewModelsSubject, walletSummary, blockieImage, titleWithListOfBadTokenScriptFiles)
+            .map { sections, summary, blockiesImage, data -> TokensViewModel.ViewState in
+                let isConsoleButtonHidden = data.1.isEmpty
+
+                return TokensViewModel.ViewState(title: data.0, summary: summary, blockiesImage: blockiesImage, isConsoleButtonHidden: isConsoleButtonHidden, isFooterHidden: self.isFooterHidden, sections: sections)
             }.removeDuplicates()
             .eraseToAnyPublisher()
-        
-        let applyTableInset = input.keyboard
-            .map { $0.isVisible }
-            .prepend(false)
-            .map { self.isFooterHidden ? KeyboardInset.none : KeyboardInset.some($0) }
-            .eraseToAnyPublisher()
-        
+
+        let applyTableInset = applyTableInset(keyboard: input.keyboard)
+
         return .init(
             viewState: viewState,
             selection: selection,
@@ -271,6 +253,40 @@ final class TokensViewModel {
             deletion: deletionSubject.eraseToAnyPublisher(),
             applyTableInset: applyTableInset)
     }
+
+    private func applyTableInset(keyboard: AnyPublisher<KeyboardChecker.KeyboardState, Never>) -> AnyPublisher<KeyboardInset, Never> {
+        keyboard
+            .map { $0.isVisible }
+            .prepend(false)
+            .map { self.isFooterHidden ? KeyboardInset.none : KeyboardInset.some($0) }
+            .eraseToAnyPublisher()
+    }
+
+    private func selection(trigger: AnyPublisher<TokensViewModel.SelectionSource, Never>) -> AnyPublisher<Token, Never> {
+        trigger.compactMap { [unowned self, tokenCollection] source -> Token? in
+            switch source {
+            case .gridItem(let indexPath, let isLeftCardSelected):
+                switch self.sections[indexPath.section] {
+                case .collectiblePairs:
+                    let pair = collectiblePairs[indexPath.row]
+                    guard let viewModel: TokenViewModel = isLeftCardSelected ? pair.left : pair.right else { return nil }
+
+                    return tokenCollection.token(for: viewModel.contractAddress, server: viewModel.server)
+                case .tokens, .testnetTokens, .activeWalletSession, .filters, .search, .walletSummary:
+                    return nil
+                }
+            case .cell(let indexPath):
+                let tokenOrServer = self.tokenOrServer(at: indexPath)
+                switch (self.sections[indexPath.section], tokenOrServer) {
+                case (.tokens, .token(let viewModel)):
+                    return tokenCollection.token(for: viewModel.contractAddress, server: viewModel.server)
+                case (_, _):
+                    return nil
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
     
     private var isFooterHidden: Bool {
         !config.enabledServers.contains(.main)
@@ -595,6 +611,12 @@ extension TokensViewModel {
         case beginLoading
         case endLoading
     }
+
+    enum RefreshControlState {
+        case beginLoading
+        case endLoading
+    }
+
     
     enum KeyboardInset {
         case some(Bool)

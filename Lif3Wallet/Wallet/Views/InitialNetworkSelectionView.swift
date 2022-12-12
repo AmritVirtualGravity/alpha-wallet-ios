@@ -53,16 +53,14 @@ class InitialNetworkSelectionView: UIView {
     }()
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorStyle = .singleLine
-        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
+        let tableView = UITableView.grouped
         tableView.isEditing = false
+        
         return tableView
     }()
 
     private let emptyTableView: EmptyTableView = {
-        let view = EmptyTableView(title: R.string.localizable.emptyTableViewSearchTitle(), image: R.image.iconsIllustrationsSearchResults()!, heightAdjustment: 100)
+        let view = EmptyTableView(title: R.string.localizable.emptyTableViewSearchTitle(), image: R.image.empty_list()!, heightAdjustment: 100)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         return view

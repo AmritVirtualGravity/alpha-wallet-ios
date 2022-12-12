@@ -4,32 +4,30 @@ import Foundation
 import UIKit
 import AlphaWalletFoundation
 
-class DappViewCellViewModel {
-    let dapp: Bookmark
-    var imageUrl: URL?
-    var title: String {
-        return dapp.title
+struct DappViewCellViewModel: Hashable {
+    private let order: Int
+    
+    let imageUrl: URL?
+    let title: String
+    let domainName: String
+
+    init(dapp: Bookmark) {
+        self.order = dapp.order
+        self.domainName = URL(string: dapp.url)?.host ?? ""
+        self.title = dapp.title
+        self.imageUrl = Favicon.get(for: URL(string: dapp.url))
     }
 
     var fallbackImage: UIImage? {
         return R.image.iconsTokensPlaceholder()
     }
 
-    var domainName: String {
-        return URL(string: dapp.url)?.host ?? ""
-    }
-
-    init(dapp: Bookmark) {
-        self.dapp = dapp
-        self.imageUrl = Favicon.get(for: URL(string: dapp.url))
-    }
-
     var backgroundColor: UIColor {
-        return Colors.appWhite
+        return Configuration.Color.Semantic.defaultViewBackground
     }
 
     var imageViewShadowColor: UIColor {
-        return Metrics.DappsHome.Icon.shadowColor
+        return Configuration.Color.Semantic.shadow
     }
 
     var imageViewShadowOffset: CGSize {
@@ -45,7 +43,7 @@ class DappViewCellViewModel {
     }
 
     var titleColor: UIColor {
-        return UIColor(red: 77, green: 77, blue: 77)
+        return Configuration.Color.Semantic.defaultTitleText
     }
 
     var titleFont: UIFont {
@@ -53,7 +51,7 @@ class DappViewCellViewModel {
     }
 
     var domainNameColor: UIColor {
-        return Colors.appBackground
+        return Configuration.Color.Semantic.defaultViewBackground
     }
 
     var domainNameFont: UIFont {

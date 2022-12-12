@@ -14,29 +14,27 @@ protocol SettingsViewControllerDelegate: class, CanOpenURL {
     func nameWalletSelected(in controller: SettingsViewController)
     func blockscanChatSelected(in controller: SettingsViewController)
     func activeNetworksSelected(in controller: SettingsViewController)
+    func createPasswordSelected(in controller: SettingsViewController)
     func helpSelected(in controller: SettingsViewController)
 }
 
 class SettingsViewController: UIViewController {
     private let promptBackupWalletViewHolder = UIView()
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView.insetGroped
         tableView.register(SettingTableViewCell.self)
         tableView.register(SwitchTableViewCell.self)
         tableView.register(HideTokenSwitchTableViewCell.self)
         tableView.separatorStyle = .singleLine
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.estimatedRowHeight = Metrics.anArbitraryRowHeightSoAutoSizingCellsWorkIniOS10
-        tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
-        tableView.separatorColor = Configuration.Color.Semantic.tableViewSeparator
+        tableView.delegate = self
 
         return tableView
     }()
     private lazy var dataSource = makeDataSource()
-    private let appear = PassthroughSubject<Void, Never>()
-    private let toggleSelection = PassthroughSubject<(indexPath: IndexPath, isOn: Bool), Never>()
+    private let willAppear = PassthroughSubject<Void, Never>()
+    private let appProtectionSelection = PassthroughSubject<(indexPath: IndexPath, isOn: Bool), Never>()
     private let blockscanChatUnreadCount = PassthroughSubject<Int?, Never>()
-    private let didSetPasscode = PassthroughSubject<Bool, Never>()
     private var cancellable = Set<AnyCancellable>()
     private let viewModel: SettingsViewModel
 
@@ -65,64 +63,51 @@ class SettingsViewController: UIViewController {
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-
         view.addSubview(tableView)
-        
         NSLayoutConstraint.activate([
-            tableView.anchorsConstraint(to: view)
+            tableView.anchorsIgnoringBottomSafeArea(to: view)
         ])
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = dataSource
-        tableView.delegate = self
-
+        tableView.separatorInset.left = 70
         if promptBackupWalletView == nil {
             hidePromptBackupWalletView()
         }
 
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+
         bind(viewModel: viewModel)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        appear.send(())
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        willAppear.send(())
     }
 
     private func bind(viewModel: SettingsViewModel) {
-        navigationItem.largeTitleDisplayMode = viewModel.largeTitleDisplayMode
-        title = viewModel.title
-        view.backgroundColor = viewModel.backgroundColor
-        tableView.backgroundColor = viewModel.backgroundColor
-
         let input = SettingsViewModelInput(
-            appear: appear.eraseToAnyPublisher(),
-            toggleSelection: toggleSelection.eraseToAnyPublisher(),
-            didSetPasscode: didSetPasscode.eraseToAnyPublisher(),
+            willAppear: willAppear.eraseToAnyPublisher(),
+            appProtectionSelection: appProtectionSelection.eraseToAnyPublisher(),
             blockscanChatUnreadCount: blockscanChatUnreadCount.eraseToAnyPublisher())
 
         let output = viewModel.transform(input: input)
 
-        output.viewModels
-            .sink { [weak self, viewModel] viewModels in
-                self?.update(with: viewModels, animate: viewModel.animatingDifferences)
+        output.viewState
+            .sink { [dataSource, tabBarItem, navigationItem] viewState in
+                navigationItem.title = viewState.title
+                dataSource.apply(viewState.snapshot, animatingDifferences: viewState.animatingDifferences)
+                tabBarItem?.badgeValue = viewState.badge
             }.store(in: &cancellable)
-
-        output.badgeValue
-            .sink { [tabBarItem] in tabBarItem?.badgeValue = $0 }
-            .store(in: &cancellable)
 
         output.askToSetPasscode
-            .sink { [weak self, didSetPasscode] _ in
-                self?.askUserToSetPasscode { value in
-                    didSetPasscode.send(value)
-                }
-            }.store(in: &cancellable)
+            .sink { _ in self.delegate?.createPasswordSelected(in: self) }
+            .store(in: &cancellable)
     }
 
-    func configure(blockscanChatUnreadCount: Int?) {
-        self.blockscanChatUnreadCount.send(blockscanChatUnreadCount)
+    func configure(blockscanChatUnreadCount value: Int?) {
+        blockscanChatUnreadCount.send(value)
     }
 
     private func showPromptBackupWalletViewAsTableHeaderView() {
@@ -134,16 +119,6 @@ class SettingsViewController: UIViewController {
 
     private func hidePromptBackupWalletView() {
         tableView.tableHeaderView = nil
-    }
-
-    private func askUserToSetPasscode(completion: ((Bool) -> Void)? = .none) {
-        guard let navigationController = navigationController else { return }
-        let lock = LockCreatePasscodeCoordinator(navigationController: navigationController, lock: viewModel.lock)
-        lock.start()
-        lock.lockViewController.willFinishWithResult = { result in
-            completion?(result)
-            lock.stop()
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -167,11 +142,24 @@ extension SettingsViewController: CanOpenURL {
 }
 
 extension SettingsViewController: SwitchTableViewCellDelegate {
+    
+    func didEnableDarkTheme(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool) {
+        guard let _ = cell.indexPath else { return }
+        let userDefault = UserDefaults.standard
+        let window = UIApplication.shared.windows.first
+        if (isOn == true) {
+            userDefault.set(true, forKey: "DarkModeOn")
+            window?.overrideUserInterfaceStyle = .dark
+        } else {
+            userDefault.set(false, forKey: "DarkModeOn")
+            window?.overrideUserInterfaceStyle = .light
+        }
+    }
 
     func cell(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool) {
         guard let indexPath = cell.indexPath else { return }
 
-        toggleSelection.send((indexPath, isOn))
+        appProtectionSelection.send((indexPath, isOn))
     }
 }
 extension SettingsViewController: HideTokenSwitchTableViewCellDelegate {
@@ -192,43 +180,37 @@ extension SettingsViewController: HideTokenSwitchTableViewCellDelegate {
 
 
 fileprivate extension SettingsViewController {
-    func makeDataSource() -> UITableViewDiffableDataSource<SettingsSection, SettingsViewModel.ViewType> {
-        return UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, viewModel in
+    func makeDataSource() -> SettingsViewModel.DataSource {
+        return SettingsViewModel.DataSource(tableView: tableView, cellProvider: { tableView, indexPath, viewModel in
             switch viewModel {
             case .cell(let vm):
                 let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.accessoryView = vm.accessoryView
                 cell.accessoryType = vm.accessoryType
                 cell.configure(viewModel: vm)
-
                 return cell
             case .undefined:
                 return UITableViewCell()
             case .passcode(let vm):
                 let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
+                cell.isforTheme = false
                 cell.delegate = self
-
+               
                 return cell
             case .hideToken(let vm):
                 let cell: HideTokenSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
                 cell.delegate = self
-
+                return cell
+            case .theme(let vm):
+                let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.configure(viewModel: vm)
+                cell.isforTheme = true
+                cell.delegate = self
                 return cell
             }
         })
-    }
-
-    private func update(with viewModels: [SettingsViewModel.SectionViewModel], animate: Bool = true) {
-        var snapshot = NSDiffableDataSourceSnapshot<SettingsSection, SettingsViewModel.ViewType>()
-        let sections = viewModels.map { $0.section }
-        snapshot.appendSections(sections)
-        for each in viewModels {
-            snapshot.appendItems(each.views, toSection: each.section)
-        }
-
-        dataSource.apply(snapshot, animatingDifferences: animate)
     }
 }
 
@@ -274,12 +256,10 @@ extension SettingsViewController: UITableViewDelegate {
             switch rows[indexPath.row] {
             case .advanced:
                 delegate?.advancedSettingsSelected(in: self)
-            case .notifications, .passcode:
+            case .notifications, .passcode, .hideToken, .theme:
                 break
             case .selectActiveNetworks:
                 delegate?.activeNetworksSelected(in: self)
-            case .hideToken:
-                break
             }
         case .help:
             delegate?.helpSelected(in: self)

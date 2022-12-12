@@ -134,7 +134,7 @@ public enum Analytics {
         case scheme
     }
 
-    public enum EmbeddedDeepLinkType: String, AnalyticsUserProperty {
+    public enum EmbeddedDeepLinkType: String {
         case eip681
         case walletConnect
         case others
@@ -150,6 +150,7 @@ public enum Analytics {
         case watchedWalletsCount
         case dynamicTypeSetting
         case hasEnsAvatar
+        case isAppPasscodeOrBiometricProtectionEnabled
     }
 
     public enum ScanQRCodeSource: String {
@@ -163,9 +164,9 @@ public enum Analytics {
     }
 
     public enum ScanQRCodeResultType: String {
-        case value
+        case addressOrEip681
         case walletConnect
-        case other
+        case string
         case url
         case privateKey
         case seedPhase

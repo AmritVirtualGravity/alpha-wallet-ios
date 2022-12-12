@@ -41,11 +41,11 @@ class SettingViewHeader: UIView {
         super.init(frame: .zero)
 
         let stackView = [
-            topSeparator,
+//            topSeparator,
             .spacer(height: 13, backgroundColor: .clear),
             [.spacerWidth(16), titleLabel, detailsLabel, .spacerWidth(16)].asStackView(axis: .horizontal, alignment: .center),
             .spacer(height: 13, backgroundColor: .clear),
-            bottomSperator
+//            bottomSperator
         ].asStackView(axis: .vertical)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
@@ -54,8 +54,8 @@ class SettingViewHeader: UIView {
 
         NSLayoutConstraint.activate([
             stackView.anchorsConstraint(to: self),
-            bottomSperator.heightAnchor.constraint(equalToConstant: 1),
-            topSeparatorHeight
+//            bottomSperator.heightAnchor.constraint(equalToConstant: 1),
+//            topSeparatorHeight
         ])
     }
 

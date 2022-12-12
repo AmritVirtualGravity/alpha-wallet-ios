@@ -29,9 +29,9 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.image = R.image.lifeBackgroundImage()!
         return imageView
     }()
-   
 
     weak var delegate: ShowSeedPhraseIntroductionViewControllerDelegate?
 
@@ -45,9 +45,9 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
         let stackView = [
             UIView.spacer(height: ScreenChecker.size(big: 32, medium: 22, small: 18)),
             subtitleLabel,
-            UIView.spacer(height: ScreenChecker.size(big: 20, medium: 20, small: 18)),
+            UIView.spacer(height: ScreenChecker.size(big: 24, medium: 20, small: 18)),
             imageView,
-            UIView.spacer(height: ScreenChecker.size(big: 20, medium: 15, small: 10)),
+            UIView.spacer(height: ScreenChecker.size(big: 17, medium: 15, small: 10)),
             descriptionLabel1,
         ].asStackView(axis: .vertical)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,20 +58,19 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
         container.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(backgroundImageView)
         container.addSubview(stackView)
-        
+
         view.addSubview(container)
         view.addSubview(footerBar)
 
         NSLayoutConstraint.activate([
-            
             // image view constraits for  full screen size
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
-       
             
             imageView.heightAnchor.constraint(equalToConstant: imageViewDimension),
+
             stackView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
             stackView.topAnchor.constraint(equalTo: container.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -95,10 +94,11 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
     }
 
     private func configure() {
-        backgroundImageView.image = viewModel.backgroundImage
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+
         subtitleLabel.numberOfLines = 0
         subtitleLabel.attributedText = viewModel.attributedSubtitle
-
+        subtitleLabel.textColor = .white
         imageView.image = viewModel.imageViewImage
 
         descriptionLabel1.numberOfLines = 0

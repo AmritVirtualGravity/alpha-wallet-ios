@@ -27,7 +27,7 @@ class ImportMagicLinkCoordinator: Coordinator {
     private let config: Config
 	private var importTokenViewController: ImportMagicTokenViewController?
     private var hasCompleted = false
-    private var getERC875TokenBalanceCoordinator: GetErc875Balance?
+    private lazy var getERC875TokenBalance = GetErc875Balance(forServer: server)
     //TODO better to make sure tokenHolder is non-optional. But be careful that ImportMagicTokenViewController also handles when viewModel always has a TokenHolder. Needs good defaults in TokenHolder that can be displayed
     private var tokenHolder: TokenHolder?
     private var count: Decimal?
@@ -265,8 +265,7 @@ class ImportMagicLinkCoordinator: Coordinator {
     }
 
     private func handleNormalLinks(signedOrder: SignedOrder, recoverAddress: AlphaWallet.Address, contractAsAddress: AlphaWallet.Address) {
-        getERC875TokenBalanceCoordinator = GetErc875Balance(forServer: server)
-        getERC875TokenBalanceCoordinator?.getERC875TokenBalance(for: recoverAddress, contract: contractAsAddress).done({ [weak self] balance in
+        getERC875TokenBalance.getErc875TokenBalance(for: recoverAddress, contract: contractAsAddress).done({ [weak self] balance in
             guard let strongSelf = self else { return }
             let filteredTokens: [String] = strongSelf.checkERC875TokensAreAvailable(
                     indices: signedOrder.order.indices,
@@ -393,7 +392,7 @@ class ImportMagicLinkCoordinator: Coordinator {
         switch server.serverWithEnhancedSupport {
         case .xDai:
             errorMessage = R.string.localizable.aClaimTokenFailedNotEnoughXDAITitle()
-        case .main, .candle, .polygon, .binance_smart_chain, .heco, .arbitrum, .klaytnCypress, .klaytnBaobabTestnet, .rinkeby, nil:
+        case .main, .polygon, .binance_smart_chain, .heco, .arbitrum, .klaytnCypress, .klaytnBaobabTestnet, .rinkeby, nil:
             errorMessage = R.string.localizable.aClaimTokenFailedNotEnoughEthTitle()
         }
         let etherToken: Token = MultipleChainsTokensDataStore.functional.etherToken(forServer: server)
@@ -441,12 +440,9 @@ class ImportMagicLinkCoordinator: Coordinator {
         }
         return filteredTokens
     }
-    private lazy var tokenProvider: TokenProviderType = {
-        return TokenProvider(account: wallet, server: server, analytics: analytics)
-    }()
 
     private func makeTokenHolder(_ bytes32Tokens: [String], _ contractAddress: AlphaWallet.Address) {
-        assetDefinitionStore.fetchXML(forContract: contractAddress, server: server, useCacheAndFetch: true) { [weak self] _ in
+        assetDefinitionStore.fetchXML(forContract: contractAddress, server: server, useCacheAndFetch: true) { [weak self, session] _ in
             guard let strongSelf = self else { return }
 
             func makeTokenHolder(name: String, symbol: String, type: TokenType? = nil) {
@@ -461,9 +457,9 @@ class ImportMagicLinkCoordinator: Coordinator {
                 let localizedTokenTypeName = R.string.localizable.tokensTitlecase()
                 makeTokenHolder(name: localizedTokenTypeName, symbol: "")
 
-                let getContractName = strongSelf.tokenProvider.getContractName(for: contractAddress)
-                let getContractSymbol = strongSelf.tokenProvider.getContractSymbol(for: contractAddress)
-                let getTokenType = strongSelf.tokenProvider.getTokenType(for: contractAddress)
+                let getContractName = session.tokenProvider.getContractName(for: contractAddress)
+                let getContractSymbol = session.tokenProvider.getContractSymbol(for: contractAddress)
+                let getTokenType = session.tokenProvider.getTokenType(for: contractAddress)
                 firstly {
                     when(fulfilled: getContractName, getContractSymbol, getTokenType)
                 }.done { name, symbol, type in

@@ -15,7 +15,7 @@ public func isRunningTests() -> Bool {
 }
 
 public func isLif3App() -> Bool {
-    Bundle.main.bundleIdentifier == "com.lif3.lif3wallet"
+    Bundle.main.bundleIdentifier == "io.lif3.wallet"
 }
 
 public func isRunningOnMac() -> Bool {

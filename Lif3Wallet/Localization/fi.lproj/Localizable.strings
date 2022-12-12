@@ -32,8 +32,11 @@
 "transaction.to.label.title" = "Vastaanottaja";
 "transaction.time.label.title" = "Tilitapahtuman ajankohta";
 "transaction.id.label.title" = "Tilitapahtuman järjestysnumero";
+"transaction.id" = "Transaction ID";
 "transaction.blockNumber.label.title" = "Lohkon järjestysnumero";
 "transaction.nonce.label.title" = "Tilitapahtuman satunnaistunnus (nonce)";
+"transaction.amount.label.title" = "Amount";
+"transaction.network.label.title" = "Network";
 "confirmPayment.confirm.button.title" = "Vahvista";
 "confirmPayment.sign.button.title" = "Allekirjoita";
 "confirmPayment.reject.button.title" = "Peru";
@@ -47,6 +50,8 @@
 "Copy" = "Kopioi";
 "Empty" = "Tyhjä";
 "emptyView.noTokens.label.title" = "Et ole vastaanottanut vielä rahakkeita!";
+"emptyView.noMessages.label.title" = "There is nothing logged";
+"emptyView.noTransactions.label.title" = "You haven't received any transactions yet!";
 "errorView.description.label.title" = "Jokin meni pieleen... Yritä uudestaan.";
 "export.backup.button.title" = "Varmuuskopioi";
 "export.controlYourMoney.label.title" = "Lompakon sisältö on vain hallinnassasi. Tallenna avainten varmuuskopiot siltä varalta, että tämä sovellus poistetaan.";
@@ -60,6 +65,8 @@
 "OK" = "OK";
 "Password" = "Salasana";
 "Refresh" = "Päivitä";
+"copiedToClipboard.title" = "%@ copied";
+"address" = "Address";
 "request.addressCopied.title" = "Osoite kopioitu";
 "request.copyWallet.button.title" = "Kopioi lompakon osoite";
 "Retry" = "Yritä uudelleen";
@@ -80,7 +87,7 @@
 "settings.biometricsEnabled.label.title" = "PIN-koodi / %@";
 "settings.error.failedToSendEmail" = "Sähköpostin lähetys epäonnistui.";
 "settings.network.button.title" = "Verkko";
-"settings.enabledNetworks.button.title" = "Kytketyt verkot";
+"settings.enabledNetworks.button.title" = "Enabled Networks %@";
 "settings.enabledNetworks.mainnet" = "Tuotantoverkko (Mainnet)";
 "settings.enabledNetworks.testnet" = "Testiverkko (Testnet)";
 "settings.enabledNetworks.promptEnableTestnet.title" = "Mikä on testiverkko?";
@@ -117,6 +124,7 @@
 "settings.pingInfura.successful" = "Infura toimii";
 "settings.pingInfura.fail" = "Infura-virhe";
 "settings.support.title" = "Tuki";
+"settings.support.darkMode" = "DarkMode";
 "settings.notifications.title" = "Ilmoitukset";
 "settings.passcode.title" = "PIN-koodi";
 "settings.hideToken.title" = "Hide 0 Balance Token";
@@ -468,6 +476,7 @@
 "blockchain.Mumbai" = "Mumbai Testnet";
 "blockchain.Optimistic" = "Optimistic Testnet";
 "blockchain.Optimistic.Kovan" = "Optimistic Kovan Testnet";
+"blockchain.Cronos.Mainnet" = "Cronos";
 "blockchain.Cronos.Testnet" = "Cronos Testnet";
 "blockchain.arbitrum" = "Arbitrum";
 "blockchain.arbitrum.rinkeby" = "Arbitrum Rinkeby";
@@ -863,3 +872,5 @@
 "accept.deepLink.field.url.title" = "URL";
 "accept.deepLink.field.note.title" = "Note";
 "accept.walletConnect.field.methods.title" = "Methods";
+"currency.navigationTitle" = "Change Fiat Currency";
+"tokenscript.overrides.empty" = "There are no TokenScript overrides";

@@ -25,46 +25,85 @@ struct Configuration {
             static let defaultForegroundText = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)
             }
+            static let defaultInverseText = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+            }
             static let defaultSubtitleText = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.dove()!, darkColor: R.color.dusty()!)
             }
-
+            static let defaultTitleText = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .black, darkColor: .white)
+            }
+            static let defaultHeadlineText = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.mine()!, darkColor: R.color.white()!)
+            }
             static let indicator = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.azure()!, darkColor: R.color.dodge()!)
+            }
+            static let alternativeText = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .darkGray, darkColor: .lightGray)
+            }
+            
+            static let defaultErrorText = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.danger()!, darkColor: R.color.danger()!)
             }
 
             static let defaultAttributedString = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.azure()!, darkColor: R.color.dodge()!)
             }
 
+//            static let primaryButtonBackground = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)
+//            }
+            
             static let primaryButtonBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)
+                return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.alabaster()!)
             }
+//            static let primaryButtonHighlightedBackground = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.concrete()!)
+//            }
+            
             static let primaryButtonHighlightedBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.concrete()!)
+                return colorFrom(trait: trait, lightColor: R.color.concrete()!, darkColor: R.color.concrete()!)
             }
+//            static let primaryButtonBackgroundInactive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+//            }
+            
             static let primaryButtonBackgroundInactive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+                return colorFrom(trait: trait, lightColor: R.color.mine()!, darkColor: R.color.mine()!)
             }
+//            static let primaryButtonBorderInactive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+//            }
             static let primaryButtonBorderInactive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+                return colorFrom(trait: trait, lightColor: R.color.mine()!, darkColor: R.color.mine()!)
             }
+//            static let primaryButtonTextActive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+//            }
+            
             static let primaryButtonTextActive = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.black()!)
             }
+//            static let primaryButtonTextInactive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+//            }
             static let primaryButtonTextInactive = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.black()!)
             }
-            static let primaryButtonBorderActive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)
-            }
+//            static let primaryButtonBorderActive = UIColor { trait in
+//                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.alabaster()!)
+//            }
 
-            static let secondaryButtonBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: UIColor.clear, darkColor: R.color.dusty()!)
+            static let primaryButtonBorderActive = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.alabaster()!)
             }
-            
+            static let secondaryButtonBackground = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+            }
             static let secondaryButtonHighlightedBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: UIColor.clear, darkColor: R.color.dusty()!)
+                return colorFrom(trait: trait, lightColor: R.color.concrete()!, darkColor: R.color.black()!)
             }
             static let secondaryButtonBackgroundInactive = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.dusty()!)
@@ -73,13 +112,26 @@ struct Configuration {
                 return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.dusty()!)
             }
             static let secondaryButtonTextActive = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.white()!)
+                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)
             }
             static let secondaryButtonTextInactive = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)
             }
             static let secondaryButtonBorderActive = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.dusty()!)
+            }
+
+            static let periodButtonSelectedText = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
+            }
+            static let periodButtonSelectedBackground = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .darkGray, darkColor: .lightGray)
+            }
+            static let periodButtonNormalText = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.cod()!, darkColor: R.color.white()!)
+            }
+            static let periodButtonNormalBackground = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
             }
 
             static let labelTextActive = UIColor { trait in
@@ -98,6 +150,12 @@ struct Configuration {
             static let tableViewCellSecondaryFont = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.dove()!, darkColor: R.color.dusty()!)
             }
+            static let placeholderText = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.dusty()!, darkColor: R.color.porcelain()!)
+            }
+            static let tableViewAccessory = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)
+            }
             static let tableViewAccessoryBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.venus()!)
             }
@@ -115,7 +173,14 @@ struct Configuration {
             static let tableViewSpecialBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.solitude()!, darkColor: R.color.mine()!)
             }
+
+            static let refreshControl = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .black, darkColor: .white)
+            }
             
+            static let collectionViewCellBackground = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
+            }
             static let searchbarTint = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.mine()!, darkColor: R.color.white()!)
             }
@@ -125,7 +190,7 @@ struct Configuration {
             }
 
             static let navigationbarSeparator = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: UIColor.clear, darkColor: R.color.venus()!)
+                return colorFrom(trait: trait, lightColor: R.color.mercury()!, darkColor: R.color.venus()!)
             }
 
             static let navigationbarPrimaryFont = UIColor { trait in
@@ -215,7 +280,52 @@ struct Configuration {
             static let shadow = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)
             }
+
+            static let sendingState = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.solitude()!, darkColor: R.color.luckyPoint()!)
+            }
+
+            static let pendingState = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.cheese()!, darkColor: R.color.ocean()!)
+            }
+            static let roundButtonBackground = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.mike()!, darkColor: R.color.mine()!)
+            }
+
+            static let textViewFailed = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.silver()!, darkColor: R.color.porcelain()!)
+            }
+            static let progressDialogBackground = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.venus()!)
+            }
+            
+            static let border = UIColor(red: 194, green: 194, blue: 194)
+            static let text = Colors.appText
+            static let label = Colors.appGrayLabel
+            static let textFieldStatus = Configuration.Color.Semantic.defaultErrorText
+            static let icon = Colors.appTint
+            static let secondary = Colors.appGrayLabel
+            static let textFieldError = Colors.appRed
+            static let textFieldShadowWhileEditing = Colors.appTint
+            static let placeholder = UIColor(hex: "919191")
+            static let ensText = UIColor(red: 117, green: 185, blue: 67)
+            static let searchTextFieldBackground = UIColor(red: 243, green: 244, blue: 245)
+            static let headerViewBackground = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.venus()!)
+            }
         }
+    }
+}
+
+extension Configuration {
+    enum Font {
+        static let text = Fonts.regular(size: ScreenChecker.size(big: 18, medium: 18, small: 14))
+        static let label = Fonts.bold(size: 13)
+        static let textFieldTitle = Fonts.regular(size: 13)
+        static let textFieldStatus = Fonts.bold(size: 13)
+        static let textField = Fonts.regular(size: ScreenChecker.size(big: 17, medium: 17, small: 14))
+        static let accessory = Fonts.bold(size: ScreenChecker.size(big: 17, medium: 17, small: 14))
+        static let amountTextField = Fonts.regular(size: ScreenChecker.size(big: 36, medium: 36, small: 26))
     }
 }
 

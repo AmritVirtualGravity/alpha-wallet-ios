@@ -24,7 +24,7 @@ struct SwapTokensViewModelOutput {
     let fromTokenBalance: AnyPublisher<String, Never>
     let toTokenBalance: AnyPublisher<String?, Never>
     let tokens: AnyPublisher<(from: Token, to: Token?), Never>
-    let amountValidation: AnyPublisher<AmountTextField_v2.ErrorState, Never>
+    let amountValidation: AnyPublisher<AmountTextField.ErrorState, Never>
     let allFunds: AnyPublisher<(allFundsFullValue: NSDecimalNumber?, allFundsShortValue: String), Never>
 }
 
@@ -103,21 +103,17 @@ final class SwapTokensViewModel: NSObject {
             .eraseToAnyPublisher()
     }
 
-    var backgoundColor: UIColor = R.color.alabaster()!
-
-    var footerBackgroundColor: UIColor = Colors.appWhite
-
     let fromHeaderViewModel = SendViewSectionHeaderViewModel(
         text: "From".uppercased(),
         showTopSeparatorLine: false,
         showBottomSeparatorLine: false,
-        backgroundColor: Colors.appBackground)
+        backgroundColor: Configuration.Color.Semantic.defaultViewBackground)
 
     let toHeaderViewModel = SendViewSectionHeaderViewModel(
         text: "To".uppercased(),
         showTopSeparatorLine: false,
         showBottomSeparatorLine: false,
-        backgroundColor: Colors.appBackground)
+        backgroundColor: Configuration.Color.Semantic.defaultViewBackground)
 
     var title: String = "Swap"
 
@@ -145,7 +141,8 @@ final class SwapTokensViewModel: NSObject {
             .sink { [configurator] in configurator.set(fromAmount: $0) }
             .store(in: &cancelable)
 
-        input.togglePair.sink { [configurator] _ in configurator.togglePair() }
+        input.togglePair
+            .sink { [configurator] _ in configurator.togglePair() }
             .store(in: &cancelable)
 
         let isContinueButtonEnabled = isContinueButtonEnabled(cryptoValue: input.cryptoValue)
@@ -154,15 +151,18 @@ final class SwapTokensViewModel: NSObject {
         let convertedValue = configurator.tokensWithTheirSwapQuote
             .map { data -> String in
                 guard let data = data else { return "" }
-                return EtherNumberFormatter.shortPlain.string(from: BigInt(data.swapQuote.estimate.toAmount), decimals: data.tokens.to.decimals)
-            }
+                return EtherNumberFormatter.shortPlain.string(from: data.swapQuote.estimate.toAmount, decimals: data.tokens.to.decimals)
+            }.eraseToAnyPublisher()
 
         let anyErrorString = configurator.error
             .compactMap { $0?.description }
+            .eraseToAnyPublisher()
 
-        let allFunds = input.allFunds.compactMap { _ in self.allFundsFormattedValues }
+        let allFunds = input.allFunds
+            .compactMap { _ in self.allFundsFormattedValues }
+            .eraseToAnyPublisher()
 
-        return .init(anyErrorString: anyErrorString.eraseToAnyPublisher(), isContinueButtonEnabled: isContinueButtonEnabled, isConfiguratorInUpdatingState: isConfiguratorInUpdatingState, convertedValue: convertedValue.eraseToAnyPublisher(), fromTokenBalance: fromTokenBalance, toTokenBalance: toTokenBalance, tokens: tokens, amountValidation: amountValidation, allFunds: allFunds.eraseToAnyPublisher())
+        return .init(anyErrorString: anyErrorString, isContinueButtonEnabled: isContinueButtonEnabled, isConfiguratorInUpdatingState: isConfiguratorInUpdatingState, convertedValue: convertedValue, fromTokenBalance: fromTokenBalance, toTokenBalance: toTokenBalance, tokens: tokens, amountValidation: amountValidation, allFunds: allFunds)
     }
 
     private func isContinueButtonEnabled(cryptoValue: AnyPublisher<String, Never>) -> AnyPublisher<Bool, Never> {
@@ -188,9 +188,9 @@ final class SwapTokensViewModel: NSObject {
             }.eraseToAnyPublisher()
     }
 
-    private func amountValidation(cryptoValue: AnyPublisher<String, Never>, useGreaterThanZeroValidation: Bool = true) -> AnyPublisher<AmountTextField_v2.ErrorState, Never> {
+    private func amountValidation(cryptoValue: AnyPublisher<String, Never>, useGreaterThanZeroValidation: Bool = true) -> AnyPublisher<AmountTextField.ErrorState, Never> {
         return Publishers.CombineLatest(cryptoValue, activeSession.combineLatest(swapPair))
-            .map { cryptoValue, sessionAndSwapPair -> AmountTextField_v2.ErrorState in
+            .map { cryptoValue, sessionAndSwapPair -> AmountTextField.ErrorState in
                 let token = sessionAndSwapPair.1.from
                 guard let balance: BalanceViewModel = self.balance(for: token, session: sessionAndSwapPair.0) else {
                     return .error

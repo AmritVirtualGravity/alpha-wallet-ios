@@ -6,15 +6,13 @@ import Combine
 import AlphaWalletFoundation
 
 struct SettingsViewModelInput {
-    let appear: AnyPublisher<Void, Never>
-    let toggleSelection: AnyPublisher<(indexPath: IndexPath, isOn: Bool), Never>
-    let didSetPasscode: AnyPublisher<Bool, Never>
+    let willAppear: AnyPublisher<Void, Never>
+    let appProtectionSelection: AnyPublisher<(indexPath: IndexPath, isOn: Bool), Never>
     let blockscanChatUnreadCount: AnyPublisher<Int?, Never>
 }
 
 struct SettingsViewModelOutput {
-    let viewModels: AnyPublisher<[SettingsViewModel.SectionViewModel], Never>
-    let badgeValue: AnyPublisher<String?, Never>
+    let viewState: AnyPublisher<SettingsViewModel.ViewState, Never>
     let askToSetPasscode: AnyPublisher<Void, Never>
 }
 
@@ -33,16 +31,12 @@ final class SettingsViewModel {
             return R.string.localizable.settingsBiometricsDisabledLabelTitle()
         }
     }
+    private let lock: Lock
     private var hideTokenTitle: String {
         return R.string.localizable.settingsHideTokenTitle()
     }
 
     private (set) var sections: [SettingsSection] = []
-    let animatingDifferences: Bool = false
-    var title: String = R.string.localizable.aSettingsNavigationTitle()
-    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewBackground
-    var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode = .automatic
-    let lock: Lock
 
     init(account: Wallet, keystore: Keystore, lock: Lock, config: Config, analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType) {
         self.account = account
@@ -69,42 +63,15 @@ final class SettingsViewModel {
     }
 
     func transform(input: SettingsViewModelInput) -> SettingsViewModelOutput {
-        let askToSetPasscode = input.toggleSelection.compactMap { [unowned self, lock] event -> Void? in
-            switch self.sections[event.indexPath.section] {
-            case .system(let rows):
-                switch rows[event.indexPath.row] {
-                case .passcode:
-                    if event.isOn {
-                        return ()
-                    } else {
-                        lock.deletePasscode()
-                        return nil
-                    }
-                case .hideToken:
-                   return nil
-                case .notifications, .selectActiveNetworks, .advanced:
-                    return nil
-                }
-            case .help, .tokenStandard, .version, .wallet:
-                return nil
-            }
-        }.eraseToAnyPublisher()
+        let askToSetPasscode = self.askToSetPasscodeOrDeleteExisted(trigger: input.appProtectionSelection)
 
         //NOTE: Refresh wallet name or ens when view will appear called, cancel prev. one if in loading proc.
-        let assignedNameOrEns = input.appear
-            .flatMapLatest { [ account, getWalletName] _ in getWalletName.assignedNameOrEns(for: account.address) }
-            .handleEvents(receiveOutput: { self.assignedNameOrEns = $0 })
-            .prepend(nil)
-            .removeDuplicates()
-            .mapToVoid()
-
+        let assignedNameOrEns = self.assignedNameOrEns(appear: input.willAppear)
         let blockscanChatUnreadCount = Publishers.Merge(Just<Int?>(nil), input.blockscanChatUnreadCount)
-        let didSetPasscode = input.didSetPasscode.mapToVoid()
+        let reload = Publishers.Merge3(Just<Void>(()), input.willAppear, assignedNameOrEns)
 
-        let reload = Publishers.Merge4(Just<Void>(()), input.appear, didSetPasscode, assignedNameOrEns)
-
-        let viewModels = Publishers.CombineLatest(reload, blockscanChatUnreadCount)
-            .map { [unowned self, account, keystore] _, blockscanChatUnreadCount -> [SettingsViewModel.SectionViewModel] in
+        let sections = Publishers.CombineLatest(reload, blockscanChatUnreadCount)
+            .map { [account, keystore] _, blockscanChatUnreadCount -> [SettingsViewModel.SectionViewModel] in
                 let sections = SettingsViewModel.functional.computeSections(account: account, keystore: keystore, blockscanChatUnreadCount: blockscanChatUnreadCount)
                 return sections.indices.map { sectionIndex -> SettingsViewModel.SectionViewModel in
                     var views: [ViewType] = []
@@ -121,23 +88,72 @@ final class SettingsViewModel {
 
                     return .init(section: sections[sectionIndex], views: views)
                 }
-            }.handleEvents(receiveOutput: { [unowned self] viewModels in
-                self.sections = viewModels.map { $0.section }
-            }).eraseToAnyPublisher()
+            }.handleEvents(receiveOutput: { self.sections = $0.map { $0.section } })
 
-        let badgeValue = blockscanChatUnreadCount
+        let badge = blockscanChatUnreadCount
             .map { value -> String? in
                 if let unreadCount = value, unreadCount > 0 {
                     return String(unreadCount)
                 } else {
                     return nil
                 }
-            }.removeDuplicates().eraseToAnyPublisher()
+            }.removeDuplicates()
 
-        return .init(viewModels: viewModels, badgeValue: badgeValue, askToSetPasscode: askToSetPasscode)
+        let viewState = Publishers.CombineLatest(sections, badge)
+            .map { sections, badge -> SettingsViewModel.ViewState in
+                let snapshot = self.buildSnapshot(for: sections)
+                return SettingsViewModel.ViewState(snapshot: snapshot, badge: badge)
+            }.eraseToAnyPublisher()
+
+        return .init(viewState: viewState, askToSetPasscode: askToSetPasscode)
     }
 
-    private func addressReplacedWithENSOrWalletName(_ ensOrWalletName: String? = nil) -> String {
+    /// Delates existed passcode if false received, sends void event when need to set a new passcode
+    private func askToSetPasscodeOrDeleteExisted(trigger: AnyPublisher<(indexPath: IndexPath, isOn: Bool), Never>) -> AnyPublisher<Void, Never> {
+        return trigger.compactMap { event -> Bool? in
+            switch self.sections[event.indexPath.section] {
+            case .system(let rows):
+                switch rows[event.indexPath.row] {
+                case .passcode: return event.isOn
+                case .notifications, .selectActiveNetworks, .advanced: return nil
+                case .hideToken: return nil
+                case .theme: return nil
+                }
+            case .help, .tokenStandard, .version, .wallet: return nil
+            }
+        }.compactMap { [lock, analytics] isOn -> Void? in
+            analytics.setUser(property: Analytics.UserProperties.isAppPasscodeOrBiometricProtectionEnabled, value: isOn)
+            if isOn {
+                return ()
+            } else {
+                lock.deletePasscode()
+                return nil
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    private func assignedNameOrEns(appear: AnyPublisher<Void, Never>) -> AnyPublisher<Void, Never> {
+        return appear
+            .flatMapLatest { [account, getWalletName] _ in getWalletName.assignedNameOrEns(for: account.address) }
+            .handleEvents(receiveOutput: { self.assignedNameOrEns = $0 })
+            .prepend(nil)
+            .removeDuplicates()
+            .mapToVoid()
+            .eraseToAnyPublisher()
+    }
+
+    private func buildSnapshot(for viewModels: [SettingsViewModel.SectionViewModel]) -> SettingsViewModel.Snapshot {
+        var snapshot = NSDiffableDataSourceSnapshot<SettingsSection, SettingsViewModel.ViewType>()
+        let sections = viewModels.map { $0.section }
+        snapshot.appendSections(sections)
+        for each in viewModels {
+            snapshot.appendItems(each.views, toSection: each.section)
+        }
+
+        return snapshot
+    }
+
+    private func addressReplacedWithEnsOrWalletName(_ ensOrWalletName: String? = nil) -> String {
         if let ensOrWalletName = ensOrWalletName {
             return "\(ensOrWalletName) | \(account.address.truncateMiddle)"
         } else {
@@ -145,7 +161,7 @@ final class SettingsViewModel {
         }
     }
 
-    private func view(for indexPath: IndexPath, sections: [SettingsSection]) -> ViewType {
+    private func view(for indexPath: IndexPath, sections: [SettingsViewModel.SettingsSection]) -> ViewType {
         switch sections[indexPath.section] {
         case .system(let rows):
             let row = rows[indexPath.row]
@@ -156,6 +172,9 @@ final class SettingsViewModel {
                 return .hideToken(.init(titleText: hideTokenTitle, icon: R.image.iconHideToken()!, value: UserDefaults.standard.bool(forKey: "HideToken")))
             case .notifications, .selectActiveNetworks, .advanced:
                 return .cell(.init(settingsSystemRow: row))
+            case .theme:
+                let usrDefault = UserDefaults.standard
+                return .theme(.init(titleText: R.string.localizable.settingsSupportDarkMode(), icon: R.image.biometrics()!, value: usrDefault.bool(forKey: "DarkModeOn")))
             }
         case .help:
             return .cell(.init(titleText: R.string.localizable.settingsSupportTitle(), icon: R.image.support()!))
@@ -163,7 +182,7 @@ final class SettingsViewModel {
             let row = rows[indexPath.row]
             switch row {
             case .changeWallet:
-                return .cell(.init(titleText: row.title, subTitleText: addressReplacedWithENSOrWalletName(assignedNameOrEns), icon: row.icon))
+                return .cell(.init(titleText: row.title, subTitleText: addressReplacedWithEnsOrWalletName(assignedNameOrEns), icon: row.icon))
             case .backup:
                 let walletSecurityLevel = PromptBackupCoordinator(keystore: keystore, wallet: account, config: .init(), analytics: analytics).securityLevel
                 let accessoryView = walletSecurityLevel.flatMap { WalletSecurityLevelIndicator(level: $0) }
@@ -178,10 +197,13 @@ final class SettingsViewModel {
 }
 
 extension SettingsViewModel {
+    typealias Snapshot = NSDiffableDataSourceSnapshot<SettingsViewModel.SettingsSection, SettingsViewModel.ViewType>
+    typealias DataSource = UITableViewDiffableDataSource<SettingsViewModel.SettingsSection, SettingsViewModel.ViewType>
+
     enum functional {}
 
     struct SectionViewModel {
-        let section: SettingsSection
+        let section: SettingsViewModel.SettingsSection
         let views: [SettingsViewModel.ViewType]
     }
 
@@ -190,6 +212,41 @@ extension SettingsViewModel {
         case cell(SettingTableViewCellViewModel)
         case undefined
         case hideToken(HideTokenSwitchTableViewCellViewModel)
+        case theme(SwitchTableViewCellViewModel)
+    }
+
+    struct ViewState {
+        let animatingDifferences: Bool = false
+        let title: String = R.string.localizable.aSettingsNavigationTitle()
+        let snapshot: SettingsViewModel.Snapshot
+        let badge: String?
+    }
+
+    enum SettingsWalletRow {
+        case showMyWallet
+        case changeWallet
+        case backup
+        case showSeedPhrase
+        case walletConnect
+        case nameWallet
+        case blockscanChat(blockscanChatUnreadCount: Int?)
+    }
+
+    enum SettingsSystemRow: CaseIterable {
+        case notifications
+        case passcode
+        case selectActiveNetworks
+        case advanced
+        case hideToken
+        case theme
+    }
+
+    enum SettingsSection {
+        case wallet(rows: [SettingsWalletRow])
+        case system(rows: [SettingsSystemRow])
+        case help
+        case version(value: String)
+        case tokenStandard(value: String)
     }
 }
 
@@ -211,15 +268,17 @@ extension SettingsViewModel.ViewType: Hashable {
         case (.hideToken(let vm1), .hideToken(let vm2)):
             return vm1 == vm2
         case (.undefined, .cell), (.undefined, .passcode), (.passcode, .undefined), (.cell, .passcode), (.cell, .undefined), (.passcode, .cell),
-            (.undefined, .hideToken), (.hideToken, .undefined), (.passcode, .hideToken), (.hideToken, .passcode), (.cell, .hideToken), (.hideToken, .cell):
+            (.undefined, .hideToken), (.hideToken, .undefined), (.passcode, .hideToken), (.hideToken, .passcode), (.cell, .hideToken), (.hideToken, .cell), (.cell, .theme), (.theme, .cell), (.undefined, .theme), (.theme, .undefined),  (.passcode, .theme), (.theme, .passcode), (.theme, .hideToken), (.hideToken, .theme):
             return false
+        case (.theme(let vm1), .theme(let vm2)):
+            return vm1 == vm2
         }
     }
 }
 
 extension SettingsViewModel.functional {
-    fileprivate static func computeSections(account: Wallet, keystore: Keystore, blockscanChatUnreadCount: Int?) -> [SettingsSection] {
-        let walletRows: [SettingsWalletRow]
+    fileprivate static func computeSections(account: Wallet, keystore: Keystore, blockscanChatUnreadCount: Int?) -> [SettingsViewModel.SettingsSection] {
+        let walletRows: [SettingsViewModel.SettingsWalletRow]
         if account.allowBackup {
             if account.origin == .hd {
                 // blockscanchat hidden for now.
@@ -227,14 +286,14 @@ extension SettingsViewModel.functional {
 //                walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
             } else {
                 walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect]
-
 //                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
             }
         } else {
             walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect]
 //            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
-        let systemRows: [SettingsSystemRow] = [.passcode, .selectActiveNetworks, .advanced, .hideToken]
+        let systemRows: [SettingsViewModel.SettingsSystemRow] = [.passcode, .selectActiveNetworks, .advanced, .hideToken, .theme]
+        
         return [
             .wallet(rows: walletRows),
             .system(rows: systemRows),
@@ -245,15 +304,7 @@ extension SettingsViewModel.functional {
     }
 }
 
-enum SettingsWalletRow {
-    case showMyWallet
-    case changeWallet
-    case backup
-    case showSeedPhrase
-    case walletConnect
-    case nameWallet
-    case blockscanChat(blockscanChatUnreadCount: Int?)
-
+extension SettingsViewModel.SettingsWalletRow {
     var title: String {
         switch self {
         case .showMyWallet:
@@ -297,8 +348,8 @@ enum SettingsWalletRow {
     }
 }
 
-extension SettingsWalletRow: Hashable {
-    static func == (lhs: SettingsWalletRow, rhs: SettingsWalletRow) -> Bool {
+extension SettingsViewModel.SettingsWalletRow: Hashable {
+    static func == (lhs: SettingsViewModel.SettingsWalletRow, rhs: SettingsViewModel.SettingsWalletRow) -> Bool {
         switch (lhs, rhs) {
         case (.showMyWallet, .showMyWallet):
             return true
@@ -332,13 +383,7 @@ extension SettingsWalletRow: Hashable {
     }
 }
 
-enum SettingsSystemRow: CaseIterable {
-    case notifications
-    case passcode
-    case selectActiveNetworks
-    case advanced
-    case hideToken
-    
+extension SettingsViewModel.SettingsSystemRow {
 
     var title: String {
         switch self {
@@ -352,7 +397,8 @@ enum SettingsSystemRow: CaseIterable {
             return R.string.localizable.advanced()
         case .hideToken:
             return R.string.localizable.settingsPasscodeTitle()
-            
+        case .theme:
+            return R.string.localizable.settingsPasscodeTitle()
         }
     }
 
@@ -368,25 +414,24 @@ enum SettingsSystemRow: CaseIterable {
             return R.image.developerMode()!
         case .hideToken:
             return R.image.biometrics()!
+        case .theme:
+            return R.image.biometrics()!
         }
     }
 }
 
-enum SettingsSection {
-    case wallet(rows: [SettingsWalletRow])
-    case system(rows: [SettingsSystemRow])
-    case help
-    case version(value: String)
-    case tokenStandard(value: String)
-
+extension SettingsViewModel.SettingsSection {
     var title: String {
         switch self {
         case .wallet:
-            return R.string.localizable.settingsSectionWalletTitle().uppercased()
+//            return R.string.localizable.settingsSectionWalletTitle().uppercased()
+            return R.string.localizable.settingsSectionWalletTitle()
         case .system:
-            return R.string.localizable.settingsSectionSystemTitle().uppercased()
+//            return R.string.localizable.settingsSectionSystemTitle().uppercased()
+            return R.string.localizable.settingsSectionSystemTitle()
         case .help:
-            return R.string.localizable.settingsSectionHelpTitle().uppercased()
+            return R.string.localizable.settingsSectionHelpTitle()
+//            return R.string.localizable.settingsSectionHelpTitle().uppercased()
         case .version:
             return R.string.localizable.settingsVersionLabelTitle()
         case .tokenStandard:
@@ -408,8 +453,8 @@ enum SettingsSection {
     }
 }
 
-extension SettingsSection: Hashable {
-    static func == (lhs: SettingsSection, rhs: SettingsSection) -> Bool {
+extension SettingsViewModel.SettingsSection: Hashable {
+    static func == (lhs: SettingsViewModel.SettingsSection, rhs: SettingsViewModel.SettingsSection) -> Bool {
         switch (lhs, rhs) {
         case (.help, .help):
             return true

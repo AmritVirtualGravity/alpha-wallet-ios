@@ -10,24 +10,12 @@ protocol RequestViewControllerDelegate: AnyObject {
     func didClose(in viewController: RequestViewController)
 }
 
-//Careful to fit in shorter phone like iPhone 5s without needing to scroll
 class RequestViewController: UIViewController {
-    private let roundedBackground: RoundedBackground = {
-        let roundedBackground = RoundedBackground()
-        roundedBackground.translatesAutoresizingMaskIntoConstraints = false
-        return roundedBackground
-    }()
-
-    private let scrollView = UIScrollView()
-    private let copyEnsButton = UIButton(type: .system)
-    private let copyAddressButton = UIButton(type: .system)
-
     private lazy var instructionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = viewModel.labelColor
-        label.font = viewModel.instructionFont
+        label.attributedText = viewModel.instructionAttributedString
         label.adjustsFontSizeToFitWidth = true
-        label.text = viewModel.instructionText
+        label.textColor = .white
         return label
     }()
     
@@ -35,246 +23,94 @@ class RequestViewController: UIViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.image = R.image.lifeBackgroundImage()!
         return imageView
     }()
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        let qrCodeDimensions: CGFloat = ScreenChecker.size(big: 260, medium: 260, small: 200)
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: qrCodeDimensions),
+            imageView.heightAnchor.constraint(equalToConstant: qrCodeDimensions)
+        ])
+
         return imageView
     }()
 
-    private lazy var addressContainerView: UIView = {
-        let v = UIView()
-        v.backgroundColor = .white
-        v.alpha = 0.1
-        v.isUserInteractionEnabled = true
-
-        return v
-    }()
-    
-  
-
-    private lazy var addressLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.textColor = viewModel.addressLabelColor
-        label.font = viewModel.addressFont
-        label.text = viewModel.myAddressText
-        label.textAlignment = .center
-        label.numberOfLines = 0
-
-        return label
+    private lazy var addressView: RoundedEnsView = {
+        return RoundedEnsView(viewModel: .init(text: ""))
     }()
 
-    private lazy var ensContainerView: UIView = {
-        let v = UIView()
-        v.backgroundColor = .blue
-        v.isHidden = true
-        v.isUserInteractionEnabled = true
-
-        return v
-    }()
-
-    private lazy var ensLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.textColor = viewModel.addressLabelColor
-        label.font = viewModel.addressFont
-        label.textAlignment = .center
-        label.minimumScaleFactor = 0.5
-        label.adjustsFontSizeToFitWidth = true
-
-        return label
+    private lazy var ensNameView: RoundedEnsView = {
+        return RoundedEnsView(viewModel: .init(text: ""))
     }()
 
     private let viewModel: RequestViewModel
-    private var cancelable: AnyCancellable?
-    private let domainResolutionService: DomainResolutionServiceType
+    private var cancelable = Set<AnyCancellable>()
 
     weak var delegate: RequestViewControllerDelegate?
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
 
-
-    init(viewModel: RequestViewModel, domainResolutionService: DomainResolutionServiceType) {
+    init(viewModel: RequestViewModel) {
         self.viewModel = viewModel
-        self.domainResolutionService = domainResolutionService
 
         super.init(nibName: nil, bundle: nil)
 
-//        title = R.string.localizable.aSettingsContentsMyWalletAddress()
-        view.backgroundColor = viewModel.backgroundColor
-        
-        view.addSubview(backgroundImageView)
-        view.addSubview(roundedBackground)
-        
-        ensContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(copyEns)))
-        addressContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(copyAddress)))
-
-        copyEnsButton.addTarget(self, action: #selector(copyEns), for: .touchUpInside)
-        copyEnsButton.setContentHuggingPriority(.required, for: .horizontal)
-
-        let ensStackView = [.spacerWidth(7), ensLabel, .spacerWidth(10), copyEnsButton, .spacerWidth(7)].asStackView(axis: .horizontal)
-        ensStackView.addSubview(forBackgroundColor: viewModel.addressBackgroundColor)
-        ensStackView.translatesAutoresizingMaskIntoConstraints = false
-        ensContainerView.addSubview(ensStackView)
-
-        copyAddressButton.addTarget(self, action: #selector(copyAddress), for: .touchUpInside)
-        copyAddressButton.setContentHuggingPriority(.required, for: .horizontal)
-
-        let addressStackView = [.spacerWidth(7), addressLabel, .spacerWidth(10), copyAddressButton, .spacerWidth(7)].asStackView(axis: .horizontal)
-        addressStackView.addSubview(forBackgroundColor: .clear)
-        addressStackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(addressStackView)
-
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        roundedBackground.addSubview(scrollView)
-
         let stackView = [
-            .spacer(height: ScreenChecker().isNarrowScreen ? 20 : 30),
+            .spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 20)),
             instructionLabel,
-            .spacer(height: ScreenChecker().isNarrowScreen ? 20 : 50),
+            .spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 15)),
             imageView,
+            .spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 15)),
+            addressView,
+            .spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 15)),
+            ensNameView
         ].asStackView(axis: .vertical, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(stackView)
+        
+        view.addSubview(backgroundImageView)
+        view.addSubview(stackView)
 
-        ensContainerView.translatesAutoresizingMaskIntoConstraints = false
-        roundedBackground.addSubview(ensContainerView)
-
-        addressContainerView.translatesAutoresizingMaskIntoConstraints = false
-        roundedBackground.addSubview(addressContainerView)
-
-        let qrCodeDimensions: CGFloat
-        if ScreenChecker().isNarrowScreen {
-            qrCodeDimensions = 230
-        } else {
-            qrCodeDimensions = 260
-        }
         NSLayoutConstraint.activate([
-                
-            
             // image view constraits for  full screen size
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
             
-            //Leading/trailing anchor needed to make label fit when on narrow iPhones
-            ensStackView.anchorsConstraint(to: ensContainerView, edgeInsets: .init(top: 14, left: 20, bottom: 14, right: 20)),
-            addressStackView.anchorsConstraint(to: addressContainerView, edgeInsets: .init(top: 14, left: 20, bottom: 14, right: 20)),
-
-            imageView.widthAnchor.constraint(equalToConstant: qrCodeDimensions),
-            imageView.heightAnchor.constraint(equalToConstant: qrCodeDimensions),
-
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            copyAddressButton.widthAnchor.constraint(equalToConstant: 30),
-
-            ensContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            ensContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
-
-            addressContainerView.topAnchor.constraint(equalTo: ensContainerView.bottomAnchor, constant: ScreenChecker().isNarrowScreen ? 10 : 20),
-            addressContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            addressContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-
-            roundedBackground.createConstraintsWithContainer(view: view),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-
-        changeQRCode(value: 0)
-
-        configure()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        addressContainerView.cornerRadius = addressContainerView.frame.size.height / 2
-        ensContainerView.cornerRadius = ensContainerView.frame.size.height / 2
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        bind(viewModel: viewModel)
     }
 
-    private func configure() {
-        backgroundImageView.image = viewModel.backgroundImage
-        copyEnsButton.setImage(R.image.copy(), for: .normal)
-        copyEnsButton.tintColor = .white
-        copyAddressButton.setImage(R.image.copy(), for: .normal)
-        copyAddressButton.tintColor = .white
-        resolveEns()
-    }
+    private func bind(viewModel: RequestViewModel) {
+        view.backgroundColor = viewModel.backgroundColor
 
-    private func resolveEns() {
-        cancelable?.cancel()
-        cancelable = domainResolutionService.resolveEns(address: viewModel.myAddress)
-            .map { ens -> EnsName? in return ens }
-            .replaceError(with: nil)
-            .sink(receiveValue: { [weak self] ensName in
-                guard let strongSelf = self else { return }
+        let input = RequestViewModelInput(copyEns: ensNameView.tapPublisher, copyAddress: addressView.tapPublisher)
+        let output = viewModel.transform(input: input)
 
-                if let ensName = ensName, ensName.nonEmpty {
-                    strongSelf.ensLabel.text = ensName
-                    strongSelf.ensContainerView.isHidden = false
-                    strongSelf.ensContainerView.cornerRadius = strongSelf.ensContainerView.frame.size.height / 2
-                } else {
-                    strongSelf.ensLabel.text = nil
-                    strongSelf.ensContainerView.isHidden = true
-                }
-            })
-    }
+        output.viewState
+            .sink { [imageView, ensNameView, addressView, navigationItem] viewState in
+                imageView.image = viewState.qrCode
+                imageView.layoutIfNeeded()
 
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        changeQRCode(value: Int(textField.text ?? "0") ?? 0)
-    }
+                ensNameView.configure(viewModel: .init(text: viewState.ensName))
+                addressView.configure(viewModel: .init(text: viewState.address))
+                navigationItem.title = viewState.title
+            }.store(in: &cancelable)
 
-    func changeQRCode(value: Int) {
-        let string = viewModel.myAddressText
-
-            // EIP67 format not being used much yet, use hex value for now
-            // let string = "ethereum:\(account.address.address)?value=\(value)"
-
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let strongSelf = self else { return }
-            let image = strongSelf.generateQRCode(from: string)
-            DispatchQueue.main.async {
-                strongSelf.imageView.image = image
-            }
-        }
-    }
-
-    @objc func copyAddress() {
-        UIPasteboard.general.string = viewModel.myAddressText
-
-        let hud = MBProgressHUD.showAdded(to: view, animated: true)
-        hud.mode = .text
-        hud.label.text = viewModel.addressCopiedText
-        hud.hide(animated: true, afterDelay: 1.5)
-
-        showFeedback()
-    }
-
-    @objc func copyEns() {
-        UIPasteboard.general.string = ensLabel.text ?? ""
-
-        let hud = MBProgressHUD.showAdded(to: view, animated: true)
-        hud.mode = .text
-        hud.label.text = viewModel.addressCopiedText
-        hud.hide(animated: true, afterDelay: 1.5)
-
-        showFeedback()
-    }
-
-    private func showFeedback() {
-        UINotificationFeedbackGenerator.show(feedbackType: .success)
-    }
-
-    func generateQRCode(from string: String) -> UIImage? {
-        return string.toQRCode()
+        output.copiedToClipboard
+            .sink { [weak self] in self?.view.showCopiedToClipboard(title: $0) }
+            .store(in: &cancelable)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -285,14 +121,5 @@ class RequestViewController: UIViewController {
 extension RequestViewController: PopNotifiable {
     func didPopViewController(animated: Bool) {
         delegate?.didClose(in: self)
-    }
-}
-
-fileprivate extension UIStackView {
-    func addSubview(forBackgroundColor backgroundColor: UIColor) {
-        let v = UIView(frame: bounds)
-        v.backgroundColor = backgroundColor
-        v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        insertSubview(v, at: 0)
     }
 }

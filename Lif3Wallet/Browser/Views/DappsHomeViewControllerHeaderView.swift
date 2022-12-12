@@ -9,7 +9,7 @@ protocol DappsHomeViewControllerHeaderViewDelegate: AnyObject {
 
 class DappsHomeViewControllerHeaderView: UICollectionReusableView {
     private let stackView = [].asStackView(axis: .vertical, contentHuggingPriority: .required, alignment: .center)
-    private let headerView = DappsHomeHeaderView()
+    private let headerView = BrowserHomeHeaderView()
     private let exitEditingModeButton = UIButton(type: .system)
 
     weak var delegate: DappsHomeViewControllerHeaderViewDelegate?
@@ -31,7 +31,8 @@ class DappsHomeViewControllerHeaderView: UICollectionReusableView {
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubviews([
-            headerView,
+//            headerView,
+            .spacer(height: 30),
             buttonsStackView,
         ])
         addSubview(stackView)

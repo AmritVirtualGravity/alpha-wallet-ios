@@ -12,7 +12,7 @@ import AlphaWalletFoundation
 
 class TokenHistoryChartView: UIView {
 
-    private class YMinMaxOnlyAxisValueFormatter: IAxisValueFormatter {
+    private class YMinMaxOnlyAxisValueFormatter: AxisValueFormatter {
         //NOTE: helper index for determining right label position
         private var index: Int = 0
         private let formatter = Formatter.fiat
@@ -42,11 +42,11 @@ class TokenHistoryChartView: UIView {
         let chartView = LineChartView()
 
         chartView.translatesAutoresizingMaskIntoConstraints = false
-        chartView.backgroundColor = .white
+        chartView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         chartView.drawGridBackgroundEnabled = false
         chartView.drawBordersEnabled = false
 
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription.enabled = false
 
         chartView.pinchZoomEnabled = false
         chartView.dragEnabled = true
@@ -86,7 +86,7 @@ class TokenHistoryChartView: UIView {
 
         return view
     }()
-
+    private let selection = PassthroughSubject<Int, Never>()
     private let viewModel: TokenHistoryChartViewModel
     private var cancelable = Set<AnyCancellable>()
 
@@ -103,7 +103,7 @@ class TokenHistoryChartView: UIView {
             chartView.topAnchor.constraint(equalTo: topAnchor),
             chartView.bottomAnchor.constraint(equalTo: periodSelectorView.topAnchor),
 
-            chartView.heightAnchor.constraint(equalToConstant: 250),
+            chartView.heightAnchor.constraint(equalToConstant: ScreenChecker.size(big: 250, medium: 250, small: 200)),
 
             periodSelectorView.leadingAnchor.constraint(equalTo: leadingAnchor),
             periodSelectorView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -111,29 +111,38 @@ class TokenHistoryChartView: UIView {
         ])
 
         bind(viewModel: viewModel)
-        periodSelectorView.set(selectedIndex: viewModel.selectedHistoryIndex)
-    } 
+        periodSelectorView.set(selectedIndex: viewModel.initialSelectionIndex)
+    }
 
     required init?(coder: NSCoder) {
         return nil
-    } 
+    }
 
     private func bind(viewModel: TokenHistoryChartViewModel) {
-        viewModel.lineChartDataSet
-            .receive(on: RunLoop.main)
-            .sink { [weak chartView] dataSet in
-                guard let set = dataSet else { chartView?.data = nil; return; }
-
-                set.fillFormatter = DefaultFillFormatter { _, _  -> CGFloat in
-                    guard let chartView = chartView else { return 0.0 }
-                    return CGFloat(chartView.leftAxis.axisMinimum)
-                }
-
-                let data: LineChartData = LineChartData(dataSets: [set])
-                data.setDrawValues(false)
-
-                chartView?.data = data
+        let input = TokenHistoryChartViewModelInput(selection: selection.eraseToAnyPublisher())
+        let output = viewModel.transform(input: input)
+        output.viewState
+            .sink { [weak self] viewState in
+                self?.buildChartView(with: viewState.lineChartDataSet)
             }.store(in: &cancelable)
+    }
+
+    private func buildChartView(with dataSet: LineChartDataSet?) {
+        guard let dataSet = dataSet else {
+            chartView.data = nil
+            chartView.clear()
+            return
+        }
+
+        dataSet.fillFormatter = DefaultFillFormatter { [weak chartView] _, _  -> CGFloat in
+            guard let chartView = chartView else { return .zero }
+            return CGFloat(chartView.leftAxis.axisMinimum)
+        }
+
+        let data: LineChartData = LineChartData(dataSets: [dataSet])
+        data.setDrawValues(false)
+
+        chartView.data = data
     }
 }
 
@@ -141,7 +150,7 @@ extension TokenHistoryChartView: TokenHistoryPeriodSelectorViewDelegate {
     func view(_ view: TokenHistoryPeriodSelectorView, didChangeSelection selection: ControlSelection) {
         switch selection {
         case .selected(let index):
-            viewModel.set(selectedHistoryIndex: Int(index))
+            self.selection.send(Int(index))
         case .unselected:
             break
         }

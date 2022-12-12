@@ -21,13 +21,12 @@ func applyStyle() {
     UIToolbar.appearance().tintColor = Colors.appTint
 
     //Background (not needed in iOS 12.1 on simulator)
-    UISearchBar.appearance().backgroundColor = Colors.appBackground
     //Cancel button
     UISearchBar.appearance().tintColor = Configuration.Color.Semantic.searchbarTint
     //Cursor color
     UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = Configuration.Color.Semantic.searchbarTint
 
-    UIRefreshControl.appearance().tintColor = Colors.navigationTitleColor
+    UIRefreshControl.appearance().tintColor = Configuration.Color.Semantic.refreshControl
 
     UISwitch.appearance().onTintColor = Colors.appTint
 
@@ -223,6 +222,7 @@ enum DataEntry {
         static let cornerRadius = Metrics.CornerRadius.textbox
         static let shadowRadius = CGFloat(2.0)
         static let currencyIconInset = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)
+        static let sideInset = ScreenChecker.size(big: 20, medium: 20, small: 16)
 
         enum TextField {
             static let borderThickness = CGFloat(1.0)
@@ -230,8 +230,11 @@ enum DataEntry {
             enum Default {
                 static let edgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
                 static let cornerRadius: CGFloat = Metrics.CornerRadius.textbox
-                static let textInset: CGSize = .zero
-                static let height: CGFloat = ScreenChecker().isNarrowScreen ? 30 : 50
+                static let textInset: CGSize = CGSize(width: 5, height: 0)
+                static let height: CGFloat = ScreenChecker.size(big: 50, medium: 50, small: 38)
+                static let spaceFromTitleToTextField: CGFloat = 4
+                static let spaceFromTextFieldToStatusLabel: CGFloat = 4
+                static let controlsContainerHeight: CGFloat = ScreenChecker.size(big: 30, medium: 30, small: 25)
             }
             
             enum Rounded {
@@ -271,8 +274,22 @@ enum DataEntry {
         }
 
         enum ButtonsBar {
-            static let insets: UIEdgeInsets = .init(top: 20, left: 0, bottom: 20, right: 0)
+            static let insets: UIEdgeInsets = .init(
+                top: ScreenChecker.size(big: 20, medium: 20, small: 15),
+                left: 0,
+                bottom: ScreenChecker.size(big: 20, medium: 20, small: 15),
+                right: 0)
             static let separatorHeight: CGFloat = 1.0
+        }
+
+        enum Cell {
+            static let insets: UIEdgeInsets = .init(
+                top: ScreenChecker.size(big: 20, medium: 20, small: 18),
+                left: 15,
+                bottom: ScreenChecker.size(big: 20, medium: 20, small: 18),
+                right: 15)
+
+            static let imageSize = CGSize(width: 40, height: 40)
         }
 
         enum TransactionConfirmation {
@@ -289,6 +306,14 @@ enum DataEntry {
         enum ImageView {
             static let serverIconSize = CGSize(width: 20, height: 20)
         }
+
+        enum TabBar {
+            static let height: CGFloat = ScreenChecker.size(big: 44, medium: 44, small: 38)
+        }
+
+        enum Container {
+            static let xMargin = CGFloat(16)
+        }
     }
 
     enum Font {
@@ -298,7 +323,7 @@ enum DataEntry {
         static let textFieldStatus = Fonts.bold(size: 13)
         static let textField = Fonts.regular(size: isNarrowScreen ? 14: 17)
         static let accessory = Fonts.bold(size: isNarrowScreen ? 14: 17)
-        static let amountTextField = Fonts.regular(size: isNarrowScreen ? 18: 36)
+        static let amountTextField = Fonts.regular(size: isNarrowScreen ? 26: 36)
     }
 }
 

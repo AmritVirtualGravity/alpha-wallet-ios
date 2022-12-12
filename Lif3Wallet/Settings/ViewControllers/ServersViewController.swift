@@ -10,41 +10,32 @@ protocol ServersViewControllerDelegate: AnyObject {
 
 class ServersViewController: UIViewController {
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let tableView = UITableView.grouped
+        tableView.register(RPCDisplaySelectableTableViewCell.self)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = Configuration.Color.Semantic.tableViewSeparator
-        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
-        tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
-        tableView.register(RPCDisplaySelectableTableViewCell.self)
 
         return tableView
     }()
     private var viewModel: ServersViewModel
-    private let roundedBackground = RoundedBackground()
+
     weak var delegate: ServersViewControllerDelegate?
 
     init(viewModel: ServersViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
-        roundedBackground.backgroundColor = Configuration.Color.Semantic.tableViewBackground
-        
-        view.addSubview(roundedBackground)
-        roundedBackground.addSubview(tableView)
+        view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: roundedBackground.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: roundedBackground.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: roundedBackground.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ] + roundedBackground.createConstraintsWithContainer(view: view))
+            tableView.anchorsIgnoringBottomSafeArea(to: view)
+        ])
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         configure(viewModel: viewModel)
     }
 
@@ -106,7 +97,7 @@ extension ServersViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        .leastNormalMagnitude
+        .leastNonzeroMagnitude
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

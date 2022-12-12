@@ -16,6 +16,7 @@ protocol CheckTransactionStateCoordinatorDelegate: class {
 class CheckTransactionStateCoordinator: Coordinator {
     private let navigationController: UINavigationController
     private let config: Config
+    private let analytics: AnalyticsLogger
     private var serverSelection: ServerSelection = .server(server: .server(.main))
     private lazy var rootViewController: CheckTransactionStateViewController = {
         let viewModel = CheckTransactionStateViewModel(serverSelection: serverSelection)
@@ -29,8 +30,9 @@ class CheckTransactionStateCoordinator: Coordinator {
     var coordinators: [Coordinator] = []
     weak var delegate: CheckTransactionStateCoordinatorDelegate?
 
-    init(navigationController: UINavigationController, config: Config) {
+    init(navigationController: UINavigationController, config: Config, analytics: AnalyticsLogger) {
         self.navigationController = navigationController
+        self.analytics = analytics
         self.config = config
     }
 
@@ -38,18 +40,10 @@ class CheckTransactionStateCoordinator: Coordinator {
         navigationController.present(rootViewController, animated: false)
     }
 
-    private var presentationViewController: UIViewController {
-        guard let keyWindow = UIApplication.shared.firstKeyWindow else { return navigationController }
-
-        if let controller = keyWindow.rootViewController?.presentedViewController {
-            return controller
-        } else {
-            return navigationController
-        }
-    }
-
     private func displayErrorMessage(_ message: String, title: String? = .none) {
-        presentationViewController.displaySuccess(title: title, message: message)
+        UIApplication.shared
+            .presentedViewController(or: navigationController)
+            .displaySuccess(title: title, message: message)
     }
 }
 
@@ -60,8 +54,8 @@ extension CheckTransactionStateCoordinator: SelectTransactionHashViewControllerD
 
         rootViewController.set(isActionButtonEnable: false)
 
-        GetTransactionState()
-            .getTransactionsState(server: server, hash: transactionHash)
+        GetTransactionState(server: server, analytics: analytics)
+            .getTransactionsState(hash: transactionHash)
             .done { state in
                 self.displayErrorMessage(R.string.localizable.checkTransactionStateComplete(state.description))
             }.catch { error in
@@ -88,18 +82,6 @@ extension CheckTransactionStateCoordinator: SelectTransactionHashViewControllerD
     }
 }
 
-extension TransactionState {
-    var description: String {
-        switch self {
-        case .completed: return R.string.localizable.transactionStateCompleted()
-        case .pending: return R.string.localizable.transactionStatePending()
-        case .error: return R.string.localizable.transactionStateError()
-        case .failed: return R.string.localizable.transactionStateFailed()
-        case .unknown: return R.string.localizable.transactionStateUnknown()
-        }
-    }
-}
-
 extension CheckTransactionStateCoordinator: ServersCoordinatorDelegate {
     func didSelectServer(selection: ServerSelection, in coordinator: ServersCoordinator) {
         serverSelection = selection
@@ -113,9 +95,7 @@ extension CheckTransactionStateCoordinator: ServersCoordinatorDelegate {
         }
     }
 
-    func didSelectDismiss(in coordinator: ServersCoordinator) {
-        coordinator.navigationController.popViewController(animated: true)
+    func didClose(in coordinator: ServersCoordinator) {
         removeCoordinator(coordinator)
     }
-
 }

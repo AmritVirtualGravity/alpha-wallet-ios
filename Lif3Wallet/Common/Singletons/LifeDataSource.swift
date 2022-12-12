@@ -6,9 +6,12 @@
 //
 
 import Foundation
+
 class LifeDateSource {
     
-    static var privateShared:LifeDateSource?
+    static var privateShared: LifeDateSource?
+    
+    var isForSwap = false
     
     class func shared() -> LifeDateSource {
         guard let uwShared = privateShared else {
@@ -18,5 +21,6 @@ class LifeDateSource {
         return uwShared
     }
     
-    var isForSwap = false
+    private init() { }
+    
 }

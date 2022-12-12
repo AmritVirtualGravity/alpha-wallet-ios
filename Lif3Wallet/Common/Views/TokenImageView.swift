@@ -24,11 +24,11 @@ class ImageView: UIImageView {
     }
 }
 
-class TokenImageView: UIView, ViewRoundingSupportable, ViewLoadingCancelable {
+final class TokenImageView: UIView, ViewRoundingSupportable, ViewLoadingCancelable {
     private var subscriptionKey: Subscribable<TokenImage>.SubscribableKey?
     private let symbolLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.appWhite
+        label.textColor = Configuration.Color.Semantic.defaultInverseText
         label.font = UIFont.systemFont(ofSize: 13)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true

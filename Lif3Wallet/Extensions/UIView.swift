@@ -64,6 +64,15 @@ extension UIView {
         ]
     }
 
+    func anchorsIgnoringBottomSafeArea(to view: UIView, edgeInsets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
+        return [
+            leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: edgeInsets.left),
+            trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -edgeInsets.right),
+            topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: edgeInsets.top),
+            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -edgeInsets.bottom),
+        ]
+    }
+
     func anchorsConstraintSafeArea(to view: UIView, edgeInsets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
         return [
             leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: edgeInsets.left),
@@ -76,7 +85,7 @@ extension UIView {
     func anchorsConstraint(to view: UIView, margin: CGFloat) -> [NSLayoutConstraint] {
         return anchorsConstraint(to: view, edgeInsets: .init(top: margin, left: margin, bottom: margin, right: margin))
     }
-
+    
     static func spacer(height: CGFloat = 1, backgroundColor: UIColor = .clear, flexible: Bool = false) -> UIView {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -163,6 +172,12 @@ extension UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         return stackView
+    }
+}
+
+extension UIView {
+    static func separator(height: CGFloat = 1) -> UIView {
+        return spacer(height: height, backgroundColor: Configuration.Color.Semantic.tableViewSeparator)
     }
 }
 

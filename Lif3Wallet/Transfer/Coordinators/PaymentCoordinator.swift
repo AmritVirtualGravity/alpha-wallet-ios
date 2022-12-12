@@ -12,6 +12,11 @@ protocol PaymentCoordinatorDelegate: CanOpenURL, BuyCryptoDelegate {
     func didSelectTokenHolder(tokenHolder: TokenHolder, in coordinator: PaymentCoordinator)
 }
 
+protocol NavigationBarPresentable {
+    func willPush()
+    func willPop()
+}
+
 class PaymentCoordinator: Coordinator {
     private var session: WalletSession {
         return sessionProvider.session(for: server)!
@@ -28,6 +33,8 @@ class PaymentCoordinator: Coordinator {
     private let reachabilityManager: ReachabilityManagerProtocol
     private let domainResolutionService: DomainResolutionServiceType
     private let tokensFilter: TokensFilter
+    private let importToken: ImportToken
+
     let flow: PaymentFlow
     weak var delegate: PaymentCoordinatorDelegate?
     var coordinators: [Coordinator] = []
@@ -45,8 +52,10 @@ class PaymentCoordinator: Coordinator {
             reachabilityManager: ReachabilityManagerProtocol = ReachabilityManager(),
             domainResolutionService: DomainResolutionServiceType,
             tokenSwapper: TokenSwapper,
-            tokensFilter: TokensFilter
+            tokensFilter: TokensFilter,
+            importToken: ImportToken
     ) {
+        self.importToken = importToken
         self.tokensFilter = tokensFilter
         self.tokenSwapper = tokenSwapper
         self.reachabilityManager = reachabilityManager
@@ -73,14 +82,15 @@ class PaymentCoordinator: Coordinator {
             tokensService: tokenCollection,
             assetDefinitionStore: assetDefinitionStore,
             analytics: analytics,
-            domainResolutionService: domainResolutionService
-        )
+            domainResolutionService: domainResolutionService,
+            importToken: importToken)
+
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)
     }
 
-    private func startWithSendCollectiblesCoordinator(token: Token, transferType: Erc1155TokenTransactionType, tokenHolders: [TokenHolder]) {
+    private func startWithSendCollectiblesCoordinator(token: Token, tokenHolders: [TokenHolder]) {
         let coordinator = TransferCollectiblesCoordinator(session: session, navigationController: navigationController, keystore: keystore, filteredTokenHolders: tokenHolders, token: token, assetDefinitionStore: assetDefinitionStore, analytics: analytics, domainResolutionService: domainResolutionService, tokensService: tokenCollection)
         coordinator.delegate = self
         coordinator.start()
@@ -110,21 +120,23 @@ class PaymentCoordinator: Coordinator {
     }
 
     func start() {
+        if let navigationBar = navigationController.navigationBar as? NavigationBarPresentable {
+            navigationBar.willPush()
+        }
+
         if shouldRestoreNavigationBarIsHiddenState {
-            self.navigationController.setNavigationBarHidden(false, animated: false)
+            navigationController.setNavigationBarHidden(false, animated: false)
         }
 
         func _startPaymentFlow(transactionType: PaymentFlowType) {
             switch transactionType {
             case .transaction(let transactionType):
                 switch transactionType {
-                case .erc1155Token(let token, let transferType, let tokenHolders):
-                    startWithSendCollectiblesCoordinator(token: token, transferType: transferType, tokenHolders: tokenHolders)
-                case .nativeCryptocurrency, .erc20Token, .dapp, .claimPaidErc875MagicLink, .tokenScript, .erc875TokenOrder, .prebuilt:
+                case .erc1155Token(let token, let tokenHolders):
+                    startWithSendCollectiblesCoordinator(token: token, tokenHolders: tokenHolders)
+                case .nativeCryptocurrency, .erc20Token, .dapp, .claimPaidErc875MagicLink, .tokenScript, .prebuilt:
                     startWithSendCoordinator(transactionType: transactionType)
-                case .erc875Token(let token, let tokenHolders), .erc721Token(let token, let tokenHolders):
-                    startWithSendNFTCoordinator(transactionType: transactionType, token: token, tokenHolder: tokenHolders[0])
-                case .erc721ForTicketToken(let token, let tokenHolders):
+                case .erc721ForTicketToken(let token, let tokenHolders), .erc875Token(let token, let tokenHolders), .erc721Token(let token, let tokenHolders):
                     startWithSendNFTCoordinator(transactionType: transactionType, token: token, tokenHolder: tokenHolders[0])
                 }
             case .tokenScript(let action, let token, let tokenHolder):
@@ -163,6 +175,10 @@ class PaymentCoordinator: Coordinator {
     }
 
     func dismiss(animated: Bool) {
+        if let navigationBar = navigationController.navigationBar as? NavigationBarPresentable {
+            navigationBar.willPop()
+        }
+
         if shouldRestoreNavigationBarIsHiddenState {
             navigationController.setNavigationBarHidden(true, animated: false)
         }

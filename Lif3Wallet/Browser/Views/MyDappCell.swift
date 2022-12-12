@@ -5,7 +5,6 @@ import UIKit
 
 class MyDappCell: UITableViewCell {
     private var iconImageViewHolder = ContainerViewWithShadow(aroundView: UIImageView())
-    private var viewModel: MyDappCellViewModel?
     private let titleLabel = UILabel()
     private let urlLabel = UILabel()
 
@@ -35,8 +34,6 @@ class MyDappCell: UITableViewCell {
     }
 
     func configure(viewModel: MyDappCellViewModel) {
-        self.viewModel = viewModel
-
         titleLabel.font = viewModel.nameFont
         titleLabel.textColor = viewModel.nameColor
         titleLabel.text = viewModel.name
@@ -53,6 +50,7 @@ class MyDappCell: UITableViewCell {
         iconImageView.clipsToBounds = true
         iconImageView.kf.setImage(with: viewModel.imageUrl, placeholder: viewModel.fallbackImage)
 
+        backgroundColor = .clear
         //TODO ugly hack to get the image view's frame. Can't figure out a good point to retrieve the correct frame otherwise
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.iconImageViewHolder.configureShadow(color: viewModel.imageViewShadowColor, offset: viewModel.imageViewShadowOffset, opacity: viewModel.imageViewShadowOpacity, radius: viewModel.imageViewShadowRadius, cornerRadius: self.iconImageViewHolder.frame.size.width / 2)

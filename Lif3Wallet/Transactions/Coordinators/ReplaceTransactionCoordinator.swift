@@ -18,8 +18,8 @@ class ReplaceTransactionCoordinator: Coordinator {
     private let tokensService: TokenViewModelState
     private let analytics: AnalyticsLogger
     private let domainResolutionService: DomainResolutionServiceType
-    private let pendingTransactionInformation: (server: RPCServer, data: Data, transactionType: TransactionType, gasPrice: BigInt)
-    private let nonce: BigInt
+    private let pendingTransactionInformation: (server: RPCServer, data: Data, transactionType: TransactionType, gasPrice: BigUInt)
+    private let nonce: BigUInt
     private let keystore: Keystore
     private let presentingViewController: UIViewController
     private let session: WalletSession
@@ -31,7 +31,7 @@ class ReplaceTransactionCoordinator: Coordinator {
         switch transactionType {
         case .nativeCryptocurrency:
             return AlphaWallet.Address(string: transaction.to)
-        case .dapp, .erc20Token, .erc875Token, .erc875TokenOrder, .erc721Token, .erc721ForTicketToken, .erc1155Token, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
+        case .dapp, .erc20Token, .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
             return nil
         }
     }
@@ -39,7 +39,7 @@ class ReplaceTransactionCoordinator: Coordinator {
         switch transactionType {
         case .nativeCryptocurrency:
             return nil
-        case .dapp, .erc20Token, .erc875Token, .erc875TokenOrder, .erc721Token, .erc721ForTicketToken, .erc1155Token, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
+        case .dapp, .erc20Token, .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
             return AlphaWallet.Address(string: transaction.to)
         }
     }
@@ -52,10 +52,10 @@ class ReplaceTransactionCoordinator: Coordinator {
             return .nativeCryptocurrency(MultipleChainsTokensDataStore.functional.etherToken(forServer: pendingTransactionInformation.server), destination: .address(session.account.address), amount: nil)
         }
     }
-    private var transactionValue: BigInt {
+    private var transactionValue: BigUInt {
         switch mode {
         case .speedup:
-            return BigInt(transaction.value) ?? 0
+            return BigUInt(transaction.value) ?? 0
         case .cancel:
             return 0
         }
@@ -82,7 +82,7 @@ class ReplaceTransactionCoordinator: Coordinator {
 
     init?(analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType, keystore: Keystore, presentingViewController: UIViewController, session: WalletSession, transaction: TransactionInstance, mode: Mode, assetDefinitionStore: AssetDefinitionStore, tokensService: TokenViewModelState) {
         guard let pendingTransactionInformation = TransactionDataStore.pendingTransactionsInformation[transaction.id] else { return nil }
-        guard let nonce = BigInt(transaction.nonce) else { return nil }
+        guard let nonce = BigUInt(transaction.nonce) else { return nil }
         self.tokensService = tokensService
         self.pendingTransactionInformation = pendingTransactionInformation
         self.keystore = keystore
@@ -98,19 +98,25 @@ class ReplaceTransactionCoordinator: Coordinator {
 
     func start() {
         do {
-            let higherGasPrice = computeGasPriceForReplacementTransaction(pendingTransactionInformation.gasPrice)
-            let unconfirmedTransaction = UnconfirmedTransaction(transactionType: transactionType, value: transactionValue, recipient: recipient, contract: contract, data: transactionData, gasPrice: higherGasPrice, nonce: nonce)
+            let unconfirmedTransaction = UnconfirmedTransaction(
+                transactionType: transactionType,
+                value: transactionValue,
+                recipient: recipient,
+                contract: contract,
+                data: transactionData,
+                gasPrice: computeGasPriceForReplacementTransaction(pendingTransactionInformation.gasPrice),
+                nonce: nonce)
             
             let coordinator = try TransactionConfirmationCoordinator(
-                    presentingViewController: presentingViewController,
-                    session: session,
-                    transaction: unconfirmedTransaction,
-                    configuration: transactionConfirmationConfiguration,
-                    analytics: analytics,
-                    domainResolutionService: domainResolutionService,
-                    keystore: keystore,
-                    assetDefinitionStore: assetDefinitionStore,
-                    tokensService: tokensService)
+                presentingViewController: presentingViewController,
+                session: session,
+                transaction: unconfirmedTransaction,
+                configuration: transactionConfirmationConfiguration,
+                analytics: analytics,
+                domainResolutionService: domainResolutionService,
+                keystore: keystore,
+                assetDefinitionStore: assetDefinitionStore,
+                tokensService: tokensService)
             coordinator.delegate = self
             addCoordinator(coordinator)
             switch mode {
@@ -126,7 +132,7 @@ class ReplaceTransactionCoordinator: Coordinator {
         }
     }
 
-    private func computeGasPriceForReplacementTransaction(_ gasPrice: BigInt) -> BigInt {
+    private func computeGasPriceForReplacementTransaction(_ gasPrice: BigUInt) -> BigUInt {
         gasPrice * 110 / 100
     }
 }

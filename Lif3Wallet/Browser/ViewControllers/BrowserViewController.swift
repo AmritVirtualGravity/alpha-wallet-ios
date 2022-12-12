@@ -56,7 +56,7 @@ final class BrowserViewController: UIViewController {
     lazy var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
         progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.tintColor = Colors.darkBlue
+        progressView.tintColor = Colors.appTint
         progressView.trackTintColor = .clear
         return progressView
     }()
@@ -66,8 +66,6 @@ final class BrowserViewController: UIViewController {
         config.websiteDataStore = WKWebsiteDataStore.default()
         return config
     }()
-    
- 
 
     init(account: Wallet, server: RPCServer) {
         self.account = account
@@ -260,7 +258,7 @@ extension BrowserViewController: WKScriptMessageHandler {
         }
         infoLog("[Browser] dapp command: \(command)")
         let requester = DAppRequester(title: webView.title, url: webView.url)
-        let token = MultipleChainsTokensDataStore.functional.token(forServer: server)
+        let token = MultipleChainsTokensDataStore.functional.etherToken(forServer: server)
         let action = DappAction.fromCommand(command, server: server, transactionType: .dapp(token, requester))
 
         infoLog("[Browser] dapp action: \(action)")

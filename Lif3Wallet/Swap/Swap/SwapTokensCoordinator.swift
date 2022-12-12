@@ -73,17 +73,18 @@ final class SwapTokensCoordinator: Coordinator {
 
     private func showSelectToken() {
         let coordinator = SelectTokenCoordinator(tokenCollection: tokenCollection, tokensFilter: tokensFilter, navigationController: navigationController, filter: .filter(tokenSelectionProvider))
-        coordinator.configureForSelectionSwapToken()
+        coordinator.rootViewController.navigationItem.leftBarButtonItem = UIBarButtonItem.logoBarButton()
         coordinator.delegate = self
         addCoordinator(coordinator)
 
         let panel = FloatingPanelController(isPanEnabled: false)
         panel.layout = FullScreenScrollableFloatingPanelLayout()
-        panel.set(contentViewController: coordinator.rootViewController)
+        panel.set(contentViewController: coordinator.navigationController)
+        panel.surfaceView.contentPadding = .init(top: 20, left: 0, bottom: 0, right: 0)
         panel.shouldDismissOnBackdrop = true
         panel.delegate = self
 
-        navigationController.present(panel, animated: true)
+        self.navigationController.present(panel, animated: true)
     }
 }
 
@@ -91,7 +92,8 @@ extension SwapTokensCoordinator: FloatingPanelControllerDelegate {
 
     func floatingPanelDidRemove(_ fpc: FloatingPanelController) {
         guard let coordinator = coordinators.compactMap({ $0 as? SelectTokenCoordinator }).first else { return }
-        coordinator.close()
+
+        removeCoordinator(coordinator)
     }
 }
 
@@ -186,8 +188,8 @@ extension SwapTokensCoordinator: ApproveSwapProviderDelegate {
     func promptForErc20Approval(token: AlphaWallet.Address, server: RPCServer, owner: AlphaWallet.Address, spender: AlphaWallet.Address, amount: BigUInt, in provider: ApproveSwapProvider) -> Promise<EthereumTransaction.Hash> {
         return firstly {
             Promise.value(token)
-        }.map { token in
-            try Erc20.buildApproveTransaction(token: token, server: server, owner: owner, spender: spender, amount: amount)
+        }.map { contract in
+            try UnconfirmedTransaction.buildApproveTransaction(contract: contract, server: server, owner: owner, spender: spender, amount: amount)
         }.then { [navigationController, keystore, analytics, assetDefinitionStore, configurator, tokenCollection, domainResolutionService] (transaction, configuration) in
             TransactionConfirmationCoordinator.promise(navigationController, session: configurator.session, coordinator: self, transaction: transaction, configuration: configuration, analytics: analytics, domainResolutionService: domainResolutionService, source: .swapApproval, delegate: self, keystore: keystore, assetDefinitionStore: assetDefinitionStore, tokensService: tokenCollection)
         }.map { confirmationResult in
@@ -276,28 +278,13 @@ extension SwapTokensCoordinator: BuyCryptoDelegate {
     }
 }
 
-extension SwapTokensCoordinator {
-    enum functional {}
-}
+public extension UnconfirmedTransaction {
+    static func buildApproveTransaction(contract: AlphaWallet.Address, server: RPCServer, owner: AlphaWallet.Address, spender: AlphaWallet.Address, amount: BigUInt) throws -> (UnconfirmedTransaction, TransactionType.Configuration) {
+        let configuration: TransactionType.Configuration = .approve
+        let transactionType: TransactionType = .prebuilt(server)
+        let data = (try? Erc20Approve(spender: spender, value: amount).encodedABI()) ?? Data()
 
-fileprivate extension SwapTokensCoordinator.functional {
-    //TODO support ERC721 setApprovalForAll()
-    //TODO unused?
-    static func isTransactionErc20Approval(_ transaction: SentTransaction) -> Bool {
-        let data = transaction.original.data
-        if let function = DecodedFunctionCall(data: data) {
-            switch function.type {
-            case .erc1155SafeTransfer, .erc1155SafeBatchTransfer, .erc20Transfer, .nativeCryptoTransfer, .others:
-                return false
-            case .erc20Approve:
-                return true
-            case .erc721ApproveAll:
-                return false
-            }
-        } else if data.isEmpty {
-            return false
-        } else {
-            return false
-        }
+        let transaction: UnconfirmedTransaction = .init(transactionType: transactionType, value: 0, recipient: owner, contract: contract, data: data)
+        return (transaction, configuration)
     }
 }

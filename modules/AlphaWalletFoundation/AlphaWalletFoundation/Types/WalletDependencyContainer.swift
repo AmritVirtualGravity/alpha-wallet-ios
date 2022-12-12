@@ -28,7 +28,7 @@ public class WalletComponentsFactory: WalletDependencyContainer {
     public let assetDefinitionStore: AssetDefinitionStore
     public let coinTickersFetcher: CoinTickersFetcher
     public let config: Config
-
+    
     private var walletDependencies: [Wallet: WalletDependency] = [:]
 
     public struct Dependencies: WalletDependency {
@@ -57,15 +57,20 @@ public class WalletComponentsFactory: WalletDependencyContainer {
         let eventsDataStore: NonActivityEventsDataStore = NonActivityMultiChainEventsDataStore(store: .storage(for: wallet))
         let transactionsDataStore: TransactionDataStore = TransactionDataStore(store: .storage(for: wallet))
         let eventsActivityDataStore: EventsActivityDataStoreProtocol = EventsActivityDataStore(store: .storage(for: wallet))
-        let sessionsProvider: SessionsProvider = .init(config: config, analytics: analytics)
 
-        let importToken = ImportToken(sessionProvider: sessionsProvider, wallet: wallet, tokensDataStore: tokensDataStore, assetDefinitionStore: assetDefinitionStore, analytics: analytics)
+        let sessionsProvider: SessionsProvider = .init(config: config, analytics: analytics)
+        sessionsProvider.start(wallet: wallet)
+
+        let importToken = ImportToken(sessionProvider: sessionsProvider, tokensDataStore: tokensDataStore, assetDefinitionStore: assetDefinitionStore, analytics: analytics)
 
         let tokensService = AlphaWalletTokensService(sessionsProvider: sessionsProvider, tokensDataStore: tokensDataStore, analytics: analytics, importToken: importToken, transactionsStorage: transactionsDataStore, nftProvider: nftProvider, assetDefinitionStore: assetDefinitionStore)
         let pipeline: TokensProcessingPipeline = WalletDataProcessingPipeline(wallet: wallet, tokensService: tokensService, coinTickersFetcher: coinTickersFetcher, assetDefinitionStore: assetDefinitionStore, eventsDataStore: eventsDataStore)
+        pipeline.start()
 
         let fetcher = WalletBalanceFetcher(wallet: wallet, tokensService: pipeline)
-        let activitiesPipeLine = ActivitiesPipeLine(config: config, wallet: wallet, assetDefinitionStore: assetDefinitionStore, transactionDataStore: transactionsDataStore, tokensService: tokensService, sessionsProvider: sessionsProvider, eventsActivityDataStore: eventsActivityDataStore, eventsDataStore: eventsDataStore)
+        fetcher.start()
+
+        let activitiesPipeLine = ActivitiesPipeLine(config: config, wallet: wallet, assetDefinitionStore: assetDefinitionStore, transactionDataStore: transactionsDataStore, tokensService: tokensService, sessionsProvider: sessionsProvider, eventsActivityDataStore: eventsActivityDataStore, eventsDataStore: eventsDataStore, analytics: analytics)
 
         let dependency: WalletDependency = Dependencies(activitiesPipeLine: activitiesPipeLine, transactionsDataStore: transactionsDataStore, importToken: importToken, tokensService: tokensService, pipeline: pipeline, fetcher: fetcher, sessionsProvider: sessionsProvider, eventsDataStore: eventsDataStore)
 

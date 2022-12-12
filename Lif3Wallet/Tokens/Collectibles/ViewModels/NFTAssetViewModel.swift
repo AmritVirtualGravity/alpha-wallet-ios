@@ -31,16 +31,15 @@ class NFTAssetViewModel {
     private let displayHelper: OpenSeaNonFungibleTokenDisplayHelper
     private let tokenHolderHelper: TokenInstanceViewConfigurationHelper
     private let nftProvider: NFTProvider
-    private let session: WalletSession
     private let mode: TokenInstanceViewMode
     private let service: TokenViewModelState & TokenHolderState
     private (set) var viewTypes: [NFTAssetViewModel.ViewType] = []
-
+    let session: WalletSession
     let token: Token
     private (set) var tokenId: TokenId
     private (set) var tokenHolder: TokenHolder
     let assetDefinitionStore: AssetDefinitionStore
-    var backgroundColor: UIColor = Colors.appBackground
+    var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
     var transferTransactionType: TransactionType {
         tokenHolder.select(with: .allFor(tokenId: tokenHolder.tokenId))
         return TransactionType(nonFungibleToken: token, tokenHolders: [tokenHolder])
@@ -74,7 +73,7 @@ class NFTAssetViewModel {
 
     var previewViewContentBackgroundColor: UIColor {
         if displayHelper.imageHasBackgroundColor {
-            return Colors.appBackground
+            return Configuration.Color.Semantic.defaultViewBackground
         } else {
             if let color = tokenHolder.values.backgroundColorStringValue.nilIfEmpty {
                 return UIColor(hex: color)
@@ -121,17 +120,12 @@ class NFTAssetViewModel {
             .compactMap { [weak self, token] updatedTokenHolders -> (tokenHolder: TokenHolder, tokenId: TokenId)? in
                 switch token.type {
                 case .erc721, .erc875, .erc721ForTickets:
-                    if let tokenHolder = self?.firstMatchingTokenHolder(from: updatedTokenHolders) {
-                        return (tokenHolder, tokenHolder.tokenId)
-                    }
+                    return self?.firstMatchingTokenHolder(from: updatedTokenHolders).flatMap { ($0, $0.tokenId) }
                 case .erc1155:
-                    if let selection = self?.isMatchingTokenHolder(from: updatedTokenHolders) {
-                        return selection
-                    }
+                    return self?.isMatchingTokenHolder(from: updatedTokenHolders)
                 case .nativeCryptocurrency, .erc20:
-                    break
+                    return nil
                 }
-                return nil
             }.handleEvents(receiveOutput: { [weak self] in
                 self?.tokenId = $0.tokenId
                 self?.tokenHolder = $0.tokenHolder
@@ -149,8 +143,8 @@ class NFTAssetViewModel {
     }
 
     private func configure(overiddenOpenSeaStats: Stats?) {
-        self.tokenHolderHelper.overridenFloorPrice = overiddenOpenSeaStats?.floorPrice
-        self.tokenHolderHelper.overridenItemsCount = overiddenOpenSeaStats?.itemsCount
+        tokenHolderHelper.overridenFloorPrice = overiddenOpenSeaStats?.floorPrice
+        tokenHolderHelper.overridenItemsCount = overiddenOpenSeaStats?.itemsCount
     }
 
     var actions: [TokenInstanceAction] {
@@ -300,7 +294,7 @@ class NFTAssetViewModel {
         }
     }
 
-    func tokenScriptWarningMessage(for action: TokenInstanceAction) -> FungibleTokenViewModel.TokenScriptWarningMessage? {
+    func tokenScriptWarningMessage(for action: TokenInstanceAction) -> FungibleTokenDetailsViewModel.TokenScriptWarningMessage? {
         if let selection = action.activeExcludingSelection(selectedTokenHolders: [tokenHolder], forWalletAddress: session.account.address) {
             if let denialMessage = selection.denial {
                 return .warning(string: denialMessage)
@@ -313,8 +307,8 @@ class NFTAssetViewModel {
         }
     }
 
-    func buttonState(for action: TokenInstanceAction) -> FungibleTokenViewModel.ActionButtonState {
-        func _configButton(action: TokenInstanceAction) -> FungibleTokenViewModel.ActionButtonState {
+    func buttonState(for action: TokenInstanceAction) -> FungibleTokenDetailsViewModel.ActionButtonState {
+        func _configButton(action: TokenInstanceAction) -> FungibleTokenDetailsViewModel.ActionButtonState {
             if let selection = action.activeExcludingSelection(selectedTokenHolders: [tokenHolder], forWalletAddress: session.account.address) {
                 if selection.denial == nil {
                     return .isDisplayed(false)

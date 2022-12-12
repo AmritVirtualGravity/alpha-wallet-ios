@@ -26,46 +26,27 @@ public final class GetGasPrice {
 
     public func getGasEstimates() -> Promise<GasEstimates> {
         let request = EtherServiceRequest(server: server, batch: BatchFactory().create(GasPriceRequest()))
-        let maxPrice: BigInt = GasPriceConfiguration.maxPrice(forServer: server)
-        let defaultPrice: BigInt = GasPriceConfiguration.defaultPrice(forServer: server)
+        let maxPrice: BigUInt = GasPriceConfiguration.maxPrice(forServer: server)
+        let defaultPrice: BigUInt = GasPriceConfiguration.defaultPrice(forServer: server)
 
         return firstly {
             APIKitSession.send(request, server: server, analytics: analytics)
         }.get { [server] estimate in
             infoLog("Estimated gas price with RPC node server: \(server) estimate: \(estimate)")
-        }.map { [server] in
-            if let gasPrice = BigInt($0.drop0x, radix: 16) {
-                if (gasPrice + GasPriceConfiguration.oneGwei) > maxPrice {
-                    // Guard against really high prices
-                    return GasEstimates(standard: maxPrice)
-                } else {
-                    if server.canUserChangeGas && server.shouldAddBufferWhenEstimatingGasPrice {
-                        //Add an extra gwei because the estimate is sometimes too low
-                        return GasEstimates(standard: gasPrice + GasPriceConfiguration.oneGwei)
-                    } else {
-                        return GasEstimates(standard: gasPrice)
-                    }
-                }
+        }.map { [server] gasPrice in
+            if (gasPrice + GasPriceConfiguration.oneGwei) > maxPrice {
+                // Guard against really high prices
+                return GasEstimates(standard: maxPrice)
             } else {
-                return GasEstimates(standard: defaultPrice)
+                if server.canUserChangeGas && server.shouldAddBufferWhenEstimatingGasPrice {
+                    //Add an extra gwei because the estimate is sometimes too low
+                    return GasEstimates(standard: gasPrice + GasPriceConfiguration.oneGwei)
+                } else {
+                    return GasEstimates(standard: gasPrice)
+                }
             }
         }.recover { _ -> Promise<GasEstimates> in
             .value(GasEstimates(standard: defaultPrice))
         }
-    }
-}
-
-public final class EthCall {
-    private let server: RPCServer
-    private let analytics: AnalyticsLogger
-
-    public init(server: RPCServer, analytics: AnalyticsLogger) {
-        self.server = server
-        self.analytics = analytics
-    }
-
-    public func ethCall(from: AlphaWallet.Address?, to: AlphaWallet.Address?, value: String?, data: String) -> Promise<String> {
-        let request = EthCallRequest(from: from, to: to, value: value, data: data)
-        return APIKitSession.send(EtherServiceRequest(server: server, batch: BatchFactory().create(request)), server: server, analytics: analytics)
     }
 }

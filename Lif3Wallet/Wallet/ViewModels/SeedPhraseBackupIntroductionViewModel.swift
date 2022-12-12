@@ -16,12 +16,9 @@ struct SeedPhraseBackupIntroductionViewModel {
     var imageViewImage: UIImage {
         return R.image.hdIntroduction()!
     }
-    
     var backgroundImage: UIImage {
         return R.image.lifeBackgroundImage()!
     }
-    
-    
     
     var attributedSubtitle: NSAttributedString {
         let subtitle = R.string.localizable.walletsBackupHdWalletIntroductionTitle()
@@ -33,7 +30,7 @@ struct SeedPhraseBackupIntroductionViewModel {
         attributeString.addAttributes([
             .paragraphStyle: style,
             .font: Screen.Backup.subtitleFont,
-            .foregroundColor: R.color.black()!
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ], range: NSRange(location: 0, length: subtitle.count))
         
         return attributeString
@@ -49,7 +46,7 @@ struct SeedPhraseBackupIntroductionViewModel {
         attributeString.addAttributes([
             .paragraphStyle: style,
             .font: Screen.Backup.descriptionFont,
-            .foregroundColor: Colors.appText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ], range: NSRange(location: 0, length: description.count))
         
         return attributeString

@@ -52,7 +52,6 @@ public enum URLServiceProvider {
             return URL(string: "https://github.com/AlphaWallet/alpha-wallet-ios/issues/new")!
         case .instagram:
             return URL(string: "https://www.instagram.com/lif3official/")!
-            
         }
     }
 }

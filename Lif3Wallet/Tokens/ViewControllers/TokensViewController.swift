@@ -35,6 +35,19 @@ final class TokensViewController: UIViewController {
     private lazy var emptyTableViewHeightConstraint: NSLayoutConstraint = {
         return emptyTableView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor, constant: 0)
     }()
+    
+    lazy var footerView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: footerBar.height))
+        view.addSubview(footerBar)
+        footerBar.frame = view.frame
+        NSLayoutConstraint.activate([
+            footerBar.topAnchor.constraint(equalTo: view.topAnchor),
+            footerBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            footerBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            footerBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        return view
+    }()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView.grouped
@@ -54,6 +67,8 @@ final class TokensViewController: UIViewController {
         tableView.separatorInset = .zero
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.refreshControl = refreshControl
+        
+        tableView.tableFooterView = footerView
 
         return tableView
     }()
@@ -161,7 +176,7 @@ final class TokensViewController: UIViewController {
 
         view.addSubview(tableView)
         tableView.addSubview(emptyTableView)
-        view.addSubview(footerBar)
+//        view.addSubview(footerBar)
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -170,12 +185,12 @@ final class TokensViewController: UIViewController {
             bottomConstraint,
             emptyTableView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
             emptyTableViewHeightConstraint,
-            footerBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            footerBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            footerBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            footerBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            footerBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            footerBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-        footerBar.isHidden = true
+//        footerBar.isHidden = true
     }
 
     override func viewDidLoad() {
@@ -190,7 +205,7 @@ final class TokensViewController: UIViewController {
 
         buttonsBar.configure(.primary(buttons: 1))
         buttonsBar.buttons[0].addTarget(self, action: #selector(buyCryptoSelected), for: .touchUpInside)
-        buttonsBar.isHidden = true
+//        buttonsBar.isHidden = true
 
         bind(viewModel: viewModel)
     }
@@ -304,7 +319,8 @@ final class TokensViewController: UIViewController {
         output.applyTableInset
             .map { [footerBar] hasInset -> UIEdgeInsets in
                 switch hasInset {
-                case .some(let noNeedInInset): return noNeedInInset ? UIEdgeInsets.zero : UIEdgeInsets(top: 0, left: 0, bottom: footerBar.height, right: 0)
+//                case .some(let noNeedInInset): return noNeedInInset ? UIEdgeInsets.zero : UIEdgeInsets(top: 0, left: 0, bottom: footerBar.height, right: 0)
+                case .some(let noNeedInInset): return noNeedInInset ? UIEdgeInsets.zero : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 case .none: return UIEdgeInsets.zero
                 }
             }.removeDuplicates()

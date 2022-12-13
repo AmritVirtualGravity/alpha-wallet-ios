@@ -34,6 +34,17 @@ extension SettingTableViewCellViewModel: Hashable {
         titleText = row.title
         icon = row.icon
     }
+    
+    init(settingsSocialMediaRow row: SettingsViewModel.SettingsSocialMediaRow) {
+        titleText = row.title
+        icon = row.icon
+    }
+    
+    init(settingsSupportRow row: SettingsViewModel.SettingsSupportRow) {
+        titleText = row.title
+        icon = row.icon
+    }
+    
     static func == (lhs: SettingTableViewCellViewModel, rhs: SettingTableViewCellViewModel) -> Bool {
         return lhs.titleText == rhs.titleText && lhs.icon == rhs.icon && lhs.subTitleText == rhs.subTitleText && lhs.accessoryType == rhs.accessoryType && lhs.accessoryView == rhs.accessoryView
     }

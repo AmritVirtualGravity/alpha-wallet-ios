@@ -125,11 +125,14 @@
 "settings.pingInfura.fail" = "Infura-virhe";
 "settings.support.title" = "Tuki";
 "settings.support.darkMode" = "DarkMode";
+"settings.helpCenter.title" = "Help Center";
+"settings.about.title" = "About";
 "settings.notifications.title" = "Ilmoitukset";
 "settings.passcode.title" = "PIN-koodi";
 "settings.hideToken.title" = "Hide 0 Balance Token";
 "settings.selectActiveNetworks.title" = "Kytketyt verkot";
 "settings.section.help.title" = "Apu";
+"settings.section.social.title" = "Social";
 "settings.section.system.title" = "Järjestelmä";
 "settings.section.wallet.title" = "Lompakko";
 "settings.change.wallet.title" = "Vaihda / lisää lomapakko";

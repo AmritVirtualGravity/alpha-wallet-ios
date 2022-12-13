@@ -2,11 +2,11 @@
 
 import UIKit
 
-protocol HideTokenSwitchTableViewCellDelegate: AnyObject {
-    func cell(_ cell: HideTokenSwitchTableViewCell, switchStateChanged isOn: Bool)
+protocol ThemeSwitchTableViewCellDelegate: AnyObject {
+    func didChangeTheme(_ cell: ThemeSwitchTableViewCell, switchStateChanged isOn: Bool)
 }
 
-class HideTokenSwitchTableViewCell: UITableViewCell {
+class ThemeSwitchTableViewCell: UITableViewCell {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -32,7 +32,7 @@ class HideTokenSwitchTableViewCell: UITableViewCell {
         set { switchView.isOn = newValue }
     }
 
-    weak var delegate: HideTokenSwitchTableViewCellDelegate?
+    weak var delegate: ThemeSwitchTableViewCellDelegate?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -57,21 +57,21 @@ class HideTokenSwitchTableViewCell: UITableViewCell {
     }
 
     @objc private func switchChanged(_ sender: UISwitch) {
-        delegate?.cell(self, switchStateChanged: sender.isOn)
+        delegate?.didChangeTheme(self, switchStateChanged: sender.isOn)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: HideTokenSwitchTableViewCellViewModel) {
+    func configure(viewModel: ThemeSwitchTableViewCellViewModel) {
         titleLabel.text = viewModel.titleText
         titleLabel.font = viewModel.titleFont
         titleLabel.textColor = viewModel.titleTextColor
         iconImageView.image = viewModel.icon
-        let usrDefault = UserDefaults.standard
-        switchView.isOn =   usrDefault.bool(forKey: "HideToken")
 //        switchView.isOn = viewModel.value
+        let usrDefault = UserDefaults.standard
+        switchView.isOn =   usrDefault.bool(forKey: "DarkModeOn")
     }
 }
 

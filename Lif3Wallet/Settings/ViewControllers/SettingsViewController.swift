@@ -25,6 +25,7 @@ class SettingsViewController: UIViewController {
         tableView.register(SettingTableViewCell.self)
         tableView.register(SwitchTableViewCell.self)
         tableView.register(HideTokenSwitchTableViewCell.self)
+        tableView.register(ThemeSwitchTableViewCell.self)
         tableView.separatorStyle = .singleLine
         tableView.estimatedRowHeight = Metrics.anArbitraryRowHeightSoAutoSizingCellsWorkIniOS10
         tableView.delegate = self
@@ -143,18 +144,7 @@ extension SettingsViewController: CanOpenURL {
 
 extension SettingsViewController: SwitchTableViewCellDelegate {
     
-    func didEnableDarkTheme(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool) {
-        guard let _ = cell.indexPath else { return }
-        let userDefault = UserDefaults.standard
-        let window = UIApplication.shared.windows.first
-        if (isOn == true) {
-            userDefault.set(true, forKey: "DarkModeOn")
-            window?.overrideUserInterfaceStyle = .dark
-        } else {
-            userDefault.set(false, forKey: "DarkModeOn")
-            window?.overrideUserInterfaceStyle = .light
-        }
-    }
+   
 
     func cell(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool) {
         guard let indexPath = cell.indexPath else { return }
@@ -165,6 +155,7 @@ extension SettingsViewController: SwitchTableViewCellDelegate {
 extension SettingsViewController: HideTokenSwitchTableViewCellDelegate {
 
     func cell(_ cell: HideTokenSwitchTableViewCell, switchStateChanged isOn: Bool) {
+        
         self.view.isUserInteractionEnabled = false
         let usrDefault = UserDefaults.standard
         if (usrDefault.bool(forKey: "HideToken") == true) {
@@ -173,6 +164,25 @@ extension SettingsViewController: HideTokenSwitchTableViewCellDelegate {
             usrDefault.set(true, forKey: "HideToken")
         }
         NotificationCenter.default.post(name: Notification.Name("HideTokenNotification"), object: nil)
+        self.view.isUserInteractionEnabled = true
+       
+      
+    }
+}
+
+extension SettingsViewController: ThemeSwitchTableViewCellDelegate {
+
+    func didChangeTheme(_ cell: ThemeSwitchTableViewCell, switchStateChanged isOn: Bool) {
+        self.view.isUserInteractionEnabled = false
+        let userDefault = UserDefaults.standard
+        let window = UIApplication.shared.windows.first
+        if (userDefault.bool(forKey: "DarkModeOn") == true) {
+            window?.overrideUserInterfaceStyle = .light
+            userDefault.set(false, forKey: "DarkModeOn")
+        } else {
+            window?.overrideUserInterfaceStyle = .dark
+            userDefault.set(true, forKey: "DarkModeOn")
+        }
         self.view.isUserInteractionEnabled = true
       
     }
@@ -194,7 +204,6 @@ fileprivate extension SettingsViewController {
             case .passcode(let vm):
                 let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
-                cell.isforTheme = false
                 cell.delegate = self
                
                 return cell
@@ -204,9 +213,8 @@ fileprivate extension SettingsViewController {
                 cell.delegate = self
                 return cell
             case .theme(let vm):
-                let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                let cell: ThemeSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: vm)
-                cell.isforTheme = true
                 cell.delegate = self
                 return cell
             }

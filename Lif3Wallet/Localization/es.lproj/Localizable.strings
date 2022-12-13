@@ -10,9 +10,9 @@
 "Delete" = "Eliminar";
 "Reload" = "Volver a cargar";
 "Share" = "Compartir";
-"setAsHomePage" = "Set as Home Page";
-"browserHistory" = "History";
-"myBookmarks" = "My Bookmarks";
+"setAsHomePage" = "Establecer como página inicial ";
+"browserHistory" = "Historial";
+"myBookmarks" = "Mis marcadores";
 "New" = "Nuevo";
 "Bookmarks" = "Marcadores";
 "History" = "Historial";

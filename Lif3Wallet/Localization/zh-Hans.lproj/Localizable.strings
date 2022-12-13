@@ -125,11 +125,14 @@
 "settings.pingInfura.fail" = "Infura Error";
 "settings.support.title" = "支持";
 "settings.support.darkMode" = "DarkMode";
+"settings.helpCenter.title" = "Help Center";
+"settings.about.title" = "About";
 "settings.notifications.title" = "通知设置";
 "settings.passcode.title" = "密码 / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";
 "settings.selectActiveNetworks.title" = "Select Active Networks";
 "settings.section.help.title" = "帮助";
+"settings.section.social.title" = "Social";
 "settings.section.system.title" = "系统";
 "settings.section.wallet.title" = "我的钱包";
 "settings.change.wallet.title" = "更改/添加钱包";

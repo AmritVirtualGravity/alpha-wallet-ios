@@ -114,6 +114,7 @@ extension SettingsCoordinator: LockCreatePasscodeCoordinatorDelegate {
 
 extension SettingsCoordinator: SettingsViewControllerDelegate {
     
+
     func createPasswordSelected(in controller: SettingsViewController) {
         let coordinator = LockCreatePasscodeCoordinator(navigationController: navigationController, lock: lock)
         addCoordinator(coordinator)
@@ -215,6 +216,8 @@ extension SettingsCoordinator: SupportCoordinatorDelegate {
 }
 
 extension SettingsCoordinator: CanOpenURL {
+
+    
     func didPressViewContractWebPage(forContract contract: AlphaWallet.Address, server: RPCServer, in viewController: UIViewController) {
         delegate?.didPressViewContractWebPage(forContract: contract, server: server, in: viewController)
     }

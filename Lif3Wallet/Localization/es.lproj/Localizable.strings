@@ -125,11 +125,14 @@
 "settings.pingInfura.fail" = "Infura Error";
 "settings.support.title" = "Asistencia";
 "settings.support.darkMode" = "DarkMode";
+"settings.helpCenter.title" = "Help Center";
+"settings.about.title" = "About";
 "settings.notifications.title" = "Notificaciones";
 "settings.passcode.title" = "Código / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";
 "settings.selectActiveNetworks.title" = "Seleccionar redes activas";
 "settings.section.help.title" = "Ayuda";
+"settings.section.social.title" = "Social";
 "settings.section.system.title" = "Sistema";
 "settings.section.wallet.title" = "Monedero";
 "settings.change.wallet.title" = "Cambiar / Añadir monedero";

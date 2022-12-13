@@ -120,6 +120,8 @@ final class SettingsViewModel {
                 case .theme: return nil
                 }
             case .help, .tokenStandard, .version, .wallet: return nil
+            case .social:
+                return nil
             }
         }.compactMap { [lock, analytics] isOn -> Void? in
             analytics.setUser(property: Analytics.UserProperties.isAppPasscodeOrBiometricProtectionEnabled, value: isOn)
@@ -176,8 +178,10 @@ final class SettingsViewModel {
                 let usrDefault = UserDefaults.standard
                 return .theme(.init(titleText: R.string.localizable.settingsSupportDarkMode(), icon: R.image.biometrics()!, value: usrDefault.bool(forKey: "DarkModeOn")))
             }
-        case .help:
-            return .cell(.init(titleText: R.string.localizable.settingsSupportTitle(), icon: R.image.support()!))
+        case .help(let rows):
+            let row = rows[indexPath.row]
+            return .cell(.init(settingsSupportRow: row))
+          
         case .wallet(let rows):
             let row = rows[indexPath.row]
             switch row {
@@ -192,6 +196,9 @@ final class SettingsViewModel {
             }
         case .tokenStandard, .version:
             return .undefined
+        case .social(let rows):
+            let row = rows[indexPath.row]
+            return .cell(.init(settingsSocialMediaRow: row))
         }
     }
 }
@@ -240,11 +247,25 @@ extension SettingsViewModel {
         case hideToken
         case theme
     }
+    
+    
+    enum SettingsSocialMediaRow {
+        case twitter
+        case telegram
+        case instagram
+        case discord
+    }
+    
+    enum SettingsSupportRow {
+        case helpCenter
+        case about
+    }
 
     enum SettingsSection {
         case wallet(rows: [SettingsWalletRow])
         case system(rows: [SettingsSystemRow])
-        case help
+        case help(rows: [SettingsSupportRow])
+        case social(rows: [SettingsSocialMediaRow])
         case version(value: String)
         case tokenStandard(value: String)
     }
@@ -293,11 +314,14 @@ extension SettingsViewModel.functional {
 //            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
         let systemRows: [SettingsViewModel.SettingsSystemRow] = [.passcode, .selectActiveNetworks, .advanced, .hideToken, .theme]
+        let socialMediaRows: [SettingsViewModel.SettingsSocialMediaRow] = [.twitter, .telegram, .instagram, .discord]
+        let supportRows: [SettingsViewModel.SettingsSupportRow] = [.helpCenter, .about]
         
         return [
             .wallet(rows: walletRows),
             .system(rows: systemRows),
-            .help,
+            .help(rows: supportRows),
+            .social(rows: socialMediaRows),
             .version(value: Bundle.main.fullVersion),
             .tokenStandard(value: "\(TokenScript.supportedTokenScriptNamespaceVersion)")
         ]
@@ -420,6 +444,82 @@ extension SettingsViewModel.SettingsSystemRow {
     }
 }
 
+extension SettingsViewModel.SettingsSocialMediaRow  {
+
+    var title: String {
+        switch self {
+        case .discord:
+            return R.string.localizable.urlDiscord()
+        case .twitter:
+            return R.string.localizable.urlTwitter()
+        case .instagram:
+            return R.string.localizable.instagram()
+        case .telegram:
+            return R.string.localizable.telegram()
+        }
+    }
+
+    var icon: UIImage? {
+        switch self {
+        case .discord:
+            return R.image.iconsSettingsDiscord()
+        case .twitter:
+            return R.image.settings_twitter()
+        case .instagram:
+            return R.image.settings_instagram()
+            
+        case .telegram:
+            return R.image.settings_telegram()
+        }
+    }
+    
+    var openUrl: URL? {
+        switch self {
+        case .discord:
+            return URL(string: "https://discord.com/invite/vANnESmVdz")
+        case .twitter:
+            return URL(string: "https://twitter.com/Official_LIF3")
+        case .instagram:
+            return URL(string: "https://www.instagram.com/lif3official/")
+        case .telegram:
+            return URL(string: "https://t.me/Lif3_Official")
+         
+        }
+    }
+}
+
+extension SettingsViewModel.SettingsSupportRow  {
+
+    var title: String {
+        switch self {
+        case .helpCenter:
+            return R.string.localizable.settingsHelpCenterTitle()
+        case .about:
+            return R.string.localizable.settingsAboutTitle()
+        }
+    }
+
+    var icon: UIImage? {
+        switch self {
+        case .helpCenter:
+            return R.image.iconsSupportHelpCenter()
+        case .about:
+            return R.image.iconsSupportAbout()
+        }
+    }
+    
+    var openUrl: URL? {
+        switch self {
+        case .helpCenter:
+            return URL(string: "https://support.lif3.com")
+        case .about:
+            return URL(string: "https://support.lif3.com")
+       
+         
+        }
+    }
+}
+
 extension SettingsViewModel.SettingsSection {
     var title: String {
         switch self {
@@ -430,12 +530,14 @@ extension SettingsViewModel.SettingsSection {
 //            return R.string.localizable.settingsSectionSystemTitle().uppercased()
             return R.string.localizable.settingsSectionSystemTitle()
         case .help:
-            return R.string.localizable.settingsSectionHelpTitle()
+            return R.string.localizable.suppportTitle()
 //            return R.string.localizable.settingsSectionHelpTitle().uppercased()
         case .version:
             return R.string.localizable.settingsVersionLabelTitle()
         case .tokenStandard:
             return R.string.localizable.settingsTokenScriptStandardTitle()
+        case .social:
+            return R.string.localizable.settingsSectionSocialTitle()
         }
     }
 
@@ -443,12 +545,14 @@ extension SettingsViewModel.SettingsSection {
         switch self {
         case .wallet(let rows):
             return rows.count
-        case .help:
-            return 1
+        case .help(let rows):
+            return rows.count
         case .system(let rows):
             return rows.count
         case .version, .tokenStandard:
             return 0
+        case .social(let rows):
+            return rows.count
         }
     }
 }
@@ -466,11 +570,15 @@ extension SettingsViewModel.SettingsSection: Hashable {
             return r1 == r2
         case (.system(let r1), .system(let r2)):
             return r1 == r2
-        case (.wallet, .tokenStandard), (.wallet, .version), (.wallet, .help), (.wallet, .system), (.system, .tokenStandard), (.system, .version), (.system, .help), (.system, .wallet):
+        case (.social(let r1), .social(let r2)):
+            return r1 == r2
+        case (.wallet, .tokenStandard), (.wallet, .version), (.wallet, .help), (.wallet, .system), (.wallet, .social),(.system, .tokenStandard), (.system, .version), (.system, .help), (.system, .wallet), (.system, .social):
             return false
-        case (.version, .help), (.version, .system), (.version, .wallet), (.tokenStandard, .version), (.tokenStandard, .help), (.tokenStandard, .system), (.tokenStandard, .wallet):
+        case (.version, .help), (.version, .system), (.version, .wallet), (.version, .social),(.tokenStandard, .version), (.tokenStandard, .help), (.tokenStandard, .system), (.tokenStandard, .wallet), (.tokenStandard, .social):
             return false
-        case (.help, .tokenStandard), (.help, .version), (.help, .system), (.help, .wallet), (.version, .tokenStandard):
+        case (.help, .tokenStandard), (.help, .version), (.help, .system), (.help, .wallet),  (.help, .social),(.version, .tokenStandard):
+            return false
+        case (.social, .tokenStandard), (.social, .version), (.social, .system), (.social, .wallet),  (.social, .help):
             return false
         }
     }

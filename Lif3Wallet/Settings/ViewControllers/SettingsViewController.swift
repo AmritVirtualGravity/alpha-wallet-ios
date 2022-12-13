@@ -129,6 +129,8 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController: CanOpenURL {
 
+    
+
     func didPressViewContractWebPage(forContract contract: AlphaWallet.Address, server: RPCServer, in viewController: UIViewController) {
         delegate?.didPressViewContractWebPage(forContract: contract, server: server, in: viewController)
     }
@@ -269,12 +271,22 @@ extension SettingsViewController: UITableViewDelegate {
             case .selectActiveNetworks:
                 delegate?.activeNetworksSelected(in: self)
             }
-        case .help:
-            delegate?.helpSelected(in: self)
+        case .help(let rows):
+            if let url = rows[indexPath.row].openUrl  {
+                delegate?.didPressOpenWebPage(url, in: self)
+            }
         case .tokenStandard:
             self.delegate?.didPressOpenWebPage(TokenScript.tokenScriptSite, in: self)
         case .version:
             break
+        case .social(let rows):
+            if let url = rows[indexPath.row].openUrl , UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: .none)
+            } else {
+                if let url = rows[indexPath.row].openUrl  {
+                    delegate?.didPressOpenWebPage(url, in: self)
+                }
+            }
         }
     }
 

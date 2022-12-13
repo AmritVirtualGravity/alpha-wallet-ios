@@ -53,7 +53,7 @@ struct ShowSeedPhraseIntroductionViewModel {
             .kern: 0.0
         ], range: NSRange(location: 0, length: description.count))
 
-        attributedString.addAttribute(.font, value: Screen.Backup.descriptionBoldFont, range: NSRange(location: 17, length: 5))
+//        attributedString.addAttribute(.font, value: Screen.Backup.descriptionBoldFont, range: NSRange(location: 17, length: 5))
 
         return attributedString
     }

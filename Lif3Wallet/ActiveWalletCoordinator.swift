@@ -420,7 +420,8 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
         } else {
             viewControllers.append(transactionCoordinator.navigationController)
         }
-        if Environment.isDebug && Features.default.isAvailable(.isSwapEnabled) {
+        /// removed 'Environment.isDebug' mode checking
+        if Features.default.isAvailable(.isSwapEnabled) {
             let swapDummyViewController = UIViewController()
             swapDummyViewController.tabBarItem = ActiveWalletViewModel.Tabs.swap.tabBarItem
             viewControllers.append(swapDummyViewController)

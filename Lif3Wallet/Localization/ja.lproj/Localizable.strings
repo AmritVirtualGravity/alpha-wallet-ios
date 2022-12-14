@@ -129,6 +129,7 @@
 "settings.notifications.title" = "Notifications";
 "settings.passcode.title" = "Passcode / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";
+"settings.security.title" = "Security";
 "settings.selectActiveNetworks.title" = "Select Active Networks";
 "settings.section.help.title" = "Help";
 "settings.section.social.title" = "Social";

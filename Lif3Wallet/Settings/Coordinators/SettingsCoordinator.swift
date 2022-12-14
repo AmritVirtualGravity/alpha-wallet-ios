@@ -114,6 +114,15 @@ extension SettingsCoordinator: LockCreatePasscodeCoordinatorDelegate {
 
 extension SettingsCoordinator: SettingsViewControllerDelegate {
     
+    func securitySelected(in controller: SettingsViewController) {
+        let viewModel = SecurityViewModel(config: config, lock: lock, analytics: analytics)
+        let viewController = SecurityViewController(viewModel: viewModel)
+        viewController.delegate = self
+        viewController.hidesBottomBarWhenPushed = true
+        viewController.navigationItem.largeTitleDisplayMode = .never
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
 
     func createPasswordSelected(in controller: SettingsViewController) {
         let coordinator = LockCreatePasscodeCoordinator(navigationController: navigationController, lock: lock)
@@ -206,6 +215,15 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
 extension SettingsCoordinator: ShowSeedPhraseCoordinatorDelegate {
     func didCancel(in coordinator: ShowSeedPhraseCoordinator) {
         removeCoordinator(coordinator)
+    }
+}
+
+extension SettingsCoordinator: SecurityViewControllerDelegate {
+    func createPasswordSelected(in controller: SecurityViewController) {
+        let coordinator = LockCreatePasscodeCoordinator(navigationController: navigationController, lock: lock)
+        addCoordinator(coordinator)
+        coordinator.delegate = self
+        coordinator.start()
     }
 }
 

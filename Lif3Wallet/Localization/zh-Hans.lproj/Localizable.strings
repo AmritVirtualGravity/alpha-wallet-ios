@@ -130,6 +130,7 @@
 "settings.notifications.title" = "通知设置";
 "settings.passcode.title" = "密码 / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";
+"settings.security.title" = "Security";
 "settings.selectActiveNetworks.title" = "Select Active Networks";
 "settings.section.help.title" = "帮助";
 "settings.section.social.title" = "Social";

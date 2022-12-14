@@ -13,7 +13,8 @@ struct EnabledServersViewModel {
     var sectionIndices: IndexSet {
         IndexSet(integersIn: Range(uncheckedBounds: (lower: 0, sections.count)))
     }
-    let sections: [Section] = [.mainnet, .testnet]
+    let sections: [Section] = [.mainnet, .testnet, .createNetwork]
+    let createNetworkRow: [CreateNetwork] = [.addChain, .browseChain]
     let servers: [RPCServer]
     private (set) var selectedServers: [RPCServer]
     private (set) var mode: Mode
@@ -38,6 +39,20 @@ struct EnabledServersViewModel {
         let warningImage = server.isDeprecated ? R.image.gasWarning() : nil
         
         return ServerImageViewModel(server: .server(server), isSelected: isServerSelected(server), isAvailableToSelect: !server.isDeprecated, warningImage: warningImage)
+    }
+    
+    func createNetworkViewModel(indexPath: IndexPath) -> SettingTableViewCellViewModel {
+        var title: String = ""
+        var icon: UIImage = R.image.notificationsCircle()!
+        
+        switch createNetworkRow[indexPath.row] {
+        case .addChain:
+            title = "Add a chain"
+        case .browseChain:
+            title = "Browse More Chains"
+        }
+        
+        return .init(titleText: title, icon: icon)
     }
 
     mutating func switchMode(to mode: Mode) {
@@ -90,6 +105,8 @@ struct EnabledServersViewModel {
             return serverCount(forMode: .testnet)
         case .mainnet:
             return serverCount(forMode: .mainnet)
+        case .createNetwork:
+            return 2
         }
     }
 
@@ -121,6 +138,7 @@ extension EnabledServersViewModel {
     enum Section {
         case testnet
         case mainnet
+        case createNetwork
     }
 
     enum Mode {
@@ -135,5 +153,9 @@ extension EnabledServersViewModel {
                 return R.string.localizable.settingsEnabledNetworksMainnet().uppercased()
             }
         }
+    }
+    
+    enum CreateNetwork {
+        case addChain, browseChain
     }
 }

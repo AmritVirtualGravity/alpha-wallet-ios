@@ -16,6 +16,7 @@ protocol SettingsViewControllerDelegate: class, CanOpenURL {
     func activeNetworksSelected(in controller: SettingsViewController)
     func createPasswordSelected(in controller: SettingsViewController)
     func helpSelected(in controller: SettingsViewController)
+    func securitySelected(in controller: SettingsViewController)
 }
 
 class SettingsViewController: UIViewController {
@@ -145,8 +146,6 @@ extension SettingsViewController: CanOpenURL {
 }
 
 extension SettingsViewController: SwitchTableViewCellDelegate {
-    
-   
 
     func cell(_ cell: SwitchTableViewCell, switchStateChanged isOn: Bool) {
         guard let indexPath = cell.indexPath else { return }
@@ -270,6 +269,8 @@ extension SettingsViewController: UITableViewDelegate {
                 break
             case .selectActiveNetworks:
                 delegate?.activeNetworksSelected(in: self)
+            case .security:
+                delegate?.securitySelected(in: self)
             }
         case .help(let rows):
             if let url = rows[indexPath.row].openUrl  {

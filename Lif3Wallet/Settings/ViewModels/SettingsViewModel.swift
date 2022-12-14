@@ -115,7 +115,7 @@ final class SettingsViewModel {
             case .system(let rows):
                 switch rows[event.indexPath.row] {
                 case .passcode: return event.isOn
-                case .notifications, .selectActiveNetworks, .advanced: return nil
+                case .notifications, .selectActiveNetworks, .advanced, .security: return nil
                 case .hideToken: return nil
                 case .theme: return nil
                 }
@@ -177,6 +177,8 @@ final class SettingsViewModel {
             case .theme:
                 let usrDefault = UserDefaults.standard
                 return .theme(.init(titleText: R.string.localizable.settingsSupportDarkMode(), icon: R.image.biometrics()!, value: usrDefault.bool(forKey: "DarkModeOn")))
+            case .security:
+                return .cell(.init(settingsSystemRow: row))
             }
         case .help(let rows):
             let row = rows[indexPath.row]
@@ -244,6 +246,7 @@ extension SettingsViewModel {
         case passcode
         case selectActiveNetworks
         case advanced
+        case security
         case hideToken
         case theme
     }
@@ -313,7 +316,7 @@ extension SettingsViewModel.functional {
             walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect]
 //            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
-        let systemRows: [SettingsViewModel.SettingsSystemRow] = [.passcode, .selectActiveNetworks, .advanced, .hideToken, .theme]
+        let systemRows: [SettingsViewModel.SettingsSystemRow] = [.selectActiveNetworks, .advanced, .hideToken, .theme, .security]
         let socialMediaRows: [SettingsViewModel.SettingsSocialMediaRow] = [.twitter, .telegram, .instagram, .discord]
         let supportRows: [SettingsViewModel.SettingsSupportRow] = [.helpCenter, .about]
         
@@ -419,6 +422,8 @@ extension SettingsViewModel.SettingsSystemRow {
             return R.string.localizable.settingsSelectActiveNetworksTitle()
         case .advanced:
             return R.string.localizable.advanced()
+        case .security:
+            return R.string.localizable.settingsSecurityTitle()
         case .hideToken:
             return R.string.localizable.settingsPasscodeTitle()
         case .theme:
@@ -435,6 +440,8 @@ extension SettingsViewModel.SettingsSystemRow {
         case .selectActiveNetworks:
             return R.image.networksCircle()!
         case .advanced:
+            return R.image.developerMode()!
+        case .security:
             return R.image.developerMode()!
         case .hideToken:
             return R.image.biometrics()!

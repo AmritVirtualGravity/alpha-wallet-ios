@@ -684,6 +684,9 @@
 		08A25852294073F100A31193 /* HelpViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A255DE294073EF00A31193 /* HelpViewCell.swift */; };
 		08A25854294073F100A31193 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A255E1294073EF00A31193 /* Localizable.strings */; };
 		08F0AE4C2940D93E00FBF77B /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */; };
+		10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E612949F98F00187A49 /* SecurityViewController.swift */; };
+		10645E642949FA9A00187A49 /* SecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E632949FA9A00187A49 /* SecurityViewModel.swift */; };
+		10645E66294A0ADA00187A49 /* SecurityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */; };
 		10D0D6C629477BF7001A87EC /* ThemeSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0D6C529477BF7001A87EC /* ThemeSwitchTableViewCell.swift */; };
 		10D0D6C829477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */; };
 		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
@@ -1562,6 +1565,9 @@
 		08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
 		102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		10645E612949F98F00187A49 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
+		10645E632949FA9A00187A49 /* SecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewModel.swift; sourceTree = "<group>"; };
+		10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityCoordinator.swift; sourceTree = "<group>"; };
 		10D0D6C529477BF7001A87EC /* ThemeSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
@@ -1952,6 +1958,7 @@
 				08A252E7294073EE00A31193 /* SupportCoordinator.swift */,
 				08A252E8294073EE00A31193 /* ServersCoordinator.swift */,
 				08A252E9294073EE00A31193 /* ConsoleCoordinator.swift */,
+				10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1980,6 +1987,7 @@
 				08A252FD294073EE00A31193 /* ConsoleViewModel.swift */,
 				08A252FE294073EE00A31193 /* AnalyticsViewModel.swift */,
 				10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */,
+				10645E632949FA9A00187A49 /* SecurityViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2041,6 +2049,7 @@
 				08A2531A294073EE00A31193 /* SupportViewController.swift */,
 				08A2531B294073EE00A31193 /* WellDoneViewController.swift */,
 				08A2531C294073EE00A31193 /* SettingsViewController.swift */,
+				10645E612949F98F00187A49 /* SecurityViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -4960,6 +4969,7 @@
 				08A256D3294073F000A31193 /* RedeemTokenCardQuantitySelectionViewController.swift in Sources */,
 				08A2570D294073F000A31193 /* WalletConnectServerProvider.swift in Sources */,
 				08760C9F294079AD00F83AB3 /* BrowserHistoryCell.swift in Sources */,
+				10645E642949FA9A00187A49 /* SecurityViewModel.swift in Sources */,
 				08A25837294073F100A31193 /* SelectTokenViewController.swift in Sources */,
 				08A25749294073F000A31193 /* AmountTextFieldViewModel.swift in Sources */,
 				08A2575F294073F000A31193 /* SvgImageView.swift in Sources */,
@@ -5110,6 +5120,7 @@
 				08A256D2294073F000A31193 /* RedeemTokenCardQuantitySelectionViewModel.swift in Sources */,
 				08A25783294073F000A31193 /* JailbreakChecker.swift in Sources */,
 				08A256E8294073F000A31193 /* UIActivityViewController.swift in Sources */,
+				10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */,
 				08A2583D294073F100A31193 /* TokensViewControllerTableViewSectionHeader.swift in Sources */,
 				08A2580E294073F100A31193 /* NFTCollectionViewModel.swift in Sources */,
 				08A257E2294073F100A31193 /* StatusViewController.swift in Sources */,
@@ -5258,6 +5269,7 @@
 				08A2567B294073EF00A31193 /* SwapStepView.swift in Sources */,
 				08A25659294073EF00A31193 /* SelectSwapRouteViewModel.swift in Sources */,
 				08A257F8294073F100A31193 /* AddHideTokenSectionHeaderViewModel.swift in Sources */,
+				10645E66294A0ADA00187A49 /* SecurityCoordinator.swift in Sources */,
 				08A257A9294073F000A31193 /* EnterPasswordViewModel.swift in Sources */,
 				08A25628294073EF00A31193 /* SettingViewHeader.swift in Sources */,
 				08A25629294073EF00A31193 /* ServerViewCell.swift in Sources */,

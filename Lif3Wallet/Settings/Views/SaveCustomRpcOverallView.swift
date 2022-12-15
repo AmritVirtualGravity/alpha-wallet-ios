@@ -23,6 +23,7 @@ class SaveCustomRpcOverallView: UIView {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.heightAnchor.constraint(equalToConstant: DataEntry.Metric.TabBar.height).isActive = true
         segmentedControl.backgroundColor = cellConfiguration.backgroundColor
+        segmentedControl.isHidden = true
         return segmentedControl
     }()
 
@@ -64,7 +65,7 @@ class SaveCustomRpcOverallView: UIView {
         addSubview(containerView)
         bottomConstraint = containerView.bottomAnchor.constraint(equalTo: bottomAnchor)
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor),
+            containerView.topAnchor.constraint(equalTo: topAnchor),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomConstraint!

@@ -6,6 +6,7 @@ import AlphaWalletFoundation
 protocol EnabledServersViewControllerDelegate: AnyObject {
     func didEditSelectedServer(customRpc: CustomRPC, in viewController: EnabledServersViewController)
     func notifyReloadServersQueued(in viewController: EnabledServersViewController)
+    func createNetworkSectionSelection(for type: EnabledServersViewModel.CreateNetwork)
 }
 
 class EnabledServersViewController: UIViewController {
@@ -132,6 +133,12 @@ extension EnabledServersViewController: UITableViewDelegate, UITableViewDataSour
             return cell
         case .createNetwork:
             let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.iconImageView.removeConstraints(cell.iconImageView.constraints)
+            cell.iconImageView.contentMode = .scaleAspectFit
+            NSLayoutConstraint.activate([
+                cell.iconImageView.heightAnchor.constraint(equalToConstant: 30),
+                cell.iconImageView.widthAnchor.constraint(equalToConstant: 30),
+            ])
             cell.configure(viewModel: viewModel.createNetworkViewModel(indexPath: indexPath))
             return cell
         }
@@ -145,6 +152,9 @@ extension EnabledServersViewController: UITableViewDelegate, UITableViewDataSour
             configure(viewModel: viewModel)
             tableView.reloadData()
             //Even if no servers is selected, we don't attempt to disable the back button here since calling code will take care of ignore the change server "request" when there are no servers selected. We don't want to disable the back button because users can't cancel the operation
+        } else if sectionType == .createNetwork {
+            let rowType = viewModel.createNetworkRow[indexPath.row]
+            delegate?.createNetworkSectionSelection(for: rowType)
         }
     }
 

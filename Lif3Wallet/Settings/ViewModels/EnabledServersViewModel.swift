@@ -43,13 +43,15 @@ struct EnabledServersViewModel {
     
     func createNetworkViewModel(indexPath: IndexPath) -> SettingTableViewCellViewModel {
         var title: String = ""
-        var icon: UIImage = R.image.notificationsCircle()!
+        var icon: UIImage?
         
         switch createNetworkRow[indexPath.row] {
         case .addChain:
             title = "Add a chain"
+            icon = R.image.add_chain()!
         case .browseChain:
             title = "Browse More Chains"
+            icon = R.image.browse_chain()!
         }
         
         return .init(titleText: title, icon: icon)

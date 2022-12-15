@@ -96,12 +96,13 @@ class SaveCustomRpcBrowseViewController: UIViewController {
     // MARK: - Configuration
 
     private func configureViewController() {
-        configureSearchBar()
+//        configureSearchBar()
         configureTableViewController()
         configureEmptyView()
         configureAddNetworkButton()
         tableViewTopToTopLayout = tableViewController.tableView.topAnchor.constraint(equalTo: browseView.topAnchor)
-        tableViewTopToSearchBarLayout = tableViewController.tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor)
+//        tableViewTopToSearchBarLayout = tableViewController.tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor)
+        tableViewTopToSearchBarLayout = tableViewController.tableView.topAnchor.constraint(equalTo: browseView.topAnchor)
         showSearchBar()
     }
 

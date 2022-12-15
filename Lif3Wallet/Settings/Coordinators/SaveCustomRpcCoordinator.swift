@@ -24,30 +24,44 @@ class SaveCustomRpcCoordinator: NSObject, Coordinator {
     private let analytics: AnalyticsLogger
     private let operation: SaveOperationType
     private var activeViewController: OverallProtocol?
+    var networkType: EnabledServersViewModel.CreateNetwork
 
     var coordinators: [Coordinator] = []
     weak var delegate: SaveCustomRpcCoordinatorDelegate?
 
-    init(navigationController: UINavigationController, config: Config, restartQueue: RestartTaskQueue, analytics: AnalyticsLogger, operation: SaveOperationType) {
+    init(navigationController: UINavigationController, config: Config, restartQueue: RestartTaskQueue, analytics: AnalyticsLogger, operation: SaveOperationType, networkType: EnabledServersViewModel.CreateNetwork) {
         self.navigationController = navigationController
         self.config = config
         self.restartQueue = restartQueue
         self.analytics = analytics
         self.operation = operation
+        self.networkType = networkType
     }
 
     func start() {
-        switch operation {
-        case .add:
-            startAdd()
-        case .edit:
-            startEdit()
-        }
+//        switch operation {
+//        case .add:
+//            startAdd()
+//        case .edit:
+//            startEdit()
+//        }
+        
+        startAddChain()
     }
-
+    
+    func startAddChain() {
+        let model = SaveCustomRpcOverallModel(manualOperation: operation, browseModel: computeRpcList())
+        let viewController = SaveCustomRpcOverallViewController(model: model, networkType: self.networkType)
+        viewController.browseDataDelegate = self
+        viewController.manualDataDelegate = self
+        activeViewController = viewController
+        setNavigationTitle(viewController: viewController)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
     private func startAdd() {
         let model = SaveCustomRpcOverallModel(manualOperation: operation, browseModel: computeRpcList())
-        let viewController = SaveCustomRpcOverallViewController(model: model)
+        let viewController = SaveCustomRpcOverallViewController(model: model, networkType: self.networkType)
         viewController.browseDataDelegate = self
         viewController.manualDataDelegate = self
         activeViewController = viewController

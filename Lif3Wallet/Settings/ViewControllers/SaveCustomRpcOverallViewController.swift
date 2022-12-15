@@ -42,6 +42,7 @@ class SaveCustomRpcOverallViewController: UIViewController, SaveCustomRpcHandleU
     private var browseViewController: SaveCustomRpcBrowseViewController
     private var entryViewController: SaveCustomRpcManualEntryViewController
     private var selection: ControlSelection = .selected(UInt(SaveCustomRpcOverallTab.browse.position))
+    private let networkType: EnabledServersViewModel.CreateNetwork
 
     // MARK: Public
 
@@ -79,8 +80,9 @@ class SaveCustomRpcOverallViewController: UIViewController, SaveCustomRpcHandleU
 
     // MARK: - Constructors
 
-    init(model: SaveCustomRpcOverallModel) {
+    init(model: SaveCustomRpcOverallModel, networkType: EnabledServersViewModel.CreateNetwork) {
         self.model = model
+        self.networkType = networkType
         let viewModel = SaveCustomRpcBrowseDataController(customRpcs: model.browseModel)
         browseViewController = SaveCustomRpcBrowseViewController(viewModel: viewModel)
         viewModel.dataObserver = browseViewController

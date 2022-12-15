@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class SettingTableViewCell: UITableViewCell {
-    private let iconImageView: UIImageView = {
+    let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false

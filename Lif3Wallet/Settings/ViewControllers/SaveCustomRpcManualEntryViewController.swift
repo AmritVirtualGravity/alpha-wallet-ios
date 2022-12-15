@@ -88,7 +88,9 @@ class SaveCustomRpcManualEntryViewController: UIViewController, SaveCustomRpcHan
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapSelected))
         editView.addBackgroundGestureRecognizer(tap)
-        editView.isTestNetworkView.configure(viewModel: SwitchViewViewModel(text: R.string.localizable.addrpcServerIsTestnetTitle(), isOn: viewModel.isTestnet))
+        editView.isTestNetworkView.configure(viewModel: SwitchViewViewModel(text: R.string.localizable.testNetwork(), isOn: viewModel.isTestnet))
+        editView.isTestNetworkView.backgroundColor = .clear
+        editView.isTestNetworkView.label.backgroundColor = .clear
         if viewModel.isEditOperation {
             editView.configureKeyboard(keyboardChecker: keyboardChecker)
         }

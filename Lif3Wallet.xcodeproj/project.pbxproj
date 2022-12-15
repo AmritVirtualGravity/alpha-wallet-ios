@@ -683,6 +683,7 @@
 		08A25851294073F100A31193 /* ContactUsBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A255DD294073EF00A31193 /* ContactUsBannerView.swift */; };
 		08A25852294073F100A31193 /* HelpViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A255DE294073EF00A31193 /* HelpViewCell.swift */; };
 		08A25854294073F100A31193 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A255E1294073EF00A31193 /* Localizable.strings */; };
+		08B108B8294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */; };
 		08F0AE4C2940D93E00FBF77B /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */; };
 		10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E612949F98F00187A49 /* SecurityViewController.swift */; };
 		10645E642949FA9A00187A49 /* SecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E632949FA9A00187A49 /* SecurityViewModel.swift */; };
@@ -1564,6 +1565,7 @@
 		08A255E5294073EF00A31193 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A255E6294073EF00A31193 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A255E7294073EF00A31193 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveNewtworkTableVIewCell.swift; sourceTree = "<group>"; };
 		08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
 		102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -2063,6 +2065,7 @@
 		08A2531D294073EE00A31193 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				08B108B6294A2AA800B658F8 /* TableVIewCells */,
 				08A2531E294073EE00A31193 /* LocaleViewCell.swift */,
 				08A2531F294073EE00A31193 /* SaveCustomRpcOverallView.swift */,
 				08A25320294073EE00A31193 /* EmptyTableView.swift */,
@@ -3739,6 +3742,14 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		08B108B6294A2AA800B658F8 /* TableVIewCells */ = {
+			isa = PBXGroup;
+			children = (
+				08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */,
+			);
+			path = TableVIewCells;
+			sourceTree = "<group>";
+		};
 		08F0AE4A2940D93D00FBF77B /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
@@ -5133,6 +5144,7 @@
 				08A25661294073EF00A31193 /* SelectSwapToolViewController.swift in Sources */,
 				08A25630294073EF00A31193 /* SettingsHeaderView.swift in Sources */,
 				08A2574F294073F000A31193 /* VerticalButtonsBar.swift in Sources */,
+				08B108B8294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift in Sources */,
 				08A256C4294073F000A31193 /* ConfirmationHeaderView.swift in Sources */,
 				08A25821294073F100A31193 /* TokenHistoryPeriodSelectorView.swift in Sources */,
 				08A25689294073EF00A31193 /* WalletPupupCoordinator.swift in Sources */,

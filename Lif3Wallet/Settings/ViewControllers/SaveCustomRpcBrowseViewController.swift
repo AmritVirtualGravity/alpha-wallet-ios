@@ -41,15 +41,16 @@ class SaveCustomRpcBrowseViewController: UIViewController {
     // MARK: - UI Elements
 
     private lazy var tableViewController: UITableViewController = {
-        let tableViewController = UITableViewController(style: .grouped)
+        let tableViewController = UITableViewController(style: .insetGrouped)
         tableViewController.tableView.dataSource = dataController
         tableViewController.tableView.translatesAutoresizingMaskIntoConstraints = false
         tableViewController.tableView.delegate = dataController
-        tableViewController.tableView.separatorStyle = .singleLine
+//        tableViewController.tableView.separatorStyle = .singleLine
         tableViewController.tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
         tableViewController.tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
         tableViewController.tableView.isEditing = false
         tableViewController.tableView.register(RPCDisplayTableViewCell.self)
+        tableViewController.tableView.register(ActiveNewtworkTableVIewCell.self)
         return tableViewController
     }()
 
@@ -96,12 +97,13 @@ class SaveCustomRpcBrowseViewController: UIViewController {
     // MARK: - Configuration
 
     private func configureViewController() {
-        configureSearchBar()
+//        configureSearchBar()
         configureTableViewController()
         configureEmptyView()
         configureAddNetworkButton()
         tableViewTopToTopLayout = tableViewController.tableView.topAnchor.constraint(equalTo: browseView.topAnchor)
-        tableViewTopToSearchBarLayout = tableViewController.tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor)
+//        tableViewTopToSearchBarLayout = tableViewController.tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor)
+        tableViewTopToSearchBarLayout = tableViewController.tableView.topAnchor.constraint(equalTo: browseView.topAnchor)
         showSearchBar()
     }
 

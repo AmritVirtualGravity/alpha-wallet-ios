@@ -24,7 +24,8 @@ class SaveCustomRpcManualEntryView: UIView {
         let textField = TextField.textField(
             keyboardType: .default,
             placeHolder: R.string.localizable.addrpcServerNetworkNameTitle(),
-            label: R.string.localizable.addrpcServerNetworkNameTitle())
+//            label: R.string.localizable.addrpcServerNetworkNameTitle())
+            label: "")
         return textField
     }()
 
@@ -32,7 +33,8 @@ class SaveCustomRpcManualEntryView: UIView {
         let textField = TextField.textField(
             keyboardType: .URL,
             placeHolder: R.string.localizable.addrpcServerRpcUrlPlaceholder(),
-            label: R.string.localizable.addrpcServerRpcUrlTitle())
+//            label: R.string.localizable.addrpcServerRpcUrlTitle())
+            label: "")
         return textField
     }()
 
@@ -40,7 +42,8 @@ class SaveCustomRpcManualEntryView: UIView {
         let textField = TextField.textField(
             keyboardType: .numberPad,
             placeHolder: R.string.localizable.chainID(),
-            label: R.string.localizable.chainID())
+//            label: R.string.localizable.chainID())
+            label: "")
         return textField
     }()
 
@@ -48,7 +51,8 @@ class SaveCustomRpcManualEntryView: UIView {
         let textField = TextField.textField(
             keyboardType: .default,
             placeHolder: R.string.localizable.symbol(),
-            label: R.string.localizable.symbol())
+//            label: R.string.localizable.symbol())
+            label: "")
         return textField
     }()
 
@@ -56,7 +60,8 @@ class SaveCustomRpcManualEntryView: UIView {
         let textField = TextField.textField(
             keyboardType: .URL,
             placeHolder: R.string.localizable.addrpcServerBlockExplorerUrlPlaceholder(),
-            label: R.string.localizable.addrpcServerBlockExplorerUrlTitle())
+//            label: R.string.localizable.addrpcServerBlockExplorerUrlTitle())
+            label: "")
         textField.returnKeyType = .done
         return textField
     }()
@@ -95,21 +100,58 @@ class SaveCustomRpcManualEntryView: UIView {
     }
 
     private func configure(isEmbedded: Bool) {
+        allTextFields.forEach({
+            $0.textField.borderStyle = .none
+            $0.cornerRadius = 0
+            $0.borderWidth = 0
+        })
+        
         translatesAutoresizingMaskIntoConstraints = !isEmbedded
         scrollViewBottomConstraint = scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         if !isEmbedded {
             scrollViewBottomConstraint.constant = -UIApplication.shared.bottomSafeAreaHeight
         }
+        
+        let textFieldStackView = [
+            chainNameTextField.defaultLayout(isForNetwork: true),
+            rpcEndPointTextField.defaultLayout(isForNetwork: true),
+            chainIDTextField.defaultLayout(isForNetwork: true),
+            symbolTextField.defaultLayout(isForNetwork: true),
+            explorerEndpointTextField.defaultLayout(isForNetwork: true),
+        ].asStackView(axis: .vertical)
+        textFieldStackView.cornerRadius = 10
+        
+        let bottomView: UIView = {
+            let view = UIView()
+            view.backgroundColor = Configuration.Color.Semantic.textFieldBackground
+            view.cornerRadius = 10
+            view.addSubview(isTestNetworkView)
+            isTestNetworkView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                isTestNetworkView.topAnchor.constraint(equalTo: view.topAnchor, constant: 6),
+                isTestNetworkView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                isTestNetworkView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                isTestNetworkView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -6)
+            ])
+            return view
+        }()
 
+//        let stackView = [
+//            chainNameTextField.defaultLayout(),
+//            rpcEndPointTextField.defaultLayout(),
+//            chainIDTextField.defaultLayout(),
+//            symbolTextField.defaultLayout(),
+//            explorerEndpointTextField.defaultLayout(),
+//            isTestNetworkView,
+//            .spacer(height: 40)
+//        ].asStackView(axis: .vertical)
+        
         let stackView = [
-            chainNameTextField.defaultLayout(),
-            rpcEndPointTextField.defaultLayout(),
-            chainIDTextField.defaultLayout(),
-            symbolTextField.defaultLayout(),
-            explorerEndpointTextField.defaultLayout(),
-            isTestNetworkView,
+            textFieldStackView,
+            bottomView,
             .spacer(height: 40)
         ].asStackView(axis: .vertical)
+        stackView.setCustomSpacing(15, after: textFieldStackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
 

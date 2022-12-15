@@ -6,17 +6,19 @@ import AlphaWalletFoundation
 protocol EnabledServersViewControllerDelegate: AnyObject {
     func didEditSelectedServer(customRpc: CustomRPC, in viewController: EnabledServersViewController)
     func notifyReloadServersQueued(in viewController: EnabledServersViewController)
+    func createNetworkSectionSelection(for type: EnabledServersViewModel.CreateNetwork)
 }
 
 class EnabledServersViewController: UIViewController {
     private let headers = (mainnet: EnableServersHeaderView(), testnet: EnableServersHeaderView())
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.insetGroped
         tableView.delegate = self
         tableView.register(RPCDisplaySelectableTableViewCell.self)
+        tableView.register(ActiveNewtworkTableVIewCell.self)
+        tableView.register(SettingTableViewCell.self)
         tableView.dataSource = self
         tableView.isEditing = false
-
         return tableView
     }()
     private var viewModel: EnabledServersViewModel
@@ -43,7 +45,8 @@ class EnabledServersViewController: UIViewController {
 
     private func configure(viewModel: EnabledServersViewModel) {
         self.viewModel = viewModel
-        title = viewModel.title
+//        title = viewModel.title
+        title = "Active Networks"
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -87,24 +90,24 @@ extension EnabledServersViewController: UITableViewDelegate, UITableViewDataSour
         viewModel.numberOfRowsInSection(section)
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView: EnableServersHeaderView
-        switch viewModel.sections[section] {
-        case .testnet:
-            headerView = headers.testnet
-            headerView.configure(mode: .testnet, isEnabled: viewModel.mode == .testnet)
-        case .mainnet:
-            headerView = headers.mainnet
-            headerView.configure(mode: .mainnet, isEnabled: viewModel.mode == .mainnet)
-        }
-
-        headerView.delegate = self
-        return headerView
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        50
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView: EnableServersHeaderView
+//        switch viewModel.sections[section] {
+//        case .testnet:
+//            headerView = headers.testnet
+//            headerView.configure(mode: .testnet, isEnabled: viewModel.mode == .testnet)
+//        case .mainnet:
+//            headerView = headers.mainnet
+//            headerView.configure(mode: .mainnet, isEnabled: viewModel.mode == .mainnet)
+//        }
+//
+//        headerView.delegate = self
+//        return headerView
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        50
+//    }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         .leastNormalMagnitude
@@ -115,22 +118,44 @@ extension EnabledServersViewController: UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+        return 44
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: RPCDisplaySelectableTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.configure(viewModel: viewModel.serverViewModel(indexPath: indexPath))
-
-        return cell
+        switch viewModel.sections[indexPath.section] {
+        case .mainnet:
+            let cell: ActiveNewtworkTableVIewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.configure(viewModel: viewModel.serverViewModel(indexPath: indexPath))
+            return cell
+        case .testnet:
+            let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+//            cell.configure(viewModel: viewModel.serverViewModel(indexPath: indexPath))
+            return cell
+        case .createNetwork:
+            let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.iconImageView.removeConstraints(cell.iconImageView.constraints)
+            cell.iconImageView.contentMode = .scaleAspectFit
+            NSLayoutConstraint.activate([
+                cell.iconImageView.heightAnchor.constraint(equalToConstant: 30),
+                cell.iconImageView.widthAnchor.constraint(equalToConstant: 30),
+            ])
+            cell.configure(viewModel: viewModel.createNetworkViewModel(indexPath: indexPath))
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        viewModel.selectServer(indexPath: indexPath)
-        configure(viewModel: viewModel)
-        tableView.reloadData()
-        //Even if no servers is selected, we don't attempt to disable the back button here since calling code will take care of ignore the change server "request" when there are no servers selected. We don't want to disable the back button because users can't cancel the operation
+        let sectionType = viewModel.sections[indexPath.section]
+        if sectionType == .mainnet || sectionType == .testnet {
+            tableView.deselectRow(at: indexPath, animated: true)
+            viewModel.selectServer(indexPath: indexPath)
+            configure(viewModel: viewModel)
+            tableView.reloadData()
+            //Even if no servers is selected, we don't attempt to disable the back button here since calling code will take care of ignore the change server "request" when there are no servers selected. We don't want to disable the back button because users can't cancel the operation
+        } else if sectionType == .createNetwork {
+            let rowType = viewModel.createNetworkRow[indexPath.row]
+            delegate?.createNetworkSectionSelection(for: rowType)
+        }
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

@@ -25,7 +25,7 @@ class EnabledServersCoordinator: Coordinator {
         let controller = EnabledServersViewController(viewModel: viewModel)
         controller.delegate = self
         controller.hidesBottomBarWhenPushed = true
-        controller.navigationItem.rightBarButtonItem = .addBarButton(self, selector: #selector(addRPCSelected))
+//        controller.navigationItem.rightBarButtonItem = .addBarButton(self, selector: #selector(addRPCSelected))
 
         return controller
     }()
@@ -47,7 +47,7 @@ class EnabledServersCoordinator: Coordinator {
     }
 
     @objc private func addRPCSelected() {
-        let coordinator = SaveCustomRpcCoordinator(navigationController: navigationController, config: config, restartQueue: restartQueue, analytics: analytics, operation: .add)
+        let coordinator = SaveCustomRpcCoordinator(navigationController: navigationController, config: config, restartQueue: restartQueue, analytics: analytics, operation: .add, networkType: .addChain)
         addCoordinator(coordinator)
         coordinator.delegate = self
 
@@ -55,12 +55,21 @@ class EnabledServersCoordinator: Coordinator {
     }
     
     private func edit(customRpc: CustomRPC, in viewController: EnabledServersViewController) {
-        let coordinator = SaveCustomRpcCoordinator(navigationController: navigationController, config: config, restartQueue: restartQueue, analytics: analytics, operation: .edit(customRpc))
+        let coordinator = SaveCustomRpcCoordinator(navigationController: navigationController, config: config, restartQueue: restartQueue, analytics: analytics, operation: .edit(customRpc), networkType: .addChain)
         addCoordinator(coordinator)
         coordinator.delegate = self
 
         coordinator.start()
     }
+    
+    private func addRPCSelectedFor(networkType: EnabledServersViewModel.CreateNetwork) {
+        let coordinator = SaveCustomRpcCoordinator(navigationController: navigationController, config: config, restartQueue: restartQueue, analytics: analytics, operation: .add, networkType: networkType)
+        addCoordinator(coordinator)
+        coordinator.delegate = self
+
+        coordinator.start()
+    }
+    
 }
 
 extension EnabledServersCoordinator: EnabledServersViewControllerDelegate {
@@ -72,6 +81,11 @@ extension EnabledServersCoordinator: EnabledServersViewControllerDelegate {
     func didEditSelectedServer(customRpc: CustomRPC, in viewController: EnabledServersViewController) {
         self.edit(customRpc: customRpc, in: viewController)
     }
+    
+    func createNetworkSectionSelection(for type: EnabledServersViewModel.CreateNetwork) {
+        addRPCSelectedFor(networkType: type)
+    }
+    
 }
 
 extension EnabledServersCoordinator: SaveCustomRpcCoordinatorDelegate {

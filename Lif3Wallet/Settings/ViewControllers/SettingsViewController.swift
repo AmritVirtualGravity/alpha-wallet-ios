@@ -17,6 +17,7 @@ protocol SettingsViewControllerDelegate: class, CanOpenURL {
     func createPasswordSelected(in controller: SettingsViewController)
     func helpSelected(in controller: SettingsViewController)
     func securitySelected(in controller: SettingsViewController)
+    func mainWalletSelected(in controller: SettingsViewController)
 }
 
 class SettingsViewController: UIViewController {
@@ -260,6 +261,8 @@ extension SettingsViewController: UITableViewDelegate {
                 delegate?.nameWalletSelected(in: self)
             case .blockscanChat:
                 delegate?.blockscanChatSelected(in: self)
+            case .mainWallet:
+                delegate?.mainWalletSelected(in: self)
             }
         case .system(let rows):
             switch rows[indexPath.row] {

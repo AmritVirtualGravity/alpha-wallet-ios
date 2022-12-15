@@ -26,7 +26,7 @@ struct SwitchViewViewModel {
 }
 
 class SwitchView: UIView {
-    private let label = UILabel()
+    let label = UILabel()
     private let toggle = UISwitch()
 
     var isOn: Bool {

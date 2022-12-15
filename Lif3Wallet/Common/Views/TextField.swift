@@ -191,9 +191,13 @@ class TextField: UIControl {
         label.isHidden = viewModel.shouldHidePlaceholder
         keyboardType = viewModel.keyboardType
     }
+    
+    var isForNetwork: Bool = false
 
-    func defaultLayout(edgeInsets: UIEdgeInsets = .zero) -> UIView {
-        let stackView = [
+    func defaultLayout(edgeInsets: UIEdgeInsets = .zero, isForNetwork: Bool = false) -> UIView {
+        self.isForNetwork = isForNetwork
+        
+        var stackView = [
             label,
             .spacer(height: DataEntry.Metric.TextField.Default.spaceFromTitleToTextField),
             //NOTE: adding shadow inset as edgeInsets might be .zero, and the sized shadow will be clipped
@@ -201,7 +205,15 @@ class TextField: UIControl {
             .spacer(height: DataEntry.Metric.TextField.Default.spaceFromTitleToTextField),
             statusLabel,
         ].asStackView(axis: .vertical)
-
+        
+        if isForNetwork {
+            stackView = [
+                label,
+                self,
+                statusLabel,
+            ].asStackView(axis: .vertical)
+        }
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         let view = UIView()
@@ -244,16 +256,20 @@ extension TextField: UITextFieldDelegate {
         let shouldDropShadow = status.textFieldShowShadow(whileEditing: false)
         layer.borderColor = borderColor.cgColor
         backgroundColor = Configuration.Color.Semantic.textFieldBackground
-
-        dropShadow(color: shouldDropShadow ? borderColor : .clear, radius: DataEntry.Metric.shadowRadius)
+        
+        if !isForNetwork {
+            dropShadow(color: shouldDropShadow ? borderColor : .clear, radius: DataEntry.Metric.shadowRadius)
+        }
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let borderColor = status.textFieldBorderColor(whileEditing: true)
         layer.borderColor = borderColor.cgColor
         backgroundColor = Configuration.Color.Semantic.textFieldBackground
-
-        dropShadow(color: borderColor, radius: DataEntry.Metric.shadowRadius)
+        
+        if !isForNetwork {
+            dropShadow(color: borderColor, radius: DataEntry.Metric.shadowRadius)
+        }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -128,7 +128,8 @@ class SaveCustomRpcOverallViewController: UIViewController, SaveCustomRpcHandleU
         modalPresentationStyle = .overCurrentContext
         add(childViewController: browseViewController)
         add(childViewController: entryViewController)
-        activateCurrentViewController()
+//        activateCurrentViewController()
+        activateController()
     }
 
     private func activateCurrentViewController() {
@@ -138,6 +139,15 @@ class SaveCustomRpcOverallViewController: UIViewController, SaveCustomRpcHandleU
         case .selected(let tab) where tab == SaveCustomRpcOverallTab.manual.position:
             activateManualViewController()
         default: // Impossible to get here but we set to browse so there is a defined state
+            activateBrowseViewController()
+        }
+    }
+    
+    private func activateController() {
+        switch networkType {
+        case .addChain:
+            activateManualViewController()
+        case .browseChain:
             activateBrowseViewController()
         }
     }
@@ -310,7 +320,7 @@ extension SaveCustomRpcBrowseDataController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.section < tableViewSection.count else { return UITableViewCell() }
-        let cell: RPCDisplayTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: ActiveNewtworkTableVIewCell = tableView.dequeueReusableCell(for: indexPath)
         let section = tableViewSection[indexPath.section]
         let server = section.serverAt(row: indexPath.row)
         let viewModel = ServerImageViewModel(server: .server(.custom(server)), isSelected: section.isMarked(chainID: server.chainID))
@@ -331,15 +341,15 @@ extension SaveCustomRpcBrowseDataController: UITableViewDelegate {
         configurationDelegate?.enableAddFunction(!selectedServers().isEmpty)
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection sectionIndex: Int) -> UIView? {
-        guard sectionIndex < tableViewSection.count else { return nil }
-        return tableViewSection[sectionIndex].headerView()
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard section < tableViewSection.count else { return 0 }
-        return tableViewSection[section].headerHeight()
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection sectionIndex: Int) -> UIView? {
+//        guard sectionIndex < tableViewSection.count else { return nil }
+//        return tableViewSection[sectionIndex].headerView()
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        guard section < tableViewSection.count else { return 0 }
+//        return tableViewSection[section].headerHeight()
+//    }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         0
@@ -350,7 +360,7 @@ extension SaveCustomRpcBrowseDataController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80.0
+        44
     }
 
 }
@@ -381,4 +391,3 @@ extension SaveCustomRpcBrowseDataController: EnableServersHeaderViewDelegate {
     }
 
 }
-

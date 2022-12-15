@@ -79,11 +79,18 @@ class SaveCustomRpcCoordinator: NSObject, Coordinator {
     }
 
     private func setNavigationTitle(viewController: UIViewController) {
-        switch operation {
-        case .add:
+//        switch operation {
+//        case .add:
+//            viewController.navigationItem.title = R.string.localizable.addrpcServerNavigationTitle()
+//        case .edit:
+//            viewController.navigationItem.title = R.string.localizable.editCustomRPCNavigationTitle()
+//        }
+        
+        switch networkType {
+        case .addChain:
             viewController.navigationItem.title = R.string.localizable.addrpcServerNavigationTitle()
-        case .edit:
-            viewController.navigationItem.title = R.string.localizable.editCustomRPCNavigationTitle()
+        case .browseChain:
+            viewController.navigationItem.title = R.string.localizable.browseMore()
         }
     }
 

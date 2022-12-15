@@ -292,7 +292,7 @@ extension SettingsCoordinator: AccountsCoordinatorDelegate {
     }
 
     func didCancel(in coordinator: AccountsCoordinator) {
-        coordinator.navigationController.popViewController(animated: true)
+//        coordinator.navigationController.popViewController(animated: true)
         removeCoordinator(coordinator)
     }
 

@@ -12,15 +12,21 @@ enum RestartReason {
     case currencyChange
 }
 
+
+
 protocol SettingsCoordinatorDelegate: class, CanOpenURL {
     func didRestart(with account: Wallet, in coordinator: SettingsCoordinator, reason: RestartReason)
     func didCancel(in coordinator: SettingsCoordinator)
     func didPressShowWallet(in coordinator: SettingsCoordinator)
     func showConsole(in coordinator: SettingsCoordinator)
     func restartToReloadServersQueued(in coordinator: SettingsCoordinator)
+    func universalScannerSelected(in coordinator: SettingsCoordinator)
+
 }
 
 class SettingsCoordinator: Coordinator {
+
+    
     private let keystore: Keystore
     private var config: Config
     private let sessions: ServerDictionary<WalletSession>
@@ -42,6 +48,10 @@ class SettingsCoordinator: Coordinator {
     let navigationController: UINavigationController
     weak var delegate: SettingsCoordinatorDelegate?
     var coordinators: [Coordinator] = []
+    
+    private var tokensCoordinator: TokensCoordinator? {
+        return coordinators.compactMap { $0 as? TokensCoordinator }.first
+    }
 
     lazy var rootViewController: SettingsViewController = {
         let viewModel = SettingsViewModel(account: account, keystore: keystore, lock: lock, config: config, analytics: analytics, domainResolutionService: domainResolutionService)
@@ -112,7 +122,22 @@ extension SettingsCoordinator: LockCreatePasscodeCoordinatorDelegate {
     }
 }
 
+
 extension SettingsCoordinator: SettingsViewControllerDelegate {
+    func scanQrSelected(in controller: SettingsViewController) {
+        delegate?.universalScannerSelected(in: self)
+    }
+    
+    
+    func mainWalletSelected(in controller: SettingsViewController) {
+        let viewModel = SettingsWalletViewModel(config: config)
+        let viewController = SettingsWalletViewController(viewModel: viewModel)
+        viewController.delegate = self
+        viewController.hidesBottomBarWhenPushed = true
+        viewController.navigationItem.largeTitleDisplayMode = .never
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
     
     func securitySelected(in controller: SettingsViewController) {
         let viewModel = SecurityViewModel(config: config, lock: lock, analytics: analytics)
@@ -267,7 +292,7 @@ extension SettingsCoordinator: AccountsCoordinatorDelegate {
     }
 
     func didCancel(in coordinator: AccountsCoordinator) {
-        coordinator.navigationController.popViewController(animated: true)
+//        coordinator.navigationController.popViewController(animated: true)
         removeCoordinator(coordinator)
     }
 
@@ -462,5 +487,57 @@ extension SettingsCoordinator: ToolsViewControllerDelegate {
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)
+    }
+}
+
+extension SettingsCoordinator: SettingsWalletViewControllerDelegate {
+    func changeWalletSelected(in controller: SettingsWalletViewController) {
+        let coordinator = AccountsCoordinator(
+                  config: config,
+                  navigationController: navigationController,
+                  keystore: keystore,
+                  analytics: analytics,
+                  viewModel: .init(configuration: .changeWallets, animatedPresentation: true),
+                  walletBalanceService: walletBalanceService,
+                  blockiesGenerator: blockiesGenerator,
+                  domainResolutionService: domainResolutionService)
+              coordinator.delegate = self
+              coordinator.start()
+              addCoordinator(coordinator)
+
+    }
+    
+    func myWalletAddressSelected(in controller: SettingsWalletViewController) {
+        delegate?.didPressShowWallet(in: self)
+    }
+    
+    func backupWalletSelected(in controller: SettingsWalletViewController) {
+        guard case .real = account.type else { return }
+
+             let coordinator = BackupCoordinator(navigationController: navigationController, keystore: keystore, account: account, analytics: analytics)
+             coordinator.delegate = self
+             coordinator.start()
+             addCoordinator(coordinator)
+    }
+    
+    func showSeedPhraseSelected(in controller: SettingsWalletViewController) {
+        guard case .real(let account) = account.type else { return }
+
+             let coordinator = ShowSeedPhraseCoordinator(navigationController: navigationController, keystore: keystore, account: account)
+             addCoordinator(coordinator)
+             coordinator.delegate = self
+             coordinator.start()
+
+    }
+    
+    func nameWalletSelected(in controller: SettingsWalletViewController) {
+        let viewModel = RenameWalletViewModel(account: account.address, analytics: analytics, domainResolutionService: domainResolutionService)
+        let viewController = RenameWalletViewController(viewModel: viewModel)
+        viewController.delegate = self
+        viewController.navigationItem.largeTitleDisplayMode = .never
+        viewController.hidesBottomBarWhenPushed = true
+
+        navigationController.pushViewController(viewController, animated: true)
+
     }
 }

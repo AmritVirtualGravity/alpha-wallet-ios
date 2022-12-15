@@ -32,8 +32,9 @@ extension SettingViewHeaderViewModel {
             if case .tokenStandard = section {
                 showTopSeparator = false
             }
-        case .wallet, .system, .help, .social:
+        case .wallet, .system, .help, .social, .activity:
             titleTextFont = Fonts.semibold(size: 15)
         }
+       
     }
 }

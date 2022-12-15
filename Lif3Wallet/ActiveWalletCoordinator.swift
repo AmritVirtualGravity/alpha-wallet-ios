@@ -666,6 +666,10 @@ extension ActiveWalletCoordinator: ConsoleCoordinatorDelegate {
 }
 
 extension ActiveWalletCoordinator: SettingsCoordinatorDelegate {
+    func universalScannerSelected(in coordinator: SettingsCoordinator) {
+        tokensCoordinator?.launchUniversalScanner(fromSource: .walletScreen)
+    }
+    
 
     private func showConsole(navigationController: UINavigationController) {
         let coordinator = ConsoleCoordinator(assetDefinitionStore: assetDefinitionStore, navigationController: navigationController)

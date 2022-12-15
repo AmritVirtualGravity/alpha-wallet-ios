@@ -40,6 +40,11 @@ extension SettingTableViewCellViewModel: Hashable {
         icon = row.icon
     }
     
+    init(settingsActivityRow row: SettingsViewModel.SettingsActivityRow) {
+        titleText = row.title
+        icon = row.icon
+    }
+    
     init(settingsSupportRow row: SettingsViewModel.SettingsSupportRow) {
         titleText = row.title
         icon = row.icon

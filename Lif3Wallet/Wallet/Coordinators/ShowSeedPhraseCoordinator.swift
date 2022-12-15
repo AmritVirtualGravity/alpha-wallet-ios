@@ -124,7 +124,7 @@ extension ShowSeedPhraseCoordinator: ShowSeedPhraseIntroductionViewControllerDel
     }
 
     func didClose(in viewController: ShowSeedPhraseIntroductionViewController) {
-        navigationController.popViewController(animated: true)
+//        navigationController.popViewController(animated: true)
         delegate?.didCancel(in: self)
     }
 }

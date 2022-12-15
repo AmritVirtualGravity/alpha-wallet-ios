@@ -127,6 +127,9 @@
 "settings.support.darkMode" = "DarkMode";
 "settings.helpCenter.title" = "Help Center";
 "settings.about.title" = "About";
+"settings.activity.title" = "Activity";
+"settings.scanQrcode.title" = "Scan Qr Code";
+"settings.walletConnect.title" = "Wallet Connect";
 "settings.notifications.title" = "通知设置";
 "settings.passcode.title" = "密码 / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";

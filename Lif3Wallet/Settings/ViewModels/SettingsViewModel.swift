@@ -122,6 +122,8 @@ final class SettingsViewModel {
             case .help, .tokenStandard, .version, .wallet: return nil
             case .social:
                 return nil
+            case .activity:
+                return nil
             }
         }.compactMap { [lock, analytics] isOn -> Void? in
             analytics.setUser(property: Analytics.UserProperties.isAppPasscodeOrBiometricProtectionEnabled, value: isOn)
@@ -193,7 +195,7 @@ final class SettingsViewModel {
                 let walletSecurityLevel = PromptBackupCoordinator(keystore: keystore, wallet: account, config: .init(), analytics: analytics).securityLevel
                 let accessoryView = walletSecurityLevel.flatMap { WalletSecurityLevelIndicator(level: $0) }
                 return .cell(.init(titleText: row.title, subTitleText: nil, icon: row.icon, accessoryType: .disclosureIndicator, accessoryView: accessoryView))
-            case .showMyWallet, .showSeedPhrase, .walletConnect, .nameWallet, .blockscanChat:
+            case .showMyWallet, .showSeedPhrase, .walletConnect, .nameWallet, .blockscanChat, .mainWallet:
                 return .cell(.init(settingsWalletRow: row))
             }
         case .tokenStandard, .version:
@@ -201,6 +203,9 @@ final class SettingsViewModel {
         case .social(let rows):
             let row = rows[indexPath.row]
             return .cell(.init(settingsSocialMediaRow: row))
+        case .activity(let rows):
+            let row = rows[indexPath.row]
+            return .cell(.init(settingsActivityRow: row))
         }
     }
 }
@@ -239,6 +244,7 @@ extension SettingsViewModel {
         case walletConnect
         case nameWallet
         case blockscanChat(blockscanChatUnreadCount: Int?)
+        case mainWallet
     }
 
     enum SettingsSystemRow: CaseIterable {
@@ -259,6 +265,12 @@ extension SettingsViewModel {
         case discord
     }
     
+    enum SettingsActivityRow {
+        case activity
+        case scanQrCode
+        case walletConnect
+    }
+    
     enum SettingsSupportRow {
         case helpCenter
         case about
@@ -266,6 +278,7 @@ extension SettingsViewModel {
 
     enum SettingsSection {
         case wallet(rows: [SettingsWalletRow])
+        case activity(rows: [SettingsActivityRow])
         case system(rows: [SettingsSystemRow])
         case help(rows: [SettingsSupportRow])
         case social(rows: [SettingsSocialMediaRow])
@@ -306,22 +319,27 @@ extension SettingsViewModel.functional {
         if account.allowBackup {
             if account.origin == .hd {
                 // blockscanchat hidden for now.
-                 walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect]
+                walletRows = [.mainWallet]
+//                 walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect]
 //                walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
             } else {
-                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect]
+                walletRows = [.mainWallet]
+//                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect]
 //                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
             }
         } else {
-            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect]
+            walletRows = [.mainWallet]
+//            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect]
 //            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
+        let activityRows: [SettingsViewModel.SettingsActivityRow] = [.activity, .scanQrCode, .walletConnect]
         let systemRows: [SettingsViewModel.SettingsSystemRow] = [.selectActiveNetworks, .advanced, .hideToken, .theme, .security]
         let socialMediaRows: [SettingsViewModel.SettingsSocialMediaRow] = [.twitter, .telegram, .instagram, .discord]
         let supportRows: [SettingsViewModel.SettingsSupportRow] = [.helpCenter, .about]
         
         return [
             .wallet(rows: walletRows),
+            .activity(rows: activityRows),
             .system(rows: systemRows),
             .help(rows: supportRows),
             .social(rows: socialMediaRows),
@@ -336,6 +354,8 @@ extension SettingsViewModel.SettingsWalletRow {
         switch self {
         case .showMyWallet:
             return R.string.localizable.settingsShowMyWalletTitle()
+        case .mainWallet:
+            return R.string.localizable.settingsSectionWalletTitle()
         case .changeWallet:
             return R.string.localizable.settingsChangeWalletTitle()
         case .backup:
@@ -358,6 +378,8 @@ extension SettingsViewModel.SettingsWalletRow {
     var icon: UIImage {
         switch self {
         case .showMyWallet:
+            return R.image.walletAddress()!
+        case .mainWallet:
             return R.image.walletAddress()!
         case .changeWallet:
             return R.image.changeWallet()!
@@ -390,21 +412,25 @@ extension SettingsViewModel.SettingsWalletRow: Hashable {
             return true
         case (.nameWallet, .nameWallet):
             return true
+        case (.mainWallet, .mainWallet):
+            return true
         case (.blockscanChat(let c1), .blockscanChat(let c2)):
             return c1 == c2
-        case (.blockscanChat, .walletConnect), (.blockscanChat, .showSeedPhrase), (.blockscanChat, .showMyWallet), (.blockscanChat, .changeWallet), (.blockscanChat, .backup):
+        case (.blockscanChat, .walletConnect), (.blockscanChat, .showSeedPhrase), (.blockscanChat, .showMyWallet), (.blockscanChat, .changeWallet), (.blockscanChat, .backup),  (.blockscanChat, .mainWallet), (.blockscanChat, .nameWallet):
             return false
-        case (.nameWallet, .walletConnect), (.nameWallet, .showSeedPhrase), (.nameWallet, .backup), (.nameWallet, .changeWallet), (.blockscanChat, .nameWallet), (.nameWallet, .showMyWallet):
+        case (.nameWallet, .walletConnect), (.nameWallet, .showSeedPhrase), (.nameWallet, .backup), (.nameWallet, .changeWallet), (.nameWallet, .blockscanChat), (.nameWallet, .showMyWallet), (.nameWallet, .mainWallet):
             return false
-        case (.walletConnect, .nameWallet), (.walletConnect, .showSeedPhrase), (.walletConnect, .backup), (.walletConnect, .changeWallet), (.walletConnect, .showMyWallet), (.nameWallet, .blockscanChat):
+        case (.walletConnect, .nameWallet), (.walletConnect, .showSeedPhrase), (.walletConnect, .backup), (.walletConnect, .changeWallet), (.walletConnect, .showMyWallet), (.walletConnect, .blockscanChat),  (.walletConnect, .mainWallet):
             return false
-        case (.showSeedPhrase, .walletConnect), (.showSeedPhrase, .backup), (.showSeedPhrase, .changeWallet), (.showSeedPhrase, .showMyWallet), (.walletConnect, .blockscanChat):
+        case (.showSeedPhrase, .walletConnect), (.showSeedPhrase, .backup), (.showSeedPhrase, .changeWallet), (.showSeedPhrase, .showMyWallet), (.showSeedPhrase, .blockscanChat), (.showSeedPhrase, .mainWallet),  (.showSeedPhrase, .nameWallet):
             return false
-        case (.backup, .nameWallet), (.backup, .walletConnect), (.backup, .showSeedPhrase), (.backup, .changeWallet), (.backup, .showMyWallet), (.showSeedPhrase, .blockscanChat), (.showSeedPhrase, .nameWallet):
+        case (.backup, .nameWallet), (.backup, .walletConnect), (.backup, .showSeedPhrase), (.backup, .changeWallet), (.backup, .showMyWallet), (.backup, .mainWallet), (.backup, .blockscanChat):
             return false
-        case (.changeWallet, .nameWallet), (.changeWallet, .walletConnect), (.changeWallet, .showSeedPhrase), (.changeWallet, .backup), (.changeWallet, .showMyWallet), (.backup, .blockscanChat):
+        case (.changeWallet, .nameWallet), (.changeWallet, .walletConnect), (.changeWallet, .showSeedPhrase), (.changeWallet, .backup), (.changeWallet, .showMyWallet), (.changeWallet, .blockscanChat),  (.changeWallet, .mainWallet):
             return false
-        case (.showMyWallet, .blockscanChat), (.showMyWallet, .nameWallet), (.showMyWallet, .walletConnect), (.showMyWallet, .showSeedPhrase), (.showMyWallet, .backup), (.showMyWallet, .changeWallet), (.changeWallet, .blockscanChat):
+        case (.showMyWallet, .blockscanChat), (.showMyWallet, .nameWallet), (.showMyWallet, .walletConnect), (.showMyWallet, .showSeedPhrase), (.showMyWallet, .backup), (.showMyWallet, .changeWallet), (.showMyWallet, .mainWallet):
+            return false
+        case (.mainWallet, .blockscanChat), (.mainWallet, .nameWallet), (.mainWallet, .walletConnect), (.mainWallet, .showSeedPhrase), (.mainWallet, .backup), (.mainWallet, .changeWallet), (.mainWallet, .showMyWallet):
             return false
         }
     }
@@ -527,6 +553,32 @@ extension SettingsViewModel.SettingsSupportRow  {
     }
 }
 
+extension SettingsViewModel.SettingsActivityRow  {
+
+    var title: String {
+        switch self {
+        case .activity:
+            return R.string.localizable.settingsActivityTitle()
+        case .scanQrCode:
+            return R.string.localizable.settingsScanQrcodeTitle()
+        case .walletConnect:
+            return R.string.localizable.settingsWalletConnectTitle()
+       
+        }
+    }
+
+    var icon: UIImage? {
+        switch self {
+        case .activity:
+            return R.image.iconsSettingsActivity()
+        case .scanQrCode:
+            return R.image.iconsSettingsScanQr()
+        case .walletConnect:
+            return R.image.iconsSettingsWalletConnect()
+        }
+    }
+}
+
 extension SettingsViewModel.SettingsSection {
     var title: String {
         switch self {
@@ -545,6 +597,8 @@ extension SettingsViewModel.SettingsSection {
             return R.string.localizable.settingsTokenScriptStandardTitle()
         case .social:
             return R.string.localizable.settingsSectionSocialTitle()
+        case .activity:
+            return ""
         }
     }
 
@@ -560,6 +614,8 @@ extension SettingsViewModel.SettingsSection {
             return 0
         case .social(let rows):
             return rows.count
+        case .activity(let rows):
+           return  rows.count
         }
     }
 }
@@ -579,14 +635,19 @@ extension SettingsViewModel.SettingsSection: Hashable {
             return r1 == r2
         case (.social(let r1), .social(let r2)):
             return r1 == r2
-        case (.wallet, .tokenStandard), (.wallet, .version), (.wallet, .help), (.wallet, .system), (.wallet, .social),(.system, .tokenStandard), (.system, .version), (.system, .help), (.system, .wallet), (.system, .social):
+        case (.activity(let r1), .activity(let r2)):
+            return r1 == r2
+        case (.wallet, .tokenStandard), (.wallet, .version), (.wallet, .help), (.wallet, .system), (.wallet, .social),(.wallet, .activity),(.system, .tokenStandard), (.system, .version), (.system, .help), (.system, .wallet), (.system, .social), (.system, .activity):
             return false
-        case (.version, .help), (.version, .system), (.version, .wallet), (.version, .social),(.tokenStandard, .version), (.tokenStandard, .help), (.tokenStandard, .system), (.tokenStandard, .wallet), (.tokenStandard, .social):
+        case (.version, .help), (.version, .system), (.version, .wallet), (.version, .social),(.version, .activity),(.tokenStandard, .version), (.tokenStandard, .help), (.tokenStandard, .system), (.tokenStandard, .wallet), (.tokenStandard, .social), (.tokenStandard, .activity):
             return false
-        case (.help, .tokenStandard), (.help, .version), (.help, .system), (.help, .wallet),  (.help, .social),(.version, .tokenStandard):
+        case (.help, .tokenStandard), (.help, .version), (.help, .system), (.help, .wallet),  (.help, .social),(.help, .activity),(.version, .tokenStandard):
             return false
-        case (.social, .tokenStandard), (.social, .version), (.social, .system), (.social, .wallet),  (.social, .help):
+        case (.social, .tokenStandard), (.social, .version), (.social, .system), (.social, .wallet),  (.social, .help), (.social, .activity):
             return false
+        case (.activity, .tokenStandard), (.activity, .version), (.activity, .system), (.activity, .wallet),  (.activity, .help), (.activity, .social):
+            return false
+
         }
     }
 }

@@ -195,7 +195,7 @@ final class SettingsViewModel {
                 let walletSecurityLevel = PromptBackupCoordinator(keystore: keystore, wallet: account, config: .init(), analytics: analytics).securityLevel
                 let accessoryView = walletSecurityLevel.flatMap { WalletSecurityLevelIndicator(level: $0) }
                 return .cell(.init(titleText: row.title, subTitleText: nil, icon: row.icon, accessoryType: .disclosureIndicator, accessoryView: accessoryView))
-            case .showMyWallet, .showSeedPhrase, .walletConnect, .nameWallet, .blockscanChat:
+            case .showMyWallet, .showSeedPhrase, .walletConnect, .nameWallet, .blockscanChat, .mainWallet:
                 return .cell(.init(settingsWalletRow: row))
             }
         case .tokenStandard, .version:
@@ -244,6 +244,7 @@ extension SettingsViewModel {
         case walletConnect
         case nameWallet
         case blockscanChat(blockscanChatUnreadCount: Int?)
+        case mainWallet
     }
 
     enum SettingsSystemRow: CaseIterable {
@@ -318,14 +319,17 @@ extension SettingsViewModel.functional {
         if account.allowBackup {
             if account.origin == .hd {
                 // blockscanchat hidden for now.
-                 walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet]
+                walletRows = [.mainWallet]
+//                 walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect]
 //                walletRows = [.showMyWallet, .changeWallet, .backup, .showSeedPhrase, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
             } else {
-                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet]
+                walletRows = [.mainWallet]
+//                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect]
 //                walletRows = [.showMyWallet, .changeWallet, .backup, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
             }
         } else {
-            walletRows = [.showMyWallet, .changeWallet, .nameWallet]
+            walletRows = [.mainWallet]
+//            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect]
 //            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
         let activityRows: [SettingsViewModel.SettingsActivityRow] = [.activity, .scanQrCode, .walletConnect]
@@ -350,6 +354,8 @@ extension SettingsViewModel.SettingsWalletRow {
         switch self {
         case .showMyWallet:
             return R.string.localizable.settingsShowMyWalletTitle()
+        case .mainWallet:
+            return R.string.localizable.settingsSectionWalletTitle()
         case .changeWallet:
             return R.string.localizable.settingsChangeWalletTitle()
         case .backup:
@@ -372,6 +378,8 @@ extension SettingsViewModel.SettingsWalletRow {
     var icon: UIImage {
         switch self {
         case .showMyWallet:
+            return R.image.walletAddress()!
+        case .mainWallet:
             return R.image.walletAddress()!
         case .changeWallet:
             return R.image.changeWallet()!
@@ -404,21 +412,25 @@ extension SettingsViewModel.SettingsWalletRow: Hashable {
             return true
         case (.nameWallet, .nameWallet):
             return true
+        case (.mainWallet, .mainWallet):
+            return true
         case (.blockscanChat(let c1), .blockscanChat(let c2)):
             return c1 == c2
-        case (.blockscanChat, .walletConnect), (.blockscanChat, .showSeedPhrase), (.blockscanChat, .showMyWallet), (.blockscanChat, .changeWallet), (.blockscanChat, .backup):
+        case (.blockscanChat, .walletConnect), (.blockscanChat, .showSeedPhrase), (.blockscanChat, .showMyWallet), (.blockscanChat, .changeWallet), (.blockscanChat, .backup),  (.blockscanChat, .mainWallet), (.blockscanChat, .nameWallet):
             return false
-        case (.nameWallet, .walletConnect), (.nameWallet, .showSeedPhrase), (.nameWallet, .backup), (.nameWallet, .changeWallet), (.blockscanChat, .nameWallet), (.nameWallet, .showMyWallet):
+        case (.nameWallet, .walletConnect), (.nameWallet, .showSeedPhrase), (.nameWallet, .backup), (.nameWallet, .changeWallet), (.nameWallet, .blockscanChat), (.nameWallet, .showMyWallet), (.nameWallet, .mainWallet):
             return false
-        case (.walletConnect, .nameWallet), (.walletConnect, .showSeedPhrase), (.walletConnect, .backup), (.walletConnect, .changeWallet), (.walletConnect, .showMyWallet), (.nameWallet, .blockscanChat):
+        case (.walletConnect, .nameWallet), (.walletConnect, .showSeedPhrase), (.walletConnect, .backup), (.walletConnect, .changeWallet), (.walletConnect, .showMyWallet), (.walletConnect, .blockscanChat),  (.walletConnect, .mainWallet):
             return false
-        case (.showSeedPhrase, .walletConnect), (.showSeedPhrase, .backup), (.showSeedPhrase, .changeWallet), (.showSeedPhrase, .showMyWallet), (.walletConnect, .blockscanChat):
+        case (.showSeedPhrase, .walletConnect), (.showSeedPhrase, .backup), (.showSeedPhrase, .changeWallet), (.showSeedPhrase, .showMyWallet), (.showSeedPhrase, .blockscanChat), (.showSeedPhrase, .mainWallet),  (.showSeedPhrase, .nameWallet):
             return false
-        case (.backup, .nameWallet), (.backup, .walletConnect), (.backup, .showSeedPhrase), (.backup, .changeWallet), (.backup, .showMyWallet), (.showSeedPhrase, .blockscanChat), (.showSeedPhrase, .nameWallet):
+        case (.backup, .nameWallet), (.backup, .walletConnect), (.backup, .showSeedPhrase), (.backup, .changeWallet), (.backup, .showMyWallet), (.backup, .mainWallet), (.backup, .blockscanChat):
             return false
-        case (.changeWallet, .nameWallet), (.changeWallet, .walletConnect), (.changeWallet, .showSeedPhrase), (.changeWallet, .backup), (.changeWallet, .showMyWallet), (.backup, .blockscanChat):
+        case (.changeWallet, .nameWallet), (.changeWallet, .walletConnect), (.changeWallet, .showSeedPhrase), (.changeWallet, .backup), (.changeWallet, .showMyWallet), (.changeWallet, .blockscanChat),  (.changeWallet, .mainWallet):
             return false
-        case (.showMyWallet, .blockscanChat), (.showMyWallet, .nameWallet), (.showMyWallet, .walletConnect), (.showMyWallet, .showSeedPhrase), (.showMyWallet, .backup), (.showMyWallet, .changeWallet), (.changeWallet, .blockscanChat):
+        case (.showMyWallet, .blockscanChat), (.showMyWallet, .nameWallet), (.showMyWallet, .walletConnect), (.showMyWallet, .showSeedPhrase), (.showMyWallet, .backup), (.showMyWallet, .changeWallet), (.showMyWallet, .mainWallet):
+            return false
+        case (.mainWallet, .blockscanChat), (.mainWallet, .nameWallet), (.mainWallet, .walletConnect), (.mainWallet, .showSeedPhrase), (.mainWallet, .backup), (.mainWallet, .changeWallet), (.mainWallet, .showMyWallet):
             return false
         }
     }

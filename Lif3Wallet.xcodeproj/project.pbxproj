@@ -689,6 +689,8 @@
 		10645E66294A0ADA00187A49 /* SecurityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */; };
 		10D0D6C629477BF7001A87EC /* ThemeSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0D6C529477BF7001A87EC /* ThemeSwitchTableViewCell.swift */; };
 		10D0D6C829477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */; };
+		10DADA9E294B172C00413AA0 /* SettingsWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9D294B172C00413AA0 /* SettingsWalletViewController.swift */; };
+		10DADAA0294B17EA00413AA0 /* SettingsWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */; };
 		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
 		290B2B6A1F92C0440053C83E /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B691F92C0440053C83E /* ConfigTests.swift */; };
 		290B2B6C1F92C35B0053C83E /* RPCServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */; };
@@ -1570,6 +1572,8 @@
 		10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityCoordinator.swift; sourceTree = "<group>"; };
 		10D0D6C529477BF7001A87EC /* ThemeSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		10DADA9D294B172C00413AA0 /* SettingsWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewController.swift; sourceTree = "<group>"; };
+		10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewModel.swift; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCServerTests.swift; sourceTree = "<group>"; };
 		290B2B6D1F92C3980053C83E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -1988,6 +1992,7 @@
 				08A252FE294073EE00A31193 /* AnalyticsViewModel.swift */,
 				10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */,
 				10645E632949FA9A00187A49 /* SecurityViewModel.swift */,
+				10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2050,6 +2055,7 @@
 				08A2531B294073EE00A31193 /* WellDoneViewController.swift */,
 				08A2531C294073EE00A31193 /* SettingsViewController.swift */,
 				10645E612949F98F00187A49 /* SecurityViewController.swift */,
+				10DADA9D294B172C00413AA0 /* SettingsWalletViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -5395,6 +5401,7 @@
 				08760C90294079AD00F83AB3 /* EditBookmarkViewController.swift in Sources */,
 				08A2581F294073F100A31193 /* NonFungibleRowView.swift in Sources */,
 				08A2565A294073EF00A31193 /* SelectSwapRouteViewController.swift in Sources */,
+				10DADAA0294B17EA00413AA0 /* SettingsWalletViewModel.swift in Sources */,
 				08A257DA294073F100A31193 /* ActivityPageView.swift in Sources */,
 				08A25682294073EF00A31193 /* LockEnterPasscodeViewController.swift in Sources */,
 				08760C8D294079AD00F83AB3 /* DappRequestSwitchCustomChainCoordinator.swift in Sources */,
@@ -5515,6 +5522,7 @@
 				08A257AE294073F000A31193 /* SeedPhraseBackupIntroductionViewModel.swift in Sources */,
 				08A25706294073F000A31193 /* WalletConnectCoordinator.swift in Sources */,
 				08A257F4294073F100A31193 /* ClaimPaidOrderCoordinator.swift in Sources */,
+				10DADA9E294B172C00413AA0 /* SettingsWalletViewController.swift in Sources */,
 				08A25806294073F100A31193 /* TokensViewModel.swift in Sources */,
 				08A25681294073EF00A31193 /* LockViewModel.swift in Sources */,
 				08A256FD294073F000A31193 /* EditPriceAlertViewController.swift in Sources */,

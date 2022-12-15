@@ -12,12 +12,16 @@ enum RestartReason {
     case currencyChange
 }
 
+
+
 protocol SettingsCoordinatorDelegate: class, CanOpenURL {
     func didRestart(with account: Wallet, in coordinator: SettingsCoordinator, reason: RestartReason)
     func didCancel(in coordinator: SettingsCoordinator)
     func didPressShowWallet(in coordinator: SettingsCoordinator)
     func showConsole(in coordinator: SettingsCoordinator)
     func restartToReloadServersQueued(in coordinator: SettingsCoordinator)
+    func universalScannerSelected(in coordinator: SettingsCoordinator)
+
 }
 
 class SettingsCoordinator: Coordinator {
@@ -42,6 +46,10 @@ class SettingsCoordinator: Coordinator {
     let navigationController: UINavigationController
     weak var delegate: SettingsCoordinatorDelegate?
     var coordinators: [Coordinator] = []
+    
+    private var tokensCoordinator: TokensCoordinator? {
+        return coordinators.compactMap { $0 as? TokensCoordinator }.first
+    }
 
     lazy var rootViewController: SettingsViewController = {
         let viewModel = SettingsViewModel(account: account, keystore: keystore, lock: lock, config: config, analytics: analytics, domainResolutionService: domainResolutionService)
@@ -112,7 +120,13 @@ extension SettingsCoordinator: LockCreatePasscodeCoordinatorDelegate {
     }
 }
 
+
 extension SettingsCoordinator: SettingsViewControllerDelegate {
+    func scanQrSelected(in controller: SettingsViewController) {
+        delegate?.universalScannerSelected(in: self)
+    }
+    
+    
     
     func securitySelected(in controller: SettingsViewController) {
         let viewModel = SecurityViewModel(config: config, lock: lock, analytics: analytics)

@@ -17,6 +17,7 @@ protocol SettingsViewControllerDelegate: class, CanOpenURL {
     func createPasswordSelected(in controller: SettingsViewController)
     func helpSelected(in controller: SettingsViewController)
     func securitySelected(in controller: SettingsViewController)
+    func scanQrSelected(in controller: SettingsViewController)
 }
 
 class SettingsViewController: UIViewController {
@@ -287,6 +288,16 @@ extension SettingsViewController: UITableViewDelegate {
                 if let url = rows[indexPath.row].openUrl  {
                     delegate?.didPressOpenWebPage(url, in: self)
                 }
+            }
+        case .activity(let rows):
+            switch rows[indexPath.row] {
+            case .activity:
+                self.tabBarController?.selectedIndex = 1
+            case .scanQrCode:
+                delegate?.scanQrSelected(in: self)
+            case .walletConnect:
+                delegate?.walletConnectSelected(in: self)
+        
             }
         }
     }

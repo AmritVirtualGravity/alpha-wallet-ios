@@ -1,4 +1,4 @@
-"Advanced" = "Lisäasetukset";
+"Advanced" = "Preferences";
 "app.device.jailbreak.description" = "Any 'jailbreak' app can access AlphaWallet's keychain data and steal your wallet! Wipe this wallet immediately and restore on a secure device.";
 "app.device.jailbreak.title" = "TÄMÄN LAITTEEN TIETOTURVA EI OLE KUNNOSSA";
 "Done" = "Valmis";

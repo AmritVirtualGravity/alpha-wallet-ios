@@ -104,8 +104,9 @@ extension AdvancedSettingsViewModel.functional {
         let canExportToJSONKeystore = features.isAvailable(.isExportJsonKeystoreEnabled) && wallet.isReal()
         return [
             .clearBrowserCache,
-            .tokenScript,
-            features.isAvailable(.isUsingPrivateNetwork) ? .usePrivateNetwork : nil,
+            //tokenscript and private network hidden for now. 
+//            .tokenScript,
+//            features.isAvailable(.isUsingPrivateNetwork) ? .usePrivateNetwork : nil,
             features.isAvailable(.isAnalyticsUIEnabled) ? .analytics : nil,
             features.isAvailable(.isLanguageSwitcherEnabled) ? .changeLanguage: nil,
             features.isAvailable(.isChangeCurrencyEnabled) ? .changeCurrency : nil,

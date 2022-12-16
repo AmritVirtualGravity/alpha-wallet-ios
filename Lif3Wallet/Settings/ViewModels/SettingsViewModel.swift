@@ -333,7 +333,7 @@ extension SettingsViewModel.functional {
 //            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
         let activityRows: [SettingsViewModel.SettingsActivityRow] = [.activity, .scanQrCode, .walletConnect]
-        let systemRows: [SettingsViewModel.SettingsSystemRow] = [.selectActiveNetworks, .advanced, .hideToken, .theme, .security]
+        let systemRows: [SettingsViewModel.SettingsSystemRow] = [.advanced, .selectActiveNetworks, .security]
         let socialMediaRows: [SettingsViewModel.SettingsSocialMediaRow] = [.twitter, .telegram, .instagram, .discord]
         let supportRows: [SettingsViewModel.SettingsSupportRow] = [.helpCenter, .about]
         

@@ -45,7 +45,7 @@ class AdvancedSettingsViewModel {
 
     private func buildCellViewModel(for row: AdvancedSettingsViewModel.AdvancedSettingsRow) -> SettingTableViewCellViewModel {
         switch row {
-        case .analytics, .changeCurrency, .changeLanguage, .clearBrowserCache, .tools, .tokenScript, .exportJSONKeystore, .features:
+        case .analytics, .changeCurrency, .changeLanguage, .clearBrowserCache, .tools, .tokenScript, .exportJSONKeystore, .features, .hideToken, .theme:
             return .init(titleText: row.title, subTitleText: nil, icon: row.icon)
         case .usePrivateNetwork:
             let provider = config.sendPrivateTransactionsProvider
@@ -81,7 +81,7 @@ extension AdvancedSettingsViewModel {
     }
 
     struct ViewState {
-        let title: String = R.string.localizable.aAdvancedSettingsNavigationTitle()
+        let title: String = R.string.localizable.settingsPreferencesTitle()
         let animatingDifferences: Bool = false
         let snapshot: AdvancedSettingsViewModel.Snapshot
     }
@@ -96,6 +96,8 @@ extension AdvancedSettingsViewModel {
         case usePrivateNetwork
         case exportJSONKeystore
         case features
+        case hideToken
+        case theme
     }
 }
 
@@ -113,6 +115,8 @@ extension AdvancedSettingsViewModel.functional {
             canExportToJSONKeystore ? .exportJSONKeystore : nil,
             .tools,
             (Environment.isDebug || Environment.isTestFlight) ? .features : nil,
+            .hideToken,
+            .theme
         ].compactMap { $0 }
     }
 }
@@ -139,6 +143,10 @@ fileprivate extension AdvancedSettingsViewModel.AdvancedSettingsRow {
             return R.string.localizable.settingsAdvancedExportJSONKeystoreTitle()
         case .features:
             return R.string.localizable.advancedSettingsFeaturesTitle()
+        case .hideToken:
+            return R.string.localizable.settingsHideTokenTitle()
+        case .theme:
+            return R.string.localizable.settingsSupportDarkMode()
         }
     }
 
@@ -162,6 +170,10 @@ fileprivate extension AdvancedSettingsViewModel.AdvancedSettingsRow {
             return R.image.iconsSettingsJson()!
         case .features:
             return R.image.ticket_bundle_checked()!
+        case .hideToken:
+            return R.image.iconHideToken()!
+        case .theme:
+            return R.image.biometrics()!
         }
     }
 }

@@ -26,6 +26,8 @@ class AdvancedSettingsViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView.grouped
         tableView.register(SettingTableViewCell.self)
+        tableView.register(HideTokenSwitchTableViewCell.self)
+        tableView.register(ThemeSwitchTableViewCell.self)
         tableView.delegate = self
 
         return tableView
@@ -79,10 +81,24 @@ class AdvancedSettingsViewController: UIViewController {
 fileprivate extension AdvancedSettingsViewController {
     private func makeDataSource() -> AdvancedSettingsViewModel.DataSource {
         return AdvancedSettingsViewModel.DataSource(tableView: tableView, cellProvider: { tableView, indexPath, viewModel in
-            let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(viewModel: viewModel)
-
-            return cell
+            switch self.viewModel.rows[indexPath.row] {
+            case .hideToken:
+                let cell: HideTokenSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                let vm = HideTokenSwitchTableViewCellViewModel(titleText: viewModel.titleText, icon: viewModel.icon!, value: UserDefaults.standard.bool(forKey: "HideToken"))
+                cell.configure(viewModel: vm)
+                cell.delegate = self
+                return cell
+            case .theme:
+                let cell: ThemeSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                let vm = ThemeSwitchTableViewCellViewModel(titleText: viewModel.titleText, icon: viewModel.icon!, value: UserDefaults.standard.bool(forKey: "DarkModeOn"))
+                cell.configure(viewModel: vm)
+                cell.delegate = self
+                return cell
+            default:
+                let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.configure(viewModel: viewModel)
+                return cell
+            }
         })
     }
 }
@@ -129,6 +145,42 @@ extension AdvancedSettingsViewController: UITableViewDelegate {
             delegate?.exportJSONKeystoreSelected(in: self)
         case .features:
             delegate?.featuresSelected(in: self)
+        case .hideToken, .theme:
+            break
         }
     }
+}
+
+extension AdvancedSettingsViewController: HideTokenSwitchTableViewCellDelegate {
+
+    func cell(_ cell: HideTokenSwitchTableViewCell, switchStateChanged isOn: Bool) {
+        self.view.isUserInteractionEnabled = false
+        let usrDefault = UserDefaults.standard
+        if (usrDefault.bool(forKey: "HideToken") == true) {
+            usrDefault.set(false, forKey: "HideToken")
+        } else {
+            usrDefault.set(true, forKey: "HideToken")
+        }
+        NotificationCenter.default.post(name: Notification.Name("HideTokenNotification"), object: nil)
+        self.view.isUserInteractionEnabled = true
+    }
+    
+}
+
+extension AdvancedSettingsViewController: ThemeSwitchTableViewCellDelegate {
+
+    func didChangeTheme(_ cell: ThemeSwitchTableViewCell, switchStateChanged isOn: Bool) {
+        self.view.isUserInteractionEnabled = false
+        let userDefault = UserDefaults.standard
+        let window = UIApplication.shared.windows.first
+        if (userDefault.bool(forKey: "DarkModeOn") == true) {
+            window?.overrideUserInterfaceStyle = .light
+            userDefault.set(false, forKey: "DarkModeOn")
+        } else {
+            window?.overrideUserInterfaceStyle = .dark
+            userDefault.set(true, forKey: "DarkModeOn")
+        }
+        self.view.isUserInteractionEnabled = true
+    }
+    
 }

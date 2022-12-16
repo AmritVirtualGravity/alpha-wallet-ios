@@ -466,7 +466,7 @@ extension SettingsViewModel.SettingsSystemRow {
         case .selectActiveNetworks:
             return R.image.networksCircle()!
         case .advanced:
-            return R.image.developerMode()!
+            return R.image.iconsSettingsPreferences()!
         case .security:
             return R.image.developerMode()!
         case .hideToken:

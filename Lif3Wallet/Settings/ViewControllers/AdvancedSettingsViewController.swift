@@ -24,7 +24,7 @@ protocol AdvancedSettingsViewControllerDelegate: AnyObject {
 class AdvancedSettingsViewController: UIViewController {
     private let viewModel: AdvancedSettingsViewModel
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.insetGroped
         tableView.register(SettingTableViewCell.self)
         tableView.register(HideTokenSwitchTableViewCell.self)
         tableView.register(ThemeSwitchTableViewCell.self)
@@ -109,9 +109,9 @@ extension AdvancedSettingsViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
 
-    //Hide the header
+   
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        .leastNormalMagnitude
+        return 20.0
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         nil

@@ -56,7 +56,7 @@ class SaveCustomRpcCoordinator: NSObject, Coordinator {
         viewController.manualDataDelegate = self
         activeViewController = viewController
         setNavigationTitle(viewController: viewController)
-        navigationController.pushViewController(viewController, animated: true)
+        navigationController.pushViewController(viewController, animated: false)
     }
     
     private func startAdd() {

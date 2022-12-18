@@ -83,9 +83,9 @@ extension SecurityViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
 
-    //Hide the header
+ 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        .leastNormalMagnitude
+        return 20.0
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         nil

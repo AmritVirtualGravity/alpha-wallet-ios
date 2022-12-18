@@ -162,9 +162,9 @@ class SaveCustomRpcOverallViewController: UIViewController, SaveCustomRpcHandleU
     private func activateManualViewController() {
         entryViewController.view.isHidden = false
         browseViewController.view.isHidden = true
-        initalizeInitialFirstResponder.once {
-            DispatchQueue.main.async { self.entryViewController.editView.chainNameTextField.becomeFirstResponder() }
-        }
+//        initalizeInitialFirstResponder.once {
+//            DispatchQueue.main.async { self.entryViewController.editView.chainNameTextField.becomeFirstResponder() }
+//        }
         hideSearchBar()
     }
 

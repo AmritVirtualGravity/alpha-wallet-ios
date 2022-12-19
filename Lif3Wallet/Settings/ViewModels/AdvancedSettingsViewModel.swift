@@ -20,14 +20,17 @@ struct AdvancedSettingsViewModelOutput {
 
 class AdvancedSettingsViewModel {
     private let wallet: Wallet
-    private let config: Config
+    var config: Config
     private (set) var rows: [AdvancedSettingsViewModel.AdvancedSettingsRow] = []
     private let features: Features = .default
     let largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode = .never
     
+    var advancedSettingSections = [AdvancedSettingsSection]()
+
     init(wallet: Wallet, config: Config) {
         self.wallet = wallet
         self.config = config
+        makeSections()
     }
 
     func transform(input: AdvancedSettingsViewModelInput) -> AdvancedSettingsViewModelOutput {
@@ -43,7 +46,7 @@ class AdvancedSettingsViewModel {
         return .init(viewState: viewState)
     }
 
-    private func buildCellViewModel(for row: AdvancedSettingsViewModel.AdvancedSettingsRow) -> SettingTableViewCellViewModel {
+    func buildCellViewModel(for row: AdvancedSettingsViewModel.AdvancedSettingsRow) -> SettingTableViewCellViewModel {
         switch row {
         case .analytics, .changeCurrency, .changeLanguage, .clearBrowserCache, .tools, .tokenScript, .exportJSONKeystore, .features, .hideToken, .theme:
             return .init(titleText: row.title, subTitleText: nil, icon: row.icon)
@@ -62,6 +65,15 @@ class AdvancedSettingsViewModel {
         }
 
         return snapshot
+    }
+    
+    func makeSections() {
+        advancedSettingSections = []
+        
+        advancedSettingSections.append(.displays(rows: [.changeLanguage, .changeCurrency, .theme, .hideToken]))
+        advancedSettingSections.append(.browser(rows: [.clearBrowserCache]))
+        advancedSettingSections.append(.analytics(rows: [.analytics]))
+        advancedSettingSections.append(.tools(rows: [.tools]))
     }
 }
 
@@ -99,6 +111,14 @@ extension AdvancedSettingsViewModel {
         case hideToken
         case theme
     }
+    
+    enum AdvancedSettingsSection {
+        case displays(rows: [AdvancedSettingsRow])
+        case browser(rows: [AdvancedSettingsRow])
+        case analytics(rows: [AdvancedSettingsRow])
+        case tools(rows: [AdvancedSettingsRow])
+    }
+    
 }
 
 extension AdvancedSettingsViewModel.functional {
@@ -106,7 +126,7 @@ extension AdvancedSettingsViewModel.functional {
         let canExportToJSONKeystore = features.isAvailable(.isExportJsonKeystoreEnabled) && wallet.isReal()
         return [
             .clearBrowserCache,
-            //tokenscript and private network hidden for now. 
+            //tokenscript and private network hidden for now.
 //            .tokenScript,
 //            features.isAvailable(.isUsingPrivateNetwork) ? .usePrivateNetwork : nil,
             features.isAvailable(.isAnalyticsUIEnabled) ? .analytics : nil,

@@ -185,7 +185,7 @@ extension AdvancedSettingsViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
 
-    //Hide the header
+   
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        .leastNormalMagnitude
         return 34

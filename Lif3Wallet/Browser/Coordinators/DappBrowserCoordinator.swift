@@ -117,13 +117,13 @@ final class DappBrowserCoordinator: NSObject, Coordinator {
     }
     
     //this methods open life url in the browser
-    func openLifeWebHome(url: String) {
-        guard let url = URL(string: url) else {
-            return
-        }
-        pushOntoNavigationController(viewController: browserViewController, animated: true)
-        browserViewController.goTo(url: url)
-    }
+//    func openLifeWebHome(url: String) {
+//        guard let url = URL(string: url) else {
+//            return
+//        }
+//        pushOntoNavigationController(viewController: browserViewController, animated: true)
+//        browserViewController.goTo(url: url)
+//    }
 
     @objc func dismiss() {
         removeAllCoordinators()
@@ -636,9 +636,9 @@ extension DappBrowserCoordinator: BrowserHomeViewControllerDelegate {
     }
 
     func viewControllerWillAppear(in viewController: BrowserHomeViewController) {
-        if (LifeDateSource.shared().isForSwap == false) {
-            openLifeWebHome(url: "https://www.lif3.com")
-        }
+//        if (LifeDateSource.shared().isForSwap == false) {
+//            openLifeWebHome(url: "https://www.lif3.com")
+//        }
         browserNavBar?.enableButtons()
     }
 

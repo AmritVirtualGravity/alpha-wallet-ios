@@ -56,9 +56,8 @@ extension ActiveWalletViewModel {
                 return UITabBarItem(title: R.string.localizable.browserTabbarItemTitle(), image: R.image.tab_browser(), selectedImage: nil)
             case .swap:
                 let tabBarItem = UITabBarItem(title: nil, image: nil, selectedImage: nil)
-                tabBarItem.imageInsets = .init(top: 7, left: 0, bottom: -7, right: 0)
+//                tabBarItem.imageInsets = .init(top: 7, left: 0, bottom: -7, right: 0)
                 tabBarItem.isEnabled = false
-
                 return tabBarItem
             }
         }

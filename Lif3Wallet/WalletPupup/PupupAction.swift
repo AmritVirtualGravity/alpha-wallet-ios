@@ -32,6 +32,12 @@ enum PupupAction: Int, CaseIterable {
     }
 
     var icon: UIImage? {
-        return R.image.swap()
+        switch self {
+        case .swap:   return R.image.popSwap()
+        case .send:   return R.image.popSend()
+        case .receive:   return R.image.popReceive()
+        case .buy:  return R.image.popBuy()
+        }
+      
     }
 }

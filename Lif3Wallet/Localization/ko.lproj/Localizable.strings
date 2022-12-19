@@ -878,3 +878,4 @@
 "accept.walletConnect.field.methods.title" = "Methods";
 "currency.navigationTitle" = "Change Fiat Currency";
 "tokenscript.overrides.empty" = "There are no TokenScript overrides";
+"quickAction.tabbar.item.title" = "Quick Action";

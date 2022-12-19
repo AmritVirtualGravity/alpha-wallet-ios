@@ -883,3 +883,4 @@
 "tokenscript.overrides.empty" = "There are no TokenScript overrides";
 "browseMore" = "Browse More";
 "testNetwork" = "Test Network";
+"quickAction.tabbar.item.title" = "Quick Action";

@@ -105,10 +105,10 @@ public enum FeaturesAvailable: String, CaseIterable, Codable {
         case .isRenameWalletEnabledWhileLongPress: return true
         case .shouldPrintCURLForOutgoingRequest: return false
         case .isPromptForEmailListSubscriptionEnabled: return true
-        case .isAlertsEnabled: return false
+        case .isAlertsEnabled: return true
         case .isUsingPrivateNetwork: return true
         case .isUsingAppEnforcedTimeoutForMakingWalletConnectConnections: return true
-        case .isAttachingLogFilesToSupportEmailEnabled: return false
+        case .isAttachingLogFilesToSupportEmailEnabled: return true
         case .isExportJsonKeystoreEnabled: return true
         case .is24SeedWordPhraseAllowed: return true
         case .isAnalyticsUIEnabled: return true
@@ -117,7 +117,7 @@ public enum FeaturesAvailable: String, CaseIterable, Codable {
         case .isSwapEnabled: return true
         case .isCoinbasePayEnabled: return true
         case .isLoggingEnabledForTickerMatches: return false
-        case .isChangeCurrencyEnabled: return false
+        case .isChangeCurrencyEnabled: return true
         }
     }
 

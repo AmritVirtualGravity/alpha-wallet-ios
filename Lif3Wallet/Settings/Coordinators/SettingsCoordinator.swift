@@ -471,6 +471,7 @@ extension SettingsCoordinator: ClearDappBrowserCacheCoordinatorDelegate {
 }
 
 extension SettingsCoordinator: ToolsViewControllerDelegate {
+    
     func checkTransactionStateSelected(in controller: ToolsViewController) {
         let coordinator = CheckTransactionStateCoordinator(navigationController: navigationController, config: config, analytics: analytics)
         addCoordinator(coordinator)
@@ -487,6 +488,12 @@ extension SettingsCoordinator: ToolsViewControllerDelegate {
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)
+    }
+    
+    func featuresSelected(in controller: ToolsViewController) {
+        let controller = FeaturesViewController()
+        controller.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(controller, animated: true)
     }
 }
 

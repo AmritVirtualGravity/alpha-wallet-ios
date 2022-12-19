@@ -7,12 +7,13 @@ protocol ToolsViewControllerDelegate: AnyObject {
     func consoleSelected(in controller: ToolsViewController)
     func pingInfuraSelected(in controller: ToolsViewController)
     func checkTransactionStateSelected(in controller: ToolsViewController)
+    func featuresSelected(in controller: ToolsViewController)
 }
 
 class ToolsViewController: UIViewController {
     private let viewModel: ToolsViewModel
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.insetGroped
         tableView.register(SettingTableViewCell.self)
         tableView.dataSource = self
         tableView.delegate = self
@@ -73,7 +74,8 @@ extension ToolsViewController: UITableViewDelegate {
 
     //Hide the header
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        .leastNormalMagnitude
+//        .leastNormalMagnitude
+        return 20
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         nil
@@ -95,6 +97,8 @@ extension ToolsViewController: UITableViewDelegate {
             delegate?.pingInfuraSelected(in: self)
         case .checkTransactionState:
             delegate?.checkTransactionStateSelected(in: self)
+        case .features:
+            delegate?.featuresSelected(in: self)
         }
     }
 }

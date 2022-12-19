@@ -244,7 +244,7 @@ extension AdvancedSettingsViewController: UITableViewDelegate {
 //            delegate?.analyticsSelected(in: self)
             break
         case .tools:
-            delegate?.featuresSelected(in: self)
+            delegate?.moreSelected(in: self)
         }
     }
 }

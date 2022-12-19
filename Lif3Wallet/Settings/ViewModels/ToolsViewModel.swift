@@ -5,8 +5,9 @@ import AlphaWalletFoundation
 
 class ToolsViewModel {
     private var config: Config
-    private var rows: [ToolsViewModel.ToolsRow] = ToolsViewModel.ToolsRow.allCases
-
+//    private var rows: [ToolsViewModel.ToolsRow] = ToolsViewModel.ToolsRow.allCases
+    private var rows: [ToolsViewModel.ToolsRow] = [.pingInfura, .checkTransactionState, .features]
+    
     var title: String = R.string.localizable.aSettingsTools()
     var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode = .never
 
@@ -33,6 +34,7 @@ extension ToolsViewModel {
         case console
         case pingInfura
         case checkTransactionState
+        case features
 
         var title: String {
             switch self {
@@ -42,6 +44,8 @@ extension ToolsViewModel {
                 return R.string.localizable.settingsPingInfuraTitle()
             case .checkTransactionState:
                 return R.string.localizable.settingsCheckTransactionState()
+            case .features:
+                return R.string.localizable.advancedSettingsFeaturesTitle()
             }
         }
 
@@ -51,10 +55,12 @@ extension ToolsViewModel {
                 return R.image.settings_console()!
             case .pingInfura:
                 //TODO need a more appropriate icon, maybe represent diagnostic or (to a lesser degree Infura)
-                return R.image.settings_analytics()!
+                return R.image.ping_infura()!
             case .checkTransactionState:
                 //TODO need a more appropriate icon, maybe represent diagnostic or (to a lesser degree Infura)
-                return R.image.settings_analytics()!
+                return R.image.check_transation_state()!
+            case .features:
+                return R.image.features()!
             }
         }
     }

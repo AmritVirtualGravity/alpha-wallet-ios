@@ -33,6 +33,8 @@ class ThemeSwitchTableViewCell: UITableViewCell {
     }
 
     weak var delegate: ThemeSwitchTableViewCellDelegate?
+    
+    var switchClosure: ((Bool)->Void)?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -58,6 +60,7 @@ class ThemeSwitchTableViewCell: UITableViewCell {
 
     @objc private func switchChanged(_ sender: UISwitch) {
         delegate?.didChangeTheme(self, switchStateChanged: sender.isOn)
+        switchClosure?(sender.isOn)
     }
 
     required init?(coder aDecoder: NSCoder) {

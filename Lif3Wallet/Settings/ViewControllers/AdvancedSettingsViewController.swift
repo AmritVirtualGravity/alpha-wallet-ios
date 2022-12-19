@@ -24,11 +24,12 @@ protocol AdvancedSettingsViewControllerDelegate: AnyObject {
 class AdvancedSettingsViewController: UIViewController {
     private let viewModel: AdvancedSettingsViewModel
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.insetGroped
         tableView.register(SettingTableViewCell.self)
         tableView.register(HideTokenSwitchTableViewCell.self)
         tableView.register(ThemeSwitchTableViewCell.self)
         tableView.delegate = self
+        tableView.dataSource = self
 
         return tableView
     }()
@@ -53,8 +54,10 @@ class AdvancedSettingsViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        
+        navigationItem.title = R.string.localizable.settingsPreferencesTitle()
 
-        bind(viewModel: viewModel)
+//        bind(viewModel: viewModel)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +106,79 @@ fileprivate extension AdvancedSettingsViewController {
     }
 }
 
+extension AdvancedSettingsViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.advancedSettingSections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch viewModel.advancedSettingSections[section] {
+        case .displays(let rows):
+            return rows.count
+        case .browser(let rows):
+            return rows.count
+        case .analytics(let rows):
+            return rows.count
+        case .tools(let rows):
+            return rows.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var vm = SettingTableViewCellViewModel(titleText: "", icon: UIImage())
+        
+        let section = viewModel.advancedSettingSections[indexPath.section]
+        switch section {
+        case .displays(rows: let rows):
+            switch rows[indexPath.row] {
+            case .hideToken:
+                let cell: HideTokenSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                let vm = HideTokenSwitchTableViewCellViewModel(titleText: R.string.localizable.settingsHideTokenTitle(),
+                                                               icon: R.image.iconHideToken()!,
+                                                               value: UserDefaults.standard.bool(forKey: "HideToken"))
+                cell.configure(viewModel: vm)
+                cell.delegate = self
+                return cell
+            case .theme:
+                let cell: ThemeSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                let vm = ThemeSwitchTableViewCellViewModel(titleText: R.string.localizable.settingsSupportDarkMode(),
+                                                           icon: R.image.setting_dark_mode()!,
+                                                           value: UserDefaults.standard.bool(forKey: "DarkModeOn"))
+                cell.configure(viewModel: vm)
+                cell.delegate = self
+                return cell
+            case .changeLanguage:
+                vm = viewModel.buildCellViewModel(for: .changeLanguage)
+            case .changeCurrency:
+                vm = viewModel.buildCellViewModel(for: .changeCurrency)
+            default:
+                 break
+            }
+        case .browser:
+            vm = viewModel.buildCellViewModel(for: .clearBrowserCache)
+        case .analytics:
+            let cell: ThemeSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            let vm = ThemeSwitchTableViewCellViewModel(titleText: R.string.localizable.settingsAnalitycsTitle(),
+                                                       icon: R.image.share_analytics()!,
+                                                       value: viewModel.config.sendAnalyticsEnabled ?? true)
+            cell.configure(viewModel: vm)
+            cell.switchClosure = { [weak self] boolValue in
+                guard let self = self else { return }
+                self.viewModel.config.sendAnalyticsEnabled = boolValue
+            }
+            return cell
+        case .tools:
+            vm = viewModel.buildCellViewModel(for: .tools)
+        }
+        
+        let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.configure(viewModel: vm)
+        return cell
+    }
+    
+}
+
 extension AdvancedSettingsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -111,7 +187,8 @@ extension AdvancedSettingsViewController: UITableViewDelegate {
 
     //Hide the header
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        .leastNormalMagnitude
+//        .leastNormalMagnitude
+        return 34
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         nil
@@ -126,27 +203,48 @@ extension AdvancedSettingsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch viewModel.rows[indexPath.row] {
-        case .tools:
-            delegate?.moreSelected(in: self)
-        case .clearBrowserCache:
+//        switch viewModel.rows[indexPath.row] {
+//        case .tools:
+//            delegate?.moreSelected(in: self)
+//        case .clearBrowserCache:
+//            delegate?.clearBrowserCacheSelected(in: self)
+//        case .tokenScript:
+//            delegate?.tokenScriptSelected(in: self)
+//        case .changeLanguage:
+//            delegate?.changeLanguageSelected(in: self)
+//        case .changeCurrency:
+//            delegate?.changeCurrencySelected(in: self)
+//        case .analytics:
+//            delegate?.analyticsSelected(in: self)
+//        case .usePrivateNetwork:
+//            delegate?.usePrivateNetworkSelected(in: self)
+//        case .exportJSONKeystore:
+//            delegate?.exportJSONKeystoreSelected(in: self)
+//        case .features:
+//            delegate?.featuresSelected(in: self)
+//        case .hideToken, .theme:
+//            break
+//        }
+        
+        let section = viewModel.advancedSettingSections[indexPath.section]
+        
+        switch section {
+        case .displays(let rows):
+            switch rows[indexPath.row] {
+            case .changeLanguage:
+                delegate?.changeLanguageSelected(in: self)
+            case .changeCurrency:
+                delegate?.changeCurrencySelected(in: self)
+            default:
+                 break
+            }
+        case .browser:
             delegate?.clearBrowserCacheSelected(in: self)
-        case .tokenScript:
-            delegate?.tokenScriptSelected(in: self)
-        case .changeLanguage:
-            delegate?.changeLanguageSelected(in: self)
-        case .changeCurrency:
-            delegate?.changeCurrencySelected(in: self)
         case .analytics:
-            delegate?.analyticsSelected(in: self)
-        case .usePrivateNetwork:
-            delegate?.usePrivateNetworkSelected(in: self)
-        case .exportJSONKeystore:
-            delegate?.exportJSONKeystoreSelected(in: self)
-        case .features:
-            delegate?.featuresSelected(in: self)
-        case .hideToken, .theme:
+//            delegate?.analyticsSelected(in: self)
             break
+        case .tools:
+            delegate?.featuresSelected(in: self)
         }
     }
 }

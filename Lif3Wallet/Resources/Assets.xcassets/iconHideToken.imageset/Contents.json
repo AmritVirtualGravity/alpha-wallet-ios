@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "icons8-hide-64 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-hide-64.png",
+      "filename" : "Menu Icons.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-hide-64 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

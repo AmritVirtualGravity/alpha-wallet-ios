@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "currency.pdf",
+      "filename" : "Menu Icons.png",
       "idiom" : "universal"
     }
   ],
@@ -10,6 +10,6 @@
     "version" : 1
   },
   "properties" : {
-      "preserves-vector-representation" : true
+    "preserves-vector-representation" : true
   }
 }

@@ -547,4 +547,12 @@ extension SettingsCoordinator: SettingsWalletViewControllerDelegate {
         navigationController.pushViewController(viewController, animated: true)
 
     }
+    
+    func exportJSONKeystoreSelected(in controller: SettingsWalletViewController) {
+        let coordinator = ExportJsonKeystoreCoordinator(keystore: keystore, wallet: account, navigationController: navigationController)
+        addCoordinator(coordinator)
+        coordinator.delegate = self
+        coordinator.start()
+    }
+    
 }

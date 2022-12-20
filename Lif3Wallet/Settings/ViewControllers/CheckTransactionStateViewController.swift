@@ -21,7 +21,7 @@ class CheckTransactionStateViewController: ModalViewController {
         let v = UILabel()
         v.numberOfLines = 0
         v.textAlignment = .center
-        v.textColor = R.color.black()
+        v.textColor = Configuration.Color.Semantic.defaultTitleText
         v.font = Fonts.bold(size: 24)
 
         return v
@@ -67,6 +67,7 @@ class CheckTransactionStateViewController: ModalViewController {
         buttonsBar.buttons[0].addTarget(self, action: #selector(checkTransactionStatusSelected), for: .touchUpInside)
 
         titleLabel.text = viewModel.title
+        
     }
 
     func set(isActionButtonEnable isEnabled: Bool) {

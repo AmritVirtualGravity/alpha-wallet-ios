@@ -19,7 +19,7 @@ class EmptyView: UIView {
 
     init(placement: EmptyViewPlacement = EmptyViewDefaultPlacement()) {
         super.init(frame: .zero)
-        backgroundColor = .clear
+        backgroundColor = .black
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
 
@@ -34,8 +34,8 @@ class EmptyView: UIView {
     func configure(title: String?) -> Self {
         let attributedTitle = title.flatMap { value in
             return NSAttributedString.init(string: value, attributes: [
-                .foregroundColor: UIColor.white,
-                .font: Fonts.regular(size: 16)
+                .foregroundColor: UIColor.gray,
+                .font: Fonts.regular(size: 15),
             ])
         }
         return configure(attributedTitle: attributedTitle)
@@ -46,7 +46,10 @@ class EmptyView: UIView {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.attributedText = attributedTitle
-
+            label.sizeToFit()
+            label.numberOfLines = 2
+            label.textAlignment = .center
+            label.lineBreakMode = .byWordWrapping
             return label
         }
         return build()
@@ -57,7 +60,7 @@ class EmptyView: UIView {
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.image = image
-
+            imageView.tintColor = .gray
             return imageView
         }
         return build()
@@ -163,7 +166,7 @@ extension EmptyView {
             .configure(insets: .zero)
             .configure(image: R.image.iconsIllustrationsEmptyWalletConnect())
             .configure(title: R.string.localizable.walletConnectSessionsEmpty())
-            .configure(buttonTitle: R.string.localizable.walletConnectSessionsScanQrCode(), width: 240, buttonSelectionClosure: completion)
+            .configure(buttonTitle: R.string.localizable.walletConnectSessionsScanQrCode(), width: UIScreen.main.bounds.width * 0.9, buttonSelectionClosure: completion)
     }
 
     static func transactionsEmptyView() -> EmptyView {

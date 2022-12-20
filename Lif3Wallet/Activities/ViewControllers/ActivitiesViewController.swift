@@ -56,7 +56,7 @@ class ActivitiesViewController: UIViewController {
         super.viewWillAppear(animated)
 
         keyboardChecker.viewWillAppear()
-        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     override func viewDidAppear(_ animated: Bool) {

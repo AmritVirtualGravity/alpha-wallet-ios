@@ -793,7 +793,7 @@
 "openOnOpenSea" = "View in OpenSea";
 "visitWebsite" = "Visit website";
 "visitWiki" = "Visit Wiki";
-"walletConnect.sessions.empty" = "No active WalletConnect sessions";
+"walletConnect.sessions.empty" = "Connect your wallet with WalletConnect to make begin transacting.";
 "walletConnect.sessions.scanQrCode" = "Scan QR Code";
 "priceAlert.emptyList" = "Alerts will appear here";
 "priceAlert.navigationTitle" = "Alerts";

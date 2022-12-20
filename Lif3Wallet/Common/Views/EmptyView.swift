@@ -19,7 +19,7 @@ class EmptyView: UIView {
 
     init(placement: EmptyViewPlacement = EmptyViewDefaultPlacement()) {
         super.init(frame: .zero)
-        backgroundColor = .clear
+        backgroundColor = .black
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
 
@@ -60,7 +60,7 @@ class EmptyView: UIView {
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.image = image
-
+            
             return imageView
         }
         return build()

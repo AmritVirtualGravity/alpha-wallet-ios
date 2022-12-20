@@ -60,7 +60,7 @@ class EmptyView: UIView {
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.image = image
-            
+            imageView.tintColor = .gray
             return imageView
         }
         return build()

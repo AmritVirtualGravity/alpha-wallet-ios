@@ -380,7 +380,7 @@ extension SettingsViewModel.SettingsWalletRow {
         case .showMyWallet:
             return R.image.walletAddress()!
         case .mainWallet:
-            return R.image.walletAddress()!
+            return R.image.iconsSettingsWallet()!
         case .changeWallet:
             return R.image.changeWallet()!
         case .backup:
@@ -445,7 +445,7 @@ extension SettingsViewModel.SettingsSystemRow {
         case .passcode:
             return R.string.localizable.settingsPasscodeTitle()
         case .selectActiveNetworks:
-            return R.string.localizable.settingsSelectActiveNetworksTitle()
+            return R.string.localizable.settingsNetworksTitle()
         case .advanced:
             return R.string.localizable.advanced()
         case .security:
@@ -468,7 +468,7 @@ extension SettingsViewModel.SettingsSystemRow {
         case .advanced:
             return R.image.iconsSettingsPreferences()!
         case .security:
-            return R.image.developerMode()!
+            return R.image.iconsSettingsSecurity()!
         case .hideToken:
             return R.image.biometrics()!
         case .theme:

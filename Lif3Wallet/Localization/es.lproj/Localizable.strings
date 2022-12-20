@@ -135,6 +135,7 @@
 "settings.hideToken.title" = "Hide 0 Balance Token";
 "settings.security.title" = "Security";
 "settings.selectActiveNetworks.title" = "Seleccionar redes activas";
+"settings.networks.title" = "Networks";
 "settings.section.help.title" = "Ayuda";
 "settings.section.social.title" = "Social";
 "settings.section.system.title" = "Sistema";

@@ -189,7 +189,7 @@ class WalletConnectCoordinator: NSObject, Coordinator {
             
             sessionsViewController = viewController
 
-            navigationController.pushViewController(viewController, animated: true, completion: completion)
+            navigationController.pushViewController(viewController, animated: false, completion: completion)
         }
     }
 

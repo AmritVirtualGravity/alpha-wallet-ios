@@ -384,7 +384,8 @@ struct ButtonsBarViewModel {
     var disabledButtonTitleColor: UIColor = Colors.appWhite
 
     var buttonCornerRadius: CGFloat {
-        return HorizontalButtonsBar.buttonsHeight / 2.0
+        return 14.0
+//        return HorizontalButtonsBar.buttonsHeight / 2.0
     }
 
     var buttonShadowColor: UIColor {

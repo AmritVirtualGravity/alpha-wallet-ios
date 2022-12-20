@@ -32,6 +32,10 @@ struct CreateInitialViewModel {
     var alreadyHaveWalletButtonText: String {
         return R.string.localizable.gettingStartedAlreadyHaveWallet()
     }
+    
+    var importWalletButtonText: String {
+        return R.string.localizable.gettingStartedImportWallet()
+    }
 
     var watchButtonTitle: String {
         return R.string.localizable.gettingStartedAlertSheetOptionWatchTitle()

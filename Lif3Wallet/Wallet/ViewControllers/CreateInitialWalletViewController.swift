@@ -73,10 +73,14 @@ class CreateInitialWalletViewController: UIViewController {
 
         let createWalletButton = buttonsBar.buttons[0]
         createWalletButton.setTitle(viewModel.createWalletButtonTitle, for: .normal)
+        
         createWalletButton.addTarget(self, action: #selector(createWalletSelected), for: .touchUpInside)
 
         let alreadyHaveWalletButton = buttonsBar.buttons[1]
-        alreadyHaveWalletButton.setTitle(viewModel.alreadyHaveWalletButtonText, for: .normal)
+        alreadyHaveWalletButton.setTitle(viewModel.importWalletButtonText, for: .normal)
+        alreadyHaveWalletButton.setBackgroundColor(.clear, forState: .normal)
+        alreadyHaveWalletButton.setTitleColor(.white, for: .normal)
+        alreadyHaveWalletButton.layer.borderColor = UIColor.white.cgColor
         alreadyHaveWalletButton.addTarget(self, action: #selector(alreadyHaveWalletWallet), for: .touchUpInside)
     }
 

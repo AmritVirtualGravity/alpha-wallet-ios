@@ -139,7 +139,7 @@ struct Configuration {
             }
 
             static let tableViewBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
             }
             static let tableViewCellBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
@@ -186,7 +186,7 @@ struct Configuration {
             }
 
             static let navigationbarBackgroundColor = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
             }
 
             static let navigationbarSeparator = UIColor { trait in

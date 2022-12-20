@@ -214,6 +214,7 @@ final class TokensViewModel {
         
         tokenCollection.tokenViewModels.sink { [weak self] tokens in
             self?.tokens = tokens
+            self?.tokens.removeAll(where: { $0.symbol == "TIX" })
             self?.reloadData()
         }.store(in: &cancellable)
         

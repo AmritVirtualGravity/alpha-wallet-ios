@@ -36,6 +36,7 @@ extension SettingsWalletViewModel {
         case backup
         case showSeedPhrase
         case nameWallet
+        case exportJSONKeystore
         
         var title: String {
             switch self {
@@ -49,6 +50,8 @@ extension SettingsWalletViewModel {
                 return R.string.localizable.settingsShowSeedPhraseButtonTitle()
             case .nameWallet:
                 return R.string.localizable.settingsWalletRename()
+            case .exportJSONKeystore:
+                return R.string.localizable.settingsAdvancedExportJSONKeystoreTitle()
             }
            
         }
@@ -65,7 +68,8 @@ extension SettingsWalletViewModel {
                 return R.image.iconsSettingsDisplayedEns()!
             case .backup:
                 return R.image.backupCircle()!
-           
+            case .exportJSONKeystore:
+                return R.image.iconsSettingsJson()!
             }
         }
     }

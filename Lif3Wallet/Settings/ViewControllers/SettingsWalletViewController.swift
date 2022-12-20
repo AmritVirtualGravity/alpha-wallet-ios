@@ -9,6 +9,7 @@ protocol SettingsWalletViewControllerDelegate: AnyObject {
     func backupWalletSelected(in controller: SettingsWalletViewController)
     func showSeedPhraseSelected(in controller: SettingsWalletViewController)
     func nameWalletSelected(in controller: SettingsWalletViewController)
+    func exportJSONKeystoreSelected(in controller: SettingsWalletViewController)
 }
 
 class SettingsWalletViewController: UIViewController {
@@ -100,6 +101,8 @@ extension SettingsWalletViewController: UITableViewDelegate {
             delegate?.showSeedPhraseSelected(in: self)
         case .nameWallet:
             delegate?.nameWalletSelected(in: self)
+        case .exportJSONKeystore:
+            delegate?.exportJSONKeystoreSelected(in: self)
         }
     }
 }

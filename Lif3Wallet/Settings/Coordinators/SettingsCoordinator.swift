@@ -57,7 +57,7 @@ class SettingsCoordinator: Coordinator {
         let viewModel = SettingsViewModel(account: account, keystore: keystore, lock: lock, config: config, analytics: analytics, domainResolutionService: domainResolutionService)
         let controller = SettingsViewController(viewModel: viewModel)
         controller.delegate = self
-        controller.navigationItem.largeTitleDisplayMode = .always
+        controller.navigationItem.largeTitleDisplayMode = .never
         
         return controller
     }()

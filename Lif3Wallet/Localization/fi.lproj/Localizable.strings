@@ -135,6 +135,7 @@
 "settings.hideToken.title" = "Hide 0 Balance Token";
 "settings.security.title" = "Security";
 "settings.selectActiveNetworks.title" = "Kytketyt verkot";
+"settings.networks.title" = "Networks";
 "settings.section.help.title" = "Apu";
 "settings.section.social.title" = "Social";
 "settings.section.system.title" = "Järjestelmä";

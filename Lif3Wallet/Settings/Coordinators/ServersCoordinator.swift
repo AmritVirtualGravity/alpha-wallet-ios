@@ -31,7 +31,6 @@ class ServersCoordinator: Coordinator {
             .artis_sigma1,
             .artis_tau1,
             .fantom_testnet,
-            .avalanche,
             .avalanche_testnet,
             .mumbai_testnet,
             .optimismGoerli,

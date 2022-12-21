@@ -17,18 +17,18 @@ class BrowserHistoryHeaderView: UIView {
         super.init(frame: .zero)
 
         header.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(header)
+//        addSubview(header)
 
         clearButton.addTarget(self, action: #selector(clearHistory), for: .touchUpInside)
         clearButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(clearButton)
 
         NSLayoutConstraint.activate([
-            header.trailingAnchor.constraint(equalTo: trailingAnchor),
-            header.leadingAnchor.constraint(equalTo: leadingAnchor),
-            header.topAnchor.constraint(equalTo: topAnchor, constant: 50),
-            header.bottomAnchor.constraint(equalTo: clearButton.topAnchor, constant: -30),
-
+//            header.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            header.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            header.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+//            header.bottomAnchor.constraint(equalTo: clearButton.topAnchor, constant: -30),
+            clearButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             clearButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             clearButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
         ])
@@ -42,7 +42,6 @@ class BrowserHistoryHeaderView: UIView {
 
     func configure(viewModel: BrowserHomeHeaderViewModel) {
         header.configure(viewModel: viewModel)
-
         clearButton.setTitle(R.string.localizable.clearButtonTitle().localizedUppercase, for: .normal)
         clearButton.titleLabel?.font = Fonts.bold(size: 12)
     }

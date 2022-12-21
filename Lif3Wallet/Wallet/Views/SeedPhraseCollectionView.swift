@@ -17,7 +17,7 @@ class SeedPhraseCollectionView: UICollectionView {
     weak var seedPhraseDelegate: SeedPhraseCollectionViewDelegate?
 
     convenience init() {
-        let layout = CollectionViewLeftAlignedFlowLayout()
+        let layout = CenterAlignedCollectionViewFlowLayout()
         layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 7
         layout.minimumLineSpacing = 7

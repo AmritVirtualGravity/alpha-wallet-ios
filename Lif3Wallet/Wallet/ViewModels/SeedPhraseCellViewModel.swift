@@ -34,7 +34,7 @@ struct SeedPhraseCellViewModel {
     }
 
     var sequenceFont: UIFont {
-        return Fonts.regular(size: 12)
+        return Fonts.regular(size: 16)
     }
 
     var sequenceColor: UIColor {

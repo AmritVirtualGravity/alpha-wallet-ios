@@ -9,7 +9,8 @@ struct ShowSeedPhraseViewModel {
 
     let words: [String]
 
-    var subtitle: String = R.string.localizable.walletsShowSeedPhraseSubtitle()
+//    var subtitle: String = R.string.localizable.walletsShowSeedPhraseSubtitle()
+    var subtitle: String = R.string.localizable.walletsShowSeedPhraseSubtitle2()
     var buttonTitle: String = R.string.localizable.walletsShowSeedPhraseTestSeedPhrase()
     
     var subtitleColor: UIColor {

@@ -258,7 +258,7 @@ struct Configuration {
             }
 
             static let overlayBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.black()!.withAlphaComponent(0.3), darkColor: R.color.white()!.withAlphaComponent(0.3))
+                return colorFrom(trait: trait, lightColor: R.color.black()!.withAlphaComponent(0.3), darkColor: R.color.black()!.withAlphaComponent(0.3))
             }
 
             static let dialogBackground = UIColor { trait in

@@ -276,6 +276,14 @@ struct Configuration {
             static let textViewBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.venus()!)
             }
+            
+            static let seedPhraseTextViewBorderColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .lightGray, darkColor: .clear)
+            }
+            
+            static let seedPhrasetextViewbackgroundColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
+            }
 
             static let shadow = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)

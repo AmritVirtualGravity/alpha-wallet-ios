@@ -161,6 +161,8 @@
 "wallets.backupHdWallet.alertSheet.title" = "Show Seed Phrase";
 "wallets.backupHdWallet.introduction.button.title" = "Back up my Wallet";
 "wallets.backupHdWallet.introduction.title" = "Back up your Wallet\nwith Seed Phrase";
+"wallets.backupHdWallet.secretPhrase.title" = "Secret Phrase";
+"wallets.backupHdWallet.secretPhrase.subtitle" = "In the next step you will see your 12 word Secret Phrase that allows you to recover your wallet.";
 "wallets.showSeedPhrase.introduction.button.title" = "Got it. Show my seed phrase";
 "wallets.showSeedPhrase.introduction.title" = "Beware of scammers!\nDon’t share seed phrase.";
 "wallets.showSeedPhrase.introduction.subtitle" = "Lif3 Wallet will NEVER ask about your\nseed phrase (especially on Telegram).";

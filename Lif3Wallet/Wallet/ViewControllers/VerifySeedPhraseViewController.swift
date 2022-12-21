@@ -53,26 +53,31 @@ class VerifySeedPhraseViewController: UIViewController {
                 errorLabel.text = viewModel.noErrorText
                 errorLabel.textColor = viewModel.noErrorColor
                 seedPhraseTextView.borderColor = viewModel.seedPhraseTextViewBorderNormalColor
+                seedPhraseTextView.backgroundColor = viewModel.seedPhraseTextViewBackgroundColor
                 delegate?.didVerifySeedPhraseSuccessfully(for: account, in: self)
             case .seedPhraseNotMatched:
                 errorLabel.text = R.string.localizable.walletsVerifySeedPhraseWrong()
                 errorLabel.textColor = viewModel.errorColor
                 seedPhraseTextView.borderColor = viewModel.seedPhraseTextViewBorderErrorColor
+                seedPhraseTextView.backgroundColor = viewModel.seedPhraseTextViewBackgroundColor
             case .keystoreError(let error):
                 seedPhraseCollectionView.viewModel = .init(words: [], isSelectable: true)
                 errorLabel.text = error.errorDescription
                 errorLabel.textColor = viewModel.errorColor
                 seedPhraseTextView.borderColor = viewModel.seedPhraseTextViewBorderErrorColor
+                seedPhraseTextView.backgroundColor = viewModel.seedPhraseTextViewBackgroundColor
             case .notDisplayedSeedPhrase:
                 seedPhraseCollectionView.viewModel = .init(words: [], isSelectable: true)
                 seedPhraseTextView.text = ""
                 buttonsBar.hideButtonInStack(button: clearChooseSeedPhraseButton)
                 continueButton.isEnabled = false
+                seedPhraseTextView.backgroundColor = viewModel.seedPhraseTextViewBackgroundColor
             case .errorDisplaySeedPhrase(let error):
                 seedPhraseCollectionView.viewModel = .init(words: [], isSelectable: true)
                 errorLabel.text = error.errorDescription
                 errorLabel.textColor = viewModel.errorColor
                 seedPhraseTextView.borderColor = viewModel.seedPhraseTextViewBorderErrorColor
+                seedPhraseTextView.backgroundColor = viewModel.seedPhraseTextViewBackgroundColor
             }
         }
     }
@@ -233,6 +238,7 @@ class VerifySeedPhraseViewController: UIViewController {
         seedPhraseTextView.autocorrectionType = .no
         seedPhraseTextView.enablesReturnKeyAutomatically = true
         seedPhraseTextView.borderColor = viewModel.seedPhraseTextViewBorderNormalColor
+        seedPhraseTextView.backgroundColor = viewModel.seedPhraseTextViewBackgroundColor
         seedPhraseTextView.borderWidth = viewModel.seedPhraseTextViewBorderWidth
         seedPhraseTextView.cornerRadius = viewModel.seedPhraseTextViewBorderCornerRadius
         seedPhraseTextView.font = viewModel.seedPhraseTextViewFont
@@ -298,6 +304,7 @@ class VerifySeedPhraseViewController: UIViewController {
         errorLabel.text = viewModel.noErrorText
         errorLabel.textColor = viewModel.noErrorColor
         seedPhraseTextView.borderColor = viewModel.seedPhraseTextViewBorderNormalColor
+     
     }
 }
 

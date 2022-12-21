@@ -40,7 +40,7 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         hidesBottomBarWhenPushed = true
 
         roundedBackground.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(backgroundImageView)
+//        view.addSubview(backgroundImageView)
         view.addSubview(roundedBackground)
 
         imageView.contentMode = .scaleAspectFit
@@ -48,10 +48,10 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         let stackView = [
             UIView.spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 18)),
             subtitleLabel,
-            UIView.spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 18)),
-            imageView,
-            UIView.spacer(height: ScreenChecker.size(big: 50, medium: 50, small: 10)),
+            UIView.spacer(height: ScreenChecker.size(big: 30, medium: 30, small: 10)),
             descriptionLabel1,
+            UIView.spacer(height: ScreenChecker.size(big: 20, medium: 20, small: 5)),
+            imageView,
             ].asStackView(axis: .vertical)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         roundedBackground.addSubview(stackView)
@@ -64,11 +64,11 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         footerBar.addSubview(buttonsBar)
 
         NSLayoutConstraint.activate([
-            // image view constraits for  full screen size
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
+//            // image view constraits for  full screen size
+//            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+//            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+//            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+//            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
             
             imageView.heightAnchor.constraint(equalToConstant: imageViewDimension),
 
@@ -109,12 +109,13 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
         backgroundImageView.image = viewModel.backgroundImage
         subtitleLabel.numberOfLines = 0
         subtitleLabel.attributedText = viewModel.attributedSubtitle
-        subtitleLabel.textColor = .white
+        subtitleLabel.textColor = Configuration.Color.Semantic.defaultTitleText
         imageView.image = viewModel.imageViewImage
 
         descriptionLabel1.numberOfLines = 0
         descriptionLabel1.attributedText = viewModel.attributedDescription
-        descriptionLabel1.textColor = .white
+        descriptionLabel1.textColor = .darkGray
+        descriptionLabel1.font = UIFont.systemFont(ofSize: 17.0)
 
 
         buttonsBar.configure()

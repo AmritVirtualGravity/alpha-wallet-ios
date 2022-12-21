@@ -161,6 +161,8 @@
 "wallets.backupHdWallet.alertSheet.title" = "Mostrar frase semilla";
 "wallets.backupHdWallet.introduction.button.title" = "Hacer una copia de seguridad de mi monedero";
 "wallets.backupHdWallet.introduction.title" = "Haz una copia de seguridad de tu monedero\n con la frase semilla";
+"wallets.backupHdWallet.secretPhrase.title" = "Secret Phrase";
+"wallets.backupHdWallet.secretPhrase.subtitle" = "In the next step you will see your 12 word Secret Phrase that allows you to recover your wallet.";
 "wallets.showSeedPhrase.introduction.button.title" = "Entendido. Mostrar mi frase semilla";
 "wallets.showSeedPhrase.introduction.title" = "Ten cuidado con los estafadores!\nNo compartas tu frase semilla";
 "wallets.showSeedPhrase.introduction.subtitle" = "Lif3 Wallet NUNCA preguntara por tu \nfrase semilla (especialmente en Telegram)";

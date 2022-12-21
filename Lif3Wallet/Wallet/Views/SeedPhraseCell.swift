@@ -16,13 +16,15 @@ class SeedPhraseCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(label)
 
-        let horizontalMargin = CGFloat(20)
-        let verticalMargin = CGFloat(10)
         NSLayoutConstraint.activate([
-            sequenceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
-            sequenceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            sequenceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            sequenceLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
-            label.anchorsConstraint(to: contentView, edgeInsets: .init(top: verticalMargin, left: horizontalMargin, bottom: verticalMargin, right: horizontalMargin)),
+            label.leadingAnchor.constraint(equalTo: sequenceLabel.trailingAnchor, constant: 6),
+            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ])
     }
 
@@ -31,6 +33,8 @@ class SeedPhraseCell: UICollectionViewCell {
     }
 
     func configure(viewModel: SeedPhraseCellViewModel) {
+        borderColor = Configuration.Color.Semantic.tableViewCellPrimaryFont.withAlphaComponent(0.3)
+        borderWidth = 1
         cornerRadius = 7
 
         if viewModel.sequence != nil {
@@ -45,14 +49,16 @@ class SeedPhraseCell: UICollectionViewCell {
         label.font = viewModel.font
         label.text = viewModel.word
 
-        if viewModel.isSelected {
-            contentView.backgroundColor = viewModel.selectedBackgroundColor
-            backgroundColor = viewModel.selectedBackgroundColor
-            label.textColor = viewModel.selectedTextColor
-        } else {
-            contentView.backgroundColor = viewModel.backgroundColor
-            backgroundColor = viewModel.backgroundColor
-            label.textColor = viewModel.textColor
-        }
+//        if viewModel.isSelected {
+//            contentView.backgroundColor = viewModel.selectedBackgroundColor
+//            backgroundColor = viewModel.selectedBackgroundColor
+//            label.textColor = viewModel.selectedTextColor
+//        } else {
+//            contentView.backgroundColor = viewModel.backgroundColor
+//            backgroundColor = viewModel.backgroundColor
+//            label.textColor = viewModel.textColor
+//        }
+        
+        label.textColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
     }
 }

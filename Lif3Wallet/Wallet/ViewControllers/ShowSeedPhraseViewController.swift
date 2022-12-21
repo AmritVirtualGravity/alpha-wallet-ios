@@ -32,6 +32,17 @@ class ShowSeedPhraseViewController: UIViewController {
     private let account: AlphaWallet.Address
     private let roundedBackground = RoundedBackground()
     private let subtitleLabel = UILabel()
+    
+    private lazy var desctiptionLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = R.string.localizable.showSeedPhraseDescription()
+        label.textColor = Configuration.Color.Semantic.tableViewCellPrimaryFont.withAlphaComponent(0.6)
+        label.font = Fonts.regular(size: 17)
+        label.textAlignment = .center
+        return label
+    }()
+    
     private let errorLabel = UILabel()
     private var state: State = .notDisplayedSeedPhrase {
         didSet {
@@ -54,6 +65,48 @@ class ShowSeedPhraseViewController: UIViewController {
         }
     }
     private let seedPhraseCollectionView = SeedPhraseCollectionView()
+    
+    private lazy var donotShareTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(hex: "E35959")
+        label.text = "DO NOT share your phrase with anyone!\nAs this gives full access to your wallet!"
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = Fonts.bold(size: 16)
+        return label
+    }()
+    
+    private lazy var donotShareSubTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(hex: "E35959")
+        label.text = "Lif3 Wallet suport will NEVER reach out to ask for it"
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = Fonts.regular(size: 16)
+        return label
+    }()
+    
+    private lazy var bottomView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(hex: "392527")
+        
+        var stackView = UIStackView(arrangedSubviews: [donotShareTitleLabel, donotShareSubTitleLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        
+        view.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
+        ])
+        view.cornerRadius = 10
+        return view
+    }()
+    
     private let buttonsBar = HorizontalButtonsBar(configuration: .primary(buttons: 1))
     private var notDisplayingSeedPhrase: Bool {
         switch state {
@@ -95,6 +148,8 @@ class ShowSeedPhraseViewController: UIViewController {
         let stackView = [
             UIView.spacer(height: ScreenChecker().isNarrowScreen ? 10 : 30),
             subtitleLabel,
+            UIView.spacer(height: 24),
+            desctiptionLabel,
             UIView.spacer(height: 10),
             errorLabel,
             UIView.spacer(height: ScreenChecker().isNarrowScreen ? 10 : 50),
@@ -108,6 +163,7 @@ class ShowSeedPhraseViewController: UIViewController {
         footerBar.backgroundColor = .clear
         roundedBackground.addSubview(footerBar)
 
+        footerBar.addSubview(bottomView)
         footerBar.addSubview(buttonsBar)
 
         NSLayoutConstraint.activate([
@@ -115,13 +171,17 @@ class ShowSeedPhraseViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stackView.topAnchor.constraint(equalTo: view.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: footerBar.topAnchor, constant: -7),
+            
+            bottomView.topAnchor.constraint(equalTo: footerBar.topAnchor),
+            bottomView.leadingAnchor.constraint(equalTo: footerBar.leadingAnchor, constant: 16),
+            bottomView.trailingAnchor.constraint(equalTo: footerBar.trailingAnchor, constant: -16),
 
+            buttonsBar.topAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 20),
             buttonsBar.leadingAnchor.constraint(equalTo: footerBar.leadingAnchor),
             buttonsBar.trailingAnchor.constraint(equalTo: footerBar.trailingAnchor),
             buttonsBar.bottomAnchor.constraint(equalTo: footerBar.bottomAnchor),
             buttonsBar.heightAnchor.constraint(equalToConstant: HorizontalButtonsBar.buttonsHeight),
 
-            footerBar.topAnchor.constraint(equalTo: buttonsBar.topAnchor),
             footerBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             footerBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).set(priority: .defaultHigh),
@@ -182,7 +242,7 @@ class ShowSeedPhraseViewController: UIViewController {
         view.backgroundColor = Colors.appBackground
 
         subtitleLabel.textAlignment = .center
-        subtitleLabel.textColor = viewModel.subtitleColor
+        subtitleLabel.textColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
         subtitleLabel.font = viewModel.subtitleFont
         //Important for smaller screens
         subtitleLabel.numberOfLines = 0
@@ -197,7 +257,8 @@ class ShowSeedPhraseViewController: UIViewController {
 
         buttonsBar.configure()
         let testSeedPhraseButton = buttonsBar.buttons[0]
-        testSeedPhraseButton.setTitle(viewModel.buttonTitle, for: .normal)
+//        testSeedPhraseButton.setTitle(viewModel.buttonTitle, for: .normal)
+        testSeedPhraseButton.setTitle("I'm Done", for: .normal)
         testSeedPhraseButton.addTarget(self, action: #selector(testSeedPhrase), for: .touchUpInside)
     }
 

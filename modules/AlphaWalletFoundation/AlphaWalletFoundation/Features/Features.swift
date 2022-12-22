@@ -115,7 +115,7 @@ public enum FeaturesAvailable: String, CaseIterable, Codable {
         case .isBlockscanChatEnabled: return true
         case .isTokenScriptSignatureStatusEnabled: return false
         case .isSwapEnabled: return true
-        case .isCoinbasePayEnabled: return true
+        case .isCoinbasePayEnabled: return false
         case .isLoggingEnabledForTickerMatches: return false
         case .isChangeCurrencyEnabled: return true
         }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Tomb Chain@1x.png",
+      "filename" : "Property 1=Tomb@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Tomb Chain@2x.png",
+      "filename" : "Property 1=Tomb@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Tomb Chain@3x.png",
+      "filename" : "Property 1=Tomb@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

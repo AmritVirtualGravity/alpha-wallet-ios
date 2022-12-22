@@ -19,6 +19,10 @@ fileprivate func colorFrom(trait: UITraitCollection, lightColor: UIColor, darkCo
 struct Configuration {
     struct Color {
         struct Semantic {
+            static let checkBoxCheckedColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .red, darkColor: .white)
+            }
+            
             static let defaultViewBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
             }
@@ -275,6 +279,24 @@ struct Configuration {
 
             static let textViewBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.venus()!)
+            }
+            
+            static let seedPhraseTextViewBorderColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .lightGray, darkColor: .clear)
+            }
+            
+            static let seedPhraseContractViewBorderColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .lightGray.withAlphaComponent(0.8), darkColor: .lightGray.withAlphaComponent(0.2))
+            }
+            
+            static let seedPhraseButtonViewBorderColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .lightGray, darkColor: .lightGray)
+            }
+            
+            
+            
+            static let seedPhrasetextViewbackgroundColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
             }
 
             static let shadow = UIColor { trait in

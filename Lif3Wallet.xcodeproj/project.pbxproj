@@ -685,6 +685,7 @@
 		08A25854294073F100A31193 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A255E1294073EF00A31193 /* Localizable.strings */; };
 		08B108B8294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */; };
 		08F0AE4C2940D93E00FBF77B /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */; };
+		105E45B52954058A00CDC40C /* SeedPhraseContractView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */; };
 		10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E612949F98F00187A49 /* SecurityViewController.swift */; };
 		10645E642949FA9A00187A49 /* SecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E632949FA9A00187A49 /* SecurityViewModel.swift */; };
 		10645E66294A0ADA00187A49 /* SecurityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */; };
@@ -1569,6 +1570,7 @@
 		08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
 		102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseContractView.swift; sourceTree = "<group>"; };
 		10645E612949F98F00187A49 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		10645E632949FA9A00187A49 /* SecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewModel.swift; sourceTree = "<group>"; };
 		10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityCoordinator.swift; sourceTree = "<group>"; };
@@ -3308,6 +3310,7 @@
 				08A25530294073EF00A31193 /* InitialNetworkSelectionView.swift */,
 				08A25531294073EF00A31193 /* SeedPhraseSuggestionViewCell.swift */,
 				08A25532294073EF00A31193 /* WordCollectionViewCell.swift */,
+				105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5452,6 +5455,7 @@
 				08A2569B294073F000A31193 /* ClaimPaidErc875MagicLinkViewModel.swift in Sources */,
 				08A256E3294073F000A31193 /* UIColor.swift in Sources */,
 				08760C532940780100F83AB3 /* R.generated.swift in Sources */,
+				105E45B52954058A00CDC40C /* SeedPhraseContractView.swift in Sources */,
 				08A2580B294073F100A31193 /* NFTCollectionCoordinator.swift in Sources */,
 				08A25842294073F100A31193 /* AddHideTokenSectionHeaderView.swift in Sources */,
 				08A256A7294073F000A31193 /* ConfigureTransactionViewModel.swift in Sources */,

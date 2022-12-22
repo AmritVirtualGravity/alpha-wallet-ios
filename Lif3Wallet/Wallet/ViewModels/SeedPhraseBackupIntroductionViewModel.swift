@@ -10,18 +10,18 @@ struct SeedPhraseBackupIntroductionViewModel {
     }
 
     var title: String {
-        return R.string.localizable.walletsBackupHdWalletIntroductionButtonTitle()
+        return R.string.localizable.continue()
     } 
 
     var imageViewImage: UIImage {
-        return R.image.hdIntroduction()!
+        return R.image.showSeedPhraseIntroduction()!
     }
     var backgroundImage: UIImage {
         return R.image.lifeBackgroundImage()!
     }
     
     var attributedSubtitle: NSAttributedString {
-        let subtitle = R.string.localizable.walletsBackupHdWalletIntroductionTitle()
+        let subtitle = R.string.localizable.walletsBackupHdWalletSecretPhraseTitle()
         let attributeString = NSMutableAttributedString(string: subtitle)
         let style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -37,7 +37,7 @@ struct SeedPhraseBackupIntroductionViewModel {
     }
     
     var attributedDescription: NSAttributedString {
-        let description = R.string.localizable.walletsShowSeedPhraseSubtitle()
+        let description = R.string.localizable.walletsBackupHdWalletSecretPhraseSubtitle()
         let attributeString = NSMutableAttributedString(string: description)
         let style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -45,7 +45,7 @@ struct SeedPhraseBackupIntroductionViewModel {
         
         attributeString.addAttributes([
             .paragraphStyle: style,
-            .font: Screen.Backup.descriptionFont,
+            .font: UIFont(resource: R.font.sourceSansProRegular, size: 17)!,
             .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ], range: NSRange(location: 0, length: description.count))
         

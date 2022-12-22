@@ -129,7 +129,7 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
 
         descriptionLabel1.numberOfLines = 0
         descriptionLabel1.attributedText = viewModel.attributedDescription
-        descriptionLabel1.textColor = .darkGray
+        descriptionLabel1.textColor = Configuration.Color.Semantic.defaultTitleText
         descriptionLabel1.font = UIFont.systemFont(ofSize: 17.0)
         
         // contract view setup

@@ -46,7 +46,7 @@ class EnabledServersViewController: UIViewController {
     private func configure(viewModel: EnabledServersViewModel) {
         self.viewModel = viewModel
 //        title = viewModel.title
-        title = "Active Networks"
+        title = R.string.localizable.settingsNetworksTitle()
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -56,6 +56,7 @@ class SeedPhraseBackupIntroductionViewController: UIViewController {
             UIView.spacer(height: ScreenChecker.size(big: 10, medium: 10, small: 10)),
             descriptionLabel1,
             imageView,
+            UIView.spacer(height: ScreenChecker.size(big: 10, medium: 10, small: 10)),
             contractView1,
             UIView.spacer(height: ScreenChecker.size(big: 10, medium: 10, small: 10)),
             contractView2,

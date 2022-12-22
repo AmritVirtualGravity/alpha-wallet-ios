@@ -286,8 +286,13 @@ struct Configuration {
             }
             
             static let seedPhraseContractViewBorderColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .lightGray.withAlphaComponent(0.8), darkColor: .lightGray.withAlphaComponent(0.2))
+            }
+            
+            static let seedPhraseButtonViewBorderColor = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: .lightGray, darkColor: .lightGray)
             }
+            
             
             
             static let seedPhrasetextViewbackgroundColor = UIColor { trait in

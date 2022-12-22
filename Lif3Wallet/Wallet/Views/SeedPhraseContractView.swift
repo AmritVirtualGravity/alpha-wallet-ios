@@ -28,12 +28,13 @@ class SeedPhraseContractView: UIView {
         
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = description
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.numberOfLines = 2
         descriptionLabel.textColor = Configuration.Color.Semantic.defaultTitleText
 
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderWidth = 1
-        button.layer.borderColor = Configuration.Color.Semantic.seedPhraseContractViewBorderColor.cgColor
+        button.layer.borderColor = Configuration.Color.Semantic.seedPhraseButtonViewBorderColor.cgColor
         button.layer.masksToBounds = true
       
         button.addTarget(self, action: #selector(didTapCheckBoxBtn), for: .touchUpInside)

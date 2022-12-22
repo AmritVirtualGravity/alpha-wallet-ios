@@ -45,7 +45,7 @@ struct SeedPhraseBackupIntroductionViewModel {
         
         attributeString.addAttributes([
             .paragraphStyle: style,
-            .font: Screen.Backup.descriptionFont,
+            .font: UIFont(resource: R.font.sourceSansProRegular, size: 17)!,
             .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ], range: NSRange(location: 0, length: description.count))
         

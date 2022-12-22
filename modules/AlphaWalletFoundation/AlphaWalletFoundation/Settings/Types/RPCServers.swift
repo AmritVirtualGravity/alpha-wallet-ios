@@ -129,7 +129,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .goerli: return "Goerli"
         case .artis_sigma1: return "ARTIS sigma1"
         case .artis_tau1: return "ARTIS tau1"
-        case .binance_smart_chain: return "Binance (BSC)"
+        case .binance_smart_chain: return "BNB Chain"
         case .binance_smart_chain_testnet: return "Binance (BSC) Testnet"
         case .heco: return "Heco"
         case .heco_testnet: return "Heco Testnet"

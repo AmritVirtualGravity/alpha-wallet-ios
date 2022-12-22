@@ -10,7 +10,7 @@ struct SeedPhraseBackupIntroductionViewModel {
     }
 
     var title: String {
-        return R.string.localizable.walletsBackupHdWalletIntroductionButtonTitle()
+        return R.string.localizable.continue()
     } 
 
     var imageViewImage: UIImage {

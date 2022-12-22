@@ -6,7 +6,7 @@ import AlphaWalletFoundation
 class ToolsViewModel {
     private var config: Config
 //    private var rows: [ToolsViewModel.ToolsRow] = ToolsViewModel.ToolsRow.allCases
-    private var rows: [ToolsViewModel.ToolsRow] = [.pingInfura, .checkTransactionState, .features]
+    private var rows: [ToolsViewModel.ToolsRow] = [.pingInfura, .checkTransactionState]
     
     var title: String = R.string.localizable.aSettingsTools()
     var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode = .never

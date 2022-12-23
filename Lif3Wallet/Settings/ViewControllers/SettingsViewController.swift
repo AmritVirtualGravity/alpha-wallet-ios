@@ -260,8 +260,7 @@ extension SettingsViewController: UITableViewDelegate {
                 delegate?.walletConnectSelected(in: self)
             case .nameWallet:
                 delegate?.nameWalletSelected(in: self)
-            case .blockscanChat:
-                delegate?.blockscanChatSelected(in: self)
+           
             case .mainWallet:
                 delegate?.mainWalletSelected(in: self)
             }
@@ -275,6 +274,8 @@ extension SettingsViewController: UITableViewDelegate {
                 delegate?.activeNetworksSelected(in: self)
             case .security:
                 delegate?.securitySelected(in: self)
+            case .blockscanChat:
+                delegate?.blockscanChatSelected(in: self)
             }
         case .help(let rows):
             if let url = rows[indexPath.row].openUrl  {

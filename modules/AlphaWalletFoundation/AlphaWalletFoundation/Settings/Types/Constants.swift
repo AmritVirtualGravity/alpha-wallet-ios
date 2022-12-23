@@ -77,9 +77,10 @@ public struct Constants {
 
     static func buyWithRampUrl(asset: String, wallet: Wallet) -> String? {
         guard Constants.Credentials.rampApiKey.nonEmpty else { return nil }
-//        return "https://buy.ramp.network/?hostApiKey=\(Constants.Credentials.rampApiKey)&hostLogoUrl=https%3A%2F%2Falphawallet.com%2Fwp-content%2Fthemes%2Falphawallet%2Fimg%2Falphawallet-logo.svg&hostAppName=Lif3Wallet&swapAsset=\(asset)&userAddress=\(wallet.address.eip55String)"
-//    https://alphawallet.com/wp-content/themes/alphawallet/img/alphawallet-logo.svg
-        return "https://buy.ramp.network/?hostApiKey=\(Constants.Credentials.rampApiKey)&hostLogoUrl=https://assets.lif3.com/wallet/ramp/Lif3.com-dark.svg&hostAppName=Lif3Wallet&swapAsset=\(asset)&userAddress=\(wallet.address.eip55String)"
+        
+        // this variable is created temporarily for now.Buy default Fantom is selected on asset.
+        let rpcAsset = "FANTOM_FTM"
+        return "https://buy.ramp.network/?hostApiKey=\(Constants.Credentials.rampApiKey)&hostLogoUrl=https://assets.lif3.com/wallet/ramp/Lif3.com-dark.svg&hostAppName=Lif3Wallet&swapAsset=\(rpcAsset)&userAddress=\(wallet.address.eip55String)"
     }
 
     static func buyWithCoinbaseUrl(blockchain: String, wallet: Wallet) -> String? {

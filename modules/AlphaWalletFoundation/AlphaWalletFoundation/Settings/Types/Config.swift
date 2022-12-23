@@ -296,8 +296,8 @@ public struct Config {
 
     public func anyEnabledServer() -> RPCServer {
         let servers = enabledServers
-        if servers.contains(.fantom) {
-            return .fantom
+        if servers.contains(.main) {
+            return .main
         } else {
             return servers.first!
         }

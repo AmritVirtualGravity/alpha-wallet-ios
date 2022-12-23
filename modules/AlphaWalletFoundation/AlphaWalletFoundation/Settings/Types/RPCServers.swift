@@ -449,7 +449,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .binance_smart_chain, .binance_smart_chain_testnet: return "BNB"
         case .heco, .heco_testnet: return "HT"
         case .custom(let custom): return custom.symbol ?? "ETH"
-        case .fantom, .fantom_testnet: return "FANTOM_FTM"
+        case .fantom, .fantom_testnet: return "FTM"
         case .avalanche, .avalanche_testnet: return "AVAX"
         case .polygon, .mumbai_testnet: return "MATIC"
         case .optimistic: return "ETH"

@@ -185,7 +185,7 @@ extension UIPasteboard {
 extension TokensCoordinator: TokensViewControllerDelegate {
 
     func buyCryptoSelected(in viewController: UIViewController) {
-        delegate?.buyCrypto(wallet: wallet, server: .fantom, viewController: viewController, source: .walletTab)
+        delegate?.buyCrypto(wallet: wallet, server: .main, viewController: viewController, source: .walletTab)
     }
 
     func whereAreMyTokensSelected(in viewController: UIViewController) {

@@ -132,7 +132,7 @@ extension RPCServer {
         case .goerli, .artis_tau1, .binance_smart_chain_testnet, .cronosTestnet, .custom: return nil
         case .heco, .heco_testnet: return R.image.iconsNetworkHeco()
         case .cronosMainnet: return R.image.iconsNetworkCronos()
-        case .fantom, .fantom_testnet: return R.image.iconsNetworkFantom()
+        case .fantom, .fantom_testnet: return R.image.iconsTokensFantom()
         case .avalanche, .avalanche_testnet: return R.image.iconsNetworkAvalanche()
         case .polygon: return R.image.iconsNetworkPolygon()
         case .mumbai_testnet: return nil

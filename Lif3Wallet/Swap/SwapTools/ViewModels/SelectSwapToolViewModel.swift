@@ -63,7 +63,7 @@ final class SelectSwapToolViewModel {
                 snapshot.appendItems(viewModels)
 
                 return snapshot
-            }.map { SelectSwapToolViewModel.ViewState(title: "Preffered Exchanges".uppercased(), snapshot: $0) }
+            }.map { SelectSwapToolViewModel.ViewState(title: "Preffered Bridges".uppercased(), snapshot: $0) }
 
         return .init(viewState: viewState.eraseToAnyPublisher())
     }

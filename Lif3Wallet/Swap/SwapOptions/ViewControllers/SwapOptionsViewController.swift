@@ -33,7 +33,7 @@ class SwapOptionsViewController: UIViewController {
     }()
 
     private lazy var swapToolsHeaderView: SwapOptionsHeaderView = {
-        let view = SwapOptionsHeaderView(viewModel: .init(title: "Preffered Exchanges"))
+        let view = SwapOptionsHeaderView(viewModel: .init(title: "Preffered Bridges"))
         let button = view.enableTapAction(title: R.string.localizable.editButtonTitle())
         button.addTarget(self, action: #selector(choseSwapToolSelected), for: .touchUpInside)
 
@@ -78,7 +78,6 @@ class SwapOptionsViewController: UIViewController {
             swapToolsView.adjusted(),
             .spacer(height: 10),
             networkHeaderView.adjusted(),
-            .spacer(height: 10),
             tableView
         ])
 
@@ -97,7 +96,7 @@ class SwapOptionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem.logoBarButton()
+//        navigationItem.leftBarButtonItem = UIBarButtonItem.logoBarButton()
         navigationItem.rightBarButtonItem = UIBarButtonItem.closeBarButton(self, selector: #selector(closeDidSelect))
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)

@@ -23,6 +23,11 @@ struct Configuration {
                 return colorFrom(trait: trait, lightColor: .red, darkColor: .white)
             }
             
+            
+            static let preferedBridgesToolsBackgroundColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: .clear, darkColor: .clear)
+            }
+            
             static let defaultViewBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
             }
@@ -143,7 +148,7 @@ struct Configuration {
             }
 
             static let tableViewBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
             }
             static let tableViewCellBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)

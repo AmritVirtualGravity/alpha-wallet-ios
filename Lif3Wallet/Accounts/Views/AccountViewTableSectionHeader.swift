@@ -49,7 +49,7 @@ class AccountViewTableSectionHeader: UIView {
     }
 
     func configure(type: AccountsViewModel.Section, shouldHide: Bool) {
-        backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
+        backgroundColor = .clear
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = 25
         paragraphStyle.maximumLineHeight = 25

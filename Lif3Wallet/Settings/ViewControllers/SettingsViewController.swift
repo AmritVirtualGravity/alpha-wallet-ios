@@ -19,6 +19,7 @@ protocol SettingsViewControllerDelegate: class, CanOpenURL {
     func securitySelected(in controller: SettingsViewController)
     func scanQrSelected(in controller: SettingsViewController)
     func mainWalletSelected(in controller: SettingsViewController)
+    func activitySelected(in controller: SettingsViewController)
 }
 
 class SettingsViewController: UIViewController {
@@ -260,7 +261,6 @@ extension SettingsViewController: UITableViewDelegate {
                 delegate?.walletConnectSelected(in: self)
             case .nameWallet:
                 delegate?.nameWalletSelected(in: self)
-           
             case .mainWallet:
                 delegate?.mainWalletSelected(in: self)
             }
@@ -296,7 +296,7 @@ extension SettingsViewController: UITableViewDelegate {
         case .activity(let rows):
             switch rows[indexPath.row] {
             case .activity:
-                self.tabBarController?.selectedIndex = 1
+                delegate?.activitySelected(in: self)
             case .scanQrCode:
                 delegate?.scanQrSelected(in: self)
             case .walletConnect:

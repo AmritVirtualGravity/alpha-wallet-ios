@@ -93,6 +93,8 @@ extension TransactionsCoordinator: TransactionsViewControllerDelegate {
     }
 }
 
+
+
 extension TransactionsCoordinator: CanOpenURL {
     func didPressViewContractWebPage(forContract contract: AlphaWallet.Address, server: RPCServer, in viewController: UIViewController) {
         delegate?.didPressViewContractWebPage(forContract: contract, server: server, in: viewController)

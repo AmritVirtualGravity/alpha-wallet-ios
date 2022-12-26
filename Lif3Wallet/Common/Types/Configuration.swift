@@ -301,7 +301,7 @@ struct Configuration {
             
             
             static let seedPhrasetextViewbackgroundColor = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
             }
 
             static let shadow = UIColor { trait in

@@ -693,6 +693,8 @@
 		10D0D6C829477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */; };
 		10DADA9E294B172C00413AA0 /* SettingsWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9D294B172C00413AA0 /* SettingsWalletViewController.swift */; };
 		10DADAA0294B17EA00413AA0 /* SettingsWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */; };
+		10F6DAB1295B246C00715C7F /* Lif3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10F6DAB0295B246C00715C7F /* Lif3.storyboard */; };
+		10F6DAB3295B24D300715C7F /* Lif3WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */; };
 		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
 		290B2B6A1F92C0440053C83E /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B691F92C0440053C83E /* ConfigTests.swift */; };
 		290B2B6C1F92C35B0053C83E /* RPCServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */; };
@@ -1578,6 +1580,8 @@
 		10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		10DADA9D294B172C00413AA0 /* SettingsWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewController.swift; sourceTree = "<group>"; };
 		10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewModel.swift; sourceTree = "<group>"; };
+		10F6DAB0295B246C00715C7F /* Lif3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lif3.storyboard; sourceTree = "<group>"; };
+		10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3WebViewController.swift; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCServerTests.swift; sourceTree = "<group>"; };
 		290B2B6D1F92C3980053C83E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -1894,6 +1898,7 @@
 		08A252DA294073EE00A31193 /* Lif3Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				10F6DAAB295B242600715C7F /* Lif3 */,
 				08A252DB294073EE00A31193 /* Settings */,
 				08A25330294073EE00A31193 /* Sell */,
 				08A2533A294073EE00A31193 /* AppCoordinator.swift */,
@@ -3761,6 +3766,47 @@
 			path = Singletons;
 			sourceTree = "<group>";
 		};
+		10F6DAAB295B242600715C7F /* Lif3 */ = {
+			isa = PBXGroup;
+			children = (
+				10F6DAAF295B245B00715C7F /* ViewModels */,
+				10F6DAAE295B245000715C7F /* Models */,
+				10F6DAAD295B244000715C7F /* ViewControllers */,
+				10F6DAAC295B243600715C7F /* Views */,
+			);
+			path = Lif3;
+			sourceTree = "<group>";
+		};
+		10F6DAAC295B243600715C7F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				10F6DAB0295B246C00715C7F /* Lif3.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		10F6DAAD295B244000715C7F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		10F6DAAE295B245000715C7F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		10F6DAAF295B245B00715C7F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		290B2B681F92C0300053C83E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -4566,6 +4612,7 @@
 				87B93B112726C59D00F6EA73 /* BrowserStorageSubscription.js in Resources */,
 				08A257C7294073F100A31193 /* WordCollectionViewCell.xib in Resources */,
 				08A25651294073EF00A31193 /* SourceSansPro-Bold.otf in Resources */,
+				10F6DAB1295B246C00715C7F /* Lif3.storyboard in Resources */,
 				08A2564C294073EF00A31193 /* ERC721-TokenScript.tsml in Resources */,
 				08A2564F294073EF00A31193 /* tokensToImport.json in Resources */,
 				08A2564E294073EF00A31193 /* ERC20-TokenScript.tsml in Resources */,
@@ -5350,6 +5397,7 @@
 				08A25826294073F100A31193 /* TokenPagesContainerView.swift in Sources */,
 				08A256DE294073F000A31193 /* NSLayoutConstraintExtension.swift in Sources */,
 				08A25728294073F000A31193 /* TransactionTableViewCell.swift in Sources */,
+				10F6DAB3295B24D300715C7F /* Lif3WebViewController.swift in Sources */,
 				08A25740294073F000A31193 /* Coordinator.swift in Sources */,
 				10D0D6C629477BF7001A87EC /* ThemeSwitchTableViewCell.swift in Sources */,
 				08A2584A294073F100A31193 /* TokenInstanceWebView.swift in Sources */,

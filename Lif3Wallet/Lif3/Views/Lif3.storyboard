@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Lif3 Web View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="Lif3WebViewController" id="Y6W-OH-hqX" customClass="Lif3WebViewController" customModule="Lif3Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWL-Da-8oc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="mav-ET-RGV">
+                                <rect key="frame" x="182" y="343" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Sc3-d2-rMf"/>
+                                    <constraint firstAttribute="height" constant="50" id="yeR-vN-bMt"/>
+                                </constraints>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mav-ET-RGV" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="9dq-ne-iBU"/>
+                            <constraint firstAttribute="bottom" secondItem="QWL-Da-8oc" secondAttribute="bottom" id="Hzf-D3-vgg"/>
+                            <constraint firstItem="QWL-Da-8oc" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="RyN-bD-2pb"/>
+                            <constraint firstItem="QWL-Da-8oc" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="YXn-bS-qwB"/>
+                            <constraint firstItem="mav-ET-RGV" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="dQQ-1U-NDk"/>
+                            <constraint firstItem="QWL-Da-8oc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hrL-ne-sBU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mxG-2D-Pt3"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="mav-ET-RGV" id="d3l-CC-m1d"/>
+                        <outlet property="webView" destination="QWL-Da-8oc" id="lqt-f8-NvK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="623.1884057971015" y="12.228260869565219"/>
+        </scene>
+    </scenes>
+</document>

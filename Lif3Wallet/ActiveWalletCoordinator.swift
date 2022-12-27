@@ -397,7 +397,22 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
             domainResolutionService: domainResolutionService,
             lock: lock,
             currencyService: currencyService,
-            tokenScriptOverridesFileManager: tokenScriptOverridesFileManager)
+            tokenScriptOverridesFileManager: tokenScriptOverridesFileManager,
+            activitiesPipeLine: activitiesPipeLine,
+            sessionsProvider: sessionsProvider,
+            assetDefinitionStore: assetDefinitionStore,
+            transactionsDataStore: transactionsDataStore,
+            tokenCollection: tokenCollection,
+            appTracker: appTracker, activitiesService: activitiesPipeLine,
+            nftProvider: nftProvider,
+             tokenActionsService: tokenActionsService,
+         coinTickersFetcher: coinTickersFetcher,
+             importToken: importToken,
+            tokensFilter: tokensFilter,
+            tokensService: tokensService,
+            tokenSwapper: tokenSwapper
+        
+        )
         coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.settings.tabBarItem
         coordinator.navigationController.configureForLargeTitles()
         coordinator.delegate = self
@@ -673,6 +688,10 @@ extension ActiveWalletCoordinator: ConsoleCoordinatorDelegate {
 }
 
 extension ActiveWalletCoordinator: SettingsCoordinatorDelegate {
+    func showWallets(in coordinator: SettingsCoordinator) {
+        //
+    }
+    
     func universalScannerSelected(in coordinator: SettingsCoordinator) {
         tokensCoordinator?.launchUniversalScanner(fromSource: .walletScreen)
     }
@@ -958,6 +977,8 @@ extension ActiveWalletCoordinator: TokensCoordinatorDelegate {
     func openConsole(inCoordinator coordinator: TokensCoordinator) {
         showConsole(navigationController: coordinator.navigationController)
     }
+    
+    
 
     func didPostTokenScriptTransaction(_ transaction: SentTransaction, in coordinator: TokensCoordinator) {
         handlePendingTransaction(transaction: transaction)

@@ -1191,13 +1191,13 @@ extension ActiveWalletCoordinator: WalletPupupCoordinatorDelegate {
         switch action {
         case .swap:
             //TODO: this is temporary. Need to create all swap features with in from the app
-            guard let url = URL(string: "https://lif3.com/swap") else {
-                return
-            }
+//            guard let url = URL(string: "https://lif3.com/swap") else {
+//                return
+//            }
             // this singleton set to true for displaying swap url in browser tab.
-            LifeDateSource.shared().isForSwap = true
-            openURLInBrowser(url: url)
-            // showTokenSelection(for: .swapToken)
+//            LifeDateSource.shared().isForSwap = true
+//            openURLInBrowser(url: url)
+             showTokenSelection(for: .swapToken)
         case .buy:
             buyCrypto(wallet: wallet, server: server, viewController: navigationController, source: .walletTab)
         case .receive:

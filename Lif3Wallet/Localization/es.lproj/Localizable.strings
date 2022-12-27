@@ -509,6 +509,7 @@
 "gettingStarted.subtitle" = "Lif3 Wallet";
 "gettingStarted.newWallet" = "Crear un monedero nuevo";
 "gettingStarted.alreadyHaveWallet" = "Ya tengo un Monedero";
+"gettingStarted.importWallet" = "Import Wallet";
 "backup.prompt.title" = "¡No has hecho una copia de seguridad de tu monedero!";
 "backup.prompt.description.withAmount" = "Todavía no has hecho una copia de seguridad de tu monedero. Tienes %@ USD netos. Hazlo ahora.";
 "backup.prompt.backupButton.title" = "Hacer una copia de seguridad del monedero";

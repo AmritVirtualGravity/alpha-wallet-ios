@@ -509,6 +509,7 @@
 "gettingStarted.subtitle" = "AlfaLompakkoon!";
 "gettingStarted.newWallet" = "Luo uusi lompakko";
 "gettingStarted.alreadyHaveWallet" = "Minulla on jo Lompakko";
+"gettingStarted.importWallet" = "Import Wallet";
 "backup.prompt.title" = "Lompakkosi ei ole varmuuskopioitu!";
 "backup.prompt.description.withAmount" = "Et ole vielä varmuuskopioinut lompakkoasi. Sinulla %@ USD lompakossasi. Toimi!";
 "backup.prompt.backupButton.title" = "Varmuuskopioi";

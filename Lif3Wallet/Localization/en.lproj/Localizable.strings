@@ -509,6 +509,7 @@
 "gettingStarted.subtitle" = "AlphaWallet";
 "gettingStarted.newWallet" = "Create a new Wallet";
 "gettingStarted.alreadyHaveWallet" = "I already have a Wallet";
+"gettingStarted.importWallet" = "Import Wallet";
 "backup.prompt.title" = "Your Wallet is not backed up!";
 "backup.prompt.description.withAmount" = "You have not backed up your wallet yet. You have %@ USD net. Act now.";
 "backup.prompt.backupButton.title" = "Back up Wallet";

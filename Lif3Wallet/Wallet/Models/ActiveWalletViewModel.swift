@@ -21,7 +21,8 @@ extension ActiveWalletViewModel {
         case tokens
         case settings
         case transactions
-        case activities
+        case lif3
+//        case activities
         case browser
         case swap
 
@@ -31,8 +32,10 @@ extension ActiveWalletViewModel {
                 return String(describing: TokensViewController.self)
             case .transactions:
                 return String(describing: TransactionsViewController.self)
-            case .activities:
-                return String(describing: ActivitiesViewController.self)
+            case .lif3:
+                return String(describing: Lif3WebViewController.self)
+//            case .activities:
+//                return String(describing: ActivitiesViewController.self)
             case .settings:
                 return String(describing: SettingsViewController.self)
             case .browser:
@@ -50,8 +53,10 @@ extension ActiveWalletViewModel {
                 return UITabBarItem(title: R.string.localizable.aSettingsNavigationTitle(), image: R.image.tab_settings(), selectedImage: nil)
             case .transactions:
                 return UITabBarItem(title: R.string.localizable.transactionsTabbarItemTitle(), image: R.image.tab_transactions(), selectedImage: nil)
-            case .activities:
-                return UITabBarItem(title: R.string.localizable.activityTabbarItemTitle(), image: R.image.tab_transactions(), selectedImage: nil)
+//            case .activities:
+//                return UITabBarItem(title: R.string.localizable.activityTabbarItemTitle(), image: R.image.tab_transactions(), selectedImage: nil)
+            case .lif3:
+                return UITabBarItem(title: R.string.localizable.lif3TabbarItemTitle(), image: R.image.tab_lif3(), selectedImage: nil)
             case .browser:
                 return UITabBarItem(title: R.string.localizable.browserTabbarItemTitle(), image: R.image.tab_browser(), selectedImage: nil)
             case .swap:

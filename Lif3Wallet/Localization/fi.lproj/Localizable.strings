@@ -189,6 +189,7 @@
 "transactions.received.ether.notification.prompt" = "Salli ilmoitukset kun vastaanotat valuuttaa %@?";
 "transaction.navigation.title" = "Tapahtuma";
 "activity.tabbar.item.title" = "Tapahtumat";
+"lif3.tabbar.item.title" = "Lif3";
 "import.navigation.title" = "Tuo lompakko";
 "configureTransaction.data.label.title" = "Tilitapahtuman tiedot (valinnainen)";
 "configureTransaction.nonce.label.title" = "Satunnaistunnus (Nonce; valinnainen)";

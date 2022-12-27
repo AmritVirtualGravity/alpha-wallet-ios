@@ -367,7 +367,7 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
         let coordinator = ActivitiesCoordinator(analytics: analytics, sessions: sessionsProvider.activeSessions, activitiesService: activitiesService, keystore: keystore, wallet: wallet, assetDefinitionStore: assetDefinitionStore)
         coordinator.delegate = self
         coordinator.start()
-        coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.activities.tabBarItem
+//        coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.activities.tabBarItem
         coordinator.navigationController.configureForLargeTitles()
         addCoordinator(coordinator)
         return coordinator
@@ -397,7 +397,22 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
             domainResolutionService: domainResolutionService,
             lock: lock,
             currencyService: currencyService,
-            tokenScriptOverridesFileManager: tokenScriptOverridesFileManager)
+            tokenScriptOverridesFileManager: tokenScriptOverridesFileManager,
+            activitiesPipeLine: activitiesPipeLine,
+            sessionsProvider: sessionsProvider,
+            assetDefinitionStore: assetDefinitionStore,
+            transactionsDataStore: transactionsDataStore,
+            tokenCollection: tokenCollection,
+            appTracker: appTracker, activitiesService: activitiesPipeLine,
+            nftProvider: nftProvider,
+             tokenActionsService: tokenActionsService,
+         coinTickersFetcher: coinTickersFetcher,
+             importToken: importToken,
+            tokensFilter: tokensFilter,
+            tokensService: tokensService,
+            tokenSwapper: tokenSwapper
+        
+        )
         coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.settings.tabBarItem
         coordinator.navigationController.configureForLargeTitles()
         coordinator.delegate = self
@@ -414,12 +429,19 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
 
         let transactionCoordinator = createTransactionCoordinator(transactionDataStore: transactionsDataStore)
 
-        if Features.default.isAvailable(.isActivityEnabled) {
-            let activityCoordinator = createActivityCoordinator(activitiesService: activitiesPipeLine)
-            viewControllers.append(activityCoordinator.navigationController)
-        } else {
-            viewControllers.append(transactionCoordinator.navigationController)
-        }
+        /** Activity tab replaced by life tab **/
+//        if Features.default.isAvailable(.isActivityEnabled) {
+//            let activityCoordinator = createActivityCoordinator(activitiesService: activitiesPipeLine)
+//            viewControllers.append(activityCoordinator.navigationController)
+//        } else {
+//            viewControllers.append(transactionCoordinator.navigationController)
+//        }
+        
+        let lif3ViewController = Lif3WebViewController.instantiate()
+        lif3ViewController.tabBarItem = ActiveWalletViewModel.Tabs.lif3.tabBarItem
+        viewControllers.append(lif3ViewController)
+        
+        
         /// removed 'Environment.isDebug' mode checking
         if Features.default.isAvailable(.isSwapEnabled) {
             let swapDummyViewController = UIViewController()
@@ -666,6 +688,10 @@ extension ActiveWalletCoordinator: ConsoleCoordinatorDelegate {
 }
 
 extension ActiveWalletCoordinator: SettingsCoordinatorDelegate {
+    func showWallets(in coordinator: SettingsCoordinator) {
+        //
+    }
+    
     func universalScannerSelected(in coordinator: SettingsCoordinator) {
         tokensCoordinator?.launchUniversalScanner(fromSource: .walletScreen)
     }
@@ -951,6 +977,8 @@ extension ActiveWalletCoordinator: TokensCoordinatorDelegate {
     func openConsole(inCoordinator coordinator: TokensCoordinator) {
         showConsole(navigationController: coordinator.navigationController)
     }
+    
+    
 
     func didPostTokenScriptTransaction(_ transaction: SentTransaction, in coordinator: TokensCoordinator) {
         handlePendingTransaction(transaction: transaction)

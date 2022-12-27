@@ -49,6 +49,16 @@ class ActivitiesCoordinator: NSObject, Coordinator {
         navigationController.viewControllers = [rootViewController]
         subscribeForActivitiesUpdates()
     }
+    
+    
+    func startWithNav() {
+       let controller = makeActivitiesViewController()
+        subscribeForActivitiesUpdates()
+        navigationController.pushViewController(controller, animated: true)
+    }
+
+    
+
 
     private func makeActivitiesViewController() -> ActivitiesViewController {
         let viewModel = ActivitiesViewModel(collection: .init())

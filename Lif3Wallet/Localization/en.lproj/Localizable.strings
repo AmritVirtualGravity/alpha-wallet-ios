@@ -189,6 +189,7 @@
 "transactions.received.ether.notification.prompt" = "Allow Notifications When You Receive %@?";
 "transaction.navigation.title" = "Transaction";
 "activity.tabbar.item.title" = "Activity";
+"lif3.tabbar.item.title" = "Lif3";
 "import.navigation.title" = "Import Wallet";
 "configureTransaction.data.label.title" = "Transaction Data (Optional)";
 "configureTransaction.nonce.label.title" = "Nonce (Optional)";

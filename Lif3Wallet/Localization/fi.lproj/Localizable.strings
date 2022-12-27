@@ -252,7 +252,8 @@
 "passphrase.remember.label.title" = "Talleta tämä paperilla turvalliseen paikkaan. Et pysty palauttamaan lompakkoasi, jos hukkaat tämän!";
 "recoveryPhrase.navigation.title" = "Palautuslause";
 "transaction.cell.unknown.title" = "Tuntematon";
-"welldone.description.label.text" = "Auta meitä jakamalla tämä sovellus ystävillesi!";
+"welldone.title.label.text" = "Are you enjoying Lif3 Wallet?";
+"welldone.description.label.text" = "Help us grow by sharing it with your friends";
 "welldone.navigation.title" = "Kiitos!";
 "welldone.share.label.text" = "Jaa";
 "welldone.viewmodel.sharing.text" = "Tunnetko jo AlfaLompakon, englanniksi Lif3 Wallet, ensimmäisen kännykässä toimivan kryptolompakon, jossa on sisäänrakennettu tuki älysopimuksille.";

@@ -252,7 +252,8 @@
 "passphrase.remember.label.title" = "これを書き留めて、秘密にして安全に保管してください。これを紛失した場合、ウォレットを復元することはできません!";
 "recoveryPhrase.navigation.title" = "回復フレーズ";
 "transaction.cell.unknown.title" = "不明";
-"welldone.description.label.text" = "友達とこのアプリをシェアして、アプリの成長をご支援ください!";
+"welldone.title.label.text" = "Are you enjoying Lif3 Wallet?";
+"welldone.description.label.text" = "Help us grow by sharing it with your friends";
 "welldone.navigation.title" = "ありがとうございます!";
 "welldone.share.label.text" = "シェア";
 "welldone.viewmodel.sharing.text" = "Lif3 Wallet をチェックしてください- 現実の世界のユースケースを実行するスマート契約とのインタラクションを行える、最初の暗号モバイル ウォレット。";

@@ -252,7 +252,8 @@
 "passphrase.remember.label.title" = "Escríbela y guárdala en un lugar privado y seguro. ¡No podrás restaurar tu monedero si la pierdes!";
 "recoveryPhrase.navigation.title" = "Frase de recuperación";
 "transaction.cell.unknown.title" = "Desconocido";
-"welldone.description.label.text" = "¡Ayúdanos a crecer compartiendo esta aplicación con tus amigos!";
+"welldone.title.label.text" = "Are you enjoying Lif3 Wallet?";
+"welldone.description.label.text" = "Help us grow by sharing it with your friends";
 "welldone.navigation.title" = "¡Gracias!";
 "welldone.share.label.text" = "Compartir";
 "welldone.viewmodel.sharing.text" = "Echa un vistazo a Lif3 Wallet - El primer monedero criptográfico móvil que puede interactuar con contratos inteligentes para llevar a cabo casos de uso en el mundo real.";

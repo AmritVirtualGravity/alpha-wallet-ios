@@ -721,6 +721,9 @@
 "customRPC.browse.search.placeholder" = "Search for Network";
 "emailList.prompt.message" = "We send an email announcing major features. Would you like to receive such emails?\n\n(max 1 email per week)";
 "emailList.prompt.subscribeButtonTitle" = "I want to receive such emails";
+"emailList.prompt.headerTitle" = "Stay Connected";
+"emailList.prompt.bodyTitle" = "We send occasional updates about new and upcoming features, and ecosystem updates.";
+"emailList.prompt.buttonTitle" = "Sign me up!";
 "emailList.prompt.email.placeholder" = "Email";
 "wallet.summary.today" = "%@ Today";
 "token.tab.info" = "Info";

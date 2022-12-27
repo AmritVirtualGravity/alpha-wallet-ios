@@ -723,6 +723,9 @@
 "emailList.email.invalid" = "Email is not valid";
 "emailList.prompt.message" = "Lähetämme sähköpostia, kun esittelemme uusia ominaisuuksia. Haluatko liittyä sähköpostilistallemme?\n\n(Korkeintaan 1 sähköposti viikossa)";
 "emailList.prompt.subscribeButtonTitle" = "Liity sähköpostilistalle";
+"emailList.prompt.headerTitle" = "Stay Connected";
+"emailList.prompt.bodyTitle" = "We send occasional updates about new and upcoming features, and ecosystem updates.";
+"emailList.prompt.buttonTitle" = "Sign me up!";
 "emailList.prompt.email.placeholder" = "Sähköposti";
 "wallet.summary.today" = "%@ tänään";
 "token.tab.info" = "Yleisnäkymä";

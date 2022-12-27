@@ -250,7 +250,8 @@
 "passphrase.remember.label.title" = "把它写下来，并确保其私密性和安全性。如果您弄丢了这个，将再也无法恢复钱包！";
 "recoveryPhrase.navigation.title" = "恢复助记词";
 "transaction.cell.unknown.title" = "未知";
-"welldone.description.label.text" = "与好友分享此应用，让我们发展壮大！";
+"welldone.title.label.text" = "Are you enjoying Lif3 Wallet?";
+"welldone.description.label.text" = "Help us grow by sharing it with your friends";
 "welldone.navigation.title" = "谢谢！";
 "welldone.share.label.text" = "共享";
 "welldone.viewmodel.sharing.text" = "了解一下 Lif3 Wallet：可以与智能合约交互，以满足现实用途的首款加密移动钱包。";

@@ -252,7 +252,8 @@
 "passphrase.remember.label.title" = "Write this down, and keep it private and secure. You won't be able to restore your wallet if you lose this!";
 "recoveryPhrase.navigation.title" = "Recovery Phrase";
 "transaction.cell.unknown.title" = "Unknown";
-"welldone.description.label.text" = "Help us grow by sharing this app with your friends!";
+"welldone.title.label.text" = "Are you enjoying Lif3 Wallet?";
+"welldone.description.label.text" = "Help us grow by sharing it with your friends";
 "welldone.navigation.title" = "Thank you!";
 "welldone.share.label.text" = "Share";
 "welldone.viewmodel.sharing.text" = "Check out Lif3 Wallet - The first crypto mobile wallet which can interact with smart contracts to perform real-world use cases.";

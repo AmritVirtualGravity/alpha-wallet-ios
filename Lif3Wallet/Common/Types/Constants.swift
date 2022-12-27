@@ -27,7 +27,7 @@ extension Constants {
     static let launchShortcutKey = "com.stormbird.alphawallet.qrScanner"
 
     // social
-    static let website = "https://alphawallet.com/"
+    static let website = "https://lif3.com/"
     static let twitterUsername = "AlphaWallet"
     static let redditGroupName = "r/AlphaWallet/"
     static let facebookUsername = "AlphaWallet"

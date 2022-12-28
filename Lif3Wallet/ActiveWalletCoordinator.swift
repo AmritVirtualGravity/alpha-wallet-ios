@@ -66,7 +66,8 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
     var coordinators: [Coordinator] = []
     var keystore: Keystore
     var universalLinkService: UniversalLinkService
-
+    var lifeTabIndex = 1
+    var browserTabIndex = 3
     weak var delegate: ActiveWalletCoordinatorDelegate?
 
     private let walletBalanceService: WalletBalanceService
@@ -804,6 +805,9 @@ extension ActiveWalletCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if isViewControllerDappBrowserTab(viewController) {
             loadHomePageIfEmpty()
+        } else if  (tabBarController.selectedIndex == lifeTabIndex) {
+            LifeDateSource.shared().openLifeUrl = true
+            tabBarController.selectedIndex = browserTabIndex
         }
     }
 

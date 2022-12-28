@@ -199,8 +199,8 @@ extension BrowserViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         recordURL()
         hideErrorView()
-        // this singleton set to false as to control pushing same vc in same navigation twice i.e default browser load case and swap url load case.(both cases pushes same vc i.e browser at same time causing app to crash)
-//        LifeDateSource.shared().isForSwap = false
+        // this singleton set to false as to control pushing same vc in same navigation twice i.e default browser load case and life url load case.(both cases pushes same vc i.e browser at same time causing app to crash)
+        LifeDateSource.shared().openLifeUrl = false
     }
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {

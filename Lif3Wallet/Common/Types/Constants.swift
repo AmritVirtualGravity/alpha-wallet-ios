@@ -36,4 +36,9 @@ extension Constants {
     static let supportEmail = "feedback+ios@alphawallet.com"
 
     static let dappsBrowserURL = URL(string: "http://aw.app")!
+    
+    //Swap URL
+    static let swapWebsiteUrl  = "https://lif3.com/swap"
+    //Life URL
+    static let lifeWebUrl  = "https://lif3.com"
 }

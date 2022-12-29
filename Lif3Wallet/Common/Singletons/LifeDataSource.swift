@@ -12,6 +12,7 @@ class LifeDateSource {
     static var privateShared: LifeDateSource?
     
     var openLifeUrl = false
+    var openSwapUrl = false
     
     class func shared() -> LifeDateSource {
         guard let uwShared = privateShared else {

@@ -636,9 +636,6 @@ extension DappBrowserCoordinator: BrowserHomeViewControllerDelegate {
     }
 
     func viewControllerWillAppear(in viewController: BrowserHomeViewController) {
-        if (LifeDateSource.shared().openLifeUrl == true) {
-            openLifeWebHome(url: "https://www.lif3.com")
-        }
         browserNavBar?.enableButtons()
     }
 

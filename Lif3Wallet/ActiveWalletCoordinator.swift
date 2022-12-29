@@ -806,8 +806,10 @@ extension ActiveWalletCoordinator: UITabBarControllerDelegate {
         if isViewControllerDappBrowserTab(viewController) {
             loadHomePageIfEmpty()
         } else if  (tabBarController.selectedIndex == lifeTabIndex) {
-            LifeDateSource.shared().openLifeUrl = true
-            tabBarController.selectedIndex = browserTabIndex
+            guard let url = URL(string: Constants.lifeWebUrl) else {
+                return
+            }
+            openURLInBrowser(url: url)
         }
     }
 
@@ -1223,13 +1225,11 @@ extension ActiveWalletCoordinator: WalletPupupCoordinatorDelegate {
         switch action {
         case .swap:
             //TODO: this is temporary. Need to create all swap features with in from the app
-//            guard let url = URL(string: "https://lif3.com/swap") else {
-//                return
-//            }
-            // this singleton set to true for displaying swap url in browser tab.
-//            LifeDateSource.shared().isForSwap = true
-//            openURLInBrowser(url: url)
-             showTokenSelection(for: .swapToken)
+            guard let url = URL(string: Constants.swapWebsiteUrl) else {
+                return
+            }
+            openURLInBrowser(url: url)
+//             showTokenSelection(for: .swapToken)
         case .buy:
             buyCrypto(wallet: wallet, server: server, viewController: navigationController, source: .walletTab)
         case .receive:

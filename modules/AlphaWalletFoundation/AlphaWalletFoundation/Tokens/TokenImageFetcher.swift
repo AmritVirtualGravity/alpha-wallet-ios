@@ -218,25 +218,27 @@ public class TokenImageFetcher {
         return fetcher.retrieveImage(with: url)
     }
     private static func fetchFromAssetLif3Repo(_ githubAssetsSource: GithubAssetsURLResolver.Source, contractAddress: AlphaWallet.Address, server: RPCServer) -> Promise<WebImageURL> {
-           struct AnyError: Error { }
-           let urlString = githubAssetsSource.url(forContract: contractAddress, server: server)
-           guard let url = URL(string: urlString) else {
-               verboseLog("Loading token icon URL: \(urlString) error")
-               return .init(error: AnyError())
-           }
-
-           guard let fetcher = imageFetcher else { return .init(error: AnyError()) }
-           return Promise { seal in
-               getContentType(urlPath: urlString, completion: { type in
-                   if type == "image/svg+xml" {
-                       if let webUrl = WebImageURL(string: urlString) {
-                       seal.fulfill(webUrl)
-                       }
-                   }
-               })
-               }
-           }
-       
+        struct AnyError: Error { }
+        let urlString = githubAssetsSource.url(forContract: contractAddress, server: server)
+        guard let url = URL(string: urlString) else {
+            verboseLog("Loading token icon URL: \(urlString) error")
+            return .init(error: AnyError())
+        }
+        
+        guard let fetcher = imageFetcher else { return .init(error: AnyError()) }
+        return Promise { seal in
+            getContentType(urlPath: urlString, completion: { type in
+                if type == "image/svg+xml" {
+                    guard let webUrl = WebImageURL(string: urlString) else {
+                        return  seal.reject(AnyError())
+                    }
+                    seal.fulfill(webUrl)
+                }
+                seal.reject(AnyError())
+            })
+        }
+    }
+    
 }
 
 

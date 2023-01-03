@@ -34,6 +34,7 @@ target 'Lif3Wallet' do
   pod 'FloatingPanel'
   pod 'SwiftFormat/CLI', '~> 0.49'
   pod 'IQKeyboardManager'
+  pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '3.x'
   
   target 'Lif3WalletTests' do
       inherit! :search_paths

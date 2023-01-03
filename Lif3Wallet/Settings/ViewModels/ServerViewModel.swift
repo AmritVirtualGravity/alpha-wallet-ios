@@ -10,6 +10,7 @@ protocol ServerTableViewCellViewModelType {
     var backgroundColor: UIColor { get }
     var serverFont: UIFont { get }
     var serverName: String { get }
+    var serverSymbol: String { get }
     var serverColor: UIColor { get }
     var selectionStyle: UITableViewCell.SelectionStyle { get set }
 }
@@ -87,6 +88,9 @@ struct TokenListServerTableViewCellViewModel: ServerTableViewCellViewModelType {
     var serverColor: UIColor = Configuration.Color.Semantic.tableViewCellSecondaryFont
     var serverName: String {
         return server.displayName.uppercased()
+    }
+    var serverSymbol:String {
+        return server.symbol.uppercased()
     }
     var selectionStyle: UITableViewCell.SelectionStyle = .none
 }

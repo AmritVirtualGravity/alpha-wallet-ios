@@ -696,13 +696,12 @@ extension TokensViewModel.functional {
             guard !servers.contains(each.server) else { continue }
             servers.append(each.server)
         }
-        
         for each in servers {
-            if (  UserDefaults.standard.bool(forKey: "HideToken") == true )  {
-                filteredTokens = filterTokenWithZeroShortAmt(tokens: tokens).filter { $0.server == each }
+            if ( UserDefaults.standard.bool(forKey: "HideToken") == true )  {
+                filteredTokens = filterTokenWithZeroShortAmt(tokens: filterBlackListedToken(tokens: tokens)).filter { $0.server == each }
                     .map { TokensViewModel.TokenOrRpcServer.token($0) }
             } else {
-                filteredTokens = tokens.filter { $0.server == each }
+                filteredTokens = filterBlackListedToken(tokens: tokens).filter { $0.server == each }
                     .map { TokensViewModel.TokenOrRpcServer.token($0) }
             }
             guard !tokens.isEmpty else { continue }
@@ -710,10 +709,32 @@ extension TokensViewModel.functional {
             
             results.append(contentsOf: filteredTokens)
         }
-        
         return results
     }
     
+    static func filterBlackListedToken(tokens: [TokenViewModel]) -> [TokenViewModel] {
+        var filteredTokens = [TokenViewModel]()
+        for token in tokens {
+            if (token.type != .nativeCryptocurrency) {
+                if (checkIfTokenIsBlackListed(token: token) == false) {
+                    filteredTokens.append(token)
+                }
+            } else {
+                filteredTokens.append(token)
+            }
+        }
+        return filteredTokens
+    }
+    
+    
+    // Returns bool if the token address is in blacklisted address list.
+    static func checkIfTokenIsBlackListed(token: TokenViewModel) -> Bool {
+        return readBlackListedJsonFile().contains {
+            $0 == token.contractAddress.eip55String
+        }
+    }
+    
+    //Filter token with 0 amount.
     static func filterTokenWithZeroShortAmt(tokens: [TokenViewModel]) -> [TokenViewModel] {
         var filteredTokens = [TokenViewModel]()
         for token in tokens {
@@ -728,8 +749,27 @@ extension TokensViewModel.functional {
         return filteredTokens
     }
     
-  
-
+    static func readBlackListedJsonFile() -> [String]{
+        if let path = Bundle.main.path(forResource: "tokensToBlackList", ofType: "json"){
+            if let jsonData = NSData(contentsOfFile: path)
+            {
+                do {
+                    if let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: jsonData as Data, options: .mutableContainers) as? NSDictionary {
+                        if let blackListedToken : [[String: AnyObject]] = jsonResult["BlackListToken"] as? [[String: AnyObject]]
+                        {
+                            return  blackListedToken.map {
+                                $0["address"] as? String ?? ""
+                            }
+                        }
+                    }
+                }
+                catch {
+                    print("error")
+                    }
+                }
+             }
+        return []
+        }
 }
 
 fileprivate extension IndexPath {

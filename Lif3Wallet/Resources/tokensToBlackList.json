@@ -1,0 +1,12 @@
+{
+  "BlackListToken":[
+     {
+       "symbol": "TIX",
+       "address": "0xCbE0CA46399Af916784cADF5bCC3aED2052D6C45"
+     },
+     {
+       "symbol": "ETH",
+       "address": "0x85dec8c4B2680793661bCA91a8F129607571863d"
+     }
+  ]
+}

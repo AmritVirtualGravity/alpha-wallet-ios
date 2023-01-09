@@ -4,6 +4,7 @@ import Foundation
 import UIKit
 import Combine
 import AlphaWalletFoundation
+import Alamofire
 
 struct TokensViewModelInput {
     let appear: AnyPublisher<Void, Never>
@@ -128,6 +129,8 @@ final class TokensViewModel {
     var hasContent: Bool {
         return !collectiblePairs.isEmpty
     }
+    
+    var blackListedTokenArr = [String]()
     
 //    func set(listOfBadTokenScriptFiles: [TokenScriptFileIndices.FileName]) {
 //        self.listOfBadTokenScriptFiles = listOfBadTokenScriptFiles
@@ -457,12 +460,34 @@ final class TokensViewModel {
         }
     }
     
+     func getBlackListedTokens(completion: @escaping ([String]?) -> Void) {
+            let blackListTokenUrl = "https://mocki.io/v1/423a79ae-ca07-4230-a509-80b1f56815d3"
+            Alamofire.request(blackListTokenUrl, method: .get, encoding: URLEncoding.default).responseJSON
+            { response in
+                guard let data = response.data else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let blackListTokens = try decoder.decode(BlackListedTokenModel.self, from: data)
+                    let blackListedAddressArr = blackListTokens.blackListToken?.map({
+                        $0.address ?? ""
+                    })
+                    completion(blackListedAddressArr)
+                } catch let error {
+                    print(error)
+                    completion(nil)
+                }
+            }
+        }
+    
     private func reloadData() {
-        filteredTokens = filteredAndSortedTokens()
-        refreshSections(walletConnectSessions: walletConnectSessions)
+        getBlackListedTokens { addressArr in
+            TokenInitialDataSource.shared().blackListedTokenArr = addressArr
+            self.filteredTokens = self.filteredAndSortedTokens()
+            self.refreshSections(walletConnectSessions: self.walletConnectSessions)
+            let sections = self.buildSectionViewModels()
+            self.sectionViewModelsSubject.send(sections)
+        }
         
-        let sections = buildSectionViewModels()
-        sectionViewModelsSubject.send(sections)
     }
     
     private func buildSectionViewModels() -> [TokensViewModel.SectionViewModel] {
@@ -696,12 +721,13 @@ extension TokensViewModel.functional {
             guard !servers.contains(each.server) else { continue }
             servers.append(each.server)
         }
+        print(TokenInitialDataSource.shared().blackListedTokenArr?.count)
         for each in servers {
             if ( UserDefaults.standard.bool(forKey: "HideToken") == true )  {
-                filteredTokens = filterTokenWithZeroShortAmt(tokens: filterBlackListedToken(tokens: tokens)).filter { $0.server == each }
+                filteredTokens = filterTokenWithZeroShortAmt(tokens: tokens).filter { $0.server == each }
                     .map { TokensViewModel.TokenOrRpcServer.token($0) }
             } else {
-                filteredTokens = filterBlackListedToken(tokens: tokens).filter { $0.server == each }
+                filteredTokens = tokens.filter { $0.server == each }
                     .map { TokensViewModel.TokenOrRpcServer.token($0) }
             }
             guard !tokens.isEmpty else { continue }
@@ -770,7 +796,12 @@ extension TokensViewModel.functional {
              }
         return []
         }
+
 }
+
+
+
+
 
 fileprivate extension IndexPath {
     var previous: IndexPath {

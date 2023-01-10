@@ -8,6 +8,7 @@
 import UIKit
 import PromiseKit
 import AlphaWalletFoundation
+import Combine
 
 protocol SaveCustomRpcCoordinatorDelegate: AnyObject {
     func didDismiss(in coordinator: SaveCustomRpcCoordinator)
@@ -25,11 +26,18 @@ class SaveCustomRpcCoordinator: NSObject, Coordinator {
     private let operation: SaveOperationType
     private var activeViewController: OverallProtocol?
     var networkType: EnabledServersViewModel.CreateNetwork
-
+    private let networkService: NetworkService
     var coordinators: [Coordinator] = []
     weak var delegate: SaveCustomRpcCoordinatorDelegate?
 
-    init(navigationController: UINavigationController, config: Config, restartQueue: RestartTaskQueue, analytics: AnalyticsLogger, operation: SaveOperationType, networkType: EnabledServersViewModel.CreateNetwork) {
+    init(navigationController: UINavigationController,
+         config: Config,
+         restartQueue: RestartTaskQueue,
+         analytics: AnalyticsLogger,
+         operation: SaveOperationType,
+         networkService: NetworkService, networkType: EnabledServersViewModel.CreateNetwork) {
+
+        self.networkService = networkService
         self.navigationController = navigationController
         self.config = config
         self.restartQueue = restartQueue
@@ -117,8 +125,25 @@ extension SaveCustomRpcCoordinator: SaveCustomRpcEntryViewControllerDataDelegate
             explorerEndpoints = nil
         }
 
-        let customChain = WalletAddEthereumChainObject(nativeCurrency: .init(name: customRpc.nativeCryptoTokenName ?? R.string.localizable.addCustomChainUnnamed(), symbol: customRpc.symbol ?? "", decimals: defaultDecimals), blockExplorerUrls: explorerEndpoints, chainName: customRpc.chainName, chainId: String(customRpc.chainID), rpcUrls: [customRpc.rpcEndpoint])
-        let saveCustomChain = AddCustomChain(customChain, analytics: analytics, isTestnet: customRpc.isTestnet, restartQueue: restartQueue, url: nil, operation: operation, chainNameFallback: R.string.localizable.addCustomChainUnnamed())
+        let customChain = WalletAddEthereumChainObject(
+            nativeCurrency: .init(
+                name: customRpc.nativeCryptoTokenName ?? R.string.localizable.addCustomChainUnnamed(),
+                symbol: customRpc.symbol ?? "", decimals: defaultDecimals),
+            blockExplorerUrls: explorerEndpoints,
+            chainName: customRpc.chainName,
+            chainId: String(customRpc.chainID),
+            rpcUrls: [customRpc.rpcEndpoint])
+
+        let saveCustomChain = AddCustomChain(
+            customChain,
+            analytics: analytics,
+            isTestnet: customRpc.isTestnet,
+            restartQueue: restartQueue,
+            url: nil,
+            operation: operation,
+            chainNameFallback: R.string.localizable.addCustomChainUnnamed(),
+            networkService: networkService)
+
         saveCustomChain.delegate = self
         saveCustomChain.run()
     }
@@ -129,7 +154,12 @@ extension SaveCustomRpcCoordinator: SaveCustomRpcBrowseViewControllerDataDelegat
 
     func didFinish(in viewController: SaveCustomRpcBrowseViewController, customRpcArray: [CustomRPC]) {
         let model = AddMultipleCustomRpcModel(remainingCustomRpc: customRpcArray)
-        let addViewController = AddMultipleCustomRpcViewController(model: model, analytics: analytics, restartQueue: restartQueue)
+        let addViewController = AddMultipleCustomRpcViewController(
+            model: model,
+            analytics: analytics,
+            restartQueue: restartQueue,
+            networkService: networkService)
+
         addViewController.delegate = self
         viewController.present(addViewController, animated: true) {
             addViewController.start()
@@ -140,7 +170,7 @@ extension SaveCustomRpcCoordinator: SaveCustomRpcBrowseViewControllerDataDelegat
 
 extension SaveCustomRpcCoordinator: AddCustomChainDelegate {
 
-    func notifyAddExplorerApiHostnameFailure(customChain: WalletAddEthereumChainObject, chainId: Int) -> Promise<Bool> {
+    func notifyAddExplorerApiHostnameFailure(customChain: WalletAddEthereumChainObject, chainId: Int) -> AnyPublisher<Bool, Never> {
         UIAlertController.promptToUseUnresolvedExplorerURL(customChain: customChain, chainId: chainId, viewController: navigationController)
     }
 

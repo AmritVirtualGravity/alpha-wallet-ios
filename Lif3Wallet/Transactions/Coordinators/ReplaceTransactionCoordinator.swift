@@ -27,11 +27,12 @@ class ReplaceTransactionCoordinator: Coordinator {
     private let mode: Mode
     private var transactionConfirmationResult: ConfirmResult? = .none
     private let assetDefinitionStore: AssetDefinitionStore
+    private let networkService: NetworkService
     private var recipient: AlphaWallet.Address? {
         switch transactionType {
         case .nativeCryptocurrency:
             return AlphaWallet.Address(string: transaction.to)
-        case .dapp, .erc20Token, .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
+        case .erc20Token, .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .prebuilt:
             return nil
         }
     }
@@ -39,7 +40,7 @@ class ReplaceTransactionCoordinator: Coordinator {
         switch transactionType {
         case .nativeCryptocurrency:
             return nil
-        case .dapp, .erc20Token, .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .tokenScript, .claimPaidErc875MagicLink, .prebuilt:
+        case .erc20Token, .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .prebuilt:
             return AlphaWallet.Address(string: transaction.to)
         }
     }
@@ -49,7 +50,7 @@ class ReplaceTransactionCoordinator: Coordinator {
             return pendingTransactionInformation.transactionType
         case .cancel:
             //Cancel with a 0-value transfer transaction
-            return .nativeCryptocurrency(MultipleChainsTokensDataStore.functional.etherToken(forServer: pendingTransactionInformation.server), destination: .address(session.account.address), amount: nil)
+            return .nativeCryptocurrency(MultipleChainsTokensDataStore.functional.etherToken(forServer: pendingTransactionInformation.server), destination: .address(session.account.address), amount: .notSet)
         }
     }
     private var transactionValue: BigUInt {
@@ -80,9 +81,19 @@ class ReplaceTransactionCoordinator: Coordinator {
     var coordinators: [Coordinator] = []
     weak var delegate: ReplaceTransactionCoordinatorDelegate?
 
-    init?(analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType, keystore: Keystore, presentingViewController: UIViewController, session: WalletSession, transaction: TransactionInstance, mode: Mode, assetDefinitionStore: AssetDefinitionStore, tokensService: TokenViewModelState) {
+    init?(analytics: AnalyticsLogger,
+          domainResolutionService: DomainResolutionServiceType,
+          keystore: Keystore,
+          presentingViewController: UIViewController,
+          session: WalletSession,
+          transaction: TransactionInstance,
+          mode: Mode,
+          assetDefinitionStore: AssetDefinitionStore,
+          tokensService: TokenViewModelState,
+          networkService: NetworkService) {
         guard let pendingTransactionInformation = TransactionDataStore.pendingTransactionsInformation[transaction.id] else { return nil }
         guard let nonce = BigUInt(transaction.nonce) else { return nil }
+        self.networkService = networkService
         self.tokensService = tokensService
         self.pendingTransactionInformation = pendingTransactionInformation
         self.keystore = keystore
@@ -97,38 +108,35 @@ class ReplaceTransactionCoordinator: Coordinator {
     }
 
     func start() {
-        do {
-            let unconfirmedTransaction = UnconfirmedTransaction(
-                transactionType: transactionType,
-                value: transactionValue,
-                recipient: recipient,
-                contract: contract,
-                data: transactionData,
-                gasPrice: computeGasPriceForReplacementTransaction(pendingTransactionInformation.gasPrice),
-                nonce: nonce)
-            
-            let coordinator = try TransactionConfirmationCoordinator(
-                presentingViewController: presentingViewController,
-                session: session,
-                transaction: unconfirmedTransaction,
-                configuration: transactionConfirmationConfiguration,
-                analytics: analytics,
-                domainResolutionService: domainResolutionService,
-                keystore: keystore,
-                assetDefinitionStore: assetDefinitionStore,
-                tokensService: tokensService)
-            coordinator.delegate = self
-            addCoordinator(coordinator)
-            switch mode {
-            case .speedup:
-                coordinator.start(fromSource: .speedupTransaction)
-            case .cancel:
-                coordinator.start(fromSource: .cancelTransaction)
-            }
-        } catch {
-            UIApplication.shared
-                .presentedViewController(or: presentingViewController)
-                .displayError(message: error.prettyError)
+        let unconfirmedTransaction = UnconfirmedTransaction(
+            transactionType: transactionType,
+            value: transactionValue,
+            recipient: recipient,
+            contract: contract,
+            data: transactionData,
+            gasPrice: computeGasPriceForReplacementTransaction(pendingTransactionInformation.gasPrice),
+            nonce: nonce)
+
+        let coordinator = TransactionConfirmationCoordinator(
+            presentingViewController: presentingViewController,
+            session: session,
+            transaction: unconfirmedTransaction,
+            configuration: transactionConfirmationConfiguration,
+            analytics: analytics,
+            domainResolutionService: domainResolutionService,
+            keystore: keystore,
+            assetDefinitionStore: assetDefinitionStore,
+            tokensService: tokensService,
+            networkService: networkService)
+        
+        coordinator.delegate = self
+        addCoordinator(coordinator)
+
+        switch mode {
+        case .speedup:
+            coordinator.start(fromSource: .speedupTransaction)
+        case .cancel:
+            coordinator.start(fromSource: .cancelTransaction)
         }
     }
 

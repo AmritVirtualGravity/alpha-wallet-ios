@@ -67,7 +67,6 @@
 "Refresh" = "Päivitä";
 "copiedToClipboard.title" = "%@ copied";
 "address" = "Address";
-"request.addressCopied.title" = "Osoite kopioitu";
 "request.copyWallet.button.title" = "Kopioi lompakon osoite";
 "Retry" = "Yritä uudelleen";
 "Send" = "Lähetä";
@@ -120,6 +119,7 @@
 "settings.contactUs.title" = "Ota yhteyttä";
 "settings.changeCurrency.title" = "Vaihda valuutta";
 "settings.analitycs.title" = "Analytiikka";
+"settings.crashReporter.title" = "Crash Reporting";
 "settings.pingInfura.title" = "Testaa Infura";
 "settings.pingInfura.successful" = "Infura toimii";
 "settings.pingInfura.fail" = "Infura-virhe";
@@ -520,7 +520,7 @@
 "backup.prompt.afterInterval.title" = "Aika varmuuskopioida lompakkosi!";
 "backup.prompt.afterInterval.description" = "Varmuuskopiointi on erittäin suositeltavaa!";
 "backup.prompt.afterHittingThreshold.title" = "Lompakkosi on vaarassa!";
-"backup.prompt.afterHittingThreshold.description" = "Et ole vielä varmuuskopioinut lompakkoasi. Sinulla %@ USD lompakossasi. Toimi!";
+"backup.prompt.afterHittingThreshold.description" = "Et ole vielä varmuuskopioinut lompakkoasi. Sinulla %@ lompakossasi. Toimi!";
 "onboarding.newWallet.backupWallet.title" = "Varmuuskopioi lompakko";
 "onboarding.newWallet.backupWallet.description" = "Varasi ovat vaarassa ellet varmuuskopio lompakkoasi ennen sen käyttöä";
 "keystore.accessKey.nonHd.backup" = "Salli pääsy lompakkoosi varmuuskopiointia varten";

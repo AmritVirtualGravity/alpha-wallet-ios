@@ -42,7 +42,6 @@ final class SwapStepsView: UIView {
             bottomLine.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomLine.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-        
         backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
         bind(viewModel: viewModel)
     }

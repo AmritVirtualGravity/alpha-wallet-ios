@@ -59,9 +59,9 @@ final class SelectedSwapToolsCollectionView: UIView {
     private func bind(viewModel: SelectedSwapToolsCollectionViewModel) {
         backgroundColor = Configuration.Color.Semantic.tableViewBackground
 
-        let willAppear = willAppear.handleEvents(receiveOutput: { [weak self] _ in
-            self?.startLoading()
-        }).eraseToAnyPublisher()
+        let willAppear = willAppear
+            .handleEvents(receiveOutput: { [weak self] _ in self?.startLoading() })
+            .eraseToAnyPublisher()
 
         let input = SelectedSwapToolsCollectionViewModelInput(willAppear: willAppear)
         let output = viewModel.transform(input: input)

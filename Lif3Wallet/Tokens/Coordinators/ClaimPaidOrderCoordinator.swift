@@ -2,7 +2,6 @@
 // Created by James Sangalli on 7/3/18.
 // Copyright © 2018 Stormbird PTE. LTD.
 //
-
 import Foundation
 import BigInt
 import AlphaWalletFoundation
@@ -32,11 +31,22 @@ class ClaimPaidOrderCoordinator: Coordinator {
             return UInt(signedOrder.order.indices.count)
         }
     }
-
+    private let networkService: NetworkService
+    
     var coordinators: [Coordinator] = []
     weak var delegate: ClaimOrderCoordinatorDelegate?
 
-    init(navigationController: UINavigationController, keystore: Keystore, session: WalletSession, token: Token, signedOrder: SignedOrder, analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType, assetDefinitionStore: AssetDefinitionStore, tokensService: TokenViewModelState) {
+    init(navigationController: UINavigationController,
+         keystore: Keystore,
+         session: WalletSession,
+         token: Token,
+         signedOrder: SignedOrder,
+         analytics: AnalyticsLogger,
+         domainResolutionService: DomainResolutionServiceType,
+         assetDefinitionStore: AssetDefinitionStore,
+         tokensService: TokenViewModelState,
+         networkService: NetworkService) {
+        self.networkService = networkService
         self.navigationController = navigationController
         self.tokensService = tokensService
         self.keystore = keystore
@@ -50,8 +60,25 @@ class ClaimPaidOrderCoordinator: Coordinator {
 
     func start() {
         do {
-            let transaction = try TransactionType.claimPaidErc875MagicLink(token).buildClaimPaidErc875MagicLink(recipient: session.account.address, signedOrder: signedOrder)
-            let coordinator = try TransactionConfirmationCoordinator(presentingViewController: navigationController, session: session, transaction: transaction, configuration: .claimPaidErc875MagicLink(confirmType: .signThenSend, price: signedOrder.order.price, numberOfTokens: numberOfTokens), analytics: analytics, domainResolutionService: domainResolutionService, keystore: keystore, assetDefinitionStore: assetDefinitionStore, tokensService: tokensService)
+            let transaction = try TransactionType.prebuilt(token.server).buildClaimPaidErc875MagicLink(
+                recipient: session.account.address,
+                signedOrder: signedOrder)
+            
+            let coordinator = TransactionConfirmationCoordinator(
+                presentingViewController: navigationController,
+                session: session,
+                transaction: transaction,
+                configuration: .claimPaidErc875MagicLink(
+                    confirmType: .signThenSend,
+                    price: signedOrder.order.price,
+                    numberOfTokens: numberOfTokens),
+                analytics: analytics,
+                domainResolutionService: domainResolutionService,
+                keystore: keystore,
+                assetDefinitionStore: assetDefinitionStore,
+                tokensService: tokensService,
+                networkService: networkService)
+
             coordinator.delegate = self
             addCoordinator(coordinator)
             coordinator.start(fromSource: .claimPaidMagicLink)

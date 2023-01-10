@@ -31,10 +31,10 @@ final class EditableSlippageView: UIControl {
         stachView.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(stachView)
-        
+
         NSLayoutConstraint.activate([
             stachView.anchorsConstraint(to: self),
-            
+
             textField.widthAnchor.constraint(equalToConstant: ScreenChecker.size(big: 70, medium: 70, small: 60))
         ])
 

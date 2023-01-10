@@ -47,7 +47,7 @@ class NFTAssetViewModel {
 
     var sellTransactionType: TransactionType {
         tokenHolder.select(with: .allFor(tokenId: tokenHolder.tokenId))
-        return TransactionType.erc875Token(token, tokenHolders: [tokenHolder])
+        return TransactionType(nonFungibleToken: token, tokenHolders: [tokenHolder])
     }
 
     var previewViewType: NFTPreviewViewType {
@@ -102,7 +102,7 @@ class NFTAssetViewModel {
         self.tokenHolder = tokenHolder
         self.assetDefinitionStore = assetDefinitionStore
         self.displayHelper = OpenSeaNonFungibleTokenDisplayHelper(contract: tokenHolder.contractAddress)
-        self.tokenHolderHelper = TokenInstanceViewConfigurationHelper(tokenId: tokenId, tokenHolder: tokenHolder)
+        self.tokenHolderHelper = TokenInstanceViewConfigurationHelper(tokenId: tokenId, tokenHolder: tokenHolder, assetDefinitionStore: assetDefinitionStore)
         self.contractViewModel = TokenAttributeViewModel(title: R.string.localizable.nonfungiblesValueContract(), attributedValue: TokenAttributeViewModel.urlValueAttributedString(token.contractAddress.truncateMiddle))
     }
 
@@ -158,21 +158,30 @@ class NFTAssetViewModel {
         let xmlHandler = XMLHandler(token: token, assetDefinitionStore: assetDefinitionStore)
         let actionsFromTokenScript = xmlHandler.actions
         infoLog("[TokenScript] actions names: \(actionsFromTokenScript.map(\.name))")
+        let results: [TokenInstanceAction]
         if xmlHandler.hasAssetDefinition {
-            return actionsFromTokenScript
+            results = actionsFromTokenScript
         } else {
             switch token.type {
             case .erc1155, .erc721:
-                return [
+                results = [
                     .init(type: .nonFungibleTransfer)
                 ]
             case .erc875, .erc721ForTickets:
-                return [
+                results = [
                     .init(type: .nftSell),
                     .init(type: .nonFungibleTransfer)
                 ]
             case .nativeCryptocurrency, .erc20:
-                return []
+                results = []
+            }
+        }
+
+        if Features.default.isAvailable(.isNftTransferEnabled) {
+            return results
+        } else {
+            return results.filter {
+                $0.type != .nonFungibleTransfer
             }
         }
     }
@@ -209,7 +218,7 @@ class NFTAssetViewModel {
         return R.image.tokenPlaceholderLarge()
     }
 
-    private func buildViewTypes(for tokenHolderHelper: TokenInstanceViewConfigurationHelper)-> [NFTAssetViewModel.ViewType] {
+    private func buildViewTypes(for tokenHolderHelper: TokenInstanceViewConfigurationHelper) -> [NFTAssetViewModel.ViewType] {
         var configurations: [NFTAssetViewModel.ViewType] = []
 
         configurations += [

@@ -31,9 +31,9 @@ class TextField: UIControl {
         func textFieldBorderColor(whileEditing: Bool = false) -> UIColor {
             switch self {
             case .none:
-                return whileEditing ? DataEntry.Color.textFieldShadowWhileEditing : DataEntry.Color.border
+                return whileEditing ? Configuration.Color.Semantic.textFieldShadowWhileEditing : Configuration.Color.Semantic.border
             case .error:
-                return DataEntry.Color.textFieldError
+                return Configuration.Color.Semantic.textFieldError
             }
         }
 
@@ -51,7 +51,7 @@ class TextField: UIControl {
             case .none:
                 return Configuration.Color.Semantic.defaultForegroundText
             case .error:
-                return DataEntry.Color.textFieldError
+                return Configuration.Color.Semantic.textFieldError
             }
         }
     }
@@ -74,8 +74,8 @@ class TextField: UIControl {
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = DataEntry.Font.textFieldTitle
-        label.textColor = DataEntry.Color.label
+        label.font = Configuration.Font.textFieldTitle
+        label.textColor = Configuration.Color.Semantic.label
         label.textAlignment = .left
 
         return label
@@ -86,8 +86,8 @@ class TextField: UIControl {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.font = DataEntry.Font.textFieldStatus
-        label.textColor = DataEntry.Color.textFieldStatus
+        label.font = Configuration.Font.textFieldStatus
+        label.textColor = Configuration.Color.Semantic.textFieldStatus
         label.textAlignment = .left
         
         return label
@@ -101,7 +101,7 @@ class TextField: UIControl {
         textField.leftViewMode = .always
         textField.rightViewMode = .always
         textField.textColor = Configuration.Color.Semantic.defaultForegroundText
-        textField.font = DataEntry.Font.textField
+        textField.font = Configuration.Font.textField
 
         return textField
     }()
@@ -194,10 +194,9 @@ class TextField: UIControl {
     
     var isForNetwork: Bool = false
 
-    func defaultLayout(edgeInsets: UIEdgeInsets = .zero, isForNetwork: Bool = false) -> UIView {
+    func defaultLayout(edgeInsets: UIEdgeInsets = .zero,isForNetwork: Bool = false) -> UIView {
         self.isForNetwork = isForNetwork
-        
-        var stackView = [
+        let stackView = [
             label,
             .spacer(height: DataEntry.Metric.TextField.Default.spaceFromTitleToTextField),
             //NOTE: adding shadow inset as edgeInsets might be .zero, and the sized shadow will be clipped
@@ -205,15 +204,6 @@ class TextField: UIControl {
             .spacer(height: DataEntry.Metric.TextField.Default.spaceFromTitleToTextField),
             statusLabel,
         ].asStackView(axis: .vertical)
-        
-        if isForNetwork {
-            stackView = [
-                label,
-                self,
-                statusLabel,
-            ].asStackView(axis: .vertical)
-        }
-        
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         let view = UIView()
@@ -266,10 +256,8 @@ extension TextField: UITextFieldDelegate {
         let borderColor = status.textFieldBorderColor(whileEditing: true)
         layer.borderColor = borderColor.cgColor
         backgroundColor = Configuration.Color.Semantic.textFieldBackground
-        
-        if !isForNetwork {
-            dropShadow(color: borderColor, radius: DataEntry.Metric.shadowRadius)
-        }
+
+        dropShadow(color: borderColor, radius: DataEntry.Metric.shadowRadius)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

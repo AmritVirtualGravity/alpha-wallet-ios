@@ -84,7 +84,6 @@ class SlippageView: UIView {
                 .map { _ -> SwapSlippage in return each }
                 .sink(receiveValue: { [weak viewModel] value in viewModel?.set(slippage: value) })
                 .store(in: &cancelable)
-            
             return .selectableView(view, each: each)
         case .editingTextField:
             let view = EditableSlippageView(viewModel: EditableSlippageViewModel(selectedSlippage: viewModel.selectedSlippage))

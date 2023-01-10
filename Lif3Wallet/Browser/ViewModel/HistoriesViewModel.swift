@@ -1,5 +1,4 @@
 // Copyright DApps Platform Inc. All rights reserved.
-
 import Foundation
 import AlphaWalletFoundation
 import Combine
@@ -25,9 +24,9 @@ class BrowserHistoryViewModel {
             .sink { [browserHistoryStorage] action in
                 switch action {
                 case .record(let record):
-                    browserHistoryStorage.delete(histories: [record])
+                    browserHistoryStorage.delete(record: record)
                 case .all:
-                    browserHistoryStorage.clearAll()
+                    browserHistoryStorage.deleteAllRecords()
                 }
             }.store(in: &cancelable)
 

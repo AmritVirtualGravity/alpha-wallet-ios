@@ -145,17 +145,22 @@ extension EnabledServersViewController: UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sectionType = viewModel.sections[indexPath.section]
-        if sectionType == .mainnet || sectionType == .testnet {
-            tableView.deselectRow(at: indexPath, animated: true)
-            viewModel.selectServer(indexPath: indexPath)
-            configure(viewModel: viewModel)
-            tableView.reloadData()
-            //Even if no servers is selected, we don't attempt to disable the back button here since calling code will take care of ignore the change server "request" when there are no servers selected. We don't want to disable the back button because users can't cancel the operation
-        } else if sectionType == .createNetwork {
-            let rowType = viewModel.createNetworkRow[indexPath.row]
-            delegate?.createNetworkSectionSelection(for: rowType)
-        }
+        // let sectionType = viewModel.sections[indexPath.section]
+        // if sectionType == .mainnet || sectionType == .testnet {
+        //     tableView.deselectRow(at: indexPath, animated: true)
+        //     viewModel.selectServer(indexPath: indexPath)
+        //     configure(viewModel: viewModel)
+        //     tableView.reloadData()
+        //     //Even if no servers is selected, we don't attempt to disable the back button here since calling code will take care of ignore the change server "request" when there are no servers selected. We don't want to disable the back button because users can't cancel the operation
+        // } else if sectionType == .createNetwork {
+        //     let rowType = viewModel.createNetworkRow[indexPath.row]
+        //     delegate?.createNetworkSectionSelection(for: rowType)
+        // }
+     tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.selectServer(indexPath: indexPath)
+        configure(viewModel: viewModel)
+        tableView.reloadData()
+        //Even if no servers is selected, we don't attempt to disable the back button here since calling code will take care of ignore the change server "request" when there are no servers selected. We don't want to disable the back button because users can't cancel the operation
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -168,7 +173,7 @@ extension EnabledServersViewController: UITableViewDelegate, UITableViewDataSour
         }
 
         deleteAction.image = R.image.close()?.withRenderingMode(.alwaysTemplate)
-        deleteAction.backgroundColor = R.color.danger()
+        deleteAction.backgroundColor = Colors.appRed
 
         let editAction = UIContextualAction(style: .normal, title: R.string.localizable.editButtonTitle()) { _, _, complete in
             self.edit(server: server)

@@ -2,7 +2,8 @@
 
 import UIKit
 
-protocol EnterKeystorePasswordViewControllerDelegate: class {
+protocol EnterKeystorePasswordViewControllerDelegate: AnyObject {
+    func didClose(in viewController: EnterKeystorePasswordViewController)
     func didEnterPassword(password: String, in viewController: EnterKeystorePasswordViewController)
 }
 
@@ -13,7 +14,7 @@ class EnterKeystorePasswordViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
         label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: Fonts.regular(size: 13.0))
-        label.textColor = R.color.dove()!
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.text = R.string.localizable.enterPasswordPasswordHeaderPlaceholder()
         label.numberOfLines = 0
 
@@ -141,5 +142,11 @@ extension EnterKeystorePasswordViewController: TextFieldDelegate {
         case .failure:
             buttonsBar.buttons[0].isEnabled = false
         }
+    }
+}
+
+extension EnterKeystorePasswordViewController: PopNotifiable {
+    func didPopViewController(animated: Bool) {
+        delegate?.didClose(in: self)
     }
 }

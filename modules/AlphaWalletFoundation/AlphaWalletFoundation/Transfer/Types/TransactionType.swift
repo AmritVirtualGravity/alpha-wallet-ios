@@ -1,9 +1,38 @@
 import Foundation
 import BigInt
 
-public enum Erc1155TokenTransactionType {
-    case batchTransfer
-    case singleTransfer
+public enum FungibleAmount {
+
+    public enum AmountType {
+        case fiat(value: Double, currency: Currency)
+        case crypto(value: Double)
+    }
+    
+    case amount(Double)
+    case allFunds
+    case notSet
+
+    public var isAllFunds: Bool {
+        switch self {
+        case .allFunds: return true
+        case .notSet, .amount: return false
+        }
+    }
+}
+
+extension FungibleAmount: Equatable {
+    public static func == (lhs: FungibleAmount, rhs: FungibleAmount) -> Bool {
+        switch (lhs, rhs) {
+        case (.amount(let a1), amount(let a2)):
+            return a1 == a2
+        case (.allFunds, .allFunds):
+            return true
+        case (.notSet, .notSet):
+            return true
+        case (.amount, .notSet), (.amount, .allFunds), (.allFunds, .notSet), (.notSet, .amount), (.notSet, .allFunds), (.allFunds, .amount):
+            return false
+        }
+    }
 }
 
 public enum TransactionType {
@@ -23,13 +52,11 @@ public enum TransactionType {
         }
     }
 
-    public init(fungibleToken token: Token, recipient: AddressOrEnsName? = nil, amount: String? = nil) {
+    public init(fungibleToken token: Token, recipient: AddressOrEnsName? = nil, amount: FungibleAmount = .notSet) {
         switch token.type {
         case .nativeCryptocurrency:
-            let amount = amount.flatMap { EtherNumberFormatter().number(from: $0, units: .ether) }
             self = .nativeCryptocurrency(token, destination: recipient, amount: amount)
         case .erc20:
-            //TODO why is this inconsistent with `.nativeCryptocurrency` which uses an integer value (i.e. taking into account decimals) instead
             self = .erc20Token(token, destination: recipient, amount: amount)
         case .erc875, .erc721, .erc721ForTickets, .erc1155:
             //NOTE: better to throw error than use incorrect state
@@ -37,28 +64,57 @@ public enum TransactionType {
         }
     }
 
-    case nativeCryptocurrency(Token, destination: AddressOrEnsName?, amount: BigInt?)
-    //TODO: replace string with BigInt
-    case erc20Token(Token, destination: AddressOrEnsName?, amount: String?)
+    case nativeCryptocurrency(Token, destination: AddressOrEnsName?, amount: FungibleAmount)
+    case erc20Token(Token, destination: AddressOrEnsName?, amount: FungibleAmount)
     case erc875Token(Token, tokenHolders: [TokenHolder])
     case erc721Token(Token, tokenHolders: [TokenHolder])
     case erc721ForTicketToken(Token, tokenHolders: [TokenHolder])
     case erc1155Token(Token, tokenHolders: [TokenHolder])
-    case dapp(Token, DAppRequester)
-    case claimPaidErc875MagicLink(Token)
-    case tokenScript(Token)
-    //TODO replace some of those above with this?
     case prebuilt(RPCServer)
 }
 
 extension TransactionType {
 
+    public var recipient: AddressOrEnsName? {
+        switch self {
+        case .nativeCryptocurrency(_, let recipient, _), .erc20Token(_, let recipient, _):
+            return recipient
+        case .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .prebuilt:
+            return nil
+        }
+    }
+
+    public var amount: FungibleAmount? {
+        switch self {
+        case .nativeCryptocurrency(_, _, let amount), .erc20Token(_, _, let amount):
+            return amount
+        case .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .prebuilt:
+            return nil
+        }
+    }
+
+    public mutating func override(recipient: AddressOrEnsName?) {
+        switch self {
+        case .nativeCryptocurrency(let token, _, let amount), .erc20Token(let token, _, let amount):
+            self = TransactionType(fungibleToken: token, recipient: recipient, amount: amount)
+        case .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .prebuilt:
+            break
+        }
+    }
+
+    public mutating func override(amount: FungibleAmount) {
+        switch self {
+        case .nativeCryptocurrency(let token, let recipient, _), .erc20Token(let token, let recipient, _):
+            self = TransactionType(fungibleToken: token, recipient: recipient, amount: amount)
+        case .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token, .prebuilt:
+            break
+        }
+    }
+
     public var symbol: String {
         switch self {
         case .nativeCryptocurrency(let server, _, _):
             return server.symbol
-        case .dapp(let token, _), .tokenScript(let token):
-            return token.symbol
         case .erc20Token(let token, _, _):
             return token.symbol
         case .erc875Token(let token, _):
@@ -68,8 +124,6 @@ extension TransactionType {
         case .erc721ForTicketToken(let token, _):
             return token.symbol
         case .erc1155Token(let token, _):
-            return token.symbol
-        case .claimPaidErc875MagicLink(let token):
             return token.symbol
         case .prebuilt:
             //Not applicable
@@ -81,8 +135,6 @@ extension TransactionType {
         switch self {
         case .nativeCryptocurrency(let token, _, _):
             return token
-        case .dapp(let token, _), .tokenScript(let token):
-            return token
         case .erc20Token(let token, _, _):
             return token
         case .erc875Token(let token, _):
@@ -92,8 +144,6 @@ extension TransactionType {
         case .erc721ForTicketToken(let token, _):
             return token
         case .erc1155Token(let token, _):
-            return token
-        case .claimPaidErc875MagicLink(let token):
             return token
         case .prebuilt(let server):
             //Not applicable
@@ -105,8 +155,6 @@ extension TransactionType {
         switch self {
         case .nativeCryptocurrency(let token, _, _):
             return token.server
-        case .dapp(let token, _), .tokenScript(let token):
-            return token.server
         case .erc20Token(let token, _, _):
             return token.server
         case .erc875Token(let token, _):
@@ -116,8 +164,6 @@ extension TransactionType {
         case .erc721ForTicketToken(let token, _):
             return token.server
         case .erc1155Token(let token, _):
-            return token.server
-        case .claimPaidErc875MagicLink(let token):
             return token.server
         case .prebuilt(let server):
              return server
@@ -138,8 +184,6 @@ extension TransactionType {
             return token.contractAddress
         case .erc1155Token(let token, _):
             return token.contractAddress
-        case .dapp(let token, _), .tokenScript(let token), .claimPaidErc875MagicLink(let token):
-            return token.contractAddress
         case .prebuilt:
             //We don't care about the contract for prebuilt transactions
             return Constants.nativeCryptoAddressInDatabase
@@ -152,7 +196,7 @@ extension TransactionType {
         case tokenScriptTransaction(confirmType: ConfirmType, contract: AlphaWallet.Address, functionCallMetaData: DecodedFunctionCall)
         case dappTransaction(confirmType: ConfirmType)
         case walletConnect(confirmType: ConfirmType, requester: RequesterViewModel)
-        case sendFungiblesTransaction(confirmType: ConfirmType, amount: FungiblesTransactionAmount)
+        case sendFungiblesTransaction(confirmType: ConfirmType)
         case sendNftTransaction(confirmType: ConfirmType)
         case claimPaidErc875MagicLink(confirmType: ConfirmType, price: BigUInt, numberOfTokens: UInt)
         case speedupTransaction
@@ -163,7 +207,7 @@ extension TransactionType {
 
         public var confirmType: ConfirmType {
             switch self {
-            case .dappTransaction(let confirmType), .walletConnect(let confirmType, _), .sendFungiblesTransaction(let confirmType, _), .sendNftTransaction(let confirmType), .tokenScriptTransaction(let confirmType, _, _), .claimPaidErc875MagicLink(let confirmType, _, _):
+            case .dappTransaction(let confirmType), .walletConnect(let confirmType, _), .sendFungiblesTransaction(let confirmType), .sendNftTransaction(let confirmType), .tokenScriptTransaction(let confirmType, _, _), .claimPaidErc875MagicLink(let confirmType, _, _):
                 return confirmType
             case .speedupTransaction, .cancelTransaction, .swapTransaction, .approve:
                 return .signThenSend
@@ -172,15 +216,15 @@ extension TransactionType {
     }
 
     public func buildAnyDappTransaction(bridgeTransaction: RawTransactionBridge) throws -> UnconfirmedTransaction {
-        guard case .dapp = self else { throw TransactionConfiguratorError.impossibleToBuildConfiguration }
+        guard case .prebuilt = self else { throw TransactionConfiguratorError.impossibleToBuildConfiguration }
 
         return UnconfirmedTransaction(transactionType: self, bridgeTransaction: bridgeTransaction)
     }
 
     public func buildSendNativeCryptocurrency(recipient: AlphaWallet.Address, amount: BigUInt) throws -> UnconfirmedTransaction {
         switch self {
-        case .nativeCryptocurrency, .dapp, .claimPaidErc875MagicLink, .tokenScript, .prebuilt:
-            break //TODO: review codebase and remove `.dapp, .claimPaidErc875MagicLink, .tokenScript, .prebuilt` from send screen
+        case .nativeCryptocurrency, .prebuilt:
+            break
         case .erc20Token, .erc875Token, .erc721Token, .erc721ForTicketToken, .erc1155Token:
             throw TransactionConfiguratorError.impossibleToBuildConfiguration
         }
@@ -227,19 +271,19 @@ extension TransactionType {
 
             let data: Data
             if tokenHolder.contractAddress.isLegacy721Contract {
-                data = (try? Erc721TransferFrom(recipient: recipient, tokenId: token.id).encodedABI())  ?? Data()
+                data = (try? Erc721TransferFrom(recipient: recipient, tokenId: token.id).encodedABI()) ?? Data()
             } else {
                 data = (try? Erc721SafeTransferFrom(recipient: recipient, account: account, tokenId: token.id).encodedABI()) ?? Data()
             }
 
             return UnconfirmedTransaction(transactionType: self, value: BigUInt(0), recipient: recipient, contract: tokenHolder.contractAddress, data: data)
-        case .nativeCryptocurrency, .erc20Token, .erc1155Token, .dapp, .claimPaidErc875MagicLink, .tokenScript, .prebuilt:
+        case .nativeCryptocurrency, .erc20Token, .erc1155Token, .prebuilt:
             throw TransactionConfiguratorError.impossibleToBuildConfiguration
         }
     }
 
     public func buildClaimPaidErc875MagicLink(recipient: AlphaWallet.Address, signedOrder: SignedOrder) throws -> UnconfirmedTransaction {
-        guard case .claimPaidErc875MagicLink = self else { throw TransactionConfiguratorError.impossibleToBuildConfiguration }
+        guard case .prebuilt = self else { throw TransactionConfiguratorError.impossibleToBuildConfiguration }
 
         func encodeOrder(signedOrder: SignedOrder, recipient: AlphaWallet.Address) throws -> Data {
             let signature = signedOrder.signature.substring(from: 2)

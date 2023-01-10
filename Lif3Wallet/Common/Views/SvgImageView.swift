@@ -4,7 +4,6 @@
 //
 //  Created by Vladyslav Shepitko on 13.05.2022.
 //
-
 import UIKit
 import WebKit
 import Kingfisher
@@ -43,10 +42,14 @@ final class SvgImageView: WKWebView {
     }
 
     func setImage(url: URL, completion: @escaping () -> Void) {
-        if let data = try? ImageCache.default.diskStorage.value(forKey: url.absoluteString), let svgString = data.flatMap({ String(data: $0, encoding: .utf8) }) {
-            loadHTMLString(html(svgString: svgString), baseURL: nil)
-            alpha = 1
-            completion()
+        if let data = try? ImageCache.default.diskStorage.value(forKey: url.absoluteString) {
+            if let dta = data   {
+                if let svgString = String(data: dta, encoding: .utf8){
+                    loadHTMLString(html(svgString: svgString), baseURL: nil)
+                    alpha = 1
+                    completion()
+                }
+            }
         } else {
             alpha = 0
 
@@ -112,19 +115,16 @@ extension SvgImageView {
                         padding: 0;
                         margin: 0;
                     }
-
                     body {
                         margin: 0;
                         padding: 0;
                     }
-
                     div {
                         width: 100%;
                         height: 100%;
                         margin: 0;
                         padding: 0;
                     }
-
                     svg {
                         width: inherit;
                         height: inherit;
@@ -132,7 +132,6 @@ extension SvgImageView {
                         max-height: 100%;
                         border-radius: \(Int(rounding.cornerRadius(view: self)))px;
                     }
-
                     div > * {
                         border-radius: \(Int(rounding.cornerRadius(view: self)))px;
                     }

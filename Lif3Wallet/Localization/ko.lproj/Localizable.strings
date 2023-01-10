@@ -67,7 +67,6 @@
 "Refresh" = "새로 고침";
 "copiedToClipboard.title" = "%@ copied";
 "address" = "Address";
-"request.addressCopied.title" = "주소가 복사되었습니다";
 "request.copyWallet.button.title" = "지갑 주소 복사";
 "Retry" = "다시 시도";
 "Send" = "보내기";
@@ -119,6 +118,7 @@
 "settings.contactUs.title" = "Contact Us";
 "settings.changeCurrency.title" = "Change Currency";
 "settings.analitycs.title" = "Analytics";
+"settings.crashReporter.title" = "Crash Reporting";
 "settings.pingInfura.title" = "Ping Infura";
 "settings.pingInfura.successful" = "Infura looks OK";
 "settings.pingInfura.fail" = "Infura Error";
@@ -516,7 +516,7 @@
 "backup.prompt.afterInterval.title" = "Time to back up your Wallet";
 "backup.prompt.afterInterval.description" = "We highly recommend to back up your wallet";
 "backup.prompt.afterHittingThreshold.title" = "Your Wallet is at risk!";
-"backup.prompt.afterHittingThreshold.description" = "You have not backed up your wallet yet. You have %@ USD net. Act now. ";
+"backup.prompt.afterHittingThreshold.description" = "You have not backed up your wallet yet. You have %@ net. Act now. ";
 "onboarding.newWallet.backupWallet.title" = "Back up your Wallet";
 "onboarding.newWallet.backupWallet.description" = "Your funds will be at risk if you do not back up before using your wallet";
 "keystore.accessKey.nonHd.backup" = "Accessing your wallet key to back it up";
@@ -644,7 +644,7 @@
 "transactionConfirmation.Row.title.wallet" = "Wallet Address";
 "transactionConfirmation.Send.Section.Gas.title" = "Gas";
 "transactionConfirmation.Send.Section.Balance.title" = "Balance";
-"transactionConfirmation.Send.Section.Balance.new.title" = "(New: %@ %@)";
+"transactionConfirmation.Send.Section.Balance.new.title" = "(New: %@)";
 "transactionConfirmation.Send.Section.Amount.title" = "Amount";
 "transactionConfirmation.Send.Section.Recipient.title" = "Recipient";
 "transactionConfirmation.Send.Section.TokenId.title" = "Token";

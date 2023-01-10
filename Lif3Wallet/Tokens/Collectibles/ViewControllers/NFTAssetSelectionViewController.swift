@@ -10,7 +10,7 @@ import StatefulViewController
 import AlphaWalletFoundation
 import Combine
 
-protocol NFTAssetSelectionViewControllerDelegate: class {
+protocol NFTAssetSelectionViewControllerDelegate: AnyObject {
     func didTapSend(in viewController: NFTAssetSelectionViewController, token: Token, tokenHolders: [TokenHolder])
 }
 
@@ -210,7 +210,7 @@ extension NFTAssetSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let tokenHolder = viewModel.selectableTokenHolder(at: section)
         let view: NFTAssetSelectionSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
-        view.configure(viewModel: .init(tokenHolder: tokenHolder, backgroundColor: R.color.alabaster()!))
+        view.configure(viewModel: .init(tokenHolder: tokenHolder, backgroundColor: Configuration.Color.Semantic.tableViewAccessoryBackground))
         view.delegate = self
         view.section = section
 
@@ -329,7 +329,7 @@ extension NFTAssetSelectionViewController {
     }
 }
 
-protocol SelectAllAssetsViewDelegate: class {
+protocol SelectAllAssetsViewDelegate: AnyObject {
     func selectAllSelected(in view: NFTAssetSelectionViewController.SelectAllAssetsView)
 }
 
@@ -338,10 +338,10 @@ extension NFTAssetSelectionViewController {
     struct SelectAllAssetsViewModel {
         let text: String
 
-        var separatorColor: UIColor = GroupedTable.Color.cellSeparator
-        var backgroundColor: UIColor = GroupedTable.Color.background
+        var separatorColor: UIColor = Configuration.Color.Semantic.tableViewSeparator
+        var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
         var titleTextFont = Fonts.bold(size: 15)
-        var titleTextColor = R.color.dove()!
+        var titleTextColor = Configuration.Color.Semantic.defaultSubtitleText
         var isSelectAllHidden: Bool = false
     }
 

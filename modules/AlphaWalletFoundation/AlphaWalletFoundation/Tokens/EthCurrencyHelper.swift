@@ -1,9 +1,8 @@
 // Copyright © 2018 Stormbird PTE. LTD.
-
 import Foundation
 import UIKit.UIColor
 
-public struct EthCurrencyHelper {
+public struct TickerHelper {
     private let ticker: CoinTicker?
 
     public enum Change24h {
@@ -16,11 +15,7 @@ public struct EthCurrencyHelper {
         return change24h(from: ticker?.percent_change_24h)
     }
 
-    public var marketPrice: Double? {
-        return ticker?.price_usd
-    }
-
-    public func valueChanged24h(value: NSDecimalNumber?) -> Double? {
+    public func valueChanged24h(value: Decimal?) -> Double? {
         guard let fiatValue = fiatValue(value: value), let ticker = ticker else { return .none }
 
         return fiatValue * ticker.percent_change_24h / 100
@@ -40,7 +35,7 @@ public struct EthCurrencyHelper {
         }
     }
 
-    public func fiatValue(value: NSDecimalNumber?) -> Double? {
+    public func fiatValue(value: Decimal?) -> Double? {
         guard let value = value, let ticker = ticker else { return .none }
 
         return value.doubleValue * ticker.price_usd
@@ -64,18 +59,5 @@ public struct EthCurrencyHelper {
 
     public init(ticker: CoinTicker?) {
         self.ticker = ticker
-    }
-}
-
-extension EthCurrencyHelper.Change24h {
-    public var string: String? {
-        switch self {
-        case .appreciate(let percentageChange24h):
-            return "\(Formatter.priceChange.string(from: percentageChange24h) ?? "")%"
-        case .depreciate(let percentageChange24h):
-            return "\(Formatter.priceChange.string(from: percentageChange24h) ?? "")%"
-        case .none:
-            return nil
-        }
     }
 }

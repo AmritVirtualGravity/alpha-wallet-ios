@@ -28,13 +28,14 @@ final class FungibleTokenDetailsViewModel {
     private let assetDefinitionStore: AssetDefinitionStore
     private let tokenActionsProvider: SupportedTokenActionsProvider
     private (set) var actions: [TokenInstanceAction] = []
-
+    private let currencyService: CurrencyService
     let token: Token
-    lazy var chartViewModel = TokenHistoryChartViewModel(chartHistories: chartHistoriesSubject.eraseToAnyPublisher(), coinTicker: coinTicker)
+    lazy var chartViewModel = TokenHistoryChartViewModel(chartHistories: chartHistoriesSubject.eraseToAnyPublisher(), coinTicker: coinTicker, currencyService: currencyService)
     lazy var headerViewModel = FungibleTokenHeaderViewModel(token: token, tokensService: tokensService)
     var wallet: Wallet { session.account }
 
-    init(token: Token, coinTickersFetcher: CoinTickersFetcher, tokensService: TokenViewModelState, session: WalletSession, assetDefinitionStore: AssetDefinitionStore, tokenActionsProvider: SupportedTokenActionsProvider) {
+    init(token: Token, coinTickersFetcher: CoinTickersFetcher, tokensService: TokenViewModelState, session: WalletSession, assetDefinitionStore: AssetDefinitionStore, tokenActionsProvider: SupportedTokenActionsProvider, currencyService: CurrencyService) {
+        self.currencyService = currencyService
         self.tokenActionsProvider = tokenActionsProvider
         self.session = session
         self.assetDefinitionStore = assetDefinitionStore
@@ -44,8 +45,8 @@ final class FungibleTokenDetailsViewModel {
     }
 
     func transform(input: FungibleTokenDetailsViewModelInput) -> FungibleTokenDetailsViewModelOutput {
-        input.willAppear.flatMapLatest { [coinTickersFetcher, token] _ in
-            coinTickersFetcher.fetchChartHistories(for: .init(token: token), force: false, periods: ChartHistoryPeriod.allCases)
+        input.willAppear.flatMapLatest { [coinTickersFetcher, token, currencyService] _ in
+            coinTickersFetcher.fetchChartHistories(for: .init(token: token), force: false, periods: ChartHistoryPeriod.allCases, currency: currencyService.currency)
         }.assign(to: \.value, on: chartHistoriesSubject)
         .store(in: &cancelable)
 
@@ -193,15 +194,23 @@ final class FungibleTokenDetailsViewModel {
     }
 
     private func maxSupplyViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {
-        let value: String = ticker?.max_supply.flatMap { Formatter.usd.string(from: $0) } ?? "-"
+        let value: String = {
+            guard let ticker = ticker else { return "-" }
+            if let maxSupply = ticker.max_supply {
+                return NumberFormatter.fiat(currency: ticker.currency).string(double: maxSupply) ?? "-"
+            } else {
+                return "-"
+            }
+        }()
         let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value)
         return .init(title: R.string.localizable.tokenInfoFieldStatsMax_supply(), attributedValue: attributedValue)
     }
 
     private var yearLowViewModel: TokenAttributeViewModel {
         let value: String = {
-            let history = chartHistories[ChartHistoryPeriod.year]
-            if let min = HistoryHelper(history: history).minMax?.min, let value = Formatter.usd.string(from: min) {
+            guard let history = chartHistories[ChartHistoryPeriod.year] else { return "-" }
+            let helper = HistoryHelper(history: history)
+            if let min = helper.minMax?.min, let value = NumberFormatter.fiat(currency: history.currency).string(double: min) {
                 return value
             } else {
                 return "-"
@@ -214,8 +223,9 @@ final class FungibleTokenDetailsViewModel {
 
     private var yearHighViewModel: TokenAttributeViewModel {
         let value: String = {
-            let history = chartHistories[ChartHistoryPeriod.year]
-            if let max = HistoryHelper(history: history).minMax?.max, let value = Formatter.usd.string(from: max) {
+            guard let history = chartHistories[ChartHistoryPeriod.year] else { return "-" }
+            let helper = HistoryHelper(history: history)
+            if let max = helper.minMax?.max, let value = NumberFormatter.fiat(currency: history.currency).string(double: max) {
                 return value
             } else {
                 return "-"
@@ -248,29 +258,27 @@ final class FungibleTokenDetailsViewModel {
 
     private func attributedHistoryValue(period: ChartHistoryPeriod) -> NSAttributedString {
         let result: (string: String, foregroundColor: UIColor) = {
-            let result = HistoryHelper(history: chartHistories[period])
+            guard let history = chartHistories[period] else { return ("-", Colors.black) }
+
+            let result = HistoryHelper(history: history)
 
             switch result.change {
             case .appreciate(let percentage, let value):
-                let p = Formatter.percent.string(from: percentage) ?? "-"
-                let v = Formatter.usd.string(from: value) ?? "-"
+                let p = NumberFormatter.percent.string(double: percentage) ?? "-"
+                let v = NumberFormatter.fiat(currency: history.currency).string(double: value) ?? "-"
 
-                return ("\(v) (\(p)%)", Style.value.appreciated)
+                return ("\(v) (\(p)%)", Colors.green)
             case .depreciate(let percentage, let value):
-                let p = Formatter.percent.string(from: percentage) ?? "-"
-                let v = Formatter.usd.string(from: value) ?? "-"
+                let p = NumberFormatter.percent.string(double: percentage) ?? "-"
+                let v = NumberFormatter.fiat(currency: history.currency).string(double: value) ?? "-"
 
-                return ("\(v) (\(p)%)", Style.value.depreciated)
+                return ("\(v) (\(p)%)", Colors.appRed)
             case .none:
                 return ("-", Colors.black)
             }
         }()
 
         return TokenAttributeViewModel.attributedString(result.string, alignment: .right, font: Fonts.regular(size: 17), foregroundColor: result.foregroundColor, lineBreakMode: .byTruncatingTail)
-    }
-
-    var backgroundColor: UIColor {
-        return Screen.TokenCard.Color.background
     }
 }
 

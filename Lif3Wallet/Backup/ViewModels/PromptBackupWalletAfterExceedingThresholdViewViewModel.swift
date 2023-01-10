@@ -5,8 +5,16 @@ import UIKit
 import AlphaWalletFoundation
 
 struct PromptBackupWalletAfterExceedingThresholdViewViewModel: PromptBackupWalletViewModel {
+    private let formatter: NumberFormatter
+
     let walletAddress: AlphaWallet.Address
-    let dollarValueInUsd: Double
+    let balance: WalletBalance.ValueForCurrency
+
+    init(walletAddress: AlphaWallet.Address, balance: WalletBalance.ValueForCurrency) {
+        self.walletAddress = walletAddress
+        self.balance = balance
+        self.formatter = NumberFormatter.fiat(currency: balance.currency)
+    }
 
     var backgroundColor: UIColor {
         return .init(red: 183, green: 80, blue: 70)
@@ -17,7 +25,7 @@ struct PromptBackupWalletAfterExceedingThresholdViewViewModel: PromptBackupWalle
     }
 
     var description: String {
-        let prettyAmount = Formatter.currency.string(from: dollarValueInUsd) ?? "-"
+        let prettyAmount = formatter.string(double: balance.amount) ?? "-"
         return R.string.localizable.backupPromptAfterHittingThresholdDescription(prettyAmount)
     }
 

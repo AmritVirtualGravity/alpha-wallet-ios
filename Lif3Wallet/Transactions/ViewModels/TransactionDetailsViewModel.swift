@@ -136,7 +136,7 @@ class TransactionDetailsViewModel {
             gasFee = gasPrice * gasLimit
         }
 
-        return GasViewModel(fee: gasFee, symbol: server.symbol, coinTicker: coinTicker, formatter: fullFormatter)
+        return GasViewModel(fee: gasFee, symbol: server.symbol, formatter: fullFormatter)
     }
 
     private var confirmation: String {

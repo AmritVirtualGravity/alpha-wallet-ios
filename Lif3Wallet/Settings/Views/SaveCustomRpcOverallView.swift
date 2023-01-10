@@ -23,7 +23,6 @@ class SaveCustomRpcOverallView: UIView {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.heightAnchor.constraint(equalToConstant: DataEntry.Metric.TabBar.height).isActive = true
         segmentedControl.backgroundColor = cellConfiguration.backgroundColor
-        segmentedControl.isHidden = true
         return segmentedControl
     }()
 

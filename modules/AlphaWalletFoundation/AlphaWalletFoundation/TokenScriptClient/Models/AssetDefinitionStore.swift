@@ -1,6 +1,5 @@
 // Copyright © 2018 Stormbird PTE. LTD.
 
-import Alamofire
 import Combine
 import PromiseKit
 
@@ -28,22 +27,6 @@ public class AssetDefinitionStore: NSObject {
         }
     }
 
-    private var httpHeaders: HTTPHeaders = {
-        guard let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return [:] }
-        return [
-            "Accept": "application/tokenscript+xml; charset=UTF-8",
-            "X-Client-Name": TokenScript.repoClientName,
-            "X-Client-Version": appVersion,
-            "X-Platform-Name": TokenScript.repoPlatformName,
-            "X-Platform-Version": UIDevice.current.systemVersion
-        ]
-    }()
-    private var lastModifiedDateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateFormat = "E, dd MMM yyyy HH:mm:ss z"
-        df.timeZone = TimeZone(secondsFromGMT: 0)
-        return df
-    }()
     private var lastContractInPasteboard: String?
     private var backingStore: AssetDefinitionBackingStore
     private let _baseTokenScriptFiles: AtomicDictionary<TokenType, String> = .init()
@@ -52,6 +35,8 @@ public class AssetDefinitionStore: NSObject {
     private var signatureChangeSubject: PassthroughSubject<AlphaWallet.Address, Never> = .init()
     private var bodyChangeSubject: PassthroughSubject<AlphaWallet.Address, Never> = .init()
     private var listOfBadTokenScriptFilesSubject: CurrentValueSubject<[TokenScriptFileIndices.FileName], Never> = .init([])
+    private let network: AssetDefinitionNetworking
+    private var cancelable: [Int: AnyCancellable] = [:]
 
     public var listOfBadTokenScriptFiles: AnyPublisher<[TokenScriptFileIndices.FileName], Never> {
         listOfBadTokenScriptFilesSubject.eraseToAnyPublisher()
@@ -82,7 +67,7 @@ public class AssetDefinitionStore: NSObject {
     public func assetBodyChanged(for contract: AlphaWallet.Address) -> AnyPublisher<Void, Never> {
         return bodyChangeSubject
             .filter { $0.sameContract(as: contract) }
-            .map { _ in return () }
+            .mapToVoid()
             .share()
             .eraseToAnyPublisher()
     }
@@ -90,7 +75,7 @@ public class AssetDefinitionStore: NSObject {
     public func assetSignatureChanged(for contract: AlphaWallet.Address) -> AnyPublisher<Void, Never> {
         return signatureChangeSubject
             .filter { $0.sameContract(as: contract) }
-            .map { _ in return () }
+            .mapToVoid()
             .share()
             .eraseToAnyPublisher()
     }
@@ -98,7 +83,7 @@ public class AssetDefinitionStore: NSObject {
     public func assetsSignatureOrBodyChange(for contract: AlphaWallet.Address) -> AnyPublisher<Void, Never> {
         return Publishers
             .Merge(assetSignatureChanged(for: contract), assetSignatureChanged(for: contract))
-            .map { _ in return () }
+            .mapToVoid()
             .eraseToAnyPublisher()
     }
 
@@ -134,7 +119,8 @@ public class AssetDefinitionStore: NSObject {
                """
     }
 
-    public init(backingStore: AssetDefinitionBackingStore = AssetDefinitionDiskBackingStoreWithOverrides(), baseTokenScriptFiles: [TokenType: String] = [:]) {
+    public init(backingStore: AssetDefinitionBackingStore = AssetDefinitionDiskBackingStoreWithOverrides(), baseTokenScriptFiles: [TokenType: String] = [:], networkService: NetworkService) {
+        self.network = AssetDefinitionNetworking(networkService: networkService)
         self.backingStore = backingStore
         self._baseTokenScriptFiles.set(value: baseTokenScriptFiles)
         super.init()
@@ -179,16 +165,8 @@ public class AssetDefinitionStore: NSObject {
     }
 
     public subscript(contract: AlphaWallet.Address) -> String? {
-        get {
-            backingStore[contract]
-        }
-        set(value) {
-            backingStore[contract] = value
-        }
-    }
-
-    private func cacheXml(_ xml: String, forContract contract: AlphaWallet.Address) {
-        backingStore[contract] = xml
+        get { backingStore[contract] }
+        set { backingStore[contract] = newValue }
     }
 
     public func isOfficial(contract: AlphaWallet.Address) -> Bool {
@@ -209,7 +187,7 @@ public class AssetDefinitionStore: NSObject {
 
         //If we override with a TokenScript file that is for a contract that also has an official TokenScript file but the files are different, we'll enter an infinite recursion where we keep fetching the official TokenScript file, store it, think it has changed, invalid cache, re-download from the official repo and loops. The simple solution is to just not attempt to download or check against the official repo if the there's an overriding TokenScript file
         if !backingStore.isOfficial(contract: contract) {
-            completionHandler?(.cached)
+            completionHandler?(.unmodified)
             return
         }
 
@@ -217,14 +195,14 @@ public class AssetDefinitionStore: NSObject {
             urlToFetch(contract: contract, server: server)
         }.done { result in
             guard let (url, isScriptUri) = result else { return }
-            self.fetchXML(forContract: contract, server: server, withUrl: url, useCacheAndFetch: useCacheAndFetch) { result in
+            self.fetchXML(contract: contract, server: server, url: url, useCacheAndFetch: useCacheAndFetch) { result in
                 //Try a bit harder if the TokenScript was specified via EIP-5169 (`scriptURI()`)
                 //TODO probably better to convert completionHandler to Promise so we can retry more elegantly
                 if isScriptUri && result.isError {
-                    self.fetchXML(forContract: contract, server: server, withUrl: url, useCacheAndFetch: useCacheAndFetch) { result in
+                    self.fetchXML(contract: contract, server: server, url: url, useCacheAndFetch: useCacheAndFetch) { result in
                         if isScriptUri && result.isError {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                self.fetchXML(forContract: contract, server: server, withUrl: url, useCacheAndFetch: useCacheAndFetch, completionHandler: completionHandler)
+                                self.fetchXML(contract: contract, server: server, url: url, useCacheAndFetch: useCacheAndFetch, completionHandler: completionHandler)
                             }
                         }
                     }
@@ -238,24 +216,23 @@ public class AssetDefinitionStore: NSObject {
         }
     }
 
-    private func fetchXML(forContract contract: AlphaWallet.Address, server: RPCServer?, withUrl url: URL, useCacheAndFetch: Bool = false, completionHandler: ((Result) -> Void)? = nil) {
-        //TODO improve check. We should store the IPFS hash, if the hash is different, download the new file, otherwise it has not changed
-        //IPFS, at least on Infura returns a `304` even though we pass in a timestamp that is older than the creation date for the "IF-Modified-Since" header. So we always download the entire file. This only works decently when we don't have many TokenScript using EIP-5169/`scriptURI()`
-        let includeLastModifiedTimestampHeader: Bool = !url.absoluteString.contains("ipfs")
-        Alamofire.request(
-                url,
-                method: .get,
-                headers: httpHeadersWithLastModifiedTimestamp(forContract: contract, includeLastModifiedTimestampHeader: includeLastModifiedTimestampHeader)
-        ).response { [weak self] response in
-            guard let strongSelf = self else { return }
-            if response.response?.statusCode == 304 {
-                completionHandler?(.unmodified)
-            } else if response.response?.statusCode == 406 {
-                completionHandler?(.error)
-            } else if response.response?.statusCode == 404 {
-                completionHandler?(.error)
-            } else if response.response?.statusCode == 200 {
-                if let xml = response.data.flatMap({ String(data: $0, encoding: .utf8) }).nilIfEmpty {
+    private func fetchXML(contract: AlphaWallet.Address, server: RPCServer?, url: URL, useCacheAndFetch: Bool = false, completionHandler: ((Result) -> Void)? = nil) {
+        let lastModified = lastModifiedDateOfCachedAssetDefinitionFile(forContract: contract)
+        let request = AssetDefinitionNetworking.GetXmlFileRequest(url: url, lastModifiedDate: lastModified)
+
+        cancelable[request.hashValue] = network
+            .fetchXml(request: request)
+            .sink(receiveCompletion: { [weak self] _ in
+                self?.cancelable[request.hashValue] = .none
+            }, receiveValue: { [weak self] response in
+                guard let strongSelf = self else { return }
+
+                switch response {
+                case .error:
+                    completionHandler?(.error)
+                case .unmodified:
+                    completionHandler?(.unmodified)
+                case .xml(let xml):
                     //Note that Alamofire converts the 304 to a 200 if caching is enabled (which it is, by default). So we'll never get a 304 here. Checking against Charles proxy will show that a 304 is indeed returned by the server with an empty body. So we compare the contents instead. https://github.com/Alamofire/Alamofire/issues/615
                     if xml == strongSelf[contract] {
                         completionHandler?(.unmodified)
@@ -264,17 +241,14 @@ public class AssetDefinitionStore: NSObject {
                             completionHandler?(result)
                         }
                     } else {
-                        strongSelf.cacheXml(xml, forContract: contract)
+                        strongSelf[contract] = xml
                         strongSelf.invalidate(forContract: contract)
                         completionHandler?(.updated)
                         strongSelf.triggerBodyChangedSubscribers(forContract: contract)
                         strongSelf.triggerSignatureChangedSubscribers(forContract: contract)
                     }
-                } else {
-                    completionHandler?(.error)
                 }
-            }
-        }
+            })
     }
 
     private func isTruncatedXML(xml: String) -> Bool {
@@ -316,20 +290,6 @@ public class AssetDefinitionStore: NSObject {
 
     private func lastModifiedDateOfCachedAssetDefinitionFile(forContract contract: AlphaWallet.Address) -> Date? {
         return backingStore.lastModifiedDateOfCachedAssetDefinitionFile(forContract: contract)
-    }
-
-    private func httpHeadersWithLastModifiedTimestamp(forContract contract: AlphaWallet.Address, includeLastModifiedTimestampHeader: Bool) -> HTTPHeaders {
-        var result = httpHeaders
-        if includeLastModifiedTimestampHeader, let lastModified = lastModifiedDateOfCachedAssetDefinitionFile(forContract: contract) {
-            result["IF-Modified-Since"] = string(fromLastModifiedDate: lastModified)
-            return result
-        } else {
-            return result
-        }
-    }
-
-    public func string(fromLastModifiedDate date: Date) -> String {
-        return lastModifiedDateFormatter.string(from: date)
     }
 
     public func forEachContractWithXML(_ body: (AlphaWallet.Address) -> Void) {
@@ -402,3 +362,4 @@ extension AssetDefinitionStore.functional {
         ScriptUri(forServer: server).get(forContract: contract)
     }
 }
+

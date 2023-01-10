@@ -1,8 +1,8 @@
 // Copyright © 2018 Stormbird PTE. LTD.
 
-import UIKit 
+import UIKit
 import Combine
-import AlphaWalletFoundation 
+import AlphaWalletFoundation
 
 protocol TokensViewControllerDelegate: AnyObject {
     func viewWillAppear(in viewController: UIViewController)
@@ -49,6 +49,8 @@ final class TokensViewController: UIViewController {
         return view
     }()
 
+   
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView.grouped
 
@@ -67,7 +69,6 @@ final class TokensViewController: UIViewController {
         tableView.separatorInset = .zero
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.refreshControl = refreshControl
-        
         tableView.tableFooterView = footerView
 
         return tableView
@@ -129,7 +130,7 @@ final class TokensViewController: UIViewController {
             adjustTableViewHeaderHeightToFitContents()
         }
     }
-    
+
     private var isPromptBackupWalletViewHolderHidden: Bool {
         get { promptBackupWalletViewHolder.isHidden }
         set {
@@ -140,7 +141,7 @@ final class TokensViewController: UIViewController {
     }
 
     weak var delegate: TokensViewControllerDelegate?
-    
+
     var promptBackupWalletView: UIView? {
         didSet {
             oldValue?.removeFromSuperview()
@@ -167,7 +168,11 @@ final class TokensViewController: UIViewController {
     }()
     private lazy var dataSource = makeDataSource()
     private let buttonsBar = HorizontalButtonsBar(configuration: .primary(buttons: 1))
-    private lazy var footerBar = ButtonsBarBackgroundView(buttonsBar: buttonsBar, separatorHeight: 0)
+    private lazy var footerBar: ButtonsBarBackgroundView = {
+        let result = ButtonsBarBackgroundView(buttonsBar: buttonsBar, separatorHeight: 0)
+        result.backgroundColor = viewModel.buyButtonFooterBarBackgroundColor
+        return result
+    }()
 
     init(viewModel: TokensViewModel) {
         self.viewModel = viewModel
@@ -288,8 +293,8 @@ final class TokensViewController: UIViewController {
 
                 navigationItem.title = state.title
                 self?.isConsoleButtonHidden = state.isConsoleButtonHidden
-//                self?.footerBar.isHidden = state.isFooterHidden
-                self?.applySnapshot(with: state.sections, animate: false)
+                self?.footerBar.isHidden = state.isFooterHidden
+                self?.applySnapshot(with: state.sections, animatingDifferences: false)
             }.store(in: &cancellable)
 
         output.deletion
@@ -472,13 +477,14 @@ extension TokensViewController {
 
 fileprivate extension TokensViewController {
     func makeDataSource() -> TableViewDiffableDataSource<TokensViewModel.Section, TokensViewModel.ViewModelType> {
-        return TableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, viewModel in
+        return TableViewDiffableDataSource(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, viewModel in
+            guard let strongSelf = self else { return UITableViewCell() }
             switch viewModel {
             case .undefined:
                 return UITableViewCell()
             case .nftCollection(let viewModel):
                 let cell: OpenSeaNonFungibleTokenPairTableCell = tableView.dequeueReusableCell(for: indexPath)
-                cell.delegate = self
+                cell.delegate = strongSelf
                 cell.configure(viewModel: viewModel)
 
                 return cell
@@ -506,15 +512,16 @@ fileprivate extension TokensViewController {
         })
     }
 
-    private func applySnapshot(with viewModels: [TokensViewModel.SectionViewModel], animate: Bool = true) {
+    private func applySnapshot(with viewModels: [TokensViewModel.SectionViewModel], animatingDifferences: Bool = true) {
         var snapshot = NSDiffableDataSourceSnapshot<TokensViewModel.Section, TokensViewModel.ViewModelType>()
         let sections = viewModels.map { $0.section }
         snapshot.appendSections(sections)
+
         for each in viewModels {
             snapshot.appendItems(each.views, toSection: each.section)
         }
 
-        dataSource.apply(snapshot, animatingDifferences: animate)
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 }
 
@@ -678,7 +685,7 @@ extension UISearchBar {
         searchBar.superview?.firstSubview(ofType: UIImageView.self)?.isHidden = true
         //Remove border line
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor.clear.cgColor
+        searchBar.layer.borderColor = Colors.clear.cgColor
         searchBar.backgroundImage = UIImage()
         searchBar.placeholder = R.string.localizable.tokensSearchbarPlaceholder()
         searchBar.backgroundColor = backgroundColor

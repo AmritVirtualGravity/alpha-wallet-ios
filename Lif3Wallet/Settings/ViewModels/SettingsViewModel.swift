@@ -23,6 +23,7 @@ final class SettingsViewModel {
     private let keystore: Keystore
     private let analytics: AnalyticsLogger
     private let getWalletName: GetWalletName
+    private let promptBackup: PromptBackup
     private var passcodeTitle: String {
         switch BiometryAuthenticationType.current {
         case .faceID, .touchID:
@@ -38,13 +39,14 @@ final class SettingsViewModel {
     
     private (set) var sections: [SettingsSection] = []
     
-    init(account: Wallet, keystore: Keystore, lock: Lock, config: Config, analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType) {
+    init(account: Wallet, keystore: Keystore, lock: Lock, config: Config, analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType, promptBackup: PromptBackup) {
         self.account = account
         self.config = config
         self.keystore = keystore
         self.analytics = analytics
         self.lock = lock
         self.getWalletName = GetWalletName(domainResolutionService: domainResolutionService)
+        self.promptBackup = promptBackup
     }
     
     func heightForRow(at indexPath: IndexPath, fallbackHeight height: CGFloat) -> CGFloat {
@@ -53,7 +55,7 @@ final class SettingsViewModel {
             let row = rows[indexPath.row]
             switch row {
             case .changeWallet:
-                return Style.TableView.ChangeWalletCell.height
+                return DataEntry.Metric.TableView.changeWalletCell
             default:
                 return height
             }
@@ -188,9 +190,12 @@ final class SettingsViewModel {
             case .changeWallet:
                 return .cell(.init(titleText: row.title, subTitleText: addressReplacedWithEnsOrWalletName(assignedNameOrEns), icon: row.icon))
             case .backup:
-                let walletSecurityLevel = PromptBackupCoordinator(keystore: keystore, wallet: account, config: .init(), analytics: analytics).securityLevel
-                let accessoryView = walletSecurityLevel.flatMap { WalletSecurityLevelIndicator(level: $0) }
-                return .cell(.init(titleText: row.title, subTitleText: nil, icon: row.icon, accessoryType: .disclosureIndicator, accessoryView: accessoryView))
+//                let walletSecurityLevel = PromptBackupCoordinator(keystore: keystore, promptBackup: promptBackup, wallet: account, config: .init(), analytics: analytics).securityLevel
+//                let accessoryView = walletSecurityLevel.flatMap { WalletSecurityLevelIndicator(level: $0) }
+//                return .cell(.init(titleText: row.title, subTitleText: nil, icon: row.icon, accessoryType: .disclosureIndicator, accessoryView: accessoryView))
+                let walletSecurityLevel = promptBackup.securityLevel(wallet: account)
+                           let accessoryView = walletSecurityLevel.flatMap { WalletSecurityLevelIndicator(level: $0) }
+                           return .cell(.init(titleText: row.title, subTitleText: nil, icon: row.icon, accessoryType: .disclosureIndicator, accessoryView: accessoryView))
             case .showMyWallet, .showSeedPhrase, .walletConnect, .nameWallet, .mainWallet:
                 return .cell(.init(settingsWalletRow: row))
             }

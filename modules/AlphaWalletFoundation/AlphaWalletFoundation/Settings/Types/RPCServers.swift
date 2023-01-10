@@ -739,7 +739,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .main: return 3
         case .binance_smart_chain: return 4
         case .polygon: return 5
-        case .avalanche:return 6
+        case .avalanche: return 6
         case .arbitrum: return 7
         case .xDai: return 8
         case .classic: return 9

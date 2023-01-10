@@ -42,14 +42,10 @@ final class SvgImageView: WKWebView {
     }
 
     func setImage(url: URL, completion: @escaping () -> Void) {
-        if let data = try? ImageCache.default.diskStorage.value(forKey: url.absoluteString) {
-            if let dta = data   {
-                if let svgString = String(data: dta, encoding: .utf8){
-                    loadHTMLString(html(svgString: svgString), baseURL: nil)
-                    alpha = 1
-                    completion()
-                }
-            }
+        if let data = try? ImageCache.default.diskStorage.value(forKey: url.absoluteString), let svgString = data.flatMap({ String(data: $0, encoding: .utf8) }) {
+            loadHTMLString(html(svgString: svgString), baseURL: nil)
+            alpha = 1
+            completion()
         } else {
             alpha = 0
 

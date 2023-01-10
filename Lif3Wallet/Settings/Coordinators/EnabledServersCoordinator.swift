@@ -89,7 +89,7 @@ class EnabledServersCoordinator: Coordinator {
     }
     
     private func addRPCSelectedFor(networkType: EnabledServersViewModel.CreateNetwork) {
-        let coordinator = SaveCustomRpcCoordinator(navigationController: navigationController, config: config, restartQueue: restartQueue, analytics: analytics, operation: .add, networkService: networkService, networkType: .addChain)
+        let coordinator = SaveCustomRpcCoordinator(navigationController: navigationController, config: config, restartQueue: restartQueue, analytics: analytics, operation: .add, networkService: networkService, networkType: networkType)
         addCoordinator(coordinator)
         coordinator.delegate = self
 

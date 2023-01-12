@@ -41,7 +41,7 @@ extension Constants {
         static let polygonScanExplorerApiKey: String? = env("POLYGONSCANEXPLORERAPIKEY") ?? "DI5EXE24AKK6C3HSPP718D4UZHWK92QHXX"
         static let paperTrail = (host: env("PAPERTRAILHOST") ?? "", port: (env("PAPERTRAILPORT") ?? "").toInt() ?? 0)
         static let openseaKey = env("OPENSEAKEY") ?? nil
-        static let rampApiKey = env("RAMPAPIKEY") ?? "j5wr7oqktym7z69yyf84bb8a6cqb7qfu5ynmeyvn"
+        static let rampApiKey = env("RAMPAPIKEY") ?? "k4jnfagsmjemjbfaxocxsnbtq2g76wfyvkdv42cs"
         static let coinbaseAppId = env("COINBASEAPPID") ?? ""
         static let enjinUserName = env("ENJINUSERNAME") ?? "vlad_shepitko@outlook.com"
         static let enjinUserPassword = env("ENJINUSERPASSWORD") ?? "wf@qJPz75CL9Tw$"

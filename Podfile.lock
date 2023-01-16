@@ -72,30 +72,30 @@ PODS:
   - CocoaLumberjack/Swift (3.7.0):
     - CocoaLumberjack/Core
   - CombineExt (1.8.0)
-  - CryptoSwift (1.5.1)
+  - CryptoSwift (1.6.0)
   - EthereumABI (1.3.0):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 1.0)
     - EthereumAddress (~> 1.3)
   - EthereumAddress (1.3.0):
     - CryptoSwift (~> 1.0)
-  - FloatingPanel (2.5.2)
+  - FloatingPanel (2.5.5)
   - iOSSnapshotTestCase (6.2.0):
     - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
   - iOSSnapshotTestCase/Core (6.2.0)
   - iOSSnapshotTestCase/SwiftSupport (6.2.0):
     - iOSSnapshotTestCase/Core
-  - IQKeyboardManager (6.5.10)
+  - IQKeyboardManager (6.5.11)
   - JSONRPCKit (2.0.3):
     - Result (~> 3.0)
   - Kanna (5.0.0)
   - KeychainSwift (10.0.0)
-  - Kingfisher (7.2.1)
+  - Kingfisher (7.5.0)
   - MailchimpSDK (2.0.4)
   - MBProgressHUD (1.2.0)
-  - Mixpanel-swift (3.2.0):
-    - Mixpanel-swift/Complete (= 3.2.0)
-  - Mixpanel-swift/Complete (3.2.0)
+  - Mixpanel-swift (3.5.1):
+    - Mixpanel-swift/Complete (= 3.5.1)
+  - Mixpanel-swift/Complete (3.5.1)
   - PaperTrailLumberjack/Core (0.1.9):
     - CocoaAsyncSocket (~> 7.6)
     - CocoaLumberjack (~> 3.4)
@@ -115,9 +115,7 @@ PODS:
   - PromiseKit/UIKit (6.3.5):
     - PromiseKit/CorePromise
   - QRCodeReaderViewController (4.0.2)
-  - R.swift (5.4.0):
-    - R.swift.Library (~> 5.3.0)
-  - R.swift.Library (5.3.0)
+  - R.swift (7.2.4)
   - Realm (10.32.3):
     - Realm/Headers (= 10.32.3)
   - Realm/Headers (10.32.3)
@@ -128,8 +126,10 @@ PODS:
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
   - StatefulViewController (3.0)
+  - SVGKit (3.1.0):
+    - CocoaLumberjack (~> 3.0)
   - SwiftAlgorithms (1.0.0)
-  - SwiftFormat/CLI (0.50.4)
+  - SwiftFormat/CLI (0.50.7)
   - SwiftLint (0.40.3)
   - SwiftProtobuf (1.18.0)
   - SwiftyJSON (5.0.0)
@@ -144,7 +144,7 @@ PODS:
     - TrustWalletCore/Types
   - TrustWalletCore/Types (2.6.34):
     - SwiftProtobuf
-  - xcbeautify (0.11.0)
+  - xcbeautify (0.15.0)
 
 DEPENDENCIES:
   - AlphaWalletAddress (from `.`)
@@ -173,6 +173,7 @@ DEPENDENCIES:
   - R.swift
   - SAMKeychain
   - StatefulViewController
+  - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `3.x`)
   - SwiftFormat/CLI (~> 0.49)
   - SwiftLint (= 0.40.3)
   - TrezorCrypto (from `https://github.com/AlphaWallet/trezor-crypto-ios.git`, commit `50c16ba5527e269bbc838e80aee5bac0fe304cc7`)
@@ -203,7 +204,6 @@ SPEC REPOS:
     - PaperTrailLumberjack
     - PromiseKit
     - R.swift
-    - R.swift.Library
     - Realm
     - RealmSwift
     - Result
@@ -251,6 +251,9 @@ EXTERNAL SOURCES:
   QRCodeReaderViewController:
     :commit: 30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65
     :git: https://github.com/AlphaWallet/QRCodeReaderViewController.git
+  SVGKit:
+    :branch: 3.x
+    :git: https://github.com/SVGKit/SVGKit.git
   TrezorCrypto:
     :commit: 50c16ba5527e269bbc838e80aee5bac0fe304cc7
     :git: https://github.com/AlphaWallet/trezor-crypto-ios.git
@@ -274,6 +277,9 @@ CHECKOUT OPTIONS:
   QRCodeReaderViewController:
     :commit: 30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65
     :git: https://github.com/AlphaWallet/QRCodeReaderViewController.git
+  SVGKit:
+    :commit: 3a984715c5cc830d269043763e645d33a47d7989
+    :git: https://github.com/SVGKit/SVGKit.git
   TrezorCrypto:
     :commit: 50c16ba5527e269bbc838e80aee5bac0fe304cc7
     :git: https://github.com/AlphaWallet/trezor-crypto-ios.git
@@ -300,24 +306,23 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   CombineExt: c4daa97ef75754d8ef319bd79edeef82652f3eea
-  CryptoSwift: c4f2debceb38bf44c80659afe009f71e23e4a082
+  CryptoSwift: 562f8eceb40e80796fffc668b0cad9313284cfa6
   EthereumABI: c021720744d260b87def6aa45d94554d260cb5a9
   EthereumAddress: 39fe8e11cf04e4e9902b55ae653dbc4e0aee5f30
-  FloatingPanel: 935712d7a8076630135fbbd47f717700913efef9
+  FloatingPanel: a27e7827e0f710fa6236fe2596dd1b5484cb4fc1
   iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
-  IQKeyboardManager: 45a1fa55c1a5b02c61ac0fd7fd5b62bb4ad20d97
+  IQKeyboardManager: ef43ce1ba1e5aaf4adf222c0a46f39761f246879
   JSONRPCKit: b2991f2f242d72022083f9d869140dabd26d65c7
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   KeychainSwift: c0d1b0c2901b9873f07f0e560fde92929069e863
-  Kingfisher: 7c084bebf7d548c623ad41bcf765fb200efed369
+  Kingfisher: b9c2a4a4af2990a768445c277359b27bde287d71
   MailchimpSDK: 794fd7cb1095e55c764d8a699eb11fb61849ed76
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  Mixpanel-swift: 7c0b15c3ea96a997a989737612a3e62e72c1c561
+  Mixpanel-swift: 89d88f4d3dd1b4b3b69bd05060756eb1248b76f0
   PaperTrailLumberjack: 449587968d5aeb3eab2d4de041ffc61ee2d49f25
   PromiseKit: 32c36425387e9cfc7f1206f27bfd906d0b53c0d6
   QRCodeReaderViewController: e8f27d035b3e72b1d4b1c61ff66458287e3be0ff
-  R.swift: c533450b0f7dc494e0993f5f1a1db925d84c3006
-  R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
+  R.swift: 681bb9135f482e7a81d9d27445b837fef5467e11
   Realm: fdf6732924dc5e69e30e0db2c11e869f92b53f3d
   RealmSwift: 7c181da8fa1c2fe613656a77c198d6a3dc3879a1
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
@@ -325,16 +330,17 @@ SPEC CHECKSUMS:
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
+  SVGKit: 3c8468aab0026048532a3b27a0c81cdd939f0649
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
-  SwiftFormat: 42b2e7e390bffa30ea7a9f2dd8c8872d37f6a093
+  SwiftFormat: 4fcf72ee44c7198255108c22ed7135c38a36ba6b
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   SwiftProtobuf: c3c12645230d9b09c72267e0de89468c5543bd86
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
   TrustKeystore: 3d8b4571c66648fb985015c96b3185440bb837fe
   TrustWalletCore: a92d85baa15932279cce925559e93695558cafdd
-  xcbeautify: b2c6b50c9cab6414296898e94cd153e4ea879662
+  xcbeautify: df17aa32d769add7af523a8be9b0ef8fb9eb75a8
 
-PODFILE CHECKSUM: 668109bda96f8575ac352bbbdb3d478d6cb11de2
+PODFILE CHECKSUM: c1d824ab3222c20cef1ae9938f13480ce1001c1c
 
 COCOAPODS: 1.11.3

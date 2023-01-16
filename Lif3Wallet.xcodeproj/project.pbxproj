@@ -684,6 +684,7 @@
 		08B108B8294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */; };
 		08F0AE4C2940D93E00FBF77B /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */; };
 		10511C81296C71E800F3E826 /* AmountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10511C80296C71E800F3E826 /* AmountTextField.swift */; };
+		1051B67E297590A900E56C96 /* Lif3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051B67D297590A900E56C96 /* Lif3ViewController.swift */; };
 		105E45B52954058A00CDC40C /* SeedPhraseContractView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */; };
 		10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E612949F98F00187A49 /* SecurityViewController.swift */; };
 		10645E642949FA9A00187A49 /* SecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E632949FA9A00187A49 /* SecurityViewModel.swift */; };
@@ -1571,6 +1572,7 @@
 		102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		10511C80296C71E800F3E826 /* AmountTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountTextField.swift; sourceTree = "<group>"; };
+		1051B67D297590A900E56C96 /* Lif3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3ViewController.swift; sourceTree = "<group>"; };
 		105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseContractView.swift; sourceTree = "<group>"; };
 		10645E612949F98F00187A49 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		10645E632949FA9A00187A49 /* SecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewModel.swift; sourceTree = "<group>"; };
@@ -3789,6 +3791,7 @@
 			isa = PBXGroup;
 			children = (
 				10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */,
+				1051B67D297590A900E56C96 /* Lif3ViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -5172,6 +5175,7 @@
 				08A256C3294073F000A31193 /* SendViewSectionHeader.swift in Sources */,
 				08A25662294073EF00A31193 /* SwapToolCollectionViewCell.swift in Sources */,
 				08A25606294073EF00A31193 /* AdvancedSettingsViewModel.swift in Sources */,
+				1051B67E297590A900E56C96 /* Lif3ViewController.swift in Sources */,
 				08A257C4294073F000A31193 /* CreateInitialWalletViewController.swift in Sources */,
 				08A2572B294073F000A31193 /* CheckDeviceCoordinator.swift in Sources */,
 				08A2576F294073F000A31193 /* ContainerViewWithShadow.swift in Sources */,

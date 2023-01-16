@@ -67,7 +67,6 @@
 "Refresh" = "刷新";
 "copiedToClipboard.title" = "%@ copied";
 "address" = "Address";
-"request.addressCopied.title" = "地址已复制";
 "request.copyWallet.button.title" = "复制钱包地址";
 "Retry" = "重试";
 "Send" = "发送";
@@ -120,6 +119,7 @@
 "settings.contactUs.title" = "联系我们";
 "settings.changeCurrency.title" = "更改货币";
 "settings.analitycs.title" = "分析";
+"settings.crashReporter.title" = "Crash Reporting";
 "settings.pingInfura.title" = "Ping Infura";
 "settings.pingInfura.successful" = "Infura looks OK";
 "settings.pingInfura.fail" = "Infura Error";
@@ -645,7 +645,7 @@
 "transactionConfirmation.Row.title.wallet" = "Wallet Address";
 "transactionConfirmation.Send.Section.Gas.title" = "Gas";
 "transactionConfirmation.Send.Section.Balance.title" = "Balance";
-"transactionConfirmation.Send.Section.Balance.new.title" = "(New: %@ %@)";
+"transactionConfirmation.Send.Section.Balance.new.title" = "(New: %@)";
 "transactionConfirmation.Send.Section.Amount.title" = "Amount";
 "transactionConfirmation.Send.Section.Recipient.title" = "Recipient";
 "transactionConfirmation.Send.Section.TokenId.title" = "Token";

@@ -11,7 +11,7 @@ import UIKit
 import Combine
 import AlphaWalletFoundation
 
-protocol NFTCollectionViewControllerDelegate: class, CanOpenURL {
+protocol NFTCollectionViewControllerDelegate: AnyObject, CanOpenURL {
     func didSelectAssetSelection(in viewController: NFTCollectionViewController)
     func didTap(transaction: TransactionInstance, in viewController: NFTCollectionViewController)
     func didTap(activity: Activity, in viewController: NFTCollectionViewController)
@@ -140,6 +140,7 @@ class NFTCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
     }
@@ -149,8 +150,6 @@ class NFTCollectionViewController: UIViewController {
     }
 
     private func bind(viewModel: NFTCollectionViewModel) {
-        view.backgroundColor = viewModel.backgroundColor
-
         updateNavigationRightBarButtons(tokenScriptFileStatusHandler: viewModel.tokenScriptFileStatusHandler)
 
         let input = NFTCollectionViewModelInput(

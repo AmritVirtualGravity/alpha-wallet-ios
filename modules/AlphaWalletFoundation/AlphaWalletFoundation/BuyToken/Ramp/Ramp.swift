@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import Alamofire
 import AlphaWalletCore
 
 public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType {
@@ -27,8 +26,8 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
     public let analyticsNavigation: Analytics.Navigation = .onRamp
     public let analyticsName: String = "Ramp"
     public let action: String
-    
-    public init(action: String, networkProvider: RampNetworkProviderType = RampNetworkProvider(), reachability: ReachabilityManagerProtocol = ReachabilityManager(), retryBehavior: RetryBehavior<RunLoop> = Oneinch.defaultRetryBehavior) {
+
+    public init(action: String, networkProvider: RampNetworkProviderType, reachability: ReachabilityManagerProtocol = ReachabilityManager(), retryBehavior: RetryBehavior<RunLoop> = Oneinch.defaultRetryBehavior) {
         self.action = action
         self.reachability = reachability
         self.networkProvider = networkProvider

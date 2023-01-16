@@ -13,12 +13,10 @@ import AlphaWalletFoundation
 struct WalletConnectRequestConverter {
 
     func convert(request: AlphaWallet.WalletConnect.Session.Request, requester: DAppRequester) -> Promise<AlphaWallet.WalletConnect.Action.ActionType> {
-        guard let rpcServer: RPCServer = request.server else {
+        guard let server: RPCServer = request.server else {
             return .init(error: WalletConnectRequestConverter.sessionRequestRPCServerMissing)
         }
         infoLog("WalletConnect convert request: \(request.method) url: \(request.description)")
-        
-        let token = MultipleChainsTokensDataStore.functional.etherToken(forServer: rpcServer)
         let data: AlphaWallet.WalletConnect.Request
         do {
             data = try AlphaWallet.WalletConnect.Request(request: request)
@@ -33,7 +31,7 @@ struct WalletConnectRequestConverter {
             return .value(.signPersonalMessage(message))
         case .signTransaction(let bridgeTransaction):
             do {
-                let transaction = try TransactionType.dapp(token, requester).buildAnyDappTransaction(bridgeTransaction: bridgeTransaction)
+                let transaction = try TransactionType.prebuilt(server).buildAnyDappTransaction(bridgeTransaction: bridgeTransaction)
                 return .value(.signTransaction(transaction))
             } catch {
                 return .init(error: error)
@@ -44,8 +42,8 @@ struct WalletConnectRequestConverter {
             return .value(.signTypedMessageV3(data))
         case .sendTransaction(let bridgeTransaction):
             do {
-                let transaction = try TransactionType.dapp(token, requester).buildAnyDappTransaction(bridgeTransaction: bridgeTransaction)
-                return .value(.signTransaction(transaction))
+                let transaction = try TransactionType.prebuilt(server).buildAnyDappTransaction(bridgeTransaction: bridgeTransaction)
+                return .value(.sendTransaction(transaction))
             } catch {
                 return .init(error: error)
             }
@@ -101,7 +99,15 @@ extension AlphaWallet.WalletConnect.Request {
             let parameters = JSONRPC_2_0.Request.Params.positional(values)
 
             self.method = request.method
-            self.payload = JSONRPC_2_0.Request(method: request.method, params: parameters, id: JSONRPC_2_0.IDType.int(request.id))
+
+            let id: JSONRPC_2_0.IDType
+            switch request.id {
+            case .left(let string):
+                id = .string(string)
+            case .right(let int):
+                id = .int(int)
+            }
+            self.payload = JSONRPC_2_0.Request(method: request.method, params: parameters, id: id)
             self.request = request
         }
 

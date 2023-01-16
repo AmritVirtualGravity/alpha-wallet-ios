@@ -4,12 +4,7 @@ import Foundation
 import LocalAuthentication
 import Combine
 
-public protocol KeystoreDelegate: AnyObject {
-    func didImport(wallet: Wallet, in keystore: Keystore)
-}
-
 public protocol Keystore {
-    var delegate: KeystoreDelegate? { get set }
     var hasMigratedFromKeystoreFiles: Bool { get }
     var hasWallets: Bool { get }
     var isUserPresenceCheckPossible: Bool { get }
@@ -19,7 +14,6 @@ public protocol Keystore {
 
     func createAccount(completion: @escaping (Result<Wallet, KeystoreError>) -> Void)
     func importWallet(type: ImportType) -> Result<Wallet, KeystoreError>
-    func createAccount() -> Result<Wallet, KeystoreError>
     func elevateSecurity(forAccount account: AlphaWallet.Address, prompt: String) -> Bool
     func exportRawPrivateKeyForNonHdWalletForBackup(forAccount account: AlphaWallet.Address, prompt: String, newPassword: String) -> AnyPublisher<Result<String, KeystoreError>, Never>
     func exportRawPrivateKeyFromHdWallet0thAddressForBackup(forAccount account: AlphaWallet.Address, prompt: String, newPassword: String) -> AnyPublisher<Result<String, KeystoreError>, Never>

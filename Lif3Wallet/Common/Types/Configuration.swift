@@ -13,6 +13,8 @@ fileprivate func colorFrom(trait: UITraitCollection, lightColor: UIColor, darkCo
         return lightColor
     case .dark:
         return darkColor
+    @unknown default:
+        return lightColor
     }
 }
 
@@ -52,7 +54,6 @@ struct Configuration {
             static let alternativeText = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: .darkGray, darkColor: .lightGray)
             }
-            
             static let defaultErrorText = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.danger()!, darkColor: R.color.danger()!)
             }
@@ -326,6 +327,7 @@ struct Configuration {
                 return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.venus()!)
             }
             
+
             static let border = UIColor(red: 194, green: 194, blue: 194)
             static let text = Colors.appText
             static let label = Colors.appGrayLabel
@@ -339,6 +341,9 @@ struct Configuration {
             static let searchTextFieldBackground = UIColor(red: 243, green: 244, blue: 245)
             static let headerViewBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.venus()!)
+            }
+            static let symbol = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)
             }
         }
     }
@@ -371,17 +376,5 @@ class UIKitFactory {
 
     @discardableResult static func decorateAsDefaultView(_ views: [UIView]) -> [UIView] {
         return views.map { decorateAsDefaultView($0) }
-    }
-
-    static func defaultLabel(text: String) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        return decorateAsDefaultLabel(label)
-    }
-
-    @discardableResult static func decorateAsDefaultLabel(_ label: UILabel) -> UILabel {
-        label.textColor = Configuration.Color.Semantic.defaultForegroundText
-        return label
-    }
-
+    } 
 }

@@ -42,7 +42,8 @@ class SettingsCoordinator: Coordinator {
     private let tokensService: DetectedContractsProvideble & TokenProvidable & TokenAddable
     private var pendingOperation: PendingOperation?
     private let tokenSwapper: TokenSwapper
-    
+    private let networkService: NetworkService
+    private let promptBackup: PromptBackup
     private let keystore: Keystore
     private var config: Config
     private let sessions: ServerDictionary<WalletSession>
@@ -70,13 +71,16 @@ class SettingsCoordinator: Coordinator {
     }
     
     lazy var rootViewController: SettingsViewController = {
-        let viewModel = SettingsViewModel(account: account, keystore: keystore, lock: lock, config: config, analytics: analytics, domainResolutionService: domainResolutionService)
+        let viewModel = SettingsViewModel(account: account, keystore: keystore, lock: lock, config: config, analytics: analytics, domainResolutionService: domainResolutionService, promptBackup: promptBackup)
         let controller = SettingsViewController(viewModel: viewModel)
         controller.delegate = self
         controller.navigationItem.largeTitleDisplayMode = .never
         
         return controller
     }()
+    
+    
+    
     
     private var cancelable = Set<AnyCancellable>()
     
@@ -124,8 +128,9 @@ class SettingsCoordinator: Coordinator {
         importToken: ImportToken,
         tokensFilter: TokensFilter,
         tokensService: DetectedContractsProvideble & TokenProvidable & TokenAddable,
-        tokenSwapper: TokenSwapper
-        
+        tokenSwapper: TokenSwapper,
+        networkService: NetworkService,
+        promptBackup: PromptBackup
     ) {
         self.tokenScriptOverridesFileManager = tokenScriptOverridesFileManager
         self.navigationController = navigationController
@@ -158,6 +163,8 @@ class SettingsCoordinator: Coordinator {
         self.tokensFilter = tokensFilter
         self.tokensService = tokensService
         self.tokenSwapper = tokenSwapper
+        self.networkService = networkService
+        self.promptBackup = promptBackup
         promptBackupCoordinator.subtlePromptDelegate = self
     }
     
@@ -176,7 +183,7 @@ class SettingsCoordinator: Coordinator {
     }
     
     private func createTokensCoordinator(promptBackupCoordinator: PromptBackupCoordinator, activitiesService: ActivitiesServiceType) -> TokensCoordinator {
-        promptBackupCoordinator.listenToNativeCryptoCurrencyBalance(service: tokenCollection)
+       
 
         let coordinator = TokensCoordinator(
                 sessions: sessionsProvider.activeSessions,
@@ -195,7 +202,7 @@ class SettingsCoordinator: Coordinator {
                 importToken: importToken,
                 blockiesGenerator: blockiesGenerator,
                 domainResolutionService: domainResolutionService,
-                tokensFilter: tokensFilter
+                tokensFilter: tokensFilter, currencyService: currencyService
         )
         coordinator.delegate = self
         coordinator.start()
@@ -209,7 +216,7 @@ class SettingsCoordinator: Coordinator {
             sessions: sessionsProvider.activeSessions,
             transactionDataStore: transactionDataStore,
             analytics: analytics,
-            tokensService: tokensService)
+            tokensService: tokensService, networkService: networkService)
 
         transactionsService.delegate = self
         transactionsService.start()
@@ -304,7 +311,7 @@ extension SettingsCoordinator: SelectTokenCoordinatorDelegate {
                     domainResolutionService: domainResolutionService,
                     tokenSwapper: tokenSwapper,
                     tokensFilter: tokensFilter,
-                    importToken: importToken)
+                    importToken: importToken, networkService: networkService)
             coordinator.delegate = self
             coordinator.start()
 
@@ -328,7 +335,7 @@ extension SettingsCoordinator: SelectTokenCoordinatorDelegate {
             case .swapToken:
                 try swapToken(token: token)
             case .sendToken(let recipient):
-                let paymentFlow = PaymentFlow.send(type: .transaction(.init(fungibleToken: token, recipient: recipient, amount: nil)))
+                let paymentFlow = PaymentFlow.send(type: .transaction(.init(fungibleToken: token, recipient: recipient)))
                 showPaymentFlow(for: paymentFlow, server: token.server, navigationController: navigationController)
             }
         } catch {
@@ -642,7 +649,7 @@ extension SettingsCoordinator: ActivityViewControllerDelegate {
     func speedupTransaction(transactionId: String, server: RPCServer, viewController: ActivityViewController) {
         guard let transaction = transactionsDataStore.transaction(withTransactionId: transactionId, forServer: server) else { return }
         guard let session = sessionsProvider.session(for: transaction.server) else { return }
-        guard let coordinator = ReplaceTransactionCoordinator(analytics: analytics, domainResolutionService: domainResolutionService, keystore: keystore, presentingViewController: viewController, session: session, transaction: transaction, mode: .speedup, assetDefinitionStore: assetDefinitionStore, tokensService: tokenCollection) else { return }
+        guard let coordinator = ReplaceTransactionCoordinator(analytics: analytics, domainResolutionService: domainResolutionService, keystore: keystore, presentingViewController: viewController, session: session, transaction: transaction, mode: .speedup, assetDefinitionStore: assetDefinitionStore, tokensService: tokenCollection, networkService: networkService) else { return }
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)
@@ -651,7 +658,7 @@ extension SettingsCoordinator: ActivityViewControllerDelegate {
     func cancelTransaction(transactionId: String, server: RPCServer, viewController: ActivityViewController) {
         guard let transaction = transactionsDataStore.transaction(withTransactionId: transactionId, forServer: server) else { return }
         guard let session = sessionsProvider.session(for: transaction.server) else { return }
-        guard let coordinator = ReplaceTransactionCoordinator(analytics: analytics, domainResolutionService: domainResolutionService, keystore: keystore, presentingViewController: viewController, session: session, transaction: transaction, mode: .cancel, assetDefinitionStore: assetDefinitionStore, tokensService: tokenCollection) else { return }
+        guard let coordinator = ReplaceTransactionCoordinator(analytics: analytics, domainResolutionService: domainResolutionService, keystore: keystore, presentingViewController: viewController, session: session, transaction: transaction, mode: .cancel, assetDefinitionStore: assetDefinitionStore, tokensService: tokenCollection, networkService: networkService) else { return }
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)
@@ -695,7 +702,7 @@ extension SettingsCoordinator: ActivitiesViewControllerDelegate {
             sessions: sessionsProvider.activeSessions,
             transactionDataStore: transactionsDataStore,
             analytics: analytics,
-            tokensService: tokensService)
+            tokensService: tokensService, networkService: networkService)
         
         transactionsService.delegate = self
         transactionsService.start()
@@ -806,19 +813,21 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     }
     
     func changeWalletSelected(in controller: SettingsViewController) {
-        let coordinator = AccountsCoordinator(
-            config: config,
-            navigationController: navigationController,
-            keystore: keystore,
-            analytics: analytics,
-            viewModel: .init(configuration: .changeWallets, animatedPresentation: true),
-            walletBalanceService: walletBalanceService,
-            blockiesGenerator: blockiesGenerator,
-            domainResolutionService: domainResolutionService)
-        coordinator.delegate = self
-        coordinator.start()
-        addCoordinator(coordinator)
-    }
+            let coordinator = AccountsCoordinator(
+                config: config,
+                navigationController: navigationController,
+                keystore: keystore,
+                analytics: analytics,
+                viewModel: .init(configuration: .changeWallets, animatedPresentation: true),
+                walletBalanceService: walletBalanceService,
+                blockiesGenerator: blockiesGenerator,
+                domainResolutionService: domainResolutionService,
+                promptBackup: promptBackup)
+            
+            coordinator.delegate = self
+            coordinator.start()
+            addCoordinator(coordinator)
+        }
     
     func myWalletAddressSelected(in controller: SettingsViewController) {
         delegate?.didPressShowWallet(in: self)
@@ -827,14 +836,14 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
     func backupWalletSelected(in controller: SettingsViewController) {
         guard case .real = account.type else { return }
         
-        let coordinator = BackupCoordinator(navigationController: navigationController, keystore: keystore, account: account, analytics: analytics)
+        let coordinator = BackupCoordinator(navigationController: navigationController, keystore: keystore, account: account, analytics: analytics, promptBackup: promptBackup)
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)
     }
     
     func activeNetworksSelected(in controller: SettingsViewController) {
-        let coordinator = EnabledServersCoordinator(navigationController: navigationController, selectedServers: config.enabledServers, restartQueue: restartQueue, analytics: analytics, config: config)
+        let coordinator = EnabledServersCoordinator(navigationController: navigationController, selectedServers: config.enabledServers, restartQueue: restartQueue, analytics: analytics, config: config, networkService: networkService)
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)
@@ -896,27 +905,22 @@ extension SettingsCoordinator: CanOpenURL {
 }
 
 extension SettingsCoordinator: AccountsCoordinatorDelegate {
-    
-    func didFinishBackup(account: AlphaWallet.Address, in coordinator: AccountsCoordinator) {
-        promptBackupCoordinator.markBackupDone()
-        promptBackupCoordinator.showHideCurrentPrompt()
-    }
-    
+
     func didAddAccount(account: Wallet, in coordinator: AccountsCoordinator) {
         //no-op
     }
-    
+
     func didDeleteAccount(account: Wallet, in coordinator: AccountsCoordinator) {
         guard !coordinator.accountsViewController.viewModel.hasWallets else { return }
         coordinator.navigationController.popViewController(animated: true)
         delegate?.didCancel(in: self)
     }
-    
+
     func didCancel(in coordinator: AccountsCoordinator) {
-        //        coordinator.navigationController.popViewController(animated: true)
+//        coordinator.navigationController.popViewController(animated: true)
         removeCoordinator(coordinator)
     }
-    
+
     func didSelectAccount(account: Wallet, in coordinator: AccountsCoordinator) {
         coordinator.navigationController.popViewController(animated: true)
         removeCoordinator(coordinator)
@@ -956,13 +960,11 @@ extension SettingsCoordinator: PromptBackupCoordinatorSubtlePromptDelegate {
 }
 
 extension SettingsCoordinator: BackupCoordinatorDelegate {
-    func didCancel(coordinator: BackupCoordinator) {
+    func didCancel(in coordinator: BackupCoordinator) {
         removeCoordinator(coordinator)
     }
-    
+
     func didFinish(account: AlphaWallet.Address, in coordinator: BackupCoordinator) {
-        promptBackupCoordinator.markBackupDone()
-        promptBackupCoordinator.showHideCurrentPrompt()
         removeCoordinator(coordinator)
     }
 }
@@ -1128,7 +1130,7 @@ extension SettingsCoordinator: SettingsWalletViewControllerDelegate {
             viewModel: .init(configuration: .changeWallets, animatedPresentation: true),
             walletBalanceService: walletBalanceService,
             blockiesGenerator: blockiesGenerator,
-            domainResolutionService: domainResolutionService)
+            domainResolutionService: domainResolutionService, promptBackup: promptBackup)
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)
@@ -1142,7 +1144,7 @@ extension SettingsCoordinator: SettingsWalletViewControllerDelegate {
     func backupWalletSelected(in controller: SettingsWalletViewController) {
         guard case .real = account.type else { return }
         
-        let coordinator = BackupCoordinator(navigationController: navigationController, keystore: keystore, account: account, analytics: analytics)
+        let coordinator = BackupCoordinator(navigationController: navigationController, keystore: keystore, account: account, analytics: analytics, promptBackup: promptBackup)
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)

@@ -459,7 +459,6 @@
 		08A25770294073F000A31193 /* LayoutConstraintsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254C1294073EF00A31193 /* LayoutConstraintsWrapper.swift */; };
 		08A25771294073F000A31193 /* SuccessOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254C2294073EF00A31193 /* SuccessOverlayView.swift */; };
 		08A25772294073F000A31193 /* TokenCardRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254C3294073EF00A31193 /* TokenCardRowView.swift */; };
-		08A25773294073F000A31193 /* AmountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254C4294073EF00A31193 /* AmountTextField.swift */; };
 		08A25774294073F000A31193 /* TimeEntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254C5294073EF00A31193 /* TimeEntryField.swift */; };
 		08A25775294073F000A31193 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254C6294073EF00A31193 /* TextView.swift */; };
 		08A25776294073F000A31193 /* GridStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254C7294073EF00A31193 /* GridStackView.swift */; };
@@ -570,7 +569,6 @@
 		08A257DF294073F100A31193 /* StatusViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2554F294073EF00A31193 /* StatusViewControllerViewModel.swift */; };
 		08A257E0294073F100A31193 /* ImportMagicTokenCardRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25550294073EF00A31193 /* ImportMagicTokenCardRowViewModel.swift */; };
 		08A257E1294073F100A31193 /* ImportMagicTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25552294073EF00A31193 /* ImportMagicTokenViewController.swift */; };
-		08A257E2294073F100A31193 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25553294073EF00A31193 /* StatusViewController.swift */; };
 		08A257E3294073F100A31193 /* AssetDefinitionStoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25556294073EF00A31193 /* AssetDefinitionStoreCoordinator.swift */; };
 		08A257E4294073F100A31193 /* AssetDefinitionsOverridesViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25558294073EF00A31193 /* AssetDefinitionsOverridesViewCellViewModel.swift */; };
 		08A257E5294073F100A31193 /* AssetDefinitionsOverridesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25559294073EF00A31193 /* AssetDefinitionsOverridesViewModel.swift */; };
@@ -685,6 +683,7 @@
 		08A25854294073F100A31193 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A255E1294073EF00A31193 /* Localizable.strings */; };
 		08B108B8294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */; };
 		08F0AE4C2940D93E00FBF77B /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */; };
+		10511C81296C71E800F3E826 /* AmountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10511C80296C71E800F3E826 /* AmountTextField.swift */; };
 		105E45B52954058A00CDC40C /* SeedPhraseContractView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */; };
 		10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E612949F98F00187A49 /* SecurityViewController.swift */; };
 		10645E642949FA9A00187A49 /* SecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E632949FA9A00187A49 /* SecurityViewModel.swift */; };
@@ -693,6 +692,7 @@
 		10D0D6C829477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */; };
 		10DADA9E294B172C00413AA0 /* SettingsWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9D294B172C00413AA0 /* SettingsWalletViewController.swift */; };
 		10DADAA0294B17EA00413AA0 /* SettingsWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */; };
+		10DE578A296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */; };
 		10F6DAB1295B246C00715C7F /* Lif3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10F6DAB0295B246C00715C7F /* Lif3.storyboard */; };
 		10F6DAB3295B24D300715C7F /* Lif3WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */; };
 		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
@@ -1337,7 +1337,6 @@
 		08A254C1294073EF00A31193 /* LayoutConstraintsWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraintsWrapper.swift; sourceTree = "<group>"; };
 		08A254C2294073EF00A31193 /* SuccessOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessOverlayView.swift; sourceTree = "<group>"; };
 		08A254C3294073EF00A31193 /* TokenCardRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenCardRowView.swift; sourceTree = "<group>"; };
-		08A254C4294073EF00A31193 /* AmountTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountTextField.swift; sourceTree = "<group>"; };
 		08A254C5294073EF00A31193 /* TimeEntryField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEntryField.swift; sourceTree = "<group>"; };
 		08A254C6294073EF00A31193 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		08A254C7294073EF00A31193 /* GridStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridStackView.swift; sourceTree = "<group>"; };
@@ -1449,7 +1448,6 @@
 		08A2554F294073EF00A31193 /* StatusViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewControllerViewModel.swift; sourceTree = "<group>"; };
 		08A25550294073EF00A31193 /* ImportMagicTokenCardRowViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMagicTokenCardRowViewModel.swift; sourceTree = "<group>"; };
 		08A25552294073EF00A31193 /* ImportMagicTokenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMagicTokenViewController.swift; sourceTree = "<group>"; };
-		08A25553294073EF00A31193 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		08A25556294073EF00A31193 /* AssetDefinitionStoreCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDefinitionStoreCoordinator.swift; sourceTree = "<group>"; };
 		08A25558294073EF00A31193 /* AssetDefinitionsOverridesViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDefinitionsOverridesViewCellViewModel.swift; sourceTree = "<group>"; };
 		08A25559294073EF00A31193 /* AssetDefinitionsOverridesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDefinitionsOverridesViewModel.swift; sourceTree = "<group>"; };
@@ -1572,6 +1570,7 @@
 		08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
 		102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		10511C80296C71E800F3E826 /* AmountTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountTextField.swift; sourceTree = "<group>"; };
 		105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseContractView.swift; sourceTree = "<group>"; };
 		10645E612949F98F00187A49 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		10645E632949FA9A00187A49 /* SecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewModel.swift; sourceTree = "<group>"; };
@@ -1580,6 +1579,7 @@
 		10D0D6C729477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		10DADA9D294B172C00413AA0 /* SettingsWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewController.swift; sourceTree = "<group>"; };
 		10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewModel.swift; sourceTree = "<group>"; };
+		10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoViewCardTokenScriptActionCoordinator.swift; sourceTree = "<group>"; };
 		10F6DAB0295B246C00715C7F /* Lif3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lif3.storyboard; sourceTree = "<group>"; };
 		10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3WebViewController.swift; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
@@ -2470,6 +2470,7 @@
 				08A253B2294073EE00A31193 /* RequestCoordinator.swift */,
 				08A253B3294073EE00A31193 /* TransactionInProgressCoordinator.swift */,
 				08A253B4294073EE00A31193 /* SignMessageCoordinator.swift */,
+				10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -3004,6 +3005,7 @@
 				08A2549E294073EF00A31193 /* ButtonsBar */,
 				08A254A4294073EF00A31193 /* UIToolbar+Custom.swift */,
 				08A254A5294073EF00A31193 /* DropDownView.swift */,
+				10511C80296C71E800F3E826 /* AmountTextField.swift */,
 				08A254A6294073EF00A31193 /* XYMarkerView.swift */,
 				08A254A7294073EF00A31193 /* RoundedEnsView.swift */,
 				08A254A8294073EF00A31193 /* TableViewDiffableDataSource.swift */,
@@ -3034,7 +3036,6 @@
 				08A254C1294073EF00A31193 /* LayoutConstraintsWrapper.swift */,
 				08A254C2294073EF00A31193 /* SuccessOverlayView.swift */,
 				08A254C3294073EF00A31193 /* TokenCardRowView.swift */,
-				08A254C4294073EF00A31193 /* AmountTextField.swift */,
 				08A254C5294073EF00A31193 /* TimeEntryField.swift */,
 				08A254C6294073EF00A31193 /* TextView.swift */,
 				08A254C7294073EF00A31193 /* GridStackView.swift */,
@@ -3408,7 +3409,6 @@
 			isa = PBXGroup;
 			children = (
 				08A25552294073EF00A31193 /* ImportMagicTokenViewController.swift */,
-				08A25553294073EF00A31193 /* StatusViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -4727,7 +4727,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/Lif3Wallet/R.generated.swift\"\n";
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/Lif3Wallet/R.generated.swift\"\n\n";
 		};
 		2F4B40F8E55CFF9EAE20CD44 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4778,7 +4778,13 @@
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/EthereumABI/EthereumABI.framework",
 				"${BUILT_PRODUCTS_DIR}/EthereumAddress/EthereumAddress.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FloatingPanel/FloatingPanel.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
@@ -4788,14 +4794,16 @@
 				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/PaperTrailLumberjack/PaperTrailLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReaderViewController/QRCodeReaderViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift/RswiftResources.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/StatefulViewController/StatefulViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftAlgorithms/Algorithms.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
@@ -4803,6 +4811,9 @@
 				"${BUILT_PRODUCTS_DIR}/TrezorCrypto/TrezorCrypto.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustKeystore/TrustKeystore.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustWalletCore/WalletCore.framework",
+				"${BUILT_PRODUCTS_DIR}/WalletConnectSwift/WalletConnectSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/WalletConnectSwiftV2/WalletConnectSwiftV2.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/MailchimpSDK/MailchimpSDK.framework/MailchimpSDK",
 			);
@@ -4828,7 +4839,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EthereumABI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EthereumAddress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatingPanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
@@ -4838,14 +4855,16 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PaperTrailLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReaderViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RswiftResources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StatefulViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Algorithms.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
@@ -4853,6 +4872,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrezorCrypto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustKeystore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WalletCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WalletConnectSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WalletConnectSwiftV2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MailchimpSDK.framework",
 			);
@@ -5155,6 +5177,7 @@
 				08A2576F294073F000A31193 /* ContainerViewWithShadow.swift in Sources */,
 				08A25636294073EF00A31193 /* GenerateSellMagicLinkViewControllerViewModel.swift in Sources */,
 				08A256B3294073F000A31193 /* SignatureConfirmationDetailsViewModel.swift in Sources */,
+				10511C81296C71E800F3E826 /* AmountTextField.swift in Sources */,
 				08760C8F294079AD00F83AB3 /* BookmarksViewController.swift in Sources */,
 				08A25617294073EF00A31193 /* ServersViewController.swift in Sources */,
 				08A2576A294073F000A31193 /* StateViewModel.swift in Sources */,
@@ -5192,7 +5215,6 @@
 				10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */,
 				08A2583D294073F100A31193 /* TokensViewControllerTableViewSectionHeader.swift in Sources */,
 				08A2580E294073F100A31193 /* NFTCollectionViewModel.swift in Sources */,
-				08A257E2294073F100A31193 /* StatusViewController.swift in Sources */,
 				08A25661294073EF00A31193 /* SelectSwapToolViewController.swift in Sources */,
 				08A25630294073EF00A31193 /* SettingsHeaderView.swift in Sources */,
 				08A2574F294073F000A31193 /* VerticalButtonsBar.swift in Sources */,
@@ -5395,6 +5417,7 @@
 				08760C91294079AD00F83AB3 /* SwitchChainRequestViewController.swift in Sources */,
 				08A25755294073F000A31193 /* XYMarkerView.swift in Sources */,
 				08760C98294079AD00F83AB3 /* DappViewCell.swift in Sources */,
+				10DE578A296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift in Sources */,
 				08A25818294073F100A31193 /* Erc875NonFungibleRowViewModel.swift in Sources */,
 				08A25826294073F100A31193 /* TokenPagesContainerView.swift in Sources */,
 				08A256DE294073F000A31193 /* NSLayoutConstraintExtension.swift in Sources */,
@@ -5568,7 +5591,6 @@
 				08A2562B294073EF00A31193 /* SaveCustomRpcBrowseView.swift in Sources */,
 				08A25694294073F000A31193 /* SignMessageCoordinator.swift in Sources */,
 				08A256EA294073F000A31193 /* RPCServer+Extensions.swift in Sources */,
-				08A25773294073F000A31193 /* AmountTextField.swift in Sources */,
 				08A255EC294073EF00A31193 /* ExportJsonKeystoreCoordinator.swift in Sources */,
 				08A25736294073F000A31193 /* DappRequesterViewModel.swift in Sources */,
 				08A256C8294073F000A31193 /* ActivityIndicatorControl.swift in Sources */,

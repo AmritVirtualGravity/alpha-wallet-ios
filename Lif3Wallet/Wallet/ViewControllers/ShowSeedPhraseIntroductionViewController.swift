@@ -100,7 +100,6 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
             footerBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             footerBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).set(priority: .defaultHigh),
-            footerBar.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -Style.insets.safeBottom).set(priority: .required),
             footerBar.topAnchor.constraint(equalTo: buttonsBar.topAnchor),
         ])
     }

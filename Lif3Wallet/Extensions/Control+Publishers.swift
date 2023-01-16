@@ -15,7 +15,7 @@ extension UIControl {
 }
 
 extension Publishers {
-    struct Control: Publisher {
+    class Control: Publisher {
         typealias Output = Void
         typealias Failure = Never
 
@@ -89,9 +89,7 @@ extension Publisher {
     ///
     /// - Returns: A publisher of a tuple of the previous and current elements from the upstream publisher.
     func withPrevious() -> AnyPublisher<(previous: Output?, current: Output), Failure> {
-// swiftlint:disable syntactic_sugar
         scan(Optional<(Output?, Output)>.none) { ($0?.1, $1) }
-// swiftlint:enable syntactic_sugar
             .compactMap { $0 }
             .eraseToAnyPublisher()
     }

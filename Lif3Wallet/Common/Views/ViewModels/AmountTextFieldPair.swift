@@ -27,14 +27,14 @@ extension AmountTextField {
 
         var textColor: UIColor {
             switch self {
-            case .error: return DataEntry.Color.textFieldStatus!
+            case .error: return Configuration.Color.Semantic.defaultErrorText
             case .none: return Configuration.Color.Semantic.defaultForegroundText
             }
         }
 
         var statusLabelTextColor: UIColor {
             switch self {
-            case .error: return DataEntry.Color.textFieldStatus!
+            case .error: return Configuration.Color.Semantic.defaultErrorText
             case .none: return Configuration.Color.Semantic.defaultSubtitleText
             }
         }
@@ -48,24 +48,24 @@ extension AmountTextField {
 
         var textFieldTextColor: UIColor {
             switch self {
-            case .error: return DataEntry.Color.textFieldStatus!
+            case .error: return Configuration.Color.Semantic.defaultErrorText
             case .none: return Configuration.Color.Semantic.defaultForegroundText
             }
         }
 
         var textFieldPlaceholderTextColor: UIColor {
             switch self {
-            case .error: return DataEntry.Color.textFieldStatus!
+            case .error: return Configuration.Color.Semantic.textFieldStatus
             case .none: return Configuration.Color.Semantic.placeholderText
             }
         }
     }
 
     enum FiatOrCrypto {
-        case cryptoCurrency(Token)
+        case cryptoCurrency(EnterAmountSupportable)
         case fiatCurrency(Currency)
 
-        var token: Token? {
+        var token: EnterAmountSupportable? {
             switch self {
             case .cryptoCurrency(let token): return token
             case .fiatCurrency: return nil
@@ -77,17 +77,60 @@ extension AmountTextField {
         var left: FiatOrCrypto
         var right: FiatOrCrypto
 
-        mutating func swap() {
+        @discardableResult mutating func swap() -> Pair {
             let currentLeft = left
 
             left = right
             right = currentLeft
+            return self
+        }
+
+        var anyCryptoCurrency: FiatOrCrypto? {
+            switch (left, right) {
+            case (.cryptoCurrency, _):
+                return left
+            case (_, .cryptoCurrency):
+                return right
+            case (_, _):
+                return nil
+            }
+        }
+
+        @discardableResult mutating func set(token: EnterAmountSupportable) -> Pair {
+            switch left {
+            case .cryptoCurrency:
+                self.left = .cryptoCurrency(token)
+            case .fiatCurrency:
+                switch right {
+                case .fiatCurrency:
+                    break //no-op might be two crypto
+                case .cryptoCurrency:
+                    self.right = .cryptoCurrency(token)
+                }
+            }
+
+            return self
+        }
+
+        @discardableResult mutating func set(currency: Currency) -> Pair {
+            switch left {
+            case .cryptoCurrency:
+                switch right {
+                case .fiatCurrency:
+                    self.right = .fiatCurrency(currency)
+                case .cryptoCurrency:
+                    break //no-op might be two crypto
+                }
+            case .fiatCurrency:
+                self.left = .fiatCurrency(currency)
+            }
+            return self
         }
 
         var symbol: String {
             switch left {
             case .cryptoCurrency(let token): return token.symbol
-            case .fiatCurrency: return Currency.USD.rawValue
+            case .fiatCurrency(let currency): return currency.code
             }
         }
 
@@ -98,18 +141,18 @@ extension AmountTextField {
             case (.fiatCurrency(let currency), _):
                 return currency
             case (_, _):
-                return .USD
+                return Currency.default
             }
         }
 
         var icon: Subscribable<TokenImage> {
             switch left {
             case .cryptoCurrency(let token): return token.icon(withSize: .s120)
-            case .fiatCurrency:
-                return .init((image: .image(R.image.usaFlag()!), symbol: "", isFinal: true, overlayServerIcon: nil))
+            case .fiatCurrency(let currency):
+                return .init((image: .image(currency.icon), symbol: "", isFinal: true, overlayServerIcon: nil))
             }
         }
 
-        var token: Token? { return left.token ?? right.token }
+        var token: EnterAmountSupportable? { return left.token ?? right.token }
     }
 }

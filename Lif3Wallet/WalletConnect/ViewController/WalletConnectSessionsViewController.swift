@@ -57,7 +57,6 @@ class WalletConnectSessionsViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
-//        view.addSubview(backgroundImageView)
         view.addSubview(tableView)
         view.addSubview(spinner)
 
@@ -85,11 +84,13 @@ class WalletConnectSessionsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+
         if let host = emptyView {
             spinner.bringSubviewToFront(host)
         }
-        backgroundImageView.image = viewModel.backgroundImage
+
         bind(viewModel: viewModel)
     }
 
@@ -144,7 +145,7 @@ extension WalletConnectSessionsViewController: UITableViewDelegate {
             completionHandler(true)
         }
 
-        hideAction.backgroundColor = R.color.danger()
+        hideAction.backgroundColor = Colors.appRed
         hideAction.image = R.image.hideToken()
         let configuration = UISwipeActionsConfiguration(actions: [hideAction])
         configuration.performsFirstActionWithFullSwipe = true

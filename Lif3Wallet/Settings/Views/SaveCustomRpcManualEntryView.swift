@@ -185,7 +185,7 @@ class SaveCustomRpcManualEntryView: UIView {
 
     func configureView() {
         buttonsBar.configure()
-        buttonsBar.buttons[0].setTitle(R.string.localizable.editCustomRPCSaveButtonTitle(preferredLanguages: nil), for: .normal)
+        buttonsBar.buttons[0].setTitle(R.string.localizable.editCustomRPCSaveButtonTitle(), for: .normal)
         configureInputAccessoryView()
     }
 

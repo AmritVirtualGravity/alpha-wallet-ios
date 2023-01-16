@@ -141,7 +141,9 @@ class AppCoordinator: NSObject, Coordinator {
     static func create() throws -> AppCoordinator {
         crashlytics.register(AlphaWallet.FirebaseCrashlyticsReporter.instance)
         applyStyle()
-
+        let userDefault = UserDefaults.standard
+        userDefault.set(true, forKey: "DarkModeOn")
+//        UserDefaults.setValue(true, forKey: "DarkModeOn")
         let window = UIWindow(frame: UIScreen.main.bounds)
         if UserDefaults.standard.bool(forKey: "DarkModeOn") {
             window.overrideUserInterfaceStyle = .dark

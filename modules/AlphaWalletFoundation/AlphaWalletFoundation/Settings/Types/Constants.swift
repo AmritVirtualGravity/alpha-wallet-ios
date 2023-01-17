@@ -76,7 +76,7 @@ public struct Constants {
         
         // this variable is created temporarily for now.Buy default Fantom is selected on asset.
         let rpcAsset = "FANTOM_FTM"
-        return "https://buy.ramp.network/?hostApiKey=\(Constants.Credentials.rampApiKey)&hostLogoUrl=https://assets.lif3.com/wallet/ramp/Lif3.com-dark.svg&hostAppName=Lif3Wallet&swapAsset=\(rpcAsset)&userAddress=\(wallet.address.eip55String)"
+        return "https://buy.ramp.network/?hostApiKey=\(Constants.Credentials.rampApiKey)&hostLogoUrl=https://assets.lif3.com/wallet/ramp/Lif3.com-dark.svg&hostAppName=Lif3Wallet&swapAsset=\(asset)&userAddress=\(wallet.address.eip55String)"
     }
 
     static func buyWithCoinbaseUrl(blockchain: String, wallet: Wallet) -> String? {

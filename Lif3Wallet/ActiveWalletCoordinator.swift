@@ -476,9 +476,10 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
 //            viewControllers.append(transactionCoordinator.navigationController)
 //        }
         
-        let lif3ViewController = Lif3WebViewController.instantiate()
-        lif3ViewController.tabBarItem = ActiveWalletViewModel.Tabs.lif3.tabBarItem
-        viewControllers.append(lif3ViewController)
+        let lifeController = Lif3ViewController.instantiate()
+        lifeController.tabBarItem = ActiveWalletViewModel.Tabs.lif3.tabBarItem
+        lifeController.delegate = self
+        viewControllers.append(lifeController)
         
         
         /// removed 'Environment.isDebug' mode checking
@@ -897,12 +898,13 @@ extension ActiveWalletCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if isViewControllerDappBrowserTab(viewController) {
             loadHomePageIfEmpty()
-        } else if  (tabBarController.selectedIndex == lifeTabIndex) {
-            guard let url = URL(string: Constants.lifeWebUrl) else {
-                return
-            }
-            openURLInBrowser(url: url)
         }
+//        else if  (tabBarController.selectedIndex == lifeTabIndex) {
+//            guard let url = URL(string: Constants.lifeWebUrl) else {
+//                return
+//            }
+//            openURLInBrowser(url: url)
+//        }
     }
 
     private func loadHomePageIfNeeded() {
@@ -1361,3 +1363,50 @@ extension ActiveWalletCoordinator {
     }
 }
 // swiftlint:enable file_length
+
+
+extension ActiveWalletCoordinator: lifeViewControllerDelegate {
+    func didTapSwapTokens() {
+        guard let url = URL(string: Constants.lifeSwapTokenWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    func didTapGarden() {
+        guard let url = URL(string: Constants.lifeGardenWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    func didTapFountainOfLif3() {
+        guard let url = URL(string: Constants.lifeFountainWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    func didTapTerrace() {
+        guard let url = URL(string: Constants.lifeTerraceWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    func didTapGreenHouse() {
+        guard let url = URL(string: Constants.lifeGreenhouseWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    func didTapNursery() {
+        guard let url = URL(string: Constants.lifeNurseryWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    
+}

@@ -91,11 +91,17 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
     
     public func getSymbolForBuyRamp(symbol: String) -> String {
         switch symbol {
-        case "FTM":
+        case "FTM":// fantom
             return "FANTOM_FTM".lowercased()
+        case "BNB": //BNB on Binance Smart Chain
+            return "BSC_BNB".lowercased()
+        case "AETH": // arbitrum on etherum
+            return "ARBITRUM_ETH".lowercased()
         default:
             return symbol.lowercased()
         }
+        
+        
     }
     
 }

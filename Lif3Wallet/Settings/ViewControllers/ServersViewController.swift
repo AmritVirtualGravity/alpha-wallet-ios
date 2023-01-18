@@ -84,8 +84,8 @@ extension ServersViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         viewModel.selectOrDeselectServer(indexPath: indexPath)
-
-        tableView.reloadData()
+        self.navigationController?.popViewController(animated: true)
+//        tableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

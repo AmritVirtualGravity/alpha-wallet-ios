@@ -42,7 +42,7 @@ final class AddressTextField: UIControl {
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.textColor = Configuration.Color.Semantic.defaultForegroundText
-        textField.font = DataEntry.Font.textField
+        textField.font = Configuration.Font.textField
         
         return textField
     }()
@@ -69,7 +69,7 @@ final class AddressTextField: UIControl {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.sendPasteButtonTitle(), for: .normal)
         button.titleLabel?.font = Configuration.Font.accessory
-                button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
+        button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
         button.setBackgroundColor(.clear, forState: .normal)
         button.contentHorizontalAlignment = .right
         button.heightConstraint.flatMap { NSLayoutConstraint.deactivate([$0]) }
@@ -86,7 +86,7 @@ final class AddressTextField: UIControl {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.clearButtonTitle(), for: .normal)
         button.titleLabel?.font = Configuration.Font.accessory
-                button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
+        button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
         button.setBackgroundColor(.clear, forState: .normal)
         button.contentHorizontalAlignment = .right
         button.heightConstraint.flatMap { NSLayoutConstraint.deactivate([$0]) }
@@ -116,7 +116,7 @@ final class AddressTextField: UIControl {
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.font = Configuration.Font.textFieldStatus
-                label.textColor = Configuration.Color.Semantic.textFieldStatus
+        label.textColor = Configuration.Color.Semantic.textFieldStatus
         label.textAlignment = .left
 
         return label

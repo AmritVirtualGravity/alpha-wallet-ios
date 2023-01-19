@@ -34,7 +34,6 @@ final class NFTCollectionViewModel {
     let tokenHolders: CurrentValueSubject<[TokenHolder], Never>
     let token: Token
     let initiallySelectedTabIndex: Int = 1
-    let backgroundColor: UIColor = Colors.appBackground
     let wallet: Wallet
 
     private var previewViewType: NFTPreviewViewType {
@@ -49,7 +48,7 @@ final class NFTCollectionViewModel {
     private (set) lazy var infoPageViewModel: NFTCollectionInfoPageViewModel = {
         let tokenHolder = tokenHolders.value[0]
         let tokenId = tokenHolder.tokenIds[0]
-        return NFTCollectionInfoPageViewModel(token: token, previewViewType: previewViewType, tokenHolder: tokenHolder, tokenId: tokenId, tokenHolders: tokenHolders.eraseToAnyPublisher(), nftProvider: nftProvider)
+        return NFTCollectionInfoPageViewModel(token: token, previewViewType: previewViewType, tokenHolder: tokenHolder, tokenId: tokenId, tokenHolders: tokenHolders.eraseToAnyPublisher(), nftProvider: nftProvider, assetDefinitionStore: assetDefinitionStore)
     }()
 
     private (set) lazy var nftAssetsPageViewModel = NFTAssetsPageViewModel(token: token, assetDefinitionStore: assetDefinitionStore, tokenHolders: tokenHolders.eraseToAnyPublisher(), layout: .list)

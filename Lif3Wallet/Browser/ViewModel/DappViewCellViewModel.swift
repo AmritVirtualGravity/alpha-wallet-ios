@@ -1,21 +1,25 @@
 // Copyright © 2018 Stormbird PTE. LTD.
-
 import Foundation
 import UIKit
 import AlphaWalletFoundation
 
 struct DappViewCellViewModel: Hashable {
-    private let order: Int
-    
-    let imageUrl: URL?
-    let title: String
-    let domainName: String
+    let bookmark: BookmarkObject
 
-    init(dapp: Bookmark) {
-        self.order = dapp.order
-        self.domainName = URL(string: dapp.url)?.host ?? ""
-        self.title = dapp.title
-        self.imageUrl = Favicon.get(for: URL(string: dapp.url))
+    var imageUrl: URL? {
+        Favicon.get(for: bookmark.url)
+    }
+
+    var title: String {
+        bookmark.title
+    }
+
+    var domainName: String {
+        bookmark.url?.host ?? ""
+    }
+
+    init(bookmark: BookmarkObject) {
+        self.bookmark = bookmark
     }
 
     var fallbackImage: UIImage? {
@@ -31,15 +35,15 @@ struct DappViewCellViewModel: Hashable {
     }
 
     var imageViewShadowOffset: CGSize {
-        return Metrics.DappsHome.Icon.shadowOffset
+        return DataEntry.Metric.DappsHome.Icon.shadowOffset
     }
 
     var imageViewShadowOpacity: Float {
-        return Metrics.DappsHome.Icon.shadowOpacity
+        return DataEntry.Metric.DappsHome.Icon.shadowOpacity
     }
 
     var imageViewShadowRadius: CGFloat {
-        return Metrics.DappsHome.Icon.shadowRadius
+        return DataEntry.Metric.DappsHome.Icon.shadowRadius
     }
 
     var titleColor: UIColor {

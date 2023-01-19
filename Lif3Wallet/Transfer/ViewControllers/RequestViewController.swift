@@ -69,15 +69,15 @@ class RequestViewController: UIViewController {
         ].asStackView(axis: .vertical, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(backgroundImageView)
+//        view.addSubview(backgroundImageView)
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([
             // image view constraits for  full screen size
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
+//            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+//            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+//            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+//            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -100),
             
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),

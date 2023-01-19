@@ -21,10 +21,11 @@ final class SwapQuoteDetailsView: UIView {
         return view
     }()
     private static var fieldEdgeInsets: UIEdgeInsets {
-        return .init(top: 0,
-                     left: ScreenChecker.size(big: 20, medium: 20, small: 16),
-                     bottom: 0,
-                     right: ScreenChecker.size(big: 20, medium: 20, small: 16))
+        return .init(
+            top: 0,
+            left: ScreenChecker.size(big: 20, medium: 20, small: 16),
+            bottom: 0,
+            right: ScreenChecker.size(big: 20, medium: 20, small: 16))
     }
 
     private lazy var exchangeView = SwapQuoteFieldView(edgeInsets: SwapQuoteDetailsView.fieldEdgeInsets, viewModel: viewModel.exchangeViewModel)

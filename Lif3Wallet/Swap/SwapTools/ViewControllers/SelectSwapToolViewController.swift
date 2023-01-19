@@ -18,9 +18,8 @@ final class SelectSwapToolViewController: UIViewController {
         tableView.register(SelectableSwapToolTableViewCell.self)
         tableView.estimatedRowHeight = DataEntry.Metric.TableView.estimatedRowHeight
         tableView.separatorInset = .zero
-        
         tableView.delegate = self
-
+        
         return tableView
     }()
     private lazy var dataSource: SelectSwapToolViewModel.DataSource = makeDataSource()
@@ -37,7 +36,6 @@ final class SelectSwapToolViewController: UIViewController {
         NSLayoutConstraint.activate([
             tableView.anchorsIgnoringBottomSafeArea(to: view)
         ])
-        
         emptyView = EmptyView.swapToolsEmptyView()
     }
     
@@ -47,7 +45,6 @@ final class SelectSwapToolViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
     }

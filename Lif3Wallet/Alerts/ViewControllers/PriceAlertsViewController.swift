@@ -10,7 +10,7 @@ import AlphaWalletFoundation
 import StatefulViewController
 import Combine
 
-protocol PriceAlertsViewControllerDelegate: class {
+protocol PriceAlertsViewControllerDelegate: AnyObject {
     func editAlertSelected(in viewController: PriceAlertsViewController, alert: PriceAlert)
     func addAlertSelected(in viewController: PriceAlertsViewController)
 }
@@ -92,9 +92,11 @@ extension PriceAlertsViewController: StatefulViewController {
 
 extension PriceAlertsViewController {
     private func makeDataSource() -> PriceAlertsViewModel.DataSource {
-        PriceAlertsViewModel.DataSource(tableView: tableView) { tableView, indexPath, viewModel -> PriceAlertTableViewCell in
+        PriceAlertsViewModel.DataSource(tableView: tableView) { [weak self] tableView, indexPath, viewModel -> PriceAlertTableViewCell in
+            guard let strongSelf = self else { return PriceAlertTableViewCell() }
+            
             let cell: PriceAlertTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.delegate = self
+            cell.delegate = strongSelf
             cell.configure(viewModel: viewModel)
 
             return cell
@@ -156,7 +158,7 @@ extension PriceAlertsViewController: UITableViewDelegate {
             completion(true)
         }
 
-        hideAction.backgroundColor = Colors.appRed
+        hideAction.backgroundColor = Colors.appRed 
         hideAction.image = R.image.hideToken()
         let configuration = UISwipeActionsConfiguration(actions: [hideAction])
         configuration.performsFirstActionWithFullSwipe = true

@@ -1,5 +1,3 @@
-// Copyright © 2019 Stormbird PTE. LTD.
-
 import UIKit
 import AlphaWalletFoundation
 
@@ -108,7 +106,6 @@ extension EnabledServersViewController: UITableViewDelegate, UITableViewDataSour
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        50
 //    }
-
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         .leastNormalMagnitude
     }

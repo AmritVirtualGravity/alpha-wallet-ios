@@ -4,7 +4,6 @@
 //
 //  Created by Vladyslav Shepitko on 02.06.2021.
 //
-
 import Foundation
 import BigInt
 
@@ -19,7 +18,7 @@ struct NativecryptoBalanceViewModel: BalanceViewModelType {
     }
     var balance: [TokenBalanceValue] { return [] }
     var value: BigInt { _balance.valueBI }
-    var amount: Double { return EtherNumberFormatter.plain.string(from: _balance.valueBI, units: .ether).doubleValue }
+    var valueDecimal: Decimal { Decimal(bigInt: value, decimals: _balance.decimals) ?? .zero }
 
     var amountString: String {
         guard !isZero else { return "0.00 \(_balance.server.symbol)" }
@@ -27,14 +26,9 @@ struct NativecryptoBalanceViewModel: BalanceViewModelType {
         return "\(balance) \(_balance.server.symbol)"
     }
 
-    var currencyAmount: String? {
-        guard let totalAmount = currencyAmountWithoutSymbol else { return nil }
-        return Formatter.usd.string(from: totalAmount)
-    }
-
-    var currencyAmountWithoutSymbol: Double? {
+    var amountInFiat: Double? {
         guard let ticker = ticker else { return nil }
-        return amount * ticker.price_usd
+        return valueDecimal.doubleValue * ticker.price_usd
     }
 
     var amountFull: String { return EtherNumberFormatter.plain.string(from: _balance.valueBI) }

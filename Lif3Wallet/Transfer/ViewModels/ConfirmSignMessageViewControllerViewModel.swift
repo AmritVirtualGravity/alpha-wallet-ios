@@ -1,5 +1,4 @@
 // Copyright © 2018 Stormbird PTE. LTD.
-
 import UIKit
 import AlphaWalletFoundation
 
@@ -15,9 +14,9 @@ struct ConfirmSignMessageViewControllerViewModel {
         return Colors.appWhite
     }
 
-	var headerTitle: String {
+    var headerTitle: String {
         return R.string.localizable.confirmSignMessage()
-	}
+    }
 
     var subtitle: String {
         switch message {

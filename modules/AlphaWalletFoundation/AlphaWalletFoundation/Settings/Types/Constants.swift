@@ -4,6 +4,8 @@ import Foundation
 import BigInt
 
 public struct Constants {
+    static let xdaiDropPrefix = Data(bytes: [0x58, 0x44, 0x41, 0x49, 0x44, 0x52, 0x4F, 0x50]).hex()
+    
     static let mainnetMagicLinkHost = "aw.app"
     static let legacyMagicLinkHost = "app.awallet.io"
     static let classicMagicLinkHost = "classic.aw.app"
@@ -25,11 +27,9 @@ public struct Constants {
     static let maticMagicLinkHost = "polygon.aw.app"
     static let mumbaiTestMagicLinkHost = "test-polygon.aw.app"
     static let optimisticMagicLinkHost = "optimistic.aw.app"
-    static let optimisticTestMagicLinkHost = "optimistic-kovan.aw.app"
     static let cronosMagicLinkHost = "cronos.aw.app"
     static let cronosTestMagicLinkHost = "test-cronos.aw.app"
     static let arbitrumMagicLinkHost = "arbitrum.aw.app"
-    static let arbitrumRinkebyMagicLinkHost = "arbitrum-rinkeby.aw.app"
     static let palmMagicLinkHost = "palm.aw.app"
     static let palmTestnetMagicLinkHost = "palmTestnet.aw.app"
     static let klaytnCypressMagicLinkHost = "klaytnCypress.aw.app"
@@ -44,11 +44,7 @@ public struct Constants {
     public static let legacyMagicLinkPrefix = "https://app.awallet.io/"
 
     // fee master
-    public static let paymentServer = "https://paymaster.stormbird.sg/api/claimToken"
-    public static let paymentServerSpawnable = "https://paymaster.stormbird.sg/api/claimSpawnableToken"
-    public static let paymentServerSupportsContractEndPoint = "https://paymaster.stormbird.sg/api/checkContractIsSupportedForFreeTransfers"
-    public static let paymentServerClaimedToken = "https://paymaster.stormbird.sg/api/checkIfSignatureIsUsed"
-    public static let currencyDropServer = "https://paymaster.stormbird.sg/api/claimFreeCurrency"
+    static let paymentServerBaseUrl = URL(string: "https://paymaster.stormbird.sg")!
 
     //Ethereum null variables
     public static let nullTokenId = "0x0000000000000000000000000000000000000000000000000000000000000000"
@@ -80,7 +76,7 @@ public struct Constants {
         
         // this variable is created temporarily for now.Buy default Fantom is selected on asset.
         let rpcAsset = "FANTOM_FTM"
-        return "https://buy.ramp.network/?hostApiKey=\(Constants.Credentials.rampApiKey)&hostLogoUrl=https://assets.lif3.com/wallet/ramp/Lif3.com-dark.svg&hostAppName=Lif3Wallet&swapAsset=\(rpcAsset)&userAddress=\(wallet.address.eip55String)"
+        return "https://buy.ramp.network/?hostApiKey=\(Constants.Credentials.rampApiKey)&hostLogoUrl=https://assets.lif3.com/wallet/ramp/Lif3.com-dark.svg&hostAppName=Lif3Wallet&swapAsset=\(asset)&userAddress=\(wallet.address.eip55String)"
     }
 
     static func buyWithCoinbaseUrl(blockchain: String, wallet: Wallet) -> String? {
@@ -103,7 +99,7 @@ public struct Constants {
 
     static let ensContractOnMainnet = AlphaWallet.Address.ethereumAddress(eip55String: "0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85")
 
-    public static let defaultEnabledServers: [RPCServer] = [.main, .xDai, .polygon]
+    public static let defaultEnabledServers: [RPCServer] = [.fantom, .tomb_chain, .binance_smart_chain, .main]
     public static let defaultEnabledTestnetServers: [RPCServer] = [.goerli]
 
     enum TokenScript {
@@ -117,7 +113,7 @@ public struct Constants {
 
     enum BlockscanChat {
         static let blockscanChatWebUrl = URL(string: "https://chat.blockscan.com/login")!
-        static let unreadCountEndpoint = URL(string: "https://blockscan-chat-proxy.herokuapp.com/blockscanchat/unreadcount")!
+        static let unreadCountBaseUrl = URL(string: "https://blockscan-chat-proxy.herokuapp.com")!
     }
 
     enum Coingecko {
@@ -162,10 +158,10 @@ public struct Constants {
     }
 
     //CurrencyFormatter
-    static let formatterFractionDigits = 2
+    public static let formatterFractionDigits = 2
 
     //EtherNumberFormatter
-    static let etherFormatterFractionDigits = 4
+    public static let etherFormatterFractionDigits = 4
 
     public static let defaultSortTokensParams: [SortTokensParam] =  [
         .byField(field: .name, direction: .ascending),
@@ -173,4 +169,7 @@ public struct Constants {
         .byField(field: .value, direction: .ascending),
         .byField(field: .value, direction: .descending)
     ]
+    
+    
+    public static let blackListedJsonWebSite = "https://assets.lif3.com/wallet/tokens/token-blacklist.json"
 }

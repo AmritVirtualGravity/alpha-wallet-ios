@@ -4,7 +4,7 @@ import UIKit
 import Combine
 import AlphaWalletFoundation
 
-protocol SettingsViewControllerDelegate: class, CanOpenURL {
+protocol SettingsViewControllerDelegate: AnyObject, CanOpenURL {
     func advancedSettingsSelected(in controller: SettingsViewController)
     func changeWalletSelected(in controller: SettingsViewController)
     func myWalletAddressSelected(in controller: SettingsViewController)
@@ -31,7 +31,7 @@ class SettingsViewController: UIViewController {
         tableView.register(HideTokenSwitchTableViewCell.self)
         tableView.register(ThemeSwitchTableViewCell.self)
         tableView.separatorStyle = .singleLine
-        tableView.estimatedRowHeight = Metrics.anArbitraryRowHeightSoAutoSizingCellsWorkIniOS10
+        tableView.estimatedRowHeight = DataEntry.Metric.anArbitraryRowHeightSoAutoSizingCellsWorkIniOS10
         tableView.delegate = self
 
         return tableView
@@ -107,8 +107,10 @@ class SettingsViewController: UIViewController {
             }.store(in: &cancellable)
 
         output.askToSetPasscode
-            .sink { _ in self.delegate?.createPasswordSelected(in: self) }
-            .store(in: &cancellable)
+            .sink { [weak self] _ in
+                guard let strongSelf = self else { return }
+                strongSelf.delegate?.createPasswordSelected(in: strongSelf)
+            }.store(in: &cancellable)
     }
 
     func configure(blockscanChatUnreadCount value: Int?) {
@@ -195,7 +197,9 @@ extension SettingsViewController: ThemeSwitchTableViewCellDelegate {
 
 fileprivate extension SettingsViewController {
     func makeDataSource() -> SettingsViewModel.DataSource {
-        return SettingsViewModel.DataSource(tableView: tableView, cellProvider: { tableView, indexPath, viewModel in
+        return SettingsViewModel.DataSource(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, viewModel in
+            guard let strongSelf = self else { return UITableViewCell() }
+
             switch viewModel {
             case .cell(let vm):
                 let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)

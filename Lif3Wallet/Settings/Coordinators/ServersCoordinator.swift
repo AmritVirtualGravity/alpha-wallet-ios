@@ -36,11 +36,8 @@ class ServersCoordinator: Coordinator {
             .optimismGoerli,
             .arbitrumGoerli,
             .optimistic,
-            .optimisticKovan,
             .cronosMainnet,
             .cronosTestnet,
-            .arbitrum,
-            .arbitrumRinkeby,
             .klaytnCypress,
             .klaytnBaobabTestnet,
             //Need to update Covalent.NetworkProvider.isSupport() if we enable .ioTeX and/or .ioTeXTestnet

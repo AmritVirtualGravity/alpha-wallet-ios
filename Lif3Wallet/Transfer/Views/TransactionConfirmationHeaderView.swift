@@ -191,7 +191,7 @@ class TransactionConfirmationHeaderView: UIView {
             chevronImageView.image = viewModel.chevronImage
             titleLabel.alpha = viewModel.titleAlpha
             titleIconImageView.alpha = viewModel.titleAlpha
-            
+
             delegate?.headerView(self, openStateChanged: viewModel.configuration.section)
         }
     }
@@ -199,20 +199,16 @@ class TransactionConfirmationHeaderView: UIView {
     func expand() {
         guard let delegate = delegate else { return }
 
-        for (index, view) in childrenStackView.arrangedSubviews.enumerated() {
-            if delegate.headerView(self, shouldShowChildren: viewModel.configuration.section, index: index) {
-                view.isHidden = false
-            }
+        for (index, view) in childrenStackView.arrangedSubviews.enumerated() where delegate.headerView(self, shouldShowChildren: viewModel.configuration.section, index: index) {
+            view.isHidden = false
         }
     }
 
     func collapse() {
         guard let delegate = delegate else { return }
 
-        for (index, view) in childrenStackView.arrangedSubviews.enumerated() {
-            if delegate.headerView(self, shouldHideChildren: viewModel.configuration.section, index: index) {
-                view.isHidden = true
-            }
+        for (index, view) in childrenStackView.arrangedSubviews.enumerated() where delegate.headerView(self, shouldHideChildren: viewModel.configuration.section, index: index) {
+            view.isHidden = true
         }
     }
 }
@@ -227,7 +223,7 @@ extension TransactionConfirmationHeaderView {
 
         label.attributedText = NSAttributedString(string: title, attributes: [
             .font: Fonts.bold(size: 17) as Any,
-            .foregroundColor: R.color.azure() as Any,
+            .foregroundColor: Colors.appTint,
             .paragraphStyle: paragraph
         ])
         label.translatesAutoresizingMaskIntoConstraints = false

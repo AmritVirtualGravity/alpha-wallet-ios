@@ -4,7 +4,6 @@
 //
 //  Created by Vladyslav Shepitko on 17.02.2021.
 //
-
 import UIKit
 import AlphaWalletFoundation
 
@@ -34,7 +33,7 @@ struct SignatureConfirmationViewModel {
 
     var iconUrl: URL? {
         return requester?.iconUrl
-    } 
+    }
 
     var title: String = R.string.localizable.signatureConfirmationTitle()
     var confirmationButtonTitle: String = R.string.localizable.confirmPaymentSignButtonTitle()
@@ -153,7 +152,7 @@ extension SignatureConfirmationViewModel {
         init(data: [EthTypedData], requester: RequesterViewModel?) {
             self.requester = requester
             self.typedData = data
-        } 
+        }
 
         var viewModels: [ViewType] {
             var values: [ViewType] = []

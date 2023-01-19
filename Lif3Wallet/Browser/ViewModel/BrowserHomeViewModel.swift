@@ -1,12 +1,11 @@
 // Copyright © 2018 Stormbird PTE. LTD.
-
 import Foundation
 import UIKit
 import AlphaWalletFoundation
 import Combine
 
 struct DappsHomeViewViewModelInput {
-    let deleteBookmark: AnyPublisher<IndexPath, Never>
+    let deleteBookmark: AnyPublisher<BookmarkObject, Never>
 }
 
 struct DappsHomeViewViewModelOutput {
@@ -15,36 +14,25 @@ struct DappsHomeViewViewModelOutput {
 
 class BrowserHomeViewModel {
     private let bookmarksStore: BookmarksStore
-    private var bookmarks: [Bookmark] = []
     private var cancelable = Set<AnyCancellable>()
 
     init(bookmarksStore: BookmarksStore) {
         self.bookmarksStore = bookmarksStore
     }
 
-    func bookmark(at index: Int) -> Bookmark {
-        return bookmarks[index]
-    }
-
     func transform(input: DappsHomeViewViewModelInput) -> DappsHomeViewViewModelOutput {
         input.deleteBookmark
-            .sink { [bookmarksStore] indexPath in
-                let bookmark = self.bookmarks[indexPath.row]
-                bookmarksStore.delete(bookmarks: [bookmark])
-            }.store(in: &cancelable)
+            .sink { [bookmarksStore] in bookmarksStore.delete(bookmark: $0) }
+            .store(in: &cancelable)
 
-        let bookmarks = bookmarksStore.bookmarks
-            .changesetPublisher
-            .map { changeSet -> [Bookmark] in
+        let viewState = bookmarksStore.bookmarksChangeset
+            .map { changeSet -> [BookmarkObject] in
                 switch changeSet {
                 case .initial(let results): return Array(results)
                 case .error: return []
                 case .update(let results, _, _, _): return Array(results)
                 }
-            }.handleEvents(receiveOutput: { self.bookmarks = $0 })
-
-        let viewState = bookmarks
-            .map { $0.map { DappViewCellViewModel(dapp: $0) } }
+            }.map { $0.map { DappViewCellViewModel(bookmark: $0) }.uniqued() }
             .map { self.buildSnapshot(for: $0) }
             .map { BrowserHomeViewModel.ViewState(snapshot: $0) }
             .eraseToAnyPublisher()
@@ -74,4 +62,3 @@ extension BrowserHomeViewModel {
         let snapshot: BrowserHomeViewModel.Snapshot
     }
 }
-

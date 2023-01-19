@@ -15,10 +15,10 @@ struct EditBookmarkViewModelOutput {
 }
 
 class EditBookmarkViewModel {
-    private let bookmark: Bookmark
+    private let bookmark: BookmarkObject
     private let bookmarksStore: BookmarksStore
 
-    init(bookmark: Bookmark, bookmarksStore: BookmarksStore) {
+    init(bookmark: BookmarkObject, bookmarksStore: BookmarksStore) {
         self.bookmark = bookmark
         self.bookmarksStore = bookmarksStore
     }
@@ -33,27 +33,27 @@ class EditBookmarkViewModel {
             .eraseToAnyPublisher()
 
         let viewState = bookmark.map { bookmark -> ViewState in
-            let imageUrl = Favicon.get(for: URL(string: bookmark.url))
-            return EditBookmarkViewModel.ViewState(bookmarkTitle: bookmark.title, bookmarkUrl: bookmark.url, imageUrl: imageUrl)
+            let imageUrl = Favicon.get(for: bookmark.url)
+            return EditBookmarkViewModel.ViewState(bookmarkTitle: bookmark.title, bookmarkUrl: bookmark.url?.absoluteString ?? "", imageUrl: imageUrl)
         }.eraseToAnyPublisher()
 
         return .init(viewState: viewState, bookmarkSaved: bookmarkSaved)
     }
 
     var imageShadowColor: UIColor {
-        return Metrics.DappsHome.Icon.shadowColor
+        return DataEntry.Metric.DappsHome.Icon.shadowColor
     }
 
     var imageShadowOffset: CGSize {
-        return Metrics.DappsHome.Icon.shadowOffset
+        return DataEntry.Metric.DappsHome.Icon.shadowOffset
     }
 
     var imageShadowOpacity: Float {
-        return Metrics.DappsHome.Icon.shadowOpacity
+        return DataEntry.Metric.DappsHome.Icon.shadowOpacity
     }
 
     var imageShadowRadius: CGFloat {
-        return Metrics.DappsHome.Icon.shadowRadius
+        return DataEntry.Metric.DappsHome.Icon.shadowRadius
     }
 
     var imageBackgroundColor: UIColor {

@@ -168,6 +168,8 @@ extension AddHideTokensViewController: UITableViewDataSource {
             result = viewModel.markTokenAsHidden(at: indexPath)
         case .none:
             result = .value(nil)
+        @unknown default:
+            result = .value(nil)
         }
 
         switch result {
@@ -216,7 +218,7 @@ extension AddHideTokensViewController: UITableViewDataSource {
             }
         }
 
-        hideAction.backgroundColor = R.color.danger()
+        hideAction.backgroundColor = Colors.appRed
         hideAction.image = R.image.hideToken()
 
         let configuration = UISwipeActionsConfiguration(actions: [hideAction])

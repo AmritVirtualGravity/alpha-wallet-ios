@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import AlphaWalletFoundation
 
-protocol EditPriceAlertViewControllerDelegate: class {
+protocol EditPriceAlertViewControllerDelegate: AnyObject {
     func didUpdateAlert(in viewController: EditPriceAlertViewController)
     func didClose(in viewController: EditPriceAlertViewController)
 }
@@ -31,7 +31,7 @@ class EditPriceAlertViewController: UIViewController {
         textField.viewModel.errorState = .none
         textField.viewModel.toggleFiatAndCryptoPair()
         textField.isAlternativeAmountEnabled = false
-        textField.allFundsAvailable = false
+        textField.isAllFundsEnabled = false
         textField.selectCurrencyButton.isHidden = false
         textField.selectCurrencyButton.expandIconHidden = true
         textField.statusLabel.text = nil
@@ -102,7 +102,7 @@ class EditPriceAlertViewController: UIViewController {
         let input = EditPriceAlertViewModelInput(
             willAppear: willAppear.eraseToAnyPublisher(),
             save: saveButton.publisher(forEvent: .touchUpInside).eraseToAnyPublisher(),
-            cryptoValue: amountTextField.cryptoValuePublisher)
+            amountToSend: amountTextField.cryptoValuePublisher)
 
         let output = viewModel.transform(input: input)
 
@@ -111,7 +111,7 @@ class EditPriceAlertViewController: UIViewController {
             .store(in: &cancelable)
 
         output.cryptoInitial
-            .sink { [weak amountTextField] in amountTextField?.set(crypto: $0, useFormatting: false) }
+            .sink { [weak amountTextField] in amountTextField?.set(amount: .amount($0)) }
             .store(in: &cancelable)
 
         output.marketPrice

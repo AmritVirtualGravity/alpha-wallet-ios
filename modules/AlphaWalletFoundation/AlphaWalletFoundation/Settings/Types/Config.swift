@@ -21,20 +21,17 @@ public struct Config {
 
     public let development = Development()
 
-    public static var currency: Currency {
+    public var currency: Currency {
         get {
-            let defaults = UserDefaults.standardOrForTests
-
             if let currency = defaults.string(forKey: Keys.currency) {
                 return Currency(rawValue: currency)!
             } else if let currency = Currency.allCases.first(where: { $0.code == Config.locale.currencySymbol }) {
                 return currency
             } else {
-                return Currency.USD
+                return Currency.default
             }
         }
         set {
-            let defaults = UserDefaults.standardOrForTests
             defaults.set(newValue.code, forKey: Keys.currency)
         }
     }
@@ -168,6 +165,7 @@ public struct Config {
         static let customRpcServers = "customRpcServers"
         static let homePageURL = "homePageURL"
         static let sendAnalyticsEnabled = "sendAnalyticsEnabled"
+        static let sendCrashReportingEnabled = "sendCrashReportingEnabled"
     }
 
     public let defaults: UserDefaults
@@ -191,6 +189,23 @@ public struct Config {
             }
 
             defaults.set(newValue, forKey: Keys.sendAnalyticsEnabled)
+        }
+    }
+
+    public var isSendCrashReportingEnabled: Bool {
+        sendCrashReportingEnabled ?? false
+    }
+
+    public var sendCrashReportingEnabled: Bool? {
+        get {
+            guard let value = defaults.value(forKey: Keys.sendCrashReportingEnabled) as? Bool else {
+                return nil
+            }
+
+            return value
+        }
+        set {
+            defaults.set(newValue, forKey: Keys.sendCrashReportingEnabled)
         }
     }
 

@@ -15,7 +15,7 @@ protocol TokenInstanceWebViewDelegate: AnyObject {
     func reinject(tokenInstanceWebView: TokenInstanceWebView)
 }
 
-class TokenInstanceWebView: UIView {
+class TokenInstanceWebView: UIView, TokenScriptLocalRefsSource {
     var coordinators: [Coordinator] = []
 
     private let analytics: AnalyticsLogger
@@ -89,6 +89,8 @@ class TokenInstanceWebView: UIView {
         ])
 
         translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        webView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -322,10 +324,7 @@ extension TokenInstanceWebView: WKScriptMessageHandler {
             return
         }
 
-        //TODO clean up this. Some of these are wrong, eg: transactionType. They are only here so we can sign personal message
-        let requester = DAppRequester(title: webView.title, url: webView.url)
-        let token = MultipleChainsTokensDataStore.functional.etherToken(forServer: server)
-        let action = DappAction.fromCommand(.eth(command), server: server, transactionType: .dapp(token, requester))
+        let action = DappAction.fromCommand(.eth(command), server: server, transactionType: .prebuilt(server))
 
         func _sign(action: DappAction, command: DappCommand, account: AlphaWallet.Address) {
             switch action {

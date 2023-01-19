@@ -61,7 +61,7 @@ class SaveCustomRpcBrowseViewController: UIViewController {
     }()
 
     private lazy var emptyView: UIView = {
-        let emptyView = EmptyTableView(title: Style.Search.Network.Empty.text, image: R.image.empty_list()!, heightAdjustment: 100.0)
+         let emptyView = EmptyTableView(title: R.string.localizable.searchNetworkResultEmpty(), image: R.image.empty_list()!, heightAdjustment: 100.0)
         emptyView.isHidden = true
         return emptyView
     }()
@@ -138,7 +138,7 @@ class SaveCustomRpcBrowseViewController: UIViewController {
 
     private func configureAddNetworkButton() {
         buttonsBar.configure()
-        buttonsBar.buttons[0].setTitle(R.string.localizable.addrpcServerSaveButtonTitle(preferredLanguages: nil), for: .normal)
+        buttonsBar.buttons[0].setTitle(R.string.localizable.addrpcServerSaveButtonTitle(), for: .normal)
         addSaveButtonTarget(self, action: #selector(handleAddButtonAction(_:)))
         enableAddFunction(false)
         browseView.addSubview(buttonsBar)
@@ -247,11 +247,11 @@ extension SaveCustomRpcBrowseViewController: HandleAddMultipleCustomRpcViewContr
         tableViewController.tableView.reloadData()
         var errorMessage: String = ""
         if let failed: [CustomRPC] = failed as? [CustomRPC], !failed.isEmpty {
-            errorMessage = R.string.localizable.addMultipleCustomRpcError(preferredLanguages: nil)
+            errorMessage = R.string.localizable.addMultipleCustomRpcError()
             reportFailures(customRpcs: failed)
         }
         if let duplicates: [CustomRPC] = duplicates as? [CustomRPC], !duplicates.isEmpty {
-            errorMessage = R.string.localizable.addMultipleCustomRpcError(preferredLanguages: nil)
+            errorMessage = R.string.localizable.addMultipleCustomRpcError()
         }
         if !errorMessage.isEmpty {
             displayError(message: errorMessage)

@@ -23,7 +23,6 @@ class RoundedEnsView: UIView, ViewRoundingSupportable {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(R.image.copy(), for: .normal)
-        button.tintColor = .white
         NSLayoutConstraint.activate([
             button.widthAnchor.constraint(equalToConstant: 30)
         ])
@@ -62,7 +61,6 @@ class RoundedEnsView: UIView, ViewRoundingSupportable {
         ])
 
         isUserInteractionEnabled = true
-        
         configure(viewModel: viewModel)
     }
 

@@ -4,7 +4,6 @@
 //
 //  Created by Vladyslav Shepitko on 17.09.2021.
 //
-
 import UIKit
 import AlphaWalletFoundation
 import Combine
@@ -98,7 +97,8 @@ extension AlertType {
     var title: String {
         switch self {
         case .price(let priceTarget, let value):
-            let result = Formatter.fiat.string(from: value) ?? "-"
+            //FIXME: replace alert rate(double) with CurrencyRateSupportable
+            let result = NumberFormatter.fiatShort(currency: CurrencyService(storage: Config()).currency).string(double: value) ?? "-"
             return "\(priceTarget.title) \(result)"
         }
     }
@@ -118,4 +118,3 @@ extension PriceTarget {
         }
     }
 }
-

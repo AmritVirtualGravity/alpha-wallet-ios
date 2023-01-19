@@ -5,16 +5,15 @@ import BigInt
 import Combine
 import AlphaWalletFoundation
 
-protocol CryptoToFiatRateUpdatable: class {
-    var cryptoToDollarRate: Double? { get set }
+protocol RateUpdatable: AnyObject {
+    var rate: CurrencyRate? { get set }
 }
 
-protocol BalanceUpdatable: class {
+protocol BalanceUpdatable: AnyObject {
     func updateBalance(_ balanceViewModel: BalanceViewModel?)
 }
 
 struct TransactionConfirmationViewModelInput {
-    let send: AnyPublisher<Void, Never>
 }
 
 struct TransactionConfirmationViewModelOutput {
@@ -31,7 +30,7 @@ class TransactionConfirmationViewModel {
     private let type: ViewModelType
     private let tokensService: TokenViewModelState
 
-    var backgroundColor: UIColor = UIColor.clear
+    var backgroundColor: UIColor = Colors.clear
     var footerBackgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
 
     init(configurator: TransactionConfigurator, configuration: TransactionType.Configuration, assetDefinitionStore: AssetDefinitionStore, domainResolutionService: DomainResolutionServiceType, tokensService: TokenViewModelState) {
@@ -47,8 +46,8 @@ class TransactionConfirmationViewModel {
             type = .dappOrWalletConnectTransaction(.init(configurator: configurator, assetDefinitionStore: assetDefinitionStore, recipientResolver: recipientResolver, requester: nil))
         case .walletConnect(_, let requester):
             type = .dappOrWalletConnectTransaction(.init(configurator: configurator, assetDefinitionStore: assetDefinitionStore, recipientResolver: recipientResolver, requester: requester))
-        case .sendFungiblesTransaction(_, let amount):
-            type = .sendFungiblesTransaction(.init(configurator: configurator, assetDefinitionStore: assetDefinitionStore, recipientResolver: recipientResolver, amount: amount))
+        case .sendFungiblesTransaction:
+            type = .sendFungiblesTransaction(.init(configurator: configurator, assetDefinitionStore: assetDefinitionStore, recipientResolver: recipientResolver))
         case .sendNftTransaction:
             type = .sendNftTransaction(.init(configurator: configurator, recipientResolver: recipientResolver))
         case .claimPaidErc875MagicLink(_, let price, let numberOfTokens):
@@ -99,7 +98,7 @@ class TransactionConfirmationViewModel {
 
         return Publishers.Merge(tokenBalance, forceTriggerUpdateBalance)
             .handleEvents(receiveOutput: { [weak self] balance in
-                self?.cryptoToFiatRateUpdatable.cryptoToDollarRate = balance?.ticker?.price_usd
+                self?.rateUpdatable.rate = balance?.ticker.flatMap { CurrencyRate(currency: $0.currency, value: $0.price_usd) }
                 self?.updateBalance(balance)
             }).eraseToAnyPublisher()
     }()
@@ -154,7 +153,7 @@ class TransactionConfirmationViewModel {
         }
     }
 
-    var cryptoToFiatRateUpdatable: CryptoToFiatRateUpdatable {
+    var rateUpdatable: RateUpdatable {
         switch type {
         case .dappOrWalletConnectTransaction(let viewModel): return viewModel
         case .tokenScriptTransaction(let viewModel): return viewModel
@@ -293,18 +292,18 @@ extension TransactionConfirmationViewModel {
         case swapTransaction(SwapTransactionViewModel)
     }
 
-    static func gasFeeString(for configurator: TransactionConfigurator, cryptoToDollarRate: Double?) -> String {
-        let fee = configurator.currentConfiguration.gasPrice * configurator.currentConfiguration.gasLimit
+    static func gasFeeString(for configurator: TransactionConfigurator, rate: CurrencyRate?) -> String {
+        let configuration = configurator.currentConfiguration
+        let fee = Decimal(bigUInt: configuration.gasPrice * configuration.gasLimit, decimals: configurator.session.server.decimals) ?? .zero
         let estimatedProcessingTime = configurator.selectedConfigurationType.estimatedProcessingTime
-        let symbol = configurator.session.server.symbol
-        let feeString = EtherNumberFormatter.short.string(from: fee)
-        let cryptoToDollarSymbol = Currency.USD.rawValue
+        let feeString = NumberFormatter.shortCrypto.string(decimal: fee) ?? "-"
         let costs: String
-        if let cryptoToDollarRate = cryptoToDollarRate {
-            let cryptoToDollarValue = StringFormatter().currency(with: Double(fee) * cryptoToDollarRate / Double(EthereumUnit.ether.rawValue), and: cryptoToDollarSymbol)
-            costs =  "< ~\(feeString) \(symbol) (\(cryptoToDollarValue) \(cryptoToDollarSymbol))"
+        if let rate = rate {
+            let amountInFiat = NumberFormatter.fiat(currency: rate.currency).string(double: fee.doubleValue * rate.value) ?? "-"
+
+            costs =  "< ~\(feeString) \(configurator.session.server.symbol) (\(amountInFiat))"
         } else {
-            costs = "< ~\(feeString) \(symbol)"
+            costs = "< ~\(feeString) \(configurator.session.server.symbol)"
         }
 
         if estimatedProcessingTime.isEmpty {

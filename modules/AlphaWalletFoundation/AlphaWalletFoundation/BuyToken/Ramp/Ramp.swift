@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import Alamofire
 import AlphaWalletCore
 
 public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType {
@@ -18,7 +17,7 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
     private let reachability: ReachabilityManagerProtocol
     private let networkProvider: RampNetworkProviderType
     private let retryBehavior: RetryBehavior<RunLoop>
-
+    
     public var objectWillChange: AnyPublisher<Void, Never> {
         objectWillChangeSubject
             .receive(on: RunLoop.main)
@@ -28,40 +27,39 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
     public let analyticsName: String = "Ramp"
     public let action: String
 
-    public init(action: String, networkProvider: RampNetworkProviderType = RampNetworkProvider(), reachability: ReachabilityManagerProtocol = ReachabilityManager(), retryBehavior: RetryBehavior<RunLoop> = Oneinch.defaultRetryBehavior) {
+    public init(action: String, networkProvider: RampNetworkProviderType, reachability: ReachabilityManagerProtocol = ReachabilityManager(), retryBehavior: RetryBehavior<RunLoop> = Oneinch.defaultRetryBehavior) {
         self.action = action
         self.reachability = reachability
         self.networkProvider = networkProvider
         self.retryBehavior = retryBehavior
     }
-
+    
     deinit {
         infoLog("\(self).deinit")
     }
-
+    
     public func url(token: TokenActionsIdentifiable, wallet: Wallet) -> URL? {
         let symbol = asset(for: token)?.symbol
         return symbol
             .flatMap { Constants.buyWithRampUrl(asset: $0, wallet: wallet) }
             .flatMap { URL(string: $0) }
     }
-
+    
     public func actions(token: TokenActionsIdentifiable) -> [TokenInstanceAction] {
         return [.init(type: .buy(service: self))]
     }
-
+    
     public func isSupport(token: TokenActionsIdentifiable) -> Bool {
         return asset(for: token) != nil
     }
-
     private func asset(for token: TokenActionsIdentifiable) -> Asset? {
         //We only operate for mainnets. This is because we store native cryptos for Ethereum testnets like `.goerli` with symbol "ETH" which would match Ramp's Ethereum token
         func isAssetMatchesForToken(token: TokenActionsIdentifiable, asset: Asset) -> Bool {
-            return asset.symbol.lowercased() == token.symbol.trimmingCharacters(in: .controlCharacters).lowercased()
-                    && asset.decimals == token.decimals
-                    && (asset.address == nil ? token.contractAddress.sameContract(as: Constants.nativeCryptoAddressInDatabase) : asset.address!.sameContract(as: token.contractAddress))
+            return asset.symbol.lowercased() == getSymbolForBuyRamp(symbol: token.symbol.trimmingCharacters(in: .controlCharacters))
+            && asset.decimals == token.decimals
+            && (asset.address == nil ? token.contractAddress.sameContract(as: Constants.nativeCryptoAddressInDatabase) : asset.address!.sameContract(as: token.contractAddress))
         }
-
+        
         guard !token.server.isTestnet else { return nil }
         switch assets {
         case .success(let assets):
@@ -70,7 +68,7 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
             return nil
         }
     }
-
+    
     public func start() {
         reachability.networkBecomeReachablePublisher
             .receive(on: queue)
@@ -82,7 +80,7 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
             }.receive(on: queue)
             .sink { [objectWillChangeSubject] result in
                 objectWillChangeSubject.send(())
-
+                
                 guard case .failure(let error) = result else { return }
                 let request = RampNetworkProvider.RampRequest()
                 RemoteLogger.instance.logRpcOrOtherWebError("Ramp error | \(error)", url: request.urlRequest?.url?.absoluteString ?? "")
@@ -90,4 +88,20 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
                 self.assets = .success($0)
             }.store(in: &cancelable)
     }
+    
+    public func getSymbolForBuyRamp(symbol: String) -> String {
+        switch symbol {
+        case "FTM":// fantom
+            return "FANTOM_FTM".lowercased()
+        case "BNB": //BNB on Binance Smart Chain
+            return "BSC_BNB".lowercased()
+        case "AETH": // arbitrum on etherum
+            return "ARBITRUM_ETH".lowercased()
+        default:
+            return symbol.lowercased()
+        }
+        
+        
+    }
+    
 }

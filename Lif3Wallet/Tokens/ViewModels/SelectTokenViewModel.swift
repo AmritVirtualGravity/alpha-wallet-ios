@@ -113,25 +113,20 @@ final class SelectTokenViewModel {
             }
         }
     }
-
-//    private func accessoryType(for token: TokenViewModel) -> UITableViewCell.AccessoryType {
-//        guard let selectedToken = selectedToken else { return .none }
-//        return selectedToken == token ? .checkmark : .none
-//    }
     
-     func filterTokenWithZeroShortAmt(tokens: [TokenViewModel]) -> [TokenViewModel] {
-        var filteredTokens = [TokenViewModel]()
-        for token in tokens {
-            if (token.type != .nativeCryptocurrency) {
-                if (token.balance.amountShort != "0") {
-                    filteredTokens.append(token)
-                }
-            } else {
-                filteredTokens.append(token)
-            }
-        }
-        return filteredTokens
-    }
+    func filterTokenWithZeroShortAmt(tokens: [TokenViewModel]) -> [TokenViewModel] {
+          var filteredTokens = [TokenViewModel]()
+          for token in tokens {
+              if (token.type != .nativeCryptocurrency) {
+                  if (token.balance.amountShort != "0") {
+                      filteredTokens.append(token)
+                  }
+              } else {
+                  filteredTokens.append(token)
+              }
+          }
+          return filteredTokens
+      }
 }
 
 extension SelectTokenViewModel {

@@ -9,9 +9,9 @@ import Foundation
 
 
 struct BlackListedTokenModel: Codable {
-    let blackListToken: [TokenModel]?
+    let blackListToken: [String]?
 
     enum CodingKeys: String, CodingKey {
-        case blackListToken = "BlackListToken"
+        case blackListToken = "blacklisted"
     }
 }

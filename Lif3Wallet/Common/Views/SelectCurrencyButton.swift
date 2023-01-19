@@ -15,7 +15,7 @@ class SelectCurrencyButton: UIControl {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.font = DataEntry.Font.amountTextField
+        label.font = Configuration.Font.amountTextField
 
         return label
     }()
@@ -26,6 +26,7 @@ class SelectCurrencyButton: UIControl {
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = Configuration.Color.Semantic.textViewFailed
 
         return imageView
     }()
@@ -98,9 +99,7 @@ class SelectCurrencyButton: UIControl {
             whenHasTokenView.anchorsConstraint(to: self),
             whenHasNoTokenView.anchorsConstraint(to: self),
             actionButton.anchorsConstraint(to: self),
-            
-            currencyIconImageView.widthAnchor.constraint(equalToConstant: 40),
-            currencyIconImageView.heightAnchor.constraint(equalToConstant: 40)
+            currencyIconImageView.sized(.init(width: 40, height: 40)),
         ] + expandImageView.sized(.init(width: 24, height: 24)))
     }
 

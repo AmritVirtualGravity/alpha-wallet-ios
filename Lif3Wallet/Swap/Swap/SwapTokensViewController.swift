@@ -10,7 +10,7 @@ import Combine
 import BigInt
 import AlphaWalletFoundation
 
-protocol SwapTokensViewControllerDelegate: class {
+protocol SwapTokensViewControllerDelegate: AnyObject {
     func swapSelected(in viewController: SwapTokensViewController)
     func changeSwapRouteSelected(in viewController: SwapTokensViewController)
     func chooseTokenSelected(in viewController: SwapTokensViewController, selection: SwapTokens.TokenSelection)
@@ -28,7 +28,7 @@ class SwapTokensViewController: UIViewController {
         amountTextField.inputAccessoryButtonType = .done
         amountTextField.viewModel.errorState = .none
         amountTextField.isAlternativeAmountEnabled = true
-        amountTextField.allFundsAvailable = true
+        amountTextField.isAllFundsEnabled = true
 
         return amountTextField
     }()
@@ -38,7 +38,7 @@ class SwapTokensViewController: UIViewController {
         amountTextField.inputAccessoryButtonType = .none
         amountTextField.viewModel.errorState = .none
         amountTextField.isAlternativeAmountEnabled = true
-        amountTextField.allFundsAvailable = false
+        amountTextField.isAllFundsEnabled = false
         amountTextField.textField.isUserInteractionEnabled = false
 
         return amountTextField
@@ -130,12 +130,11 @@ class SwapTokensViewController: UIViewController {
     }
 
     private func bind(viewModel: SwapTokensViewModel) {
-        fromTokenHeaderView.configure(viewModel: viewModel.fromHeaderViewModel)
-        toTokenHeaderView.configure(viewModel: viewModel.toHeaderViewModel)
+        let input = SwapTokensViewModelInput(
+            cryptoValue: fromAmountTextField.cryptoValuePublisher,
+            allFunds: fromAmountTextField.allFundsButton.publisher(forEvent: .touchUpInside).eraseToAnyPublisher(),
+            togglePair: togglePairButton.publisher(forEvent: .touchUpInside).eraseToAnyPublisher())
 
-        let allFunds = fromAmountTextField.allFundsButton.publisher(forEvent: .touchUpInside).eraseToAnyPublisher()
-        let togglePair = togglePairButton.publisher(forEvent: .touchUpInside).eraseToAnyPublisher()
-        let input = SwapTokensViewModelInput(cryptoValue: fromAmountTextField.cryptoValuePublisher, allFunds: allFunds, togglePair: togglePair)
         let output = viewModel.transform(input: input)
 
         output.anyErrorString
@@ -155,19 +154,19 @@ class SwapTokensViewController: UIViewController {
                 }
             }.store(in: &cancelable)
 
-        output.convertedValue               
-            .sink { [weak toAmountTextField] in toAmountTextField?.set(crypto: $0, useFormatting: false) }
+        output.convertedValue
+            .sink { [weak toAmountTextField] in toAmountTextField?.set(amount: $0) }
             .store(in: &cancelable)
 
         output.amountValidation
             .sink { [weak fromAmountTextField] in fromAmountTextField?.viewModel.errorState = $0 }
             .store(in: &cancelable)
 
-        output.tokens
-            .sink { [weak fromAmountTextField, weak toAmountTextField] tokens in
-                fromAmountTextField?.viewModel.set(token: tokens.from)
-                toAmountTextField?.viewModel.set(token: tokens.to)
-            }.store(in: &cancelable)
+//        output.tokens
+//            .sink { [weak fromAmountTextField, weak toAmountTextField] tokens in
+//                fromAmountTextField?.viewModel.set(token: tokens.from)
+//                toAmountTextField?.viewModel.set(token: tokens.to)
+//            }.store(in: &cancelable)
 
         output.fromTokenBalance
             .sink { [weak fromAmountTextField] in fromAmountTextField?.statusLabel.text = $0 }
@@ -177,7 +176,8 @@ class SwapTokensViewController: UIViewController {
             .sink { [weak toAmountTextField] in toAmountTextField?.statusLabel.text = $0 }
             .store(in: &cancelable)
 
-        output.allFunds.sink { [weak fromAmountTextField] in fromAmountTextField?.set(crypto: $0.allFundsFullValue.localizedString, shortCrypto: $0.allFundsShortValue, useFormatting: false) }
+        output.allFunds
+            .sink { [weak fromAmountTextField] in fromAmountTextField?.set(amount: $0) }
             .store(in: &cancelable)
     }
 

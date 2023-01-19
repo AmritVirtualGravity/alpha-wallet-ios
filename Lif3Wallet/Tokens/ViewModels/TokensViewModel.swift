@@ -4,6 +4,7 @@ import Foundation
 import UIKit
 import Combine
 import AlphaWalletFoundation
+import Alamofire
 
 struct TokensViewModelInput {
     let appear: AnyPublisher<Void, Never>
@@ -131,6 +132,14 @@ final class TokensViewModel {
     var hasContent: Bool {
         return !collectiblePairs.isEmpty
     }
+    
+    var blackListedTokenArr = [String]()
+    
+//    func set(listOfBadTokenScriptFiles: [TokenScriptFileIndices.FileName]) {
+//        self.listOfBadTokenScriptFiles = listOfBadTokenScriptFiles
+//        reloadData()
+//    }
+    
     func heightForHeaderInSection(for section: Int) -> CGFloat {
         switch sections[section] {
         case .walletSummary:
@@ -460,12 +469,34 @@ final class TokensViewModel {
         }
     }
     
+     func getBlackListedTokens(completion: @escaping ([String]?) -> Void) {
+         let blackListTokenUrl = Constants.blackListedJsonWebSite
+            Alamofire.request(blackListTokenUrl, method: .get, encoding: URLEncoding.default).responseJSON
+            { response in
+                guard let data = response.data else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let blackListTokens = try decoder.decode(BlackListedTokenModel.self, from: data)
+                    let blackListedAddressArr = blackListTokens.blackListToken
+                    completion(blackListedAddressArr)
+                } catch let error {
+                    print(error)
+                    completion(nil)
+                }
+            }
+        }
+    
+    
+    
     private func reloadData() {
-        filteredTokens = filteredAndSortedTokens()
-        refreshSections(walletConnectSessions: walletConnectSessions)
+        getBlackListedTokens { addressArr in
+            TokenInitialDataSource.shared().blackListedTokenArr = addressArr
+            self.filteredTokens = self.filteredAndSortedTokens()
+            self.refreshSections(walletConnectSessions: self.walletConnectSessions)
+            let sections = self.buildSectionViewModels()
+            self.sectionViewModelsSubject.send(sections)
+        }
         
-        let sections = buildSectionViewModels()
-        sectionViewModelsSubject.send(sections)
     }
     
     private func buildSectionViewModels() -> [TokensViewModel.SectionViewModel] {
@@ -698,13 +729,12 @@ extension TokensViewModel.functional {
             guard !servers.contains(each.server) else { continue }
             servers.append(each.server)
         }
-        
         for each in servers {
-            if (  UserDefaults.standard.bool(forKey: "HideToken") == true )  {
-                filteredTokens = filterTokenWithZeroShortAmt(tokens: tokens).filter { $0.server == each }
+            if ( UserDefaults.standard.bool(forKey: "HideToken") == true )  {
+                filteredTokens = filterTokenWithZeroShortAmt(tokens: filterBlackListedToken(tokens: tokens)).filter { $0.server == each }
                     .map { TokensViewModel.TokenOrRpcServer.token($0) }
             } else {
-                filteredTokens = tokens.filter { $0.server == each }
+                filteredTokens = filterBlackListedToken(tokens: tokens).filter { $0.server == each }
                     .map { TokensViewModel.TokenOrRpcServer.token($0) }
             }
             guard !tokens.isEmpty else { continue }
@@ -712,10 +742,36 @@ extension TokensViewModel.functional {
             
             results.append(contentsOf: filteredTokens)
         }
-        
         return results
     }
     
+    //filter black Listed Tokens.
+    static func filterBlackListedToken(tokens: [TokenViewModel]) -> [TokenViewModel] {
+        var filteredTokens = [TokenViewModel]()
+        for token in tokens {
+            if (token.type != .nativeCryptocurrency) {
+                if (checkIfTokenIsBlackListed(token: token) == false) {
+                    filteredTokens.append(token)
+                }
+            } else {
+                filteredTokens.append(token)
+            }
+        }
+        return filteredTokens
+    }
+    
+    // Returns bool if the token address is in blacklisted address list.
+    static func checkIfTokenIsBlackListed(token: TokenViewModel) -> Bool {
+        if let blackListArr = TokenInitialDataSource.shared().blackListedTokenArr {
+            return blackListArr.contains {
+//                $0 == token.symbol
+                $0 == token.server.symbol + "-" + token.contractAddress.eip55String + "-" + token.name
+            }
+        }
+        return false
+    }
+    
+    //Filter token with 0 amount.
     static func filterTokenWithZeroShortAmt(tokens: [TokenViewModel]) -> [TokenViewModel] {
         var filteredTokens = [TokenViewModel]()
         for token in tokens {
@@ -730,9 +786,15 @@ extension TokensViewModel.functional {
         return filteredTokens
     }
     
-  
-
+   
+    
 }
+
+
+
+   
+
+
 
 fileprivate extension IndexPath {
     var previous: IndexPath {

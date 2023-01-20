@@ -136,7 +136,7 @@ class NFTAssetViewController: UIViewController, TokenVerifiableStatusViewControl
                 delegate?.didPressRedeem(token: viewModel.token, tokenHolder: viewModel.tokenHolder, in: self)
             case .nftSell:
                 delegate?.didPressSell(tokenHolder: viewModel.tokenHolder, for: .send(type: .transaction(viewModel.sellTransactionType)), in: self)
-            case .erc20Send, .erc20Receive, .swap, .buy, .bridge:
+            case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .stake:
                 //TODO when we support TokenScript views for ERC20s, we need to perform the action here
                 break
             case .nonFungibleTransfer:

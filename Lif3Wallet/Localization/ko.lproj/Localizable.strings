@@ -71,6 +71,7 @@
 "Retry" = "다시 시도";
 "Send" = "보내기";
 "Receive" = "Receive";
+"Stake" = "Stake";
 "send.error.emptyClipBoard" = "빈 클립보드";
 "send.error.invalidAddress" = "잘못된 주소";
 "send.error.invalidAmount" = "잘못된 금액";

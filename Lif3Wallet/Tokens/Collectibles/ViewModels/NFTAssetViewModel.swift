@@ -376,6 +376,8 @@ extension TokenInstanceAction {
             return service.action
         case .bridge(let service):
             return service.action
+        case .stake:
+            return R.string.localizable.stake()
         }
     }
 }

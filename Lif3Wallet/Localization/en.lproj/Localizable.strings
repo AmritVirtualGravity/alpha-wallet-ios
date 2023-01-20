@@ -71,6 +71,7 @@
 "Retry" = "Retry";
 "Send" = "Send";
 "Receive" = "Receive";
+"Stake" = "Stake";
 "send.error.emptyClipBoard" = "Empty ClipBoard";
 "send.error.invalidAddress" = "Invalid Address";
 "send.error.invalidAmount" = "Invalid Amount";

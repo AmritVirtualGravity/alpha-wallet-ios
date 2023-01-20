@@ -71,6 +71,7 @@
 "Retry" = "Reintentar";
 "Send" = "Enviar";
 "Receive" = "Recibir";
+"Stake" = "Stake";
 "send.error.emptyClipBoard" = "Vaciar portapapeles";
 "send.error.invalidAddress" = "Dirección no válida";
 "send.error.invalidAmount" = "Cantidad no válida";

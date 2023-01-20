@@ -168,6 +168,8 @@ class FungibleTokenDetailsViewController: UIViewController {
                 delegate?.didTapBridge(for: viewModel.token, service: service, in: self)
             case .buy(let service):
                 delegate?.didTapBuy(for: viewModel.token, service: service, in: self)
+            case .stake:
+                break
             }
             break
         }

@@ -39,10 +39,15 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
     }
     
     public func url(token: TokenActionsIdentifiable, wallet: Wallet) -> URL? {
-        let symbol = asset(for: token)?.symbol
-        return symbol
-            .flatMap { Constants.buyWithRampUrl(asset: $0, wallet: wallet) }
-            .flatMap { URL(string: $0) }
+        let symbol = getSwapAsset(for: token)
+        if let url = URL(string: Constants.buyWithRampUrl(asset: symbol, wallet: wallet) ?? "") {
+            return url
+        }
+        return nil
+        
+//        return symbol
+//            .flatMap { Constants.buyWithRampUrl(asset: $0, wallet: wallet) }
+//            .flatMap { URL(string: $0) }
     }
     
     public func actions(token: TokenActionsIdentifiable) -> [TokenInstanceAction] {
@@ -50,12 +55,13 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
     }
     
     public func isSupport(token: TokenActionsIdentifiable) -> Bool {
-        return asset(for: token) != nil
+        return isTokenOnRamp(swapAsset: getSwapAsset(for: token))
+//        return asset(for: token) != nil
     }
     private func asset(for token: TokenActionsIdentifiable) -> Asset? {
         //We only operate for mainnets. This is because we store native cryptos for Ethereum testnets like `.goerli` with symbol "ETH" which would match Ramp's Ethereum token
         func isAssetMatchesForToken(token: TokenActionsIdentifiable, asset: Asset) -> Bool {
-            return asset.symbol.lowercased() == getSymbolForBuyRamp(symbol: token.symbol.trimmingCharacters(in: .controlCharacters))
+            return asset.symbol.lowercased() == token.symbol.trimmingCharacters(in: .controlCharacters)
             && asset.decimals == token.decimals
             && (asset.address == nil ? token.contractAddress.sameContract(as: Constants.nativeCryptoAddressInDatabase) : asset.address!.sameContract(as: token.contractAddress))
         }
@@ -66,6 +72,36 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
             return assets.first(where: { isAssetMatchesForToken(token: token, asset: $0) })
         case .failure:
             return nil
+        }
+    }
+    
+    public func getBuyRampList() -> [String] {
+        return    ["ARBITRUM_ETH", "AVAX_AVAX", "AVAX_USDC", "BCH_BCH", "BSC_BNB",  "BSC_BUSD", "BSC_FEVR","BTC_BTC","CARDANO_ADA", "CELO_CELO", "CELO_CEUR", "CELO_CREAL", "CELO_CUSD","COSMOS_ATOM","DOGE_DOGE","ELROND_EGLD","ETH_BAT", "ETH_DAI", "ETH_ENS", "ETH_ETH",  "ETH_FEVR",  "ETH_LINK",  "ETH_MANA","ETH_RLY","ETH_SAND", "ETH_USDC",  "ETH_USDT", "FANTOM_FTM", "FILECOIN_FIL", "FLOW_FLOW", "FLOW_FUSD", "FLOW_USDC", "FUSE_FUSD", "HARMONY_ONE","IMMUTABLEX_ETH", "KUSAMA_KSM", "LTC_LTC","MATIC_BAT", "MATIC_DAI", "MATIC_ETH", "MATIC_MANA", "MATIC_MATIC",  "MATIC_OVR","MATIC_SAND", "MATIC_USDC", "NEAR_NEAR","OKC_OKT","OPTIMISM_DAI","OPTIMISM_ETH","POLKADOT_DOT", "RONIN_AXS","RONIN_RON",  "RONIN_SLP",   "RONIN_WETH", "RSK_RDOC", "RSK_RIF","SOLANA_BAT","SOLANA_KIN",   "SOLANA_RLY", "SOLANA_SOL",  "SOLANA_USDC",   "SOLANA_USDT", "STARKNET_ETH",  "TEZOS_XTZ", "XDAI_XDAI","XLM_XLM", "XRP_XRP","ZILLIQA_ZIL",  "ZKSYNC_DAI",  "ZKSYNC_ETH","ZKSYNC_USDC","ZKSYNC_USDT","ZKSYNC_WBTC"]
+    }
+    
+    public func getSwapAsset(for token: TokenActionsIdentifiable) -> String {
+        var chainSymbol = mapChainSymbolForRamp(token: token)
+        return (chainSymbol + "_" + token.symbol).uppercased()
+    }
+    
+    public func mapChainSymbolForRamp(token: TokenActionsIdentifiable) -> String {
+        switch token.server {
+        case .fantom:
+            return "FANTOM"
+        case.binance_smart_chain:
+            return "BSC"
+        case.arbitrum:
+            return "ARBITRUM"
+        case.optimistic:
+            return "OPTIMISM"
+        default:
+            return token.server.symbol
+        }
+    }
+    
+    public func isTokenOnRamp(swapAsset: String) -> Bool {
+        return getBuyRampList().contains {
+            $0 == swapAsset
         }
     }
     
@@ -89,19 +125,21 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
             }.store(in: &cancelable)
     }
     
-    public func getSymbolForBuyRamp(symbol: String) -> String {
-        switch symbol {
-        case "FTM":// fantom
-            return "FANTOM_FTM".lowercased()
-        case "BNB": //BNB on Binance Smart Chain
-            return "BSC_BNB".lowercased()
-        case "AETH": // arbitrum on etherum
-            return "ARBITRUM_ETH".lowercased()
-        default:
-            return symbol.lowercased()
-        }
-        
-        
-    }
+//    public func getSymbolForBuyRamp(assetSymbol: String, chainSymbol:String, type: AlphaWalletFoundation.TokenType) -> String {
+//        if type == .nativeCryptocurrency {
+//            switch assetSymbol {
+//            case "FTM":// fantom
+//                return "FANTOM_FTM".lowercased()
+//            case "BNB": //BNB on Binance Smart Chain
+//                return "BSC_BNB".lowercased()
+//            case "AETH": // arbitrum on etherum
+//                return "ARBITRUM_ETH".lowercased()
+//            default:
+//                return assetSymbol.lowercased()
+//            }
+//        } else {
+//            return (chainSymbol + "_" + assetSymbol).lowercased()
+//        }
+//    }
     
 }

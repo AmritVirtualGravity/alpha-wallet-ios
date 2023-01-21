@@ -24,6 +24,8 @@ extension TokenInstanceAction.ActionType: Equatable {
             return s1.action == s2.action
         case (.buy(let s1), .buy(let s2)):
             return s1.action == s2.action
+        case (.stake, .stake):
+            return true
         default:
             return false
         }
@@ -41,11 +43,12 @@ public struct TokenInstanceAction {
         case swap(service: TokenActionProvider)
         case bridge(service: TokenActionProvider)
         case buy(service: TokenActionProvider)
+        case stake
     }
 
     public var attributes: [AttributeId: AssetAttribute] {
         switch type {
-        case .erc20Send, .erc20Receive, .swap, .buy, .bridge:
+        case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .stake:
             return .init()
         case .nftRedeem, .nftSell, .nonFungibleTransfer:
             return .init()
@@ -75,7 +78,7 @@ public struct TokenInstanceAction {
     }
     public var transactionFunction: FunctionOrigin? {
         switch type {
-        case .erc20Send, .erc20Receive, .swap, .buy, .bridge:
+        case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .stake:
             return nil
         case .nftRedeem, .nftSell, .nonFungibleTransfer:
             return nil
@@ -85,7 +88,7 @@ public struct TokenInstanceAction {
     }
     public var contract: AlphaWallet.Address? {
         switch type {
-        case .erc20Send, .erc20Receive, .swap, .buy, .bridge:
+        case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .stake:
             return nil
         case .nftRedeem, .nftSell, .nonFungibleTransfer:
             return nil
@@ -104,7 +107,7 @@ public struct TokenInstanceAction {
     //TODO we can live-reload the action view screen now if we observe for changes
     public func viewHtml(forTokenHolder tokenHolder: TokenHolder, tokenId: TokenId) -> String {
         switch type {
-        case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .nonFungibleTransfer, .nftRedeem, .nftSell:
+        case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .nonFungibleTransfer, .nftRedeem, .nftSell, .stake:
             return ""
         case .tokenScript(_, _, (html: let html, style: let style), _, _, _):
             return wrapWithHtmlViewport(html: html, style: style, forTokenHolder: tokenHolder)
@@ -113,7 +116,7 @@ public struct TokenInstanceAction {
 
     public func activeExcludingSelection(selectedTokenHolders: [TokenHolder], forWalletAddress walletAddress: AlphaWallet.Address, fungibleBalance: BigInt? = nil) -> TokenScriptSelection? {
         switch type {
-        case .erc20Send, .erc20Receive, .swap, .buy, .bridge:
+        case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .stake:
             return nil
         case .nftRedeem, .nftSell, .nonFungibleTransfer:
             return nil
@@ -133,7 +136,7 @@ public struct TokenInstanceAction {
 
     public func activeExcludingSelection(selectedTokenHolder tokenHolder: TokenHolder, tokenId: TokenId, forWalletAddress walletAddress: AlphaWallet.Address, fungibleBalance: BigInt? = nil) -> TokenScriptSelection? {
         switch type {
-        case .erc20Send, .erc20Receive, .swap, .buy, .bridge:
+        case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .stake:
             return nil
         case .nftRedeem, .nftSell, .nonFungibleTransfer:
             return nil

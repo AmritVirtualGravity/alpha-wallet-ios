@@ -133,7 +133,7 @@ final class TokensViewModel {
         return !collectiblePairs.isEmpty
     }
     
-    var blackListedTokenArr = [String]()
+  
     
 //    func set(listOfBadTokenScriptFiles: [TokenScriptFileIndices.FileName]) {
 //        self.listOfBadTokenScriptFiles = listOfBadTokenScriptFiles
@@ -218,8 +218,8 @@ final class TokensViewModel {
             }.store(in: &cancellable)
 
         tokenCollection.tokenViewModels
-            .sink { [weak self] tokens in
-                self?.tokens = tokens
+            .sink { [weak self] tokensaaa in
+                self?.tokens = tokensaaa
                 self?.reloadData()
             }.store(in: &cancellable)
 
@@ -764,7 +764,6 @@ extension TokensViewModel.functional {
     static func checkIfTokenIsBlackListed(token: TokenViewModel) -> Bool {
         if let blackListArr = TokenInitialDataSource.shared().blackListedTokenArr {
             return blackListArr.contains {
-//                $0 == token.symbol
                 $0 == token.server.symbol + "-" + token.contractAddress.eip55String + "-" + token.name
             }
         }
@@ -785,14 +784,7 @@ extension TokensViewModel.functional {
         }
         return filteredTokens
     }
-    
-   
-    
 }
-
-
-
-   
 
 
 

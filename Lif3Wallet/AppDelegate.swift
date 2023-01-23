@@ -1,6 +1,7 @@
 // Copyright © 2022 Stormbird PTE. LTD.
 
 import UIKit
+import SDWebImageSVGCoder
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -8,8 +9,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         do {
+            
+            // register coder, on AppDelegate
+            let SVGCoder = SDImageSVGCoder.shared
+            SDImageCodersManager.shared.addCoder(SVGCoder)
             appCoordinator = try AppCoordinator.create()
+            
             appCoordinator.start(launchOptions: launchOptions)
+
         } catch {
             //no-op
         }

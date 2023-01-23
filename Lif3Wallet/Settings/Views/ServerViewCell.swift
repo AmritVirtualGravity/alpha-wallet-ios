@@ -2,6 +2,7 @@
 
 import UIKit
 import SVGKit
+import SDWebImage
 
 class ServerTableViewCell: UITableViewCell {
     static let selectionAccessoryType: (selected: UITableViewCell.AccessoryType, unselected: UITableViewCell.AccessoryType) = (selected: .checkmark, unselected: .none)
@@ -53,13 +54,20 @@ class ServerTableViewCell: UITableViewCell {
         nameLabel.textColor = viewModel.serverColor
         nameLabel.text = viewModel.serverName
         let url = returnServerImageUrl(symbol: viewModel.serverSymbol)
+        
+        
+       
         if let imageUrl = URL(string: url) {
-            if let image = SVGKImage(contentsOf: imageUrl) {
-                 if let uiImageInstance = image.uiImage {
-                     self.serverImageView.image = uiImageInstance
-                 }
-              }
+            self.serverImageView.sd_setImage(with: imageUrl)
         }
+//
+//        if let imageUrl = URL(string: url) {
+//            if let image = SVGKImage(contentsOf: imageUrl) {
+//                 if let uiImageInstance = image.uiImage {
+//                     self.serverImageView.image = uiImageInstance
+//                 }
+//              }
+//        }
     }
     
     func returnServerImageUrl(symbol: String)  -> String{

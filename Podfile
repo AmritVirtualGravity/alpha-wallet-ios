@@ -32,7 +32,8 @@ target 'Lif3Wallet' do
   pod 'xcbeautify'
   pod 'FloatingPanel'
   pod 'IQKeyboardManager'
-
+  pod 'SDWebImage'
+  pod 'SDWebImageSVGCoder'
   pod 'SwiftLint', '0.50.3', :configuration => 'Debug'
   pod 'SwiftFormat/CLI', '~> 0.49', :configuration => 'Debug'
 

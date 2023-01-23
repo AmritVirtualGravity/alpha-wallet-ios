@@ -128,6 +128,8 @@
 "settings.support.darkMode" = "DarkMode";
 "settings.helpCenter.title" = "Help Center";
 "settings.about.title" = "About";
+"settings.featurerequest.title" = "Feature Request";
+"settings.bugreport.title" = "Submit Bug Report";
 "settings.activity.title" = "Activity";
 "settings.scanQrcode.title" = "Scan Qr Code";
 "settings.walletConnect.title" = "Wallet Connect";

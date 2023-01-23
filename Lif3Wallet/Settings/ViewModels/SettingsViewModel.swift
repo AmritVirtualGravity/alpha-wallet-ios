@@ -276,6 +276,8 @@ extension SettingsViewModel {
     enum SettingsSupportRow {
         case helpCenter
         case about
+        case featureRequest
+        case bugReport
     }
     
     enum SettingsSection {
@@ -334,7 +336,7 @@ extension SettingsViewModel.functional {
         let activityRows: [SettingsViewModel.SettingsActivityRow] = [.activity, .scanQrCode, .walletConnect]
         let systemRows: [SettingsViewModel.SettingsSystemRow] = [.advanced, .selectActiveNetworks, .security, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         let socialMediaRows: [SettingsViewModel.SettingsSocialMediaRow] = [.twitter, .telegram, .instagram, .discord]
-        let supportRows: [SettingsViewModel.SettingsSupportRow] = [.helpCenter, .about]
+        let supportRows: [SettingsViewModel.SettingsSupportRow] = [.helpCenter,.featureRequest,.bugReport, .about]
         
         return [
             .wallet(rows: walletRows),
@@ -560,6 +562,10 @@ extension SettingsViewModel.SettingsSupportRow  {
             return R.string.localizable.settingsHelpCenterTitle()
         case .about:
             return R.string.localizable.settingsAboutTitle()
+        case .featureRequest:
+            return R.string.localizable.settingsFeaturerequestTitle()
+        case .bugReport:
+            return R.string.localizable.settingsBugreportTitle()
         }
     }
     
@@ -569,6 +575,10 @@ extension SettingsViewModel.SettingsSupportRow  {
             return R.image.iconsSupportHelpCenter()
         case .about:
             return R.image.iconsSupportAbout()
+        case .featureRequest:
+            return R.image.iconsSupportHelpCenter()
+        case .bugReport:
+            return R.image.iconsSupportHelpCenter()
         }
     }
     
@@ -578,6 +588,10 @@ extension SettingsViewModel.SettingsSupportRow  {
             return URL(string: "https://support.lif3.com")
         case .about:
             return URL(string: "https://support.lif3.com")
+        case .featureRequest:
+            return URL(string: "https://support.lif3.com/hc/en-us/community/topics/5998714637455-Feature-Requests")
+        case .bugReport:
+            return URL(string: "https://support.lif3.com/hc/en-us/community/topics/6259382527759-Bug-Report")
             
             
         }

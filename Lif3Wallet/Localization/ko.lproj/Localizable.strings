@@ -126,6 +126,8 @@
 "settings.support.title" = "Support";
 "settings.helpCenter.title" = "Help Center";
 "settings.about.title" = "About";
+"settings.featurerequest.title" = "Feature Request";
+"settings.bugreport.title" = "Submit Bug Report";
 "settings.support.darkMode" = "DarkMode";
 "settings.notifications.title" = "Notifications";
 "settings.passcode.title" = "Passcode / Touch ID";

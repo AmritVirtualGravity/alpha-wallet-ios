@@ -144,6 +144,8 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
     private let tokenScriptOverridesFileManager: TokenScriptOverridesFileManager
     private var cancelable = Set<AnyCancellable>()
     private let networkService: NetworkService
+    
+
 
     init(navigationController: UINavigationController = NavigationController(),
          walletAddressesStore: WalletAddressesStore,
@@ -232,7 +234,7 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
 
     func start(animated: Bool) {
         donateWalletShortcut()
-
+        getDefaultWhiteListTokens() 
         setupResourcesOnMultiChain()
         walletConnectCoordinator.delegate = self
         setupTabBarController()
@@ -249,6 +251,14 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
         showWhatsNew()
         notificationService.start(wallet: wallet)
         handleTokenScriptOverrideImport()
+    }
+    
+    private func getDefaultWhiteListTokens() {
+        for defaultToken in Constants.defaultTokens {
+            if  let address = AlphaWallet.Address(string: defaultToken.address) {
+                let token =  importToken.importToken(for: address, server: defaultToken.server)
+            }
+        }
     }
 
     private func handleTokenScriptOverrideImport() {

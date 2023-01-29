@@ -77,6 +77,7 @@ class TokensCoordinator: Coordinator {
     private let importToken: ImportToken
     private let wallet: Wallet
     private let currencyService: CurrencyService
+    
 
     init(navigationController: UINavigationController = .withOverridenBarAppearence(),
          sessions: ServerDictionary<WalletSession>,
@@ -230,7 +231,6 @@ extension TokensCoordinator: TokensViewControllerDelegate {
     func viewWillAppear(in viewController: UIViewController) {
         guard !viewWillAppearHandled else { return }
         viewWillAppearHandled = true
-
         delegate?.viewWillAppearOnce(in: self)
     }
 
@@ -548,3 +548,14 @@ extension TokensCoordinator: AddHideTokensCoordinatorDelegate {
         removeCoordinator(coordinator)
     }
 }
+
+struct DefaultToken {
+   var address:String
+   var server: RPCServer
+   
+   init(address: String, server: RPCServer) {
+       self.address = address
+       self.server = server
+   }
+}
+

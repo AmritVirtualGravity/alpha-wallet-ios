@@ -99,7 +99,7 @@ public struct Constants {
 
     static let ensContractOnMainnet = AlphaWallet.Address.ethereumAddress(eip55String: "0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85")
 
-    public static let defaultEnabledServers: [RPCServer] = [.fantom, .tomb_chain, .binance_smart_chain, .main]
+    public static let defaultEnabledServers: [RPCServer] = [.fantom, .tomb_chain, .main, .binance_smart_chain]
     public static let defaultEnabledTestnetServers: [RPCServer] = [.goerli]
 
     enum TokenScript {

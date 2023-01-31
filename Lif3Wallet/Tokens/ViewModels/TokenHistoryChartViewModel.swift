@@ -60,19 +60,30 @@ class TokenHistoryChartViewModel {
 
         return .init(viewState: viewState)
     }
+    
+    private func setGradientColors(ticker: CoinTicker?) -> CGGradient?{
+        
+        let color =  gradientColorForTicker(ticker: ticker)
+        
+        let gradientColors = [color.cgColor,color.withAlphaComponent(0.7).cgColor] as CFArray // Colors of the gradient
+        let colorLocations:[CGFloat] = [1.0, 0.0] // Positioning of the gradient
+        let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations)
+        return gradient
+    }
 
     private func buildLineChartDataSet(for entries: [ChartDataEntry], ticker: CoinTicker?) -> LineChartDataSet {
         let set = LineChartDataSet(entries: entries, label: "")
         set.axisDependency = .left
         set.setColor(chartSetColorForTicker(ticker: ticker))
         set.drawCirclesEnabled = false
-        set.lineWidth = 2
-        set.fillAlpha = 1
+        set.lineWidth = 1
+        set.fillAlpha = 0.1
         set.drawFilledEnabled = true
-        set.fill = setGradientFill
+        if let gradientColor =  setGradientColors(ticker: ticker) {
+            set.fill = LinearGradientFill(gradient: gradientColor, angle: 90)
+        }
         set.highlightColor = chartSelectionColorForTicker(ticker: ticker)
         set.drawCircleHoleEnabled = false
-
         return set
     }
 

@@ -234,7 +234,7 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
 
     func start(animated: Bool) {
         donateWalletShortcut()
-        getDefaultWhiteListTokens() 
+       
         setupResourcesOnMultiChain()
         walletConnectCoordinator.delegate = self
         setupTabBarController()
@@ -251,14 +251,23 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
         showWhatsNew()
         notificationService.start(wallet: wallet)
         handleTokenScriptOverrideImport()
+        getDefaultWhiteListTokens()
     }
     
     private func getDefaultWhiteListTokens() {
         for defaultToken in Constants.defaultTokens {
             if  let address = AlphaWallet.Address(string: defaultToken.address) {
-                let token =  importToken.importToken(for: address, server: defaultToken.server)
+               importToken(contract: address, server: defaultToken.server)
             }
         }
+    }
+    
+    private func importToken(contract: AlphaWallet.Address, server: RPCServer) {
+        importToken.importTokenPublisher(for: contract, server: server, onlyIfThereIsABalance: false)
+            .handleEvents(receiveCompletion: { [server, wallet] result in
+                guard case .failure(let error) = result else { return }
+                debugLog("Error while adding imported token contract: \(contract.eip55String) server: \(server) wallet: \(wallet.address.eip55String) error: \(error)")
+            }).sinkAsync()
     }
 
     private func handleTokenScriptOverrideImport() {

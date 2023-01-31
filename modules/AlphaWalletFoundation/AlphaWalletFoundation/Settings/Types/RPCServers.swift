@@ -608,7 +608,7 @@ public enum RPCServer: Hashable, CaseIterable {
 
     var transactionsSource: TransactionsSource {
         switch self {
-        case .main, .classic, .callisto, .custom, .poa, .goerli, .xDai, .artis_sigma1, .binance_smart_chain, .binance_smart_chain_testnet, .artis_tau1, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet:
+        case .main, .classic, .callisto, .custom, .poa, .goerli, .xDai, .artis_sigma1, .binance_smart_chain, .binance_smart_chain_testnet, .artis_tau1, .heco, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .polygon, .mumbai_testnet, .optimistic, .cronosTestnet, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet, .tomb_chain:
             return .etherscan
         case .klaytnCypress, .klaytnBaobabTestnet:
             return .etherscan
@@ -722,7 +722,7 @@ public enum RPCServer: Hashable, CaseIterable {
             return 3000
         case .fantom_testnet:
             return 3000
-        case .main, .poa, .classic, .callisto, .goerli, .artis_sigma1, .artis_tau1, .fantom, .custom, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli:
+        case .main, .poa, .classic, .callisto, .goerli, .artis_sigma1, .artis_tau1, .fantom, .custom, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .tomb_chain:
             return nil
         case .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet:
             //These not allow range more than 10,000

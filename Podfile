@@ -58,12 +58,6 @@ target 'Lif3Wallet' do
 
 end
 
-target 'AlphaWalletShare' do
-  use_frameworks!
-  inherit! :search_paths
-
-  pod 'AlphaWalletShareExtensionCore', :path => '.'
-end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|

@@ -27,7 +27,6 @@ class TokenHistoryChartView: UIView {
         chartView.drawBordersEnabled = false
 
         chartView.chartDescription.enabled = false
-
         chartView.pinchZoomEnabled = false
         chartView.dragEnabled = true
         chartView.setScaleEnabled(false)
@@ -38,7 +37,7 @@ class TokenHistoryChartView: UIView {
         chartView.leftAxis.enabled = false
         chartView.rightAxis.enabled = true
 
-        chartView.rightAxis.drawGridLinesEnabled = true
+        chartView.rightAxis.drawGridLinesEnabled = false
         chartView.rightAxis.gridColor = .init(red: 220, green: 220, blue: 220)
         chartView.rightAxis.drawLabelsEnabled = true
 

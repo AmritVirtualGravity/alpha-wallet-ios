@@ -1,5 +1,5 @@
 //
-//  WalletConnectRequestConverter.swift
+//  WalletConnectRequestDecoder.swift
 //  AlphaWallet
 //
 //  Created by Vladyslav Shepitko on 09.11.2021.
@@ -9,14 +9,16 @@ import Foundation
 import PromiseKit
 import WalletConnectSwift
 import AlphaWalletFoundation
+import AlphaWalletLogger
 
-struct WalletConnectRequestConverter {
+struct WalletConnectRequestDecoder {
 
-    func convert(request: AlphaWallet.WalletConnect.Session.Request, requester: DAppRequester) -> Promise<AlphaWallet.WalletConnect.Action.ActionType> {
+    func decode(request: AlphaWallet.WalletConnect.Session.Request) -> Promise<AlphaWallet.WalletConnect.Action.ActionType> {
         guard let server: RPCServer = request.server else {
-            return .init(error: WalletConnectRequestConverter.sessionRequestRPCServerMissing)
+            return .init(error: WalletConnectRequestDecoder.sessionRequestRPCServerMissing)
         }
-        infoLog("WalletConnect convert request: \(request.method) url: \(request.description)")
+        infoLog("[WalletConnect] convert request: \(request.method) url: \(request.description)")
+
         let data: AlphaWallet.WalletConnect.Request
         do {
             data = try AlphaWallet.WalletConnect.Request(request: request)
@@ -29,9 +31,9 @@ struct WalletConnectRequestConverter {
             return .value(.signMessage(message))
         case .signPersonalMessage(_, let message):
             return .value(.signPersonalMessage(message))
-        case .signTransaction(let bridgeTransaction):
+        case .signTransaction(let walletConnectTransaction):
             do {
-                let transaction = try TransactionType.prebuilt(server).buildAnyDappTransaction(bridgeTransaction: bridgeTransaction)
+                let transaction = try TransactionType.prebuilt(server).buildAnyDappTransaction(walletConnectTransaction: walletConnectTransaction)
                 return .value(.signTransaction(transaction))
             } catch {
                 return .init(error: error)
@@ -40,9 +42,9 @@ struct WalletConnectRequestConverter {
             return .value(.typedMessage(data))
         case .signTypedData(_, let data):
             return .value(.signTypedMessageV3(data))
-        case .sendTransaction(let bridgeTransaction):
+        case .sendTransaction(let walletConnectTransaction):
             do {
-                let transaction = try TransactionType.prebuilt(server).buildAnyDappTransaction(bridgeTransaction: bridgeTransaction)
+                let transaction = try TransactionType.prebuilt(server).buildAnyDappTransaction(walletConnectTransaction: walletConnectTransaction)
                 return .value(.sendTransaction(transaction))
             } catch {
                 return .init(error: error)
@@ -58,11 +60,11 @@ struct WalletConnectRequestConverter {
         case .walletAddEthereumChain(let data):
             return .value(.walletAddEthereumChain(data))
         case .custom:
-            return .init(error: WalletConnectRequestConverter.unsupportedMethod)
+            return .init(error: WalletConnectRequestDecoder.unsupportedMethod)
         }
     }
 
-    enum WalletConnectRequestConverter: Error {
+    enum WalletConnectRequestDecoder: Error {
         case sessionRequestRPCServerMissing
         case unsupportedMethod
     }

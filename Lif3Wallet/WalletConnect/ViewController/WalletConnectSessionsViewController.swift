@@ -136,16 +136,16 @@ extension WalletConnectSessionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let title = R.string.localizable.walletConnectSessionDisconnect()
-        let hideAction = UIContextualAction(style: .destructive, title: title) { [weak self] (_, _, completionHandler) in
+        let hideAction = UIContextualAction(style: .destructive, title: title) { [weak self] _, _, completion in
             guard let strongSelf = self else { return }
             guard let session = strongSelf.dataSource.itemIdentifier(for: indexPath) else { return }
 
             strongSelf.delegate?.didDisconnectSelected(session: session, in: strongSelf)
 
-            completionHandler(true)
+            completion(true)
         }
 
-        hideAction.backgroundColor = Colors.appRed
+        hideAction.backgroundColor = Configuration.Color.Semantic.dangerBackground
         hideAction.image = R.image.hideToken()
         let configuration = UISwipeActionsConfiguration(actions: [hideAction])
         configuration.performsFirstActionWithFullSwipe = true

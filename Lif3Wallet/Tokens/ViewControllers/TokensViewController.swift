@@ -266,7 +266,6 @@ final class TokensViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = viewModel.largeTitleDisplayMode
         view.backgroundColor = viewModel.backgroundColor
         tableView.backgroundColor = viewModel.backgroundColor
-        title = viewModel.walletDefaultTitle
 
         buttonsBar.buttons[0].setTitle(viewModel.buyCryptoTitle, for: .normal)
 
@@ -685,7 +684,7 @@ extension UISearchBar {
         searchBar.superview?.firstSubview(ofType: UIImageView.self)?.isHidden = true
         //Remove border line
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = Colors.clear.cgColor
+        searchBar.layer.borderColor = Configuration.Color.Semantic.borderClear.cgColor
         searchBar.backgroundImage = UIImage()
         searchBar.placeholder = R.string.localizable.tokensSearchbarPlaceholder()
         searchBar.backgroundColor = backgroundColor

@@ -8,6 +8,7 @@
 import UIKit
 import AlphaWalletFoundation
 import Combine
+import AlphaWalletLogger
 
 struct SupportViewModelInput {
     let willAppear: AnyPublisher<Void, Never>

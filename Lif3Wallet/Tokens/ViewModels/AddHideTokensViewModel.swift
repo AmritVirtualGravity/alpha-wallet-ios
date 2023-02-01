@@ -78,7 +78,7 @@ final class AddHideTokensViewModel {
             .handleEvents(receiveOutput: { [weak self] _ in self?.filterTokens() })
 
         return .init(viewState: viewState.eraseToAnyPublisher())
-    } 
+    }
 
     func titleForSection(_ section: Int) -> String {
         sections[section].description
@@ -140,23 +140,25 @@ final class AddHideTokensViewModel {
             }
         case .popularTokens:
             let token = popularTokens[indexPath.row]
-            let promise = importToken
-                .importToken(for: token.contractAddress, server: token.server, onlyIfThereIsABalance: false)
-                .then { [tokenCollection] _token -> Promise<TokenWithIndexToInsert?> in
-                    guard let token = tokenCollection.tokenViewModel(for: _token) else { return .init(error: PMKError.cancelled) }
+            let publisher = importToken
+                .importTokenPublisher(for: token.contractAddress, server: token.server, onlyIfThereIsABalance: false)
+                .flatMap { [tokenCollection] _token -> AnyPublisher<TokenWithIndexToInsert?, ImportToken.ImportTokenError> in
+                    guard let token = tokenCollection.tokenViewModel(for: _token) else {
+                        return .fail(ImportToken.ImportTokenError.internal(error: PMKError.cancelled))
+                    }
                     self.popularTokens.remove(at: indexPath.row)
                     self.displayedTokens.append(token)
 
                     if let sectionIndex = self.sections.firstIndex(of: .displayedTokens) {
                         tokenCollection.mark(token: token, isHidden: false)
 
-                        return .value((token, IndexPath(row: max(0, self.displayedTokens.count - 1), section: Int(sectionIndex))))
+                        return .just((token, IndexPath(row: max(0, self.displayedTokens.count - 1), section: Int(sectionIndex))))
                     }
 
-                    return .value(nil)
-                }
+                    return .just(nil)
+                }.eraseToAnyPublisher()
 
-            return .promise(promise)
+            return .publisher(publisher)
         }
 
         return .value(nil)
@@ -170,7 +172,7 @@ final class AddHideTokensViewModel {
 
             if let sectionIndex = sections.firstIndex(of: .hiddenTokens) {
                 mark(token: token, isHidden: true)
-                
+
                 return .value((token, IndexPath(row: 0, section: Int(sectionIndex))))
             }
         case .hiddenTokens, .availableNewTokens, .popularTokens, .sortingFilters:
@@ -184,7 +186,7 @@ final class AddHideTokensViewModel {
         switch sections[indexPath.section] {
         case .displayedTokens:
             let token = displayedTokens[indexPath.row]
-            guard token.contractAddress.sameContract(as: Constants.nativeCryptoAddressInDatabase) else { return .delete }
+            guard token.contractAddress == Constants.nativeCryptoAddressInDatabase else { return .delete }
             return .none
         case .availableNewTokens, .popularTokens, .hiddenTokens:
             return .insert
@@ -285,7 +287,7 @@ extension AddHideTokensViewModel {
 
     enum ShowHideTokenResult {
         case value(TokenWithIndexToInsert?)
-        case promise(Promise<TokenWithIndexToInsert?>)
+        case publisher(AnyPublisher<TokenWithIndexToInsert?, ImportToken.ImportTokenError>)
     }
 }
 

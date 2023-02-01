@@ -18,14 +18,15 @@ PODS:
     - AlphaWalletCore
     - AlphaWalletENS
     - AlphaWalletGoBack
+    - AlphaWalletLogger
     - AlphaWalletOpenSea
+    - AlphaWalletShareExtensionCore
     - AlphaWalletWeb3
     - AlphaWalletWeb3Provider
     - APIKit (= 5.1.0)
     - Apollo (= 0.53.0)
     - BigInt (~> 3.1)
     - BlockiesSwift
-    - CocoaLumberjack (= 3.7.0)
     - CombineExt (= 1.8.0)
     - CryptoSwift (~> 1.4)
     - EthereumABI
@@ -41,11 +42,14 @@ PODS:
     - TrustKeystore
     - TrustWalletCore (= 2.6.34)
   - AlphaWalletGoBack (1.0.0)
+  - AlphaWalletLogger (1.0.0):
+    - CocoaLumberjack (= 3.7.0)
   - AlphaWalletOpenSea (1.0.0):
     - AlphaWalletAddress
     - AlphaWalletCore
     - PromiseKit
     - SwiftyJSON (= 5.0.0)
+  - AlphaWalletShareExtensionCore (1.0.0)
   - AlphaWalletTrackAPICalls (1.0.0)
   - AlphaWalletWeb3 (0.0.1):
     - BigInt
@@ -171,7 +175,7 @@ PODS:
   - SVGKit (3.1.0):
     - CocoaLumberjack (~> 3.0)
   - SwiftAlgorithms (1.0.0)
-  - SwiftFormat/CLI (0.50.7)
+  - SwiftFormat/CLI (0.50.8)
   - SwiftLint (0.50.3)
   - SwiftProtobuf (1.18.0)
   - SwiftyJSON (5.0.0)
@@ -213,7 +217,9 @@ DEPENDENCIES:
   - AlphaWalletENS (from `.`)
   - AlphaWalletFoundation (from `.`)
   - AlphaWalletGoBack (from `.`)
+  - AlphaWalletLogger (from `.`)
   - AlphaWalletOpenSea (from `.`)
+  - AlphaWalletShareExtensionCore (from `.`)
   - AlphaWalletTrackAPICalls (from `.`)
   - AlphaWalletWeb3 (from `.`)
   - AlphaWalletWeb3Provider (from `https://github.com/AlphaWallet/AlphaWallet-web3-provider`, commit `9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870`)
@@ -309,7 +315,11 @@ EXTERNAL SOURCES:
     :path: "."
   AlphaWalletGoBack:
     :path: "."
+  AlphaWalletLogger:
+    :path: "."
   AlphaWalletOpenSea:
+    :path: "."
+  AlphaWalletShareExtensionCore:
     :path: "."
   AlphaWalletTrackAPICalls:
     :path: "."
@@ -377,9 +387,11 @@ SPEC CHECKSUMS:
   AlphaWalletAddress: 72c3fc97248fc0cdc50d137faaa295bc9610c7ec
   AlphaWalletCore: 635739018555de844a020f8b9b7d49610b3de655
   AlphaWalletENS: 33e4fd3d46929938c271190fe7804811c1e9dc8f
-  AlphaWalletFoundation: 11eedbd2e143852ec70f7081731acf5df9ca4864
+  AlphaWalletFoundation: dd5955624d340767d9b86e1bb28585dda8f9d1dd
   AlphaWalletGoBack: 1d55b51e6cfd999740d3cfab09d9fa723ba85ff2
+  AlphaWalletLogger: 1c0f115e624b6b6e67e9767560fddb6bda2aaa75
   AlphaWalletOpenSea: 71e255612529b04ae4d66dca54bd181185593b1d
+  AlphaWalletShareExtensionCore: e5fc88c6120d5b77b3ba44a37e7b58da5ccbb7b6
   AlphaWalletTrackAPICalls: 1e5d1f0a1858bd4d383aa412677a642be7d21e17
   AlphaWalletWeb3: 86d0be33c612d75685a5797ef4492e42c295f1a5
   AlphaWalletWeb3Provider: 7ca1e1c1dc841dc1915f970daace48bf34931655
@@ -428,7 +440,7 @@ SPEC CHECKSUMS:
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
   SVGKit: 3c8468aab0026048532a3b27a0c81cdd939f0649
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
-  SwiftFormat: 4fcf72ee44c7198255108c22ed7135c38a36ba6b
+  SwiftFormat: 16f04fcde066f40004f51e26bc95bc14dc377d6f
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   SwiftProtobuf: c3c12645230d9b09c72267e0de89468c5543bd86
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
@@ -439,6 +451,6 @@ SPEC CHECKSUMS:
   WalletConnectSwiftV2: e05838f7d04eb69197a23b37768365d8595bab32
   xcbeautify: df17aa32d769add7af523a8be9b0ef8fb9eb75a8
 
-PODFILE CHECKSUM: 20025abfa8c718d4c2a215ec55c86f4d1904dd68
+PODFILE CHECKSUM: 4a36335856072b6331901f3d1f095adc48f4702a
 
 COCOAPODS: 1.11.3

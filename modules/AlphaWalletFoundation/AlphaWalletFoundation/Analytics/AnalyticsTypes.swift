@@ -108,6 +108,11 @@ public enum Analytics {
         case openSeaExpiredApiKey
         case rpcNodeRateLimited
         case rpcNodeInvalidApiKey
+        case lifiFetchSupportedTokensError
+        case lifiFetchSwapQuoteError
+        case lifiFetchSwapRouteError
+        case lifiFetchSupportedToolsError
+        case lifiFetchSupportedChainsError
     }
 
     public enum Properties: String {
@@ -161,6 +166,7 @@ public enum Analytics {
         case addCustomTokenScreen
         case walletScreen
         case quickAction
+        case siriShortcut
     }
 
     public enum ScanQRCodeResultType: String {
@@ -169,7 +175,7 @@ public enum Analytics {
         case string
         case url
         case privateKey
-        case seedPhase
+        case seedPhrase
         case json
         case address
     }
@@ -237,6 +243,7 @@ public enum Analytics {
 
     public enum ShortcutType: String {
         case walletQrCode
+        case camera
     }
 
     public enum HelpUrl: String {

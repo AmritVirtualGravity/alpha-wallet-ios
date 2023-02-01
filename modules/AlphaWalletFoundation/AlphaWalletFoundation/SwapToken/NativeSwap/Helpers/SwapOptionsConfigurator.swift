@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Combine 
+import Combine
 import BigInt
 import CombineExt
 
@@ -80,10 +80,14 @@ public final class SwapOptionsConfigurator {
         let exchanges = tokenSwapper.storage.selectedTools.map { $0.map { $0.key }.filter { $0.nonEmpty } }
         let swapParams = Publishers.CombineLatest4(fromAndToTokens, amount, slippage, exchanges)
 
-        return Publishers.CombineLatest(swapParams, tokenSwapper.storage.prefferedExchange)
+        let prefferedExchange = tokenSwapper.storage.prefferedExchange
+            .removeDuplicates()
+            .debounce(for: .milliseconds(250), scheduler: RunLoop.main)
+
+        return Publishers.CombineLatest(swapParams, prefferedExchange)
             .compactMap { [weak self] (params, prefferedExchange) -> AnyPublisher<SwapQuote?, Never>? in
                 if params.1 == .zero {
-                    return Just<SwapQuote?>(nil).eraseToAnyPublisher()
+                    return .just(nil)
                 } else {
                     return self?.fetchSwapQuote(tokens: params.0, amount: params.1, slippage: params.2, exchanges: params.3, prefferedExchange: prefferedExchange)
                 }
@@ -96,9 +100,8 @@ public final class SwapOptionsConfigurator {
     public init(sessionProvider: SessionsProvider,
                 swapPair: SwapPair,
                 tokenCollection: TokenCollection,
-                reachabilityManager: ReachabilityManagerProtocol,
                 tokenSwapper: TokenSwapper) {
-        
+
         self.tokenSwapper = tokenSwapper
         self.sessions = sessionProvider.activeSessions.values.sorted(by: { $0.server.displayOrderPriority < $1.server.displayOrderPriority })
         self.server = swapPair.from.server
@@ -108,7 +111,7 @@ public final class SwapOptionsConfigurator {
         invalidateSessionsWhenSupportedTokensChanged()
         fetchSupportedTokensForSelectedServer()
         resetToTokenForNonSupportedSwapPair()
-    } 
+    }
 
     public func set(token: Token, selection: SwapTokens.TokenSelection) {
         var pair = swapPair
@@ -231,7 +234,7 @@ public final class SwapOptionsConfigurator {
         do {
             let tokens = try supportedTokens(forServer: server)
             let token = try firstSupportedFromToken(forServer: server, tokens: tokens)
-            if isInitialServerValidation && !swapPair.from.contractAddress.sameContract(as: token.contractAddress) {
+            if isInitialServerValidation && swapPair.from.contractAddress != token.contractAddress {
                 let _ = try firstSupportedFromToken(forServer: server, tokens: [swapPair.from])
                 //NOTE: no changes needed as current swapPair.from supports
             } else {

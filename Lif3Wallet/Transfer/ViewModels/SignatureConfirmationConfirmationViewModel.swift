@@ -38,8 +38,8 @@ struct SignatureConfirmationViewModel {
     var title: String = R.string.localizable.signatureConfirmationTitle()
     var confirmationButtonTitle: String = R.string.localizable.confirmPaymentSignButtonTitle()
     var cancelationButtonTitle: String = R.string.localizable.cancel()
-    var backgroundColor: UIColor = UIColor.clear
-    var footerBackgroundColor: UIColor = Colors.appWhite
+    var backgroundColor: UIColor = Configuration.Color.Semantic.backgroundClear
+    var footerBackgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
 
     var viewModels: [SignatureConfirmationViewModel.ViewType] {
         switch type {

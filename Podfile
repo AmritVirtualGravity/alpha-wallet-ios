@@ -24,10 +24,12 @@ target 'Lif3Wallet' do
   pod 'AlphaWalletCore', :path => '.'
   pod 'AlphaWalletGoBack', :path => '.'
   pod 'AlphaWalletENS', :path => '.'
+  pod 'AlphaWalletLogger', :path => '.'
   pod 'AlphaWalletOpenSea', :path => '.'
   pod 'AlphaWalletFoundation', :path => '.'
   pod 'AlphaWalletTrackAPICalls', :path => '.'
   pod 'AlphaWalletWeb3', :path => '.'
+  pod 'AlphaWalletShareExtensionCore', :path => '.'
   pod 'MailchimpSDK'
   pod 'xcbeautify'
   pod 'FloatingPanel'
@@ -55,6 +57,7 @@ target 'Lif3Wallet' do
   end
 
 end
+
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|

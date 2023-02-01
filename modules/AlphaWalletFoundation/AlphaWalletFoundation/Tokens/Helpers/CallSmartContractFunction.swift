@@ -111,7 +111,7 @@ public func callSmartContract(withServer server: RPCServer, contract contractAdd
                 .recover(on: callSmartContractQueue, { error -> Promise<[String: Any]> in
                         //NOTE: We only want to log rate limit errors above
                     guard case AlphaWalletWeb3.Web3Error.rateLimited = error else { throw error }
-                    warnLog("[API] Rate limited by RPC node server: \(server)")
+//                    warnLog("[API] Rate limited by RPC node server: \(server)")
 
                     throw error
                 })
@@ -155,7 +155,7 @@ final class GetEventLogs {
                 return promise
             }
         }).recover(on: queue, { error -> Promise<[EventParserResultProtocol]> in
-            warnLog("[eth_getLogs] failure for server: \(server) with error: \(error)")
+//            warnLog("[eth_getLogs] failure for server: \(server) with error: \(error)")
             throw error
         })
     }

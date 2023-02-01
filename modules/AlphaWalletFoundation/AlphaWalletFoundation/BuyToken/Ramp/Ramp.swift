@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import AlphaWalletCore
+import AlphaWalletLogger
 
 public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType {
     private var objectWillChangeSubject = PassthroughSubject<Void, Never>()
@@ -61,9 +62,9 @@ public final class Ramp: SupportedTokenActionsProvider, BuyTokenURLProviderType 
     private func asset(for token: TokenActionsIdentifiable) -> Asset? {
         //We only operate for mainnets. This is because we store native cryptos for Ethereum testnets like `.goerli` with symbol "ETH" which would match Ramp's Ethereum token
         func isAssetMatchesForToken(token: TokenActionsIdentifiable, asset: Asset) -> Bool {
-            return asset.symbol.lowercased() == token.symbol.trimmingCharacters(in: .controlCharacters)
-            && asset.decimals == token.decimals
-            && (asset.address == nil ? token.contractAddress.sameContract(as: Constants.nativeCryptoAddressInDatabase) : asset.address!.sameContract(as: token.contractAddress))
+            return asset.symbol.lowercased() == token.symbol.trimmingCharacters(in: .controlCharacters).lowercased()
+                    && asset.decimals == token.decimals
+                    && (asset.address == nil ? token.contractAddress == Constants.nativeCryptoAddressInDatabase : asset.address! == token.contractAddress)
         }
         
         guard !token.server.isTestnet else { return nil }

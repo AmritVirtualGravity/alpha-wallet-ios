@@ -24,7 +24,7 @@ extension CurrencyService {
 }
 
 extension WalletDataProcessingPipeline {
-    static func make(wallet: Wallet = .make(), server: RPCServer = .main) -> FakeWalletDep {
+    static func make(wallet: Wallet = .make(), server: RPCServer = .main) -> AppCoordinator.WalletDependencies {
         let fas = FakeAnalyticsService()
         let sessionsProvider: SessionsProvider = .make(wallet: wallet, servers: [server])
         let eventsActivityDataStore: EventsActivityDataStoreProtocol = EventsActivityDataStore(store: .fake(for: wallet))
@@ -66,18 +66,18 @@ extension WalletDataProcessingPipeline {
             tokensService: tokensService,
             sessionsProvider: sessionsProvider,
             eventsActivityDataStore: eventsActivityDataStore,
-            eventsDataStore: eventsDataStore,
-            analytics: fas)
+            eventsDataStore: eventsDataStore)
 
-        let dep = FakeWalletDep(
+        let dep = AppCoordinator.WalletDependencies(
             activitiesPipeLine: activitiesPipeLine,
-            tokensDataStore: tokensDataStore,
             transactionsDataStore: transactionsDataStore,
+            tokensDataStore: tokensDataStore,
             importToken: importToken,
             tokensService: tokensService,
             pipeline: pipeline,
             fetcher: fetcher,
             sessionsProvider: sessionsProvider,
+            eventsDataStore: eventsDataStore,
             currencyService: currencyService)
         
         dep.sessionsProvider.start(wallet: wallet)
@@ -86,19 +86,6 @@ extension WalletDataProcessingPipeline {
 
         return dep
     }
-
-    struct FakeWalletDep {
-        let activitiesPipeLine: ActivitiesPipeLine
-        let tokensDataStore: TokensDataStore
-        let transactionsDataStore: TransactionDataStore
-        let importToken: ImportToken
-        let tokensService: DetectedContractsProvideble & TokenProvidable & TokenAddable & TokensServiceTests
-        let pipeline: TokensProcessingPipeline
-        let fetcher: WalletBalanceFetcher
-        let sessionsProvider: SessionsProvider
-        let currencyService: AlphaWalletFoundation.CurrencyService
-    }
-
 }
 
 extension SessionsProvider {
@@ -129,10 +116,11 @@ class PaymentCoordinatorTests: XCTestCase {
             analytics: FakeAnalyticsService(),
             tokenCollection: dep.pipeline,
             domainResolutionService: FakeDomainResolutionService(),
-            tokenSwapper: FakeTokenSwapper(),
+            tokenSwapper: TokenSwapper.make(),
             tokensFilter: .make(),
             importToken: dep.importToken,
-            networkService: FakeNetworkService())
+            networkService: FakeNetworkService(),
+            transactionDataStore: FakeTransactionsStorage(wallet: wallet))
         coordinator.start()
 
         XCTAssertEqual(1, coordinator.coordinators.count)
@@ -154,10 +142,11 @@ class PaymentCoordinatorTests: XCTestCase {
             analytics: FakeAnalyticsService(),
             tokenCollection: dep.pipeline,
             domainResolutionService: FakeDomainResolutionService(),
-            tokenSwapper: FakeTokenSwapper(),
+            tokenSwapper: TokenSwapper.make(),
             tokensFilter: .make(),
             importToken: dep.importToken,
-            networkService: FakeNetworkService())
+            networkService: FakeNetworkService(),
+            transactionDataStore: FakeTransactionsStorage(wallet: wallet))
 
         coordinator.start()
 

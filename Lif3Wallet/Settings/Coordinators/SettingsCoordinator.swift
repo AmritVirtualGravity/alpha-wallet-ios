@@ -170,7 +170,7 @@ class SettingsCoordinator: Coordinator {
     
     func start() {
         let tokenCoordinator = createTokensCoordinator(promptBackupCoordinator: promptBackupCoordinator, activitiesService: activitiesService)
-        let txnCoordinator =  createTransactionCoordinator(transactionDataStore: transactionsDataStore)
+//        let txnCoordinator =  createTransactionCoordinator(transactionDataStore: transactionsDataStore)
         navigationController.viewControllers = [rootViewController]
     }
     
@@ -211,30 +211,30 @@ class SettingsCoordinator: Coordinator {
     }
     
     
-    private func createTransactionCoordinator(transactionDataStore: TransactionDataStore) -> TransactionsCoordinator {
-        let transactionsService = TransactionsService(
-            sessions: sessionsProvider.activeSessions,
-            transactionDataStore: transactionDataStore,
-            analytics: analytics,
-            tokensService: tokensService, networkService: networkService)
-
-        transactionsService.delegate = self
-        transactionsService.start()
-
-        let coordinator = TransactionsCoordinator(
-            analytics: analytics,
-            sessions: sessionsProvider.activeSessions,
-            transactionsService: transactionsService,
-            tokensService: tokenCollection)
-
-        coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.transactions.tabBarItem
-        coordinator.navigationController.configureForLargeTitles()
-        coordinator.delegate = self
-        coordinator.start()
-        addCoordinator(coordinator)
-
-        return coordinator
-    }
+//    private func createTransactionCoordinator(transactionDataStore: TransactionDataStore) -> TransactionsCoordinator {
+//        let transactionsService = TransactionsService(
+//            sessions: sessionsProvider.activeSessions,
+//            transactionDataStore: transactionDataStore,
+//            analytics: analytics,
+//            tokensService: tokensService, networkService: networkService, assetDefinitionStore: assetDefinitionStore)
+//
+//        transactionsService.delegate = self
+//        transactionsService.start()
+//
+//        let coordinator = TransactionsCoordinator(
+//            analytics: analytics,
+//            sessions: sessionsProvider.activeSessions,
+//            transactionsService: transactionsService,
+//            tokensService: tokenCollection)
+//
+//        coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.transactions.tabBarItem
+//        coordinator.navigationController.configureForLargeTitles()
+//        coordinator.delegate = self
+//        coordinator.start()
+//        addCoordinator(coordinator)
+//
+//        return coordinator
+//    }
 }
 
 
@@ -311,7 +311,7 @@ extension SettingsCoordinator: SelectTokenCoordinatorDelegate {
                     domainResolutionService: domainResolutionService,
                     tokenSwapper: tokenSwapper,
                     tokensFilter: tokensFilter,
-                    importToken: importToken, networkService: networkService)
+                    importToken: importToken, networkService: networkService, transactionDataStore: transactionsDataStore)
             coordinator.delegate = self
             coordinator.start()
 
@@ -673,18 +673,18 @@ extension SettingsCoordinator: ActivityViewControllerDelegate {
     }
 }
 
-extension SettingsCoordinator: TransactionsServiceDelegate {
-    
-    func didCompleteTransaction(in service: TransactionsService, transaction: TransactionInstance) {
-        tokenCollection.refreshBalance(updatePolicy: .all)
-    }
-    
-    func didExtractNewContracts(in service: TransactionsService, contractsAndServers: [AddressAndRPCServer]) {
-        for each in contractsAndServers {
-            assetDefinitionStore.fetchXML(forContract: each.address, server: each.server)
-        }
-    }
-}
+//extension SettingsCoordinator: TransactionsServiceDelegate {
+//
+//    func didCompleteTransaction(in service: TransactionsService, transaction: TransactionInstance) {
+//        tokenCollection.refreshBalance(updatePolicy: .all)
+//    }
+//
+//    func didExtractNewContracts(in service: TransactionsService, contractsAndServers: [AddressAndRPCServer]) {
+//        for each in contractsAndServers {
+//            assetDefinitionStore.fetchXML(forContract: each.address, server: each.server)
+//        }
+//    }
+//}
 
 
 
@@ -702,9 +702,9 @@ extension SettingsCoordinator: ActivitiesViewControllerDelegate {
             sessions: sessionsProvider.activeSessions,
             transactionDataStore: transactionsDataStore,
             analytics: analytics,
-            tokensService: tokensService, networkService: networkService)
+            tokensService: tokensService, networkService: networkService, assetDefinitionStore: assetDefinitionStore)
         
-        transactionsService.delegate = self
+//        transactionsService.delegate = self
         transactionsService.start()
         let coordinator = TransactionsCoordinator(
             analytics: analytics,
@@ -1096,7 +1096,7 @@ extension SettingsCoordinator: ClearDappBrowserCacheCoordinatorDelegate {
 extension SettingsCoordinator: ToolsViewControllerDelegate {
     
     func checkTransactionStateSelected(in controller: ToolsViewController) {
-        let coordinator = CheckTransactionStateCoordinator(navigationController: navigationController, config: config, analytics: analytics)
+        let coordinator = CheckTransactionStateCoordinator(navigationController: navigationController, config: config, sessionsProvider: sessionsProvider)
         addCoordinator(coordinator)
         coordinator.delegate = self
         coordinator.start()
@@ -1107,7 +1107,7 @@ extension SettingsCoordinator: ToolsViewControllerDelegate {
     }
     
     func pingInfuraSelected(in controller: ToolsViewController) {
-        let coordinator = PingInfuraCoordinator(viewController: controller, analytics: analytics)
+        let coordinator = PingInfuraCoordinator(viewController: controller, analytics: analytics, sessionsProvider: sessionsProvider)
         coordinator.delegate = self
         coordinator.start()
         addCoordinator(coordinator)

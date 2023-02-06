@@ -40,7 +40,7 @@ extension Constants {
 
         public static let analyticsKey = ""
         public static let mailChimpListSpecificKey = "df306008c71da38ba3940d8643e25362"
-        public static let walletConnectProjectId = "8ba9ee138960775e5231b70cc5ef1c3a"
+        public static let walletConnectProjectId = "73a6c37191ac566feabe6ef5c8e8dda7"
         static let infuraKey = env("INFURAKEY") ?? "cda4f16979b941298843c90c14dc967f"
         static let etherscanKey = env("ETHERSCANKEY") ?? "JGST1ZY7VTCFDCU5PXTMPCBWCY5JA7QCIA"
         static let binanceSmartChainExplorerApiKey: String? = env("BINANCESMARTCHAINEXPLORERAPIKEY") ?? "BN85QQZAWGTSFPWCU3M4VQ6C7HNXTUBG5F"

@@ -124,7 +124,7 @@ PODS:
     - Result (~> 3.0)
   - Kanna (5.0.0)
   - KeychainSwift (10.0.0)
-  - Kingfisher (7.5.0)
+  - Kingfisher (7.6.0)
   - MailchimpSDK (2.0.4)
   - MBProgressHUD (1.2.0)
   - Mixpanel-swift (3.5.1):
@@ -418,7 +418,7 @@ SPEC CHECKSUMS:
   JSONRPCKit: b2991f2f242d72022083f9d869140dabd26d65c7
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   KeychainSwift: c0d1b0c2901b9873f07f0e560fde92929069e863
-  Kingfisher: b9c2a4a4af2990a768445c277359b27bde287d71
+  Kingfisher: b9bb0cd6907813593db268be80ddb931423c33b2
   MailchimpSDK: 794fd7cb1095e55c764d8a699eb11fb61849ed76
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Mixpanel-swift: 89d88f4d3dd1b4b3b69bd05060756eb1248b76f0

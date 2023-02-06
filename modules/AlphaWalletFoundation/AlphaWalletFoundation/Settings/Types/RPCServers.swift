@@ -546,7 +546,7 @@ public enum RPCServer: Hashable, CaseIterable {
             case .fantom_testnet: return "https://rpc.ankr.com/fantom_testnet"
             case .avalanche: return "https://api.avax.network/ext/bc/C/rpc"
             case .avalanche_testnet: return "https://api.avax-test.network/ext/bc/C/rpc"
-            case .polygon: return "https://polygon-mainnet.infura.io/v3/\(Constants.Credentials.infuraKey)"
+            case .polygon: return "https://polygon-rpc.com"
             case .mumbai_testnet: return "https://polygon-mumbai.infura.io/v3/\(Constants.Credentials.infuraKey)"
             case .optimistic: return "https://optimism-mainnet.infura.io/v3/\(Constants.Credentials.infuraKey)"
             case .cronosMainnet: return "https://evm.cronos.org"

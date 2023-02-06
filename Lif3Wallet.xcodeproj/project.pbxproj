@@ -656,6 +656,7 @@
 		104E54352991196C00C49760 /* Donations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104E54342991196C00C49760 /* Donations.swift */; };
 		10511C81296C71E800F3E826 /* AmountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10511C80296C71E800F3E826 /* AmountTextField.swift */; };
 		1051B67E297590A900E56C96 /* Lif3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051B67D297590A900E56C96 /* Lif3ViewController.swift */; };
+		1059D35A29914AFB0090BEC7 /* PreferencesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1059D35929914AFB0090BEC7 /* PreferencesTableViewCell.swift */; };
 		105E45B52954058A00CDC40C /* SeedPhraseContractView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */; };
 		10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E612949F98F00187A49 /* SecurityViewController.swift */; };
 		10645E642949FA9A00187A49 /* SecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E632949FA9A00187A49 /* SecurityViewModel.swift */; };
@@ -1553,6 +1554,7 @@
 		104E54342991196C00C49760 /* Donations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Donations.swift; sourceTree = "<group>"; };
 		10511C80296C71E800F3E826 /* AmountTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountTextField.swift; sourceTree = "<group>"; };
 		1051B67D297590A900E56C96 /* Lif3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3ViewController.swift; sourceTree = "<group>"; };
+		1059D35929914AFB0090BEC7 /* PreferencesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTableViewCell.swift; sourceTree = "<group>"; };
 		105E45B42954058A00CDC40C /* SeedPhraseContractView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseContractView.swift; sourceTree = "<group>"; };
 		10645E612949F98F00187A49 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		10645E632949FA9A00187A49 /* SecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewModel.swift; sourceTree = "<group>"; };
@@ -2110,6 +2112,7 @@
 				08A2532D294073EE00A31193 /* HideTokenSwitchTableViewCell.swift */,
 				08A2532E294073EE00A31193 /* SwitchTableViewCell.swift */,
 				10D0D6C529477BF7001A87EC /* ThemeSwitchTableViewCell.swift */,
+				1059D35929914AFB0090BEC7 /* PreferencesTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5552,6 +5555,7 @@
 				08A257EB294073F100A31193 /* PromptBackupWalletAfterReceivingEtherViewViewModel.swift in Sources */,
 				08A25610294073EF00A31193 /* SaveCustomRpcBrowseViewController.swift in Sources */,
 				08A25759294073F000A31193 /* TokenImageView.swift in Sources */,
+				1059D35A29914AFB0090BEC7 /* PreferencesTableViewCell.swift in Sources */,
 				08A257D7294073F100A31193 /* DefaultActivityItemViewCell.swift in Sources */,
 				08A2562F294073EF00A31193 /* SwitchView.swift in Sources */,
 				08A2583A294073F100A31193 /* UiTweaks.swift in Sources */,

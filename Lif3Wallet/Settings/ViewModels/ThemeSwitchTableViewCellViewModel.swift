@@ -7,7 +7,7 @@ struct ThemeSwitchTableViewCellViewModel {
     let icon: UIImage
     let value: Bool
 
-    var titleFont: UIFont = Fonts.regular(size: 17)
+    var titleFont: UIFont = Fonts.regular(size: 14)
     var titleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
 }
 

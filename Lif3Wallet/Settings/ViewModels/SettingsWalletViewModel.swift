@@ -17,6 +17,8 @@ class SettingsWalletViewModel {
     func numberOfRows() -> Int {
         return rows.count
     }
+    
+    
 
     func viewModel(for indexPath: IndexPath) -> SettingTableViewCellViewModel {
         let row = rows[indexPath.row]

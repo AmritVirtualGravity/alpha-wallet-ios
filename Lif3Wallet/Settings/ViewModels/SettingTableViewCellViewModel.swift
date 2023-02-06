@@ -11,14 +11,14 @@ struct SettingTableViewCellViewModel {
     let titleText: String
     var subTitleText: String?
     let icon: UIImage?
-    var accessoryType: UITableViewCell.AccessoryType = .none
+    var accessoryType: UITableViewCell.AccessoryType = .disclosureIndicator
     var accessoryView: UIView?
 
     var subTitleHidden: Bool {
         return subTitleText == nil
     }
 
-    var titleFont: UIFont = Fonts.regular(size: 17)
+    var titleFont: UIFont = Fonts.regular(size: 15)
     var titleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
     var subTitleFont: UIFont = Fonts.regular(size: 12)
     var subTitleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellSecondaryFont

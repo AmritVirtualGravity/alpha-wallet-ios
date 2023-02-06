@@ -25,7 +25,7 @@ class AdvancedSettingsViewController: UIViewController {
     private let viewModel: AdvancedSettingsViewModel
     private lazy var tableView: UITableView = {
         let tableView = UITableView.insetGroped
-        tableView.register(SettingTableViewCell.self)
+        tableView.register(PreferencesTableViewCell.self)
         tableView.register(HideTokenSwitchTableViewCell.self)
         tableView.register(ThemeSwitchTableViewCell.self)
         tableView.delegate = self
@@ -98,7 +98,7 @@ fileprivate extension AdvancedSettingsViewController {
                 cell.delegate = self
                 return cell
             default:
-                let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                let cell: PreferencesTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: viewModel)
                 return cell
             }
@@ -172,7 +172,7 @@ extension AdvancedSettingsViewController: UITableViewDataSource {
             vm = viewModel.buildCellViewModel(for: .tools)
         }
         
-        let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: PreferencesTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.configure(viewModel: vm)
         return cell
     }

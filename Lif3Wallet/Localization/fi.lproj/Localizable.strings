@@ -132,6 +132,7 @@
 "settings.activity.title" = "Activity";
 "settings.scanQrcode.title" = "Scan Qr Code";
 "settings.walletConnect.title" = "Wallet Connect";
+"settings.contact.title" = "Add Contact";
 "settings.notifications.title" = "Ilmoitukset";
 "settings.passcode.title" = "PIN-koodi";
 "settings.hideToken.title" = "Hide 0 Balance Token";

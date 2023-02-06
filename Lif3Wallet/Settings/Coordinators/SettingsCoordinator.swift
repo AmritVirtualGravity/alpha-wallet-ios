@@ -26,7 +26,11 @@ protocol SettingsCoordinatorDelegate: class, CanOpenURL {
     
 }
 
-class SettingsCoordinator: Coordinator {
+class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
+    func didClose(in coordinator: ContactListCoordinator) {
+        removeCoordinator(coordinator)
+    }
+    
     private let activitiesPipeLine: ActivitiesPipeLine
     private let sessionsProvider: SessionsProvider
     private let assetDefinitionStore: AssetDefinitionStore
@@ -730,6 +734,13 @@ extension SettingsCoordinator: ActivitiesViewControllerDelegate {
 
 
 extension SettingsCoordinator: SettingsViewControllerDelegate {
+    
+    func addContactSelected(in controller: SettingsViewController) {
+        let coordinator = ContactListCoordinator(analytics: analytics, wallet: account, navigationController: navigationController, domainResolutionService: domainResolutionService)
+        coordinator.delegate = self
+        coordinator.start()
+    }
+    
     
     func activitySelected(in controller: SettingsViewController) {
         let viewModel = ActivitiesViewModel(collection: .init())

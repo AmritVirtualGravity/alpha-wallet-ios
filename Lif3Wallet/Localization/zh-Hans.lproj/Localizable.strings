@@ -133,6 +133,7 @@
 "settings.activity.title" = "Activity";
 "settings.scanQrcode.title" = "Scan Qr Code";
 "settings.walletConnect.title" = "Wallet Connect";
+"settings.contact.title" = "Add Contact";
 "settings.notifications.title" = "通知设置";
 "settings.passcode.title" = "密码 / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";

@@ -8,18 +8,16 @@
 import UIKit
 import Combine
 
-class SettingTableViewCell: UITableViewCell {
+class PreferencesTableViewCell: UITableViewCell {
     let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 30),
-            imageView.heightAnchor.constraint(equalToConstant: 30),
+            imageView.widthAnchor.constraint(equalToConstant: 40),
+            imageView.heightAnchor.constraint(equalToConstant: 40),
         ])
-
         return imageView
     }()
 
@@ -60,14 +58,14 @@ class SettingTableViewCell: UITableViewCell {
 
         let stackView = [
             iconImageView, col1
-        ].asStackView(axis: .horizontal, spacing: 22, alignment: .center)
+        ].asStackView(axis: .horizontal, spacing: 16, alignment: .center)
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         contentView.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            stackView.anchorsConstraint(to: contentView, edgeInsets: .init(top: 5, left: 16, bottom: 5, right: 10))
+            stackView.anchorsConstraint(to: contentView, edgeInsets: .init(top: 10, left: 16, bottom: 10, right: 10))
         ])
     }
 

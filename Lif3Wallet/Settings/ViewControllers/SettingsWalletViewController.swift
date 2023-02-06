@@ -16,7 +16,7 @@ class SettingsWalletViewController: UIViewController {
     private let viewModel: SettingsWalletViewModel
     private lazy var tableView: UITableView = {
         let tableView = UITableView.insetGroped
-        tableView.register(SettingTableViewCell.self)
+        tableView.register(PreferencesTableViewCell.self)
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -61,7 +61,7 @@ extension SettingsWalletViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: PreferencesTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.configure(viewModel: viewModel.viewModel(for: indexPath))
 
         return cell

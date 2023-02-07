@@ -18,4 +18,12 @@ struct ContactListViewModel {
         let items = realm.objects(ContactRmModel.self)
         return Array(items)
     }
+    
+    func deleteContact(index: Int) {
+       let realm = try! Realm()
+       let contact = realm.objects(ContactRmModel.self)[index]
+        try! realm.write {
+            realm.delete(contact)
+        }
+   }
 }

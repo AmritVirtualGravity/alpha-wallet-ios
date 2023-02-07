@@ -28,6 +28,17 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
         self.delegate?.didSelectContactList(in: self, contact:  contact, contactIndex: indexPath.row)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            viewModel.deleteContact(index: indexPath.row)
+            contactTableView.reloadData()
+        }
+    }
+
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete

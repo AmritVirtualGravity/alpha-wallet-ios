@@ -33,6 +33,7 @@ class AddContactCoordinator: Coordinator {
         viewController.index = index
         if let contactData = contact {
             viewController.prepopulateContactData(contact: contactData)
+            viewController.configure()
         }
         navigationController.pushViewController(viewController, animated: true)
     }

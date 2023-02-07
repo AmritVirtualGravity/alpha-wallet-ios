@@ -27,4 +27,13 @@ struct AddContactViewModel {
         let items = realm.objects(ContactRmModel.self)
         return Array(items)
     }
+    
+    func updateContacts(index: Int, name: String, address: String) {
+        let realm = try! Realm()
+        let contact = realm.objects(ContactRmModel.self)[index]
+        try! realm.write {
+            contact.name = name
+            contact.walletAddress = address
+        }
+    }
 }

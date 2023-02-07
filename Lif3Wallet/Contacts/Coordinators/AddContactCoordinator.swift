@@ -27,9 +27,13 @@ class AddContactCoordinator: Coordinator {
         self.wallet = wallet
     }
 
-    func start(contact: ContactRmModel?) {
+    func start(contact: ContactRmModel?, index: Int?) {
         viewController.delegate = self
         viewController.contactData = contact
+        viewController.index = index
+        if let contactData = contact {
+            viewController.prepopulateContactData(contact: contactData)
+        }
         navigationController.pushViewController(viewController, animated: true)
     }
 

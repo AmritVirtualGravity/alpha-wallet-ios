@@ -12,7 +12,9 @@ import RealmSwift
 
 
 protocol ContactsListViewControllerDelegate: AnyObject {
-    func didSelectAddContact(in viewController: ContactsListViewController, contact: ContactRmModel?)
+    func didSelectAddContact(in viewController: ContactsListViewController)
+    
+    func didSelectContactList(in viewController: ContactsListViewController, contact: ContactRmModel?, contactIndex: Int?)
 }
 
 class ContactsListViewController: UIViewController {
@@ -57,7 +59,7 @@ class ContactsListViewController: UIViewController {
     }
 
     @IBAction func didTapAddContact(_ sender: Any) {
-        self.delegate?.didSelectAddContact(in: self, contact:  nil)
+        self.delegate?.didSelectAddContact(in: self)
     }
     
 }

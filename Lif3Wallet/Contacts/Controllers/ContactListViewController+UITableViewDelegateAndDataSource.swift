@@ -25,7 +25,12 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contact = viewModel.getContacts()[indexPath.row]
-        self.delegate?.didSelectAddContact(in: self, contact:  contact)
+        self.delegate?.didSelectContactList(in: self, contact:  contact, contactIndex: indexPath.row)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
     }
     
     

@@ -46,6 +46,7 @@ class AddContactViewController: UIViewController {
     weak var delegate: AddContactViewControllerDelegate?
     
     var contactData: ContactRmModel?
+    var index: Int?
 
     private lazy var containerView: ScrollableStackView = {
         let containerView = ScrollableStackView()
@@ -95,19 +96,14 @@ class AddContactViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-      
+        configure()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        prepopulateContactData()
-        configure()
     }
     
-    public func prepopulateContactData() {
-        guard let contact = contactData else {
-            return
-        }
+    public func prepopulateContactData(contact: ContactRmModel) {
         addressTextField.value = contact.walletAddress
         nameTextField.value = contact.name
     }
@@ -130,7 +126,12 @@ class AddContactViewController: UIViewController {
         if (!validate()) {
             return
         }
-        self.viewModel.addContacts(name: self.nameTextField.value.trimmed, address: self.addressTextField.value.trimmed)
+        
+        if let _ = contactData, let contactIndex = index {
+            self.viewModel.updateContacts(index: contactIndex, name: self.nameTextField.value.trimmed, address: self.addressTextField.value.trimmed)
+        } else {
+            self.viewModel.addContacts(name: self.nameTextField.value.trimmed, address: self.addressTextField.value.trimmed)
+        }
         self.navigationController?.popViewController(animated: true)
         
     }

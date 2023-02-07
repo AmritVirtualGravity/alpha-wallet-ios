@@ -17,6 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No contacts added. " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byk-FX-QY8">
+                                <rect key="frame" x="119.66666666666669" y="450" width="154" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="433-Ez-XHB">
                                 <rect key="frame" x="30" y="748" width="333" height="50"/>
                                 <constraints>
@@ -83,12 +89,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="UAv-5m-zuK" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="FIL-cb-gn6"/>
+                            <constraint firstItem="byk-FX-QY8" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Fm5-jc-YyG"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="433-Ez-XHB" secondAttribute="trailing" constant="30" id="Jft-Rt-YvP"/>
                             <constraint firstItem="UAv-5m-zuK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="L9P-We-yO4"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="433-Ez-XHB" secondAttribute="bottom" constant="20" id="OdQ-Pf-pX7"/>
                             <constraint firstItem="433-Ez-XHB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Tss-nH-T2D"/>
+                            <constraint firstItem="byk-FX-QY8" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="g50-yu-iW2"/>
                             <constraint firstItem="433-Ez-XHB" firstAttribute="top" secondItem="UAv-5m-zuK" secondAttribute="bottom" constant="26" id="gYA-dF-ZBi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UAv-5m-zuK" secondAttribute="trailing" id="mWK-Cz-JpN"/>
+                            <constraint firstItem="byk-FX-QY8" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="pEU-30-HS7"/>
                             <constraint firstItem="UAv-5m-zuK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tdf-T7-K8c"/>
                         </constraints>
                     </view>
@@ -96,6 +105,7 @@
                     <connections>
                         <outlet property="addContactsButton" destination="433-Ez-XHB" id="trD-hC-RLF"/>
                         <outlet property="contactTableView" destination="UAv-5m-zuK" id="4EL-Mt-ck0"/>
+                        <outlet property="noContactsLabel" destination="byk-FX-QY8" id="DSH-rs-zgb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

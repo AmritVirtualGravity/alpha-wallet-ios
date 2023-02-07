@@ -18,11 +18,11 @@ class ContactListCoordinator: Coordinator, ContactsListViewControllerDelegate, C
         removeCoordinator(coordinator)
     }
     
-    func didSelectAddContact(in viewController: ContactsListViewController) {
+    func didSelectAddContact(in viewController: ContactsListViewController, contact: ContactRmModel?) {
        let coordinator = AddContactCoordinator(analytics: analytics, wallet: wallet, navigationController: navigationController, domainResolutionService: domainResolutionService)
         addCoordinator(coordinator)
         coordinator.delegate = self
-        coordinator.start()
+        coordinator.start(contact: contact)
     }
     
     var coordinators: [Coordinator] = []

@@ -2,7 +2,7 @@
 //  contact.swift
 //  Lif3Wallet
 //
-//  Created by Vanila Tech Bibhut on 2/6/23.
+//  Created by Bibhut on 2/6/23.
 //
 
 import Foundation

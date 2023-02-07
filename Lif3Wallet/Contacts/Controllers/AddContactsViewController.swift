@@ -44,6 +44,8 @@ class AddContactViewController: UIViewController {
 
 
     weak var delegate: AddContactViewControllerDelegate?
+    
+    var contactData: ContactRmModel?
 
     private lazy var containerView: ScrollableStackView = {
         let containerView = ScrollableStackView()
@@ -92,16 +94,24 @@ class AddContactViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-        configure()
+      
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        
+        prepopulateContactData()
+        configure()
     }
+    
+    public func prepopulateContactData() {
+        guard let contact = contactData else {
+            return
+        }
+        addressTextField.value = contact.walletAddress
+        nameTextField.value = contact.name
+    }
+    
 
     public func configure() {
         addressTextField.label.text = viewModel.addressLabel
@@ -109,18 +119,18 @@ class AddContactViewController: UIViewController {
         buttonsBar.configure()
         let saveButton = buttonsBar.buttons[0]
         saveButton.addTarget(self, action: #selector(addContactButtonSelected), for: .touchUpInside)
-        saveButton.setTitle(R.string.localizable.settingsContactTitle(), for: .normal)
+        if let _ = contactData {
+            saveButton.setTitle(R.string.localizable.settingsUpdateContactTitle(), for: .normal)
+        } else {
+            saveButton.setTitle(R.string.localizable.settingsContactTitle(), for: .normal)
+        }
     }
 
     @objc private func addContactButtonSelected(_ sender: UIButton) {
-        
         if (!validate()) {
             return
         }
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(ContactRmModel(name: nameTextField.value.trimmed, walletAddress: addressTextField.value.trimmed))
-        }
+        self.viewModel.addContacts(name: self.nameTextField.value.trimmed, address: self.addressTextField.value.trimmed)
         self.navigationController?.popViewController(animated: true)
         
     }
@@ -148,15 +158,14 @@ class AddContactViewController: UIViewController {
     
     
     func checkIfAddressAlreadyExist(walletAddress: String) -> Bool{
-        let realm = try! Realm()
-        let items = realm.objects(ContactRmModel.self)
-        return items.contains { contact in
+//        let realm = try! Realm()
+//        let items = realm.objects(ContactRmModel.self)
+      let contactList =   viewModel.getContacts()
+        return contactList.contains { contact in
             contact.walletAddress == walletAddress
         }
         
     }
-   
-
     
 }
 
@@ -187,12 +196,10 @@ extension AddContactViewController: AddressTextFieldDelegate {
 
     func didPaste(in textField: AddressTextField) {
         textField.errorState = .none
-//        updateContractValue(value: textField.value.trimmed)
         view.endEditing(true)
     }
 
     func shouldReturn(in textField: AddressTextField) -> Bool {
-//        symbolTextField.becomeFirstResponder()
         return true
     }
 

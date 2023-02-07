@@ -712,6 +712,7 @@
 		10DADAA0294B17EA00413AA0 /* SettingsWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */; };
 		10DDA3AD296718FF00268A42 /* tokensToBlackList.json in Resources */ = {isa = PBXBuildFile; fileRef = 10DDA3AC296718FF00268A42 /* tokensToBlackList.json */; };
 		10DE578A296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */; };
+		10EAA3C229921B7600636ABC /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EAA3C129921B7600636ABC /* ContactListViewModel.swift */; };
 		10F6DAB1295B246C00715C7F /* Lif3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10F6DAB0295B246C00715C7F /* Lif3.storyboard */; };
 		10F6DAB3295B24D300715C7F /* Lif3WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */; };
 		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
@@ -1618,6 +1619,7 @@
 		10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewModel.swift; sourceTree = "<group>"; };
 		10DDA3AC296718FF00268A42 /* tokensToBlackList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tokensToBlackList.json; sourceTree = "<group>"; };
 		10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoViewCardTokenScriptActionCoordinator.swift; sourceTree = "<group>"; };
+		10EAA3C129921B7600636ABC /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
 		10F6DAB0295B246C00715C7F /* Lif3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lif3.storyboard; sourceTree = "<group>"; };
 		10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3WebViewController.swift; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
@@ -3684,6 +3686,7 @@
 			isa = PBXGroup;
 			children = (
 				100DD71A2991585500D3ABEA /* AddContactViewModel.swift */,
+				10EAA3C129921B7600636ABC /* ContactListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -5599,6 +5602,7 @@
 				08A2577A294073F000A31193 /* ScrollableSegmentedControl.swift in Sources */,
 				08A25802294073F100A31193 /* SelectTokenViewModel.swift in Sources */,
 				10B2A32C29911A6700908F41 /* TransactionConfirmationRPCServerInfoView.swift in Sources */,
+				10EAA3C229921B7600636ABC /* ContactListViewModel.swift in Sources */,
 				08A257B6294073F000A31193 /* ImportSelectionType.swift in Sources */,
 				08A255F6294073EF00A31193 /* EnabledServersViewModel.swift in Sources */,
 				08A2584D294073F100A31193 /* TokenCardWebView.swift in Sources */,

@@ -2,7 +2,7 @@
 //  ContactsListViewController.swift
 //  Lif3Wallet
 //
-//  Created by Vanila Tech Bibhut on 2/2/23.
+//  Created by  Bibhut on 2/2/23.
 //
 
 import UIKit
@@ -12,18 +12,20 @@ import RealmSwift
 
 
 protocol ContactsListViewControllerDelegate: AnyObject {
-    func didSelectAddContact(in viewController: ContactsListViewController)
+    func didSelectAddContact(in viewController: ContactsListViewController, contact: ContactRmModel?)
 }
 
 class ContactsListViewController: UIViewController {
     
     var delegate: ContactsListViewControllerDelegate?
+    var viewModel = ContactListViewModel()
     
     // MARK: - Contants
     static func instantiate() -> ContactsListViewController {
         let controllerStr = String(describing: ContactsListViewController.self)
         return UIStoryboard(name: "Contact", bundle: nil).instantiateViewController(withIdentifier: controllerStr) as! ContactsListViewController
     }
+    @IBOutlet weak var noContactsLabel: UILabel!
     
     
     @IBOutlet weak var contactTableView: UITableView! {
@@ -42,8 +44,6 @@ class ContactsListViewController: UIViewController {
         }
     }
     
-    let items = try! Realm().objects(ContactRmModel.self)
-    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +52,12 @@ class ContactsListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         contactTableView.reloadData()
+        noContactsLabel.isHidden = viewModel.getContacts().count <= 0 ? false : true
+        contactTableView.isHidden = viewModel.getContacts().count <= 0 ? true : false
     }
 
     @IBAction func didTapAddContact(_ sender: Any) {
-        self.delegate?.didSelectAddContact(in: self)
+        self.delegate?.didSelectAddContact(in: self, contact:  nil)
     }
     
 }

@@ -28,8 +28,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="eez-0G-MEW"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Add Contact">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="didTapAddContact:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Wo8-Li-leo"/>
                                 </connections>
@@ -111,34 +115,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="932.06106870229007" y="-2.1126760563380285"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="mDa-yg-h1M">
-            <objects>
-                <viewController id="a4d-4d-SkP" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5OB-fR-EuK">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lpc-hP-vIw" customClass="Addres">
-                                <rect key="frame" x="20" y="421.66666666666669" width="353" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="PT7-09-ymv"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Lpc-hP-vIw" firstAttribute="leading" secondItem="PT7-09-ymv" secondAttribute="leading" constant="20" id="5Bz-71-6jF"/>
-                            <constraint firstItem="Lpc-hP-vIw" firstAttribute="centerY" secondItem="PT7-09-ymv" secondAttribute="centerY" id="R2k-lX-Ldq"/>
-                            <constraint firstItem="PT7-09-ymv" firstAttribute="trailing" secondItem="Lpc-hP-vIw" secondAttribute="trailing" constant="20" id="kHY-1E-rUg"/>
-                            <constraint firstItem="Lpc-hP-vIw" firstAttribute="centerX" secondItem="PT7-09-ymv" secondAttribute="centerX" id="qX4-9T-2sg"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nUm-SA-Y2p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1674" y="-2"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="x3S-gc-sG2">

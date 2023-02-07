@@ -1,4 +1,3 @@
-// Copyright SIX DAY LLC. All rights reserved.
 
 import Foundation
 import UIKit
@@ -11,8 +10,6 @@ protocol AddContactViewControllerDelegate: AnyObject {
 }
 
 
-
-
 class AddContactViewController: UIViewController {
     
     private var viewModel = AddContactViewModel()
@@ -21,7 +18,6 @@ class AddContactViewController: UIViewController {
         textField.returnKeyType = .done
         textField.inputAccessoryButtonType = .done
         textField.delegate = self
-
         return textField
     }()
 
@@ -38,7 +34,6 @@ class AddContactViewController: UIViewController {
     private let changeServerButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(Configuration.Color.Semantic.navigationbarButtonItemTint, for: .normal)
-
         return button
     }()
 
@@ -53,31 +48,24 @@ class AddContactViewController: UIViewController {
         containerView.stackView.spacing = ScreenChecker.size(big: 24, medium: 24, small: 20)
         containerView.stackView.axis = .vertical
         containerView.scrollView.showsVerticalScrollIndicator = false
-
         return containerView
     }()
 
     init(domainResolutionService: DomainResolutionServiceType) {
         self.domainResolutionService = domainResolutionService
         super.init(nibName: nil, bundle: nil)
-
         self.hidesBottomBarWhenPushed = true
         self.navigationItem.rightBarButtonItem = .init(customView: changeServerButton)
-
         self.containerView.stackView.addArrangedSubviews([
             .spacer(height: 0),
             self.nameTextField.defaultLayout(),
             //NOTE: 0 for applying insets of stack view
             self.addressTextField.defaultLayout(edgeInsets: .zero),
         ])
-
         buttonsBar.buttons[0].isEnabled = true
-
         let footerBar = ButtonsBarBackgroundView(buttonsBar: buttonsBar)
-
         view.addSubview(footerBar)
         view.addSubview(containerView)
-
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: DataEntry.Metric.Container.xMargin),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -DataEntry.Metric.Container.xMargin),
@@ -138,7 +126,6 @@ class AddContactViewController: UIViewController {
     
     func validate() -> Bool {
         var validate = false
-        
         if !CryptoAddressValidator.isValidAddress(addressTextField.value) {
             addressTextField.errorState = .error("Please enter valid address")
             validate = false
@@ -159,22 +146,16 @@ class AddContactViewController: UIViewController {
     
     
     func checkIfAddressAlreadyExist(walletAddress: String) -> Bool{
-//        let realm = try! Realm()
-//        let items = realm.objects(ContactRmModel.self)
-      let contactList =   viewModel.getContacts()
+      let contactList = viewModel.getContacts()
         return contactList.contains { contact in
             contact.walletAddress == walletAddress
         }
-        
     }
-    
 }
-
 
 
 extension AddContactViewController: AddressTextFieldDelegate {
     func doneButtonTapped(for textField: AddressTextField) {
-//        symbolTextField.becomeFirstResponder()
         view.endEditing(true)
     }
 
@@ -201,18 +182,17 @@ extension AddContactViewController: AddressTextFieldDelegate {
     }
 
     func shouldReturn(in textField: AddressTextField) -> Bool {
+        view.endEditing(true)
         return true
     }
 
     func didChange(to string: String, in textField: AddressTextField) {
-        if CryptoAddressValidator.isValidAddress(string) {
-//            updateContractValue(value: string)
-        }
     }
 }
 
 extension AddContactViewController: TextFieldDelegate {
     func shouldReturn(in textField: TextField) -> Bool {
+        view.endEditing(true)
         return true
     }
     

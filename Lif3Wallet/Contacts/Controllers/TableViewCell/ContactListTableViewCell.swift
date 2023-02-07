@@ -2,7 +2,7 @@
 //  ContactListTableViewCell.swift
 //  Lif3Wallet
 //
-//  Created by Vanila Tech Bibhut on 2/2/23.
+//  Created by Bibhut on 2/2/23.
 //
 
 import UIKit

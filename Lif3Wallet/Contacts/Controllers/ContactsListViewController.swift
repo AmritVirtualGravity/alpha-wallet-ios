@@ -13,7 +13,6 @@ import RealmSwift
 
 protocol ContactsListViewControllerDelegate: AnyObject {
     func didSelectAddContact(in viewController: ContactsListViewController)
-    
     func didSelectContactList(in viewController: ContactsListViewController, contact: ContactRmModel?, contactIndex: Int?)
 }
 
@@ -39,10 +38,8 @@ class ContactsListViewController: UIViewController {
     
     @IBOutlet weak var addContactsButton: UIButton! {
         didSet {
-            addContactsButton.layer.cornerRadius = 10
-            addContactsButton.setTitle("Add Contact", for: .normal)
+            addContactsButton.layer.cornerRadius = 14.0
             addContactsButton.backgroundColor = Configuration.Color.Semantic.primaryButtonBackground
-            addContactsButton.setTitleColor(.black, for: .normal)
         }
     }
     

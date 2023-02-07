@@ -161,7 +161,7 @@ struct Configuration {
             }
 
             static let tableViewBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
+                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
             }
             static let tableViewCellBackground = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)

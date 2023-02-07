@@ -32,7 +32,9 @@ class SettingsViewController: UIViewController {
         tableView.register(HideTokenSwitchTableViewCell.self)
         tableView.register(ThemeSwitchTableViewCell.self)
         tableView.separatorStyle = .singleLine
+        tableView.separatorColor =  .white.withAlphaComponent(0.1)
         tableView.estimatedRowHeight = DataEntry.Metric.anArbitraryRowHeightSoAutoSizingCellsWorkIniOS10
+        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
         tableView.delegate = self
 
         return tableView
@@ -314,6 +316,6 @@ extension SettingsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return viewModel.heightForRow(at: indexPath, fallbackHeight: tableView.rowHeight)
+        return viewModel.heightForRow(at: indexPath, fallbackHeight: 40)
     }
 }

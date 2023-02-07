@@ -18,7 +18,13 @@ class SwitchTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
+        
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: 28),
+            imageView.heightAnchor.constraint(equalToConstant: 28),
+        ])
         return imageView
+        
     }()
 
     private let titleLabel: UILabel = {
@@ -30,6 +36,10 @@ class SwitchTableViewCell: UITableViewCell {
     private let switchView: UISwitch = {
         let switchView = UISwitch()
         switchView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            switchView.widthAnchor.constraint(equalToConstant: 28),
+            switchView.heightAnchor.constraint(equalToConstant: 28),
+        ])
         return switchView
     }()
 

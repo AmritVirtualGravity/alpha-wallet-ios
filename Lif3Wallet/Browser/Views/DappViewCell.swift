@@ -15,7 +15,16 @@ class DappViewCell: UICollectionViewCell {
     private let jiggleAnimationKey = "jiggle"
     private var viewModel: DappViewCellViewModel?
     private let background = UIView()
-    private var imageHolder = ContainerViewWithShadow(aroundView: UIImageView())
+//    private var imageHolder = ContainerViewWithShadow(aroundView: UIImageView())
+    
+    private let imageView: UIImageView = {
+         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+         NSLayoutConstraint.activate([
+             imageView.widthAnchor.constraint(equalToConstant: 30)
+         ])
+         return imageView
+     }()
     private let titleLabel = UILabel()
     private let domainLabel = UILabel()
     private let deleteButton = UIButton(type: .system)
@@ -43,40 +52,41 @@ class DappViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        background.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(background)
+//        background.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.addSubview(background)
 
         let stackView = [
-            .spacer(height: marginAroundImage),
-            imageHolder,
-            .spacer(height: 9),
+            imageView,
             titleLabel,
-            domainLabel,
-        ].asStackView(axis: .vertical, spacing: 0, alignment: .center)
+//            domainLabel,
+        ].asStackView(axis: .horizontal, spacing: 5, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         background.addSubview(stackView)
+        contentView.addSubview(stackView)
 
         deleteButton.addTarget(self, action: #selector(deleteDapp), for: .touchUpInside)
         deleteButton.isHidden = true
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        background.addSubview(deleteButton)
+        contentView.addSubview(deleteButton)
 
-        let xMargin = CGFloat(0)
-        let yMargin = CGFloat(0)
+//        let xMargin = CGFloat(0)
+//        let yMargin = CGFloat(0)
         NSLayoutConstraint.activate([
-            background.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: xMargin),
-            background.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -xMargin),
-            background.topAnchor.constraint(equalTo: contentView.topAnchor, constant: yMargin),
-            background.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -yMargin),
+//            background.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: xMargin),
+//            background.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -xMargin),
+//            background.topAnchor.constraint(equalTo: contentView.topAnchor, constant: yMargin),
+//            background.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -yMargin),
+            
+            stackView.anchorsConstraint(to: contentView, edgeInsets: .init(top: 10, left: 10, bottom: 10, right: 10)),
+//
+//            stackView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+//            stackView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
+//            stackView.topAnchor.constraint(equalTo: background.topAnchor),
+//            stackView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
 
-            stackView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: background.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: background.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
-
-            imageHolder.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: marginAroundImage),
-            imageHolder.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -marginAroundImage),
-            imageHolder.widthAnchor.constraint(equalTo: imageHolder.heightAnchor),
+//            imageHolder.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: marginAroundImage),
+//            imageHolder.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -marginAroundImage),
+//            imageHolder.widthAnchor.constraint(equalTo: imageHolder.heightAnchor),
 
             deleteButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -3),
             //Some allowance so the delete button is not clipped while jiggling
@@ -95,32 +105,35 @@ class DappViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        if let viewModel = viewModel {
-            imageHolder.configureShadow(color: viewModel.imageViewShadowColor, offset: viewModel.imageViewShadowOffset, opacity: viewModel.imageViewShadowOpacity, radius: viewModel.imageViewShadowRadius, cornerRadius: imageHolder.frame.size.width / 2)
-        }
+//        if let viewModel = viewModel {
+//            imageHolder.configureShadow(color: viewModel.imageViewShadowColor, offset: viewModel.imageViewShadowOffset, opacity: viewModel.imageViewShadowOpacity, radius: viewModel.imageViewShadowRadius, cornerRadius: imageHolder.frame.size.width / 2)
+//        }
     }
 
     func configure(viewModel: DappViewCellViewModel) {
         self.viewModel = viewModel
 
-        contentView.backgroundColor = viewModel.backgroundColor
+//        contentView.backgroundColor = viewModel.backgroundColor
+        contentView.layer.cornerRadius = 12
+        contentView.layer.borderWidth = 1
+        contentView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        layer.borderColor  = UIColor.clear.cgColor
+//        background.backgroundColor = viewModel.backgroundColor
+//        background.clipsToBounds = true
 
-        background.backgroundColor = viewModel.backgroundColor
-        background.clipsToBounds = true
+//        imageHolder.configureShadow(color: viewModel.imageViewShadowColor, offset: viewModel.imageViewShadowOffset, opacity: viewModel.imageViewShadowOpacity, radius: viewModel.imageViewShadowRadius, cornerRadius: imageHolder.frame.size.width / 2)
 
-        imageHolder.configureShadow(color: viewModel.imageViewShadowColor, offset: viewModel.imageViewShadowOffset, opacity: viewModel.imageViewShadowOpacity, radius: viewModel.imageViewShadowRadius, cornerRadius: imageHolder.frame.size.width / 2)
-
-        let imageView = imageHolder.childView
-        imageView.backgroundColor = viewModel.backgroundColor
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
+//        let imageView = imageHolder.childView
+//        imageView.backgroundColor = viewModel.backgroundColor
+//        imageView.contentMode = .scaleAspectFill
+//        imageView.clipsToBounds = true
         imageView.kf.setImage(with: viewModel.imageUrl, placeholder: viewModel.fallbackImage)
 
         deleteButton.tintColor = Configuration.Color.Semantic.deleteButtonTitle
         deleteButton.imageView?.tintColor = Configuration.Color.Semantic.deleteButtonTitle
         deleteButton.setImage(R.image.onboarding_failed(), for: .normal)
 
-        titleLabel.textAlignment = .center
+        titleLabel.textAlignment = .left
         titleLabel.textColor = viewModel.titleColor
         titleLabel.font = viewModel.titleFont
         titleLabel.text = viewModel.title

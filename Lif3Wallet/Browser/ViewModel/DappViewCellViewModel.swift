@@ -51,7 +51,7 @@ struct DappViewCellViewModel: Hashable {
     }
 
     var titleFont: UIFont {
-        return Fonts.regular(size: 12)
+        return Fonts.semibold(size: 14)
     }
 
     var domainNameColor: UIColor {

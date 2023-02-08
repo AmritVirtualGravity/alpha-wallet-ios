@@ -462,6 +462,7 @@
 "dappBrowser.title" = "";
 "dappBrowser.switchServer" = "Connected to: %@";
 "myDappsButton.imageLabel" = "My Bookmarks";
+"bookmarks.titleLabel" = "Bookmarks";
 "discoverDappsButton.imageLabel" = "Discover Dapps";
 "historyButton.imageLabel" = "My History";
 "addButton.title" = "Add";

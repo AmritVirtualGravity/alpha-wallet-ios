@@ -47,9 +47,9 @@ class DappsHomeViewControllerHeaderView: UICollectionReusableView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -22),
             stackView.bottomAnchor.constraint(equalTo: exitEditingModeButton.topAnchor, constant: 0),
             myDappsButton.widthAnchor.constraint(equalTo: historyButton.widthAnchor),
-            bookMarksLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            exitEditingModeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
-            exitEditingModeButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            bookMarksLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
+            exitEditingModeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 22),
+            exitEditingModeButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
         ])
     }
 

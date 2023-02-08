@@ -163,9 +163,9 @@ PODS:
     - Realm (= 10.32.3)
   - Result (3.2.4)
   - SAMKeychain (1.5.3)
-  - SDWebImage (5.15.0):
-    - SDWebImage/Core (= 5.15.0)
-  - SDWebImage/Core (5.15.0)
+  - SDWebImage (5.15.2):
+    - SDWebImage/Core (= 5.15.2)
+  - SDWebImage/Core (5.15.2)
   - SDWebImageSVGCoder (1.6.1):
     - SDWebImage/Core (~> 5.6)
   - secp256k1_ios (0.1.3)
@@ -432,7 +432,7 @@ SPEC CHECKSUMS:
   RealmSwift: 7c181da8fa1c2fe613656a77c198d6a3dc3879a1
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SDWebImage: 9bec4c5cdd9579e1f57104735ee0c37df274d593
+  SDWebImage: 8ab87d4b3e5cc4927bd47f78db6ceb0b94442577
   SDWebImageSVGCoder: 6fc109f9c2a82ab44510fff410b88b1a6c271ee8
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4

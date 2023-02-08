@@ -45,6 +45,8 @@ class BrowserHomeViewController: UIViewController {
             collectionView.reloadData()
         }
     }
+    
+    private let titleLabel = UILabel()
     private var timerToCheckIfStillEditing: Timer?
     private let viewModel: BrowserHomeViewModel
     private var browserNavBar: DappBrowserNavigationBar? {
@@ -52,17 +54,18 @@ class BrowserHomeViewController: UIViewController {
     }
     lazy private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let fixedGutter = CGFloat(24)
+        let fixedGutter = CGFloat(16)
         let availableWidth = UIScreen.main.bounds.size.width - (2 * fixedGutter)
         let numberOfColumns: CGFloat
         if ScreenChecker().isBigScreen {
-            numberOfColumns = 6
+            numberOfColumns = 4
         } else {
-            numberOfColumns = 3
+            numberOfColumns = 2
         }
         let dimension = (availableWidth / numberOfColumns).rounded(.down)
         //Using a sizing cell doesn't get the same reason after we change network. Resorting to hardcoding the width and height difference
-        let itemSize = CGSize(width: dimension, height: dimension + 30)
+        let itemSize = CGSize(width: dimension - 10, height: 55 )
+//        let itemSize = CGSize(width: dimension, height: dimension + 30)
         let additionalGutter = (availableWidth - itemSize.width * numberOfColumns) / (numberOfColumns + 1)
         layout.itemSize = itemSize
         layout.minimumInteritemSpacing = 0
@@ -72,6 +75,7 @@ class BrowserHomeViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.registerSupplementaryView(DappsHomeViewControllerHeaderView.self, of: UICollectionView.elementKindSectionHeader)
         collectionView.register(DappViewCell.self)
+        
         collectionView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         collectionView.delegate = self
 
@@ -157,11 +161,13 @@ extension BrowserHomeViewController: UICollectionViewDelegateFlowLayout {
 
         delegate?.didTap(bookmark: dataSource.item(at: indexPath).bookmark, in: self)
     }
+    
+    
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let headerView = DappsHomeViewControllerHeaderView()
         headerView.configure()
-        return headerView.systemLayoutSizeFitting(.init(width: collectionView.frame.size.width, height: 1000))
+        return headerView.systemLayoutSizeFitting(.init(width: collectionView.frame.size.width, height: 50))
     }
 }
 

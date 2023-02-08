@@ -460,6 +460,7 @@
 "dappBrowser.title" = "";
 "dappBrowser.switchServer" = "已连接到： %@";
 "myDappsButton.imageLabel" = "我的书签";
+"bookmarks.titleLabel" = "Bookmarks";
 "discoverDappsButton.imageLabel" = "发现 DApp";
 "historyButton.imageLabel" = "我的历史记录";
 "addButton.title" = "添加";

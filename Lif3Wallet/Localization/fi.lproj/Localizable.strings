@@ -461,6 +461,7 @@
 "dappBrowser.title" = "";
 "dappBrowser.switchServer" = "Kytketty verkko: %@";
 "myDappsButton.imageLabel" = "Kirjanmerkit";
+"bookmarks.titleLabel" = "Bookmarks";
 "discoverDappsButton.imageLabel" = "Etsi Dapps-sovelluksia";
 "historyButton.imageLabel" = "Selaushistoria";
 "addButton.title" = "Lisää";

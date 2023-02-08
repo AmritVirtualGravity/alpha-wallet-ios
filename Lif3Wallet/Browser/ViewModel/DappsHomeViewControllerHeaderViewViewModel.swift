@@ -29,4 +29,13 @@ struct DappsHomeViewControllerHeaderViewViewModel {
     var historyButtonTitle: String {
         return R.string.localizable.historyButtonImageLabel()
     }
+    
+    var bookmarksTitle: String {
+        return R.string.localizable.bookmarksTitleLabel()
+    }
+    
+    var font: UIFont {
+        return Fonts.semibold(size: 15)
+    }
+    
 }

@@ -35,7 +35,7 @@ struct DappsHomeViewControllerHeaderViewViewModel {
     }
     
     var font: UIFont {
-        return Fonts.semibold(size: 15)
+        return Fonts.semibold(size: 20)
     }
     
 }

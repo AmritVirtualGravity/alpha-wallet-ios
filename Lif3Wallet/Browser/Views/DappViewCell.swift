@@ -61,7 +61,7 @@ class DappViewCell: UICollectionViewCell {
 //            domainLabel,
         ].asStackView(axis: .horizontal, spacing: 5, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        background.addSubview(stackView)
+//        background.addSubview(stackView)
         contentView.addSubview(stackView)
 
         deleteButton.addTarget(self, action: #selector(deleteDapp), for: .touchUpInside)
@@ -115,9 +115,7 @@ class DappViewCell: UICollectionViewCell {
 
 //        contentView.backgroundColor = viewModel.backgroundColor
         contentView.layer.cornerRadius = 12
-        contentView.layer.borderWidth = 1
         contentView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
-        layer.borderColor  = UIColor.clear.cgColor
 //        background.backgroundColor = viewModel.backgroundColor
 //        background.clipsToBounds = true
 

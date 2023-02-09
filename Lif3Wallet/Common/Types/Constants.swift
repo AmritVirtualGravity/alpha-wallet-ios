@@ -37,6 +37,8 @@ extension Constants {
 
     static let dappsBrowserURL = URL(string: "http://aw.app")!
     
+    static let deBankURL = "http:debank.com/profile/"
+    
     //Swap URL
     static let swapWebsiteUrl  = "https://lif3.com/swap"
     //Life URL

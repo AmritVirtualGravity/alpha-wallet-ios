@@ -377,7 +377,9 @@ extension SettingsCoordinator: SelectServiceToSwapCoordinatorDelegate {
 
 extension SettingsCoordinator: TokensCoordinatorDelegate {
     func openDeBankUrl(in coordinator: TokensCoordinator) {
-       //
+//        if let deBankUrl = URL(string: Constants.deBankURL + account.address.eip55String) {
+//            openURLInBrowser(url: deBankUrl)
+//        }
     }
     
     

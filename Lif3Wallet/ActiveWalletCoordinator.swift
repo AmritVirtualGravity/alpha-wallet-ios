@@ -929,7 +929,6 @@ extension ActiveWalletCoordinator: WhereAreMyTokensCoordinatorDelegate {
 
 extension ActiveWalletCoordinator: TokensCoordinatorDelegate {
     func openDeBankUrl(in coordinator: TokensCoordinator) {
-        print(Constants.deBankURL + wallet.address.eip55String)
         if let deBankUrl = URL(string: Constants.deBankURL + wallet.address.eip55String) {
             openURLInBrowser(url: deBankUrl)
         }

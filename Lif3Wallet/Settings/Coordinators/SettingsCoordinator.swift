@@ -376,6 +376,12 @@ extension SettingsCoordinator: SelectServiceToSwapCoordinatorDelegate {
 
 
 extension SettingsCoordinator: TokensCoordinatorDelegate {
+    func openDeBankUrl(in coordinator: TokensCoordinator) {
+//        if let deBankUrl = URL(string: Constants.deBankURL + account.address.eip55String) {
+//            openURLInBrowser(url: deBankUrl)
+//        }
+    }
+    
     
     func show(error: Error) {
         //TODO Not comprehensive. Example, if we are showing a token instance view and tap on unverified to open browser, this wouldn't owrk

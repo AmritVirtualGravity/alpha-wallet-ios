@@ -144,6 +144,7 @@
 "settings.section.wallet.title" = "Lompakko";
 "settings.change.wallet.title" = "Vaihda / lisää lomapakko";
 "settings.show.my.wallet.title" = "Näytä lompakon osoite";
+"settings.view.on.debank.title" = "View on DeBank";
 "suppport.title" = "Tuki";
 "transactions.noTransactions.label.title" = "Ei vielä tapahtumia!";
 "wallet.navigation.title" = "Vaihda lompakkoa";

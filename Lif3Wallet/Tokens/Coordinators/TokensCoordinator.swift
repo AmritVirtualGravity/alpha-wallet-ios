@@ -20,6 +20,7 @@ protocol TokensCoordinatorDelegate: CanOpenURL, SendTransactionDelegate, BuyCryp
     func whereAreMyTokensSelected(in coordinator: TokensCoordinator)
     func didSelectAccount(account: Wallet, in coordinator: TokensCoordinator)
     func viewWillAppearOnce(in coordinator: TokensCoordinator)
+    func openDeBankUrl(in coordinator: TokensCoordinator)
 }
 
 class TokensCoordinator: Coordinator {
@@ -247,11 +248,17 @@ extension TokensCoordinator: TokensViewControllerDelegate {
         }
         alertController.addAction(copyAddressAction)
 
-        let showMyWalletAddressAction = UIAlertAction(title: R.string.localizable.settingsShowMyWalletTitle(), style: .default) { [weak self] _ in
+//        let showMyWalletAddressAction = UIAlertAction(title: R.string.localizable.settingsShowMyWalletTitle(), style: .default) { [weak self] _ in
+//            guard let strongSelf = self else { return }
+//            strongSelf.delegate?.didTap(suggestedPaymentFlow: .payment(type: .request, server: server), viewController: .none, in: strongSelf)
+//        }
+//        alertController.addAction(showMyWalletAddressAction)
+        
+        let viewOnDeBankAction = UIAlertAction(title: R.string.localizable.settingsViewOnDebankTitle(), style: .default) { [weak self] _ in
             guard let strongSelf = self else { return }
-            strongSelf.delegate?.didTap(suggestedPaymentFlow: .payment(type: .request, server: server), viewController: .none, in: strongSelf)
+            strongSelf.delegate?.openDeBankUrl(in: strongSelf)
         }
-        alertController.addAction(showMyWalletAddressAction)
+        alertController.addAction(viewOnDeBankAction)
 
         if config.enabledServers.contains(.main) {
             let buyAction = UIAlertAction(title: R.string.localizable.buyCryptoTitle(), style: .default) { [weak self] _ in
@@ -275,11 +282,11 @@ extension TokensCoordinator: TokensViewControllerDelegate {
 
         alertController.addAction(swapAction)
 
-        let renameThisWalletAction = UIAlertAction(title: R.string.localizable.tokensWalletRenameThisWallet(), style: .default) { [weak self] _ in
-            guard let strongSelf = self else { return }
-            strongSelf.didPressRenameThisWallet()
-        }
-        alertController.addAction(renameThisWalletAction)
+//        let renameThisWalletAction = UIAlertAction(title: R.string.localizable.tokensWalletRenameThisWallet(), style: .default) { [weak self] _ in
+//            guard let strongSelf = self else { return }
+//            strongSelf.didPressRenameThisWallet()
+//        }
+//        alertController.addAction(renameThisWalletAction)
 
         let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: .cancel) { _ in }
         alertController.addAction(cancelAction)

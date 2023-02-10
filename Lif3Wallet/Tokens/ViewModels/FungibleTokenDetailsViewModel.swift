@@ -135,16 +135,19 @@ final class FungibleTokenDetailsViewModel {
         } else {
             views = [
                 .charts,
-                .header(viewModel: .init(title: R.string.localizable.tokenInfoHeaderPerformance())),
+                .stakeSwap,
+//                .header(viewModel: .init(title: R.string.localizable.tokenInfoHeaderPerformance())),
                 .field(viewModel: dayViewModel),
-                .field(viewModel: weekViewModel),
-                .field(viewModel: monthViewModel),
-                .field(viewModel: yearViewModel),
+//                .field(viewModel: weekViewModel),
+//                .field(viewModel: monthViewModel),
+//                .field(viewModel: yearViewModel),
 
-                .header(viewModel: .init(title: R.string.localizable.tokenInfoHeaderStats())),
+//                .header(viewModel: .init(title: R.string.localizable.tokenInfoHeaderStats())),
                 .field(viewModel: markerCapViewModel(for: ticker)),
-                .field(viewModel: yearLowViewModel),
-                .field(viewModel: yearHighViewModel)
+//                .field(viewModel: yearLowViewModel),
+//                .field(viewModel: yearHighViewModel),
+                .field(viewModel: totalSupplyViewModel(for: ticker)),
+                .field(viewModel: circulatingSupplyViewModel(for: ticker))
             ]
         }
 
@@ -189,15 +192,22 @@ final class FungibleTokenDetailsViewModel {
     }
 
     private func markerCapViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {
-        let value: String = ticker?.market_cap.flatMap { StringFormatter().largeNumberFormatter(for: $0, currency: "USD") } ?? "-"
-        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value)
+        let value: String = ticker?.market_cap.flatMap { StringFormatter().largeNumberFormatter(for: $0, currency: "") } ?? "-"
+        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString("$\(value)")
         return .init(title: R.string.localizable.tokenInfoFieldStatsMarket_cap(), attributedValue: attributedValue)
     }
 
     private func totalSupplyViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {
         let value: String = ticker?.total_supply.flatMap { String($0) } ?? "-"
-        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value)
+        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value + token.server.symbol)
+        
         return .init(title: R.string.localizable.tokenInfoFieldStatsTotal_supply(), attributedValue: attributedValue)
+    }
+    
+    private func circulatingSupplyViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {
+        let value: String = ticker?.circulating_supply.flatMap { String($0) } ?? "-"
+        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value + token.server.symbol)
+        return .init(title: R.string.localizable.tokenInfoFieldStatsCirculating_supply(), attributedValue: attributedValue)
     }
 
     private func maxSupplyViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {
@@ -262,6 +272,7 @@ final class FungibleTokenDetailsViewModel {
         let attributedValue: NSAttributedString = attributedHistoryValue(period: ChartHistoryPeriod.day)
         return .init(title: R.string.localizable.tokenInfoFieldStatsDay(), attributedValue: attributedValue)
     }
+    
 
     private func attributedHistoryValue(period: ChartHistoryPeriod) -> NSAttributedString {
         let result: (string: String, foregroundColor: UIColor) = {
@@ -287,6 +298,15 @@ final class FungibleTokenDetailsViewModel {
 
         return TokenAttributeViewModel.attributedString(result.string, alignment: .right, font: Fonts.regular(size: 17), foregroundColor: result.foregroundColor, lineBreakMode: .byTruncatingTail)
     }
+    
+    var stakeTitle: String {
+        return "Stake"
+    }
+    
+    
+    var swapTitle: String {
+        return "Swap"
+    }
 }
 
 extension FungibleTokenDetailsViewModel {
@@ -306,6 +326,7 @@ extension FungibleTokenDetailsViewModel {
         case testnet
         case header(viewModel: TokenInfoHeaderViewModel)
         case field(viewModel: TokenAttributeViewModel)
+        case stakeSwap
     }
 
     struct ViewState {

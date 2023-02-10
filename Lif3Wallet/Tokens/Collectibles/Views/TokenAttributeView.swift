@@ -48,9 +48,9 @@ class TokenAttributeView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         let subStackView = [titleLabel, valueLabel].asStackView(spacing: 5)
         let stackView = [
-            .spacer(height: 0, flexible: true),
+//            .spacer(height: 0, flexible: true),
             subStackView,
-            .spacer(height: 0, flexible: true),
+//            .spacer(height: 0, flexible: true),
             separatorView
         ].asStackView(axis: .vertical)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,7 @@ class TokenAttributeView: UIView {
         NSLayoutConstraint.activate([
             subStackView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -1),
             stackView.anchorsConstraint(to: self, edgeInsets: edgeInsets),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
+            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
             separatorView.heightAnchor.constraint(equalToConstant: 1),
         ])
 
@@ -86,6 +86,7 @@ class TokenAttributeView: UIView {
 
         valueLabel.numberOfLines = viewModel.valueLabelNumberOfLines
         separatorView.backgroundColor = viewModel.separatorColor
-        separatorView.isHidden = viewModel.isSeparatorHidden
+//        separatorView.isHidden = viewModel.isSeparatorHidden
+        separatorView.isHidden = true
     }
 }

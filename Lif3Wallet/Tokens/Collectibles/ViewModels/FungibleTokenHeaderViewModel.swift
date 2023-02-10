@@ -82,6 +82,7 @@ final class FungibleTokenHeaderViewModel {
 
     private func buildValue(for tokenViewModel: TokenViewModel?) -> NSAttributedString {
         guard let tokenViewModel = tokenViewModel else { return .init(string: UiTweaks.noPriceMarker) }
+        
         return amountAttributedString(for: tokenViewModel.balance) ?? .init(string: UiTweaks.noPriceMarker)
     }
 

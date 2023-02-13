@@ -162,11 +162,11 @@ class SwapTokensViewController: UIViewController {
             .sink { [weak fromAmountTextField] in fromAmountTextField?.viewModel.errorState = $0 }
             .store(in: &cancelable)
 
-//        output.tokens
-//            .sink { [weak fromAmountTextField, weak toAmountTextField] tokens in
-//                fromAmountTextField?.viewModel.set(token: tokens.from)
-//                toAmountTextField?.viewModel.set(token: tokens.to)
-//            }.store(in: &cancelable)
+        output.tokens
+            .sink { [weak fromAmountTextField, weak toAmountTextField] tokens in
+                fromAmountTextField?.viewModel.set(token: tokens.from)
+                toAmountTextField?.viewModel.set(token: tokens.to)
+            }.store(in: &cancelable)
 
         output.fromTokenBalance
             .sink { [weak fromAmountTextField] in fromAmountTextField?.statusLabel.text = $0 }

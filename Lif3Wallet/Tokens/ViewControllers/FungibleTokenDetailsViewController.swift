@@ -18,9 +18,23 @@ protocol FungibleTokenDetailsViewControllerDelegate: AnyObject, CanOpenURL {
     func didTap(action: TokenInstanceAction, token: Token, in viewController: FungibleTokenDetailsViewController)
 }
 
+
+
 class FungibleTokenDetailsViewController: UIViewController {
     private let containerView: ScrollableStackView = ScrollableStackView()
     private let buttonsBar = HorizontalButtonsBar(configuration: .combined(buttons: 2))
+    private var stakeButton: UIButton =  {
+        let button = UIButton()
+        button.setBackgroundImage(R.image.stakeButtonBackgroundImage()!, for: .normal)
+       
+        return button
+    }()
+    private var swapButton: UIButton =  {
+        let button = UIButton()
+        button.setBackgroundImage(R.image.swapButtomBackgroundImage()!, for: .normal)
+       
+        return button
+    }()
     private lazy var headerView: FungibleTokenHeaderView = {
         let view = FungibleTokenHeaderView(viewModel: viewModel.headerViewModel)
         view.delegate = self
@@ -47,22 +61,20 @@ class FungibleTokenDetailsViewController: UIViewController {
         view.addSubview(containerView)
 
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             containerView.topAnchor.constraint(equalTo: view.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: footerBar.topAnchor),
-
             footerBar.anchorsConstraint(to: view)
         ])
-
         buttonsBar.viewController = self
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        stakeButton.addTarget(self, action: #selector(didTapStake), for: .touchUpInside)
+        swapButton.addTarget(self, action: #selector(didTapSwap), for: .touchUpInside)
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-
         bind(viewModel: viewModel)
     }
 
@@ -70,6 +82,8 @@ class FungibleTokenDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         willAppear.send(())
     }
+    
+    
 
     private func buildSubviews(for viewTypes: [FungibleTokenDetailsViewModel.ViewType]) -> [UIView] {
         var subviews: [UIView] = []
@@ -94,13 +108,18 @@ class FungibleTokenDetailsViewController: UIViewController {
             case .field(let viewModel):
                 let view = TokenAttributeView(indexPath: IndexPath(row: 0, section: 0))
                 view.configure(viewModel: viewModel)
-
                 subviews += [view]
             case .header(let viewModel):
                 let view = TokenInfoHeaderView()
                 view.configure(viewModel: viewModel)
-
                 subviews += [view]
+            case .stakeSwap:
+                let buttonsStackView = [
+                    stakeButton,
+                    swapButton
+                ].asStackView(axis: .horizontal, distribution: .equalSpacing)
+                subviews += [buttonsStackView]
+                subviews += [UIView.spacer(height: 20)]
             }
         }
 
@@ -178,6 +197,15 @@ class FungibleTokenDetailsViewController: UIViewController {
     private func show(message: String) {
         UIAlertController.alert(message: message, alertButtonTitles: [R.string.localizable.oK()], alertButtonStyles: [.default], viewController: self)
     }
+    
+    @objc private func didTapSwap(_ sender: UIButton) {
+        delegate?.didTapSwap(swapTokenFlow:  .swapToken(token: viewModel.token), in: self)
+    }
+    
+    @objc private func didTapStake(_ sender: UIButton) {
+        print("Stake button tapped")
+//        delegate?.didTapSwap(swapTokenFlow:  .swapToken(token: viewModel.token), in: self)
+    }
 
 }
 
@@ -187,3 +215,6 @@ extension FungibleTokenDetailsViewController: FungibleTokenHeaderViewDelegate {
         delegate?.didPressViewContractWebPage(forContract: viewModel.token.contractAddress, server: viewModel.token.server, in: self)
     }
 }
+
+
+

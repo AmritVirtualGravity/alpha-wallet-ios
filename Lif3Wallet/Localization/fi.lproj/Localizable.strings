@@ -742,12 +742,13 @@
 "token.tab.activity" = "Tapahtumat";
 "token.info.header.performance" = "Suorituskyky";
 "token.info.header.stats" = "Tilastot";
-"token.info.field.stats.day" = "1 päivä";
+"token.info.field.stats.day" = "Volume (24hr)";
 "token.info.field.stats.week" = "1 viikko";
 "token.info.field.stats.month" = "1 kuukausi";
 "token.info.field.stats.year" = "1 vuosi";
 "token.info.field.stats.market_cap" = "Markkinarvo (Market Cap)";
 "token.info.field.stats.total_supply" = "Tarjonta (Total Supply)";
+"token.info.field.stats.circulating_supply" = "Circulating Supply";
 "token.info.field.stats.max_supply" = "Maksimitarjonta (Max Supply)";
 "token.info.field.performance.year.low" = "Vuoden alhaisin";
 "token.info.field.performance.year.high" = "Vuoden korkein";

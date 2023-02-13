@@ -743,12 +743,13 @@
 "token.tab.activity" = "Activity";
 "token.info.header.performance" = "Performance";
 "token.info.header.stats" = "Stats";
-"token.info.field.stats.day" = "1 Day";
+"token.info.field.stats.day" = "Volume (24hr)";
 "token.info.field.stats.week" = "1 Week";
 "token.info.field.stats.month" = "1 Month";
 "token.info.field.stats.year" = "1 Year";
 "token.info.field.stats.market_cap" = "Market Cap";
 "token.info.field.stats.total_supply" = "Total Supply";
+"token.info.field.stats.circulating_supply" = "Circulating Supply";
 "token.info.field.stats.max_supply" = "Max Supply";
 "token.info.field.performance.year.low" = "1 Year Low";
 "token.info.field.performance.year.high" = "1 Year High";

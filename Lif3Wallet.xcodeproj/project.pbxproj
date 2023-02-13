@@ -3396,7 +3396,6 @@
 		08A2556E294073EF00A31193 /* Tokens */ = {
 			isa = PBXGroup;
 			children = (
-				10C9A4D4296C0299009738A7 /* Helper */,
 				08A2556F294073EF00A31193 /* Coordinators */,
 				08A25577294073EF00A31193 /* ViewModels */,
 				08A2558C294073EF00A31193 /* Collectibles */,
@@ -3798,13 +3797,6 @@
 				10B2A31429911A6700908F41 /* WalletConnectSessionViewController.swift */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		10C9A4D4296C0299009738A7 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		10F6DAAB295B242600715C7F /* Lif3 */ = {

@@ -36,13 +36,20 @@ class FungibleTokenCoordinator: Coordinator {
     private let navigationController: UINavigationController
     private var cancelable = Set<AnyCancellable>()
     private let currencyService: CurrencyService
-    private lazy var rootViewController: FungibleTokenTabViewController = {
-        let viewModel = FungibleTokenTabViewModel(token: token, session: session, tokensService: tokensService, assetDefinitionStore: assetDefinitionStore)
-        let viewController = FungibleTokenTabViewController(viewModel: viewModel)
-        let viewControlers = viewModel.tabBarItems.map { buildViewController(tabBarItem: $0) }
-        viewController.set(viewControllers: viewControlers)
+//    private lazy var rootViewController: FungibleTokenTabViewController = {
+//        let viewModel = FungibleTokenTabViewModel(token: token, session: session, tokensService: tokensService, assetDefinitionStore: assetDefinitionStore)
+//        let viewController = FungibleTokenTabViewController(viewModel: viewModel)
+//        let viewControlers = viewModel.tabBarItems.map { buildViewController(tabBarItem: $0) }
+//        viewController.set(viewControllers: viewControlers)
+//        viewController.delegate = self
+//
+//        return viewController
+//    }()
+    
+    private lazy var rootViewController: FungibleTokenDetailsViewController = {
+        lazy var viewModel = FungibleTokenDetailsViewModel(token: self.token, coinTickersFetcher: self.coinTickersFetcher, tokensService: self.tokensService, session: self.session, assetDefinitionStore: self.assetDefinitionStore, tokenActionsProvider: self.tokenActionsProvider, currencyService: self.currencyService)
+        let viewController = FungibleTokenDetailsViewController(viewModel: viewModel)
         viewController.delegate = self
-
         return viewController
     }()
 

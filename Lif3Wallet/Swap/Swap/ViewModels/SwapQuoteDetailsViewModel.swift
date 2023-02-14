@@ -79,12 +79,13 @@ final class SwapQuoteDetailsViewModel {
             .eraseToAnyPublisher()
     }()
 
+    
     private lazy var exchangeString: AnyPublisher<String, Never> = {
-        Publishers.CombineLatest(configurator.validatedAmount, configurator.tokensWithTheirSwapQuote)
-            .map { $0.1?.swapQuote.tool ?? "-" }
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-    }()
+           Publishers.CombineLatest(configurator.validatedAmount, configurator.tokensWithTheirSwapQuote)
+               .map { Constants.updateSwapTokenName(swapTool: $0.1?.swapQuote.tool ?? "-")  }
+               .removeDuplicates()
+               .eraseToAnyPublisher()
+       }()
 
     private lazy var gasCostString: AnyPublisher<String, Never> = {
         Publishers.CombineLatest(configurator.validatedAmount, configurator.tokensWithTheirSwapQuote)

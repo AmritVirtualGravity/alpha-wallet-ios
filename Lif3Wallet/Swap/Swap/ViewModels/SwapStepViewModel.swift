@@ -24,6 +24,7 @@ extension SwapStepsViewModel {
                 .foregroundColor: Configuration.Color.Semantic.defaultHeadlineText
             ])
         }
+        
         var descriptionAttributedString: NSAttributedString {
             NSAttributedString(string: "Single transaction including:", attributes: [
                 .font: Fonts.regular(size: 15),
@@ -52,7 +53,7 @@ extension SwapStepsViewModel {
             let amount = (Decimal(bigUInt: subStep.amount, decimals: subStep.token.decimals) ?? .zero).doubleValue
             let amountString = formatter.string(double: amount, minimumFractionDigits: 4, maximumFractionDigits: 8)
 
-            let description = "\(subStep.type.capitalized) to \(amountString) \(subStep.token.symbol) via \(subStep.tool)"
+            let description = "\(subStep.type.capitalized) to \(amountString) \(subStep.token.symbol) via \(Constants.updateSwapTokenName(swapTool: subStep.tool))"
             return NSAttributedString(string: "\(index + 1). \(description)", attributes: [
                 .font: Fonts.regular(size: 15),
                 .foregroundColor: Configuration.Color.Semantic.defaultHeadlineText

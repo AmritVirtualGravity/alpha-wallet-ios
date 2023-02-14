@@ -661,6 +661,7 @@
 		10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E612949F98F00187A49 /* SecurityViewController.swift */; };
 		10645E642949FA9A00187A49 /* SecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E632949FA9A00187A49 /* SecurityViewModel.swift */; };
 		10645E66294A0ADA00187A49 /* SecurityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */; };
+		108DDC04299B48F300567B78 /* FormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108DDC03299B48F300567B78 /* FormatterExtension.swift */; };
 		10B2A2E8299119C400908F41 /* CameraDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B2A2E7299119C300908F41 /* CameraDonation.swift */; };
 		10B2A31529911A6700908F41 /* WalletConnectSessionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B2A2EB29911A6700908F41 /* WalletConnectSessionDetailsViewModel.swift */; };
 		10B2A31629911A6700908F41 /* WalletConnectSessionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B2A2EC29911A6700908F41 /* WalletConnectSessionCellViewModel.swift */; };
@@ -1559,6 +1560,7 @@
 		10645E612949F98F00187A49 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		10645E632949FA9A00187A49 /* SecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewModel.swift; sourceTree = "<group>"; };
 		10645E65294A0ADA00187A49 /* SecurityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityCoordinator.swift; sourceTree = "<group>"; };
+		108DDC03299B48F300567B78 /* FormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterExtension.swift; sourceTree = "<group>"; };
 		10B2A2E7299119C300908F41 /* CameraDonation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDonation.swift; sourceTree = "<group>"; };
 		10B2A2EB29911A6700908F41 /* WalletConnectSessionDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletConnectSessionDetailsViewModel.swift; sourceTree = "<group>"; };
 		10B2A2EC29911A6700908F41 /* WalletConnectSessionCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletConnectSessionCellViewModel.swift; sourceTree = "<group>"; };
@@ -2732,6 +2734,7 @@
 				08A25428294073EF00A31193 /* UIViewController.swift */,
 				08A25429294073EF00A31193 /* UIAlertController.swift */,
 				08A2542A294073EF00A31193 /* UINavigationController.swift */,
+				108DDC03299B48F300567B78 /* FormatterExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -5499,6 +5502,7 @@
 				08A25738294073F000A31193 /* Error.swift in Sources */,
 				08A256F0294073F000A31193 /* UITableViewCell.swift in Sources */,
 				08A256A8294073F000A31193 /* RequestViewModel.swift in Sources */,
+				108DDC04299B48F300567B78 /* FormatterExtension.swift in Sources */,
 				08A2569F294073F000A31193 /* DappOrWalletConnectTransactionViewModel.swift in Sources */,
 				08A2577A294073F000A31193 /* ScrollableSegmentedControl.swift in Sources */,
 				08A25802294073F100A31193 /* SelectTokenViewModel.swift in Sources */,

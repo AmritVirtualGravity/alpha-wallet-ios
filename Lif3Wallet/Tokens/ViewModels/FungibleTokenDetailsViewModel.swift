@@ -198,15 +198,19 @@ final class FungibleTokenDetailsViewModel {
     }
 
     private func totalSupplyViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {
-        let value: String = ticker?.total_supply.flatMap { String($0) } ?? "-"
-        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value + token.server.symbol)
+//        let value: String = ticker?.total_supply?.formattedWithSeparator.flatMap { String($0) } ?? "-"
+        
+        let value = ticker?.total_supply?.formattedWithSeparator ?? "-"
+        
+        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value + " " + token.server.symbol)
         
         return .init(title: R.string.localizable.tokenInfoFieldStatsTotal_supply(), attributedValue: attributedValue)
     }
     
     private func circulatingSupplyViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {
-        let value: String = ticker?.circulating_supply.flatMap { String($0) } ?? "-"
-        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value + token.server.symbol)
+        let value = ticker?.circulating_supply?.formattedWithSeparator ?? "-"
+//        let value: String = ticker?.circulating_supply?.formattedWithSeparator.flatMap { String($0) } ?? "-"
+        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString(value + " " + token.server.symbol)
         return .init(title: R.string.localizable.tokenInfoFieldStatsCirculating_supply(), attributedValue: attributedValue)
     }
 

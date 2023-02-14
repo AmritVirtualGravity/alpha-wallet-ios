@@ -40,6 +40,7 @@ class FungibleTokenDetailsViewController: UIViewController {
         NSLayoutConstraint.activate([
             button.heightAnchor.constraint(equalToConstant: 50),
         ])
+//        button.setBackgroundImage(R.image.swapButtomBackgroundImage()!, for: .normal)
         return button
     }()
     private lazy var headerView: FungibleTokenHeaderView = {

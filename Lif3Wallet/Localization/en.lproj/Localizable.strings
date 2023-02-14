@@ -72,6 +72,8 @@
 "Send" = "Send";
 "Receive" = "Receive";
 "Stake" = "Stake";
+"Alerts" = "Alerts";
+"Activity" = "Activity";
 "send.error.emptyClipBoard" = "Empty ClipBoard";
 "send.error.invalidAddress" = "Invalid Address";
 "send.error.invalidAmount" = "Invalid Amount";

@@ -72,6 +72,8 @@
 "Send" = "보내기";
 "Receive" = "Receive";
 "Stake" = "Stake";
+"Alerts" = "Alerts";
+"Activity" = "Activity";
 "send.error.emptyClipBoard" = "빈 클립보드";
 "send.error.invalidAddress" = "잘못된 주소";
 "send.error.invalidAmount" = "잘못된 금액";

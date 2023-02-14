@@ -14,6 +14,7 @@ protocol lifeViewControllerDelegate {
     func didTapTerrace()
     func didTapGreenHouse()
     func didTapNursery()
+    func didTapLif3Trade()
 }
 
 class Lif3ViewController: UIViewController {
@@ -23,6 +24,18 @@ class Lif3ViewController: UIViewController {
         let controllerStr = String(describing: Lif3ViewController.self)
         return UIStoryboard(name: "Lif3", bundle: nil).instantiateViewController(withIdentifier: controllerStr) as! Lif3ViewController
     }
+    
+    
+    @IBOutlet weak var lif3TradeView: UIView! {
+        didSet {
+            lif3TradeView.layer.cornerRadius = 10
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapLif3Trade(_:)))
+            lif3TradeView.addGestureRecognizer(tap)
+        }
+       
+
+    }
+    
     
     @IBOutlet weak var swapTokenView: UIView! {
         didSet {
@@ -98,6 +111,10 @@ class Lif3ViewController: UIViewController {
     }
     @objc func tapNursery(_ sender: UITapGestureRecognizer? = nil) {
         delegate?.didTapNursery()
+    }
+    
+    @objc func tapLif3Trade(_ sender: UITapGestureRecognizer? = nil) {
+        delegate?.didTapLif3Trade()
     }
     
 

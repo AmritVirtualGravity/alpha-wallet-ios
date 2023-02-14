@@ -1328,6 +1328,13 @@ extension ActiveWalletCoordinator {
 
 
 extension ActiveWalletCoordinator: lifeViewControllerDelegate {
+    func didTapLif3Trade() {
+        guard let url = URL(string: Constants.lif3TradeUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
     func didTapSwapTokens() {
         guard let url = URL(string: Constants.lifeSwapTokenWebUrl) else {
             return

@@ -31,8 +31,16 @@ class FungibleTokenDetailsViewController: UIViewController {
     }()
     private var swapButton: UIButton =  {
         let button = UIButton()
-        button.setBackgroundImage(R.image.swapButtomBackgroundImage()!, for: .normal)
-       
+        button.setTitle("Swap", for: .normal)
+        button.titleLabel?.textColor = .white
+        button.layer.cornerRadius = 12
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        
+        NSLayoutConstraint.activate([
+            button.heightAnchor.constraint(equalToConstant: 50),
+        ])
+//        button.setBackgroundImage(R.image.swapButtomBackgroundImage()!, for: .normal)
         return button
     }()
     private lazy var headerView: FungibleTokenHeaderView = {
@@ -115,9 +123,10 @@ class FungibleTokenDetailsViewController: UIViewController {
                 subviews += [view]
             case .stakeSwap:
                 let buttonsStackView = [
-                    stakeButton,
+                    //todo: hidden for now. Showed after stake feature implementation
+//                    stakeButton,
                     swapButton
-                ].asStackView(axis: .horizontal, distribution: .equalSpacing)
+                ].asStackView(axis: .horizontal)
                 subviews += [buttonsStackView]
                 subviews += [UIView.spacer(height: 20)]
             }

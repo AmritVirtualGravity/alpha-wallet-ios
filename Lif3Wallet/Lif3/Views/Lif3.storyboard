@@ -90,13 +90,13 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lif3 Trade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ph-Rc-V86">
-                                                                <rect key="frame" x="149.66666666666666" y="77" width="74.333333333333343" height="21.666666666666671"/>
+                                                                <rect key="frame" x="150" y="77" width="74.333333333333314" height="21.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell or buy your tokens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJ7-BL-0Le">
-                                                                <rect key="frame" x="139.33333333333334" y="103.66666666666667" width="95" height="12.666666666666671"/>
+                                                                <rect key="frame" x="139.66666666666666" y="103.66666666666667" width="95" height="12.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -141,13 +141,13 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swap Tokens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocw-0z-uZd">
-                                                                <rect key="frame" x="37.333333333333307" y="67.000000000000028" width="97.333333333333314" height="21.666666666666671"/>
+                                                                <rect key="frame" x="37.333333333333336" y="67.000000000000028" width="97.333333333333314" height="21.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell or buy your tokens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aua-r3-Wsa">
-                                                                <rect key="frame" x="38.666666666666693" y="98.666666666666657" width="94.666666666666686" height="12.666666666666671"/>
+                                                                <rect key="frame" x="38.666666666666664" y="98.666666666666657" width="94.666666666666686" height="12.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -181,7 +181,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dde-d2-pr0">
-                                                                <rect key="frame" x="44.333333333333336" y="98.666666666666657" width="83.333333333333314" height="12.666666666666671"/>
+                                                                <rect key="frame" x="44.333333333333307" y="98.666666666666657" width="83.333333333333314" height="12.666666666666671"/>
                                                                 <string key="text">Deposit your tokens
 and earn rewards</string>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
@@ -229,13 +229,13 @@ and earn rewards</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fountain of Lif3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYe-t6-wFs">
-                                                                <rect key="frame" x="27.333333333333307" y="67" width="117.33333333333331" height="21.666666666666671"/>
+                                                                <rect key="frame" x="27.333333333333336" y="67" width="117.33333333333331" height="21.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell or buy your tokens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGE-I2-iAz">
-                                                                <rect key="frame" x="38.666666666666693" y="98.666666666666629" width="94.666666666666686" height="12.666666666666671"/>
+                                                                <rect key="frame" x="38.666666666666664" y="98.666666666666629" width="94.666666666666686" height="12.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -263,7 +263,7 @@ and earn rewards</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terrace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERs-zm-drg">
-                                                                <rect key="frame" x="58.333333333333343" y="67" width="55.333333333333343" height="21.666666666666671"/>
+                                                                <rect key="frame" x="58.333333333333314" y="67" width="55.333333333333343" height="21.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -410,6 +410,7 @@ and/or TOMB to Earn LIF3</string>
                                     <constraint firstItem="j9g-Ks-Fne" firstAttribute="top" secondItem="L7U-5n-L0g" secondAttribute="bottom" constant="30" id="nA6-IL-o9h"/>
                                     <constraint firstItem="L7U-5n-L0g" firstAttribute="leading" secondItem="kf6-SE-l6A" secondAttribute="leading" id="rLz-cM-0vp"/>
                                     <constraint firstItem="kf6-SE-l6A" firstAttribute="top" secondItem="yAf-dS-gpT" secondAttribute="bottom" constant="33.670000000000002" id="rhX-QO-PEm"/>
+                                    <constraint firstItem="yAf-dS-gpT" firstAttribute="centerX" secondItem="9CR-IB-4b7" secondAttribute="centerX" id="zrH-nc-oy1"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="WfK-LN-e5y"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="OJs-q4-TBE"/>

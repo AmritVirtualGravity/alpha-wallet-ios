@@ -65,7 +65,8 @@ struct SelectableSwapRouteTableViewCellViewModel: Hashable {
         self.toTokenSymbol = swapRoute.toToken.symbol
         self.toTokenRpcServer = RPCServer(chainID: swapRoute.toToken.chainId)
         self.tag = swapRoute.tags.first ?? ""
-        self.exchange = swapRoute.steps.first.flatMap { "Swap via \($0.tool)" } ?? "-"
+       
+        self.exchange = swapRoute.steps.first.flatMap { "Swap via \( Constants.updateSwapTokenName(swapTool: $0.tool))" } ?? "-"
         self.amount = Decimal(bigUInt: swapRoute.toAmount, decimals: swapRoute.toToken.decimals) ?? .zero
         self.fees = swapRoute.steps.map { step -> [String] in
             let gasCosts = step.estimate.gasCosts.map { gasCost -> String in
@@ -82,3 +83,4 @@ struct SelectableSwapRouteTableViewCellViewModel: Hashable {
         }.flatMap { $0 }
     }
 }
+

@@ -65,4 +65,23 @@ extension Constants {
         DefaultToken(address: "0xFB40b1eFe90D4b786D2D9d9dc799B18BDe92923b", server: .polygon),
         DefaultToken(address: "0x2C2D8a078B33bf7782a16AcCE2C5BA6653a90D5f", server: .polygon)
     ]
+    
+    static func updateSwapTokenName(swapTool: String) -> String {
+        
+        switch (swapTool) {
+        case "spookyswap-ftm":
+            return "Spooky Swap"
+        case "spiritswap-ftm":
+            return "Spirit Swap"
+        case "tombswap-ftm":
+            return "Tomb Swap"
+        case "sushiswap-ftm":
+            return "Sushi Swap"
+        case "soulswap-ftm":
+            return "Soul Swap"
+        default:
+            return swapTool
+        }
+        
+    }
 }

@@ -49,6 +49,7 @@ extension Constants {
     static let lifeTerraceWebUrl  = "https://lif3.com/terrace"
     static let lifeGreenhouseWebUrl  = "https://lif3.com/staking"
     static let lifeNurseryWebUrl  = "https://lif3.com/nursery"
+    static let lif3TradeUrl  = "https://trade.lif3.com"
     
     
     static let  defaultTokens = [

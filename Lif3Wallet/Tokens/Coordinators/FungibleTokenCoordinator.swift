@@ -50,6 +50,7 @@ class FungibleTokenCoordinator: Coordinator {
         lazy var viewModel = FungibleTokenDetailsViewModel(token: self.token, coinTickersFetcher: self.coinTickersFetcher, tokensService: self.tokensService, session: self.session, assetDefinitionStore: self.assetDefinitionStore, tokenActionsProvider: self.tokenActionsProvider, currencyService: self.currencyService)
         let viewController = FungibleTokenDetailsViewController(viewModel: viewModel)
         viewController.delegate = self
+        viewController.title = "\(token.name)(\(token.symbol))"
         return viewController
     }()
 

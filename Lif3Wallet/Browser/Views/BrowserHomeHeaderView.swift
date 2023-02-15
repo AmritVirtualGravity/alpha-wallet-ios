@@ -19,7 +19,7 @@ class BrowserHomeHeaderView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         let stackView = [
-            logoImage,
+//            logoImage,
             titleLabel,
         ].asStackView(axis: .vertical, spacing: 20, contentHuggingPriority: .required, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,8 +32,8 @@ class BrowserHomeHeaderView: UIView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            logoImage.widthAnchor.constraint(equalToConstant: 80),
-            logoImage.widthAnchor.constraint(equalTo: logoImage.heightAnchor),
+//            logoImage.widthAnchor.constraint(equalToConstant: 80),
+//            logoImage.widthAnchor.constraint(equalTo: logoImage.heightAnchor),
         ])
     }
 

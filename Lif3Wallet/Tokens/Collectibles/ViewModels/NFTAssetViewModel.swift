@@ -379,6 +379,10 @@ extension TokenInstanceAction {
             return service.action
         case .stake:
             return R.string.localizable.stake()
+        case .alert:
+            return R.string.localizable.alerts()
+        case .activity:
+            return R.string.localizable.activity()
         }
     }
 }

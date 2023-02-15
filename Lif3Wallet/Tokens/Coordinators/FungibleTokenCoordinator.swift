@@ -139,6 +139,30 @@ class FungibleTokenCoordinator: Coordinator {
 }
 
 extension FungibleTokenCoordinator: FungibleTokenDetailsViewControllerDelegate {
+    
+    func didTapActivities(in viewController: FungibleTokenDetailsViewController) {
+        guard let navigationController = viewController.navigationController else { return }
+        let viewModel = ActivitiesViewModel(collection: .init())
+        let controller = ActivitiesViewController(analytics: analytics, keystore: keystore, wallet: session.account, viewModel: viewModel, sessions: sessions, assetDefinitionStore: assetDefinitionStore)
+        controller.hidesBottomBarWhenPushed = true
+        controller.delegate = self
+        activitiesService.activitiesPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak controller] activities in
+                controller?.configure(viewModel: .init(collection: .init(activities: activities)))
+            }.store(in: &cancelable)
+        activitiesService.start()
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
+    func didTapAlert(in viewController: FungibleTokenDetailsViewController) {
+        guard let navigationController = viewController.navigationController else { return }
+        let viewModel = PriceAlertsViewModel(alertService: alertService, token: token)
+        let viewController = PriceAlertsViewController(viewModel: viewModel)
+        viewController.edgesForExtendedLayout = []
+        viewController.delegate = self
+        navigationController.pushViewController(viewController, animated: true)
+    }
     func didTapSwap(swapTokenFlow: SwapTokenFlow, in viewController: FungibleTokenDetailsViewController) {
         delegate?.didTapSwap(swapTokenFlow: swapTokenFlow, in: self)
     }

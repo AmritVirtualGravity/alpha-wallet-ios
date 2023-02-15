@@ -72,6 +72,8 @@
 "Send" = "发送";
 "Receive" = "接收";
 "Stake" = "Stake";
+"Alerts" = "Alerts";
+"Activity" = "Activity";
 "send.error.emptyClipBoard" = "剪贴板为空";
 "send.error.invalidAddress" = "无效地址";
 "send.error.invalidAmount" = "无效金额";

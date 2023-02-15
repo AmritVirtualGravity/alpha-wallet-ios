@@ -36,11 +36,11 @@ class FungibleTokenTabViewModel {
         let hasTicker = tokensService.tokenViewModel(for: token)?.balance.ticker != nil
 
         if Features.default.isAvailable(.isAlertsEnabled) && hasTicker {
-            tabBarItems = [.details]
-//            tabBarItems = [.details, .activities, .alerts]
+//            tabBarItems = [.details]
+            tabBarItems = [.details, .activities, .alerts]
         } else {
-            tabBarItems = [.details]
-//            tabBarItems = [.details, .activities]
+//            tabBarItems = [.details]
+            tabBarItems = [.details, .activities]
         }
     }
 

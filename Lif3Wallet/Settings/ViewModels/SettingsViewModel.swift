@@ -576,9 +576,9 @@ extension SettingsViewModel.SettingsSupportRow  {
         case .about:
             return R.image.iconsSupportAbout()
         case .featureRequest:
-            return R.image.iconsSupportHelpCenter()
+            return R.image.iconsSupportFeatureRequest()
         case .bugReport:
-            return R.image.iconsSupportHelpCenter()
+            return R.image.iconsSupportBugReport()
         }
     }
     

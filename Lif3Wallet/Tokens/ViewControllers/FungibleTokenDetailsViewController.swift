@@ -16,8 +16,8 @@ protocol FungibleTokenDetailsViewControllerDelegate: AnyObject, CanOpenURL {
     func didTapSend(for token: Token, in viewController: FungibleTokenDetailsViewController)
     func didTapReceive(for token: Token, in viewController: FungibleTokenDetailsViewController)
     func didTap(action: TokenInstanceAction, token: Token, in viewController: FungibleTokenDetailsViewController)
-    func didTapActivities()
-    func didTapAlert()
+    func didTapActivities(in viewController: FungibleTokenDetailsViewController)
+    func didTapAlert(in viewController: FungibleTokenDetailsViewController)
 }
 
 
@@ -201,9 +201,9 @@ class FungibleTokenDetailsViewController: UIViewController {
             case .stake:
                 break
             case .activity:
-                delegate?.didTapActivities()
+                delegate?.didTapActivities(in: self)
             case .alert:
-                delegate?.didTapAlert()
+                delegate?.didTapAlert(in: self)
             }
             break
         }

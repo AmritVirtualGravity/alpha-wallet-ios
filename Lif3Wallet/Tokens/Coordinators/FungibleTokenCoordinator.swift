@@ -138,7 +138,9 @@ class FungibleTokenCoordinator: Coordinator {
 }
 
 extension FungibleTokenCoordinator: FungibleTokenDetailsViewControllerDelegate {
-    func didTapActivities() {
+    
+    func didTapActivities(in viewController: FungibleTokenDetailsViewController) {
+        guard let navigationController = viewController.navigationController else { return }
         let viewModel = ActivitiesViewModel(collection: .init())
         let controller = ActivitiesViewController(analytics: analytics, keystore: keystore, wallet: session.account, viewModel: viewModel, sessions: sessions, assetDefinitionStore: assetDefinitionStore)
         controller.hidesBottomBarWhenPushed = true
@@ -148,17 +150,18 @@ extension FungibleTokenCoordinator: FungibleTokenDetailsViewControllerDelegate {
             .sink { [weak controller] activities in
                 controller?.configure(viewModel: .init(collection: .init(activities: activities)))
             }.store(in: &cancelable)
-        self.navigationController.pushViewController(controller, animated: true)
-
+        activitiesService.start()
+        navigationController.pushViewController(controller, animated: true)
     }
     
-    func didTapAlert() {
+    func didTapAlert(in viewController: FungibleTokenDetailsViewController) {
+        guard let navigationController = viewController.navigationController else { return }
         let viewModel = PriceAlertsViewModel(alertService: alertService, token: token)
         let viewController = PriceAlertsViewController(viewModel: viewModel)
+        viewController.edgesForExtendedLayout = []
         viewController.delegate = self
-        self.navigationController.present(viewController, animated: true)
+        navigationController.pushViewController(viewController, animated: true)
     }
-    
     func didTapSwap(swapTokenFlow: SwapTokenFlow, in viewController: FungibleTokenDetailsViewController) {
         delegate?.didTapSwap(swapTokenFlow: swapTokenFlow, in: self)
     }

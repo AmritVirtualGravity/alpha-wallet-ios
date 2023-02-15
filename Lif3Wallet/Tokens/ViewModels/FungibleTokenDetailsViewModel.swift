@@ -92,9 +92,8 @@ final class FungibleTokenDetailsViewModel {
                 let actions: [TokenInstanceAction] = [
                     .init(type: .erc20Send),
                     .init(type: .erc20Receive),
-                    .init(type: .alert),
                     .init(type: .activity),
-//                    .init(type: .stake)
+                    .init(type: .alert)
                 ]
 
                 return actions + tokenActionsProvider.actions(token: token)
@@ -105,11 +104,10 @@ final class FungibleTokenDetailsViewModel {
                 return []
             case .erc20:
                 let actions: [TokenInstanceAction] = [
-//                    .init(type: .stake)
-                    .init(type: .alert),
                     .init(type: .activity),
+                    .init(type: .alert)
                 ]
-                return actionsFromTokenScript + tokenActionsProvider.actions(token: token) + actions
+                return actionsFromTokenScript + actions + tokenActionsProvider.actions(token: token) 
 //                return actionsFromTokenScript + tokenActionsProvider.actions(token: token) + actions
             case .nativeCryptocurrency:
                 //TODO we should support retrieval of XML (and XMLHandler) based on address + server. For now, this is only important for native cryptocurrency. So might be ok to check like this for now
@@ -120,9 +118,8 @@ final class FungibleTokenDetailsViewModel {
                     let actions: [TokenInstanceAction] = [
                         .init(type: .erc20Send),
                         .init(type: .erc20Receive),
-//                        .init(type: .stake)
-                        .init(type: .alert),
                         .init(type: .activity),
+                        .init(type: .alert)
                     ]
 
                     return actions + tokenActionsProvider.actions(token: token)

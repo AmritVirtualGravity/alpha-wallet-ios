@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -21,11 +21,11 @@
             <objects>
                 <viewController storyboardIdentifier="Lif3WebViewController" id="Y6W-OH-hqX" customClass="Lif3WebViewController" customModule="Lif3Wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWL-Da-8oc">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -33,7 +33,7 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="mav-ET-RGV">
-                                <rect key="frame" x="182" y="343" width="50" height="50"/>
+                                <rect key="frame" x="189" y="444.66666666666669" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Sc3-d2-rMf"/>
                                     <constraint firstAttribute="height" constant="50" id="yeR-vN-bMt"/>
@@ -67,14 +67,14 @@
             <objects>
                 <viewController storyboardIdentifier="Lif3ViewController" id="35J-JY-3P6" customClass="Lif3ViewController" customModule="Lif3Wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tUQ-WY-12H">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CR-IB-4b7">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="47" width="414" height="753"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAf-dS-gpT">
-                                        <rect key="frame" x="20" y="40" width="374" height="150"/>
+                                        <rect key="frame" x="20" y="50" width="374" height="150"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="h7b-s8-W9n">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
@@ -125,7 +125,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kf6-SE-l6A">
-                                        <rect key="frame" x="20" y="220" width="374" height="150"/>
+                                        <rect key="frame" x="20" y="230" width="374" height="150"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="wgz-cq-ZJa">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
@@ -147,7 +147,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell or buy your tokens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aua-r3-Wsa">
-                                                                <rect key="frame" x="38.666666666666664" y="98.666666666666686" width="94.666666666666686" height="12.666666666666671"/>
+                                                                <rect key="frame" x="38.666666666666657" y="98.666666666666686" width="95" height="12.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -160,7 +160,6 @@
                                                             <constraint firstItem="Ocw-0z-uZd" firstAttribute="top" secondItem="w4t-U7-ieQ" secondAttribute="bottom" constant="5" id="bCS-x6-cqU"/>
                                                             <constraint firstItem="Ocw-0z-uZd" firstAttribute="centerX" secondItem="2Fo-hm-3mG" secondAttribute="centerX" id="h7R-XP-qSf"/>
                                                             <constraint firstItem="w4t-U7-ieQ" firstAttribute="top" secondItem="2Fo-hm-3mG" secondAttribute="top" constant="22" id="qXu-dX-bQ3"/>
-                                                            <constraint firstItem="Aua-r3-Wsa" firstAttribute="leading" secondItem="2Fo-hm-3mG" secondAttribute="leading" constant="38.666666666666657" id="yZa-MM-kdo"/>
                                                             <constraint firstItem="w4t-U7-ieQ" firstAttribute="centerX" secondItem="2Fo-hm-3mG" secondAttribute="centerX" id="zHc-ND-poj"/>
                                                         </constraints>
                                                     </view>
@@ -175,7 +174,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Garden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8I-k6-GKE">
-                                                                <rect key="frame" x="43" y="67" width="86" height="21.666666666666671"/>
+                                                                <rect key="frame" x="42.999999999999993" y="67" width="86.333333333333314" height="21.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -194,7 +193,6 @@ and earn rewards</string>
                                                             <constraint firstItem="F8I-k6-GKE" firstAttribute="top" secondItem="BCy-6P-qGf" secondAttribute="bottom" constant="5" id="7xC-rj-vlq"/>
                                                             <constraint firstItem="BCy-6P-qGf" firstAttribute="top" secondItem="2Qb-sZ-MJ5" secondAttribute="top" constant="22" id="88E-R3-bJc"/>
                                                             <constraint firstItem="F8I-k6-GKE" firstAttribute="centerX" secondItem="2Qb-sZ-MJ5" secondAttribute="centerX" id="E1s-lG-qs2"/>
-                                                            <constraint firstItem="F8I-k6-GKE" firstAttribute="leading" secondItem="2Qb-sZ-MJ5" secondAttribute="leading" constant="43" id="Eav-DP-3Ed"/>
                                                             <constraint firstAttribute="height" constant="150" id="EmG-jp-WsC"/>
                                                             <constraint firstItem="Dde-d2-pr0" firstAttribute="top" secondItem="F8I-k6-GKE" secondAttribute="bottom" constant="10" id="OfN-Am-Mbl"/>
                                                             <constraint firstItem="BCy-6P-qGf" firstAttribute="centerX" secondItem="2Qb-sZ-MJ5" secondAttribute="centerX" id="Ouq-cu-p7j"/>
@@ -206,6 +204,7 @@ and earn rewards</string>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="4Sn-KG-CD2"/>
                                             <constraint firstItem="wgz-cq-ZJa" firstAttribute="width" secondItem="kf6-SE-l6A" secondAttribute="width" id="D4w-c6-AEN"/>
                                             <constraint firstItem="wgz-cq-ZJa" firstAttribute="centerY" secondItem="kf6-SE-l6A" secondAttribute="centerY" id="i0m-uJ-zHy"/>
                                             <constraint firstItem="wgz-cq-ZJa" firstAttribute="height" secondItem="kf6-SE-l6A" secondAttribute="height" id="kWJ-ZS-p6h"/>
@@ -213,7 +212,7 @@ and earn rewards</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7U-5n-L0g">
-                                        <rect key="frame" x="20" y="400" width="374" height="150"/>
+                                        <rect key="frame" x="20" y="410" width="374" height="150"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-Kg-sjQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
@@ -235,7 +234,7 @@ and earn rewards</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell or buy your tokens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGE-I2-iAz">
-                                                                <rect key="frame" x="38.666666666666664" y="98.666666666666686" width="94.666666666666686" height="12.666666666666671"/>
+                                                                <rect key="frame" x="38.666666666666657" y="98.666666666666629" width="95" height="12.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -243,7 +242,6 @@ and earn rewards</string>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
-                                                            <constraint firstItem="zGE-I2-iAz" firstAttribute="leading" secondItem="5nh-lv-Ncw" secondAttribute="leading" constant="38.666666666666657" id="1SQ-Sf-ojC"/>
                                                             <constraint firstItem="LYe-t6-wFs" firstAttribute="centerX" secondItem="5nh-lv-Ncw" secondAttribute="centerX" id="3IM-Kj-jiH"/>
                                                             <constraint firstItem="LYe-t6-wFs" firstAttribute="top" secondItem="MZX-aa-Lr6" secondAttribute="bottom" constant="5" id="COt-Ic-TIB"/>
                                                             <constraint firstItem="zGE-I2-iAz" firstAttribute="centerX" secondItem="LYe-t6-wFs" secondAttribute="centerX" id="CvR-2Y-sY8"/>
@@ -269,7 +267,7 @@ and earn rewards</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWL-bs-3RR">
-                                                                <rect key="frame" x="27.666666666666664" y="98.666666666666686" width="116.66666666666669" height="12.666666666666671"/>
+                                                                <rect key="frame" x="27.666666666666657" y="98.666666666666629" width="117" height="12.666666666666671"/>
                                                                 <string key="text">Depisit your LPs to Leverage
 or Auto-compound .</string>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
@@ -281,7 +279,6 @@ or Auto-compound .</string>
                                                         <constraints>
                                                             <constraint firstItem="ERs-zm-drg" firstAttribute="centerX" secondItem="Atj-7c-QZR" secondAttribute="centerX" id="HRz-iG-GmQ"/>
                                                             <constraint firstItem="AWL-bs-3RR" firstAttribute="centerX" secondItem="ERs-zm-drg" secondAttribute="centerX" id="Hum-7G-lwI"/>
-                                                            <constraint firstItem="AWL-bs-3RR" firstAttribute="leading" secondItem="Atj-7c-QZR" secondAttribute="leading" constant="27.666666666666657" id="Qem-Lg-N0B"/>
                                                             <constraint firstItem="ERs-zm-drg" firstAttribute="top" secondItem="MgJ-Mq-vCu" secondAttribute="bottom" constant="5" id="e1U-v8-SXx"/>
                                                             <constraint firstItem="AWL-bs-3RR" firstAttribute="top" secondItem="ERs-zm-drg" secondAttribute="bottom" constant="10" id="kJX-ww-eMd"/>
                                                             <constraint firstItem="MgJ-Mq-vCu" firstAttribute="top" secondItem="Atj-7c-QZR" secondAttribute="top" constant="22" id="oBS-T4-IF3"/>
@@ -301,7 +298,7 @@ or Auto-compound .</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9g-Ks-Fne">
-                                        <rect key="frame" x="20" y="580" width="374" height="158.66666666666663"/>
+                                        <rect key="frame" x="20" y="590" width="374" height="158.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Oal-AZ-LEP">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="158.66666666666666"/>
@@ -323,7 +320,7 @@ or Auto-compound .</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LT9-tu-etv">
-                                                                <rect key="frame" x="24" y="98.666666666666629" width="124" height="12.666666666666671"/>
+                                                                <rect key="frame" x="23.999999999999993" y="98.666666666666629" width="124.33333333333331" height="12.666666666666671"/>
                                                                 <string key="text">Single Stake assets by lending
 to borrowers in Terrace.</string>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
@@ -337,7 +334,6 @@ to borrowers in Terrace.</string>
                                                             <constraint firstItem="ZaM-mX-dCB" firstAttribute="top" secondItem="Yyq-YG-aBT" secondAttribute="top" constant="22" id="LYy-d1-zZG"/>
                                                             <constraint firstItem="ZaM-mX-dCB" firstAttribute="centerX" secondItem="Yyq-YG-aBT" secondAttribute="centerX" id="jJF-Q1-hYd"/>
                                                             <constraint firstItem="Qkm-8O-AeQ" firstAttribute="centerX" secondItem="Yyq-YG-aBT" secondAttribute="centerX" id="lub-sk-DE7"/>
-                                                            <constraint firstItem="LT9-tu-etv" firstAttribute="leading" secondItem="Yyq-YG-aBT" secondAttribute="leading" constant="24" id="oxs-qC-jaO"/>
                                                             <constraint firstItem="LT9-tu-etv" firstAttribute="centerX" secondItem="Qkm-8O-AeQ" secondAttribute="centerX" id="qjA-qZ-rTy"/>
                                                             <constraint firstItem="LT9-tu-etv" firstAttribute="top" secondItem="Qkm-8O-AeQ" secondAttribute="bottom" constant="10" id="zTc-ZN-zow"/>
                                                         </constraints>
@@ -362,7 +358,7 @@ to borrowers in Terrace.</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shZ-YV-gg8">
-                                                                <rect key="frame" x="24.333333333333336" y="98.666666666666629" width="123.33333333333331" height="25.333333333333329"/>
+                                                                <rect key="frame" x="24.33333333333335" y="98.666666666666629" width="123.66666666666669" height="25.333333333333329"/>
                                                                 <string key="text">Single Stake FTM, BNB, MATIC
 and/or TOMB to Earn LIF3</string>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
@@ -377,7 +373,6 @@ and/or TOMB to Earn LIF3</string>
                                                             <constraint firstAttribute="bottom" secondItem="shZ-YV-gg8" secondAttribute="bottom" constant="34.666666666666586" id="PEb-Rq-CY9"/>
                                                             <constraint firstItem="shZ-YV-gg8" firstAttribute="centerX" secondItem="Kpr-lW-flH" secondAttribute="centerX" id="QLC-rl-vEL"/>
                                                             <constraint firstItem="Kpr-lW-flH" firstAttribute="centerX" secondItem="3Ht-4s-BUe" secondAttribute="centerX" id="ToV-Er-MXN"/>
-                                                            <constraint firstItem="shZ-YV-gg8" firstAttribute="leading" secondItem="3Ht-4s-BUe" secondAttribute="leading" constant="24.333333333333343" id="WSC-pO-YCk"/>
                                                             <constraint firstItem="Kpr-lW-flH" firstAttribute="top" secondItem="8oq-gr-qfQ" secondAttribute="bottom" constant="5" id="bQj-E5-Smh"/>
                                                             <constraint firstItem="8oq-gr-qfQ" firstAttribute="centerX" secondItem="3Ht-4s-BUe" secondAttribute="centerX" id="xUw-ps-UVW"/>
                                                         </constraints>
@@ -398,7 +393,7 @@ and/or TOMB to Earn LIF3</string>
                                 <constraints>
                                     <constraint firstItem="L7U-5n-L0g" firstAttribute="top" secondItem="kf6-SE-l6A" secondAttribute="bottom" constant="30" id="7UD-CN-Oc4"/>
                                     <constraint firstItem="j9g-Ks-Fne" firstAttribute="leading" secondItem="L7U-5n-L0g" secondAttribute="leading" id="Gzp-mM-Rn8"/>
-                                    <constraint firstItem="yAf-dS-gpT" firstAttribute="top" secondItem="9CR-IB-4b7" secondAttribute="top" constant="40" id="HUS-DK-o6d"/>
+                                    <constraint firstItem="yAf-dS-gpT" firstAttribute="top" secondItem="9CR-IB-4b7" secondAttribute="top" constant="50" id="HUS-DK-o6d"/>
                                     <constraint firstItem="yAf-dS-gpT" firstAttribute="leading" secondItem="OJs-q4-TBE" secondAttribute="leading" constant="20" id="Ho9-xT-QMS"/>
                                     <constraint firstItem="kf6-SE-l6A" firstAttribute="trailing" secondItem="yAf-dS-gpT" secondAttribute="trailing" id="Q0d-dn-2HI"/>
                                     <constraint firstAttribute="bottom" secondItem="j9g-Ks-Fne" secondAttribute="bottom" constant="40" id="WBu-Be-uyR"/>
@@ -426,6 +421,7 @@ and/or TOMB to Earn LIF3</string>
                             <constraint firstItem="9CR-IB-4b7" firstAttribute="centerX" secondItem="F2X-DE-efy" secondAttribute="centerX" id="nvT-HY-JeY"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="414" height="800"/>
                     <connections>
                         <outlet property="fountainView" destination="5nh-lv-Ncw" id="S5g-Oc-Xsn"/>
                         <outlet property="gardenView" destination="2Qb-sZ-MJ5" id="lP0-Sg-esR"/>

@@ -746,6 +746,7 @@
 "token.info.field.stats.month" = "1 Month";
 "token.info.field.stats.year" = "1 Year";
 "token.info.field.stats.market_cap" = "Market Cap";
+"token.info.field.stats.total_volume" = "Trading Volume";
 "token.info.field.stats.total_supply" = "Total Supply";
 "token.info.field.stats.circulating_supply" = "Circulating Supply";
 "token.info.field.stats.max_supply" = "Max Supply";

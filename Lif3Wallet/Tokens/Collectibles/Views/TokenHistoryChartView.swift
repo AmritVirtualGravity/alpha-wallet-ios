@@ -11,9 +11,9 @@ import AlphaWalletFoundation
 
 class TokenHistoryChartView: UIView {
     private let marker = XYMarkerView(
-        color: Colors.darkGray,
+        color: Colors.appWhite,
         font: Fonts.regular(size: 12),
-        textColor: Configuration.Color.Semantic.defaultInverseText,
+        textColor: Colors.black,
         insets: UIEdgeInsets(top: 8, left: 8, bottom: 20, right: 8))
 
     private lazy var valueFormatter = YMinMaxOnlyAxisValueFormatter(currency: .default)
@@ -25,7 +25,7 @@ class TokenHistoryChartView: UIView {
         chartView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         chartView.drawGridBackgroundEnabled = false
         chartView.drawBordersEnabled = false
-
+        
         chartView.chartDescription.enabled = false
         chartView.pinchZoomEnabled = false
         chartView.dragEnabled = true

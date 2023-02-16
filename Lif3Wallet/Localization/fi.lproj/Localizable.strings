@@ -747,6 +747,7 @@
 "token.info.field.stats.month" = "1 kuukausi";
 "token.info.field.stats.year" = "1 vuosi";
 "token.info.field.stats.market_cap" = "Markkinarvo (Market Cap)";
+"token.info.field.stats.total_volume" = "Trading Volume";
 "token.info.field.stats.total_supply" = "Tarjonta (Total Supply)";
 "token.info.field.stats.circulating_supply" = "Circulating Supply";
 "token.info.field.stats.max_supply" = "Maksimitarjonta (Max Supply)";

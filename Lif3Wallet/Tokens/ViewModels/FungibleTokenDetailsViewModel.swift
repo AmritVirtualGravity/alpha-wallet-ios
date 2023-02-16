@@ -140,7 +140,7 @@ final class FungibleTokenDetailsViewModel {
                 .charts,
                 .stakeSwap,
 //                .header(viewModel: .init(title: R.string.localizable.tokenInfoHeaderPerformance())),
-                .field(viewModel: dayViewModel),
+                .field(viewModel: totalVolumeViewModel(for: ticker)),
 //                .field(viewModel: weekViewModel),
 //                .field(viewModel: monthViewModel),
 //                .field(viewModel: yearViewModel),
@@ -198,6 +198,12 @@ final class FungibleTokenDetailsViewModel {
         let value: String = ticker?.market_cap.flatMap { StringFormatter().largeNumberFormatter(for: $0, currency: "") } ?? "-"
         let attributedValue = TokenAttributeViewModel.defaultValueAttributedString("$\(value)")
         return .init(title: R.string.localizable.tokenInfoFieldStatsMarket_cap(), attributedValue: attributedValue)
+    }
+    
+    private func totalVolumeViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {
+        let value = ticker?.total_volume?.formattedWithSeparator ?? "-"
+        let attributedValue = TokenAttributeViewModel.defaultValueAttributedString("$\(value)")
+        return .init(title: R.string.localizable.tokenInfoFieldStatsTotal_volume(), attributedValue: attributedValue)
     }
 
     private func totalSupplyViewModel(for ticker: CoinTicker?) -> TokenAttributeViewModel {

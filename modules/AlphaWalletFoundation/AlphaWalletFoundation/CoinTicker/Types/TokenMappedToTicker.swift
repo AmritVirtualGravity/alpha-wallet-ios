@@ -30,6 +30,8 @@ public struct TokenMappedToTicker {
             return "xdai"
         } else if server == .arbitrum && contractAddress == Constants.nativeCryptoAddressInDatabase {
             return "ethereum"
+        } else if server == .tomb_chain && contractAddress == Constants.nativeCryptoAddressInDatabase {
+            return "tomb"
         } else {
             return nil
         }
@@ -42,14 +44,15 @@ public struct TokenMappedToTicker {
 }
 
 extension TokenMappedToTicker: Hashable, Codable {
-
+    
     public init(token: Token) {
         symbol = token.symbol
         name = token.name
         contractAddress = token.contractAddress
         server = token.server
-        coinGeckoId = token.info.coinGeckoId
+        coinGeckoId =  token.info.coinGeckoId
     }
+    
 }
 
 extension TokenMappedToTicker: Equatable {

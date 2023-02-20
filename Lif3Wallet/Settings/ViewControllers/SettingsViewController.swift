@@ -20,6 +20,7 @@ protocol SettingsViewControllerDelegate: AnyObject, CanOpenURL {
     func scanQrSelected(in controller: SettingsViewController)
     func mainWalletSelected(in controller: SettingsViewController)
     func activitySelected(in controller: SettingsViewController)
+    func addContactSelected(in controller: SettingsViewController)
 }
 
 class SettingsViewController: UIViewController {
@@ -307,6 +308,8 @@ extension SettingsViewController: UITableViewDelegate {
                 delegate?.scanQrSelected(in: self)
             case .walletConnect:
                 delegate?.walletConnectSelected(in: self)
+            case .contact:
+                delegate?.addContactSelected(in: self)
         
             }
         }

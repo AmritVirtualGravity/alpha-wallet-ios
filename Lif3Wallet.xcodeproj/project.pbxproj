@@ -648,6 +648,15 @@
 		08A25854294073F100A31193 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A255E1294073EF00A31193 /* Localizable.strings */; };
 		08B108B8294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */; };
 		08F0AE4C2940D93E00FBF77B /* LifeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */; };
+		100DD7232991585500D3ABEA /* AddContactCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DD7172991585500D3ABEA /* AddContactCoordinator.swift */; };
+		100DD7242991585500D3ABEA /* ContactListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DD7182991585500D3ABEA /* ContactListCoordinator.swift */; };
+		100DD7252991585500D3ABEA /* AddContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DD71A2991585500D3ABEA /* AddContactViewModel.swift */; };
+		100DD7262991585500D3ABEA /* ContactListViewController+UITableViewDelegateAndDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DD71C2991585500D3ABEA /* ContactListViewController+UITableViewDelegateAndDataSource.swift */; };
+		100DD7272991585500D3ABEA /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DD71D2991585500D3ABEA /* ContactsListViewController.swift */; };
+		100DD7282991585500D3ABEA /* ContactListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DD71F2991585500D3ABEA /* ContactListTableViewCell.swift */; };
+		100DD7292991585500D3ABEA /* AddContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DD7202991585500D3ABEA /* AddContactsViewController.swift */; };
+		100DD72A2991585500D3ABEA /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 100DD7222991585500D3ABEA /* Contact.storyboard */; };
+		100DD72D29915BFC00D3ABEA /* ContactRmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DD72C29915BFC00D3ABEA /* ContactRmModel.swift */; };
 		104E542F2991153800C49760 /* ImportMagicLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104E54282991153800C49760 /* ImportMagicLinkCoordinator.swift */; };
 		104E54302991153800C49760 /* ImportMagicTokenViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104E542A2991153800C49760 /* ImportMagicTokenViewControllerViewModel.swift */; };
 		104E54312991153800C49760 /* ImportMagicTokenCardRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104E542B2991153800C49760 /* ImportMagicTokenCardRowViewModel.swift */; };
@@ -705,6 +714,7 @@
 		10DADAA0294B17EA00413AA0 /* SettingsWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */; };
 		10DDA3AD296718FF00268A42 /* tokensToBlackList.json in Resources */ = {isa = PBXBuildFile; fileRef = 10DDA3AC296718FF00268A42 /* tokensToBlackList.json */; };
 		10DE578A296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */; };
+		10EAA3C229921B7600636ABC /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EAA3C129921B7600636ABC /* ContactListViewModel.swift */; };
 		10F6DAB1295B246C00715C7F /* Lif3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10F6DAB0295B246C00715C7F /* Lif3.storyboard */; };
 		10F6DAB3295B24D300715C7F /* Lif3WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */; };
 		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
@@ -1545,6 +1555,15 @@
 		08A255E7294073EF00A31193 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveNewtworkTableVIewCell.swift; sourceTree = "<group>"; };
 		08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
+		100DD7172991585500D3ABEA /* AddContactCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactCoordinator.swift; sourceTree = "<group>"; };
+		100DD7182991585500D3ABEA /* ContactListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListCoordinator.swift; sourceTree = "<group>"; };
+		100DD71A2991585500D3ABEA /* AddContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewModel.swift; sourceTree = "<group>"; };
+		100DD71C2991585500D3ABEA /* ContactListViewController+UITableViewDelegateAndDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ContactListViewController+UITableViewDelegateAndDataSource.swift"; sourceTree = "<group>"; };
+		100DD71D2991585500D3ABEA /* ContactsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
+		100DD71F2991585500D3ABEA /* ContactListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListTableViewCell.swift; sourceTree = "<group>"; };
+		100DD7202991585500D3ABEA /* AddContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactsViewController.swift; sourceTree = "<group>"; };
+		100DD7222991585500D3ABEA /* Contact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
+		100DD72C29915BFC00D3ABEA /* ContactRmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRmModel.swift; sourceTree = "<group>"; };
 		102CD8AF293F050100A36057 /* HideTokenSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		102CD8B1293F05B600A36057 /* HideTokenSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTokenSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		104E54282991153800C49760 /* ImportMagicLinkCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportMagicLinkCoordinator.swift; sourceTree = "<group>"; };
@@ -1604,6 +1623,7 @@
 		10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewModel.swift; sourceTree = "<group>"; };
 		10DDA3AC296718FF00268A42 /* tokensToBlackList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tokensToBlackList.json; sourceTree = "<group>"; };
 		10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoViewCardTokenScriptActionCoordinator.swift; sourceTree = "<group>"; };
+		10EAA3C129921B7600636ABC /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
 		10F6DAB0295B246C00715C7F /* Lif3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lif3.storyboard; sourceTree = "<group>"; };
 		10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3WebViewController.swift; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
@@ -1922,6 +1942,7 @@
 		08A252DA294073EE00A31193 /* Lif3Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				100DD7152991585500D3ABEA /* Contacts */,
 				10B2A2E929911A6700908F41 /* WalletConnect */,
 				104E54262991153800C49760 /* Market */,
 				10F6DAAB295B242600715C7F /* Lif3 */,
@@ -3645,6 +3666,71 @@
 			path = Singletons;
 			sourceTree = "<group>";
 		};
+		100DD7152991585500D3ABEA /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				100DD72B29915BED00D3ABEA /* Models */,
+				100DD7162991585500D3ABEA /* Coordinators */,
+				100DD7192991585500D3ABEA /* ViewModels */,
+				100DD71B2991585500D3ABEA /* Controllers */,
+				100DD7212991585500D3ABEA /* Views */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		100DD7162991585500D3ABEA /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				100DD7172991585500D3ABEA /* AddContactCoordinator.swift */,
+				100DD7182991585500D3ABEA /* ContactListCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		100DD7192991585500D3ABEA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				100DD71A2991585500D3ABEA /* AddContactViewModel.swift */,
+				10EAA3C129921B7600636ABC /* ContactListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		100DD71B2991585500D3ABEA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				100DD71C2991585500D3ABEA /* ContactListViewController+UITableViewDelegateAndDataSource.swift */,
+				100DD71D2991585500D3ABEA /* ContactsListViewController.swift */,
+				100DD71E2991585500D3ABEA /* TableViewCell */,
+				100DD7202991585500D3ABEA /* AddContactsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		100DD71E2991585500D3ABEA /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				100DD71F2991585500D3ABEA /* ContactListTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		100DD7212991585500D3ABEA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				100DD7222991585500D3ABEA /* Contact.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		100DD72B29915BED00D3ABEA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				100DD72C29915BFC00D3ABEA /* ContactRmModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		104E54262991153800C49760 /* Market */ = {
 			isa = PBXGroup;
 			children = (
@@ -4668,6 +4754,7 @@
 				08A25645294073EF00A31193 /* non_asset_catalog_redemption_location@3x.png in Resources */,
 				08760CAB29407C2000F83AB3 /* redeemInfo.html in Resources */,
 				08A25648294073EF00A31193 /* chains.zip in Resources */,
+				100DD72A2991585500D3ABEA /* Contact.storyboard in Resources */,
 				08A25656294073EF00A31193 /* LaunchScreen.xcassets in Resources */,
 				08760CA929407C2000F83AB3 /* sellInfo.html in Resources */,
 				08A25655294073EF00A31193 /* tokens.json in Resources */,
@@ -5173,6 +5260,7 @@
 				10B2A32829911A6700908F41 /* WalletConnectV2URI.swift in Sources */,
 				08A25638294073EF00A31193 /* SetSellTokensCardExpiryDateViewController.swift in Sources */,
 				08A2562A294073EF00A31193 /* ExportJsonKeystoreFileView.swift in Sources */,
+				100DD7242991585500D3ABEA /* ContactListCoordinator.swift in Sources */,
 				08A2576C294073F000A31193 /* ContainerTableViewCell.swift in Sources */,
 				08A2561F294073EF00A31193 /* SupportViewController.swift in Sources */,
 				08A25814294073F100A31193 /* SelectableNFTAssetContainerViewModel.swift in Sources */,
@@ -5362,6 +5450,7 @@
 				08A25819294073F100A31193 /* FungibleTokenHeaderViewModel.swift in Sources */,
 				08A25722294073F000A31193 /* TransactionViewModel.swift in Sources */,
 				08A25799294073F000A31193 /* AccountsViewController.swift in Sources */,
+				100DD7232991585500D3ABEA /* AddContactCoordinator.swift in Sources */,
 				08A256EE294073F000A31193 /* UIDevice.swift in Sources */,
 				08A25798294073F000A31193 /* AccountsViewModel.swift in Sources */,
 				08A257B2294073F000A31193 /* ShowSeedPhraseViewModel.swift in Sources */,
@@ -5386,6 +5475,7 @@
 				08A257F7294073F100A31193 /* AddHideTokensCoordinator.swift in Sources */,
 				08A255EF294073EF00A31193 /* LocalesCoordinator.swift in Sources */,
 				08A256F5294073F000A31193 /* UIImage.swift in Sources */,
+				100DD7262991585500D3ABEA /* ContactListViewController+UITableViewDelegateAndDataSource.swift in Sources */,
 				08A2575C294073F000A31193 /* AddressOrEnsNameLabel.swift in Sources */,
 				08A25781294073F000A31193 /* ScreenChecker.swift in Sources */,
 				08A2569C294073F000A31193 /* CancelTransactionViewModel.swift in Sources */,
@@ -5429,6 +5519,7 @@
 				08A257E9294073F100A31193 /* BackupCoordinator.swift in Sources */,
 				08A25626294073EF00A31193 /* SaveCustomRpcManualEntryView.swift in Sources */,
 				08A25621294073EF00A31193 /* SettingsViewController.swift in Sources */,
+				100DD7252991585500D3ABEA /* AddContactViewModel.swift in Sources */,
 				08760C89294079AD00F83AB3 /* DappsAutoCompletionCellViewModel.swift in Sources */,
 				08A25614294073EF00A31193 /* AdvancedSettingsViewController.swift in Sources */,
 				08A2580A294073F100A31193 /* AddHideTokensViewModel.swift in Sources */,
@@ -5470,6 +5561,7 @@
 				08A25632294073EF00A31193 /* SwitchTableViewCell.swift in Sources */,
 				08760C91294079AD00F83AB3 /* SwitchChainRequestViewController.swift in Sources */,
 				08A25755294073F000A31193 /* XYMarkerView.swift in Sources */,
+				100DD72D29915BFC00D3ABEA /* ContactRmModel.swift in Sources */,
 				08760C98294079AD00F83AB3 /* DappViewCell.swift in Sources */,
 				10DE578A296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift in Sources */,
 				08A25818294073F100A31193 /* Erc875NonFungibleRowViewModel.swift in Sources */,
@@ -5486,6 +5578,7 @@
 				08A25734294073F000A31193 /* AcceptProposalViewModel.swift in Sources */,
 				08A25604294073EF00A31193 /* CheckTransactionStateViewModel.swift in Sources */,
 				08A25793294073F000A31193 /* LockEnterPasscodeCoordinator.swift in Sources */,
+				100DD7292991585500D3ABEA /* AddContactsViewController.swift in Sources */,
 				08A257CF294073F100A31193 /* ActivityCellViewModel.swift in Sources */,
 				08A255F4294073EF00A31193 /* ConsoleCoordinator.swift in Sources */,
 				08A25672294073EF00A31193 /* SwapTokensViewModel.swift in Sources */,
@@ -5499,6 +5592,7 @@
 				08A257F3294073F100A31193 /* FungibleTokenCoordinator.swift in Sources */,
 				08A2566A294073EF00A31193 /* SwapOptionsHeaderViewModel.swift in Sources */,
 				08A25761294073F000A31193 /* DateEntryField.swift in Sources */,
+				100DD7272991585500D3ABEA /* ContactsListViewController.swift in Sources */,
 				08A25738294073F000A31193 /* Error.swift in Sources */,
 				08A256F0294073F000A31193 /* UITableViewCell.swift in Sources */,
 				08A256A8294073F000A31193 /* RequestViewModel.swift in Sources */,
@@ -5507,6 +5601,7 @@
 				08A2577A294073F000A31193 /* ScrollableSegmentedControl.swift in Sources */,
 				08A25802294073F100A31193 /* SelectTokenViewModel.swift in Sources */,
 				10B2A32C29911A6700908F41 /* TransactionConfirmationRPCServerInfoView.swift in Sources */,
+				10EAA3C229921B7600636ABC /* ContactListViewModel.swift in Sources */,
 				08A257B6294073F000A31193 /* ImportSelectionType.swift in Sources */,
 				08A255F6294073EF00A31193 /* EnabledServersViewModel.swift in Sources */,
 				08A2584D294073F100A31193 /* TokenCardWebView.swift in Sources */,
@@ -5663,6 +5758,7 @@
 				08A25676294073EF00A31193 /* SwapTokensCoordinator.swift in Sources */,
 				08A25824294073F100A31193 /* TokenInfoHeaderView.swift in Sources */,
 				08A2580C294073F100A31193 /* NFTAssetSelectionCoordinator.swift in Sources */,
+				100DD7282991585500D3ABEA /* ContactListTableViewCell.swift in Sources */,
 				08A256D4294073F000A31193 /* TokenCardRedemptionViewController.swift in Sources */,
 				08A257FB294073F100A31193 /* OpenSeaNonFungibleTokenCardRowViewModel.swift in Sources */,
 				08A257AE294073F000A31193 /* SeedPhraseBackupIntroductionViewModel.swift in Sources */,

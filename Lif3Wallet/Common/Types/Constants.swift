@@ -16,10 +16,10 @@ extension Constants {
     static let xdaiDropPrefix = Data([0x58, 0x44, 0x41, 0x49, 0x44, 0x52, 0x4F, 0x50]).hex()
 
     enum WalletConnect {
-        static let server = "AlphaWallet"
+        static let server = "Lif3Wallet"
         static let websiteUrl = URL(string: Constants.website)!
         static let icons = [
-            "https://gblobscdn.gitbook.com/spaces%2F-LJJeCjcLrr53DcT1Ml7%2Favatar.png?alt=media"
+            "https://assets.lif3.com/swap/tokens/LIF3.svg"
         ]
         static let connectionTimeout: TimeInterval = 10
     }
@@ -28,12 +28,12 @@ extension Constants {
 
     // social
     static let website = "https://lif3.com/"
-    static let twitterUsername = "AlphaWallet"
+    static let twitterUsername = "Official_LIF3"
     static let redditGroupName = "r/AlphaWallet/"
     static let facebookUsername = "AlphaWallet"
 
     // support
-    static let supportEmail = "feedback+ios@alphawallet.com"
+    static let supportEmail = "ios-feedback@lif3.com"
 
     static let dappsBrowserURL = URL(string: "http://aw.app")!
     
@@ -80,6 +80,10 @@ extension Constants {
             return "Sushi Swap"
         case "soulswap-ftm":
             return "Soul Swap"
+        case "uniswap-eth":
+            return "Uniswap"
+        case "sushiswap-eth":
+            return "Sushi Swap"
         default:
             return swapTool
         }

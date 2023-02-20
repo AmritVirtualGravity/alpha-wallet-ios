@@ -587,7 +587,7 @@ extension SettingsViewModel.SettingsSupportRow  {
         case .helpCenter:
             return URL(string: "https://support.lif3.com")
         case .about:
-            return URL(string: "https://support.lif3.com")
+            return URL(string: "https://lif3.com")
         case .featureRequest:
             return URL(string: "https://support.lif3.com/hc/en-us/community/topics/5998714637455-Feature-Requests")
         case .bugReport:

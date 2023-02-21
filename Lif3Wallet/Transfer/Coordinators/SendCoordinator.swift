@@ -93,7 +93,7 @@ extension SendCoordinator: SendViewControllerDelegate {
         let controller = AddAddressToContactViewController()
         controller.delegate = self
         controller.modalPresentationStyle = .overCurrentContext
-        self.navigationController.present(controller, animated: true)
+        self.navigationController.present(controller, animated: false)
     }
     
     func didClose(in viewController: SendViewController) {
@@ -197,11 +197,21 @@ extension SendCoordinator: CanOpenURL {
 
 
 extension SendCoordinator: AddAddressToContactViewControllerDelegate {
+    
     func didTapCreateContact(in viewController: AddAddressToContactViewController) {
-        self.navigationController.dismiss(animated: true)
+//        print(viewController.addAddressToContactPopView.nameTextField.value)
+//        print(sendViewController.targetAddressTextField.value)
+    
+        let viewModel = SendViewModel(
+            transactionType: transactionType,
+            session: session,
+            tokensService: tokensService,
+            importToken: importToken)
+        viewModel.addContacts(name: viewController.addAddressToContactPopView.nameTextField.value, address: sendViewController.targetAddressTextField.value)
+        self.navigationController.dismiss(animated: false)
     }
     
     func didTapOutside(in viewController: AddAddressToContactViewController) {
-        self.navigationController.dismiss(animated: true)
+        self.navigationController.dismiss(animated: false)
     }
 }

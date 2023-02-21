@@ -51,7 +51,7 @@ class SendViewController: UIViewController {
         return tableView
     }()
     
-    private var contactListArr = [ContactRmModel]()
+    public var contactListArr = [ContactRmModel]()
     
     //NOTE: Internal, for tests
     let viewModel: SendViewModel
@@ -138,8 +138,13 @@ class SendViewController: UIViewController {
         amountHeader.configure(viewModel: viewModel.amountViewModel)
         recipientHeader.configure(viewModel: viewModel.recipientViewModel)
         contactHeader.configure(viewModel: viewModel.contactViewModel)
-        getContactList()
         bind(viewModel: viewModel)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getContactList()
+        showHideAddToContactButton(address: targetAddressTextField.value.trimmed)
     }
 
     
@@ -247,7 +252,7 @@ class SendViewController: UIViewController {
     }
 
     private func activateAmountView() {
-        amountTextField.becomeFirstResponder()
+//        amountTextField.becomeFirstResponder()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -297,6 +302,7 @@ extension SendViewController: AddressTextFieldDelegate {
     }
 
     func openQRCodeReader(for textField: AddressTextField) {
+        showHideAddToContactButton(address: textField.value)
         delegate?.openQRCode(in: self)
     }
 

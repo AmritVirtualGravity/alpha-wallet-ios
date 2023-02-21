@@ -15,7 +15,7 @@ protocol AddAddressToContactViewControllerDelegate {
 class AddAddressToContactViewController: UIViewController {
     
     public var delegate: AddAddressToContactViewControllerDelegate?
-    private var addAddressToContactPopView: AddAddressToContactPopView = {
+    public var addAddressToContactPopView: AddAddressToContactPopView = {
         let popView = AddAddressToContactPopView()
         popView.layer.cornerRadius = 12
         return popView
@@ -36,12 +36,22 @@ class AddAddressToContactViewController: UIViewController {
     }
     
     func didTapAddContact() {
-        self.delegate?.didTapCreateContact(in: self)
+        if (!addAddressToContactPopView.nameTextField.value.trimmed.isEmpty) {
+            self.delegate?.didTapCreateContact(in: self)
+        } else {
+            addAddressToContactPopView.nameTextField.status = .error(R.string.localizable.warningFieldRequired())
+        }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
         self.delegate?.didTapOutside(in: self)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presentingViewController?.viewWillAppear(animated)
     }
     
     

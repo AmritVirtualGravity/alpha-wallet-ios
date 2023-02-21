@@ -135,7 +135,7 @@ class AddContactViewController: UIViewController {
         } else if nameTextField.value.trimmed.isEmpty {
             nameTextField.status = .error(R.string.localizable.warningFieldRequired())
             validate = false
-        } else if checkIfAddressAlreadyExist(walletAddress: addressTextField.value) {
+        } else if (contactData == nil  && checkIfAddressAlreadyExist(walletAddress: addressTextField.value)) {
             addressTextField.errorState = .error("Please enter different address. This address is already used.")
             validate = false
         } else {

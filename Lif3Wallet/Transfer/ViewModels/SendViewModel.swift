@@ -557,5 +557,12 @@ extension SendViewModel {
       return nil
     }
     
+    func addContacts(name:String, address: String) {
+       let realm = try! Realm()
+       try! realm.write {
+           realm.add(ContactRmModel(name:name, walletAddress: address))
+       }
+   }
+    
     
 }

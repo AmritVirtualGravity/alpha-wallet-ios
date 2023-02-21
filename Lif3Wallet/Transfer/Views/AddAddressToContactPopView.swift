@@ -25,7 +25,7 @@ class AddAddressToContactPopView: UIView {
         return label
     }()
     
-    private lazy var nameTextField: TextField = {
+    public lazy var nameTextField: TextField = {
         let textField = TextField.textField
         textField.inputAccessoryButtonType = .done
         textField.returnKeyType = .done
@@ -52,7 +52,7 @@ class AddAddressToContactPopView: UIView {
             textLabel,
             nameTextField,
             footerBar
-        ].asStackView(axis: .vertical, spacing: 10)
+        ].asStackView(axis: .vertical, spacing: 2)
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)

@@ -671,6 +671,10 @@ extension ImportWalletViewController: TextViewDelegate {
 }
 
 extension ImportWalletViewController: AddressTextFieldDelegate {
+    func didClear(in textField: AddressTextField) {
+        //
+    }
+    
     func doneButtonTapped(for textField: AddressTextField) {
         view.endEditing(true)
     }

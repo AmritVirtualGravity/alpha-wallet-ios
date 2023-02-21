@@ -82,6 +82,7 @@
 "send.paste.button.addressBook" = "Libreta de direcciones";
 "send.amount" = "Cantidad";
 "send.recipient" = "Destinatario";
+"send.contactList" = "Contact List";
 "send.recipientsAddress" = "Dirección del destinatario";
 "send.invalid.Token" = "Token no válido";
 "send.available" = "Disponible: %@";

@@ -12,6 +12,7 @@ protocol SendViewControllerDelegate: AnyObject, CanOpenURL {
 class SendViewController: UIViewController {
     private let recipientHeader = SendViewSectionHeader()
     private let amountHeader = SendViewSectionHeader()
+    private let contactHeader = SendViewSectionHeader()
     private let buttonsBar: HorizontalButtonsBar = {
         let buttonsBar = HorizontalButtonsBar(configuration: .primary(buttons: 1))
         buttonsBar.configure()
@@ -19,6 +20,38 @@ class SendViewController: UIViewController {
 
         return buttonsBar
     }()
+    
+    private let addToContactButton:UIButton = {
+        let button = UIButton()
+        button.setTitle("Add to Contact", for: .normal)
+        button.titleLabel?.font = Fonts.regular(size: 16)
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.isHidden = true
+        return button
+    }()
+    
+    private let contactNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Fonts.bold(size: 15)
+        label.isHidden = true
+        return label
+    }()
+    
+    private lazy var contactTableView: UITableView = {
+        let tableView = UITableView.insetGroped
+        tableView.register(ContactTableViewCell.self)
+//        tableView.separatorStyle = .singleLine
+        tableView.separatorColor =  .white.withAlphaComponent(0.1)
+        tableView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        return tableView
+    }()
+    
+    private var contactListArr = [ContactRmModel]()
+    
     //NOTE: Internal, for tests
     let viewModel: SendViewModel
     //We use weak link to make sure that token alert will be deallocated by close button tapping.
@@ -59,7 +92,7 @@ class SendViewController: UIViewController {
     init(viewModel: SendViewModel, domainResolutionService: DomainResolutionServiceType) {
         self.domainResolutionService = domainResolutionService
         self.viewModel = viewModel
-
+        
         super.init(nibName: nil, bundle: nil)
 
         containerView.stackView.addArrangedSubviews([
@@ -69,37 +102,77 @@ class SendViewController: UIViewController {
             .spacer(height: ScreenChecker().isNarrowScreen ? 7: 14),
             recipientHeader,
             .spacer(height: ScreenChecker().isNarrowScreen ? 7: 16),
-            targetAddressTextField.defaultLayout(edgeInsets: .init(top: 0, left: 16, bottom: 0, right: 16))
+//            contactNameLabel,
+//            .spacer(height: ScreenChecker().isNarrowScreen ? 7: 14),
+            targetAddressTextField.defaultLayout(edgeInsets: .init(top: 0, left: 16, bottom: 0, right: 16)),
+            addToContactButton,
+            contactHeader,
+            contactTableView
         ])
 
         let footerBar = ButtonsBarBackgroundView(buttonsBar: buttonsBar, separatorHeight: 0)
 
         view.addSubview(footerBar)
         view.addSubview(containerView)
+        view.addSubview(contactNameLabel)
 
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: footerBar.topAnchor),
-
+            contactTableView.topAnchor.constraint(equalTo: contactHeader.bottomAnchor),
+            contactTableView.bottomAnchor.constraint(equalTo: footerBar.topAnchor),
+            contactNameLabel.topAnchor.constraint(equalTo: recipientHeader.bottomAnchor, constant: 10),
+            contactNameLabel.bottomAnchor.constraint(equalTo: targetAddressTextField.topAnchor, constant: -10),
+            contactNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 18),
             footerBar.anchorsConstraint(to: view),
         ])
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         amountHeader.configure(viewModel: viewModel.amountViewModel)
         recipientHeader.configure(viewModel: viewModel.recipientViewModel)
-
+        contactHeader.configure(viewModel: viewModel.contactViewModel)
+        getContactList()
         bind(viewModel: viewModel)
     }
 
+    
+  
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         didAppear.send(())
+    }
+    
+    func getContactList() {
+        viewModel.getContacts { contactList in
+            self.contactListArr = contactList
+            self.contactTableView.reloadData()
+        }
+    }
+    
+    func checkIfTheContactAlreadyExists(address: String) -> Bool {
+        return self.contactListArr.contains { contact in
+            contact.walletAddress == address
+        }
+    }
+    
+    
+    func showHideAddToContactButton(address: String) {
+        if address.isEmpty  || !CryptoAddressValidator.isValidAddress(address) {
+            contactNameLabel.isHidden = true
+            addToContactButton.isHidden = true
+        } else {
+            addToContactButton.isHidden = checkIfTheContactAlreadyExists(address: address)
+            contactNameLabel.isHidden = !checkIfTheContactAlreadyExists(address: address)
+            if  let contact = viewModel.getContact(contactList: contactListArr, address: address) {
+                contactNameLabel.text = contact.name
+            }
+        }
     }
 
     func allFundsSelected() {
@@ -110,7 +183,7 @@ class SendViewController: UIViewController {
         let send = sendButton.publisher(forEvent: .touchUpInside).eraseToAnyPublisher()
         let recipient = send.map { [targetAddressTextField] _ in return targetAddressTextField.value.trimmed }
             .eraseToAnyPublisher()
-
+        
         let input = SendViewModelInput(
             amountToSend: amountTextField.cryptoValuePublisher,
             qrCode: qrCode.eraseToAnyPublisher(),
@@ -224,6 +297,7 @@ extension SendViewController: AddressTextFieldDelegate {
 
     func didPaste(in textField: AddressTextField) {
         textField.errorState = .none
+        showHideAddToContactButton(address: textField.value)
         //NOTE: Comment it as activating amount view doesn't work properly here
         //activateAmountView()
     }
@@ -232,8 +306,40 @@ extension SendViewController: AddressTextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func didClear(in textField: AddressTextField) {
+        showHideAddToContactButton(address: textField.value)
+    }
+    
 
     func didChange(to string: String, in textField: AddressTextField) {
         //no-op
+        showHideAddToContactButton(address: string)
     }
 }
+
+extension SendViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let contact = contactListArr[indexPath.row]
+            let cell: ContactTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.configure(viewModel: ContactTableViewCellViewModel(name: contact.name, address: contact.walletAddress))
+            return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contactListArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let contact = contactListArr[indexPath.row]
+        targetAddressTextField.value = contact.walletAddress
+        showHideAddToContactButton(address: contact.walletAddress)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70.0
+    }
+    
+}
+   

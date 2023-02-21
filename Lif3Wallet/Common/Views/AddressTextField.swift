@@ -7,6 +7,7 @@ protocol AddressTextFieldDelegate: AnyObject {
     func displayError(error: Error, for textField: AddressTextField)
     func openQRCodeReader(for textField: AddressTextField)
     func didPaste(in textField: AddressTextField)
+    func didClear(in textField: AddressTextField)
     func shouldReturn(in textField: AddressTextField) -> Bool
     func didChange(to string: String, in textField: AddressTextField)
     func doneButtonTapped(for textField: AddressTextField)
@@ -322,6 +323,7 @@ final class AddressTextField: UIControl {
         ensAddressLabel.clear()
         textFieldText = String()
         errorState = .none
+        delegate?.didClear(in: self)
     }
 
     @objc private func pasteButtonSelected(_ sender: UIButton) {

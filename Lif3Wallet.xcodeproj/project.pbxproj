@@ -717,6 +717,8 @@
 		10EAA3C229921B7600636ABC /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EAA3C129921B7600636ABC /* ContactListViewModel.swift */; };
 		10F6DAB1295B246C00715C7F /* Lif3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10F6DAB0295B246C00715C7F /* Lif3.storyboard */; };
 		10F6DAB3295B24D300715C7F /* Lif3WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */; };
+		10F9207529A3C320009604CE /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F9207429A3C320009604CE /* ContactTableViewCell.swift */; };
+		10F9207829A3C410009604CE /* ContactTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F9207729A3C410009604CE /* ContactTableViewCellViewModel.swift */; };
 		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
 		290B2B6A1F92C0440053C83E /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B691F92C0440053C83E /* ConfigTests.swift */; };
 		290B2B6C1F92C35B0053C83E /* RPCServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */; };
@@ -1626,6 +1628,8 @@
 		10EAA3C129921B7600636ABC /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
 		10F6DAB0295B246C00715C7F /* Lif3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lif3.storyboard; sourceTree = "<group>"; };
 		10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3WebViewController.swift; sourceTree = "<group>"; };
+		10F9207429A3C320009604CE /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		10F9207729A3C410009604CE /* ContactTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCServerTests.swift; sourceTree = "<group>"; };
 		290B2B6D1F92C3980053C83E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -2526,6 +2530,7 @@
 		08A253B5294073EE00A31193 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				10F9207629A3C3F8009604CE /* Contacts */,
 				08A253B6294073EE00A31193 /* TransactionConfirmationTableHeaderViewModel.swift */,
 				08A253B7294073EE00A31193 /* SlidableTextFieldViewModel.swift */,
 				08A253B8294073EE00A31193 /* SendTransactionErrorViewModel.swift */,
@@ -2639,6 +2644,7 @@
 				08A253F6294073EF00A31193 /* ConfirmSignMessageTableViewCell.swift */,
 				08A253F7294073EF00A31193 /* GasSpeedTableViewHeaderView.swift */,
 				08A253F8294073EF00A31193 /* TransactionConfirmationRowDescriptionView.swift */,
+				10F9207429A3C320009604CE /* ContactTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3930,6 +3936,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		10F9207629A3C3F8009604CE /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				10F9207729A3C410009604CE /* ContactTableViewCellViewModel.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
 		290B2B681F92C0300053C83E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -5187,6 +5201,7 @@
 				08A25627294073EF00A31193 /* WalletSecurityLevelIndicator.swift in Sources */,
 				08A25760294073F000A31193 /* NumberStepper.swift in Sources */,
 				08A257C0294073F000A31193 /* InitialNetworkSelectionViewController.swift in Sources */,
+				10F9207829A3C410009604CE /* ContactTableViewCellViewModel.swift in Sources */,
 				08A2568A294073EF00A31193 /* WalletPupupViewController.swift in Sources */,
 				08A2563E294073EF00A31193 /* AddMultipleCustomRpcView.swift in Sources */,
 				08A256D3294073F000A31193 /* RedeemTokenCardQuantitySelectionViewController.swift in Sources */,
@@ -5441,6 +5456,7 @@
 				08760C80294079AD00F83AB3 /* HistoriesViewModel.swift in Sources */,
 				08760C9B294079AD00F83AB3 /* DappButton.swift in Sources */,
 				08A256F4294073F000A31193 /* UIButton.swift in Sources */,
+				10F9207529A3C320009604CE /* ContactTableViewCell.swift in Sources */,
 				08A25851294073F100A31193 /* ContactUsBannerView.swift in Sources */,
 				08A2567C294073EF00A31193 /* FeaturesTableViewController.swift in Sources */,
 				08A25804294073F100A31193 /* ShowAddHideTokensViewModel.swift in Sources */,

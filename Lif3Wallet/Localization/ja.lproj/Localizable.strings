@@ -82,6 +82,7 @@
 "send.paste.button.addressBook" = "Address Book";
 "send.amount" = "Amount";
 "send.recipient" = "Recipient";
+"send.contactList" = "Contact List";
 "send.recipientsAddress" = "Recipient’s Address";
 "send.invalid.Token" = "Invalid token";
 "send.available" = "Available: %@";

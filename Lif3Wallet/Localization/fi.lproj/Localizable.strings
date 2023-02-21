@@ -79,6 +79,7 @@
 "send.paste.button.addressBook" = "Osoitekirja";
 "send.amount" = "Summa";
 "send.recipient" = "Vastaanottaja";
+"send.contactList" = "Contact List";
 "send.recipientsAddress" = "Vastaanottajan osoite";
 "send.invalid.Token" = "Virheellinen rahake";
 "send.available" = "Käytettävissä: %@";

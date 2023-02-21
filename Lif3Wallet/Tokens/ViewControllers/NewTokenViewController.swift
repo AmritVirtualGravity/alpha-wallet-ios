@@ -364,6 +364,10 @@ extension NewTokenViewController: PopNotifiable {
 }
 
 extension NewTokenViewController: AddressTextFieldDelegate {
+    func didClear(in textField: AddressTextField) {
+        //
+    }
+    
     func nextButtonTapped(for textField: AddressTextField) {
         symbolTextField.becomeFirstResponder()
     }

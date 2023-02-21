@@ -155,6 +155,10 @@ class AddContactViewController: UIViewController {
 
 
 extension AddContactViewController: AddressTextFieldDelegate {
+    func didClear(in textField: AddressTextField) {
+        //
+    }
+    
     func doneButtonTapped(for textField: AddressTextField) {
         view.endEditing(true)
     }

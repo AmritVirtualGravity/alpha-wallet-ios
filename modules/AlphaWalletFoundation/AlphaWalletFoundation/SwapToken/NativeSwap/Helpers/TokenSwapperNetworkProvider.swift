@@ -29,7 +29,8 @@ public final class LiQuestTokenSwapperNetworkProvider: TokenSwapperNetworkProvid
     }
 
     public func fetchSupportedTools() -> AnyPublisher<[SwapTool], SwapError> {
-        networkService
+        
+         networkService
             .dataTaskPublisher(ToolsRequest())
             .receive(on: DispatchQueue.global())
             .mapError { SwapError.inner($0.unwrapped) }
@@ -57,7 +58,7 @@ public final class LiQuestTokenSwapperNetworkProvider: TokenSwapperNetworkProvid
     }
 
     public func fetchSupportedChains() -> AnyPublisher<[RPCServer], PromiseError> {
-        return networkService
+         networkService
             .dataTaskPublisher(SupportedChainsRequest())
             .receive(on: DispatchQueue.global())
             .map { data, _ -> [RPCServer] in

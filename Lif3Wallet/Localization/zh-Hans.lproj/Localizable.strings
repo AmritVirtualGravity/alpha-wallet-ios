@@ -82,6 +82,7 @@
 "send.paste.button.addressBook" = "地址簿";
 "send.amount" = "价值";
 "send.recipient" = "接收人";
+"send.contactList" = "Contact List";
 "send.recipientsAddress" = "接收人地址";
 "send.invalid.Token" = "无效通证";
 "send.available" = "可用： %@";

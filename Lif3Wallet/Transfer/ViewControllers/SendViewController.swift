@@ -7,6 +7,7 @@ protocol SendViewControllerDelegate: AnyObject, CanOpenURL {
     func didPressConfirm(transaction: UnconfirmedTransaction, in viewController: SendViewController)
     func openQRCode(in viewController: SendViewController)
     func didClose(in viewController: SendViewController)
+    func didTapAddAddressToContact(in viewController: SendViewController)
 }
 
 class SendViewController: UIViewController {
@@ -132,7 +133,7 @@ class SendViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        addToContactButton.addTarget(self, action: #selector(addContactButtonSelected), for: .touchUpInside)
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         amountHeader.configure(viewModel: viewModel.amountViewModel)
         recipientHeader.configure(viewModel: viewModel.recipientViewModel)
@@ -173,6 +174,10 @@ class SendViewController: UIViewController {
                 contactNameLabel.text = contact.name
             }
         }
+    }
+    
+    @objc private func addContactButtonSelected(_ sender: UIButton) {
+        self.delegate?.didTapAddAddressToContact(in: self)
     }
 
     func allFundsSelected() {

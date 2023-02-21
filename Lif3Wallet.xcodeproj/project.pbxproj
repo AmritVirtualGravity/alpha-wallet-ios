@@ -714,6 +714,10 @@
 		10DADAA0294B17EA00413AA0 /* SettingsWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */; };
 		10DDA3AD296718FF00268A42 /* tokensToBlackList.json in Resources */ = {isa = PBXBuildFile; fileRef = 10DDA3AC296718FF00268A42 /* tokensToBlackList.json */; };
 		10DE578A296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */; };
+		10E5AC6229A4B8DD00CDE4CF /* AddAddressToContactPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5AC6129A4B8DD00CDE4CF /* AddAddressToContactPopView.swift */; };
+		10E5AC6429A4B99400CDE4CF /* AddAddressToContactPopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5AC6329A4B99400CDE4CF /* AddAddressToContactPopViewModel.swift */; };
+		10E5AC6629A4BA7F00CDE4CF /* AddAddressToContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5AC6529A4BA7F00CDE4CF /* AddAddressToContactViewController.swift */; };
+		10E5AC6829A4C11900CDE4CF /* AddAddressToContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5AC6729A4C11900CDE4CF /* AddAddressToContactViewModel.swift */; };
 		10EAA3C229921B7600636ABC /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EAA3C129921B7600636ABC /* ContactListViewModel.swift */; };
 		10F6DAB1295B246C00715C7F /* Lif3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10F6DAB0295B246C00715C7F /* Lif3.storyboard */; };
 		10F6DAB3295B24D300715C7F /* Lif3WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */; };
@@ -1625,6 +1629,10 @@
 		10DADA9F294B17EA00413AA0 /* SettingsWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewModel.swift; sourceTree = "<group>"; };
 		10DDA3AC296718FF00268A42 /* tokensToBlackList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tokensToBlackList.json; sourceTree = "<group>"; };
 		10DE5789296D3B3B00792100 /* NoViewCardTokenScriptActionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoViewCardTokenScriptActionCoordinator.swift; sourceTree = "<group>"; };
+		10E5AC6129A4B8DD00CDE4CF /* AddAddressToContactPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressToContactPopView.swift; sourceTree = "<group>"; };
+		10E5AC6329A4B99400CDE4CF /* AddAddressToContactPopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressToContactPopViewModel.swift; sourceTree = "<group>"; };
+		10E5AC6529A4BA7F00CDE4CF /* AddAddressToContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressToContactViewController.swift; sourceTree = "<group>"; };
+		10E5AC6729A4C11900CDE4CF /* AddAddressToContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressToContactViewModel.swift; sourceTree = "<group>"; };
 		10EAA3C129921B7600636ABC /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
 		10F6DAB0295B246C00715C7F /* Lif3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lif3.storyboard; sourceTree = "<group>"; };
 		10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3WebViewController.swift; sourceTree = "<group>"; };
@@ -2623,6 +2631,7 @@
 				08A253E7294073EF00A31193 /* RequestViewController.swift */,
 				08A253E8294073EF00A31193 /* TransactionConfirmationViewController.swift */,
 				08A253E9294073EF00A31193 /* TransferTokensCardQuantitySelectionViewController.swift */,
+				10E5AC6529A4BA7F00CDE4CF /* AddAddressToContactViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2645,6 +2654,7 @@
 				08A253F7294073EF00A31193 /* GasSpeedTableViewHeaderView.swift */,
 				08A253F8294073EF00A31193 /* TransactionConfirmationRowDescriptionView.swift */,
 				10F9207429A3C320009604CE /* ContactTableViewCell.swift */,
+				10E5AC6129A4B8DD00CDE4CF /* AddAddressToContactPopView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3940,6 +3950,8 @@
 			isa = PBXGroup;
 			children = (
 				10F9207729A3C410009604CE /* ContactTableViewCellViewModel.swift */,
+				10E5AC6329A4B99400CDE4CF /* AddAddressToContactPopViewModel.swift */,
+				10E5AC6729A4C11900CDE4CF /* AddAddressToContactViewModel.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -5247,6 +5259,7 @@
 				08A25624294073EF00A31193 /* EmptyTableView.swift in Sources */,
 				08A25613294073EF00A31193 /* EnabledServersViewController.swift in Sources */,
 				10C9A4D2296C0066009738A7 /* TokenModel.swift in Sources */,
+				10E5AC6229A4B8DD00CDE4CF /* AddAddressToContactPopView.swift in Sources */,
 				08A255F9294073EF00A31193 /* SupportViewModel.swift in Sources */,
 				08A2569E294073F000A31193 /* TokenScriptTransactionViewModel.swift in Sources */,
 				08A25825294073F100A31193 /* NonFungibleTraitView.swift in Sources */,
@@ -5436,6 +5449,7 @@
 				08A2575E294073F000A31193 /* BalloonMarker.swift in Sources */,
 				08A25845294073F100A31193 /* TestnetTokenInfoView.swift in Sources */,
 				08A257C5294073F100A31193 /* SeedPhraseCell.swift in Sources */,
+				10E5AC6829A4C11900CDE4CF /* AddAddressToContactViewModel.swift in Sources */,
 				08A25838294073F100A31193 /* TokensViewController.swift in Sources */,
 				08A2563C294073EF00A31193 /* WalletQrCodeDonation.swift in Sources */,
 				08A256D7294073F000A31193 /* WhatsNewListingCoordinator.swift in Sources */,
@@ -5817,6 +5831,7 @@
 				10B2A32E29911A6700908F41 /* SignMessageCoordinatorBridgeToPromise.swift in Sources */,
 				08A25832294073F100A31193 /* AddHideTokensViewController.swift in Sources */,
 				08A2572A294073F000A31193 /* TransactionFieldView.swift in Sources */,
+				10E5AC6629A4BA7F00CDE4CF /* AddAddressToContactViewController.swift in Sources */,
 				08A256EB294073F000A31193 /* UICollectionViewLayout+Extensions.swift in Sources */,
 				08A25726294073F000A31193 /* TransactionDetailsViewController.swift in Sources */,
 				08A25764294073F000A31193 /* SelectCurrencyButton.swift in Sources */,
@@ -5831,6 +5846,7 @@
 				08760C8C294079AD00F83AB3 /* QRCodeResolutionCoordinator.swift in Sources */,
 				08A25688294073EF00A31193 /* WalletPupupViewModel.swift in Sources */,
 				08760CA0294079AD00F83AB3 /* DappBrowserNavigationBar.swift in Sources */,
+				10E5AC6429A4B99400CDE4CF /* AddAddressToContactPopViewModel.swift in Sources */,
 				08A2581E294073F100A31193 /* NFTCollectionInfoPageView.swift in Sources */,
 				08A255E8294073EF00A31193 /* CustomRpcTableViewSection.swift in Sources */,
 				08A25633294073EF00A31193 /* ContactUsEmailResolver.swift in Sources */,

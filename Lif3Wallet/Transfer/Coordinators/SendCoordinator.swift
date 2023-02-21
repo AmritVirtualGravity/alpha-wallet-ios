@@ -88,6 +88,14 @@ extension SendCoordinator: ScanQRCodeCoordinatorDelegate {
 }
 
 extension SendCoordinator: SendViewControllerDelegate {
+    
+    func didTapAddAddressToContact(in viewController: SendViewController) {
+        let controller = AddAddressToContactViewController()
+        controller.delegate = self
+        controller.modalPresentationStyle = .overCurrentContext
+        self.navigationController.present(controller, animated: true)
+    }
+    
     func didClose(in viewController: SendViewController) {
         delegate?.didCancel(in: self)
     }
@@ -184,5 +192,16 @@ extension SendCoordinator: CanOpenURL {
 
     func didPressOpenWebPage(_ url: URL, in viewController: UIViewController) {
         delegate?.didPressOpenWebPage(url, in: viewController)
+    }
+}
+
+
+extension SendCoordinator: AddAddressToContactViewControllerDelegate {
+    func didTapCreateContact(in viewController: AddAddressToContactViewController) {
+        self.navigationController.dismiss(animated: true)
+    }
+    
+    func didTapOutside(in viewController: AddAddressToContactViewController) {
+        self.navigationController.dismiss(animated: true)
     }
 }

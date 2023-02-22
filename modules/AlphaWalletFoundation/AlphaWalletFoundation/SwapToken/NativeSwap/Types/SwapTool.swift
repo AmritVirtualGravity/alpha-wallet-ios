@@ -19,7 +19,7 @@ public struct SwapTool {
 
 extension SwapToolsResponse: Decodable {
     private enum Keys: String, CodingKey {
-        case tools = "bridges"
+        case tools = "exchanges"
     }
 
     public init(from decoder: Decoder) throws {

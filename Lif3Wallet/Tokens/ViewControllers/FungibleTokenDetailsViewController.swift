@@ -71,8 +71,8 @@ class FungibleTokenDetailsViewController: UIViewController {
         view.addSubview(containerView)
 
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             containerView.topAnchor.constraint(equalTo: view.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: footerBar.topAnchor),
             footerBar.anchorsConstraint(to: view)

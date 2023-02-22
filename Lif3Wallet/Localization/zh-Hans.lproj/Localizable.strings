@@ -82,6 +82,7 @@
 "send.paste.button.addressBook" = "地址簿";
 "send.amount" = "价值";
 "send.recipient" = "接收人";
+"send.contactList" = "Contact List";
 "send.recipientsAddress" = "接收人地址";
 "send.invalid.Token" = "无效通证";
 "send.available" = "可用： %@";
@@ -135,6 +136,8 @@
 "settings.activity.title" = "Activity";
 "settings.scanQrcode.title" = "Scan Qr Code";
 "settings.walletConnect.title" = "Wallet Connect";
+"settings.contact.title" = "Add Contact";
+"settings.updateContact.title" = "Update Contact";
 "settings.notifications.title" = "通知设置";
 "settings.passcode.title" = "密码 / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";

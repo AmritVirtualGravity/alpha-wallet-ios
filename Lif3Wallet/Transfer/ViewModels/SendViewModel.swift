@@ -6,6 +6,7 @@ import BigInt
 import AlphaWalletFoundation
 import AlphaWalletCore
 import Combine
+import RealmSwift
 
 struct SendViewModelInput {
     let amountToSend: AnyPublisher<AmountTextFieldViewModel.FungibleAmount, Never>
@@ -75,6 +76,7 @@ final class SendViewModel: TransactionTypeSupportable {
 
     let amountViewModel = SendViewSectionHeaderViewModel(text: R.string.localizable.sendAmount().uppercased(), showTopSeparatorLine: true)
     let recipientViewModel = SendViewSectionHeaderViewModel(text: R.string.localizable.sendRecipient().uppercased())
+    let contactViewModel = SendViewSectionHeaderViewModel(text: R.string.localizable.sendContactList().uppercased())
 
     init(transactionType: TransactionType, session: WalletSession, tokensService: TokenProvidable & TokenAddable & TokenBalanceRefreshable & TokenViewModelState, importToken: ImportToken) {
         self.transactionTypeSubject = .init(transactionType)
@@ -537,4 +539,30 @@ extension Swift.Result {
         case .success(let value): return value
         }
     }
+}
+
+extension SendViewModel {
+    
+    func getContacts(completion: @escaping (_ contactList: [ContactRmModel]) -> ()) {
+       let realm = try! Realm()
+       let items = realm.objects(ContactRmModel.self)
+        completion(Array(items))
+   }
+    
+    
+    func getContact(contactList: [ContactRmModel], address: String) -> ContactRmModel? {
+        if let index = contactList.firstIndex(where: {$0.walletAddress == address}) {
+            return contactList[index]
+        }
+      return nil
+    }
+    
+    func addContacts(name:String, address: String) {
+       let realm = try! Realm()
+       try! realm.write {
+           realm.add(ContactRmModel(name:name, walletAddress: address))
+       }
+   }
+    
+    
 }

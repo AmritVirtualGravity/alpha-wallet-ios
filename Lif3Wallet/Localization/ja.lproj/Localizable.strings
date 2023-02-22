@@ -82,6 +82,7 @@
 "send.paste.button.addressBook" = "Address Book";
 "send.amount" = "Amount";
 "send.recipient" = "Recipient";
+"send.contactList" = "Contact List";
 "send.recipientsAddress" = "Recipient’s Address";
 "send.invalid.Token" = "Invalid token";
 "send.available" = "Available: %@";
@@ -133,6 +134,8 @@
 "settings.activity.title" = "Activity";
 "settings.scanQrcode.title" = "Scan Qr Code";
 "settings.walletConnect.title" = "Wallet Connect";
+"settings.contact.title" = "Add Contact";
+"settings.updateContact.title" = "Update Contact";
 "settings.support.darkMode" = "DarkMode";
 "settings.notifications.title" = "Notifications";
 "settings.passcode.title" = "Passcode / Touch ID";

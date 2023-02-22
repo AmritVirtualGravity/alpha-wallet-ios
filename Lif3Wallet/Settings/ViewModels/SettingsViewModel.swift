@@ -246,6 +246,7 @@ extension SettingsViewModel {
         case nameWallet
         //        case blockscanChat(blockscanChatUnreadCount: Int?)
         case mainWallet
+        
     }
     
     enum SettingsSystemRow: Equatable {
@@ -271,6 +272,7 @@ extension SettingsViewModel {
         case activity
         case scanQrCode
         case walletConnect
+        case contact
     }
     
     enum SettingsSupportRow {
@@ -333,7 +335,7 @@ extension SettingsViewModel.functional {
             walletRows = [.mainWallet]
             //            walletRows = [.showMyWallet, .changeWallet, .nameWallet, .walletConnect, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         }
-        let activityRows: [SettingsViewModel.SettingsActivityRow] = [.activity, .scanQrCode, .walletConnect]
+        let activityRows: [SettingsViewModel.SettingsActivityRow] = [.activity, .scanQrCode, .walletConnect, .contact]
         let systemRows: [SettingsViewModel.SettingsSystemRow] = [.advanced, .selectActiveNetworks, .security, .blockscanChat(blockscanChatUnreadCount: blockscanChatUnreadCount)]
         let socialMediaRows: [SettingsViewModel.SettingsSocialMediaRow] = [.twitter, .telegram, .instagram, .discord]
         let supportRows: [SettingsViewModel.SettingsSupportRow] = [.helpCenter,.featureRequest,.bugReport, .about]
@@ -608,6 +610,8 @@ extension SettingsViewModel.SettingsActivityRow  {
             return R.string.localizable.settingsScanQrcodeTitle()
         case .walletConnect:
             return R.string.localizable.settingsWalletConnectTitle()
+        case .contact:
+            return R.string.localizable.settingsContactTitle()
             
         }
     }
@@ -619,6 +623,8 @@ extension SettingsViewModel.SettingsActivityRow  {
         case .scanQrCode:
             return R.image.iconsSettingsScanQr()
         case .walletConnect:
+            return R.image.iconsSettingsWalletConnect()
+        case .contact:
             return R.image.iconsSettingsWalletConnect()
         }
     }

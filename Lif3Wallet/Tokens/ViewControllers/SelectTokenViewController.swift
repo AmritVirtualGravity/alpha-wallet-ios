@@ -128,7 +128,7 @@ extension SelectTokenViewController {
 }
 
 fileprivate extension SelectTokenViewController {
-    func makeDataSource() -> TableViewDiffableDataSource<SelectTokenViewModel.Section, SelectTokenViewModel.ViewModelType> {
+    func makeDataSource() -> TableViewDiffableDataSource< SelectTokenViewModel.Section, SelectTokenViewModel.ViewModelType> {
         return TableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, viewModel in
             switch viewModel {
             case .nativeCryptocurrency(let viewModel):

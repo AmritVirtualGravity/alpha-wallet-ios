@@ -82,6 +82,7 @@
 "send.paste.button.addressBook" = "Libreta de direcciones";
 "send.amount" = "Cantidad";
 "send.recipient" = "Destinatario";
+"send.contactList" = "Contact List";
 "send.recipientsAddress" = "Dirección del destinatario";
 "send.invalid.Token" = "Token no válido";
 "send.available" = "Disponible: %@";
@@ -135,6 +136,8 @@
 "settings.activity.title" = "Activity";
 "settings.scanQrcode.title" = "Scan Qr Code";
 "settings.walletConnect.title" = "Wallet Connect";
+"settings.contact.title" = "Add Contact";
+"settings.updateContact.title" = "Update Contact";
 "settings.notifications.title" = "Notificaciones";
 "settings.passcode.title" = "Código / Touch ID";
 "settings.hideToken.title" = "Hide 0 Balance Token";

@@ -79,6 +79,7 @@
 "send.paste.button.addressBook" = "Osoitekirja";
 "send.amount" = "Summa";
 "send.recipient" = "Vastaanottaja";
+"send.contactList" = "Contact List";
 "send.recipientsAddress" = "Vastaanottajan osoite";
 "send.invalid.Token" = "Virheellinen rahake";
 "send.available" = "Käytettävissä: %@";
@@ -132,6 +133,8 @@
 "settings.activity.title" = "Activity";
 "settings.scanQrcode.title" = "Scan Qr Code";
 "settings.walletConnect.title" = "Wallet Connect";
+"settings.contact.title" = "Add Contact";
+"settings.updateContact.title" = "Update Contact";
 "settings.notifications.title" = "Ilmoitukset";
 "settings.passcode.title" = "PIN-koodi";
 "settings.hideToken.title" = "Hide 0 Balance Token";

@@ -33,7 +33,7 @@ class SwapOptionsViewController: UIViewController {
     }()
 
     private lazy var swapToolsHeaderView: SwapOptionsHeaderView = {
-        let view = SwapOptionsHeaderView(viewModel: .init(title: "Preffered Bridges"))
+        let view = SwapOptionsHeaderView(viewModel: .init(title: "Preffered Exchanges"))
         let button = view.enableTapAction(title: R.string.localizable.editButtonTitle())
         button.addTarget(self, action: #selector(choseSwapToolSelected), for: .touchUpInside)
 

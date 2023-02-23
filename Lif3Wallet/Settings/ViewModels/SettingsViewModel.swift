@@ -625,7 +625,7 @@ extension SettingsViewModel.SettingsActivityRow  {
         case .walletConnect:
             return R.image.iconsSettingsWalletConnect()
         case .contact:
-            return R.image.iconsSettingsWalletConnect()
+            return R.image.iconsSettingsContact()
         }
     }
 }

@@ -6259,7 +6259,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 230223;
+				CURRENT_PROJECT_VERSION = 230224;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = W6945M9UKD;
 				ENABLE_BITCODE = NO;
@@ -6304,7 +6304,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 230223;
+				CURRENT_PROJECT_VERSION = 230224;
 				DEVELOPMENT_TEAM = W6945M9UKD;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
@@ -6385,7 +6385,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lif3WalletSafariExtension/Lif3WalletSafariExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 230223;
+				CURRENT_PROJECT_VERSION = 230224;
 				DEVELOPMENT_TEAM = W6945M9UKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lif3WalletSafariExtension/Info.plist;
@@ -6423,7 +6423,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lif3WalletSafariExtension/Lif3WalletSafariExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 230223;
+				CURRENT_PROJECT_VERSION = 230224;
 				DEVELOPMENT_TEAM = W6945M9UKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lif3WalletSafariExtension/Info.plist;
@@ -6460,7 +6460,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lif3WalletShare/Lif3WalletShare.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 230223;
+				CURRENT_PROJECT_VERSION = 230224;
 				DEVELOPMENT_TEAM = W6945M9UKD;
 				INFOPLIST_FILE = Lif3WalletShare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -6490,7 +6490,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lif3WalletShare/Lif3WalletShare.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 230223;
+				CURRENT_PROJECT_VERSION = 230224;
 				DEVELOPMENT_TEAM = W6945M9UKD;
 				INFOPLIST_FILE = Lif3WalletShare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

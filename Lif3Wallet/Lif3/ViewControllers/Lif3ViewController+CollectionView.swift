@@ -24,7 +24,7 @@ extension Lif3ViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: newsCollectionView.bounds.width - 20 , height: newsCollectionView.bounds.height)
+        return CGSize(width: newsCollectionView.bounds.width - 20, height: newsCollectionView.bounds.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -42,10 +42,10 @@ extension Lif3ViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let bannerHeight = newsCollectionView.bounds.height
         let bannerWidth = newsCollectionView.bounds.width
         let layoutBanner: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layoutBanner.sectionInset = UIEdgeInsets(top: 1, left: 10, bottom: 1, right:1)
-        layoutBanner.itemSize = CGSize(width: bannerWidth - 20, height: bannerHeight)
+        layoutBanner.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right:0)
+        layoutBanner.itemSize = CGSize(width: bannerWidth, height: bannerHeight)
         layoutBanner.minimumInteritemSpacing = 0
-        layoutBanner.minimumLineSpacing = 15
+        layoutBanner.minimumLineSpacing = 16
         layoutBanner.scrollDirection = .horizontal
         newsCollectionView.isPagingEnabled = true
         newsCollectionView.collectionViewLayout = layoutBanner

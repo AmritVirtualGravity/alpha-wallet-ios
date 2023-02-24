@@ -112,7 +112,7 @@ class Lif3ViewController: UIViewController {
         super.viewDidLoad()
         self.collectionViewSetup()
         getLif3NewsListData()
-//        startBannerScroll()
+        startBannerScroll()
         // Do any additional setup after loading the view.
     }
     

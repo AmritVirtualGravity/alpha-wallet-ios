@@ -76,7 +76,7 @@
                                 <rect key="frame" x="0.0" y="59" width="414" height="807"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eAc-3X-hPA">
-                                        <rect key="frame" x="18" y="50" width="396" height="226"/>
+                                        <rect key="frame" x="15" y="50" width="384" height="226"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="226" id="5FT-zh-gRb"/>
@@ -348,9 +348,9 @@
                                 <constraints>
                                     <constraint firstItem="L7U-5n-L0g" firstAttribute="top" secondItem="kf6-SE-l6A" secondAttribute="bottom" constant="15" id="7UD-CN-Oc4"/>
                                     <constraint firstItem="yAf-dS-gpT" firstAttribute="leading" secondItem="OJs-q4-TBE" secondAttribute="leading" constant="20" id="Ho9-xT-QMS"/>
-                                    <constraint firstItem="eAc-3X-hPA" firstAttribute="leading" secondItem="9CR-IB-4b7" secondAttribute="leading" constant="18" id="PhG-Yq-QAm"/>
+                                    <constraint firstItem="eAc-3X-hPA" firstAttribute="leading" secondItem="9CR-IB-4b7" secondAttribute="leading" constant="15" id="PhG-Yq-QAm"/>
                                     <constraint firstItem="kf6-SE-l6A" firstAttribute="trailing" secondItem="yAf-dS-gpT" secondAttribute="trailing" id="Q0d-dn-2HI"/>
-                                    <constraint firstAttribute="trailing" secondItem="eAc-3X-hPA" secondAttribute="trailing" id="Q8G-5h-sMK"/>
+                                    <constraint firstAttribute="trailing" secondItem="eAc-3X-hPA" secondAttribute="trailing" constant="15" id="Q8G-5h-sMK"/>
                                     <constraint firstItem="yDN-91-Qfl" firstAttribute="top" secondItem="eAc-3X-hPA" secondAttribute="bottom" constant="25" id="bKx-Cq-kjC"/>
                                     <constraint firstItem="yDN-91-Qfl" firstAttribute="trailing" secondItem="yAf-dS-gpT" secondAttribute="trailing" id="bRD-XK-Zbw"/>
                                     <constraint firstAttribute="trailing" secondItem="kf6-SE-l6A" secondAttribute="trailing" constant="20" id="bny-Rf-dlv"/>

@@ -1328,6 +1328,34 @@ extension ActiveWalletCoordinator {
 
 
 extension ActiveWalletCoordinator: lifeViewControllerDelegate {
+    func didTapFarm() {
+        guard let url = URL(string: Constants.lifeWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    func didTapFountain() {
+        guard let url = URL(string: Constants.lifeFountainWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    func didTapLeverage() {
+        guard let url = URL(string: Constants.lifeWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
+    func didTapSingleStake() {
+        guard let url = URL(string: Constants.lifeWebUrl) else {
+            return
+        }
+        openURLInBrowser(url: url)
+    }
+    
     func didTapLif3Trade() {
         guard let url = URL(string: Constants.lif3TradeUrl) else {
             return
@@ -1342,39 +1370,18 @@ extension ActiveWalletCoordinator: lifeViewControllerDelegate {
         openURLInBrowser(url: url)
     }
     
-    func didTapGarden() {
-        guard let url = URL(string: Constants.lifeGardenWebUrl) else {
-            return
-        }
-        openURLInBrowser(url: url)
-    }
-    
-    func didTapFountainOfLif3() {
-        guard let url = URL(string: Constants.lifeFountainWebUrl) else {
-            return
-        }
-        openURLInBrowser(url: url)
-    }
-    
-    func didTapTerrace() {
-        guard let url = URL(string: Constants.lifeTerraceWebUrl) else {
-            return
-        }
-        openURLInBrowser(url: url)
-    }
-    
-    func didTapGreenHouse() {
-        guard let url = URL(string: Constants.lifeGreenhouseWebUrl) else {
-            return
-        }
-        openURLInBrowser(url: url)
-    }
-    
     func didTapNursery() {
         guard let url = URL(string: Constants.lifeNurseryWebUrl) else {
             return
         }
         openURLInBrowser(url: url)
+    }
+    
+    func didTapNews(url: String) {
+        guard let newsUrl = URL(string: url) else {
+            return
+        }
+        openURLInBrowser(url: newsUrl)
     }
     
     

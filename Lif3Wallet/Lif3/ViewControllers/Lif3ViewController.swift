@@ -9,12 +9,13 @@ import UIKit
 
 protocol lifeViewControllerDelegate {
      func didTapSwapTokens()
-    func didTapGarden()
-    func didTapFountainOfLif3()
-    func didTapTerrace()
-    func didTapGreenHouse()
+    func didTapFarm()
     func didTapNursery()
+    func didTapFountain()
+    func didTapLeverage()
+    func didTapSingleStake()
     func didTapLif3Trade()
+    func didTapNews(url: String)
 }
 
 class Lif3ViewController: UIViewController {
@@ -24,7 +25,22 @@ class Lif3ViewController: UIViewController {
         let controllerStr = String(describing: Lif3ViewController.self)
         return UIStoryboard(name: "Lif3", bundle: nil).instantiateViewController(withIdentifier: controllerStr) as! Lif3ViewController
     }
+
+    var newsArr: [Lif3NewsListModel] = [Lif3NewsListModel]()
     
+    weak var timer: Timer?
+    
+    
+    var bannerScrollIndex = 0 
+ 
+   let viewModel = Lif3ViewModel()
+    @IBOutlet weak var newsCollectionView: UICollectionView!{
+        didSet{
+            self.newsCollectionView.productPromotionBannerStyle()
+            self.newsCollectionView.dataSource = self
+            self.newsCollectionView.delegate = self
+        }
+    }
     
     @IBOutlet weak var lif3TradeView: UIView! {
         didSet {
@@ -32,8 +48,6 @@ class Lif3ViewController: UIViewController {
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapLif3Trade(_:)))
             lif3TradeView.addGestureRecognizer(tap)
         }
-       
-
     }
     
     
@@ -45,11 +59,21 @@ class Lif3ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var gardenView: UIView! {
+    
+    @IBOutlet weak var farmView: UIView!{
         didSet {
-            gardenView.layer.cornerRadius = 10
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapGarden(_:)))
-            gardenView.addGestureRecognizer(tap)
+            farmView.layer.cornerRadius = 10
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapFarm(_:)))
+            farmView.addGestureRecognizer(tap)
+        }
+    }
+    
+    
+    @IBOutlet weak var nurseryView: UIView! {
+        didSet {
+            nurseryView.layer.cornerRadius = 10
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapNursery(_:)))
+            nurseryView.addGestureRecognizer(tap)
         }
     }
     
@@ -62,53 +86,57 @@ class Lif3ViewController: UIViewController {
     }
     
     
-    @IBOutlet weak var terraceView: UIView! {
+    
+    
+    @IBOutlet weak var leverageView: UIView! {
         didSet {
-            terraceView.layer.cornerRadius = 10
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapTerrace(_:)))
-            terraceView.addGestureRecognizer(tap)
+            leverageView.layer.cornerRadius = 10
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapLeverage(_:)))
+            leverageView.addGestureRecognizer(tap)
         }
     }
     
-    @IBOutlet weak var greenhouseView: UIView! {
-        didSet {
-            greenhouseView.layer.cornerRadius = 10
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapGreenhouse(_:)))
-            greenhouseView.addGestureRecognizer(tap)
-        }
-    }
     
-    @IBOutlet weak var nurseryView: UIView! {
+    @IBOutlet weak var singleStakeView: UIView!{
         didSet {
-            nurseryView.layer.cornerRadius = 10
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapNursery(_:)))
-            nurseryView.addGestureRecognizer(tap)
+            singleStakeView.layer.cornerRadius = 10
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapSingleStake(_:)))
+            singleStakeView.addGestureRecognizer(tap)
         }
     }
     
     var delegate:lifeViewControllerDelegate?
 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionViewSetup()
+        getLif3NewsListData()
+        startBannerScroll()
         // Do any additional setup after loading the view.
     }
+    
 
     @objc func tapSwapToken(_ sender: UITapGestureRecognizer? = nil) {
         delegate?.didTapSwapTokens()
     }
-    @objc func tapGarden(_ sender: UITapGestureRecognizer? = nil) {
-        delegate?.didTapGarden()
+    
+    @objc func tapFarm(_ sender: UITapGestureRecognizer? = nil) {
+        delegate?.didTapFarm()
     }
+    
     @objc func tapFountain(_ sender: UITapGestureRecognizer? = nil) {
-        delegate?.didTapFountainOfLif3()
+        delegate?.didTapFountain()
     }
-    @objc func tapTerrace(_ sender: UITapGestureRecognizer? = nil) {
-        delegate?.didTapTerrace()
+    
+    @objc func tapLeverage(_ sender: UITapGestureRecognizer? = nil) {
+        delegate?.didTapLeverage()
     }
-    @objc func tapGreenhouse(_ sender: UITapGestureRecognizer? = nil) {
-        delegate?.didTapGreenHouse()
+    
+    @objc func tapSingleStake(_ sender: UITapGestureRecognizer? = nil) {
+        delegate?.didTapSingleStake()
     }
+    
     @objc func tapNursery(_ sender: UITapGestureRecognizer? = nil) {
         delegate?.didTapNursery()
     }
@@ -118,4 +146,27 @@ class Lif3ViewController: UIViewController {
     }
     
 
+}
+
+//Network Calls
+extension Lif3ViewController {
+    
+    func getLif3NewsListData () {
+        viewModel.getLif3NewsList{ newsList in
+            self.newsArr  = newsList ?? []
+            self.newsCollectionView.reloadData()
+        }
+    }
+    
+  
+}
+
+
+extension UICollectionView {
+    func productPromotionBannerStyle() {
+        self.register(cellType: BannerCell.self)
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
+    }
+    
 }

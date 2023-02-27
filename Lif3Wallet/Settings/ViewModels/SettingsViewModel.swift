@@ -544,7 +544,7 @@ extension SettingsViewModel.SettingsSocialMediaRow  {
     var openUrl: URL? {
         switch self {
         case .discord:
-            return URL(string: "https://discord.com/invite/vANnESmVdz")
+            return URL(string: "https://discord.com/invite/lif3")
         case .twitter:
             return URL(string: "https://twitter.com/Official_LIF3")
         case .instagram:

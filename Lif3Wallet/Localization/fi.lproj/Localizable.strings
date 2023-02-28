@@ -735,11 +735,11 @@
 "customRPC.browse.search.placeholder" = "Etsi verkkoa";
 "emailList.prompt.title" = "Tilaa uutiset";
 "emailList.email.invalid" = "Email is not valid";
-"emailList.prompt.message" = "Lähetämme sähköpostia, kun esittelemme uusia ominaisuuksia. Haluatko liittyä sähköpostilistallemme?\n\n(Korkeintaan 1 sähköposti viikossa)";
+"emailList.prompt.message" = "We send ocasional emails about new features and roadmaps for Lif3.\n\n Would you like to receive such emails?";
 "emailList.prompt.subscribeButtonTitle" = "Liity sähköpostilistalle";
 "emailList.prompt.headerTitle" = "Stay Connected";
 "emailList.prompt.bodyTitle" = "We send occasional updates about new and upcoming features, and ecosystem updates.";
-"emailList.prompt.buttonTitle" = "Sign me up!";
+"emailList.prompt.buttonTitle" = "Sign up!";
 "emailList.prompt.email.placeholder" = "Sähköposti";
 "wallet.summary.today" = "%@ tänään";
 "token.tab.info" = "Yleisnäkymä";

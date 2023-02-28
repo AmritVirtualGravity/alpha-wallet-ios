@@ -13,8 +13,8 @@ protocol CollectUsersEmailViewControllerDelegate: AnyObject {
 }
 
 struct CollectUsersEmailViewModel {
-    let title: String = R.string.localizable.emailListPromptHeaderTitle()
-    let description: String = R.string.localizable.emailListPromptBodyTitle()
+    let title: String = R.string.localizable.emailListPromptTitle()
+    let description: String = R.string.localizable.emailListPromptMessage()
     let receiveEmailButtonTitle: String = R.string.localizable.emailListPromptButtonTitle()
     let emailTextFieldPlaceholder: String = R.string.localizable.emailListPromptEmailPlaceholder()
 }

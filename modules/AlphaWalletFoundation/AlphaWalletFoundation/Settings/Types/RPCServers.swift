@@ -132,7 +132,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .custom(let custom): return custom.chainName
         case .fantom: return "Fantom Opera"
         case .fantom_testnet: return "Fantom Testnet"
-        case .avalanche: return "Avalanche C-Chain"
+        case .avalanche: return "Avalanche"
         case .avalanche_testnet: return "Avalanche FUJI C-Chain"
         case .polygon: return "Polygon"
         case .mumbai_testnet: return "Mumbai Testnet"

@@ -506,6 +506,8 @@ extension TokensCoordinator: SingleChainTokenCoordinatorDelegate {
     }
 
     func didTapBuy(transactionType: TransactionType, service: TokenActionProvider, in coordinator: SingleChainTokenCoordinator) {
+        let usrDefault = UserDefaults.standard
+        usrDefault.set(false, forKey: "FromPupAction")
         delegate?.didTapBuy(transactionType: transactionType, service: service, in: self)
     }
 

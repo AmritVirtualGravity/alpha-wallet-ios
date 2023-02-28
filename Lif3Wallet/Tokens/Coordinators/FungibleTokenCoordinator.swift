@@ -172,6 +172,9 @@ extension FungibleTokenCoordinator: FungibleTokenDetailsViewControllerDelegate {
     }
 
     func didTapBuy(for token: Token, service: TokenActionProvider, in viewController: FungibleTokenDetailsViewController) {
+        //todo: need some better way to do this. 
+        let usrDefault = UserDefaults.standard
+        usrDefault.set(false, forKey: "FromPupAction")
         delegate?.didTapBuy(transactionType: .init(fungibleToken: token), service: service, in: self)
     }
 

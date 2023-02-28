@@ -85,8 +85,19 @@ extension Constants {
         case "sushiswap-eth":
             return "Sushi Swap"
         default:
-            return swapTool
+            return swapTool.capitalizingFirstLetter() 
         }
         
+    }
+}
+
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
     }
 }

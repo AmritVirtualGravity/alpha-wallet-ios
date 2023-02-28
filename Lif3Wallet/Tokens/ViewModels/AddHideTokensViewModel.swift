@@ -32,7 +32,7 @@ final class AddHideTokensViewModel {
     private var isSearchActive: Bool = false
     private let tokensFilter: TokensFilter
 
-    var sections: [Section] = [.sortingFilters, .displayedTokens, .hiddenTokens, .popularTokens]
+    var sections: [Section] = [.sortingFilters, .displayedTokens, .popularTokens, .hiddenTokens ]
     var title: String = R.string.localizable.walletsAddHideTokensTitle()
 //    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewHeaderBackground
 
@@ -272,8 +272,8 @@ extension AddHideTokensViewModel {
             }
         }
 
-        static var enabledSectins: [Section] {
-            [.sortingFilters, .displayedTokens, .hiddenTokens, .popularTokens]
+        static var enabledSections: [Section] {
+            [.sortingFilters, .displayedTokens,.popularTokens, .hiddenTokens]
         }
     }
 
@@ -312,7 +312,7 @@ extension AddHideTokensViewModel.functional {
             }
             return sections
         } else {
-            return AddHideTokensViewModel.Section.enabledSectins
+            return AddHideTokensViewModel.Section.enabledSections
         }
     }
 }

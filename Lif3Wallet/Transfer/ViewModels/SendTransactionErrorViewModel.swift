@@ -7,7 +7,8 @@ extension SendTransactionNotRetryableError: LocalizedError {
     public var errorDescription: String? {
         switch type {
         case .insufficientFunds:
-            return R.string.localizable.tokenTransactionConfirmationErrorTitleInsufficientFundsError(server.cryptoCurrencyName)
+//            return R.string.localizable.tokenTransactionConfirmationErrorTitleInsufficientFundsError(server.cryptoCurrencyName)
+            return R.string.localizable.tokenTransactionConfirmationErrorTitleInsufficientGas()
         case .nonceTooLow:
             return R.string.localizable.tokenTransactionConfirmationErrorTitleNonceTooLowError()
         case .gasPriceTooLow:

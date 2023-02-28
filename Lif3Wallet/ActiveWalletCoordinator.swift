@@ -1304,6 +1304,9 @@ extension ActiveWalletCoordinator: WalletPupupCoordinatorDelegate {
             openURLInBrowser(url: url)
 //             showTokenSelection(for: .swapToken)
         case .buy:
+            //todo: need some better way to do this. 
+            let usrDefault = UserDefaults.standard
+            usrDefault.set(true, forKey: "FromPupAction")
             buyCrypto(wallet: wallet, server: server, viewController: navigationController, source: .walletTab)
         case .receive:
             showPaymentFlow(for: .request, server: server, navigationController: navigationController)

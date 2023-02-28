@@ -73,9 +73,8 @@ public struct Constants {
 
     static func buyWithRampUrl(asset: String, wallet: Wallet) -> String? {
         guard Constants.Credentials.rampApiKey.nonEmpty else { return nil }
-        
-        // this variable is created temporarily for now.Buy default Fantom is selected on asset.
-        let rpcAsset = "FANTOM_FTM"
+        let isFromPopAction = UserDefaults.standard.bool(forKey: "FromPupAction")
+        let asset = !isFromPopAction ? asset : ""
         return "https://buy.ramp.network/?hostApiKey=\(Constants.Credentials.rampApiKey)&hostLogoUrl=https://assets.lif3.com/wallet/ramp/Lif3.com-dark.svg&hostAppName=Lif3Wallet&swapAsset=\(asset)&userAddress=\(wallet.address.eip55String)"
     }
 

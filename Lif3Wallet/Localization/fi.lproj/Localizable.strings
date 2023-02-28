@@ -562,6 +562,7 @@
 "token.transactionCancelConfirmation.title" = "Vahvista peruminen";
 "token.transactionConfirmation.title" = "Vahvista tilitapahtuma?";
 "token.transactionConfirmation.error.title.insufficientFundsError" = "Liian vähän %@ kulujen maksamiseen";
+"token.transactionConfirmation.error.title.insufficientGas" = "Insufficient Gas";
 "token.transactionConfirmation.error.title.nonceTooLowError" = "Tilitapahtuman satunnaistunnus (Nonce) on liian pieni";
 "token.transactionConfirmation.error.title.gasPriceTooLow" = "Kulujen yksikköhinta (Gas Price) liian pieni";
 "token.transactionConfirmation.error.title.gasLimitTooLow" = "Kuluraja (Gas Limit) on liian alhainen";

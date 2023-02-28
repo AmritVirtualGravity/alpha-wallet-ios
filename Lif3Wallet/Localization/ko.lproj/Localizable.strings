@@ -560,6 +560,7 @@
 "token.transactionCancelConfirmation.title" = "Attempt to Cancel";
 "token.transactionConfirmation.title" = "Confirm Transaction?";
 "token.transactionConfirmation.error.title.insufficientFundsError" = "Not enough %@ to pay for fees";
+"token.transactionConfirmation.error.title.insufficientGas" = "Insufficient Gas";
 "token.transactionConfirmation.error.title.nonceTooLowError" = "Nonce of the Transaction is too low";
 "token.transactionConfirmation.error.title.gasPriceTooLow" = "Gas Price is too low";
 "token.transactionConfirmation.error.title.gasLimitTooLow" = "Gas Limit is too low";

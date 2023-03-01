@@ -21,7 +21,7 @@ final class AddHideTokensViewModel {
     private var displayedTokens: [TokenViewModel] = []
     private var hiddenTokens: [TokenViewModel] = []
     private var popularTokens: [PopularToken] = []
-    private let importToken: ImportToken
+    private let sessionsProvider: SessionsProvider
     private let popularTokensCollection: PopularTokensCollectionType = LocalPopularTokensCollection()
     private let config: Config
     private var cancelable = Set<AnyCancellable>()
@@ -32,17 +32,20 @@ final class AddHideTokensViewModel {
     private var isSearchActive: Bool = false
     private let tokensFilter: TokensFilter
 
-    var sections: [Section] = [.sortingFilters, .displayedTokens, .popularTokens, .hiddenTokens ]
+    var sections: [Section] = [.sortingFilters, .displayedTokens, .hiddenTokens, .popularTokens]
     var title: String = R.string.localizable.walletsAddHideTokensTitle()
-//    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewHeaderBackground
 
     var numberOfSections: Int {
         sections.count
     }
 
-    init(tokenCollection: TokenViewModelState & TokenHidable, tokensFilter: TokensFilter, importToken: ImportToken, config: Config) {
+    init(tokenCollection: TokenViewModelState & TokenHidable,
+         tokensFilter: TokensFilter,
+         sessionsProvider: SessionsProvider,
+         config: Config) {
+
         self.tokenCollection = tokenCollection
-        self.importToken = importToken
+        self.sessionsProvider = sessionsProvider
         self.config = config
         self.tokensFilter = tokensFilter
     }
@@ -140,8 +143,11 @@ final class AddHideTokensViewModel {
             }
         case .popularTokens:
             let token = popularTokens[indexPath.row]
-            let publisher = importToken
-                .importTokenPublisher(for: token.contractAddress, server: token.server, onlyIfThereIsABalance: false)
+            guard let session = sessionsProvider.session(for: token.server) else {
+                return .value(nil)
+            }
+            let publisher = session.importToken
+                .importToken(for: token.contractAddress, onlyIfThereIsABalance: false)
                 .flatMap { [tokenCollection] _token -> AnyPublisher<TokenWithIndexToInsert?, ImportToken.ImportTokenError> in
                     guard let token = tokenCollection.tokenViewModel(for: _token) else {
                         return .fail(ImportToken.ImportTokenError.internal(error: PMKError.cancelled))
@@ -272,8 +278,8 @@ extension AddHideTokensViewModel {
             }
         }
 
-        static var enabledSections: [Section] {
-            [.sortingFilters, .displayedTokens,.popularTokens, .hiddenTokens]
+        static var enabledSectins: [Section] {
+            [.sortingFilters, .displayedTokens, .popularTokens, .hiddenTokens,]
         }
     }
 
@@ -312,7 +318,7 @@ extension AddHideTokensViewModel.functional {
             }
             return sections
         } else {
-            return AddHideTokensViewModel.Section.enabledSections
+            return AddHideTokensViewModel.Section.enabledSectins
         }
     }
 }

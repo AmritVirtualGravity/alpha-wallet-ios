@@ -51,12 +51,12 @@ public enum Analytics {
         case twitter = "Screen: Twitter"
         case reddit = "Screen: Reddit"
         case facebook = "Screen: Facebook"
-        case instagram = "Screen: Instagram"
         case github = "Screen: Github"
         case explorer = "Screen: Explorer"
         case openShortcut = "Screen: Shortcut"
         case openHelpUrl = "Screen: Help URL"
         case blockscanChat = "Screen: Blockscan Chat"
+        case instagram = "Screen: Instagram"
     }
 
     public enum Action: String, AnalyticsAction {

@@ -487,7 +487,7 @@ final class TokensViewModel {
     
      func getBlackListedTokens(completion: @escaping ([String]?) -> Void) {
          let blackListTokenUrl = Constants.blackListedJsonWebSite
-            Alamofire.request(blackListTokenUrl, method: .get, encoding: URLEncoding.default).responseJSON
+            AF.request(blackListTokenUrl, method: .get, encoding: URLEncoding.default).responseJSON
             { response in
                 guard let data = response.data else { return }
                 do {

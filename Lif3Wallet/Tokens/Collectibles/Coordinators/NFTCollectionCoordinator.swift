@@ -32,7 +32,7 @@ class NFTCollectionCoordinator: NSObject, Coordinator {
     private var cancelable = Set<AnyCancellable>()
     private let tokensService: TokenViewModelState & TokenHolderState
     private lazy var tokenCardViewFactory: TokenCardViewFactory = {
-        TokenCardViewFactory(token: token, assetDefinitionStore: assetDefinitionStore, analytics: analytics, keystore: keystore, wallet: session.account)
+        TokenCardViewFactory(token: token, assetDefinitionStore: assetDefinitionStore, wallet: session.account)
     }()
     private let currencyService: CurrencyService
 
@@ -40,8 +40,24 @@ class NFTCollectionCoordinator: NSObject, Coordinator {
     let navigationController: UINavigationController
     var coordinators: [Coordinator] = []
     lazy var rootViewController: NFTCollectionViewController = {
-        let viewModel = NFTCollectionViewModel(token: token, wallet: session.account, assetDefinitionStore: assetDefinitionStore, tokensService: tokensService, activitiesService: activitiesService, nftProvider: nftProvider)
-        let controller = NFTCollectionViewController(keystore: keystore, session: session, assetDefinition: assetDefinitionStore, analytics: analytics, viewModel: viewModel, sessions: sessions, tokenCardViewFactory: tokenCardViewFactory)
+        let viewModel = NFTCollectionViewModel(
+            token: token,
+            wallet: session.account,
+            assetDefinitionStore: assetDefinitionStore,
+            tokensService: tokensService,
+            activitiesService: activitiesService,
+            nftProvider: nftProvider,
+            config: session.config)
+
+        let controller = NFTCollectionViewController(
+            keystore: keystore,
+            session: session,
+            assetDefinition: assetDefinitionStore,
+            analytics: analytics,
+            viewModel: viewModel,
+            sessions: sessions,
+            tokenCardViewFactory: tokenCardViewFactory)
+        
         controller.hidesBottomBarWhenPushed = true
         controller.delegate = self
 
@@ -387,6 +403,7 @@ extension NFTCollectionCoordinator: NFTCollectionViewControllerDelegate {
         viewController.delegate = self
         viewController.hidesBottomBarWhenPushed = true
         viewController.navigationItem.largeTitleDisplayMode = .never
+
         return viewController
     }
 

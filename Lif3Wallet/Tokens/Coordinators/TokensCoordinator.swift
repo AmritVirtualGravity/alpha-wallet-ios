@@ -20,18 +20,16 @@ protocol TokensCoordinatorDelegate: CanOpenURL, SendTransactionDelegate, BuyCryp
     func whereAreMyTokensSelected(in coordinator: TokensCoordinator)
     func didSelectAccount(account: Wallet, in coordinator: TokensCoordinator)
     func viewWillAppearOnce(in coordinator: TokensCoordinator)
-    func openDeBankUrl(in coordinator: TokensCoordinator)
 }
 
 class TokensCoordinator: Coordinator {
-    private let sessions: ServerDictionary<WalletSession>
+    private let sessionsProvider: SessionsProvider
     private let keystore: Keystore
     private let config: Config
     private let tokenCollection: TokenCollection
     private let assetDefinitionStore: AssetDefinitionStore
     private let promptBackupCoordinator: PromptBackupCoordinator
     private let analytics: AnalyticsLogger
-    private let nftProvider: NFTProvider
     private let tokenActionsService: TokenActionsService
     private let tokensFilter: TokensFilter
     private let activitiesService: ActivitiesServiceType
@@ -75,49 +73,43 @@ class TokensCoordinator: Coordinator {
     private var viewWillAppearHandled = false
     private let blockiesGenerator: BlockiesGenerator
     private let domainResolutionService: DomainResolutionServiceType
-    private let importToken: ImportToken
     private let wallet: Wallet
     private let currencyService: CurrencyService
-    
 
     init(navigationController: UINavigationController = .withOverridenBarAppearence(),
-         sessions: ServerDictionary<WalletSession>,
+         sessionsProvider: SessionsProvider,
          keystore: Keystore,
          config: Config,
          assetDefinitionStore: AssetDefinitionStore,
          promptBackupCoordinator: PromptBackupCoordinator,
          analytics: AnalyticsLogger,
-         nftProvider: NFTProvider,
          tokenActionsService: TokenActionsService,
          walletConnectCoordinator: WalletConnectCoordinator,
          coinTickersFetcher: CoinTickersFetcher,
          activitiesService: ActivitiesServiceType,
          walletBalanceService: WalletBalanceService,
          tokenCollection: TokenCollection,
-         importToken: ImportToken,
          blockiesGenerator: BlockiesGenerator,
          domainResolutionService: DomainResolutionServiceType,
          tokensFilter: TokensFilter,
          currencyService: CurrencyService) {
 
         self.currencyService = currencyService
-        self.wallet = sessions.anyValue.account
+        self.wallet = sessionsProvider.activeSessions.anyValue.account
         self.tokensFilter = tokensFilter
         self.tokenCollection = tokenCollection
         self.navigationController = navigationController
-        self.sessions = sessions
+        self.sessionsProvider = sessionsProvider
         self.keystore = keystore
         self.config = config
         self.assetDefinitionStore = assetDefinitionStore
         self.promptBackupCoordinator = promptBackupCoordinator
         self.analytics = analytics
-        self.nftProvider = nftProvider
         self.tokenActionsService = tokenActionsService
         self.walletConnectCoordinator = walletConnectCoordinator
         self.coinTickersFetcher = coinTickersFetcher
         self.activitiesService = activitiesService
         self.walletBalanceService = walletBalanceService
-        self.importToken = importToken
         self.blockiesGenerator = blockiesGenerator
         self.domainResolutionService = domainResolutionService
 
@@ -163,19 +155,19 @@ class TokensCoordinator: Coordinator {
     }
 
     private func setupSingleChainTokenCoordinators() {
-        for session in sessions.values {
+        for session in sessionsProvider.activeSessions.values {
             let coordinator = SingleChainTokenCoordinator(
                 session: session,
                 keystore: keystore,
                 assetDefinitionStore: assetDefinitionStore,
                 analytics: analytics,
-                nftProvider: nftProvider,
+                nftProvider: session.nftProvider,
                 tokenActionsProvider: tokenActionsService,
                 coinTickersFetcher: coinTickersFetcher,
                 activitiesService: activitiesService,
                 alertService: alertService,
                 tokensService: tokenCollection,
-                sessions: sessions,
+                sessions: sessionsProvider.activeSessions,
                 currencyService: currencyService)
 
             coordinator.delegate = self
@@ -201,7 +193,7 @@ class TokensCoordinator: Coordinator {
         let coordinator = QRCodeResolutionCoordinator(
             config: config,
             coordinator: scanQRCodeCoordinator,
-            usage: .all(tokensService: tokenCollection, importToken: importToken),
+            usage: .all(tokensService: tokenCollection, sessionsProvider: sessionsProvider),
             account: wallet)
 
         coordinator.delegate = self
@@ -232,6 +224,7 @@ extension TokensCoordinator: TokensViewControllerDelegate {
     func viewWillAppear(in viewController: UIViewController) {
         guard !viewWillAppearHandled else { return }
         viewWillAppearHandled = true
+
         delegate?.viewWillAppearOnce(in: self)
     }
 
@@ -239,7 +232,7 @@ extension TokensCoordinator: TokensViewControllerDelegate {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.popoverPresentationController?.barButtonItem = sender
 
-        let server: RPCServer = sessions.anyValue.server
+        let server: RPCServer = sessionsProvider.activeSessions.anyValue.server
 
         let copyAddressAction = UIAlertAction(title: R.string.localizable.copyAddress(), style: .default) { [weak self] _ in
             guard let strongSelf = self else { return }
@@ -248,17 +241,11 @@ extension TokensCoordinator: TokensViewControllerDelegate {
         }
         alertController.addAction(copyAddressAction)
 
-//        let showMyWalletAddressAction = UIAlertAction(title: R.string.localizable.settingsShowMyWalletTitle(), style: .default) { [weak self] _ in
-//            guard let strongSelf = self else { return }
-//            strongSelf.delegate?.didTap(suggestedPaymentFlow: .payment(type: .request, server: server), viewController: .none, in: strongSelf)
-//        }
-//        alertController.addAction(showMyWalletAddressAction)
-        
-        let viewOnDeBankAction = UIAlertAction(title: R.string.localizable.settingsViewOnDebankTitle(), style: .default) { [weak self] _ in
+        let showMyWalletAddressAction = UIAlertAction(title: R.string.localizable.settingsShowMyWalletTitle(), style: .default) { [weak self] _ in
             guard let strongSelf = self else { return }
-            strongSelf.delegate?.openDeBankUrl(in: strongSelf)
+            strongSelf.delegate?.didTap(suggestedPaymentFlow: .payment(type: .request, server: server), viewController: .none, in: strongSelf)
         }
-        alertController.addAction(viewOnDeBankAction)
+        alertController.addAction(showMyWalletAddressAction)
 
         if config.enabledServers.contains(.main) {
             let buyAction = UIAlertAction(title: R.string.localizable.buyCryptoTitle(), style: .default) { [weak self] _ in
@@ -321,7 +308,7 @@ extension TokensCoordinator: TokensViewControllerDelegate {
             domainResolutionService: domainResolutionService,
             navigationController: navigationController,
             config: config,
-            importToken: importToken)
+            sessionsProvider: sessionsProvider)
 
         coordinator.delegate = self
         addCoordinator(coordinator)
@@ -397,7 +384,7 @@ extension TokensCoordinator: QRCodeResolutionCoordinatorDelegate {
             wallet: wallet,
             navigationController: navigationController,
             config: config,
-            importToken: importToken,
+            sessionsProvider: sessionsProvider,
             initialState: .address(address),
             domainResolutionService: domainResolutionService)
 
@@ -506,8 +493,6 @@ extension TokensCoordinator: SingleChainTokenCoordinatorDelegate {
     }
 
     func didTapBuy(transactionType: TransactionType, service: TokenActionProvider, in coordinator: SingleChainTokenCoordinator) {
-        let usrDefault = UserDefaults.standard
-        usrDefault.set(false, forKey: "FromPupAction")
         delegate?.didTapBuy(transactionType: transactionType, service: service, in: self)
     }
 
@@ -557,14 +542,3 @@ extension TokensCoordinator: AddHideTokensCoordinatorDelegate {
         removeCoordinator(coordinator)
     }
 }
-
-struct DefaultToken {
-   var address:String
-   var server: RPCServer
-   
-   init(address: String, server: RPCServer) {
-       self.address = address
-       self.server = server
-   }
-}
-

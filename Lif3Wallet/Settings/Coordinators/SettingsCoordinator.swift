@@ -1,10 +1,11 @@
 // Copyright SIX DAY LLC. All rights reserved.
 // Copyright © 2018 Stormbird PTE. LTD.
-
-import Foundation
 import UIKit
+import PromiseKit
 import Combine
 import AlphaWalletFoundation
+import AlphaWalletLogger
+import AlphaWalletCore
 
 enum RestartReason {
     case walletChange
@@ -38,10 +39,10 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
     private let tokenCollection: TokenCollection
     private let appTracker: AppTracker
     private let activitiesService: ActivitiesServiceType
-    private let nftProvider: NFTProvider
+//    private let nftProvider: NFTProvider
     private var tokenActionsService: TokenActionsService
     private var coinTickersFetcher: CoinTickersFetcher
-    private var importToken: ImportToken
+//    private var importToken: ImportToken
     private var tokensFilter: TokensFilter
     private let tokensService: DetectedContractsProvideble & TokenProvidable & TokenAddable
     private var pendingOperation: PendingOperation?
@@ -60,7 +61,7 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
     private let blockiesGenerator: BlockiesGenerator
     private let domainResolutionService: DomainResolutionServiceType
     private var account: Wallet {
-        return sessions.anyValue.account
+        return sessionsProvider.activeSessions.anyValue.account
     }
     private let lock: Lock
     private let currencyService: CurrencyService
@@ -75,7 +76,7 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
     }
     
     lazy var rootViewController: SettingsViewController = {
-        let viewModel = SettingsViewModel(account: account, keystore: keystore, lock: lock, config: config, analytics: analytics, domainResolutionService: domainResolutionService, promptBackup: promptBackup)
+        let viewModel = SettingsViewModel(account: account, lock: lock, config: config, analytics: analytics, domainResolutionService: domainResolutionService, promptBackup: promptBackup)
         let controller = SettingsViewController(viewModel: viewModel)
         controller.delegate = self
         controller.navigationItem.largeTitleDisplayMode = .never
@@ -116,9 +117,6 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
         lock: Lock,
         currencyService: CurrencyService,
         tokenScriptOverridesFileManager: TokenScriptOverridesFileManager,
-        
-        
-        
         activitiesPipeLine: ActivitiesPipeLine,
         sessionsProvider: SessionsProvider,
         assetDefinitionStore: AssetDefinitionStore,
@@ -126,10 +124,9 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
         tokenCollection: TokenCollection,
         appTracker: AppTracker,
         activitiesService: ActivitiesServiceType,
-        nftProvider: NFTProvider,
         tokenActionsService: TokenActionsService,
         coinTickersFetcher: CoinTickersFetcher,
-        importToken: ImportToken,
+//        importToken: ImportToken,
         tokensFilter: TokensFilter,
         tokensService: DetectedContractsProvideble & TokenProvidable & TokenAddable,
         tokenSwapper: TokenSwapper,
@@ -160,10 +157,10 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
         self.tokenCollection = tokenCollection
         self.appTracker = appTracker
         self.activitiesService = activitiesService
-        self.nftProvider = nftProvider
+//        self.nftProvider = nftProvider
         self.tokenActionsService = tokenActionsService
         self.coinTickersFetcher = coinTickersFetcher
-        self.importToken = importToken
+//        self.importToken = importToken
         self.tokensFilter = tokensFilter
         self.tokensService = tokensService
         self.tokenSwapper = tokenSwapper
@@ -173,7 +170,7 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
     }
     
     func start() {
-        let tokenCoordinator = createTokensCoordinator(promptBackupCoordinator: promptBackupCoordinator, activitiesService: activitiesService)
+        let tokenCoordinator = createTokensCoordinator()
 //        let txnCoordinator =  createTransactionCoordinator(transactionDataStore: transactionsDataStore)
         navigationController.viewControllers = [rootViewController]
     }
@@ -186,30 +183,29 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
         rootViewController.configure(blockscanChatUnreadCount: count)
     }
     
-    private func createTokensCoordinator(promptBackupCoordinator: PromptBackupCoordinator, activitiesService: ActivitiesServiceType) -> TokensCoordinator {
-       
-
+    private func createTokensCoordinator() -> TokensCoordinator {
         let coordinator = TokensCoordinator(
-                sessions: sessionsProvider.activeSessions,
-                keystore: keystore,
-                config: config,
-                assetDefinitionStore: assetDefinitionStore,
-                promptBackupCoordinator: promptBackupCoordinator,
-                analytics: analytics,
-                nftProvider: nftProvider,
-                tokenActionsService: tokenActionsService,
-                walletConnectCoordinator: walletConnectCoordinator,
-                coinTickersFetcher: coinTickersFetcher,
-                activitiesService: activitiesService,
-                walletBalanceService: walletBalanceService,
-                tokenCollection: tokenCollection,
-                importToken: importToken,
-                blockiesGenerator: blockiesGenerator,
-                domainResolutionService: domainResolutionService,
-                tokensFilter: tokensFilter, currencyService: currencyService
-        )
+            sessionsProvider: sessionsProvider,
+            keystore: keystore,
+            config: config,
+            assetDefinitionStore: assetDefinitionStore,
+            promptBackupCoordinator: promptBackupCoordinator,
+            analytics: analytics,
+            tokenActionsService: tokenActionsService,
+            walletConnectCoordinator: walletConnectCoordinator,
+            coinTickersFetcher: coinTickersFetcher,
+            activitiesService: activitiesPipeLine,
+            walletBalanceService: walletBalanceService,
+            tokenCollection: tokenCollection,
+            blockiesGenerator: blockiesGenerator,
+            domainResolutionService: domainResolutionService,
+            tokensFilter: tokensFilter,
+            currencyService: currencyService)
+
+        coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.tokens.tabBarItem
         coordinator.delegate = self
         coordinator.start()
+
         addCoordinator(coordinator)
         return coordinator
     }
@@ -307,15 +303,14 @@ extension SettingsCoordinator: SelectTokenCoordinatorDelegate {
                     navigationController: navigationController,
                     flow: type,
                     server: server,
-                    sessionProvider: sessionsProvider,
+                    sessionsProvider: sessionsProvider,
                     keystore: keystore,
                     assetDefinitionStore: assetDefinitionStore,
                     analytics: analytics,
                     tokenCollection: tokenCollection,
                     domainResolutionService: domainResolutionService,
                     tokenSwapper: tokenSwapper,
-                    tokensFilter: tokensFilter,
-                    importToken: importToken, networkService: networkService, transactionDataStore: transactionsDataStore)
+                    tokensFilter: tokensFilter,networkService: networkService, transactionDataStore: transactionsDataStore)
             coordinator.delegate = self
             coordinator.start()
 
@@ -645,6 +640,26 @@ extension SettingsCoordinator: ReplaceTransactionCoordinatorDelegate {
 
 
 extension SettingsCoordinator: ActivityViewControllerDelegate {
+    func requestSignMessage(message: SignMessageType,
+                            server: RPCServer,
+                            account: AlphaWallet.Address,
+                            source: Analytics.SignMessageRequestSource,
+                            requester: RequesterViewModel?) -> AnyPublisher<Data, PromiseError> {
+
+        infoLog("[\(source)] signMessage: \(message)")
+
+        return SignMessageCoordinator.promise(
+            analytics: analytics,
+            navigationController: navigationController,
+            keystore: keystore,
+            coordinator: self,
+            signType: message,
+            account: account,
+            source: source,
+            requester: requester)
+            .publisher(queue: .main)
+    }
+    
     func reinject(viewController: ActivityViewController) {
         activitiesPipeLine.reinject(activity: viewController.viewModel.activity)
     }
@@ -695,7 +710,6 @@ extension SettingsCoordinator: ActivityViewControllerDelegate {
 //        }
 //    }
 //}
-
 
 
 

@@ -110,9 +110,9 @@ class SingleChainTokenCoordinator: Coordinator {
         coordinator.delegate = self
         coordinator.start()
     }
-
+    
     private func showTokenInstanceActionView(forAction action: TokenInstanceAction, fungibleTokenObject token: Token, navigationController: UINavigationController) {
-        let tokenHolder = token.getTokenHolder(assetDefinitionStore: assetDefinitionStore, forWallet: session.account)
+        let tokenHolder = session.tokenAdaptor.getTokenHolder(token: token)
         delegate?.didPress(for: .send(type: .tokenScript(action: action, token: token, tokenHolder: tokenHolder)), viewController: navigationController, in: self)
     }
 }

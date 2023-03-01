@@ -162,7 +162,7 @@ extension SwapTokensCoordinator: SwapTokensViewControllerDelegate {
 
     func swapSelected(in viewController: SwapTokensViewController) {
         guard let swapQuote = configurator.lastSwapQuote, let fromAmount = configurator.fromAmount else {
-            showError(CustomError.tokenOrSwapQuoteNotFound)
+            showError(SwapError.tokenOrSwapQuoteNotFound)
             return
         }
 

@@ -10,6 +10,7 @@ struct EnterSellTokensCardPriceQuantityViewModel {
     private let assetDefinitionStore: AssetDefinitionStore
     private let currencyService: CurrencyService
     lazy var ethToken: Token = MultipleChainsTokensDataStore.functional.etherToken(forServer: server)
+
     let token: Token
     let tokenHolder: TokenHolder
     var ethCost: Double = .zero
@@ -58,7 +59,12 @@ struct EnterSellTokensCardPriceQuantityViewModel {
         return dollarCost.trimmed.isEmpty
     }
 
-    init(token: Token, tokenHolder: TokenHolder, server: RPCServer, assetDefinitionStore: AssetDefinitionStore, currencyService: CurrencyService) {
+    init(token: Token,
+         tokenHolder: TokenHolder,
+         server: RPCServer,
+         assetDefinitionStore: AssetDefinitionStore,
+         currencyService: CurrencyService) {
+
         self.token = token
         self.currencyService = currencyService
         self.tokenHolder = tokenHolder

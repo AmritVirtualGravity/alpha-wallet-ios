@@ -24,7 +24,7 @@ final class FungibleTokenDetailsViewModel {
             .map { $0?.balance.ticker }
             .eraseToAnyPublisher()
     }()
-    private lazy var tokenHolder: TokenHolder = token.getTokenHolder(assetDefinitionStore: assetDefinitionStore, forWallet: session.account)
+    private lazy var tokenHolder: TokenHolder = session.tokenAdaptor.getTokenHolder(token: token)
     private let session: WalletSession
     private let assetDefinitionStore: AssetDefinitionStore
     private let tokenActionsProvider: SupportedTokenActionsProvider

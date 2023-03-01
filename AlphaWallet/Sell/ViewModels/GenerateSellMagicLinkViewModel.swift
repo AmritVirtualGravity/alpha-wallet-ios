@@ -4,12 +4,11 @@ import UIKit
 import AlphaWalletFoundation
 
 struct GenerateSellMagicLinkViewModel {
-    private let tokenHolder: TokenHolder
-    private let ethCost: Double
-    private let linkExpiryDate: Date
-    private let server: RPCServer
+    let tokenHolder: TokenHolder
+    let ethCost: Double
+    let linkExpiryDate: Date
+    let server: RPCServer
     private let assetDefinitionStore: AssetDefinitionStore
-
     var contentsBackgroundColor: UIColor {
         return Configuration.Color.Semantic.defaultViewBackground
     }
@@ -94,7 +93,12 @@ struct GenerateSellMagicLinkViewModel {
         return tokenHolder.count
     }
 
-    init(tokenHolder: TokenHolder, ethCost: Double, linkExpiryDate: Date, server: RPCServer, assetDefinitionStore: AssetDefinitionStore) {
+    init(tokenHolder: TokenHolder,
+         ethCost: Double,
+         linkExpiryDate: Date,
+         server: RPCServer,
+         assetDefinitionStore: AssetDefinitionStore) {
+
         self.tokenHolder = tokenHolder
         self.ethCost = ethCost
         self.linkExpiryDate = linkExpiryDate

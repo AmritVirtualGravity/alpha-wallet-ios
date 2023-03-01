@@ -14,7 +14,7 @@ struct FungibleTokenDetailsViewModelOutput {
 }
 
 final class FungibleTokenDetailsViewModel {
-    private var chartHistoriesSubject: CurrentValueSubject<[ChartHistoryPeriod: ChartHistory], Never> = .init([:])
+    private let chartHistoriesSubject: CurrentValueSubject<[ChartHistoryPeriod: ChartHistory], Never> = .init([:])
     private let coinTickersFetcher: CoinTickersFetcher
     private let tokensService: TokenViewModelState
     private var cancelable = Set<AnyCancellable>()
@@ -24,18 +24,33 @@ final class FungibleTokenDetailsViewModel {
             .map { $0?.balance.ticker }
             .eraseToAnyPublisher()
     }()
-    private lazy var tokenHolder: TokenHolder = token.getTokenHolder(assetDefinitionStore: assetDefinitionStore, forWallet: session.account)
+    private lazy var tokenHolder: TokenHolder = session.tokenAdaptor.getTokenHolder(token: token)
     private let session: WalletSession
     private let assetDefinitionStore: AssetDefinitionStore
     private let tokenActionsProvider: SupportedTokenActionsProvider
     private (set) var actions: [TokenInstanceAction] = []
     private let currencyService: CurrencyService
+    private let tokenImageFetcher: TokenImageFetcher
+
     let token: Token
     lazy var chartViewModel = TokenHistoryChartViewModel(chartHistories: chartHistoriesSubject.eraseToAnyPublisher(), coinTicker: coinTicker, currencyService: currencyService)
-    lazy var headerViewModel = FungibleTokenHeaderViewModel(token: token, tokensService: tokensService)
+    lazy var headerViewModel = FungibleTokenHeaderViewModel(
+        token: token,
+        tokensService: tokensService,
+        tokenImageFetcher: tokenImageFetcher)
+
     var wallet: Wallet { session.account }
 
-    init(token: Token, coinTickersFetcher: CoinTickersFetcher, tokensService: TokenViewModelState, session: WalletSession, assetDefinitionStore: AssetDefinitionStore, tokenActionsProvider: SupportedTokenActionsProvider, currencyService: CurrencyService) {
+    init(token: Token,
+         coinTickersFetcher: CoinTickersFetcher,
+         tokensService: TokenViewModelState,
+         session: WalletSession,
+         assetDefinitionStore: AssetDefinitionStore,
+         tokenActionsProvider: SupportedTokenActionsProvider,
+         currencyService: CurrencyService,
+         tokenImageFetcher: TokenImageFetcher) {
+
+        self.tokenImageFetcher = tokenImageFetcher
         self.currencyService = currencyService
         self.tokenActionsProvider = tokenActionsProvider
         self.session = session
@@ -81,7 +96,7 @@ final class FungibleTokenDetailsViewModel {
     }
 
     private func buildTokenActions() -> [TokenInstanceAction] {
-        let xmlHandler = XMLHandler(token: token, assetDefinitionStore: assetDefinitionStore)
+        let xmlHandler = session.tokenAdaptor.xmlHandler(token: token)
         let actionsFromTokenScript = xmlHandler.actions
         infoLog("[TokenScript] actions names: \(actionsFromTokenScript.map(\.name))")
         if actionsFromTokenScript.isEmpty {
@@ -259,7 +274,7 @@ final class FungibleTokenDetailsViewModel {
 
     private func attributedHistoryValue(period: ChartHistoryPeriod) -> NSAttributedString {
         let result: (string: String, foregroundColor: UIColor) = {
-            guard let history = chartHistories[period] else { return ("-", Colors.black) }
+            guard let history = chartHistories[period] else { return ("-", Configuration.Color.Semantic.defaultForegroundText) }
 
             let result = HistoryHelper(history: history)
 
@@ -275,7 +290,7 @@ final class FungibleTokenDetailsViewModel {
 
                 return ("\(v) (\(p)%)", Configuration.Color.Semantic.depreciation)
             case .none:
-                return ("-", Colors.black)
+                return ("-", Configuration.Color.Semantic.defaultForegroundText)
             }
         }()
 

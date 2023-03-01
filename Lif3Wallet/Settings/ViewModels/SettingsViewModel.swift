@@ -20,7 +20,6 @@ final class SettingsViewModel {
     private let account: Wallet
     private var assignedNameOrEns: String?
     private var config: Config
-    private let keystore: Keystore
     private let analytics: AnalyticsLogger
     private let getWalletName: GetWalletName
     private let promptBackup: PromptBackup
@@ -39,10 +38,9 @@ final class SettingsViewModel {
     
     private (set) var sections: [SettingsSection] = []
     
-    init(account: Wallet, keystore: Keystore, lock: Lock, config: Config, analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType, promptBackup: PromptBackup) {
+    init(account: Wallet, lock: Lock, config: Config, analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType, promptBackup: PromptBackup) {
         self.account = account
         self.config = config
-        self.keystore = keystore
         self.analytics = analytics
         self.lock = lock
         self.getWalletName = GetWalletName(domainResolutionService: domainResolutionService)
@@ -66,32 +64,32 @@ final class SettingsViewModel {
     
     func transform(input: SettingsViewModelInput) -> SettingsViewModelOutput {
         let askToSetPasscode = self.askToSetPasscodeOrDeleteExisted(trigger: input.appProtectionSelection)
-        
+
         //NOTE: Refresh wallet name or ens when view will appear called, cancel prev. one if in loading proc.
         let assignedNameOrEns = self.assignedNameOrEns(appear: input.willAppear)
         let blockscanChatUnreadCount = Publishers.Merge(Just<Int?>(nil), input.blockscanChatUnreadCount)
         let reload = Publishers.Merge3(Just<Void>(()), input.willAppear, assignedNameOrEns)
-        
+
         let sections = Publishers.CombineLatest(reload, blockscanChatUnreadCount)
-            .map { [account, keystore] _, blockscanChatUnreadCount -> [SettingsViewModel.SectionViewModel] in
-                let sections = SettingsViewModel.functional.computeSections(account: account, keystore: keystore, blockscanChatUnreadCount: blockscanChatUnreadCount)
+            .map { [account] _, blockscanChatUnreadCount -> [SettingsViewModel.SectionViewModel] in
+                let sections = SettingsViewModel.functional.computeSections(account: account, blockscanChatUnreadCount: blockscanChatUnreadCount)
                 return sections.indices.map { sectionIndex -> SettingsViewModel.SectionViewModel in
                     var views: [ViewType] = []
                     guard sections[sectionIndex].numberOfRows > 0 else {
                         return .init(section: sections[sectionIndex], views: [])
                     }
-                    
+
                     for rowIndex in 0 ..< sections[sectionIndex].numberOfRows {
                         let indexPath = IndexPath(item: rowIndex, section: sectionIndex)
                         let view = self.view(for: indexPath, sections: sections)
-                        
+
                         views.append(view)
                     }
-                    
+
                     return .init(section: sections[sectionIndex], views: views)
                 }
             }.handleEvents(receiveOutput: { self.sections = $0.map { $0.section } })
-        
+
         let badge = blockscanChatUnreadCount
             .map { value -> String? in
                 if let unreadCount = value, unreadCount > 0 {
@@ -100,15 +98,16 @@ final class SettingsViewModel {
                     return nil
                 }
             }.removeDuplicates()
-        
+
         let viewState = Publishers.CombineLatest(sections, badge)
             .map { sections, badge -> SettingsViewModel.ViewState in
                 let snapshot = self.buildSnapshot(for: sections)
                 return SettingsViewModel.ViewState(snapshot: snapshot, badge: badge)
             }.eraseToAnyPublisher()
-        
+
         return .init(viewState: viewState, askToSetPasscode: askToSetPasscode)
     }
+
     
     /// Delates existed passcode if false received, sends void event when need to set a new passcode
     private func askToSetPasscodeOrDeleteExisted(trigger: AnyPublisher<(indexPath: IndexPath, isOn: Bool), Never>) -> AnyPublisher<Void, Never> {
@@ -320,7 +319,7 @@ extension SettingsViewModel.ViewType: Hashable {
 }
 
 extension SettingsViewModel.functional {
-    fileprivate static func computeSections(account: Wallet, keystore: Keystore, blockscanChatUnreadCount: Int?) -> [SettingsViewModel.SettingsSection] {
+    fileprivate static func computeSections(account: Wallet, blockscanChatUnreadCount: Int?) -> [SettingsViewModel.SettingsSection] {
         let walletRows: [SettingsViewModel.SettingsWalletRow]
         if account.allowBackup {
             if account.origin == .hd {

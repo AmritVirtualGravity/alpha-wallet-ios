@@ -11,3 +11,9 @@ public enum ImageOrWebImageUrl {
     case url(WebImageURL)
     case image(UIImage?)
 }
+
+public enum RawImage {
+    case generated(image: UIImage, symbol: String)
+    case loaded(image: UIImage)
+    case none
+}

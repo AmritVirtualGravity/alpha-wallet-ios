@@ -19,7 +19,7 @@ class SendCoordinator: Coordinator {
     private let analytics: AnalyticsLogger
     private let domainResolutionService: DomainResolutionServiceType
     private var transactionConfirmationResult: ConfirmResult? = .none
-    private let importToken: ImportToken
+    private let sessionsProvider: SessionsProvider
     private let networkService: NetworkService
 
     let navigationController: UINavigationController
@@ -33,16 +33,16 @@ class SendCoordinator: Coordinator {
     init(transactionType: TransactionType,
          navigationController: UINavigationController,
          session: WalletSession,
+         sessionsProvider: SessionsProvider,
          keystore: Keystore,
          tokensService: TokenProvidable & TokenAddable & TokenViewModelState & TokenBalanceRefreshable,
          assetDefinitionStore: AssetDefinitionStore,
          analytics: AnalyticsLogger,
          domainResolutionService: DomainResolutionServiceType,
-         importToken: ImportToken,
          networkService: NetworkService) {
         
         self.networkService = networkService
-        self.importToken = importToken
+        self.sessionsProvider = sessionsProvider
         self.transactionType = transactionType
         self.navigationController = navigationController
         self.session = session
@@ -62,7 +62,7 @@ class SendCoordinator: Coordinator {
             transactionType: transactionType,
             session: session,
             tokensService: tokensService,
-            importToken: importToken)
+            sessionsProvider: sessionsProvider)
 
         let controller = SendViewController(
             viewModel: viewModel,
@@ -88,12 +88,11 @@ extension SendCoordinator: ScanQRCodeCoordinatorDelegate {
 }
 
 extension SendCoordinator: SendViewControllerDelegate {
-    
     func didTapAddAddressToContact(in viewController: SendViewController) {
         let controller = AddAddressToContactViewController()
-        controller.delegate = self
-        controller.modalPresentationStyle = .overCurrentContext
-        self.navigationController.present(controller, animated: false)
+             controller.delegate = self
+             controller.modalPresentationStyle = .overCurrentContext
+             self.navigationController.present(controller, animated: false)
     }
     
     func didClose(in viewController: SendViewController) {
@@ -195,7 +194,6 @@ extension SendCoordinator: CanOpenURL {
     }
 }
 
-
 extension SendCoordinator: AddAddressToContactViewControllerDelegate {
     
     func didTapCreateContact(in viewController: AddAddressToContactViewController) {
@@ -206,7 +204,7 @@ extension SendCoordinator: AddAddressToContactViewControllerDelegate {
             transactionType: transactionType,
             session: session,
             tokensService: tokensService,
-            importToken: importToken)
+            sessionsProvider: sessionsProvider)
         viewModel.addContacts(name: viewController.addAddressToContactPopView.nameTextField.value, address: sendViewController.targetAddressTextField.value)
         self.navigationController.dismiss(animated: false)
     }

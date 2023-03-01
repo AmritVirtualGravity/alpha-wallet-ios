@@ -13,7 +13,7 @@ struct Lif3ViewModel: Codable {
     func getLif3NewsList(completion: @escaping ([Lif3NewsListModel]?) -> Void) {
         
         let lif3NewsUrl = "https://assets.lif3.com/wallet/lif3-news/lif3news.json"
-           Alamofire.request(lif3NewsUrl, method: .get, encoding: URLEncoding.default).responseJSON
+           AF.request(lif3NewsUrl, method: .get, encoding: URLEncoding.default).responseJSON
            { response in
                guard let data = response.data else { return }
                do {

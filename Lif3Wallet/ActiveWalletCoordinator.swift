@@ -3,6 +3,7 @@ import PromiseKit
 import Combine
 import AlphaWalletFoundation
 import AlphaWalletLogger
+import AlphaWalletCore
 
 // swiftlint:disable file_length
 protocol ActiveWalletCoordinatorDelegate: AnyObject {
@@ -14,20 +15,21 @@ protocol ActiveWalletCoordinatorDelegate: AnyObject {
 }
 
 // swiftlint:disable type_body_length
-class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate {
+class ActiveWalletCoordinator: NSObject, Coordinator {
     private let wallet: Wallet
     private let config: Config
     private let assetDefinitionStore: AssetDefinitionStore
     private let appTracker: AppTracker
     private let analytics: AnalyticsLogger
-    private let nftProvider: NFTProvider
+//    private let nftProvider: NFTProvider
+//    private let sessions: ServerDictionary<WalletSession>
     private let restartQueue: RestartTaskQueue
     private let coinTickersFetcher: CoinTickersFetcher
     private let transactionsDataStore: TransactionDataStore
     private let blockscanChatService: BlockscanChatService
     private let activitiesPipeLine: ActivitiesPipeLine
     private let sessionsProvider: SessionsProvider
-    internal let importToken: ImportToken
+//    internal let importToken: ImportToken
     private let currencyService: CurrencyService
     private lazy var tokensFilter: TokensFilter = {
         return TokensFilter(
@@ -123,13 +125,6 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
         }
     }
 
-    private lazy var dappRequestHandler: DappRequestHandler = {
-        let handler = DappRequestHandler(walletConnectProvider: walletConnectCoordinator.walletConnectProvider, dappBrowserCoordinator: dappBrowserCoordinator!)
-        handler.delegate = self
-
-        return handler
-    }()
-
     private lazy var transactionNotificationService: NotificationSourceService = {
         let service = TransactionNotificationSourceService(transactionDataStore: transactionsDataStore, config: config)
         service.delegate = promptBackup
@@ -155,7 +150,8 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
          config: Config,
          appTracker: AppTracker = AppTracker(),
          analytics: AnalyticsLogger,
-         nftProvider: NFTProvider,
+//         sessions: ServerDictionary<WalletSession>,
+//         nftProvider: NFTProvider,
          restartQueue: RestartTaskQueue,
          universalLinkCoordinator: UniversalLinkService,
          accountsCoordinator: AccountsCoordinator,
@@ -169,7 +165,7 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
          tokenSwapper: TokenSwapper,
          sessionsProvider: SessionsProvider,
          tokenCollection: TokenCollection,
-         importToken: ImportToken,
+//         importToken: ImportToken,
          transactionsDataStore: TransactionDataStore,
          tokensService: DetectedContractsProvideble & TokenProvidable & TokenAddable,
          lock: Lock,
@@ -186,7 +182,7 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
         self.lock = lock
         self.tokensService = tokensService
         self.transactionsDataStore = transactionsDataStore
-        self.importToken = importToken
+//        self.importToken = importToken
         self.tokenCollection = tokenCollection
         self.activitiesPipeLine = activitiesPipeLine
         self.tokenSwapper = tokenSwapper
@@ -198,7 +194,8 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
         self.config = config
         self.appTracker = appTracker
         self.analytics = analytics
-        self.nftProvider = nftProvider
+//        self.nftProvider = nftProvider
+//        self.sessions = sessions
         self.restartQueue = restartQueue
         self.assetDefinitionStore = assetDefinitionStore
         self.universalLinkService = universalLinkCoordinator
@@ -255,30 +252,36 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
     }
     
     private func getDefaultWhiteListTokens() {
+        
+        
         for defaultToken in Constants.defaultTokens {
-            if  let address = AlphaWallet.Address(string: defaultToken.address) {
-               importToken(contract: address, server: defaultToken.server)
+            
+            
+            if  let address = AlphaWallet.Address(string: defaultToken.address!) {
+                importToken(contract: address, server: defaultToken.server!)
             }
         }
     }
     
     private func importToken(contract: AlphaWallet.Address, server: RPCServer) {
-        importToken.importTokenPublisher(for: contract, server: server, onlyIfThereIsABalance: false)
-            .handleEvents(receiveCompletion: { [server, wallet] result in
+        guard let session = sessionsProvider.session(for: server) else { return }
+        session.importToken.importToken(for: contract, onlyIfThereIsABalance: false)
+            .sinkAsync(receiveCompletion: { result in
                 guard case .failure(let error) = result else { return }
-                debugLog("Error while adding imported token contract: \(contract.eip55String) server: \(server) wallet: \(wallet.address.eip55String) error: \(error)")
-            }).sinkAsync()
+                debugLog("Error while adding imported token contract: \(contract.eip55String) server: \(server) wallet: \(self.wallet.address.eip55String) error: \(error)")
+            })
     }
 
     private func handleTokenScriptOverrideImport() {
         tokenScriptOverridesFileManager
             .importTokenScriptOverridesFileEvent
-            .sink { [weak self, importToken, wallet] event in
+            .sink { [weak self, sessionsProvider, wallet] event in
                 switch event {
                 case .failure(let error):
                     self?.show(error: error)
                 case .success(let override):
-                    importToken.importTokenPublisher(for: override.contract, server: override.server, onlyIfThereIsABalance: false)
+                    guard let session = sessionsProvider.session(for: override.server) else { return }
+                    session.importToken.importToken(for: override.contract, onlyIfThereIsABalance: false)
                         .sinkAsync(receiveCompletion: { result in
                             guard case .failure(let error) = result else { return }
                             debugLog("Error while adding imported token contract: \(override.contract.eip55String) server: \(override.server) wallet: \(wallet.address.eip55String) error: \(error)")
@@ -347,20 +350,18 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
 
     private func createTokensCoordinator() -> TokensCoordinator {
         let coordinator = TokensCoordinator(
-            sessions: sessionsProvider.activeSessions,
+            sessionsProvider: sessionsProvider,
             keystore: keystore,
             config: config,
             assetDefinitionStore: assetDefinitionStore,
             promptBackupCoordinator: promptBackupCoordinator,
             analytics: analytics,
-            nftProvider: nftProvider,
             tokenActionsService: tokenActionsService,
             walletConnectCoordinator: walletConnectCoordinator,
             coinTickersFetcher: coinTickersFetcher,
             activitiesService: activitiesPipeLine,
             walletBalanceService: walletBalanceService,
             tokenCollection: tokenCollection,
-            importToken: importToken,
             blockiesGenerator: blockiesGenerator,
             domainResolutionService: domainResolutionService,
             tokensFilter: tokensFilter,
@@ -421,13 +422,10 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
     private func createBrowserCoordinator(browserOnly: Bool) -> DappBrowserCoordinator {
         let coordinator = DappBrowserCoordinator(
             sessionsProvider: sessionsProvider,
-            keystore: keystore,
             config: config,
             browserOnly: browserOnly,
             analytics: analytics,
             domainResolutionService: domainResolutionService,
-            assetDefinitionStore: assetDefinitionStore,
-            tokensService: tokenCollection,
             bookmarksStore: BookmarksStore(),
             browserHistoryStorage: BrowserHistoryStorage(ignoreUrls: [Constants.dappsBrowserURL]),
             wallet: wallet,
@@ -442,37 +440,25 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
     }
 
     private func createSettingsCoordinator() -> SettingsCoordinator {
-        let coordinator = SettingsCoordinator(
-                   keystore: keystore,
-                   config: config,
-                   sessions: sessionsProvider.activeSessions,
-                   restartQueue: restartQueue,
-                   promptBackupCoordinator: promptBackupCoordinator,
-                   analytics: analytics,
-                   walletConnectCoordinator: walletConnectCoordinator,
-                   walletBalanceService: walletBalanceService,
-                   blockscanChatService: blockscanChatService,
-                   blockiesGenerator: blockiesGenerator,
-                   domainResolutionService: domainResolutionService,
-                   lock: lock,
-                   currencyService: currencyService,
-                   tokenScriptOverridesFileManager: tokenScriptOverridesFileManager,
-                   activitiesPipeLine: activitiesPipeLine,
-                   sessionsProvider: sessionsProvider,
-                   assetDefinitionStore: assetDefinitionStore,
-                   transactionsDataStore: transactionsDataStore,
-                   tokenCollection: tokenCollection,
-                   appTracker: appTracker, activitiesService: activitiesPipeLine,
-                   nftProvider: nftProvider,
-                    tokenActionsService: tokenActionsService,
-                coinTickersFetcher: coinTickersFetcher,
-                    importToken: importToken,
-                   tokensFilter: tokensFilter,
-                   tokensService: tokensService,
-                   tokenSwapper: tokenSwapper,
-                   networkService: networkService,
-                   promptBackup: promptBackup
-               )
+//        let coordinator = SettingsCoordinator(
+//            navigationController: keystore,
+//            keystore: config,
+//            config: sessionsProvider,
+//            sessions: restartQueue,
+//            restartQueue: promptBackupCoordinator,
+//            promptBackupCoordinator: analytics,
+//            analytics: walletConnectCoordinator,
+//            walletConnectCoordinator: walletBalanceService,
+//            walletBalanceService: blockscanChatService,
+//            blockscanChatService: blockiesGenerator,
+//            blockiesGenerator: domainResolutionService,
+//            domainResolutionService: lock,
+//            lock: currencyService,
+//            currencyService: tokenScriptOverridesFileManager,
+//            tokenScriptOverridesFileManager: networkService,
+//            activitiesPipeLine: promptBackup)
+        
+        let coordinator = SettingsCoordinator(keystore: keystore, config: config, sessions: sessionsProvider.activeSessions, restartQueue: restartQueue, promptBackupCoordinator: promptBackupCoordinator, analytics: analytics, walletConnectCoordinator: walletConnectCoordinator, walletBalanceService: walletBalanceService, blockscanChatService: blockscanChatService, blockiesGenerator: blockiesGenerator, domainResolutionService: domainResolutionService, lock: lock, currencyService: currencyService, tokenScriptOverridesFileManager: tokenScriptOverridesFileManager, activitiesPipeLine: activitiesPipeLine, sessionsProvider: sessionsProvider, assetDefinitionStore: assetDefinitionStore, transactionsDataStore: transactionsDataStore, tokenCollection: tokenCollection, appTracker: appTracker, activitiesService: activitiesPipeLine, tokenActionsService: tokenActionsService, coinTickersFetcher: coinTickersFetcher, tokensFilter: tokensFilter, tokensService: tokensService, tokenSwapper: tokenSwapper, networkService: networkService, promptBackup: promptBackup)
 
         coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.settings.tabBarItem
         coordinator.navigationController.configureForLargeTitles()
@@ -482,6 +468,7 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
 
         return coordinator
     }
+
 
     private func setupTabBarController() {
         var viewControllers = [UIViewController]()
@@ -548,7 +535,7 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
                 navigationController: navigationController,
                 flow: type,
                 server: server,
-                sessionProvider: sessionsProvider,
+                sessionsProvider: sessionsProvider,
                 keystore: keystore,
                 assetDefinitionStore: assetDefinitionStore,
                 analytics: analytics,
@@ -556,7 +543,6 @@ class ActiveWalletCoordinator: NSObject, Coordinator, DappRequestHandlerDelegate
                 domainResolutionService: domainResolutionService,
                 tokenSwapper: tokenSwapper,
                 tokensFilter: tokensFilter,
-                importToken: importToken,
                 networkService: networkService,
                 transactionDataStore: transactionsDataStore)
 
@@ -661,33 +647,52 @@ extension ActiveWalletCoordinator: SelectServiceToBuyCryptoCoordinatorDelegate {
 
 // swiftlint:enable type_body_length
 extension ActiveWalletCoordinator: WalletConnectCoordinatorDelegate {
+    
 
     func buyCrypto(wallet: Wallet, server: RPCServer, viewController: UIViewController, source: Analytics.BuyCryptoSource) {
         let token = MultipleChainsTokensDataStore.functional.etherToken(forServer: server)
         buyCrypto(wallet: wallet, token: token, viewController: viewController, source: source)
     }
 
-    func requestSwitchChain(server: RPCServer, currentUrl: URL?, callbackID: SwitchCustomChainCallbackId, targetChain: WalletSwitchEthereumChainObject) {
+    func requestSwitchChain(server: RPCServer,
+                            currentUrl: URL?,
+                            targetChain: WalletSwitchEthereumChainObject) -> AnyPublisher<SwitchExistingChainOperation, PromiseError> {
+
         let coordinator = DappRequestSwitchExistingChainCoordinator(
             config: config,
             server: server,
-            callbackId: callbackID,
             targetChain: targetChain,
             restartQueue: restartQueue,
             analytics: analytics,
             currentUrl: currentUrl,
             inViewController: presentationViewController)
 
-        coordinator.delegate = dappRequestHandler
-        dappRequestHandler.addCoordinator(coordinator)
-        coordinator.start()
+        addCoordinator(coordinator)
+
+        return coordinator.start()
+            .handleEvents(receiveOutput: { [weak self] operation in
+                //NOTE: we need this small delay to make sure source subscriber received event, e.g web browser or wallet connect, and then perform switching actions, because for processRestartQueueAndRestartUI recreates active wallet coordinator, will be removed when silent updated will be applied
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    switch operation {
+                    case .restartToEnableAndSwitchBrowserToServer:
+                        self?.processRestartQueueAndRestartUI(reason: .serverChange)
+                    case .switchBrowserToExistingServer, .notifySuccessful:
+                        break
+                    }
+                }
+            }, receiveCompletion: { [weak self] _ in
+                self?.removeCoordinator(coordinator)
+            }, receiveCancel: { [weak self] in
+                self?.removeCoordinator(coordinator)
+            }).eraseToAnyPublisher()
     }
 
-    func requestAddCustomChain(server: RPCServer, callbackId: SwitchCustomChainCallbackId, customChain: WalletAddEthereumChainObject) {
+    func requestAddCustomChain(server: RPCServer,
+                               customChain: WalletAddEthereumChainObject) -> AnyPublisher<SwitchCustomChainOperation, PromiseError> {
+
         let coordinator = DappRequestSwitchCustomChainCoordinator(
             config: config,
             server: server,
-            callbackId: callbackId,
             customChain: customChain,
             restartQueue: restartQueue,
             analytics: analytics,
@@ -695,13 +700,26 @@ extension ActiveWalletCoordinator: WalletConnectCoordinatorDelegate {
             viewController: presentationViewController,
             networkService: networkService)
 
-        coordinator.delegate = dappRequestHandler
-        dappRequestHandler.addCoordinator(coordinator)
-        coordinator.start()
-    }
+        addCoordinator(coordinator)
 
-    func session(for server: AlphaWalletFoundation.RPCServer) -> WalletSession? {
-        sessionsProvider.session(for: server)
+        return coordinator.start()
+            .handleEvents(receiveOutput: { [weak self] operation in
+                //NOTE: we need this small delay to make sure source subscriber received event, e.g web browser or wallet connect, and then perform switching actions, because for processRestartQueueAndRestartUI recreates active wallet coordinator, will be removed when silent updated will be applied
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    switch operation {
+                    case .notifySuccessful:
+                        break
+                    case .restartToEnableAndSwitchBrowserToServer, .restartToAddEnableAndSwitchBrowserToServer:
+                        self?.processRestartQueueAndRestartUI(reason: .serverChange)
+                    case .switchBrowserToExistingServer(let server, url: let url):
+                        self?.dappBrowserCoordinator?.switch(toServer: server, url: url)
+                    }
+                }
+            }, receiveCompletion: { [weak self] _ in
+                self?.removeCoordinator(coordinator)
+            }, receiveCancel: { [weak self] in
+                self?.removeCoordinator(coordinator)
+            }).eraseToAnyPublisher()
     }
 
     func didSendTransaction(_ transaction: SentTransaction, inCoordinator coordinator: TransactionConfirmationCoordinator) {
@@ -712,6 +730,7 @@ extension ActiveWalletCoordinator: WalletConnectCoordinatorDelegate {
         tokensCoordinator?.launchUniversalScanner(fromSource: .walletScreen)
     }
 }
+
 
 extension ActiveWalletCoordinator: CanOpenURL {
     private func open(url: URL, in viewController: UIViewController) {
@@ -806,6 +825,28 @@ extension ActiveWalletCoordinator: UrlSchemeResolver {
 }
 
 extension ActiveWalletCoordinator: ActivityViewControllerDelegate {
+    
+    
+    func requestSignMessage(message: SignMessageType,
+                            server: RPCServer,
+                            account: AlphaWallet.Address,
+                            source: Analytics.SignMessageRequestSource,
+                            requester: RequesterViewModel?) -> AnyPublisher<Data, PromiseError> {
+
+        infoLog("[\(source)] signMessage: \(message)")
+
+        return SignMessageCoordinator.promise(
+            analytics: analytics,
+            navigationController: navigationController,
+            keystore: keystore,
+            coordinator: self,
+            signType: message,
+            account: account,
+            source: source,
+            requester: requester)
+            .publisher(queue: .main)
+    }
+    
     func reinject(viewController: ActivityViewController) {
         activitiesPipeLine.reinject(activity: viewController.viewModel.activity)
     }
@@ -1185,6 +1226,126 @@ extension ActiveWalletCoordinator: PaymentCoordinatorDelegate {
 }
 
 extension ActiveWalletCoordinator: DappBrowserCoordinatorDelegate {
+
+    func requestSingTransaction(session: WalletSession,
+                                source: Analytics.TransactionConfirmationSource,
+                                requester: RequesterViewModel?,
+                                transaction: UnconfirmedTransaction,
+                                configuration: TransactionType.Configuration) -> AnyPublisher<Data, PromiseError> {
+
+        infoLog("[\(source)] singTransaction: \(transaction) type: \(configuration.confirmType)")
+
+        return firstly {
+            TransactionConfirmationCoordinator.promise(navigationController, session: session, coordinator: self, transaction: transaction, configuration: configuration, analytics: analytics, domainResolutionService: domainResolutionService, source: source, delegate: self, keystore: keystore, assetDefinitionStore: assetDefinitionStore, tokensService: tokenCollection, networkService: networkService)
+        }.map { data -> Data in
+            switch data {
+            case .signedTransaction(let data):
+                return data
+            case .sentRawTransaction, .sentTransaction:
+                throw PMKError.cancelled
+            }
+        }.publisher(queue: .main)
+    }
+
+    func requestSendRawTransaction(session: WalletSession,
+                                   source: Analytics.TransactionConfirmationSource,
+                                   requester: DappRequesterViewModel?,
+                                   transaction: String) -> AnyPublisher<String, PromiseError> {
+
+        infoLog("[\(source)] signRawTransaction: \(transaction)")
+        return firstly {
+            showAskSendRawTransaction(title: R.string.localizable.walletConnectSendRawTransactionTitle(), message: transaction)
+        }.then { shouldSend -> Promise<ConfirmResult> in
+            guard shouldSend else { return .init(error: DAppError.cancelled) }
+            let prompt = R.string.localizable.keystoreAccessKeySign()
+            let sender = SendTransaction(session: session, keystore: self.keystore, confirmType: .signThenSend, config: session.config, analytics: self.analytics, prompt: prompt)
+            return sender.send(rawTransaction: transaction)
+        }.map { data in
+            switch data {
+            case .signedTransaction, .sentTransaction:
+                throw DAppError.cancelled
+            case .sentRawTransaction(let transactionId, _):
+                return transactionId
+            }
+        }.then { callback -> Promise<String> in
+            return UINotificationFeedbackGenerator.showFeedbackPromise(value: callback, feedbackType: .success)
+        }.get { _ in
+            TransactionInProgressCoordinator.promise(self.navigationController, coordinator: self).done { _ in }.cauterize()
+        }.publisher(queue: .main)
+    }
+
+    private func showAskSendRawTransaction(title: String, message: String) -> Promise<Bool> {
+        return Promise { seal in
+            let style: UIAlertController.Style = UIDevice.current.userInterfaceIdiom == .pad ? .alert : .actionSheet
+
+            let alertViewController = UIAlertController(title: title, message: message, preferredStyle: style)
+            let startAction = UIAlertAction(title: R.string.localizable.oK(), style: .default) { _ in
+                seal.fulfill(true)
+            }
+
+            let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: .cancel) { _ in
+                seal.fulfill(false)
+            }
+
+            alertViewController.addAction(startAction)
+            alertViewController.addAction(cancelAction)
+
+            navigationController.present(alertViewController, animated: true)
+        }
+    }
+
+    func requestSendTransaction(session: WalletSession,
+                                source: Analytics.TransactionConfirmationSource,
+                                requester: RequesterViewModel?,
+                                transaction: UnconfirmedTransaction,
+                                configuration: TransactionType.Configuration) -> AnyPublisher<SentTransaction, PromiseError> {
+
+        infoLog("[\(source)] sendTransaction: \(transaction) type: \(configuration.confirmType)")
+
+        return firstly {
+            TransactionConfirmationCoordinator.promise(navigationController, session: session, coordinator: self, transaction: transaction, configuration: configuration, analytics: analytics, domainResolutionService: domainResolutionService, source: .walletConnect, delegate: self, keystore: keystore, assetDefinitionStore: assetDefinitionStore, tokensService: tokenCollection, networkService: networkService)
+        }.map { data -> SentTransaction in
+            switch data {
+            case .sentTransaction(let transaction):
+                return transaction
+            case .signedTransaction, .sentRawTransaction:
+                throw PMKError.cancelled
+            }
+        }.get { _ in
+            TransactionInProgressCoordinator.promise(self.navigationController, coordinator: self).done { _ in }.cauterize()
+        }.publisher(queue: .main)
+    }
+
+    func requestGetTransactionCount(session: WalletSession, source: Analytics.SignMessageRequestSource) -> AnyPublisher<Data, PromiseError> {
+        infoLog("[\(source)] getTransactionCount")
+        return session.blockchainProvider
+            .nextNonce(wallet: session.account.address)
+            .mapError { PromiseError(error: $0) }
+            .flatMap { nonce -> AnyPublisher<Data, PromiseError> in
+                if let data = Data(fromHexEncodedString: String(format: "%02X", nonce)) {
+                    return .just(data)
+                } else {
+                    return .fail(PromiseError(error: PMKError.badInput))
+                }
+            }.receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
+    }
+
+    func requestEthCall(from: AlphaWallet.Address?,
+                        to: AlphaWallet.Address?,
+                        value: String?,
+                        data: String,
+                        source: Analytics.SignMessageRequestSource,
+                        session: WalletSession) -> AnyPublisher<String, PromiseError> {
+
+        infoLog("[\(source)] ethCall")
+        return session.blockchainProvider
+            .call(from: from, to: to, value: value, data: data)
+            .receive(on: RunLoop.main)
+            .mapError { PromiseError(error: $0.unwrapped) }
+            .eraseToAnyPublisher()
+    }
+
     func didSentTransaction(transaction: SentTransaction, inCoordinator coordinator: DappBrowserCoordinator) {
         handlePendingTransaction(transaction: transaction)
     }
@@ -1201,6 +1362,7 @@ extension ActiveWalletCoordinator: DappBrowserCoordinatorDelegate {
         processRestartQueueAndRestartUI(reason: .serverChange)
     }
 }
+
 
 extension ActiveWalletCoordinator: StaticHTMLViewControllerDelegate {
 }

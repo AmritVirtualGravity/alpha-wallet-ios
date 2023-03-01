@@ -5,13 +5,13 @@ import UIKit
 import AlphaWalletFoundation
 
 struct SetSellTokensCardExpiryDateViewModel {
-    private let ethCost: Double
     private let server: RPCServer
     private let assetDefinitionStore: AssetDefinitionStore
-    
+
+    let ethCost: Double
     let token: Token
     let tokenHolder: TokenHolder
-    
+
     var headerTitle: String {
         return R.string.localizable.aWalletTokenSellEnterLinkExpiryDateTitle()
     }
@@ -65,7 +65,12 @@ struct SetSellTokensCardExpiryDateViewModel {
         return tokenHolder.count
     }
     
-    init(token: Token, tokenHolder: TokenHolder, ethCost: Double, server: RPCServer, assetDefinitionStore: AssetDefinitionStore) {
+    init(token: Token,
+         tokenHolder: TokenHolder,
+         ethCost: Double,
+         server: RPCServer,
+         assetDefinitionStore: AssetDefinitionStore) {
+
         self.token = token
         self.tokenHolder = tokenHolder
         self.ethCost = ethCost

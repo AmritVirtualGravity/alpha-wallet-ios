@@ -3,8 +3,9 @@
 import UIKit
 import Combine
 import AlphaWalletFoundation
+import AlphaWalletCore
 
-protocol ActivityViewControllerDelegate: AnyObject {
+protocol ActivityViewControllerDelegate: AnyObject, RequestSignMessageDelegate {
     func reinject(viewController: ActivityViewController)
     func goToToken(viewController: ActivityViewController)
     func speedupTransaction(transactionId: String, server: RPCServer, viewController: ActivityViewController)
@@ -27,7 +28,7 @@ class ActivityViewController: UIViewController {
     private let separator = UIView()
     private let bottomFiller = UIView.spacerWidth()
     lazy private var tokenScriptRendererView: TokenInstanceWebView = {
-        let webView = TokenInstanceWebView(analytics: analytics, server: server, wallet: wallet, assetDefinitionStore: assetDefinitionStore, keystore: keystore)
+        let webView = TokenInstanceWebView(server: server, wallet: wallet, assetDefinitionStore: assetDefinitionStore)
         webView.isWebViewInteractionEnabled = true
         webView.delegate = self
         webView.isStandalone = true
@@ -234,15 +235,27 @@ class ActivityViewController: UIViewController {
 }
 
 extension ActivityViewController: TokenInstanceWebViewDelegate {
-    //TODO not good. But quick and dirty to ship
-    func navigationControllerFor(tokenInstanceWebView: TokenInstanceWebView) -> UINavigationController? {
-        navigationController
+    
+    func requestSignMessage(message: SignMessageType,
+                            server: RPCServer,
+                            account: AlphaWallet.Address,
+                            source: Analytics.SignMessageRequestSource,
+                            requester: RequesterViewModel?) -> AnyPublisher<Data, PromiseError> {
+        
+        guard let delegate = delegate else { return .empty() }
+        
+        return delegate.requestSignMessage(
+            message: message,
+            server: server,
+            account: account,
+            source: source,
+            requester: requester)
     }
-
+    
     func shouldClose(tokenInstanceWebView: TokenInstanceWebView) {
         //no-op
     }
-
+    
     func reinject(tokenInstanceWebView: TokenInstanceWebView) {
         delegate?.reinject(viewController: self)
     }

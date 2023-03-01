@@ -111,6 +111,7 @@ public struct TokenInstanceAction {
         self.type = type
     }
     //TODO we can live-reload the action view screen now if we observe for changes
+    //TODO we can live-reload the action view screen now if we observe for changes
     public func viewHtml(forTokenHolder tokenHolder: TokenHolder, tokenId: TokenId) -> String {
         switch type {
         case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .nonFungibleTransfer, .nftRedeem, .nftSell, .stake, .activity, .alert:

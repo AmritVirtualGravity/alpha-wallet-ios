@@ -112,7 +112,7 @@ class Lif3ViewController: UIViewController {
         super.viewDidLoad()
         self.collectionViewSetup()
         getLif3NewsListData()
-        startBannerScroll()
+       
         // Do any additional setup after loading the view.
     }
     
@@ -150,15 +150,14 @@ class Lif3ViewController: UIViewController {
 
 //Network Calls
 extension Lif3ViewController {
-    
     func getLif3NewsListData () {
         viewModel.getLif3NewsList{ newsList in
             self.newsArr  = newsList ?? []
+            self.startBannerScroll()
             self.newsCollectionView.reloadData()
+           
         }
     }
-    
-  
 }
 
 
@@ -168,5 +167,4 @@ extension UICollectionView {
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
     }
-    
 }

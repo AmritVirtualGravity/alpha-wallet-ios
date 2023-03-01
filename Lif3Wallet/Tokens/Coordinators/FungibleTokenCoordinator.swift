@@ -189,10 +189,10 @@ extension FungibleTokenCoordinator: FungibleTokenDetailsViewControllerDelegate {
     func didTap(action: TokenInstanceAction, token: Token, in viewController: FungibleTokenDetailsViewController) {
         guard let navigationController = viewController.navigationController else { return }
 
-        let tokenHolder = token.getTokenHolder(assetDefinitionStore: assetDefinitionStore, forWallet: session.account)
+        let tokenHolder = session.tokenAdaptor.getTokenHolder(token: token)
         delegate?.didPress(for: .send(type: .tokenScript(action: action, token: token, tokenHolder: tokenHolder)), viewController: navigationController, in: self)
     }
-
+    
     func didPressViewContractWebPage(forContract contract: AlphaWallet.Address, server: RPCServer, in viewController: UIViewController) {
         delegate?.didPressViewContractWebPage(forContract: contract, server: server, in: viewController)
     }

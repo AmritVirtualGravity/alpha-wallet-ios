@@ -53,7 +53,6 @@ extension Lif3ViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func startBannerScroll() {
-        if newsArr.count > 0 {
             // just in case you had existing `Timer`, `invalidate` it before we lose our reference to it
             timer?.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
@@ -67,7 +66,7 @@ extension Lif3ViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 
                 self?.newsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             }
-        }
+        
     }
     
     

@@ -177,7 +177,7 @@ extension TransferCollectiblesCoordinator: TransactionConfirmationCoordinatorDel
             strongSelf.removeCoordinator(coordinator)
             strongSelf.transactionConfirmationResult = result
 
-            let coordinator = TransactionInProgressCoordinator(presentingViewController: strongSelf.navigationController)
+            let coordinator = TransactionInProgressCoordinator(presentingViewController: strongSelf.navigationController, session: strongSelf.session)
             coordinator.delegate = strongSelf
             strongSelf.addCoordinator(coordinator)
 

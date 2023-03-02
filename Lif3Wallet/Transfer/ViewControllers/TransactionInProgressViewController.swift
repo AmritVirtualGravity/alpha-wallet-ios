@@ -14,7 +14,7 @@ protocol TransactionInProgressViewControllerDelegate: AnyObject {
 }
 
 class TransactionInProgressViewController: UIViewController {
-
+    
     private let viewModel: TransactionInProgressViewModel
     private lazy var footerBar: UIView = {
         let view = UIView()
@@ -99,6 +99,7 @@ class TransactionInProgressViewController: UIViewController {
     private func configure(viewModel: TransactionInProgressViewModel) {
         view.backgroundColor = viewModel.backgroundColor
         titleLabel.attributedText = viewModel.titleAttributedText
+       
         subtitleLabel.attributedText = viewModel.subtitleAttributedText
         imageView.image = viewModel.image
     }

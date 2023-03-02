@@ -1270,7 +1270,7 @@ extension ActiveWalletCoordinator: DappBrowserCoordinatorDelegate {
         }.then { callback -> Promise<String> in
             return UINotificationFeedbackGenerator.showFeedbackPromise(value: callback, feedbackType: .success)
         }.get { _ in
-            TransactionInProgressCoordinator.promise(self.navigationController, coordinator: self).done { _ in }.cauterize()
+            TransactionInProgressCoordinator.promise(self.navigationController, coordinator: self, session: self.sessionsProvider.activeSessions.anyValue).done { _ in }.cauterize()
         }.publisher(queue: .main)
     }
 
@@ -1312,7 +1312,7 @@ extension ActiveWalletCoordinator: DappBrowserCoordinatorDelegate {
                 throw PMKError.cancelled
             }
         }.get { _ in
-            TransactionInProgressCoordinator.promise(self.navigationController, coordinator: self).done { _ in }.cauterize()
+            TransactionInProgressCoordinator.promise(self.navigationController, coordinator: self, session: self.sessionsProvider.activeSessions.anyValue).done { _ in }.cauterize()
         }.publisher(queue: .main)
     }
 

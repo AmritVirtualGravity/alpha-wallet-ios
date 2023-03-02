@@ -9,7 +9,13 @@ import UIKit
 import AlphaWalletFoundation
 
 struct TransactionInProgressViewModel {
-
+    
+    private var server: RPCServer
+    
+    init(server: RPCServer) {
+        self.server = server
+    }
+    
     var titleAttributedText: NSAttributedString {
         let style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -22,7 +28,7 @@ struct TransactionInProgressViewModel {
     }
 
     var subtitleAttributedText: NSAttributedString {
-        let x = R.string.localizable.aWalletTokenTransactionInProgressSubtitle()
+        let x = R.string.localizable.aWalletTokenTransactionInProgressSubtitle(server.name)
         let style = NSMutableParagraphStyle()
         style.alignment = .center
         style.lineSpacing = ScreenChecker().isNarrowScreen ? 7 : 14

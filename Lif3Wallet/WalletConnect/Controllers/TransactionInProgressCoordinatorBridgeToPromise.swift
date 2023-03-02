@@ -13,11 +13,13 @@ private class TransactionInProgressCoordinatorBridgeToPromise {
 
     private let (promiseToReturn, seal) = Promise<Void>.pending()
     private var retainCycle: TransactionInProgressCoordinatorBridgeToPromise?
+    private let session: WalletSession
 
-    init(navigationController: UINavigationController, coordinator: Coordinator) {
+    init(navigationController: UINavigationController, coordinator: Coordinator, session: WalletSession) {
+        self.session = session
         retainCycle = self
-
-        let newCoordinator = TransactionInProgressCoordinator(presentingViewController: navigationController)
+        
+        let newCoordinator = TransactionInProgressCoordinator(presentingViewController: navigationController, session: session)
         newCoordinator.delegate = self
         coordinator.addCoordinator(newCoordinator)
 
@@ -44,7 +46,7 @@ extension TransactionInProgressCoordinatorBridgeToPromise: TransactionInProgress
 
 extension TransactionInProgressCoordinator {
 
-    static func promise(_ navigationController: UINavigationController, coordinator: Coordinator) -> Promise<Void> {
-        return TransactionInProgressCoordinatorBridgeToPromise(navigationController: navigationController, coordinator: coordinator).promise
+    static func promise(_ navigationController: UINavigationController, coordinator: Coordinator, session: WalletSession) -> Promise<Void> {
+        return TransactionInProgressCoordinatorBridgeToPromise(navigationController: navigationController, coordinator: coordinator, session: session).promise
     }
 }

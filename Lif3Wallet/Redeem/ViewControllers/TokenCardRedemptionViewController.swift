@@ -55,7 +55,7 @@ class TokenCardRedemptionViewController: UIViewController, TokenVerifiableStatus
 
         let imageHolder = UIView()
         imageHolder.translatesAutoresizingMaskIntoConstraints = false
-        imageHolder.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        imageHolder.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         imageHolder.cornerRadius = DataEntry.Metric.CornerRadius.box
         imageHolder.addSubview(imageView)
 
@@ -89,7 +89,7 @@ class TokenCardRedemptionViewController: UIViewController, TokenVerifiableStatus
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     required init?(coder aDecoder: NSCoder) {

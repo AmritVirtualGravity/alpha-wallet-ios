@@ -76,7 +76,7 @@ extension PriceAlertsViewModel {
         let addNewAlertViewModel = ShowAddHideTokensViewModel(
             addHideTokensIcon: R.image.add_hide_tokens(),
             addHideTokensTitle: R.string.localizable.priceAlertNewAlert(),
-            backgroundColor: Configuration.Color.Semantic.tableViewHeaderBackground,
+            backgroundColor: ConfigurationLif3.Color.Semantic.tableViewHeaderBackground,
             badgeText: nil)
     }
 }

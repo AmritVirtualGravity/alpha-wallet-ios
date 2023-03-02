@@ -33,7 +33,7 @@ class LockView: UIView {
 		lockTitle.font = Fonts.regular(size: 20)
 		lockTitle.textAlignment = .center
 		lockTitle.translatesAutoresizingMaskIntoConstraints = false
-        lockTitle.textColor = Configuration.Color.Semantic.defaultForegroundText
+        lockTitle.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
 	}
 	private func applyConstraints() {
 		characterView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -44,7 +44,7 @@ class LockView: UIView {
 		lockTitle.bottomAnchor.constraint(equalTo: characterView.topAnchor, constant: -20).isActive = true
 	}
 	private func addUiElements() {
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 		addSubview(lockTitle)
 		addSubview(characterView)
 	}

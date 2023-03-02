@@ -37,7 +37,7 @@ class EnabledServersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         configure(viewModel: viewModel)
     }
 
@@ -165,7 +165,7 @@ extension EnabledServersViewController: UITableViewDelegate, UITableViewDataSour
         }
 
         deleteAction.image = R.image.close()?.withRenderingMode(.alwaysTemplate)
-        deleteAction.backgroundColor = Configuration.Color.Semantic.dangerBackground
+        deleteAction.backgroundColor = ConfigurationLif3.Color.Semantic.dangerBackground
 
         let editAction = UIContextualAction(style: .normal, title: R.string.localizable.editButtonTitle()) { _, _, complete in
             self.edit(server: server)

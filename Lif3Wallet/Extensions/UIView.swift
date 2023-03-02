@@ -167,7 +167,7 @@ extension UIView {
 
 extension UIView {
     static func separator(height: CGFloat = 1) -> UIView {
-        return spacer(height: height, backgroundColor: Configuration.Color.Semantic.tableViewSeparator)
+        return spacer(height: height, backgroundColor: ConfigurationLif3.Color.Semantic.tableViewSeparator)
     }
 }
 
@@ -227,7 +227,7 @@ extension UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        view.backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
 
         return view
     }

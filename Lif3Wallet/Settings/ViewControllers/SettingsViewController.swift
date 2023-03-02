@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController {
         tableView.separatorStyle = .singleLine
         tableView.separatorColor =  .white.withAlphaComponent(0.1)
         tableView.estimatedRowHeight = DataEntry.Metric.anArbitraryRowHeightSoAutoSizingCellsWorkIniOS10
-        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
+        tableView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewBackground
         tableView.delegate = self
 
         return tableView
@@ -84,7 +84,7 @@ class SettingsViewController: UIViewController {
             hidePromptBackupWalletView()
         }
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         bind(viewModel: viewModel)
     }

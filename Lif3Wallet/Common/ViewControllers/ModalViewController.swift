@@ -90,7 +90,7 @@ private class _ModalViewController: UIViewController {
 
     private lazy var scrollableContainerView: ScrollableStackView = {
         let view = ScrollableStackView()
-        view.backgroundColor = Configuration.Color.Semantic.headerViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.headerViewBackground
         return view
     }()
 
@@ -99,7 +99,7 @@ private class _ModalViewController: UIViewController {
     private lazy var backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Configuration.Color.Semantic.overlayBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.overlayBackground
         view.alpha = 0
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(closeButtonSelected))
@@ -112,7 +112,7 @@ private class _ModalViewController: UIViewController {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Configuration.Color.Semantic.headerViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.headerViewBackground
         view.cornerRadius = 12
 
         let subview = [

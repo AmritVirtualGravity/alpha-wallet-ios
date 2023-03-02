@@ -18,7 +18,7 @@ fileprivate func colorFrom(trait: UITraitCollection, lightColor: UIColor, darkCo
     }
 }
 
-struct Configuration {
+struct ConfigurationLif3 {
     struct Color {
         struct Semantic {
             static let checkBoxCheckedColor = UIColor { trait in
@@ -355,7 +355,7 @@ struct Configuration {
 
             static let border = UIColor(red: 194, green: 194, blue: 194)
             static let text = Colors.appText
-            static let textFieldStatus = Configuration.Color.Semantic.defaultErrorText
+            static let textFieldStatus = ConfigurationLif3.Color.Semantic.defaultErrorText
             static let icon = Colors.appTint
             static let secondary = UIColor(red: 155, green: 155, blue: 155)
             static let textFieldShadowWhileEditing = Colors.appTint
@@ -379,7 +379,7 @@ struct Configuration {
     }
 }
 
-extension Configuration {
+extension ConfigurationLif3 {
     enum Font {
         static let text = Fonts.regular(size: ScreenChecker.size(big: 18, medium: 18, small: 14))
         static let label = Fonts.bold(size: 13)
@@ -400,7 +400,7 @@ class UIKitFactory {
     }
 
     @discardableResult static func decorateAsDefaultView(_ view: UIView) -> UIView {
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         return view
     }
 

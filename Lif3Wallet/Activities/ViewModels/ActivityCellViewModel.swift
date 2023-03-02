@@ -12,7 +12,7 @@ struct ActivityCellViewModel {
     let activity: Activity
 
     var contentsBackgroundColor: UIColor {
-        Configuration.Color.Semantic.tableViewCellBackground
+        ConfigurationLif3.Color.Semantic.tableViewCellBackground
     }
 
     var contentsCornerRadius: CGFloat {
@@ -20,6 +20,6 @@ struct ActivityCellViewModel {
     }
 
     var backgroundColor: UIColor {
-        return Configuration.Color.Semantic.tableViewCellBackground
+        return ConfigurationLif3.Color.Semantic.tableViewCellBackground
     }
 }

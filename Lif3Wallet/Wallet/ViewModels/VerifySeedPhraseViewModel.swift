@@ -10,15 +10,15 @@ struct VerifySeedPhraseViewModel {
     }
 
     var seedPhraseTextViewBorderNormalColor: UIColor {
-        return Configuration.Color.Semantic.seedPhraseTextViewBorderColor
+        return ConfigurationLif3.Color.Semantic.seedPhraseTextViewBorderColor
     }
     
     var seedPhraseTextViewBackgroundColor: UIColor {
-        return Configuration.Color.Semantic.seedPhrasetextViewbackgroundColor
+        return ConfigurationLif3.Color.Semantic.seedPhrasetextViewbackgroundColor
     }
 
     var seedPhraseTextViewBorderErrorColor: UIColor {
-        return Configuration.Color.Semantic.defaultErrorText
+        return ConfigurationLif3.Color.Semantic.defaultErrorText
     }
 
     var seedPhraseTextViewBorderWidth: CGFloat {
@@ -38,12 +38,12 @@ struct VerifySeedPhraseViewModel {
     }
 
     var errorColor: UIColor {
-        return Configuration.Color.Semantic.defaultErrorText
+        return ConfigurationLif3.Color.Semantic.defaultErrorText
     }
 
     //Make it the same as the background. Trick to maintain the height of the error label even when there's no error by putting some dummy text. The dummy text must still make sense for accessibility
     var noErrorColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     var errorFont: UIFont {
@@ -60,7 +60,7 @@ struct VerifySeedPhraseViewModel {
     }
 
     var subtitleColor: UIColor {
-        return Configuration.Color.Semantic.defaultSubtitleText
+        return ConfigurationLif3.Color.Semantic.defaultSubtitleText
     }
 
     var subtitleFont: UIFont {

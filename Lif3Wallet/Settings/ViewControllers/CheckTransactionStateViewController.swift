@@ -21,7 +21,7 @@ class CheckTransactionStateViewController: ModalViewController {
         let v = UILabel()
         v.numberOfLines = 0
         v.textAlignment = .center
-        v.textColor = Configuration.Color.Semantic.defaultTitleText
+        v.textColor = ConfigurationLif3.Color.Semantic.defaultTitleText
         v.font = Fonts.bold(size: 24)
 
         return v

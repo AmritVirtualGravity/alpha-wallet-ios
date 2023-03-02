@@ -80,7 +80,7 @@ class SwapRouteSummaryView: UIView {
     }
 
     private func bind(viewModel: SwapRouteSummaryViewModel) {
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         let output = viewModel.transform(input: .init())
         output.viewState.sink { [weak self] state in

@@ -11,15 +11,15 @@ struct GroupActivityCellViewModel {
     let groupType: GroupType
 
     var contentsBackgroundColor: UIColor {
-        Configuration.Color.Semantic.tableViewCellBackground
+        ConfigurationLif3.Color.Semantic.tableViewCellBackground
     }
 
     var backgroundColor: UIColor {
-        Configuration.Color.Semantic.tableViewCellBackground
+        ConfigurationLif3.Color.Semantic.tableViewCellBackground
     }
 
     var titleTextColor: UIColor {
-        Configuration.Color.Semantic.defaultForegroundText
+        ConfigurationLif3.Color.Semantic.defaultForegroundText
     }
 
     var title: NSAttributedString {

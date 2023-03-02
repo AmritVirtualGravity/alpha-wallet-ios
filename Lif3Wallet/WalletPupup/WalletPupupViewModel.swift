@@ -9,5 +9,5 @@ import UIKit
 
 struct WalletPupupViewModel {
     var actions: [PupupAction] = [.swap, .send, .receive, .buy]
-    var backbroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
+    var backbroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 }

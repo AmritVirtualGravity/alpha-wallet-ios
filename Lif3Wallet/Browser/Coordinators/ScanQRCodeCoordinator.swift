@@ -26,7 +26,7 @@ final class ScanQRCodeCoordinator: NSObject, Coordinator {
             showTorchButton: true,
             showMyQRCodeButton: shouldShowMyQRCodeButton,
             chooseFromPhotoLibraryButtonTitle: R.string.localizable.photos(),
-            bordersColor: Configuration.Color.Semantic.qrCodeRectBorders,
+            bordersColor: ConfigurationLif3.Color.Semantic.qrCodeRectBorders,
             messageText: R.string.localizable.qrCodeTitle(),
             torchTitle: R.string.localizable.light(),
             torchImage: R.image.light(),

@@ -27,7 +27,7 @@ struct AccountViewModel {
     var balance: NSAttributedString {
         return .init(string: accountRowViewModel.balance.totalAmountString, attributes: [
             .font: Fonts.bold(size: 20),
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
         ])
     }
 
@@ -38,7 +38,7 @@ struct AccountViewModel {
     var addressOrEnsName: NSAttributedString {
         return .init(string: accountRowViewModel.addressOrEnsName, attributes: [
             .font: Fonts.regular(size: 12),
-            .foregroundColor: Configuration.Color.Semantic.defaultAttributedString
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultAttributedString
         ])
     }
 

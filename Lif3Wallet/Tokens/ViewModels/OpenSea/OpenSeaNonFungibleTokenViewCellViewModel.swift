@@ -10,14 +10,14 @@ struct OpenSeaNonFungibleTokenViewCellViewModel {
     var assetsCountAttributedString: NSAttributedString {
         return .init(string: "\(token.nonZeroBalance.count.toString()) \(token.symbol)", attributes: [
             .font: Fonts.regular(size: 15),
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
         ])
     }
 
     var titleAttributedString: NSAttributedString {
         return .init(string: token.tokenScriptOverrides?.titleInPluralForm ?? "", attributes: [
             .font: Fonts.regular(size: 20),
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
         ])
     }
     var tokenIcon: Subscribable<TokenImage> {
@@ -29,11 +29,11 @@ struct OpenSeaNonFungibleTokenViewCellViewModel {
     }
 
     var backgroundColor: UIColor {
-        return Configuration.Color.Semantic.collectionViewBackground
+        return ConfigurationLif3.Color.Semantic.collectionViewBackground
     }
 
     var contentsBackgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
     
     var contentsCornerRadius: CGFloat {

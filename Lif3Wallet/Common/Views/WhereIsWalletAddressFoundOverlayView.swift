@@ -14,7 +14,7 @@ class WhereIsWalletAddressFoundOverlayView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = Configuration.Color.Semantic.overlayBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.overlayBackground
 
         let blurEffect = UIBlurEffect(style: .regular)
         let blurView = UIVisualEffectView(effect: blurEffect)
@@ -48,7 +48,7 @@ class WhereIsWalletAddressFoundOverlayView: UIView {
             let maskPath = UIBezierPath(rect: UIScreen.main.bounds)
             maskPath.append(clipPath.reversing())
             let mask = CAShapeLayer()
-            mask.backgroundColor = Configuration.Color.Semantic.dangerBackground.cgColor
+            mask.backgroundColor = ConfigurationLif3.Color.Semantic.dangerBackground.cgColor
             mask.path = maskPath.cgPath
             layer.mask = mask
         }
@@ -115,16 +115,16 @@ private class Dialog: UIView {
     }
 
     func configure() {
-        backgroundColor = Configuration.Color.Semantic.dialogBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.dialogBackground
 
         titleLabel.font = Fonts.regular(size: 24)
-        titleLabel.textColor = Configuration.Color.Semantic.defaultForegroundText
+        titleLabel.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
         titleLabel.textAlignment = .center
         titleLabel.text = R.string.localizable.onboardingNewWalletBackupWalletTitle()
 
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = Fonts.regular(size: 18)
-        descriptionLabel.textColor = Configuration.Color.Semantic.defaultSubtitleText
+        descriptionLabel.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
         descriptionLabel.textAlignment = .center
         descriptionLabel.text = R.string.localizable.onboardingNewWalletBackupWalletDescription()
 

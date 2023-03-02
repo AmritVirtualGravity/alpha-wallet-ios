@@ -19,7 +19,7 @@ class TransactionConfirmationViewController: UIViewController {
     private let separatorLine: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Configuration.Color.Semantic.popupSeparator
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.popupSeparator
         return view
     }()
     private let loadingIndicatorView = ActivityIndicatorControl()
@@ -151,7 +151,7 @@ class TransactionConfirmationViewController: UIViewController {
 
         buttonsBar.configure()
         let button = buttonsBar.buttons[0]
-        button.shrinkBorderColor = Configuration.Color.Semantic.loadingIndicatorBorder
+        button.shrinkBorderColor = ConfigurationLif3.Color.Semantic.loadingIndicatorBorder
         button.setTitle(viewModel.confirmationButtonTitle, for: .normal)
         button.addTarget(self, action: #selector(confirmButtonSelected), for: .touchUpInside)
 

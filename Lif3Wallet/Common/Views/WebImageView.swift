@@ -29,7 +29,7 @@ final class FixedContentModeImageView: UIImageView {
         contentMode = fixedContentMode
         layer.masksToBounds = true
         clipsToBounds = true
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         cornerRadius = rounding.cornerRadius(view: self)
     }

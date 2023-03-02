@@ -45,7 +45,7 @@ class SupportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         
         bind(viewModel: viewModel)
     }
@@ -85,7 +85,7 @@ fileprivate extension SupportViewController {
         return SupportViewModel.DataSource(tableView: tableView, cellProvider: { tableView, indexPath, viewModel in
             let cell: SettingTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configure(viewModel: viewModel)
-            cell.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+            cell.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
             return cell
         })

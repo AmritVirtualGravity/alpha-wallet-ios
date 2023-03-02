@@ -31,14 +31,14 @@ struct FungibleTokenViewCellViewModel {
 
     var titleAttributedString: NSAttributedString {
         return NSAttributedString(string: safeShortTitleInPluralForm, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
             .font: Screen.TokenCard.Font.title
         ])
     }
 
     var cryptoValueAttributedString: NSAttributedString {
         return NSAttributedString(string: amountShort + " " + symbolInPluralForm, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText,
             .font: Screen.TokenCard.Font.subtitle
         ])
     }
@@ -127,7 +127,7 @@ struct FungibleTokenViewCellViewModel {
         }()
 
         return NSAttributedString(string: fiatValue, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
             .font: Screen.TokenCard.Font.valueChangeValue
         ])
     }

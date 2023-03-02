@@ -84,7 +84,7 @@ class FungibleTokenDetailsViewController: UIViewController {
         super.viewDidLoad()
         stakeButton.addTarget(self, action: #selector(didTapStake), for: .touchUpInside)
         swapButton.addTarget(self, action: #selector(didTapSwap), for: .touchUpInside)
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
     }
 
@@ -103,7 +103,7 @@ class FungibleTokenDetailsViewController: UIViewController {
             switch each {
             case .testnet:
                 subviews += [UIView.spacer(height: 40)]
-                subviews += [UIView.spacer(backgroundColor: Configuration.Color.Semantic.tableViewSeparator)]
+                subviews += [UIView.spacer(backgroundColor: ConfigurationLif3.Color.Semantic.tableViewSeparator)]
 
                 let view = TestnetTokenInfoView()
                 view.configure(viewModel: .init())
@@ -113,7 +113,7 @@ class FungibleTokenDetailsViewController: UIViewController {
                 subviews += [chartView]
 
                 subviews += [UIView.spacer(height: 10)]
-                subviews += [UIView.spacer(backgroundColor: Configuration.Color.Semantic.tableViewSeparator)]
+                subviews += [UIView.spacer(backgroundColor: ConfigurationLif3.Color.Semantic.tableViewSeparator)]
                 subviews += [UIView.spacer(height: 10)]
             case .field(let viewModel):
                 let view = TokenAttributeView(indexPath: IndexPath(row: 0, section: 0))

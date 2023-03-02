@@ -24,14 +24,14 @@ class SettingViewHeader: UIView {
     private let topSeparator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
         return view
     }()
 
     private let bottomSperator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
         return view
     }()
 

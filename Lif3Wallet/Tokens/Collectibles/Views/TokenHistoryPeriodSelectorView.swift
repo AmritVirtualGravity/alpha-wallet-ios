@@ -13,11 +13,11 @@ protocol TokenHistoryPeriodSelectorViewDelegate: class {
 
 struct TokenHistoryPeriodSelectorViewModel {
     var titles: [String]
-    let selectedStateBackgroundColor: UIColor = Configuration.Color.Semantic.periodButtonSelectedBackground
-    let normalStateBackgroundColor: UIColor = Configuration.Color.Semantic.periodButtonNormalBackground
+    let selectedStateBackgroundColor: UIColor = ConfigurationLif3.Color.Semantic.periodButtonSelectedBackground
+    let normalStateBackgroundColor: UIColor = ConfigurationLif3.Color.Semantic.periodButtonNormalBackground
 
-    let selectedStateTextColor: UIColor = Configuration.Color.Semantic.periodButtonSelectedText
-    let normalStateTextColor: UIColor = Configuration.Color.Semantic.periodButtonNormalText
+    let selectedStateTextColor: UIColor = ConfigurationLif3.Color.Semantic.periodButtonSelectedText
+    let normalStateTextColor: UIColor = ConfigurationLif3.Color.Semantic.periodButtonNormalText
 }
 
 class TokenHistoryPeriodSelectorView: UIView {

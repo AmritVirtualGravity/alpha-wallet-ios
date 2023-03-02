@@ -12,7 +12,7 @@ class AccountViewCell: UITableViewCell {
         let indicator = UIView()
         indicator.layer.cornerRadius = DataEntry.Metric.SelectionIndicator.width / 2.0
         indicator.borderWidth = 0.0
-        indicator.backgroundColor = Configuration.Color.Semantic.indicator
+        indicator.backgroundColor = ConfigurationLif3.Color.Semantic.indicator
         NSLayoutConstraint.activate([
             indicator.widthAnchor.constraint(equalToConstant: DataEntry.Metric.SelectionIndicator.width),
             indicator.heightAnchor.constraint(equalToConstant: DataEntry.Metric.SelectionIndicator.height)
@@ -28,7 +28,7 @@ class AccountViewCell: UITableViewCell {
         selectionStyle = .none
         isUserInteractionEnabled = true
         addressOrEnsName.lineBreakMode = .byTruncatingMiddle
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         let leftStackView = [
             [balanceLabel, apprecation24hourLabel].asStackView(spacing: 10),

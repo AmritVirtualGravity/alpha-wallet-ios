@@ -42,7 +42,7 @@ struct ImportMagicTokenViewControllerViewModel {
     }
 
     var activityIndicatorColor: UIColor {
-        return Configuration.Color.Semantic.defaultIcon
+        return ConfigurationLif3.Color.Semantic.defaultIcon
     }
     var showActivityIndicator: Bool {
         switch state {
@@ -192,9 +192,9 @@ struct ImportMagicTokenViewControllerViewModel {
 
     var statusColor: UIColor {
         if case .failed = state {
-            return Configuration.Color.Semantic.fail
+            return ConfigurationLif3.Color.Semantic.fail
         } else {
-            return Configuration.Color.Semantic.pass
+            return ConfigurationLif3.Color.Semantic.pass
         }
     }
 
@@ -211,7 +211,7 @@ struct ImportMagicTokenViewControllerViewModel {
     }
 
     var ethCostLabelLabelColor: UIColor {
-        return Configuration.Color.Semantic.defaultForegroundText
+        return ConfigurationLif3.Color.Semantic.defaultForegroundText
     }
 
     var ethCostLabelLabelFont: UIFont {
@@ -229,7 +229,7 @@ struct ImportMagicTokenViewControllerViewModel {
     }
 
     var ethCostLabelColor: UIColor {
-        return Configuration.Color.Semantic.defaultForegroundText
+        return ConfigurationLif3.Color.Semantic.defaultForegroundText
     }
 
     var ethCostLabelFont: UIFont {
@@ -241,7 +241,7 @@ struct ImportMagicTokenViewControllerViewModel {
     }
 
     var dollarCostLabelLabelColor: UIColor {
-        return Configuration.Color.Semantic.defaultForegroundText
+        return ConfigurationLif3.Color.Semantic.defaultForegroundText
     }
 
     var dollarCostLabelLabelFont: UIFont {
@@ -261,11 +261,11 @@ struct ImportMagicTokenViewControllerViewModel {
     }
 
     var dollarCostLabelBackgroundColor: UIColor {
-        return Configuration.Color.Semantic.tableViewSpecialBackground
+        return ConfigurationLif3.Color.Semantic.tableViewSpecialBackground
     }
 
     var dollarCostLabelColor: UIColor {
-        return Configuration.Color.Semantic.alternativeText
+        return ConfigurationLif3.Color.Semantic.alternativeText
     }
 
     var dollarCostLabelFont: UIFont {

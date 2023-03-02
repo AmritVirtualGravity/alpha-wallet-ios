@@ -242,7 +242,7 @@ class AppCoordinator: NSObject, Coordinator {
             legacyFileBasedKeystore: legacyFileBasedKeystore)
 
         let navigationController: UINavigationController = .withOverridenBarAppearence()
-        navigationController.view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        navigationController.view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         let coordinator = AppCoordinator(
             window: window,

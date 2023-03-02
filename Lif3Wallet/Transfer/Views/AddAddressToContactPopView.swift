@@ -39,7 +39,7 @@ class AddAddressToContactPopView: UIView {
     private let button: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 14.0
-        button.backgroundColor = Configuration.Color.Semantic.primaryButtonBackground
+        button.backgroundColor = ConfigurationLif3.Color.Semantic.primaryButtonBackground
         return button
     }()
 

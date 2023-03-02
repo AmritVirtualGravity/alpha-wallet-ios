@@ -19,9 +19,9 @@ struct SettingTableViewCellViewModel {
     }
 
     var titleFont: UIFont = Fonts.regular(size: 15)
-    var titleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
+    var titleTextColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont
     var subTitleFont: UIFont = Fonts.regular(size: 12)
-    var subTitleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellSecondaryFont
+    var subTitleTextColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewCellSecondaryFont
 }
 
 extension SettingTableViewCellViewModel: Hashable {

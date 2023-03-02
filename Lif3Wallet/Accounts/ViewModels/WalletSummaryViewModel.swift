@@ -50,7 +50,7 @@ struct WalletSummaryViewModel: Hashable {
     }
 
     var backgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 }
 
@@ -62,7 +62,7 @@ extension WalletSummaryViewModel {
 
             return [
                 .font: Fonts.bold(size: 36),
-                .foregroundColor: Configuration.Color.Semantic.labelTextActive,
+                .foregroundColor: ConfigurationLif3.Color.Semantic.labelTextActive,
                 .paragraphStyle: style,
             ]
         }
@@ -109,11 +109,11 @@ extension TickerHelper {
     func valueChangeValueColor(from value: Double?) -> UIColor {
         switch change24h(from: value) {
         case .appreciate:
-            return Configuration.Color.Semantic.appreciation
+            return ConfigurationLif3.Color.Semantic.appreciation
         case .depreciate:
-            return Configuration.Color.Semantic.depreciation
+            return ConfigurationLif3.Color.Semantic.depreciation
         case .none:
-            return Configuration.Color.Semantic.defaultSubtitleText
+            return ConfigurationLif3.Color.Semantic.defaultSubtitleText
         }
     }
 }

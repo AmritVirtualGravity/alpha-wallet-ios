@@ -22,7 +22,7 @@ struct LocaleViewModel {
     }
 
     var backgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     var localeFont: UIFont {

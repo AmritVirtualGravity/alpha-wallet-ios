@@ -37,7 +37,7 @@ class ShowSeedPhraseViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = R.string.localizable.showSeedPhraseDescription()
-        label.textColor = Configuration.Color.Semantic.tableViewCellPrimaryFont.withAlphaComponent(0.6)
+        label.textColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont.withAlphaComponent(0.6)
         label.font = Fonts.regular(size: 17)
         label.textAlignment = .center
         return label
@@ -239,10 +239,10 @@ class ShowSeedPhraseViewController: UIViewController {
     }
 
     func configure() {
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         subtitleLabel.textAlignment = .center
-        subtitleLabel.textColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
+        subtitleLabel.textColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont
         subtitleLabel.font = viewModel.subtitleFont
         //Important for smaller screens
         subtitleLabel.numberOfLines = 0

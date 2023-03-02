@@ -12,9 +12,9 @@ class ExportJsonKeystoreFileView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
-        label.backgroundColor = Configuration.Color.Semantic.defaultInverseText
+        label.backgroundColor = ConfigurationLif3.Color.Semantic.defaultInverseText
         label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: Fonts.regular(size: 13.0))
-        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
         label.text = R.string.localizable.settingsAdvancedExportJSONKeystoreFileLabel()
         label.heightAnchor.constraint(equalToConstant: 22.0).isActive = true
 
@@ -24,10 +24,10 @@ class ExportJsonKeystoreFileView: UIView {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.adjustsFontForContentSizeCategory = true
-        textView.backgroundColor = Configuration.Color.Semantic.tableViewAccessoryBackground
+        textView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewAccessoryBackground
         textView.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: Fonts.regular(size: 17.0))
-        textView.textColor = Configuration.Color.Semantic.defaultHeadlineText
-        textView.borderColor = Configuration.Color.Semantic.textViewFailed
+        textView.textColor = ConfigurationLif3.Color.Semantic.defaultHeadlineText
+        textView.borderColor = ConfigurationLif3.Color.Semantic.textViewFailed
         textView.cornerRadius = 5.0
         textView.borderWidth = 1.0
         textView.isEditable = false
@@ -59,10 +59,10 @@ class ExportJsonKeystoreFileView: UIView {
     }
 
     private func configureView() {
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         let edgeInsets = UIEdgeInsets(top: 16.0, left: 0.0, bottom: 16.0, right: 0.0)
         let footerBar = ButtonsBarBackgroundView(buttonsBar: buttonsBar, edgeInsets: edgeInsets, separatorHeight: 1.0)
-        footerBar.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        footerBar.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         addSubview(label)
         addSubview(textView)

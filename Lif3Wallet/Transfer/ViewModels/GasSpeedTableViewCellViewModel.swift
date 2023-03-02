@@ -49,12 +49,12 @@ struct GasSpeedViewModel {
     var titleAttributedString: NSAttributedString? {
         if isSelected {
             return NSAttributedString(string: title, attributes: [
-                .foregroundColor: Configuration.Color.Semantic.defaultTitleText,
+                .foregroundColor: ConfigurationLif3.Color.Semantic.defaultTitleText,
                 .font: Fonts.semibold(size: 17)
             ])
         } else {
             return NSAttributedString(string: title, attributes: [
-                .foregroundColor: Configuration.Color.Semantic.defaultTitleText,
+                .foregroundColor: ConfigurationLif3.Color.Semantic.defaultTitleText,
                 .font: Fonts.regular(size: 17)
             ])
         }
@@ -64,21 +64,21 @@ struct GasSpeedViewModel {
         guard let estimatedTime = estimatedTime else { return nil }
 
         return NSAttributedString(string: estimatedTime, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultHeadlineText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultHeadlineText,
             .font: Fonts.regular(size: 15)
         ])
     }
 
     var detailsAttributedString: NSAttributedString? {
         return NSAttributedString(string: gasFeeString, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText,
             .font: Fonts.regular(size: 15)
         ])
     }
 
     var gasPriceAttributedString: NSAttributedString? {
         NSAttributedString(string: gasPriceString, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText,
             .font: Fonts.regular(size: 13)
         ])
     }

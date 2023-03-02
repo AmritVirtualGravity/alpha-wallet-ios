@@ -76,9 +76,9 @@ struct TransactionRowCellViewModel {
     var contentsBackgroundColor: UIColor {
         switch transactionRow.state {
         case .completed, .error, .unknown, .failed:
-            return Configuration.Color.Semantic.defaultViewBackground
+            return ConfigurationLif3.Color.Semantic.defaultViewBackground
         case .pending:
-            return Configuration.Color.Semantic.pendingState
+            return ConfigurationLif3.Color.Semantic.pendingState
         }
     }
 

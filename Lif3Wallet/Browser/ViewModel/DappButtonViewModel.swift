@@ -9,7 +9,7 @@ struct DappButtonViewModel {
     }
 
     var textColor: UIColor? {
-        return Configuration.Color.Semantic.defaultTitleText
+        return ConfigurationLif3.Color.Semantic.defaultTitleText
     }
 
     var imageForEnabledMode: UIImage? {

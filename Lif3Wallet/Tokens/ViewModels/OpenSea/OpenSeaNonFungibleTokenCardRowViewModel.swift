@@ -21,7 +21,7 @@ struct OpenSeaNonFungibleTokenCardRowViewModel {
     }
 
     var contentsBackgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     var bigImageBackgroundColor: UIColor {
@@ -38,11 +38,11 @@ struct OpenSeaNonFungibleTokenCardRowViewModel {
     }
 
     var titleColor: UIColor {
-        return Configuration.Color.Semantic.defaultForegroundText
+        return ConfigurationLif3.Color.Semantic.defaultForegroundText
     }
 
     var subtitleColor: UIColor {
-        return Configuration.Color.Semantic.secondary
+        return ConfigurationLif3.Color.Semantic.secondary
     }
 
     var titleFont: UIFont {

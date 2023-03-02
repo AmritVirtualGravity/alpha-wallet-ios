@@ -83,13 +83,13 @@ final class SwapTokensViewModel: NSObject {
         text: "From".uppercased(),
         showTopSeparatorLine: false,
         showBottomSeparatorLine: false,
-        backgroundColor: Configuration.Color.Semantic.defaultViewBackground)
+        backgroundColor: ConfigurationLif3.Color.Semantic.defaultViewBackground)
 
     let toHeaderViewModel = SendViewSectionHeaderViewModel(
         text: "To".uppercased(),
         showTopSeparatorLine: false,
         showBottomSeparatorLine: false,
-        backgroundColor: Configuration.Color.Semantic.defaultViewBackground)
+        backgroundColor: ConfigurationLif3.Color.Semantic.defaultViewBackground)
 
     var title: String = "Swap"
 

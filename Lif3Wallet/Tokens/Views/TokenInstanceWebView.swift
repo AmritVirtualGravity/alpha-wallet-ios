@@ -92,8 +92,8 @@ class TokenInstanceWebView: UIView, TokenScriptLocalRefsSource {
         ])
 
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-        webView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        webView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     required init?(coder aDecoder: NSCoder) {

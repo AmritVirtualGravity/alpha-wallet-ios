@@ -67,7 +67,7 @@ class DappsHomeViewControllerHeaderView: UICollectionReusableView {
         historyButton.configure(viewModel: .init(image: viewModel.historyButtonImage, title: viewModel.historyButtonTitle))
         bookMarksLabel.text = viewModel.bookmarksTitle
         bookMarksLabel.textAlignment = .left
-        bookMarksLabel.textColor = Configuration.Color.Semantic.defaultTitleText
+        bookMarksLabel.textColor = ConfigurationLif3.Color.Semantic.defaultTitleText
         bookMarksLabel.font = viewModel.font
         if viewModel.isEditing {
             exitEditingModeButton.isHidden = false

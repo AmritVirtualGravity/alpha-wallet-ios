@@ -19,7 +19,7 @@ class SendTransactionErrorViewController: UIViewController {
         let v = UILabel()
         v.numberOfLines = 0
         v.textAlignment = .center
-        v.textColor = Configuration.Color.Semantic.defaultForegroundText
+        v.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
         v.font = Fonts.regular(size: 28)
         return v
     }()
@@ -28,7 +28,7 @@ class SendTransactionErrorViewController: UIViewController {
         let v = UILabel()
         v.numberOfLines = 0
         v.textAlignment = .center
-        v.textColor = Configuration.Color.Semantic.defaultHeadlineText
+        v.textColor = ConfigurationLif3.Color.Semantic.defaultHeadlineText
         v.font = Fonts.regular(size: 17)
         return v
     }()
@@ -94,7 +94,7 @@ class SendTransactionErrorViewController: UIViewController {
     }
 
     private func configure() {
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
@@ -109,7 +109,7 @@ class SendTransactionErrorViewController: UIViewController {
         if let rectifyErrorTitle = viewModel.rectifyErrorButtonTitle {
             buttonsBar.configure()
             let button = buttonsBar.buttons[0]
-            button.shrinkBorderColor = Configuration.Color.Semantic.loadingIndicatorBorder
+            button.shrinkBorderColor = ConfigurationLif3.Color.Semantic.loadingIndicatorBorder
             button.setTitle(rectifyErrorTitle, for: .normal)
             button.addTarget(self, action: #selector(rectifyErrorButtonTapped), for: .touchUpInside)
             footerBar.isHidden = false

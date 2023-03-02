@@ -19,12 +19,12 @@ class RequestViewModel {
     private let account: Wallet
     private let domainResolutionService: DomainResolutionServiceType
 
-    let backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
+    let backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
     var instructionAttributedString: NSAttributedString {
         NSAttributedString(string: R.string.localizable.aWalletAddressScanInstructions(), attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: Configuration.Color.Semantic.labelTextActive
+            .foregroundColor: ConfigurationLif3.Color.Semantic.labelTextActive
         ])
     }
     

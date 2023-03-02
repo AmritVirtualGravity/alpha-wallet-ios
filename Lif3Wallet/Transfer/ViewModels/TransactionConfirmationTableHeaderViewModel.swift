@@ -40,7 +40,7 @@ struct TransactionConfirmationHeaderViewModel {
         guard let title = title else { return nil }
         
         return NSAttributedString(string: title, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
             .font: Fonts.regular(size: 17)
         ])
     }
@@ -49,7 +49,7 @@ struct TransactionConfirmationHeaderViewModel {
         guard let name = headerName else { return nil }
 
         return NSAttributedString(string: name, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText,
             .font: Fonts.regular(size: 13)
         ])
     }
@@ -58,13 +58,13 @@ struct TransactionConfirmationHeaderViewModel {
         guard let details = details else { return nil }
 
         return NSAttributedString(string: details, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText,
             .font: Fonts.regular(size: 15)
         ])
     }
 
     var backgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     init(title: Title, headerName: String?, details: String? = nil, titleIcon: Subscribable<UIImage> = .init(nil), configuration: TransactionConfirmationHeaderView.Configuration) {

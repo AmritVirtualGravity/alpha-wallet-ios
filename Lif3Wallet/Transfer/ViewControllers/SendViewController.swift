@@ -44,7 +44,7 @@ class SendViewController: UIViewController {
         tableView.register(ContactTableViewCell.self)
 //        tableView.separatorStyle = .singleLine
         tableView.separatorColor =  .white.withAlphaComponent(0.1)
-        tableView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        tableView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -134,7 +134,7 @@ class SendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addToContactButton.addTarget(self, action: #selector(addContactButtonSelected), for: .touchUpInside)
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         amountHeader.configure(viewModel: viewModel.amountViewModel)
         recipientHeader.configure(viewModel: viewModel.recipientViewModel)
         contactHeader.configure(viewModel: viewModel.contactViewModel)

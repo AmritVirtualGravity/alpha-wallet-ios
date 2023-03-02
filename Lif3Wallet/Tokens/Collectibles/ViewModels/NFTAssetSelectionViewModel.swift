@@ -35,7 +35,7 @@ class NFTAssetSelectionViewModel {
             filter(tokenHolders: tokenHolders)
         }
     }
-    var headerBackgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
+    var headerBackgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
     let actions: [NFTAssetSelectionViewModel.ToolbarAction] = [.clear, .selectAll, .send]
 
     var title: String {
@@ -46,7 +46,7 @@ class NFTAssetSelectionViewModel {
         }
     }
 
-    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewBackground
+    var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewBackground
 
     var isSearchActive: Bool = false
 

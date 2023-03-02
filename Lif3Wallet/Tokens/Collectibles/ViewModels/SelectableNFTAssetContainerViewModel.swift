@@ -17,7 +17,7 @@ struct SelectableNFTAssetContainerViewModel {
     }
 
     var contentsBackgroundColor: UIColor? {
-        return selectionViewModel.isSelected ? Configuration.Color.Semantic.tableViewSpecialBackground : Configuration.Color.Semantic.tableViewCellBackground
+        return selectionViewModel.isSelected ? ConfigurationLif3.Color.Semantic.tableViewSpecialBackground : ConfigurationLif3.Color.Semantic.tableViewCellBackground
     }
 
     var cardAmountSelectionToolbarViewModel: SingleTokenCardAmountSelectionToolbarViewModel {

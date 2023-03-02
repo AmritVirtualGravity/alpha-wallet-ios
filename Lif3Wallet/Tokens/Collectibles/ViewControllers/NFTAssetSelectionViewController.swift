@@ -210,7 +210,7 @@ extension NFTAssetSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let tokenHolder = viewModel.selectableTokenHolder(at: section)
         let view: NFTAssetSelectionSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
-        view.configure(viewModel: .init(tokenHolder: tokenHolder, backgroundColor: Configuration.Color.Semantic.tableViewAccessoryBackground))
+        view.configure(viewModel: .init(tokenHolder: tokenHolder, backgroundColor: ConfigurationLif3.Color.Semantic.tableViewAccessoryBackground))
         view.delegate = self
         view.section = section
 
@@ -338,10 +338,10 @@ extension NFTAssetSelectionViewController {
     struct SelectAllAssetsViewModel {
         let text: String
 
-        var separatorColor: UIColor = Configuration.Color.Semantic.tableViewSeparator
-        var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
+        var separatorColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+        var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         var titleTextFont = Fonts.bold(size: 15)
-        var titleTextColor = Configuration.Color.Semantic.defaultSubtitleText
+        var titleTextColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
         var isSelectAllHidden: Bool = false
     }
 

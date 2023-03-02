@@ -6,7 +6,7 @@ import UIKit
 class RoundedBackground: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 //        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
         //No longer rounded. We are keeping this class and its instance around in case the visual design changes

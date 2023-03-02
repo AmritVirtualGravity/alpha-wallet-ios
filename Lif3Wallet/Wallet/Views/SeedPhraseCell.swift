@@ -33,7 +33,7 @@ class SeedPhraseCell: UICollectionViewCell {
     }
 
     func configure(viewModel: SeedPhraseCellViewModel) {
-        borderColor = Configuration.Color.Semantic.tableViewCellPrimaryFont.withAlphaComponent(0.3)
+        borderColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont.withAlphaComponent(0.3)
         borderWidth = 1
         cornerRadius = 7
 
@@ -59,6 +59,6 @@ class SeedPhraseCell: UICollectionViewCell {
 //            label.textColor = viewModel.textColor
 //        }
         
-        label.textColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
+        label.textColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont
     }
 }

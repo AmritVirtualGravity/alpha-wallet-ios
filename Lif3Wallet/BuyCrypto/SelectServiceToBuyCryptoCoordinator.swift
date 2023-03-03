@@ -8,6 +8,7 @@
 import UIKit
 import AlphaWalletFoundation
 import Ramp
+import AlphaWalletCore
 
 protocol SelectServiceToBuyCryptoCoordinatorDelegate: AnyObject, CanOpenURL {
     func selectBuyService(_ result: Result<Void, BuyCryptoError>, in coordinator: SelectServiceToBuyCryptoCoordinator)
@@ -20,7 +21,6 @@ class SelectServiceToBuyCryptoCoordinator: Coordinator {
     private let source: Analytics.BuyCryptoSource
     private let analytics: AnalyticsLogger
     private let buyTokenProvider: BuyTokenProvider
-
     var coordinators: [Coordinator] = []
     weak var delegate: SelectServiceToBuyCryptoCoordinatorDelegate?
 
@@ -55,7 +55,7 @@ class SelectServiceToBuyCryptoCoordinator: Coordinator {
         let isFromPopAction = UserDefaults.standard.bool(forKey: "FromPupAction")
        
         configuration.swapAsset = isFromPopAction ? "" :  getSwapAsset(for: token)
-        configuration.hostApiKey = "k4jnfagsmjemjbfaxocxsnbtq2g76wfyvkdv42cs"
+        configuration.hostApiKey = Constants.Credentials.rampApiKey
         configuration.userAddress = wallet.address.eip55String
         let ramp = try! RampViewController(configuration: configuration)
         ramp.delegate = self

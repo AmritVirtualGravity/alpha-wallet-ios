@@ -10,7 +10,7 @@ struct AddAddressToContactPopViewModel {
     let titleText: String = "Name"
     var font: UIFont = Fonts.semibold(size: 15)
     var textColor: UIColor = .white
-    var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
+    var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
     let buttonTitleText : String = "Add To Contact"
     let placeHolder: String = "eg. Tom Henderson"
 }

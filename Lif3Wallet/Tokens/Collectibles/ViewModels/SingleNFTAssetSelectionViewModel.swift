@@ -48,7 +48,7 @@ struct SingleNFTAssetSelectionViewModel {
 
         return .init(string: "\(amount)", attributes: [
             .font: Fonts.semibold(size: 20),
-            .foregroundColor: Configuration.Color.Semantic.defaultInverseText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultInverseText
         ])
     }
 }

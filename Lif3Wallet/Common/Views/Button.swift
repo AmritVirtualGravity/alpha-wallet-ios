@@ -31,7 +31,7 @@ enum ButtonStyle {
     var backgroundColor: UIColor {
         switch self {
         case .solid, .squared: return Colors.appTint
-        case .border, .borderless: return Configuration.Color.Semantic.defaultViewBackground
+        case .border, .borderless: return ConfigurationLif3.Color.Semantic.defaultViewBackground
         case .system: return .clear
         case .special: return Colors.concrete
         case .green: return ButtonsBarViewModel.primaryButton.buttonBackgroundColor
@@ -42,7 +42,7 @@ enum ButtonStyle {
         switch self {
         case .solid, .squared: return Colors.appTint
         case .border: return Colors.appTint
-        case .borderless: return Configuration.Color.Semantic.defaultViewBackground
+        case .borderless: return ConfigurationLif3.Color.Semantic.defaultViewBackground
         case .system: return .clear
         case .special: return Colors.concrete
         case .green: return ButtonsBarViewModel.primaryButton.buttonBackgroundColor
@@ -72,7 +72,7 @@ enum ButtonStyle {
     var textColor: UIColor {
         switch self {
         case .solid, .squared: return Colors.appWhite
-        case .border, .borderless, .system, .special: return Configuration.Color.Semantic.defaultForegroundText
+        case .border, .borderless, .system, .special: return ConfigurationLif3.Color.Semantic.defaultForegroundText
         case .green: return ButtonsBarViewModel.primaryButton.buttonTitleColor
         }
     }
@@ -81,14 +81,14 @@ enum ButtonStyle {
         switch self {
         case .solid, .squared: return UIColor(white: 1, alpha: 0.8)
         case .border: return Colors.appWhite
-        case .borderless, .system, .special: return Configuration.Color.Semantic.defaultViewBackground
+        case .borderless, .system, .special: return ConfigurationLif3.Color.Semantic.defaultViewBackground
         case .green: return Colors.appWhite.withAlphaComponent(0.8)
         }
     }
 
     var borderColor: UIColor {
         switch self {
-        case .solid, .squared, .border: return Configuration.Color.Semantic.defaultButtonBorder
+        case .solid, .squared, .border: return ConfigurationLif3.Color.Semantic.defaultButtonBorder
         case .borderless, .system, .special: return .clear
         case .green: return ButtonsBarViewModel.primaryButton.buttonBorderColor
         }

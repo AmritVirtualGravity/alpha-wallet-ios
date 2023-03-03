@@ -17,11 +17,11 @@ struct ActivityViewModel {
     }
 
     var backgroundColor: UIColor {
-        Configuration.Color.Semantic.defaultViewBackground
+        ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     var titleTextColor: UIColor {
-        Configuration.Color.Semantic.defaultTitleText
+        ConfigurationLif3.Color.Semantic.defaultTitleText
     }
 
     var titleFont: UIFont {
@@ -99,7 +99,7 @@ struct ActivityViewModel {
     }
 
     var subTitleTextColor: UIColor {
-        Configuration.Color.Semantic.defaultSubtitleText
+        ConfigurationLif3.Color.Semantic.defaultSubtitleText
     }
 
     var subTitleFont: UIFont {
@@ -111,7 +111,7 @@ struct ActivityViewModel {
     }
 
     var timestampColor: UIColor {
-        Configuration.Color.Semantic.defaultSubtitleText
+        ConfigurationLif3.Color.Semantic.defaultSubtitleText
     }
 
     var timestamp: String {

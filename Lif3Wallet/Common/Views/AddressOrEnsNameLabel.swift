@@ -105,8 +105,8 @@ class AddressOrEnsNameLabel: UILabel {
         setContentHuggingPriority(.required, for: .horizontal)
         setContentCompressionResistancePriority(.required, for: .horizontal)
 
-        textColor = Configuration.Color.Semantic.ensText
-        font = Configuration.Font.label
+        textColor = ConfigurationLif3.Color.Semantic.ensText
+        font = ConfigurationLif3.Font.label
         textAlignment = .center
         clear()
     }

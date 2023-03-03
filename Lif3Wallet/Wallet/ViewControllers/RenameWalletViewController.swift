@@ -60,7 +60,7 @@ class RenameWalletViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         buttonsBar.buttons[0].setTitle(R.string.localizable.walletRenameSave(), for: .normal)
         
         bind(viewModel: viewModel)

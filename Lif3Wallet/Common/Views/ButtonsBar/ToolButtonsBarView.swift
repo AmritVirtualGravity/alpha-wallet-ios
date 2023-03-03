@@ -25,7 +25,7 @@ class ToolButtonsBarView: UIView, ButtonsBarViewType {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         addSubview(buttonsBar)
 
         NSLayoutConstraint.activate([buttonsBar.anchorsConstraint(to: self)])

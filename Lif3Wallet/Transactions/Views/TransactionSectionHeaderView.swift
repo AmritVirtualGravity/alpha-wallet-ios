@@ -11,7 +11,7 @@ class TransactionSectionHeaderView: UITableViewHeaderFooterView {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.sizeToFit()
-        titleLabel.textColor = Configuration.Color.Semantic.defaultForegroundText
+        titleLabel.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
         titleLabel.font = Fonts.semibold(size: 15)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -21,8 +21,8 @@ class TransactionSectionHeaderView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-        contentView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        contentView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         contentView.addSubview(titleLabel)
 

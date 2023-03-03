@@ -40,7 +40,7 @@ class WalletSecurityLevelIndicator: UIView {
     private func configure() {
         label.textAlignment = .center
         label.font = Fonts.regular(size: 11)
-        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
         label.text = WalletSecurityLevelIndicator.convertLevelToTitle(level)
     }
 

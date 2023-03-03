@@ -8,7 +8,7 @@
 import UIKit
 import AlphaWalletFoundation
 
-fileprivate typealias CFG = Configuration
+fileprivate typealias CFG = ConfigurationLif3
 
 protocol TransactionConfirmationHeaderViewDelegate: AnyObject {
     func headerView(_ header: TransactionConfirmationHeaderView, shouldHideChildren section: Int, index: Int) -> Bool

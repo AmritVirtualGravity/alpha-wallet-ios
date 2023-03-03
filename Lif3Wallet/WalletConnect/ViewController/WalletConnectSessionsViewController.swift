@@ -71,7 +71,7 @@ class WalletConnectSessionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         if let host = emptyView {
             spinner.bringSubviewToFront(host)
@@ -131,7 +131,7 @@ extension WalletConnectSessionsViewController: UITableViewDelegate {
             completion(true)
         }
 
-        hideAction.backgroundColor = Configuration.Color.Semantic.dangerBackground
+        hideAction.backgroundColor = ConfigurationLif3.Color.Semantic.dangerBackground
         hideAction.image = R.image.hideToken()
         let configuration = UISwipeActionsConfiguration(actions: [hideAction])
         configuration.performsFirstActionWithFullSwipe = true

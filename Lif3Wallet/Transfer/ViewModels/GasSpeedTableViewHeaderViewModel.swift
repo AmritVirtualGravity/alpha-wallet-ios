@@ -16,12 +16,12 @@ struct GasSpeedTableViewHeaderViewModel {
 
     var titleAttributedString: NSAttributedString {
         return NSAttributedString(string: title, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText,
             .font: Fonts.regular(size: 13)
         ])
     }
 
     var backgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 }

@@ -3114,6 +3114,7 @@
 		08A254E5294073EF00A31193 /* BuyCrypto */ = {
 			isa = PBXGroup;
 			children = (
+				103C5BD729B0EE9C00944F2A /* Model */,
 				08A254E6294073EF00A31193 /* BuyCryptoUsingThirdPartyCoordinator.swift */,
 				08A254E7294073EF00A31193 /* SelectServiceToBuyCryptoCoordinator.swift */,
 			);
@@ -3804,6 +3805,13 @@
 				1013957229A8A052000AD3EF /* Lif3ViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		103C5BD729B0EE9C00944F2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		104E54262991153800C49760 /* Market */ = {
@@ -5001,6 +5009,7 @@
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReaderViewController/QRCodeReaderViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift/RswiftResources.framework",
+				"${BUILT_PRODUCTS_DIR}/Ramp/Ramp.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -5066,6 +5075,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReaderViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RswiftResources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Ramp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",

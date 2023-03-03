@@ -28,7 +28,7 @@ struct ShowSeedPhraseIntroductionViewModel {
         attributeString.addAttributes([
             .paragraphStyle: style,
             .font: Screen.Backup.subtitleFont,
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
             .kern: 0.0
         ], range: NSRange(location: 0, length: subtitle.count))
 
@@ -45,7 +45,7 @@ struct ShowSeedPhraseIntroductionViewModel {
         attributedString.addAttributes([
             .paragraphStyle: style,
             .font: Screen.Backup.descriptionFont,
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
             .kern: 0.0
         ], range: NSRange(location: 0, length: description.count))
 

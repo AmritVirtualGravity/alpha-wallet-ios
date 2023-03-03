@@ -180,14 +180,22 @@ final class TokensViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         view.addSubview(tableView)
+        
         tableView.addSubview(emptyTableView)
 //        view.addSubview(footerBar)
 
         NSLayoutConstraint.activate([
+//            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            //            bottomConstraint,
+            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bottomConstraint,
+
+//            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -60),
+            tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
             emptyTableView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
             emptyTableViewHeightConstraint,
 //            footerBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -669,22 +677,22 @@ extension TokensViewController.functional {
 }
 
 extension UISearchBar {
-    static func configure(searchBar: UISearchBar, backgroundColor: UIColor = Configuration.Color.Semantic.searchbarBackground) {
+    static func configure(searchBar: UISearchBar, backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.searchbarBackground) {
         if let placeholderLabel = searchBar.firstSubview(ofType: UILabel.self) {
             placeholderLabel.textColor = Colors.lightGray
         }
         if let textField = searchBar.firstSubview(ofType: UITextField.self) {
-            textField.textColor = Configuration.Color.Semantic.defaultForegroundText
+            textField.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
             if let imageView = textField.leftView as? UIImageView {
                 imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-                imageView.tintColor = Configuration.Color.Semantic.defaultForegroundText
+                imageView.tintColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
             }
         }
         //Hack to hide the horizontal separator below the search bar
         searchBar.superview?.firstSubview(ofType: UIImageView.self)?.isHidden = true
         //Remove border line
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = Configuration.Color.Semantic.borderClear.cgColor
+        searchBar.layer.borderColor = ConfigurationLif3.Color.Semantic.borderClear.cgColor
         searchBar.backgroundImage = UIImage()
         searchBar.placeholder = R.string.localizable.tokensSearchbarPlaceholder()
         searchBar.backgroundColor = backgroundColor

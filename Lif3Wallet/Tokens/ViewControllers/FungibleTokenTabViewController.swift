@@ -28,7 +28,7 @@ class FungibleTokenTabViewController: TopTabBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         updateNavigationRightBarButtons(tokenScriptFileStatusHandler: viewModel.tokenScriptFileStatusHandler)
         bind(viewModel: viewModel)
     }

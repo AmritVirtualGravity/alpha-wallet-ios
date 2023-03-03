@@ -32,7 +32,7 @@ class LocalesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     func configure(viewModel: LocalesViewModel) {

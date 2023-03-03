@@ -98,7 +98,7 @@ class SwapOptionsViewController: UIViewController {
 
 //        navigationItem.leftBarButtonItem = UIBarButtonItem.logoBarButton()
         navigationItem.rightBarButtonItem = UIBarButtonItem.closeBarButton(self, selector: #selector(closeDidSelect))
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
     } 
 
@@ -189,11 +189,11 @@ extension UITableView {
         let tableView = SelfSizingTableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .singleLine
-        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
+        tableView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewBackground
         tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
         tableView.isEditing = false
         tableView.keyboardDismissMode = .onDrag
-        tableView.separatorColor = Configuration.Color.Semantic.tableViewSeparator
+        tableView.separatorColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
         tableView.isScrollEnabled = false
 
         return tableView

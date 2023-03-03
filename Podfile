@@ -45,6 +45,7 @@ target 'Lif3Wallet' do
   pod 'WalletConnectSwift', :git => 'https://github.com/AlphaWallet/WalletConnectSwift.git', :branch => 'alphaWallet'
   pod 'Starscream', '3.1.1'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '3.x'
+  pod 'Ramp', :git => 'https://github.com/RampNetwork/ramp-sdk-ios', :tag => '4.0.0'
   
   target 'Lif3WalletTests' do
       inherit! :search_paths

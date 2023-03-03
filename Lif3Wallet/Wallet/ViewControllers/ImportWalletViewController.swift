@@ -42,8 +42,8 @@ class ImportWalletViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
-        label.font = Configuration.Font.label
-        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
+        label.font = ConfigurationLif3.Font.label
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
 
         return label
     }()
@@ -120,7 +120,7 @@ class ImportWalletViewController: UIViewController {
         label.numberOfLines = 0
         label.isHidden = false
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
         return label
     }()
 

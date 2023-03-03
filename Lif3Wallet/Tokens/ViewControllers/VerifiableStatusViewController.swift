@@ -102,7 +102,7 @@ func createTokenScriptFileStatusButton(withStatus status: TokenLevelTokenScriptD
             title = message
         }
         image = R.image.verified()
-        tintColor = Configuration.Color.Semantic.textFieldContrastText
+        tintColor = ConfigurationLif3.Color.Semantic.textFieldContrastText
     case .type2BadTokenScript(let isDebugMode, let error, let reason):
         switch reason {
         case .some(.oldTokenScriptVersion):
@@ -125,7 +125,7 @@ func createTokenScriptFileStatusButton(withStatus status: TokenLevelTokenScriptD
             title = error.localizedDescription
         }
         image = R.image.unverified()
-        tintColor = Configuration.Color.Semantic.defaultErrorText
+        tintColor = ConfigurationLif3.Color.Semantic.defaultErrorText
     }
     button.setTitle(title, for: .normal)
     button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)

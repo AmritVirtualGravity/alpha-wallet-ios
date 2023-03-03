@@ -37,8 +37,8 @@ final class SvgImageView: WKWebView {
         navigationDelegate = self
 
         isOpaque = false
-        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-        scrollView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        scrollView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     func setImage(url: URL, completion: @escaping () -> Void) {

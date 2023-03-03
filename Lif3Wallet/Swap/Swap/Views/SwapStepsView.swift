@@ -15,7 +15,7 @@ final class SwapStepsView: UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.widthAnchor.constraint(equalToConstant: 1).isActive = true
-        view.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
 
         return view
     }()
@@ -42,7 +42,7 @@ final class SwapStepsView: UIView {
             bottomLine.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomLine.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-        backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
         bind(viewModel: viewModel)
     }
 

@@ -22,8 +22,8 @@ class PasscodeCharacterView: UIView {
     private func setupView() {
         backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
-        filledImageView.image = filledImageView.image?.withTintColor(Configuration.Color.Semantic.symbol, renderingMode: .alwaysOriginal)
-        emptyImageView.image = emptyImageView.image?.withTintColor(Configuration.Color.Semantic.symbol, renderingMode: .alwaysOriginal)
+        filledImageView.image = filledImageView.image?.withTintColor(ConfigurationLif3.Color.Semantic.symbol, renderingMode: .alwaysOriginal)
+        emptyImageView.image = emptyImageView.image?.withTintColor(ConfigurationLif3.Color.Semantic.symbol, renderingMode: .alwaysOriginal)
         addSubview(filledImageView)
         addSubview(emptyImageView)
         NSLayoutConstraint.activate([

@@ -27,11 +27,11 @@ struct DappViewCellViewModel: Hashable {
     }
 
     var backgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     var imageViewShadowColor: UIColor {
-        return Configuration.Color.Semantic.shadow
+        return ConfigurationLif3.Color.Semantic.shadow
     }
 
     var imageViewShadowOffset: CGSize {
@@ -47,7 +47,7 @@ struct DappViewCellViewModel: Hashable {
     }
 
     var titleColor: UIColor {
-        return Configuration.Color.Semantic.defaultTitleText
+        return ConfigurationLif3.Color.Semantic.defaultTitleText
     }
 
     var titleFont: UIFont {
@@ -55,7 +55,7 @@ struct DappViewCellViewModel: Hashable {
     }
 
     var domainNameColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     var domainNameFont: UIFont {

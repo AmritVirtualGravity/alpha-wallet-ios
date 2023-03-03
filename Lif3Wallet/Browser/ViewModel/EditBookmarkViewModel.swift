@@ -57,7 +57,7 @@ class EditBookmarkViewModel {
     }
 
     var imageBackgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     var imagePlaceholder: UIImage {

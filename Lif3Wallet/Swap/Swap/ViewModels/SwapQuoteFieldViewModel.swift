@@ -23,7 +23,7 @@ final class SwapQuoteFieldViewModel {
     var titleAttributedString: NSAttributedString {
         NSAttributedString(string: title, attributes: [
             .font: Fonts.regular(size: 15),
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
         ])
     }
 
@@ -39,7 +39,7 @@ final class SwapQuoteFieldViewModel {
         let value = value.map { value -> NSAttributedString? in
             return NSAttributedString(string: value.replacingOccurrences(of: "\0", with: ""), attributes: [
                 .font: Fonts.regular(size: 17),
-                .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
+                .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
             ])
         }.eraseToAnyPublisher()
 

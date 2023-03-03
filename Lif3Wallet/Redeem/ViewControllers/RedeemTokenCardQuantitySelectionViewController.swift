@@ -21,7 +21,7 @@ class RedeemTokenCardQuantitySelectionViewController: UIViewController, TokenVer
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = Configuration.Color.Semantic.alternativeText
+        label.textColor = ConfigurationLif3.Color.Semantic.alternativeText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -117,7 +117,7 @@ class RedeemTokenCardQuantitySelectionViewController: UIViewController, TokenVer
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         buttonsBar.configure()
         let nextButton = buttonsBar.buttons[0]

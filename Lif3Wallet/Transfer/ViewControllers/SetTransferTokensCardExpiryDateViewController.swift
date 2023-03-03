@@ -14,7 +14,7 @@ class SetTransferTokensCardExpiryDateViewController: UIViewController, TokenVeri
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = Configuration.Color.Semantic.alternativeText
+        label.textColor = ConfigurationLif3.Color.Semantic.alternativeText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -24,7 +24,7 @@ class SetTransferTokensCardExpiryDateViewController: UIViewController, TokenVeri
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = Configuration.Color.Semantic.alternativeText
+        label.textColor = ConfigurationLif3.Color.Semantic.alternativeText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -37,7 +37,7 @@ class SetTransferTokensCardExpiryDateViewController: UIViewController, TokenVeri
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = Configuration.Color.Semantic.defaultForegroundText
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 21)
 
         return label
@@ -46,7 +46,7 @@ class SetTransferTokensCardExpiryDateViewController: UIViewController, TokenVeri
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = Configuration.Color.Semantic.defaultNote
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultNote
         label.font = Fonts.semibold(size: 21)
 
         return label
@@ -55,7 +55,7 @@ class SetTransferTokensCardExpiryDateViewController: UIViewController, TokenVeri
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = Configuration.Color.Semantic.defaultNote
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultNote
         label.font = Fonts.regular(size: 21)
         label.numberOfLines = 0
 
@@ -65,7 +65,7 @@ class SetTransferTokensCardExpiryDateViewController: UIViewController, TokenVeri
         let noteBorderView = UIView()
         noteBorderView.translatesAutoresizingMaskIntoConstraints = false
         noteBorderView.layer.cornerRadius = DataEntry.Metric.CornerRadius.box
-        noteBorderView.layer.borderColor = Configuration.Color.Semantic.defaultNote.cgColor
+        noteBorderView.layer.borderColor = ConfigurationLif3.Color.Semantic.defaultNote.cgColor
         noteBorderView.layer.borderWidth = 1
 
         return noteBorderView
@@ -244,7 +244,7 @@ class SetTransferTokensCardExpiryDateViewController: UIViewController, TokenVeri
 
         timePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
         datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         buttonsBar.configure()
         let nextButton = buttonsBar.buttons[0]

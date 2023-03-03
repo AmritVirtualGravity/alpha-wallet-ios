@@ -15,7 +15,7 @@ struct NonFungibleRowViewModel {
 
     var contentBackgroundColor: UIColor {
         if displayHelper.imageHasBackgroundColor {
-            return Configuration.Color.Semantic.defaultViewBackground
+            return ConfigurationLif3.Color.Semantic.defaultViewBackground
         } else {
             if let color = tokenHolder.values.backgroundColorStringValue.nilIfEmpty {
                 return UIColor(hex: color)
@@ -24,7 +24,7 @@ struct NonFungibleRowViewModel {
             }
         }
     }
-    var titleColor: UIColor = Configuration.Color.Semantic.defaultTitleText
+    var titleColor: UIColor = ConfigurationLif3.Color.Semantic.defaultTitleText
     var titleFont: UIFont = Screen.TokenCard.Font.title
 
     var title: NSAttributedString {
@@ -46,7 +46,7 @@ struct NonFungibleRowViewModel {
         let assetCount = Int(tokenHolder.values(tokenId: tokenId)?.valueIntValue ?? 0)
         return .init(string: R.string.localizable.semifungiblesAssetsCount(assetCount), attributes: [
             .font: Screen.TokenCard.Font.subtitle,
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
         ])
     }
 

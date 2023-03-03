@@ -33,7 +33,7 @@ class ChooseSendPrivateTransactionsProviderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
 
         bind(viewModel: viewModel)
     }
@@ -107,8 +107,8 @@ extension UITableView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
         tableView.separatorStyle = .singleLine
-        tableView.separatorColor = Configuration.Color.Semantic.tableViewSeparator
-        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
+        tableView.separatorColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+        tableView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         return tableView
@@ -118,8 +118,8 @@ extension UITableView {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.tableFooterView = UIView.tableFooterToRemoveEmptyCellSeparators()
         tableView.separatorStyle = .singleLine
-        tableView.separatorColor = Configuration.Color.Semantic.tableViewSeparator
-        tableView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
+        tableView.separatorColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+        tableView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }

@@ -13,7 +13,7 @@ struct SwitchTableViewCellViewModel {
     let value: Bool
 
     var titleFont: UIFont = Fonts.regular(size: 14)
-    var titleTextColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
+    var titleTextColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont
 }
 
 extension SwitchTableViewCellViewModel: Hashable {

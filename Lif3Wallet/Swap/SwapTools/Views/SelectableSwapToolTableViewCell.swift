@@ -63,7 +63,7 @@ final class SelectableSwapToolTableViewCell: UITableViewCell {
         accessoryImageView.image = viewModel.accessoryImageView
         iconView.setImage(url: viewModel.logoUrl, placeholder: viewModel.logoPlaceholder)
         selectionStyle = viewModel.selectionStyle
-        backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.tableViewCellBackground
         infoView.configure(viewModel: viewModel.infoViewModel)
     }
 }

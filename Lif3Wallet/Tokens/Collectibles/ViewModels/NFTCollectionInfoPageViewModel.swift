@@ -40,7 +40,7 @@ final class NFTCollectionInfoPageViewModel {
         }
     }
 
-    var previewViewContentBackgroundColor: UIColor { return Configuration.Color.Semantic.defaultViewBackground }
+    var previewViewContentBackgroundColor: UIColor { return ConfigurationLif3.Color.Semantic.defaultViewBackground }
 
     init(token: Token,
          previewViewType: NFTPreviewViewType,

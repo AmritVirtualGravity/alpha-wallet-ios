@@ -11,7 +11,7 @@ struct ConfirmationHeaderViewModel {
     let title: String
     let isMinimalMode: Bool
     var backgroundColor: UIColor {
-        Configuration.Color.Semantic.headerViewBackground
+        ConfigurationLif3.Color.Semantic.headerViewBackground
     }
     var icon: UIImage? {
         return isMinimalMode ? nil : R.image.awLogoSmall()
@@ -23,7 +23,7 @@ struct ConfirmationHeaderViewModel {
         return .init(string: title, attributes: [
             .font: Fonts.semibold(size: 17) as Any,
             .paragraphStyle: style,
-            .foregroundColor: Configuration.Color.Semantic.popupPrimaryFont
+            .foregroundColor: ConfigurationLif3.Color.Semantic.popupPrimaryFont
         ])
     }
     var swipeIndicationHidden: Bool

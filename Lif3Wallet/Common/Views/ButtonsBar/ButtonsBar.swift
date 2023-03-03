@@ -340,24 +340,24 @@ class HorizontalButtonsBar: UIView, ButtonsBarViewType {
 struct ButtonsBarViewModel {
 
     static let primaryButton = ButtonsBarViewModel(
-        buttonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackground,
-        highlightedButtonBackgroundColor: Configuration.Color.Semantic.primaryButtonHighlightedBackground,
-        disabledButtonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackgroundInactive,
-        disabledButtonBorderColor: Configuration.Color.Semantic.primaryButtonBorderInactive,
-        buttonTitleColor: Configuration.Color.Semantic.primaryButtonTextActive,
-        disabledButtonTitleColor: Configuration.Color.Semantic.primaryButtonTextInactive,
-        buttonBorderColor: Configuration.Color.Semantic.primaryButtonBorderActive
+        buttonBackgroundColor: ConfigurationLif3.Color.Semantic.primaryButtonBackground,
+        highlightedButtonBackgroundColor: ConfigurationLif3.Color.Semantic.primaryButtonHighlightedBackground,
+        disabledButtonBackgroundColor: ConfigurationLif3.Color.Semantic.primaryButtonBackgroundInactive,
+        disabledButtonBorderColor: ConfigurationLif3.Color.Semantic.primaryButtonBorderInactive,
+        buttonTitleColor: ConfigurationLif3.Color.Semantic.primaryButtonTextActive,
+        disabledButtonTitleColor: ConfigurationLif3.Color.Semantic.primaryButtonTextInactive,
+        buttonBorderColor: ConfigurationLif3.Color.Semantic.primaryButtonBorderActive
     )
     
 
     static let secondaryButton = ButtonsBarViewModel(
-        buttonBackgroundColor: Configuration.Color.Semantic.secondaryButtonBackground,
-        highlightedButtonBackgroundColor: Configuration.Color.Semantic.secondaryButtonHighlightedBackground,
-        disabledButtonBackgroundColor: Configuration.Color.Semantic.secondaryButtonBackgroundInactive,
-        disabledButtonBorderColor: Configuration.Color.Semantic.secondaryButtonBorderInactive,
-        buttonTitleColor: Configuration.Color.Semantic.secondaryButtonTextActive,
-        disabledButtonTitleColor: Configuration.Color.Semantic.secondaryButtonTextInactive,
-        buttonBorderColor: Configuration.Color.Semantic.secondaryButtonBorderActive
+        buttonBackgroundColor: ConfigurationLif3.Color.Semantic.secondaryButtonBackground,
+        highlightedButtonBackgroundColor: ConfigurationLif3.Color.Semantic.secondaryButtonHighlightedBackground,
+        disabledButtonBackgroundColor: ConfigurationLif3.Color.Semantic.secondaryButtonBackgroundInactive,
+        disabledButtonBorderColor: ConfigurationLif3.Color.Semantic.secondaryButtonBorderInactive,
+        buttonTitleColor: ConfigurationLif3.Color.Semantic.secondaryButtonTextActive,
+        disabledButtonTitleColor: ConfigurationLif3.Color.Semantic.secondaryButtonTextInactive,
+        buttonBorderColor: ConfigurationLif3.Color.Semantic.secondaryButtonBorderActive
     )
 
     static let systemButton = ButtonsBarViewModel(
@@ -376,8 +376,8 @@ struct ButtonsBarViewModel {
     var buttonBackgroundColor: UIColor = Colors.appWhite
 
     var highlightedButtonBackgroundColor: UIColor?
-    var disabledButtonBackgroundColor: UIColor = Configuration.Color.Semantic.disabledActionButton
-    var disabledButtonBorderColor: UIColor = Configuration.Color.Semantic.disabledActionButton
+    var disabledButtonBackgroundColor: UIColor = ConfigurationLif3.Color.Semantic.disabledActionButton
+    var disabledButtonBorderColor: UIColor = ConfigurationLif3.Color.Semantic.disabledActionButton
 
     var buttonTitleColor: UIColor = Colors.appTint
     var highlightedButtonTitleColor: UIColor?
@@ -389,7 +389,7 @@ struct ButtonsBarViewModel {
     }
 
     var buttonShadowColor: UIColor {
-        return Configuration.Color.Semantic.actionButtonShadow
+        return ConfigurationLif3.Color.Semantic.actionButtonShadow
     }
 
     var buttonShadowOffset: CGSize {

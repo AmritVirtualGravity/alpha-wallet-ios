@@ -16,7 +16,7 @@ extension SignatureConfirmationDetailsViewModel {
         case eip712v3And4(key: String, value: EIP712TypedData.JSON)
     }
 }
-typealias ColorsSemantic = Configuration.Color.Semantic
+typealias ColorsSemantic = ConfigurationLif3.Color.Semantic
 enum SignatureConfirmationDetailsViewModel {
     case rawValue(viewModel: RawValueViewModel)
     case typedMessageValue(viewModel: TypedMessageViewModel)
@@ -34,7 +34,7 @@ enum SignatureConfirmationDetailsViewModel {
     }
 
     var backgroundColor: UIColor {
-        return Configuration.Color.Semantic.defaultViewBackground
+        return ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     var valueToCopy: String {
@@ -169,7 +169,7 @@ extension SignatureConfirmationDetailsViewModel {
             case single(value: String)
         }
 
-        var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
+        var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         let key: String
         var presentationType: PresentationType
         private let json: EIP712TypedData.JSON

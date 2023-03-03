@@ -39,7 +39,7 @@ class ContactsListViewController: UIViewController {
     @IBOutlet weak var addContactsButton: UIButton! {
         didSet {
             addContactsButton.layer.cornerRadius = 14.0
-            addContactsButton.backgroundColor = Configuration.Color.Semantic.primaryButtonBackground
+            addContactsButton.backgroundColor = ConfigurationLif3.Color.Semantic.primaryButtonBackground
         }
     }
     

@@ -50,7 +50,7 @@ struct ServersViewModel {
     }
 
     var descriptionColor: UIColor {
-        return Configuration.Color.Semantic.defaultForegroundText
+        return ConfigurationLif3.Color.Semantic.defaultForegroundText
     }
 
     var displayWarningFooter: Bool {

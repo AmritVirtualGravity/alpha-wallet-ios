@@ -37,13 +37,13 @@ final class AddressTextField: UIControl {
         textField.layer.cornerRadius = DataEntry.Metric.TextField.Default.cornerRadius
         textField.leftView = .spacerWidth(16)
         textField.rightView = makeTargetAddressRightView()
-        textField.layer.borderColor = Configuration.Color.Semantic.border.cgColor
+        textField.layer.borderColor = ConfigurationLif3.Color.Semantic.border.cgColor
         textField.layer.borderWidth = DataEntry.Metric.borderThickness
         textField.placeholder = R.string.localizable.addressEnsLabelMessage()
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
-        textField.textColor = Configuration.Color.Semantic.defaultForegroundText
-        textField.font = Configuration.Font.textField
+        textField.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        textField.font = ConfigurationLif3.Font.textField
         
         return textField
     }()
@@ -69,8 +69,8 @@ final class AddressTextField: UIControl {
         let button = Button(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.sendPasteButtonTitle(), for: .normal)
-        button.titleLabel?.font = Configuration.Font.accessory
-        button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
+        button.titleLabel?.font = ConfigurationLif3.Font.accessory
+        button.setTitleColor(ConfigurationLif3.Color.Semantic.icon, for: .normal)
         button.setBackgroundColor(.clear, forState: .normal)
         button.contentHorizontalAlignment = .right
         button.heightConstraint.flatMap { NSLayoutConstraint.deactivate([$0]) }
@@ -86,8 +86,8 @@ final class AddressTextField: UIControl {
         let button = Button(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.clearButtonTitle(), for: .normal)
-        button.titleLabel?.font = Configuration.Font.accessory
-        button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
+        button.titleLabel?.font = ConfigurationLif3.Font.accessory
+        button.setTitleColor(ConfigurationLif3.Color.Semantic.icon, for: .normal)
         button.setBackgroundColor(.clear, forState: .normal)
         button.contentHorizontalAlignment = .right
         button.heightConstraint.flatMap { NSLayoutConstraint.deactivate([$0]) }
@@ -102,8 +102,8 @@ final class AddressTextField: UIControl {
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Configuration.Font.textFieldTitle
-        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
+        label.font = ConfigurationLif3.Font.textFieldTitle
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
         label.textAlignment = .left
         label.numberOfLines = 0
 
@@ -116,8 +116,8 @@ final class AddressTextField: UIControl {
         label.numberOfLines = 0
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.font = Configuration.Font.textFieldStatus
-        label.textColor = Configuration.Color.Semantic.textFieldStatus
+        label.font = ConfigurationLif3.Font.textFieldStatus
+        label.textColor = ConfigurationLif3.Color.Semantic.textFieldStatus
         label.textAlignment = .left
 
         return label
@@ -152,7 +152,7 @@ final class AddressTextField: UIControl {
         didSet {
             switch errorState {
             case .error(let error):
-                statusLabel.textColor = Configuration.Color.Semantic.textFieldStatus
+                statusLabel.textColor = ConfigurationLif3.Color.Semantic.textFieldStatus
                 statusLabel.text = error
                 statusLabel.isHidden = error.isEmpty
             case .none:
@@ -205,7 +205,7 @@ final class AddressTextField: UIControl {
 
         cornerRadius = DataEntry.Metric.TextField.Default.cornerRadius
         textField.layer.borderWidth = DataEntry.Metric.borderThickness
-        textField.backgroundColor = Configuration.Color.Semantic.textFieldBackground
+        textField.backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
         textField.layer.borderColor = errorState.textFieldBorderColor(whileEditing: isFirstResponder).cgColor
         errorState = .none
     }
@@ -260,7 +260,7 @@ final class AddressTextField: UIControl {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         let view = UIView()
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
 
@@ -294,7 +294,7 @@ final class AddressTextField: UIControl {
     }
 
     private func makeTargetAddressRightView() -> UIView {
-        let icon = R.image.qr_code_icon()!.withTintColor(Configuration.Color.Semantic.textFieldIcon, renderingMode: .alwaysTemplate)
+        let icon = R.image.qr_code_icon()!.withTintColor(ConfigurationLif3.Color.Semantic.textFieldIcon, renderingMode: .alwaysTemplate)
         let scanQRCodeButton = Button(size: .normal, style: .system)
         scanQRCodeButton.translatesAutoresizingMaskIntoConstraints = false
         scanQRCodeButton.setImage(icon, for: .normal)
@@ -364,7 +364,7 @@ extension AddressTextField: UITextFieldDelegate {
         let borderColor = errorState.textFieldBorderColor(whileEditing: false)
         let shouldDropShadow = errorState.textFieldShowShadow(whileEditing: false)
         textField.layer.borderColor = borderColor.cgColor
-        textField.backgroundColor = Configuration.Color.Semantic.textFieldBackground
+        textField.backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
 
         textField.dropShadow(color: shouldDropShadow ? borderColor : .clear, radius: DataEntry.Metric.shadowRadius)
     }
@@ -372,7 +372,7 @@ extension AddressTextField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let borderColor = errorState.textFieldBorderColor(whileEditing: true)
         textField.layer.borderColor = borderColor.cgColor
-        textField.backgroundColor = Configuration.Color.Semantic.textFieldBackground
+        textField.backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
 
         textField.dropShadow(color: borderColor, radius: DataEntry.Metric.shadowRadius)
     }

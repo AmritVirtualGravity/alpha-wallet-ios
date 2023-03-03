@@ -20,7 +20,7 @@ final class SelectedSwapToolsCollectionView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(SwapToolCollectionViewCell.self)
-        collectionView.backgroundColor = Configuration.Color.Semantic.tableViewBackground
+        collectionView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewBackground
         
         return collectionView
     }()
@@ -57,7 +57,7 @@ final class SelectedSwapToolsCollectionView: UIView {
     }
 
     private func bind(viewModel: SelectedSwapToolsCollectionViewModel) {
-        backgroundColor = Configuration.Color.Semantic.tableViewBackground
+        backgroundColor = ConfigurationLif3.Color.Semantic.tableViewBackground
 
         let willAppear = willAppear
             .handleEvents(receiveOutput: { [weak self] _ in self?.startLoading() })

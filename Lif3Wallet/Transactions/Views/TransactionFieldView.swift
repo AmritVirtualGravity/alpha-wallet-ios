@@ -10,7 +10,7 @@ extension TransactionFieldView {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = Configuration.Color.Semantic.defaultForegroundText
+        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 17)
         label.numberOfLines = 0
 
@@ -39,7 +39,7 @@ class TransactionFieldView<DetailsView: UIView>: UIStackView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = Fonts.regular(size: 13)
         titleLabel.textAlignment = .left
-        titleLabel.textColor = Configuration.Color.Semantic.alternativeText
+        titleLabel.textColor = ConfigurationLif3.Color.Semantic.alternativeText
 
         return titleLabel
     }()
@@ -134,7 +134,7 @@ extension TransactionFieldView {
     @discardableResult func configure(title: String) -> Self {
         let attributedTitle = NSAttributedString(string: title, attributes: [
             .font: Fonts.regular(size: 13),
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
         ])
 
         return configure(attributedTitleText: attributedTitle)
@@ -169,7 +169,7 @@ extension TransactionFieldView where DetailsView: UILabel {
     @discardableResult func configure(value: String) -> Self {
         let attributedValue = NSAttributedString(string: value, attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
         ])
 
         return configure(attributedValueText: attributedValue)

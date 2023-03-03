@@ -20,7 +20,7 @@ extension TokensViewController {
                     return
                 }
 
-                subview.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+                subview.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
                 subview.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(subview)
                 contentView.addSubview(bottomSeparator)
@@ -84,12 +84,12 @@ extension TokensViewController {
         override init(reuseIdentifier: String?) {
             super.init(reuseIdentifier: reuseIdentifier)
 
-            contentView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+            contentView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
             bottomSeparator.isHidden = true
             topSeparator.isHidden = true
 
-            bottomSeparator.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
-            topSeparator.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
+            bottomSeparator.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+            topSeparator.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
         }
 
         required init?(coder aDecoder: NSCoder) {
@@ -141,8 +141,8 @@ extension TokensViewController {
             bottomSeparator.isHidden = isBottomSeparatorHidden
             topSeparator.isHidden = isTopSeparatorHidden
 
-            bottomSeparator.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
-            topSeparator.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
+            bottomSeparator.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+            topSeparator.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
 
             addSubview(stackView)
 

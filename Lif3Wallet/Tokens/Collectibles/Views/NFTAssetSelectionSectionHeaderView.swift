@@ -69,12 +69,12 @@ extension NFTAssetSelectionViewController {
     struct NFTAssetSelectionSectionHeaderViewModel {
         let text: String
         var selectAllAssetsViewModel: SelectAllAssetsViewModel
-        var separatorColor: UIColor = Configuration.Color.Semantic.tableViewSeparator
-        var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
+        var separatorColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+        var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         let tokenHolder: TokenHolder
         var isSelectAllHidden: Bool = false
 
-        init(tokenHolder: TokenHolder, backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground) {
+        init(tokenHolder: TokenHolder, backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground) {
             self.tokenHolder = tokenHolder
             self.text = tokenHolder.name
             self.backgroundColor = backgroundColor

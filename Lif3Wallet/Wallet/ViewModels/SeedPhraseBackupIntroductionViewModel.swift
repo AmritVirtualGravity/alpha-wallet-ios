@@ -27,7 +27,7 @@ struct SeedPhraseBackupIntroductionViewModel {
         attributeString.addAttributes([
             .paragraphStyle: style,
             .font: Screen.Backup.subtitleFont,
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
         ], range: NSRange(location: 0, length: subtitle.count))
         
         return attributeString
@@ -43,7 +43,7 @@ struct SeedPhraseBackupIntroductionViewModel {
         attributeString.addAttributes([
             .paragraphStyle: style,
             .font: UIFont(resource: R.font.sourceSansProRegular, size: 17)!,
-            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
         ], range: NSRange(location: 0, length: description.count))
         
         return attributeString

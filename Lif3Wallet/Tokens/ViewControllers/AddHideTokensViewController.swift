@@ -77,7 +77,7 @@ class AddHideTokensViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = []
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         setupFilteringWithKeyword()
 
         bind(viewModel: viewModel)
@@ -221,7 +221,7 @@ extension AddHideTokensViewController: UITableViewDataSource {
             }
         }
 
-        hideAction.backgroundColor = Configuration.Color.Semantic.dangerBackground
+        hideAction.backgroundColor = ConfigurationLif3.Color.Semantic.dangerBackground
         hideAction.image = R.image.hideToken()
 
         let configuration = UISwipeActionsConfiguration(actions: [hideAction])
@@ -307,12 +307,12 @@ extension AddHideTokensViewController {
 
     private func fixTableViewBackgroundColor() {
         let v = UIView()
-        v.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        v.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
         tableView.backgroundView = v
     }
 
     private func fixNavigationBarAndStatusBarBackgroundColorForiOS13Dot1() {
-        view.superview?.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.superview?.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
     }
 
     private func setupFilteringWithKeyword() {

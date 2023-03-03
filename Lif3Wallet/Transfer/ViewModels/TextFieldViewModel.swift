@@ -19,7 +19,7 @@ struct TextFieldViewModel {
         guard let placeholder = placeholder else { return nil }
 
         return NSAttributedString(string: placeholder, attributes: [
-            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText,
+            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText,
             .font: Fonts.regular(size: 13)
         ])
     }

@@ -109,7 +109,7 @@ class WalletConnectSessionDetailsViewModel {
     private func statusFieldAttributedString(session: AlphaWallet.WalletConnect.Session) -> NSAttributedString {
         NSAttributedString(string: walletConnectProvider.isConnected(session.topicOrUrl) ? R.string.localizable.walletConnectStatusOnline() : R.string.localizable.walletConnectStatusOffline(), attributes: [
             .font: Fonts.semibold(size: 17),
-            .foregroundColor: walletConnectProvider.isConnected(session.topicOrUrl) ? ConfigurationLif3.Color.Semantic.pass : ConfigurationLif3.Color.Semantic.fail
+            .foregroundColor: walletConnectProvider.isConnected(session.topicOrUrl) ? Configuration.Color.Semantic.pass : Configuration.Color.Semantic.fail
         ])
     }
 
@@ -117,7 +117,7 @@ class WalletConnectSessionDetailsViewModel {
         let dappName = session.dappName.trimmed.isEmpty ? "--" : session.dappName.trimmed
         return NSAttributedString(string: dappName, attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 
@@ -125,14 +125,14 @@ class WalletConnectSessionDetailsViewModel {
         let dappName = session.dappNameShort.trimmed.isEmpty ? "--" : session.dappNameShort.trimmed
         return .init(string: dappName, attributes: [
             .font: Fonts.regular(size: ScreenChecker().isNarrowScreen ? 26 : 36),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 
     private func dappUrlFieldAttributedString(session: AlphaWallet.WalletConnect.Session) -> NSAttributedString {
         return NSAttributedString(string: session.dappUrl.absoluteString, attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 
@@ -140,7 +140,7 @@ class WalletConnectSessionDetailsViewModel {
         let servers = session.servers.map { $0.name }.joined(separator: ", ")
         return NSAttributedString(string: servers, attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 
@@ -148,7 +148,7 @@ class WalletConnectSessionDetailsViewModel {
         let methods = session.methods.joined(separator: ", ")
         return NSAttributedString(string: methods, attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 
@@ -156,7 +156,7 @@ class WalletConnectSessionDetailsViewModel {
         let events = session.events.joined(separator: ", ")
         return NSAttributedString(string: events, attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 }

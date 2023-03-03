@@ -13,7 +13,7 @@ struct CreateInitialViewModel {
 
         return .init(string: R.string.localizable.gettingStartedSubtitle(), attributes: [
             .font: font,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
             .paragraphStyle: paragraph
         ])
     }

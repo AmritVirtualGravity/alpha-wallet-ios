@@ -56,8 +56,8 @@ class NonFungibleRowView: TokenCardViewRepresentable {
         ]
 
         clipsToBounds = true
-        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
-        borderColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        borderColor = Configuration.Color.Semantic.tableViewSeparator
         configureLayout(layout: layout)
     }
 

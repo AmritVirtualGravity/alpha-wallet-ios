@@ -12,7 +12,7 @@ class ButtonsBarBackgroundView: UIView {
     private let buttonsBar: ButtonsBarViewType
     private let separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+        view.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -30,7 +30,7 @@ class ButtonsBarBackgroundView: UIView {
         addSubview(separatorLine)
         addSubview(buttonsBar)
         translatesAutoresizingMaskIntoConstraints = false
-//        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+//        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         backgroundColor = .clear
         NSLayoutConstraint.activate([
             separatorLine.leadingAnchor.constraint(equalTo: leadingAnchor),

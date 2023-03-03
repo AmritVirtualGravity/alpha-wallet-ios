@@ -8,7 +8,7 @@
 import UIKit
 
 struct ContainerCollectionViewCellViewModel {
-    var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.collectionViewCellBackground
+    var backgroundColor: UIColor = Configuration.Color.Semantic.collectionViewCellBackground
 }
 
 typealias TokenCardConfigurableView = UIView & TokenCardRowViewLayoutConfigurable
@@ -42,7 +42,7 @@ class ContainerCollectionViewCell: UICollectionViewCell {
     static func configureSeparatorLines(layout: GridOrListLayout, _ element: ContainerCollectionViewCell) {
         switch layout {
         case .list:
-            element.cellSeparators.bottom.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+            element.cellSeparators.bottom.backgroundColor = Configuration.Color.Semantic.tableViewSeparator
         case .grid:
             element.cellSeparators.bottom.backgroundColor = .clear
         }

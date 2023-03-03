@@ -16,7 +16,7 @@ struct BrowserHistoryCellViewModel: Hashable {
     }
 
     var backgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultViewBackground
+        return Configuration.Color.Semantic.defaultViewBackground
     }
 
     var fallbackImage: UIImage? {
@@ -40,7 +40,7 @@ struct BrowserHistoryCellViewModel: Hashable {
     }
 
     var imageViewShadowColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.shadow
+        return Configuration.Color.Semantic.shadow
     }
 
     var imageViewShadowOffset: CGSize {

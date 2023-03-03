@@ -54,7 +54,7 @@ class NFTAssetListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
     }
 
@@ -101,8 +101,8 @@ fileprivate extension NFTAssetListViewController {
             let cell: ContainerTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.containerEdgeInsets = .zero
             cell.selectionStyle = viewModel.containerViewState.selectionStyle
-            cell.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
-            cell.contentView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+            cell.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+            cell.contentView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
             cell.accessoryType = viewModel.containerViewState.accessoryType
 
             let subview = tokenCardViewFactory.createTokenCardView(for: viewModel.tokenHolder, layout: viewModel.layout, listEdgeInsets: .init(top: 8, left: 16, bottom: 8, right: 16))

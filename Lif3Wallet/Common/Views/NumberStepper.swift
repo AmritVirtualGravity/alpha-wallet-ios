@@ -26,7 +26,7 @@ class NumberStepper: UIControl {
     }
 
     @IBInspectable
-    public var buttonsTextColor: UIColor = ConfigurationLif3.Color.Semantic.defaultForegroundText {
+    public var buttonsTextColor: UIColor = Configuration.Color.Semantic.defaultForegroundText {
         didSet {
             for button in [leftButton, rightButton] {
                 button.setTitleColor(buttonsTextColor, for: .normal)
@@ -53,7 +53,7 @@ class NumberStepper: UIControl {
     }
 
     @IBInspectable
-    public var labelTextColor: UIColor = ConfigurationLif3.Color.Semantic.defaultForegroundText {
+    public var labelTextColor: UIColor = Configuration.Color.Semantic.defaultForegroundText {
         didSet {
             label.textColor = labelTextColor
         }
@@ -66,7 +66,7 @@ class NumberStepper: UIControl {
         }
     }
 
-    public var labelFont = ConfigurationLif3.Font.text {
+    public var labelFont = Configuration.Font.text {
         didSet {
             label.font = labelFont
         }
@@ -143,7 +143,7 @@ class NumberStepper: UIControl {
 
         backgroundColor = buttonsBackgroundColor
         borderWidth = 1
-        borderColor = ConfigurationLif3.Color.Semantic.border
+        borderColor = Configuration.Color.Semantic.border
         layer.cornerRadius = DataEntry.Metric.cornerRadius
         clipsToBounds = true
     }

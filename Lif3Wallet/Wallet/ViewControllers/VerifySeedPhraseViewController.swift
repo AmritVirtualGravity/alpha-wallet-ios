@@ -223,7 +223,7 @@ class VerifySeedPhraseViewController: UIViewController {
     }
 
     func configure() {
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         subtitleLabel.textAlignment = .center
         subtitleLabel.textColor = viewModel.subtitleColor

@@ -17,18 +17,18 @@ struct DefaultActivityCellViewModel {
 
     var contentsBackgroundColor: UIColor {
         if activityStateViewViewModel.isInPendingState {
-            return ConfigurationLif3.Color.Semantic.sendingState
+            return Configuration.Color.Semantic.sendingState
         } else {
-            return ConfigurationLif3.Color.Semantic.tableViewCellBackground
+            return Configuration.Color.Semantic.tableViewCellBackground
         }
     }
 
     var backgroundColor: UIColor {
-        ConfigurationLif3.Color.Semantic.tableViewCellBackground
+        Configuration.Color.Semantic.tableViewCellBackground
     }
 
     var titleTextColor: UIColor {
-        ConfigurationLif3.Color.Semantic.defaultForegroundText
+        Configuration.Color.Semantic.defaultForegroundText
     }
 
     var title: NSAttributedString {
@@ -107,7 +107,7 @@ struct DefaultActivityCellViewModel {
     }
 
     var subTitleTextColor: UIColor {
-        ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        Configuration.Color.Semantic.defaultSubtitleText
     }
 
     var subTitleFont: UIFont {
@@ -159,11 +159,11 @@ struct DefaultActivityCellViewModel {
 
         switch activity.state {
         case .pending:
-            return NSAttributedString(string: string, attributes: [.font: Fonts.semibold(size: 17), .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText])
+            return NSAttributedString(string: string, attributes: [.font: Fonts.semibold(size: 17), .foregroundColor: Configuration.Color.Semantic.defaultForegroundText])
         case .completed:
-            return NSAttributedString(string: string, attributes: [.font: Fonts.semibold(size: 17), .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText])
+            return NSAttributedString(string: string, attributes: [.font: Fonts.semibold(size: 17), .foregroundColor: Configuration.Color.Semantic.defaultForegroundText])
         case .failed:
-            return NSAttributedString(string: string, attributes: [.font: Fonts.semibold(size: 17), .foregroundColor: ConfigurationLif3.Color.Semantic.textViewFailed, .strikethroughStyle: NSUnderlineStyle.single.rawValue])
+            return NSAttributedString(string: string, attributes: [.font: Fonts.semibold(size: 17), .foregroundColor: Configuration.Color.Semantic.textViewFailed, .strikethroughStyle: NSUnderlineStyle.single.rawValue])
         }
     }
 
@@ -172,7 +172,7 @@ struct DefaultActivityCellViewModel {
     }
 
     var timestampColor: UIColor {
-        ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        Configuration.Color.Semantic.defaultSubtitleText
     }
     private static let formatter: DateFormatter = Date.formatter(with: "dd MMM yyyy h:mm:ss a")
     var timestamp: String {

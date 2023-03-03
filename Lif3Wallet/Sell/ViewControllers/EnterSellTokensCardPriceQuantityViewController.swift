@@ -16,7 +16,7 @@ class EnterSellTokensCardPriceQuantityViewController: UIViewController, TokenVer
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -25,7 +25,7 @@ class EnterSellTokensCardPriceQuantityViewController: UIViewController, TokenVer
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -42,7 +42,7 @@ class EnterSellTokensCardPriceQuantityViewController: UIViewController, TokenVer
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.semibold(size: 21)
 
         return label
@@ -51,7 +51,7 @@ class EnterSellTokensCardPriceQuantityViewController: UIViewController, TokenVer
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.semibold(size: 21)
 
         return label
@@ -60,7 +60,7 @@ class EnterSellTokensCardPriceQuantityViewController: UIViewController, TokenVer
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -69,7 +69,7 @@ class EnterSellTokensCardPriceQuantityViewController: UIViewController, TokenVer
         let label = PaddedLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.alternativeText
+        label.textColor = Configuration.Color.Semantic.alternativeText
         label.layer.masksToBounds = true
         label.font = Fonts.semibold(size: 21)
 
@@ -251,7 +251,7 @@ class EnterSellTokensCardPriceQuantityViewController: UIViewController, TokenVer
 
         quantityStepper.addTarget(self, action: #selector(quantityChanged), for: .valueChanged)
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         buttonsBar.configure()
 

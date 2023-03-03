@@ -12,19 +12,19 @@ struct ActivitiesViewModel {
     var collection: ActivityCollection
 
     var backgroundColor: UIColor {
-        ConfigurationLif3.Color.Semantic.tableViewBackground
+        Configuration.Color.Semantic.tableViewBackground
     }
 
     var separatorColor: UIColor {
-        ConfigurationLif3.Color.Semantic.tableViewSeparator
+        Configuration.Color.Semantic.tableViewSeparator
     }
 
     var headerBackgroundColor: UIColor {
-        ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+        Configuration.Color.Semantic.tableViewHeaderBackground
     }
 
     var headerTitleTextColor: UIColor {
-        ConfigurationLif3.Color.Semantic.defaultForegroundText
+        Configuration.Color.Semantic.defaultForegroundText
     }
 
     var headerTitleFont: UIFont {

@@ -34,9 +34,9 @@ final class SwapToolCollectionViewCell: UICollectionViewCell {
 
     func configure(viewModel: SwapToolCollectionViewCellViewModel) {
         cornerRadius = 7
-           self.borderColor = ConfigurationLif3.Color.Semantic.seedPhraseContractViewBorderColor
+           self.borderColor = Configuration.Color.Semantic.seedPhraseContractViewBorderColor
            self.borderWidth = 1
-           backgroundColor = ConfigurationLif3.Color.Semantic.preferedBridgesToolsBackgroundColor
+           backgroundColor = Configuration.Color.Semantic.preferedBridgesToolsBackgroundColor
            label.attributedText = viewModel.nameAttributedString
     }
 }

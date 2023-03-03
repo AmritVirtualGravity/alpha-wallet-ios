@@ -15,8 +15,8 @@ struct AssetDefinitionsOverridesViewCellViewModel: Hashable {
         return url.lastPathComponent
     }
 
-    let backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
-    let textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+    let backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+    let textColor = Configuration.Color.Semantic.defaultForegroundText
     let textFont = Fonts.regular(size: 18)
     let textLineBreakMode = NSLineBreakMode.byTruncatingMiddle
 }

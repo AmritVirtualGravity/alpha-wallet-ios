@@ -24,7 +24,7 @@ final class FungibleTokenHeaderViewModel {
     private let tokensService: TokenViewModelState
     private var cancelable = Set<AnyCancellable>()
 
-    let backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+    let backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
     var iconImage: Subscribable<TokenImage> {
         token.icon(withSize: .s300)
     }
@@ -138,21 +138,21 @@ extension FungibleTokenHeaderViewModel.functional {
 
         return NSAttributedString(string: R.string.localizable.aWalletTokenValue(string), attributes: [
             .font: Screen.TokenCard.Font.placeholderLabel,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
+            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
         ])
     }
 
     static var testnetValueHintLabelAttributedString: NSAttributedString {
         return NSAttributedString(string: R.string.localizable.tokenValueTestnetWarning(), attributes: [
             .font: Screen.TokenCard.Font.placeholderLabel,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
+            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
         ])
     }
 
     static func asTitleAttributedString(_ title: String) -> NSAttributedString {
         return NSAttributedString(string: title, attributes: [
             .font: Fonts.regular(size: ScreenChecker().isNarrowScreen ? 26 : 36),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 
@@ -167,7 +167,7 @@ extension FungibleTokenHeaderViewModel.functional {
 
         let mutableAttributedString = NSMutableAttributedString(string: string, attributes: [
             .font: Screen.TokenCard.Font.placeholderLabel,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
+            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
         ])
 
         let range = NSRange(valuePercentageChangeRange, in: string)

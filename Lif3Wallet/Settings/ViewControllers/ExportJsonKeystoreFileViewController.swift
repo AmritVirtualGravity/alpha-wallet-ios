@@ -59,7 +59,7 @@ class ExportJsonKeystoreFileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
     }
 

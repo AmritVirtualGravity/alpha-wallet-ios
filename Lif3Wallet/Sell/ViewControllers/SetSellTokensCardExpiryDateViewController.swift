@@ -14,7 +14,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -24,7 +24,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -34,7 +34,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.font = Fonts.semibold(size: 21)
 
         return label
@@ -44,7 +44,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.font = Fonts.semibold(size: 21)
 
         return label
@@ -53,7 +53,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.font = Fonts.semibold(size: 21)
 
         return label
@@ -62,7 +62,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.font = Fonts.semibold(size: 21)
         label.numberOfLines = 0
 
@@ -72,7 +72,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultNote
+        label.textColor = Configuration.Color.Semantic.defaultNote
         label.font = Fonts.semibold(size: 21)
 
         return label
@@ -81,7 +81,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultNote
+        label.textColor = Configuration.Color.Semantic.defaultNote
         label.font = Fonts.semibold(size: 21)
         label.numberOfLines = 0
 
@@ -90,7 +90,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
     private let noteBorderView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = DataEntry.Metric.CornerRadius.box
-        view.layer.borderColor = ConfigurationLif3.Color.Semantic.defaultNote.cgColor
+        view.layer.borderColor = Configuration.Color.Semantic.defaultNote.cgColor
         view.layer.borderWidth = 1
 
         return view
@@ -256,7 +256,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         timePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
         datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         buttonsBar.configure()
 
         let nextButton = buttonsBar.buttons[0]
@@ -290,7 +290,7 @@ class SetSellTokensCardExpiryDateViewController: UIViewController, TokenVerifiab
         }
         updateNavigationRightBarButtons(withTokenScriptFileStatus: tokenScriptFileStatus)
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         navigationItem.title = viewModel.headerTitle
 
@@ -366,7 +366,7 @@ extension UIDatePicker {
         if let locale = Config.getLocale() {
             picker.locale = Locale(identifier: locale)
         }
-        picker.textColor = ConfigurationLif3.Color.Semantic.defaultInverseText
+        picker.textColor = Configuration.Color.Semantic.defaultInverseText
 
         return picker
     }
@@ -381,7 +381,7 @@ extension UIDatePicker {
         if let locale = Config.getLocale() {
             datePicker.locale = Locale(identifier: locale)
         }
-        datePicker.textColor = ConfigurationLif3.Color.Semantic.defaultInverseText
+        datePicker.textColor = Configuration.Color.Semantic.defaultInverseText
 
         return datePicker
     }

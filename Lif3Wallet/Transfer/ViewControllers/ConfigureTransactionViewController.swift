@@ -81,7 +81,7 @@ class ConfigureTransactionViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         navigationItem.title = viewModel.title
-        containerView.configure(viewModel: .init(backgroundColor: ConfigurationLif3.Color.Semantic.defaultViewBackground))
+        containerView.configure(viewModel: .init(backgroundColor: Configuration.Color.Semantic.defaultViewBackground))
         navigationItem.leftBarButtonItem = UIBarButtonItem.saveBarButton(self, selector: #selector(saveButtonSelected))
 
         view.addSubview(containerView)
@@ -101,7 +101,7 @@ class ConfigureTransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         recalculateTotalFeeForCustomGas()
     }
 
@@ -181,7 +181,7 @@ class ConfigureTransactionViewController: UIViewController {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = Fonts.regular(size: 15)
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.text = R.string.localizable.transactionConfirmationFeeFooterText()
 
         footer.translatesAutoresizingMaskIntoConstraints = false
@@ -208,12 +208,12 @@ class ConfigureTransactionViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.font = Fonts.semibold(size: 20)
-        titleLabel.textColor = ConfigurationLif3.Color.Semantic.defaultErrorText
+        titleLabel.textColor = Configuration.Color.Semantic.defaultErrorText
         titleLabel.text = gasPriceWarning.longTitle
 
         let descriptionLabel = UITextView()
         descriptionLabel.backgroundColor = .clear
-        descriptionLabel.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        descriptionLabel.textColor = Configuration.Color.Semantic.defaultSubtitleText
         descriptionLabel.textAlignment = .center
         descriptionLabel.isEditable = false
         descriptionLabel.isSelectable = true

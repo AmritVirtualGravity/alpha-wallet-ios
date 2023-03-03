@@ -23,18 +23,18 @@ class SeedPhraseContractView: UIView {
     
     private func configure(){
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = ConfigurationLif3.Color.Semantic.seedPhraseContractViewBorderColor.cgColor
+        self.layer.borderColor = Configuration.Color.Semantic.seedPhraseContractViewBorderColor.cgColor
         self.layer.cornerRadius = 20
         
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = description
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.numberOfLines = 2
-        descriptionLabel.textColor = ConfigurationLif3.Color.Semantic.defaultTitleText
+        descriptionLabel.textColor = Configuration.Color.Semantic.defaultTitleText
 
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderWidth = 1
-        button.layer.borderColor = ConfigurationLif3.Color.Semantic.seedPhraseButtonViewBorderColor.cgColor
+        button.layer.borderColor = Configuration.Color.Semantic.seedPhraseButtonViewBorderColor.cgColor
         button.layer.masksToBounds = true
       
         button.addTarget(self, action: #selector(didTapCheckBoxBtn), for: .touchUpInside)

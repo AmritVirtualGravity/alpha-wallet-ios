@@ -29,14 +29,14 @@ final class AmountTextField: UIControl {
     private(set) lazy var textField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "0", attributes: [
-            .font: ConfigurationLif3.Font.amountTextField, .foregroundColor: ConfigurationLif3.Color.Semantic.placeholderText
+            .font: Configuration.Font.amountTextField, .foregroundColor: Configuration.Color.Semantic.placeholderText
         ])
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
         textField.keyboardType = .decimalPad
         textField.leftViewMode = .always
-        textField.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
-        textField.font = ConfigurationLif3.Font.amountTextField
+        textField.textColor = Configuration.Color.Semantic.defaultForegroundText
+        textField.font = Configuration.Font.amountTextField
         textField.textAlignment = .right
 
         return textField
@@ -46,8 +46,8 @@ final class AmountTextField: UIControl {
         let button = Button(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.sendAllFunds(), for: .normal)
-        button.titleLabel?.font = ConfigurationLif3.Font.accessory
-        button.setTitleColor(ConfigurationLif3.Color.Semantic.icon, for: .normal)
+        button.titleLabel?.font = Configuration.Font.accessory
+        button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
         button.setBackgroundColor(.clear, forState: .normal)
         button.contentHorizontalAlignment = .right
         button.heightConstraint.flatMap { NSLayoutConstraint.deactivate([$0]) }
@@ -90,8 +90,8 @@ final class AmountTextField: UIControl {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.textColor = ConfigurationLif3.Color.Semantic.textFieldContrastText
-        label.font = ConfigurationLif3.Font.label
+        label.textColor = Configuration.Color.Semantic.textFieldContrastText
+        label.font = Configuration.Font.label
 
         return label
     }()
@@ -171,7 +171,7 @@ final class AmountTextField: UIControl {
         ].asStackView(axis: .vertical)
 
         let view = UIView()
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         view.translatesAutoresizingMaskIntoConstraints = false
 
         let stackView = col1
@@ -202,7 +202,7 @@ final class AmountTextField: UIControl {
                 textField?.textColor = errorState.textFieldTextColor
 
                 textField?.attributedPlaceholder = NSAttributedString(string: "0", attributes: [
-                    .font: ConfigurationLif3.Font.amountTextField, .foregroundColor: errorState.textFieldPlaceholderTextColor
+                    .font: Configuration.Font.amountTextField, .foregroundColor: errorState.textFieldPlaceholderTextColor
                 ])
             }.store(in: &cancelable)
 

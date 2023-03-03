@@ -45,10 +45,10 @@ class EnableServersHeaderView: UIView {
 
     func configure(mode: EnabledServersViewModel.Mode, isEnabled: Bool) {
         self.mode = mode
-        backgroundColor  = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+        backgroundColor  = Configuration.Color.Semantic.tableViewHeaderBackground
 
-        label.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
-        label.textColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont
+        label.backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
+        label.textColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
         label.font = Fonts.semibold(size: 15)
         label.text = mode.headerText
 

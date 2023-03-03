@@ -34,14 +34,14 @@ struct NonFungibleTokenViewCellViewModel {
     var titleAttributedString: NSAttributedString {
         return .init(string: safeShortTitleInPluralForm, attributes: [
             .font: Screen.TokenCard.Font.title,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 
     var tickersAmountAttributedString: NSAttributedString {
         return .init(string: "\(nonZeroBalanceCount) \(symbol)", attributes: [
             .font: Screen.TokenCard.Font.subtitle,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
+            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
         ])
     }
 

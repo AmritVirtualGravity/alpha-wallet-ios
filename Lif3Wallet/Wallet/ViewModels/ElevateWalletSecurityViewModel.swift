@@ -44,7 +44,7 @@ struct ElevateWalletSecurityViewModel {
         attributeString.addAttributes([
             .paragraphStyle: style,
             .font: Screen.Backup.subtitleFont,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ], range: NSRange(location: 0, length: subtitle.count))
 
         return attributeString
@@ -59,7 +59,7 @@ struct ElevateWalletSecurityViewModel {
         attributeString.addAttributes([
             .paragraphStyle: style,
             .font: descriptionFont,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ], range: NSRange(location: 0, length: description.count))
 
         return attributeString
@@ -78,6 +78,6 @@ struct ElevateWalletSecurityViewModel {
     }
 
     var cancelLockingButtonTitleColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.cancelButtonTitle
+        return Configuration.Color.Semantic.cancelButtonTitle
     }
 }

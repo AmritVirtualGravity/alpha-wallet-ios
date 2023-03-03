@@ -17,7 +17,7 @@ class TransactionTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.regular(size: ScreenChecker.size(big: 17, medium: 17, small: 15))
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
 
         return label
@@ -37,7 +37,7 @@ class TransactionTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byTruncatingMiddle
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.font = Fonts.regular(size: ScreenChecker.size(big: 13, medium: 13, small: 12))
 
         return label
@@ -90,7 +90,7 @@ class TransactionTableViewCell: UITableViewCell {
 
             background.anchorsConstraint(to: contentView),
         ])
-        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
     }
 
     required init?(coder aDecoder: NSCoder) {

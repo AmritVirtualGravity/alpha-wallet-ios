@@ -153,7 +153,7 @@ final class SendSemiFungibleTokenViewController: UIViewController, TokenVerifiab
     private func configure(subview: UIView & TokenCardRowViewConfigurable, tokenId: TokenId, tokenHolder: TokenHolder) {
         if let typeSubView = subview as? NonFungibleRowView {
             var viewModel = NonFungibleRowViewModel(tokenHolder: tokenHolder, tokenId: tokenId)
-            viewModel.titleColor = ConfigurationLif3.Color.Semantic.defaultTitleText
+            viewModel.titleColor = Configuration.Color.Semantic.defaultTitleText
             viewModel.titleFont = Fonts.semibold(size: ScreenChecker().isNarrowScreen ? 13 : 17)
 
             typeSubView.configure(viewModel: viewModel)
@@ -176,7 +176,7 @@ final class SendSemiFungibleTokenViewController: UIViewController, TokenVerifiab
         title = viewModel.title
         updateNavigationRightBarButtons(withTokenScriptFileStatus: tokenScriptFileStatus)
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         selectTokenCardAmountView.configure(viewModel: viewModel.selectionViewModel)
 

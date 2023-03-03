@@ -74,7 +74,7 @@ class OpenSeaNonFungibleTokenView: UIView {
         background.layer.cornerRadius = viewModel.contentsCornerRadius
         background.clipsToBounds = true
         background.borderWidth = 1
-        background.borderColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+        background.borderColor = Configuration.Color.Semantic.tableViewSeparator
 
         imageHolder.clipsToBounds = true
         tokenImageView.subscribable = viewModel.tokenIcon

@@ -26,7 +26,7 @@ protocol TokenCardRowViewModelProtocol {
 
 extension TokenCardRowViewModelProtocol {
     var contentsBackgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultViewBackground
+        return Configuration.Color.Semantic.defaultViewBackground
     }
 
     var contentsCornerRadius: CGFloat {
@@ -34,19 +34,19 @@ extension TokenCardRowViewModelProtocol {
     }
 
     var titleColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultForegroundText
+        return Configuration.Color.Semantic.defaultForegroundText
     }
 
     var countColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.appreciation
+        return Configuration.Color.Semantic.appreciation
     }
 
     var subtitleColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.secondary
+        return Configuration.Color.Semantic.secondary
     }
 
     var iconsColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultHeadlineText
+        return Configuration.Color.Semantic.defaultHeadlineText
     }
 
     var tokenCountFont: UIFont {
@@ -62,11 +62,11 @@ extension TokenCardRowViewModelProtocol {
     }
 
     var stateBackgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.tableViewSpecialBackground
+        return Configuration.Color.Semantic.tableViewSpecialBackground
     }
 
     var stateColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultInverseText
+        return Configuration.Color.Semantic.defaultInverseText
     }
 
     var subtitleFont: UIFont {

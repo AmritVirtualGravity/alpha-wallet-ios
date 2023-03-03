@@ -28,9 +28,9 @@ class StaticHTMLViewController: UIViewController {
     init(delegate: StaticHTMLViewControllerDelegate?) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
-        webView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        webView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         //TODO verify still needed for WKWebView
         //So webview is see-through to reveal its parents background color when HTML is not loaded yet
         webView.isOpaque = false

@@ -26,7 +26,7 @@ class CollectUsersEmailViewController: ModalViewController {
         let v = UILabel()
         v.numberOfLines = 0
         v.textAlignment = .center
-        v.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        v.textColor = Configuration.Color.Semantic.defaultForegroundText
         v.font = Fonts.bold(size: 24)
 
         return v
@@ -36,7 +36,7 @@ class CollectUsersEmailViewController: ModalViewController {
         let v = UILabel()
         v.numberOfLines = 0
         v.textAlignment = .center
-        v.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        v.textColor = Configuration.Color.Semantic.defaultSubtitleText
         v.font = Fonts.regular(size: 17)
 
         return v
@@ -53,14 +53,14 @@ class CollectUsersEmailViewController: ModalViewController {
 
     private lazy var buttonsBar: HorizontalButtonsBar = {
         let buttonsBar = HorizontalButtonsBar(configuration: .primary(buttons: 1))
-        buttonsBar.backgroundColor = ConfigurationLif3.Color.Semantic.dialogBackground
+        buttonsBar.backgroundColor = Configuration.Color.Semantic.dialogBackground
         return buttonsBar
     }()
 
     init() {
         super.init(nibName: nil, bundle: nil)
         let footerView = ButtonsBarBackgroundView(buttonsBar: buttonsBar, separatorHeight: 0)
-        footerView.backgroundColor = ConfigurationLif3.Color.Semantic.dialogBackground
+        footerView.backgroundColor = Configuration.Color.Semantic.dialogBackground
         footerStackView.addArrangedSubview(footerView)
         generateSubviews()
         presentationDelegate = self

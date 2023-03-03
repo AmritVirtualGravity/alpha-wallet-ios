@@ -31,9 +31,9 @@ class TextField: UIControl {
         func textFieldBorderColor(whileEditing: Bool = false) -> UIColor {
             switch self {
             case .none:
-                return whileEditing ? ConfigurationLif3.Color.Semantic.textFieldShadowWhileEditing : ConfigurationLif3.Color.Semantic.border
+                return whileEditing ? Configuration.Color.Semantic.textFieldShadowWhileEditing : Configuration.Color.Semantic.border
             case .error:
-                return ConfigurationLif3.Color.Semantic.defaultErrorText
+                return Configuration.Color.Semantic.defaultErrorText
             }
         }
 
@@ -49,9 +49,9 @@ class TextField: UIControl {
         func textFieldTextColor(whileEditing: Bool = false) -> UIColor {
             switch self {
             case .none:
-                return ConfigurationLif3.Color.Semantic.defaultForegroundText
+                return Configuration.Color.Semantic.defaultForegroundText
             case .error:
-                return ConfigurationLif3.Color.Semantic.defaultErrorText
+                return Configuration.Color.Semantic.defaultErrorText
             }
         }
     }
@@ -74,8 +74,8 @@ class TextField: UIControl {
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = ConfigurationLif3.Font.textFieldTitle
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.font = Configuration.Font.textFieldTitle
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.textAlignment = .left
 
         return label
@@ -86,8 +86,8 @@ class TextField: UIControl {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.font = ConfigurationLif3.Font.textFieldStatus
-        label.textColor = ConfigurationLif3.Color.Semantic.textFieldStatus
+        label.font = Configuration.Font.textFieldStatus
+        label.textColor = Configuration.Color.Semantic.textFieldStatus
         label.textAlignment = .left
         
         return label
@@ -100,8 +100,8 @@ class TextField: UIControl {
         textField.delegate = self
         textField.leftViewMode = .always
         textField.rightViewMode = .always
-        textField.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
-        textField.font = ConfigurationLif3.Font.textField
+        textField.textColor = Configuration.Color.Semantic.defaultForegroundText
+        textField.font = Configuration.Font.textField
 
         return textField
     }()
@@ -179,7 +179,7 @@ class TextField: UIControl {
 
         cornerRadius = DataEntry.Metric.TextField.Default.cornerRadius
         layer.borderWidth = DataEntry.Metric.borderThickness
-        backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
+        backgroundColor = Configuration.Color.Semantic.textFieldBackground
         layer.borderColor = status.textFieldBorderColor(whileEditing: isFirstResponder).cgColor
         status = .none
     }
@@ -216,7 +216,7 @@ class TextField: UIControl {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         let view = UIView()
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
 
@@ -254,7 +254,7 @@ extension TextField: UITextFieldDelegate {
         let borderColor = status.textFieldBorderColor(whileEditing: false)
         let shouldDropShadow = status.textFieldShowShadow(whileEditing: false)
         layer.borderColor = borderColor.cgColor
-        backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
+        backgroundColor = Configuration.Color.Semantic.textFieldBackground
         
         if !isForNetwork {
             dropShadow(color: shouldDropShadow ? borderColor : .clear, radius: DataEntry.Metric.shadowRadius)
@@ -264,7 +264,7 @@ extension TextField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let borderColor = status.textFieldBorderColor(whileEditing: true)
         layer.borderColor = borderColor.cgColor
-        backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
+        backgroundColor = Configuration.Color.Semantic.textFieldBackground
 
         if !isForNetwork {
                     dropShadow(color: borderColor, radius: DataEntry.Metric.shadowRadius)

@@ -107,7 +107,7 @@ final class TokensViewModel {
     }
     
     var backgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.searchbarBackground
+        return Configuration.Color.Semantic.searchbarBackground
     }
 
     var buyButtonFooterBarBackgroundColor: UIColor {
@@ -358,7 +358,7 @@ final class TokensViewModel {
                     completion(true)
                 }
 
-                hideAction.backgroundColor = ConfigurationLif3.Color.Semantic.dangerBackground
+                hideAction.backgroundColor = Configuration.Color.Semantic.dangerBackground
                 hideAction.image = R.image.hideToken()
                 let configuration = UISwipeActionsConfiguration(actions: [hideAction])
                 configuration.performsFirstActionWithFullSwipe = true

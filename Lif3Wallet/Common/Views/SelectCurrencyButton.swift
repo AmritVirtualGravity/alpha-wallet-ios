@@ -15,7 +15,7 @@ class SelectCurrencyButton: UIControl {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.font = ConfigurationLif3.Font.amountTextField
+        label.font = Configuration.Font.amountTextField
 
         return label
     }()
@@ -26,7 +26,7 @@ class SelectCurrencyButton: UIControl {
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = ConfigurationLif3.Color.Semantic.textViewFailed
+        imageView.tintColor = Configuration.Color.Semantic.textViewFailed
 
         return imageView
     }()
@@ -126,7 +126,7 @@ fileprivate class HasNoTokenView: UIControl {
         let imageView = UIImageView(image: R.image.chevronDown()?.withRenderingMode(.alwaysTemplate))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = ConfigurationLif3.Color.Semantic.defaultInverseText
+        imageView.tintColor = Configuration.Color.Semantic.defaultInverseText
         return imageView
     }()
 
@@ -153,11 +153,11 @@ fileprivate class HasNoTokenView: UIControl {
             chevronImageView.heightAnchor.constraint(equalToConstant: 15),
         ])
 
-        backgroundColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        backgroundColor = Configuration.Color.Semantic.defaultForegroundText
         cornerRadius = 20
         titleLabel.attributedText = NSAttributedString.init(string: "Select Token", attributes: [
             .font: Fonts.bold(size: 17),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultInverseText
+            .foregroundColor: Configuration.Color.Semantic.defaultInverseText
         ])
     }
 

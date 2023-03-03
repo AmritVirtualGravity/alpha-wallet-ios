@@ -27,15 +27,15 @@ extension AmountTextField {
 
         var textColor: UIColor {
             switch self {
-            case .error: return ConfigurationLif3.Color.Semantic.defaultErrorText
-            case .none: return ConfigurationLif3.Color.Semantic.defaultForegroundText
+            case .error: return Configuration.Color.Semantic.defaultErrorText
+            case .none: return Configuration.Color.Semantic.defaultForegroundText
             }
         }
 
         var statusLabelTextColor: UIColor {
             switch self {
-            case .error: return ConfigurationLif3.Color.Semantic.defaultErrorText
-            case .none: return ConfigurationLif3.Color.Semantic.defaultSubtitleText
+            case .error: return Configuration.Color.Semantic.defaultErrorText
+            case .none: return Configuration.Color.Semantic.defaultSubtitleText
             }
         }
 
@@ -48,15 +48,15 @@ extension AmountTextField {
 
         var textFieldTextColor: UIColor {
             switch self {
-            case .error: return ConfigurationLif3.Color.Semantic.defaultErrorText
-            case .none: return ConfigurationLif3.Color.Semantic.defaultForegroundText
+            case .error: return Configuration.Color.Semantic.defaultErrorText
+            case .none: return Configuration.Color.Semantic.defaultForegroundText
             }
         }
 
         var textFieldPlaceholderTextColor: UIColor {
             switch self {
-            case .error: return ConfigurationLif3.Color.Semantic.textFieldStatus
-            case .none: return ConfigurationLif3.Color.Semantic.placeholderText
+            case .error: return Configuration.Color.Semantic.textFieldStatus
+            case .none: return Configuration.Color.Semantic.placeholderText
             }
         }
     }

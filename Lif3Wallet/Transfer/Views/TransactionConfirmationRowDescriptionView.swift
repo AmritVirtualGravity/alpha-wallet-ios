@@ -9,7 +9,7 @@ class TransactionConfirmationRowDescriptionView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = Fonts.regular(size: ScreenChecker().isNarrowScreen ? 16 : 18)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = ConfigurationLif3.Color.Semantic.defaultHeadlineText
+        titleLabel.textColor = Configuration.Color.Semantic.defaultHeadlineText
 
         return titleLabel
     }()

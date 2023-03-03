@@ -14,11 +14,11 @@ class CrashReporterViewModel {
 
         return NSAttributedString(string: R.string.localizable.analyticsDescription(), attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont,
+            .foregroundColor: Configuration.Color.Semantic.tableViewCellPrimaryFont,
             .paragraphStyle: style,
         ])
     }
-    var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+    var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
     var switchViewModel: SwitchViewViewModel {
         .init(text: R.string.localizable.analyticsShareAnonymousData(), isOn: config.sendCrashReportingEnabled ?? true)
     }

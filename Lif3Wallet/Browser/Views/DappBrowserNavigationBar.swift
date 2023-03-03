@@ -30,16 +30,16 @@ final class DappBrowserNavigationBar: UINavigationBar {
     private let stackView = UIStackView()
     private let moreButton: UIButton = {
         let moreButton = UIButton(type: .system)
-        moreButton.tintColor = ConfigurationLif3.Color.Semantic.navigationbarPrimaryFont
+        moreButton.tintColor = Configuration.Color.Semantic.navigationbarPrimaryFont
         moreButton.adjustsImageWhenHighlighted = true
         moreButton.setImage(R.image.toolbarMenu(), for: .normal)
-        moreButton.backgroundColor = ConfigurationLif3.Color.Semantic.navigationbarBackgroundColor
+        moreButton.backgroundColor = Configuration.Color.Semantic.navigationbarBackgroundColor
         return moreButton
     }()
 
     private let homeButton: UIButton = {
         let homeButton = UIButton(type: .system)
-        homeButton.tintColor = ConfigurationLif3.Color.Semantic.navigationbarPrimaryFont
+        homeButton.tintColor = Configuration.Color.Semantic.navigationbarPrimaryFont
         homeButton.adjustsImageWhenHighlighted = true
         homeButton.setImage(R.image.iconsSystemHome(), for: .normal)
 
@@ -51,24 +51,24 @@ final class DappBrowserNavigationBar: UINavigationBar {
     private let changeServerButton = UIButton(type: .system)
     private let cancelEditingButton: UIButton = {
         let cancelEditingButton = UIButton(type: .system)
-        cancelEditingButton.setTitleColor(ConfigurationLif3.Color.Semantic.navigationbarButtonItemTint, for: .normal)
+        cancelEditingButton.setTitleColor(Configuration.Color.Semantic.navigationbarButtonItemTint, for: .normal)
         //compression and hugging priority required to make cancel button appear reliably yet not be too wide
         cancelEditingButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         cancelEditingButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         cancelEditingButton.isHidden = true
         cancelEditingButton.clipsToBounds = true
-        cancelEditingButton.backgroundColor = ConfigurationLif3.Color.Semantic.backgroundClear
-        cancelEditingButton.setTitleColor(ConfigurationLif3.Color.Semantic.defaultForegroundText, for: .highlighted)
-        cancelEditingButton.setTitleColor(ConfigurationLif3.Color.Semantic.defaultForegroundText, for: .normal)
+        cancelEditingButton.backgroundColor = Configuration.Color.Semantic.backgroundClear
+        cancelEditingButton.setTitleColor(Configuration.Color.Semantic.defaultForegroundText, for: .highlighted)
+        cancelEditingButton.setTitleColor(Configuration.Color.Semantic.defaultForegroundText, for: .normal)
 
         return cancelEditingButton
     }()
     private let closeButton: UIButton = {
         let closeButton = UIButton(type: .system)
-        closeButton.tintColor = ConfigurationLif3.Color.Semantic.navigationbarPrimaryFont
+        closeButton.tintColor = Configuration.Color.Semantic.navigationbarPrimaryFont
         closeButton.isHidden = true
         closeButton.setTitle(R.string.localizable.done(), for: .normal)
-        closeButton.setTitleColor(ConfigurationLif3.Color.Semantic.navigationbarButtonItemTint, for: .normal)
+        closeButton.setTitleColor(Configuration.Color.Semantic.navigationbarButtonItemTint, for: .normal)
         closeButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         closeButton.setContentHuggingPriority(.required, for: .horizontal)
 
@@ -88,9 +88,9 @@ final class DappBrowserNavigationBar: UINavigationBar {
         textField.placeholder = R.string.localizable.browserUrlTextfieldPlaceholder()
         textField.keyboardType = .webSearch
         textField.borderStyle = .none
-        textField.backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
+        textField.backgroundColor = Configuration.Color.Semantic.textFieldBackground
         textField.layer.borderWidth = DataEntry.Metric.borderThickness
-        textField.layer.borderColor = ConfigurationLif3.Color.Semantic.borderClear.cgColor
+        textField.layer.borderColor = Configuration.Color.Semantic.borderClear.cgColor
         textField.cornerRadius = DataEntry.Metric.cornerRadius
 
         return textField
@@ -99,7 +99,7 @@ final class DappBrowserNavigationBar: UINavigationBar {
     private let domainNameLabel = UILabel()
     private let backButton: UIButton = {
         let backButton = UIButton(type: .system)
-        backButton.tintColor = ConfigurationLif3.Color.Semantic.navigationbarPrimaryFont
+        backButton.tintColor = Configuration.Color.Semantic.navigationbarPrimaryFont
         backButton.adjustsImageWhenHighlighted = true
         backButton.setImage(R.image.toolbarBack(), for: .normal)
         
@@ -107,7 +107,7 @@ final class DappBrowserNavigationBar: UINavigationBar {
     }()
     private let forwardButton: UIButton = {
         let forwardButton = UIButton(type: .system)
-        forwardButton.tintColor = ConfigurationLif3.Color.Semantic.navigationbarPrimaryFont
+        forwardButton.tintColor = Configuration.Color.Semantic.navigationbarPrimaryFont
         forwardButton.adjustsImageWhenHighlighted = true
         forwardButton.setImage(R.image.toolbarForward(), for: .normal)
 
@@ -220,7 +220,7 @@ final class DappBrowserNavigationBar: UINavigationBar {
     }
 
     func configure(server: RPCServer) {
-        let color = ConfigurationLif3.Color.Semantic.navigationbarButtonItemTint
+        let color = Configuration.Color.Semantic.navigationbarButtonItemTint
         backButton.imageView?.tintColor = color
         forwardButton.imageView?.tintColor = color
         changeServerButton.tintColor = color
@@ -338,17 +338,17 @@ extension DappBrowserNavigationBar: NavigationBarPresentable {
 extension DappBrowserNavigationBar: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = ConfigurationLif3.Color.Semantic.borderClear.cgColor
-        textField.backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
+        textField.layer.borderColor = Configuration.Color.Semantic.borderClear.cgColor
+        textField.backgroundColor = Configuration.Color.Semantic.textFieldBackground
 
         textField.dropShadow(color: .clear, radius: DataEntry.Metric.shadowRadius)
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
-        textField.layer.borderColor = ConfigurationLif3.Color.Semantic.textFieldShadowWhileEditing.cgColor
+        textField.backgroundColor = Configuration.Color.Semantic.textFieldBackground
+        textField.layer.borderColor = Configuration.Color.Semantic.textFieldShadowWhileEditing.cgColor
 
-        textField.dropShadow(color: ConfigurationLif3.Color.Semantic.textFieldShadowWhileEditing, radius: DataEntry.Metric.shadowRadius)
+        textField.dropShadow(color: Configuration.Color.Semantic.textFieldShadowWhileEditing, radius: DataEntry.Metric.shadowRadius)
     }
 
     private func queue(typedText text: String) {

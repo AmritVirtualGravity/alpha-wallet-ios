@@ -5,48 +5,48 @@ import UIKit
 import AlphaWalletFoundation
 
 func applyStyle() {
-    UIBarButtonItem.appearance(whenContainedInInstancesOf: [UIDocumentBrowserViewController.self]).tintColor = ConfigurationLif3.Color.Semantic.navigationbarButtonItemTint
+    UIBarButtonItem.appearance(whenContainedInInstancesOf: [UIDocumentBrowserViewController.self]).tintColor = Configuration.Color.Semantic.navigationbarButtonItemTint
     UIWindow.appearance().tintColor = Colors.appTint
 
-    UINavigationBar.appearance().shadowImage = UIImage(color: ConfigurationLif3.Color.Semantic.navigationbarSeparator, size: CGSize(width: 0.25, height: 0.25))
+    UINavigationBar.appearance().shadowImage = UIImage(color: Configuration.Color.Semantic.navigationbarSeparator, size: CGSize(width: 0.25, height: 0.25))
     UINavigationBar.appearance().compactAppearance = UINavigationBarAppearance.defaultAppearence
     UINavigationBar.appearance().standardAppearance = UINavigationBarAppearance.defaultAppearence
     UINavigationBar.appearance().scrollEdgeAppearance = UINavigationBarAppearance.defaultAppearence
 
     //We could have set the backBarButtonItem with an empty title for every view controller. Using appearance here, while a hack is still more convenient though, since we don't have to do it for every view controller instance
     UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -200, vertical: 0), for: .default)
-    UIBarButtonItem.appearance().tintColor = ConfigurationLif3.Color.Semantic.navigationbarButtonItemTint
-    UIBarButtonItem.appearance(whenContainedInInstancesOf: [UIToolbar.self]).tintColor = ConfigurationLif3.Color.Semantic.navigationbarButtonItemTint
+    UIBarButtonItem.appearance().tintColor = Configuration.Color.Semantic.navigationbarButtonItemTint
+    UIBarButtonItem.appearance(whenContainedInInstancesOf: [UIToolbar.self]).tintColor = Configuration.Color.Semantic.navigationbarButtonItemTint
 
     UIToolbar.appearance().tintColor = Colors.appTint
 
     //Background (not needed in iOS 12.1 on simulator)
     //Cancel button
-    UISearchBar.appearance().tintColor = ConfigurationLif3.Color.Semantic.searchbarTint
+    UISearchBar.appearance().tintColor = Configuration.Color.Semantic.searchbarTint
     //Cursor color
-    UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = ConfigurationLif3.Color.Semantic.searchbarTint
+    UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = Configuration.Color.Semantic.searchbarTint
 
-    UIRefreshControl.appearance().tintColor = ConfigurationLif3.Color.Semantic.refreshControl
+    UIRefreshControl.appearance().tintColor = Configuration.Color.Semantic.refreshControl
 
     UISwitch.appearance().onTintColor = Colors.appTint
 
-    UITableView.appearance().separatorColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+    UITableView.appearance().separatorColor = Configuration.Color.Semantic.tableViewSeparator
 }
 
 extension UINavigationBarAppearance {
     static var defaultAppearence: UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = ConfigurationLif3.Color.Semantic.navigationbarBackgroundColor
-        appearance.shadowColor = ConfigurationLif3.Color.Semantic.navigationbarSeparator
+        appearance.backgroundColor = Configuration.Color.Semantic.navigationbarBackgroundColor
+        appearance.shadowColor = Configuration.Color.Semantic.navigationbarSeparator
         appearance.shadowImage = nil
         appearance.setBackIndicatorImage(R.image.backWhite(), transitionMaskImage: R.image.backWhite())
         appearance.titleTextAttributes = [
-            .foregroundColor: ConfigurationLif3.Color.Semantic.navigationbarPrimaryFont,
+            .foregroundColor: Configuration.Color.Semantic.navigationbarPrimaryFont,
             .font: Fonts.semibold(size: 17) as Any
         ]
         appearance.largeTitleTextAttributes = [
-            .foregroundColor: ConfigurationLif3.Color.Semantic.navigationbarPrimaryFont,
+            .foregroundColor: Configuration.Color.Semantic.navigationbarPrimaryFont,
             .font: Fonts.bold(size: 36) as Any,
         ]
         //NOTE: Hides back button text
@@ -62,8 +62,8 @@ extension UITabBarAppearance {
     static var defaultAppearence: UITabBarAppearance {
         let tabBarAppearance = UITabBarAppearance()
 
-        tabBarAppearance.backgroundColor = ConfigurationLif3.Color.Semantic.tabBarBackground
-        tabBarAppearance.shadowColor = ConfigurationLif3.Color.Semantic.tabBarSeparator
+        tabBarAppearance.backgroundColor = Configuration.Color.Semantic.tabBarBackground
+        tabBarAppearance.shadowColor = Configuration.Color.Semantic.tabBarSeparator
 
         let tabBarItemAppearance = UITabBarItemAppearance()
 
@@ -86,7 +86,7 @@ extension UITabBarController {
     static func withOverridenBarAppearence(appearence tabBarAppearance: UITabBarAppearance = .defaultAppearence) -> UITabBarController {
         let tabBarController = UITabBarController()
         tabBarController.tabBar.isTranslucent = false
-        tabBarController.tabBar.tintColor = ConfigurationLif3.Color.Semantic.tabBarTint
+        tabBarController.tabBar.tintColor = Configuration.Color.Semantic.tabBarTint
         tabBarController.tabBar.standardAppearance = tabBarAppearance
 
         if #available(iOS 15.0, *) {
@@ -291,10 +291,10 @@ enum Screen {
 
     enum Backup {
         static let subtitleFont = Fonts.regular(size: ScreenChecker.size(big: 28, medium: 28, small: 22))
-        static let subtitleColor = ConfigurationLif3.Color.Semantic.alternativeText
+        static let subtitleColor = Configuration.Color.Semantic.alternativeText
         static let descriptionFont = Fonts.regular(size: ScreenChecker.size(big: 17, medium: 15, small: 15))
         static let descriptionBoldFont = Fonts.bold(size: ScreenChecker.size(big: 17, medium: 15, small: 15))
-        static let descriptionColor = ConfigurationLif3.Color.Semantic.alternativeText
+        static let descriptionColor = Configuration.Color.Semantic.alternativeText
     }
 
     enum TokenCard {
@@ -308,20 +308,20 @@ enum Screen {
         }
 
         enum Color {
-            static let title = ConfigurationLif3.Color.Semantic.defaultForegroundText
-            static let subtitle = ConfigurationLif3.Color.Semantic.defaultSubtitleText
-            static let valueChangeLabel = ConfigurationLif3.Color.Semantic.alternativeText
-            static func valueChangeValue(ticker: CoinTicker?, emptyValueColor: UIColor = ConfigurationLif3.Color.Semantic.alternativeText) -> UIColor {
+            static let title = Configuration.Color.Semantic.defaultForegroundText
+            static let subtitle = Configuration.Color.Semantic.defaultSubtitleText
+            static let valueChangeLabel = Configuration.Color.Semantic.alternativeText
+            static func valueChangeValue(ticker: CoinTicker?, emptyValueColor: UIColor = Configuration.Color.Semantic.alternativeText) -> UIColor {
                 switch TickerHelper(ticker: ticker).change24h {
                 case .appreciate:
-                    return ConfigurationLif3.Color.Semantic.appreciation
+                    return Configuration.Color.Semantic.appreciation
                 case .depreciate:
-                    return ConfigurationLif3.Color.Semantic.depreciation
+                    return Configuration.Color.Semantic.depreciation
                 case .none:
                     return emptyValueColor
                 }
             }
-            static let blockChainName = ConfigurationLif3.Color.Semantic.defaultInverseText
+            static let blockChainName = Configuration.Color.Semantic.defaultInverseText
         }
     }
 }
@@ -333,10 +333,10 @@ enum Style {
     }
 
     enum ScrollableSegmentedControl {
-        static let configuration = ScrollableSegmentedControlConfiguration(lineConfiguration: ScrollableSegmentedControlHighlightableLineViewConfiguration(lineHeight: 1.0, highlightHeight: 3.0, lineColor: ConfigurationLif3.Color.Semantic.scrollableSegmentedControlLineColor, highLightColor: ConfigurationLif3.Color.Semantic.scrollableSegmentedControllerHighlightColor), isProportionalWidth: true, cellSpacing: 10.0, alignmentWhenNotScrollable: .filled, animationDuration: 0.25, animationCurve: .easeInOut)
+        static let configuration = ScrollableSegmentedControlConfiguration(lineConfiguration: ScrollableSegmentedControlHighlightableLineViewConfiguration(lineHeight: 1.0, highlightHeight: 3.0, lineColor: Configuration.Color.Semantic.scrollableSegmentedControlLineColor, highLightColor: Configuration.Color.Semantic.scrollableSegmentedControllerHighlightColor), isProportionalWidth: true, cellSpacing: 10.0, alignmentWhenNotScrollable: .filled, animationDuration: 0.25, animationCurve: .easeInOut)
     }
     enum ScrollableSegmentedControlCell {
-        static let configuration = ScrollableSegmentedControlCellConfiguration(backgroundColor: ConfigurationLif3.Color.Semantic.scrollableSegmentedControllerBackground, highlightedTextColor: R.color.azure()!, nonHighlightedTextColor: ConfigurationLif3.Color.Semantic.scrollableSegmentedControllerNonHighlightColor, highlightedFont: Fonts.semibold(size: 15), nonHighlightedFont: Fonts.regular(size: 15), cellPadding: 8.0, textBottomPadding: 12.0)
+        static let configuration = ScrollableSegmentedControlCellConfiguration(backgroundColor: Configuration.Color.Semantic.scrollableSegmentedControllerBackground, highlightedTextColor: R.color.azure()!, nonHighlightedTextColor: Configuration.Color.Semantic.scrollableSegmentedControllerNonHighlightColor, highlightedFont: Fonts.semibold(size: 15), nonHighlightedFont: Fonts.regular(size: 15), cellPadding: 8.0, textBottomPadding: 12.0)
     }
 }
 

@@ -123,7 +123,7 @@ class SaveCustomRpcManualEntryView: UIView {
         
         let bottomView: UIView = {
             let view = UIView()
-            view.backgroundColor = ConfigurationLif3.Color.Semantic.textFieldBackground
+            view.backgroundColor = Configuration.Color.Semantic.textFieldBackground
             view.cornerRadius = 10
             view.addSubview(isTestNetworkView)
             isTestNetworkView.translatesAutoresizingMaskIntoConstraints = false

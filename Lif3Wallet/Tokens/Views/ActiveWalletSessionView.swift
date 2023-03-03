@@ -14,7 +14,7 @@ protocol ActiveWalletSessionViewDelegate: AnyObject {
 
 struct ActiveWalletSessionViewModel {
     let count: Int
-    let backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewSpecialBackground
+    let backgroundColor: UIColor = Configuration.Color.Semantic.tableViewSpecialBackground
     let icon: UIImage = R.image.walletConnectIcon()!
 
     var titleAttributedText: NSAttributedString {
@@ -24,7 +24,7 @@ struct ActiveWalletSessionViewModel {
         return .init(string: "WalletConnect", attributes: [
             .paragraphStyle: style,
             .font: Fonts.regular(size: ScreenChecker.size(big: 20, medium: 20, small: 18)),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
     }
 
@@ -40,7 +40,7 @@ struct ActiveWalletSessionViewModel {
         return .init(string: title, attributes: [
             .paragraphStyle: style,
             .font: Fonts.regular(size: ScreenChecker.size(big: 16, medium: 16, small: 14)),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
+            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
         ])
     }
 }

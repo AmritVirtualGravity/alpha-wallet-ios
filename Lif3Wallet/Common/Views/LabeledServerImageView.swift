@@ -17,7 +17,7 @@ class LabeledServerImageView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 17)
         label.numberOfLines = 0
 

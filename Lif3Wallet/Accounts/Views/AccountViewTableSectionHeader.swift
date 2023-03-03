@@ -56,8 +56,8 @@ class AccountViewTableSectionHeader: UIView {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: Fonts.semibold(size: 15),
             .paragraphStyle: paragraphStyle,
-            .backgroundColor: ConfigurationLif3.Color.Semantic.defaultViewBackground,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText]
+            .backgroundColor: Configuration.Color.Semantic.defaultViewBackground,
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText]
         let attrString = NSAttributedString(string: type.title, attributes: attributes)
         label.attributedText = attrString
         label.isHidden = shouldHide

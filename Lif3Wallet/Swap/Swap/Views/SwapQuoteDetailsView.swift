@@ -40,7 +40,7 @@ final class SwapQuoteDetailsView: UIView {
         button.setTitle("Show", for: .normal)
         button.setTitle("Hide", for: .selected)
         button.widthAnchor.constraint(equalToConstant: ScreenChecker.size(big: 50, medium: 50, small: 44)).isActive = true
-        button.tintColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+        button.tintColor = Configuration.Color.Semantic.tableViewHeaderBackground
         button.setTitleColor(Colors.appTint, for: .normal)
         button.setTitleColor(Colors.appTint, for: .selected)
 
@@ -82,7 +82,7 @@ final class SwapQuoteDetailsView: UIView {
         toggleFeesButton.addTarget(self, action: #selector(toggleFeesSelected), for: .touchUpInside)
         bind(viewModel: viewModel)
         swapFeesView.isHidden = true
-        backgroundColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+        backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
     }
 
     private func bind(viewModel: SwapQuoteDetailsViewModel) {

@@ -12,8 +12,8 @@ protocol SwitchViewDelegate: AnyObject {
 }
 
 struct SwitchViewViewModel {
-    var backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
-    var textColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont
+    var backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+    var textColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
     var font = Fonts.regular(size: 17)
 
     var text: String

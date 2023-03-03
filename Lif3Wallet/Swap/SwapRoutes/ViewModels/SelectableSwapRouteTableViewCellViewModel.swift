@@ -27,7 +27,7 @@ struct SelectableSwapRouteTableViewCellViewModel: Hashable {
 
     var swapViaExchangeAttributedString: NSAttributedString {
         return NSAttributedString(string: exchange, attributes: [
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
             .font: Fonts.regular(size: 18)
         ])
     }
@@ -39,7 +39,7 @@ struct SelectableSwapRouteTableViewCellViewModel: Hashable {
     var amountAttributedString: NSAttributedString {
         let string = NumberFormatter.shortCrypto.string(double: amount.doubleValue, minimumFractionDigits: 6, maximumFractionDigits: 8)
         return NSAttributedString(string: "\(string) \(toTokenSymbol)", attributes: [
-            .foregroundColor: ConfigurationLif3.Color.Semantic.alternativeText,
+            .foregroundColor: Configuration.Color.Semantic.alternativeText,
             .font: Fonts.bold(size: 20)
         ])
     }
@@ -54,7 +54,7 @@ struct SelectableSwapRouteTableViewCellViewModel: Hashable {
     var feesAttributedStrings: [NSAttributedString] {
         return fees.map { value -> NSAttributedString in
             return NSAttributedString(string: value, attributes: [
-                .foregroundColor: ConfigurationLif3.Color.Semantic.alternativeText,
+                .foregroundColor: Configuration.Color.Semantic.alternativeText,
                 .font: Fonts.regular(size: 16)
             ])
         }

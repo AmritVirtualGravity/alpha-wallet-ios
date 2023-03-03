@@ -14,7 +14,7 @@ class EnterKeystorePasswordViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
         label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: Fonts.regular(size: 13.0))
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
         label.text = R.string.localizable.enterPasswordPasswordHeaderPlaceholder()
         label.numberOfLines = 0
 
@@ -93,7 +93,7 @@ class EnterKeystorePasswordViewController: UIViewController {
 
     private func configure(viewModel: EnterKeystorePasswordViewModel) {
         self.viewModel = viewModel
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         navigationItem.title = viewModel.title
         passwordTextField.placeholder = viewModel.passwordFieldPlaceholder
         label.text = viewModel.headerSectionText

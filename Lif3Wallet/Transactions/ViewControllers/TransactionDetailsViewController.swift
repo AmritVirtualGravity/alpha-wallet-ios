@@ -75,7 +75,7 @@ class TransactionDetailsViewController: UIViewController {
         if viewModel.shareAvailable {
             navigationItem.rightBarButtonItem = UIBarButtonItem.actionBarButton(self, selector: #selector(shareButtonSelected))
         }
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         bind(viewModel: viewModel)
     }

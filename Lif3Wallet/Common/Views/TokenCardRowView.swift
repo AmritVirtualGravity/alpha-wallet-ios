@@ -101,7 +101,7 @@ class TokenCardRowView: UIView, TokenCardRowViewProtocol {
         row3 = [dateImageView, dateLabel, seatRangeImageView, teamsLabel, .spacerWidth(7), categoryImageView, matchLabel].asStackView(spacing: 7, contentHuggingPriority: .required)
 
         super.init(frame: .zero)
-        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         checkboxImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(checkboxImageView)

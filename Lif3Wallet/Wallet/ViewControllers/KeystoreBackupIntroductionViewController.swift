@@ -79,7 +79,7 @@ class KeystoreBackupIntroductionViewController: UIViewController {
     }
 
     func configure() {
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         title = viewModel.title
 

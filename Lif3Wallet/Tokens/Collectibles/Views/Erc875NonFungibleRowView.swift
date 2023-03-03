@@ -94,8 +94,8 @@ class Erc875NonFungibleRowView: TokenCardViewRepresentable {
         ])
 
         clipsToBounds = true
-        borderColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
-        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        borderColor = Configuration.Color.Semantic.tableViewSeparator
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         configureLayout(layout: layout)
     }
 

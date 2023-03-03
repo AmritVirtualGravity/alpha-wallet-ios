@@ -19,7 +19,7 @@ struct PriceAlertTableViewCellViewModel: Hashable {
         self.alert = alert
         titleAttributedString = .init(string: alert.title, attributes: [
             .font: Fonts.regular(size: 17),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText
         ])
         icon = alert.icon
         isSelected = alert.isEnabled

@@ -114,16 +114,16 @@ class ShowSeedPhraseIntroductionViewController: UIViewController {
     }
 
     private func configure() {
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         subtitleLabel.numberOfLines = 0
         subtitleLabel.attributedText = viewModel.attributedSubtitle
-        subtitleLabel.textColor = ConfigurationLif3.Color.Semantic.defaultTitleText
+        subtitleLabel.textColor = Configuration.Color.Semantic.defaultTitleText
         imageView.image = viewModel.imageViewImage
 
         descriptionLabel1.numberOfLines = 0
         descriptionLabel1.attributedText = viewModel.attributedDescription
-        descriptionLabel1.textColor = ConfigurationLif3.Color.Semantic.defaultTitleText
+        descriptionLabel1.textColor = Configuration.Color.Semantic.defaultTitleText
         setupContractView()
         buttonsBar.configure()
         let showSeedPhraseButton = buttonsBar.buttons[0]

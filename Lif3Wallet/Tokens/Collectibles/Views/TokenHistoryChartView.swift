@@ -22,7 +22,7 @@ class TokenHistoryChartView: UIView {
         let chartView = LineChartView()
 
         chartView.translatesAutoresizingMaskIntoConstraints = false
-        chartView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        chartView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         chartView.drawGridBackgroundEnabled = false
         chartView.drawBordersEnabled = false
         

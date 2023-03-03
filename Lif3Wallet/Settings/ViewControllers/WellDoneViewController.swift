@@ -22,7 +22,7 @@ class WellDoneViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = R.string.localizable.welldoneTitleLabelText()
         titleLabel.font = Fonts.regular(size: 30)
-        titleLabel.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        titleLabel.textColor = Configuration.Color.Semantic.defaultForegroundText
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
 
@@ -30,7 +30,7 @@ class WellDoneViewController: UIViewController {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = R.string.localizable.welldoneDescriptionLabelText()
         descriptionLabel.font = Fonts.regular(size: 18)
-        descriptionLabel.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        descriptionLabel.textColor = Configuration.Color.Semantic.defaultForegroundText
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
 
@@ -53,7 +53,7 @@ class WellDoneViewController: UIViewController {
         ].asStackView(axis: .vertical, spacing: 10, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.dialogBackground
+        view.backgroundColor = Configuration.Color.Semantic.dialogBackground
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([

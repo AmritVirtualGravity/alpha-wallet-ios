@@ -33,7 +33,7 @@ class BrowserHistoryHeaderView: UIView {
             clearButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
         ])
 
-        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
     }
 
     required init?(coder aDecoder: NSCoder) {

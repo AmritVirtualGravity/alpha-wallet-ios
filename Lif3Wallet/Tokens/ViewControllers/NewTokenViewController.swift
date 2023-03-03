@@ -98,7 +98,7 @@ class NewTokenViewController: UIViewController {
     private let buttonsBar = HorizontalButtonsBar(configuration: .primary(buttons: 1))
     private let changeServerButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(ConfigurationLif3.Color.Semantic.navigationbarButtonItemTint, for: .normal)
+        button.setTitleColor(Configuration.Color.Semantic.navigationbarButtonItemTint, for: .normal)
 
         return button
     }()
@@ -173,7 +173,7 @@ class NewTokenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         changeServerButton.addTarget(self, action: #selector(changeServerAction), for: .touchUpInside)
         configure()
     }

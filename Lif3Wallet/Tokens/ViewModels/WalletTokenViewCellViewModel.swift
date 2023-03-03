@@ -27,7 +27,7 @@ struct WalletTokenViewCellViewModel {
 
     var titleAttributedString: NSAttributedString {
         return NSAttributedString(string: token.tokenScriptOverrides?.titleInPluralForm ?? "", attributes: [
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultForegroundText,
+            .foregroundColor: Configuration.Color.Semantic.defaultForegroundText,
             .font: Screen.TokenCard.Font.title
         ])
     }

@@ -19,7 +19,7 @@ class EmptyView: UIView {
 
     init(placement: EmptyViewPlacement = EmptyViewDefaultPlacement()) {
         super.init(frame: .zero)
-        backgroundColor = ConfigurationLif3.Color.Semantic.tableViewBackground
+        backgroundColor = Configuration.Color.Semantic.tableViewBackground
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
 

@@ -9,10 +9,10 @@ struct GenerateTransferMagicLinkViewModel {
     private let assetDefinitionStore: AssetDefinitionStore
 
     var contentsBackgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultViewBackground
+        return Configuration.Color.Semantic.defaultViewBackground
     }
     var subtitleColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultForegroundText
+        return Configuration.Color.Semantic.defaultForegroundText
     }
     var subtitleFont: UIFont {
         return Fonts.regular(size: 25)
@@ -26,16 +26,16 @@ struct GenerateTransferMagicLinkViewModel {
 	}
 
     var actionButtonTitleColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultForegroundText
+        return Configuration.Color.Semantic.defaultForegroundText
     }
     var actionButtonBackgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.actionButtonBackground
+        return Configuration.Color.Semantic.actionButtonBackground
     }
     var actionButtonTitleFont: UIFont {
         return Fonts.regular(size: 20)
     }
     var cancelButtonTitleColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.cancelButtonTitle
+        return Configuration.Color.Semantic.cancelButtonTitle
     }
     var cancelButtonBackgroundColor: UIColor {
         return .clear
@@ -55,7 +55,7 @@ struct GenerateTransferMagicLinkViewModel {
     }
 
     var tokenSaleDetailsLabelColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultForegroundText
+        return Configuration.Color.Semantic.defaultForegroundText
     }
 
     var descriptionLabelText: String {
@@ -73,7 +73,7 @@ struct GenerateTransferMagicLinkViewModel {
     }
 
     var detailsBackgroundBackgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultViewBackground
+        return Configuration.Color.Semantic.defaultViewBackground
     }
 
     private var tokenCount: Int {

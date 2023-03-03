@@ -12,7 +12,7 @@ class CurrencyTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.regular(size: ScreenChecker.size(big: 16, medium: 16, small: 12))
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
 
         return label
     }()
@@ -21,7 +21,7 @@ class CurrencyTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.regular(size: ScreenChecker.size(big: 20, medium: 20, small: 16))
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
 
         return label
     }()
@@ -55,8 +55,8 @@ class CurrencyTableViewCell: UITableViewCell {
             nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12)
         ])
 
-        backgroundColor = ConfigurationLif3.Color.Semantic.tableViewCellBackground
-        contentView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewCellBackground
+        backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+        contentView.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
     }
 
     required init?(coder aDecoder: NSCoder) {

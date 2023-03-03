@@ -12,7 +12,7 @@ struct TransactionHeaderViewModel {
     var amount: NSAttributedString {
         NSAttributedString(string: transactionViewModel.fullAmountAttributedString.string, attributes: [
             .font: Fonts.semibold(size: 20) as Any,
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultHeadlineText,
+            .foregroundColor: Configuration.Color.Semantic.defaultHeadlineText,
         ])
     }
 
@@ -47,7 +47,7 @@ struct TransactionHeaderViewModel {
     }
 
     var titleTextColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultForegroundText
+        return Configuration.Color.Semantic.defaultForegroundText
     }
 
     var title: String {
@@ -94,7 +94,7 @@ class TransactionHeaderView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = Fonts.semibold(size: 17)
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultHeadlineText
+        label.textColor = Configuration.Color.Semantic.defaultHeadlineText
         label.numberOfLines = 0
         
         return label

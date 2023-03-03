@@ -22,7 +22,7 @@ class AddMultipleCustomRpcView: UIView {
         label.font = Fonts.bold(size: 17)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         return label
     }()
 
@@ -40,7 +40,7 @@ class AddMultipleCustomRpcView: UIView {
         label.text = "…"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         return label
     }()
 
@@ -50,7 +50,7 @@ class AddMultipleCustomRpcView: UIView {
         label.text = "-"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         return label
     }()
 
@@ -80,7 +80,7 @@ class AddMultipleCustomRpcView: UIView {
         configureNetworkNameLabel()
         configureProgressLabel()
         configureButton()
-        backgroundColor = ConfigurationLif3.Color.Semantic.progressDialogBackground
+        backgroundColor = Configuration.Color.Semantic.progressDialogBackground
         layer.cornerRadius = 25.0
     }
 

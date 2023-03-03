@@ -82,7 +82,7 @@ class TokenInstanceActionViewController: UIViewController, TokenVerifiableStatus
 
         updateNavigationRightBarButtons(withTokenScriptFileStatus: nil)
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         roundedBackground.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(roundedBackground)

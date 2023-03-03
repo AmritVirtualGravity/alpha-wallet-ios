@@ -31,8 +31,8 @@ class TextView: UIControl {
         let button = Button(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.sendPasteButtonTitle(), for: .normal)
-        button.titleLabel?.font = ConfigurationLif3.Font.accessory
-        button.setTitleColor(ConfigurationLif3.Color.Semantic.icon, for: .normal)
+        button.titleLabel?.font = Configuration.Font.accessory
+        button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
         button.setBackgroundColor(.clear, forState: .normal)
         button.contentHorizontalAlignment = .right
         button.heightConstraint.flatMap { NSLayoutConstraint.deactivate([$0]) }
@@ -45,8 +45,8 @@ class TextView: UIControl {
         let button = Button(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.clearButtonTitle(), for: .normal)
-        button.titleLabel?.font = ConfigurationLif3.Font.accessory
-        button.setTitleColor(ConfigurationLif3.Color.Semantic.icon, for: .normal)
+        button.titleLabel?.font = Configuration.Font.accessory
+        button.setTitleColor(Configuration.Color.Semantic.icon, for: .normal)
         button.setBackgroundColor(.clear, forState: .normal)
         button.contentHorizontalAlignment = .right
         button.heightConstraint.flatMap { NSLayoutConstraint.deactivate([$0]) }
@@ -58,8 +58,8 @@ class TextView: UIControl {
     let statusLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = ConfigurationLif3.Font.textFieldStatus
-        label.textColor = ConfigurationLif3.Color.Semantic.textFieldStatus
+        label.font = Configuration.Font.textFieldStatus
+        label.textColor = Configuration.Color.Semantic.textFieldStatus
 
         return label
     }()
@@ -69,9 +69,9 @@ class TextView: UIControl {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.delegate = self
         textView.textContainerInset = .init(top: 10, left: 12, bottom: 10, right: 12)
-        textView.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
-        textView.font = ConfigurationLif3.Font.text
-        textView.layer.borderColor = ConfigurationLif3.Color.Semantic.border.cgColor
+        textView.textColor = Configuration.Color.Semantic.defaultForegroundText
+        textView.font = Configuration.Font.text
+        textView.layer.borderColor = Configuration.Color.Semantic.border.cgColor
         textView.layer.borderWidth = DataEntry.Metric.borderThickness
         textView.layer.cornerRadius = DataEntry.Metric.cornerRadius
         textView.backgroundColor = .clear
@@ -82,8 +82,8 @@ class TextView: UIControl {
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = ConfigurationLif3.Font.textFieldTitle
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        label.font = Configuration.Font.textFieldTitle
+        label.textColor = Configuration.Color.Semantic.defaultSubtitleText
 
         return label
     }()
@@ -168,7 +168,7 @@ class TextView: UIControl {
 
         cornerRadius = DataEntry.Metric.cornerRadius
         layer.borderWidth = DataEntry.Metric.borderThickness
-        backgroundColor = ConfigurationLif3.Color.Semantic.textViewBackground
+        backgroundColor = Configuration.Color.Semantic.textViewBackground
         layer.borderColor = errorState.textFieldBorderColor(whileEditing: isFirstResponder).cgColor
         errorState = .none
     }
@@ -201,7 +201,7 @@ class TextView: UIControl {
         ])
 
         let view = UIView()
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(stackView)
@@ -266,7 +266,7 @@ extension TextView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         let borderColor = errorState.textFieldBorderColor(whileEditing: true)
         layer.borderColor = borderColor.cgColor
-        backgroundColor = ConfigurationLif3.Color.Semantic.textViewBackground
+        backgroundColor = Configuration.Color.Semantic.textViewBackground
 
         dropShadow(color: borderColor, radius: DataEntry.Metric.shadowRadius)
     }
@@ -275,7 +275,7 @@ extension TextView: UITextViewDelegate {
         let borderColor = errorState.textFieldBorderColor(whileEditing: false)
         let shouldDropShadow = errorState.textFieldShowShadow(whileEditing: false)
         layer.borderColor = borderColor.cgColor
-        backgroundColor = ConfigurationLif3.Color.Semantic.textViewBackground
+        backgroundColor = Configuration.Color.Semantic.textViewBackground
 
         dropShadow(color: shouldDropShadow ? borderColor : .clear, radius: DataEntry.Metric.shadowRadius)
     }

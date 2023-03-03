@@ -22,11 +22,11 @@ struct SelectableSwapToolTableViewCellViewModel: Hashable {
     var infoViewModel: InformationViewModel {
         let title = NSAttributedString(string: name, attributes: [
             .font: Fonts.regular(size: 18),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultTitleText
+            .foregroundColor: Configuration.Color.Semantic.defaultTitleText
         ])
         let description = NSAttributedString(string: name, attributes: [
             .font: Fonts.regular(size: 16),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultSubtitleText
+            .foregroundColor: Configuration.Color.Semantic.defaultSubtitleText
         ])
         return InformationViewModel(title: title, description: description)
     }

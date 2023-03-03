@@ -11,15 +11,15 @@ import AlphaWalletFoundation
 struct SelectableSlippageViewModel {
     let value: SwapSlippage
     var borderWidth: CGFloat = 1
-    var borderColor: UIColor = ConfigurationLif3.Color.Semantic.secondaryButtonTextInactive
+    var borderColor: UIColor = Configuration.Color.Semantic.secondaryButtonTextInactive
     var cornerRadius: CGFloat = 4.0
     var isSelected: Bool
     var backgroundColor: UIColor {
-        return isSelected ? ConfigurationLif3.Color.Semantic.periodButtonNormalText : ConfigurationLif3.Color.Semantic.periodButtonNormalBackground
+        return isSelected ? Configuration.Color.Semantic.periodButtonNormalText : Configuration.Color.Semantic.periodButtonNormalBackground
     }
 
     var titleAttributedString: NSAttributedString {
-        let textColor: UIColor = isSelected ? ConfigurationLif3.Color.Semantic.defaultInverseText : ConfigurationLif3.Color.Semantic.defaultForegroundText
+        let textColor: UIColor = isSelected ? Configuration.Color.Semantic.defaultInverseText : Configuration.Color.Semantic.defaultForegroundText
         return .init(string: value.title, attributes: [
             .font: Fonts.regular(size: 17),
             .foregroundColor: textColor

@@ -86,7 +86,7 @@ class EditPriceAlertViewController: UIViewController {
         super.viewDidLoad()
 
         saveButton.setTitle(R.string.localizable.priceAlertSet(), for: .normal)
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         bind(viewModel: viewModel)
     }

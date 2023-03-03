@@ -109,7 +109,7 @@ class WalletConnectSessionViewController: UIViewController {
         super.viewDidLoad()
 
         hidesBottomBarWhenPushed = true
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         changeNetworksButton.addTarget(self, action: #selector(switchNetworkButtonSelected), for: .touchUpInside)
 
         bind(viewModel: viewModel)

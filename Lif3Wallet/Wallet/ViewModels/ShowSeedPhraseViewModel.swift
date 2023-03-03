@@ -14,7 +14,7 @@ struct ShowSeedPhraseViewModel {
     var buttonTitle: String = R.string.localizable.walletsShowSeedPhraseTestSeedPhrase()
     
     var subtitleColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultSubtitleText
+        return Configuration.Color.Semantic.defaultSubtitleText
     }
 
     var subtitleFont: UIFont {
@@ -22,7 +22,7 @@ struct ShowSeedPhraseViewModel {
     }
 
     var errorColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultErrorText
+        return Configuration.Color.Semantic.defaultErrorText
     }
 
     var errorFont: UIFont {

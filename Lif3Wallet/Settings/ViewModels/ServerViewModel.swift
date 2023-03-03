@@ -48,8 +48,8 @@ struct ServerImageViewModel: ServerImageTableViewCellViewModelType, Hashable {
         self.warningImage = warningImage
     }
 
-    var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewBackground
-    var serverColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont
+    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewBackground
+    var serverColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
     var selectionStyle: UITableViewCell.SelectionStyle = .default
     var accessoryImage: UIImage? {
         isSelected ? R.image.iconsSystemCheckboxOn() : R.image.iconsSystemCheckboxOff()
@@ -58,7 +58,7 @@ struct ServerImageViewModel: ServerImageTableViewCellViewModelType, Hashable {
         return server.displayName
     }
     var primaryFont: UIFont = Fonts.regular(size: 20)
-    var primaryFontColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont
+    var primaryFontColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
 
     var secondaryText: String {
         switch server {
@@ -70,7 +70,7 @@ struct ServerImageViewModel: ServerImageTableViewCellViewModelType, Hashable {
 
     }
     var secondaryFont: UIFont = Fonts.regular(size: 15)
-    var secondaryFontColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewCellSecondaryFont
+    var secondaryFontColor: UIColor = Configuration.Color.Semantic.tableViewCellSecondaryFont
 }
 
 struct TokenListServerTableViewCellViewModel: ServerTableViewCellViewModelType {
@@ -83,9 +83,9 @@ struct TokenListServerTableViewCellViewModel: ServerTableViewCellViewModelType {
     }
 
     var accessoryType: UITableViewCell.AccessoryType = LocaleViewCell.selectionAccessoryType.unselected
-    var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewHeaderBackground
     var serverFont: UIFont = Fonts.semibold(size: 15)
-    var serverColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewCellSecondaryFont
+    var serverColor: UIColor = Configuration.Color.Semantic.tableViewCellSecondaryFont
     var serverName: String {
         return server.displayName.uppercased()
     }

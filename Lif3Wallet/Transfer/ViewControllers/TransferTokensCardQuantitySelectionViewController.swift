@@ -13,7 +13,7 @@ class TransferTokensCardQuantitySelectionViewController: UIViewController, Token
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        label.textColor = Configuration.Color.Semantic.defaultForegroundText
         label.font = Fonts.regular(size: 10)
 
         return label
@@ -103,7 +103,7 @@ class TransferTokensCardQuantitySelectionViewController: UIViewController, Token
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         buttonsBar.configure()
         let nextButton = buttonsBar.buttons[0]

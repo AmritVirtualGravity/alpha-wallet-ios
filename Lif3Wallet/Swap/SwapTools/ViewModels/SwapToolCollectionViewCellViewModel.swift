@@ -17,7 +17,7 @@ struct SwapToolCollectionViewCellViewModel: Hashable {
         return NSAttributedString(string: name, attributes: [
             .paragraphStyle: style,
             .font: Fonts.regular(size: 18),
-            .foregroundColor: ConfigurationLif3.Color.Semantic.defaultTitleText
+            .foregroundColor: Configuration.Color.Semantic.defaultTitleText
         ])
     }
 }

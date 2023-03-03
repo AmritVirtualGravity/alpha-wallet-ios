@@ -28,7 +28,7 @@ struct MyDappCellViewModel: Hashable {
     }
 
     var backgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultViewBackground
+        return Configuration.Color.Semantic.defaultViewBackground
     }
 
     var nameFont: UIFont {
@@ -48,7 +48,7 @@ struct MyDappCellViewModel: Hashable {
     }
 
     var imageViewShadowColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.shadow
+        return Configuration.Color.Semantic.shadow
     }
 
     var imageViewShadowOffset: CGSize {

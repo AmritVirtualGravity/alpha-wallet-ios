@@ -339,7 +339,7 @@ extension AccountsViewModel {
         var backgroundColor: UIColor {
             switch self {
             case .copyToClipboard: return Colors.appTint
-            case .deleteWallet: return ConfigurationLif3.Color.Semantic.dangerBackground
+            case .deleteWallet: return Configuration.Color.Semantic.dangerBackground
             }
         }
     }

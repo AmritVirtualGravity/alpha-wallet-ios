@@ -27,7 +27,7 @@ extension SwapStepsView {
         private var indicatorView: UIView = {
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultHeadlineText
+            view.backgroundColor = Configuration.Color.Semantic.defaultHeadlineText
             view.cornerRadius = 5
             view.heightAnchor.constraint(equalToConstant: 10).isActive = true
             view.widthAnchor.constraint(equalToConstant: 10).isActive = true
@@ -69,7 +69,7 @@ extension SwapStepsView {
         }
 
         private func configure(viewModel: SwapStepsViewModel.SwapStepViewModel) {
-            backgroundColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+            backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
             toolLabel.attributedText = viewModel.toolAttributedString
             descriptionLabel.attributedText = viewModel.descriptionAttributedString
 
@@ -103,7 +103,7 @@ extension SwapStepsView {
             ])
 
             configure(viewModel: viewModel)
-            backgroundColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+            backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
         }
 
         private func configure(viewModel: SwapStepsViewModel.SwapSubStepViewModel) {

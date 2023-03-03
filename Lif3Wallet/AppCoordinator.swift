@@ -88,7 +88,7 @@ class AppCoordinator: NSObject, Coordinator {
         let service = TokenActionsService()
         service.register(service: BuyTokenProvider(subProviders: [
             Coinbase(action: R.string.localizable.aWalletTokenBuyOnCoinbaseTitle()),
-            Ramp(action: R.string.localizable.aWalletTokenBuyOnRampTitle(), networkProvider: RampNetworkProvider(networkService: networkService))
+            Lif3Ramp(action: R.string.localizable.aWalletTokenBuyOnRampTitle(), networkProvider: RampNetworkProvider(networkService: networkService))
         ], action: R.string.localizable.aWalletTokenBuyTitle()))
 
         let honeySwapService = HoneySwap(action: R.string.localizable.aWalletTokenErc20ExchangeHoneyswapButtonTitle())
@@ -242,7 +242,7 @@ class AppCoordinator: NSObject, Coordinator {
             legacyFileBasedKeystore: legacyFileBasedKeystore)
 
         let navigationController: UINavigationController = .withOverridenBarAppearence()
-        navigationController.view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        navigationController.view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
 
         let coordinator = AppCoordinator(
             window: window,

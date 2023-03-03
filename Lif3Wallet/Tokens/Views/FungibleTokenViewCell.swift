@@ -61,9 +61,9 @@ class FungibleTokenViewCell: UITableViewCell {
     func configure(viewModel: FungibleTokenViewCellViewModel) {
         selectionStyle = .none
 
-        backgroundColor = ConfigurationLif3.Color.Semantic.tableViewCellBackground
-        background.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewCellBackground
-        contentView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewCellBackground
+        backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+        background.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+        contentView.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
 
         titleLabel.attributedText = viewModel.titleAttributedString
         titleLabel.baselineAdjustment = .alignCenters

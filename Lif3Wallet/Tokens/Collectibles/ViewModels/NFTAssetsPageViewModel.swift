@@ -27,7 +27,7 @@ final class NFTAssetsPageViewModel {
 
     var layout: GridOrListLayout { layoutSubject.value }
     var title: String { R.string.localizable.semifungiblesAssetsTitle() }
-    var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+    var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
 
     var spacingForGridLayout: CGFloat {
         switch token.type {

@@ -18,8 +18,8 @@ class SelfResizedTextView: UITextView {
 
     init() {
         super.init(frame: .zero, textContainer: nil)
-        backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
-        textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        textColor = Configuration.Color.Semantic.defaultForegroundText
         
         self.translatesAutoresizingMaskIntoConstraints = false
         scrollViewContentSizeObserver = self.observe(\SelfResizedTextView.contentSize, options: [.new]) { [weak self] (_, change) in

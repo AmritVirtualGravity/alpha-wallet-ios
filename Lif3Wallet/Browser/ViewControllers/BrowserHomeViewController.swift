@@ -76,7 +76,7 @@ class BrowserHomeViewController: UIViewController {
         collectionView.registerSupplementaryView(DappsHomeViewControllerHeaderView.self, of: UICollectionView.elementKindSectionHeader)
         collectionView.register(DappViewCell.self)
         
-        collectionView.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        collectionView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         collectionView.delegate = self
 
         return collectionView
@@ -108,7 +108,7 @@ class BrowserHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
     }
 

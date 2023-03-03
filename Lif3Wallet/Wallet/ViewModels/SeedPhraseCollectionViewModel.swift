@@ -11,7 +11,7 @@ struct SeedPhraseCollectionViewModel {
     let shouldShowSequenceNumber: Bool
 
     var backgroundColor: UIColor {
-        return ConfigurationLif3.Color.Semantic.defaultViewBackground
+        return Configuration.Color.Semantic.defaultViewBackground
     }
 
     var seedPhraseWordCount: Int {

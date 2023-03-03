@@ -677,22 +677,22 @@ extension TokensViewController.functional {
 }
 
 extension UISearchBar {
-    static func configure(searchBar: UISearchBar, backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.searchbarBackground) {
+    static func configure(searchBar: UISearchBar, backgroundColor: UIColor = Configuration.Color.Semantic.searchbarBackground) {
         if let placeholderLabel = searchBar.firstSubview(ofType: UILabel.self) {
             placeholderLabel.textColor = Colors.lightGray
         }
         if let textField = searchBar.firstSubview(ofType: UITextField.self) {
-            textField.textColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+            textField.textColor = Configuration.Color.Semantic.defaultForegroundText
             if let imageView = textField.leftView as? UIImageView {
                 imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-                imageView.tintColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+                imageView.tintColor = Configuration.Color.Semantic.defaultForegroundText
             }
         }
         //Hack to hide the horizontal separator below the search bar
         searchBar.superview?.firstSubview(ofType: UIImageView.self)?.isHidden = true
         //Remove border line
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = ConfigurationLif3.Color.Semantic.borderClear.cgColor
+        searchBar.layer.borderColor = Configuration.Color.Semantic.borderClear.cgColor
         searchBar.backgroundImage = UIImage()
         searchBar.placeholder = R.string.localizable.tokensSearchbarPlaceholder()
         searchBar.backgroundColor = backgroundColor

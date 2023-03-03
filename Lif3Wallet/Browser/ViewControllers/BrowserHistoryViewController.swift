@@ -54,7 +54,7 @@ final class BrowserHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         buildTableViewHeader()
         bind(viewModel: viewModel)
     }
@@ -148,7 +148,7 @@ extension BrowserHistoryViewController: UITableViewDelegate {
             }
         }
 
-        deleteAction.backgroundColor = ConfigurationLif3.Color.Semantic.dangerBackground
+        deleteAction.backgroundColor = Configuration.Color.Semantic.dangerBackground
         deleteAction.image = R.image.hideToken()
 
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])

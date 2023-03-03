@@ -23,7 +23,7 @@ struct PopularTokenViewCellViewModel {
 
     var titleAttributedString: NSAttributedString {
         return NSAttributedString(string: title, attributes: [
-            .foregroundColor: ConfigurationLif3.Color.Semantic.tableViewCellPrimaryFont,
+            .foregroundColor: Configuration.Color.Semantic.tableViewCellPrimaryFont,
             .font: Screen.TokenCard.Font.title
         ])
     }

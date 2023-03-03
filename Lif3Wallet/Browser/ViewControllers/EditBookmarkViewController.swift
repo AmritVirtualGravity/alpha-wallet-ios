@@ -101,7 +101,7 @@ class EditBookmarkViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.defaultViewBackground
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         buttonsBar.buttons[0].setTitle(R.string.localizable.save(), for: .normal)
         bind(viewModel: viewModel)
     }

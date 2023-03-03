@@ -9,10 +9,10 @@ import UIKit
 
 struct AddHideTokenSectionHeaderViewModel {
     let titleText: String
-    var separatorColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewSeparator
+    var separatorColor: UIColor = Configuration.Color.Semantic.tableViewSeparator
     var titleTextFont: UIFont = Fonts.bold(size: 24)
-    var titleTextColor: UIColor = ConfigurationLif3.Color.Semantic.defaultForegroundText
+    var titleTextColor: UIColor = Configuration.Color.Semantic.defaultForegroundText
 
-    var backgroundColor: UIColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewHeaderBackground
     var showTopSeparator: Bool = false
 }

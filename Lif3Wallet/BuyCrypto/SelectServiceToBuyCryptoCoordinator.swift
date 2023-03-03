@@ -51,7 +51,7 @@ class SelectServiceToBuyCryptoCoordinator: Coordinator {
 //        coordinator.delegate = self
 //        addCoordinator(coordinator)
 //        coordinator.start(wallet: wallet)
-        var configuration = Configuration()
+        var configuration = Ramp.Configuration()
         let isFromPopAction = UserDefaults.standard.bool(forKey: "FromPupAction")
        
         configuration.swapAsset = isFromPopAction ? "" :  getSwapAsset(for: token)

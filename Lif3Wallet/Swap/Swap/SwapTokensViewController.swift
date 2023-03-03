@@ -116,8 +116,8 @@ class SwapTokensViewController: UIViewController {
         toAmountTextField.selectCurrencyButton.addTarget(self, action: #selector(chooseTokenSelected), for: .touchUpInside)
         fromAmountTextField.selectCurrencyButton.addTarget(self, action: #selector(chooseTokenSelected), for: .touchUpInside)
 
-        containerView.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
-        view.backgroundColor = ConfigurationLif3.Color.Semantic.tableViewHeaderBackground
+        containerView.backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
+        view.backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
         title = viewModel.title
         fromTokenHeaderView.configure(viewModel: viewModel.fromHeaderViewModel)
         toTokenHeaderView.configure(viewModel: viewModel.toHeaderViewModel)

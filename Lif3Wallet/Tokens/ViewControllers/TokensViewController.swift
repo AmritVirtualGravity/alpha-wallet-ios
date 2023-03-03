@@ -185,10 +185,16 @@ final class TokensViewController: UIViewController {
 //        view.addSubview(footerBar)
 
         NSLayoutConstraint.activate([
+//            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            bottomConstraint,
+            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bottomConstraint,
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
             emptyTableView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
             emptyTableViewHeightConstraint,
 //            footerBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

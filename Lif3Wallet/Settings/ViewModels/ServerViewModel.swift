@@ -48,7 +48,7 @@ struct ServerImageViewModel: ServerImageTableViewCellViewModelType, Hashable {
         self.warningImage = warningImage
     }
 
-    var backgroundColor: UIColor = Configuration.Color.Semantic.tableViewBackground
+    var backgroundColor: UIColor = Configuration.Color.Semantic.defaultViewBackground
     var serverColor: UIColor = Configuration.Color.Semantic.tableViewCellPrimaryFont
     var selectionStyle: UITableViewCell.SelectionStyle = .default
     var accessoryImage: UIImage? {

@@ -44,7 +44,7 @@ class SwapOptionsViewController: UIViewController {
         let tableView = UITableView.selfSizingTableView
         tableView.register(RPCDisplaySelectableTableViewCell.self)
         tableView.delegate = self
-
+        tableView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         return tableView
     }()
     private lazy var swapToolsView: SelectedSwapToolsCollectionView = {
@@ -78,6 +78,7 @@ class SwapOptionsViewController: UIViewController {
             swapToolsView.adjusted(),
             .spacer(height: 10),
             networkHeaderView.adjusted(),
+            .spacer(height: 10),
             tableView
         ])
 

@@ -31,12 +31,12 @@ final class SwapToolCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func configure(viewModel: SwapToolCollectionViewCellViewModel) {
         cornerRadius = 7
-           self.borderColor = Configuration.Color.Semantic.seedPhraseContractViewBorderColor
-           self.borderWidth = 1
-           backgroundColor = Configuration.Color.Semantic.preferedBridgesToolsBackgroundColor
-           label.attributedText = viewModel.nameAttributedString
+        self.borderColor = Configuration.Color.Semantic.seedPhraseContractViewBorderColor
+        self.borderWidth = 1
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        label.attributedText = viewModel.nameAttributedString
     }
 }

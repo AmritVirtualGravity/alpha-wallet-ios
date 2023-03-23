@@ -61,7 +61,7 @@ class ServerTableViewCell: UITableViewCell {
         priceChangeLabel.textAlignment = .right
         priceChangeLabel.font          = viewModel.serverFont
         priceChangeLabel.textColor     = viewModel.serverColor
-        priceChangeLabel.text          = "$23,329.43"
+        priceChangeLabel.text          = viewModel.sum.rC.dollar
         let url = returnServerImageUrl(symbol: viewModel.serverSymbol)
         
         if let imageUrl = URL(string: url) {

@@ -382,7 +382,7 @@ final class TokensViewModel {
         case .tokens:
             switch tokenOrServer(at: indexPath) {
             case .rpcServer(let server, let sum):
-                let viewModel = TokenListServerTableViewCellViewModel(server: server, isTopSeparatorHidden: true)
+                let viewModel = TokenListServerTableViewCellViewModel(server: server, isTopSeparatorHidden: true, sum: sum)
                 
                 return .rpcServer(viewModel)
             case .token(let token):
@@ -754,12 +754,13 @@ extension TokensViewModel.functional {
                     .map {
                         TokensViewModel.TokenOrRpcServer.token($0)
                     }
-                 totalSum = filteredTokens.map({ $0.token?.balance.valueDecimal ?? 0 }).reduce(0.0, +)
+                 totalSum = filteredTokens.map({ Decimal($0.token?.balance.amountInFiat ?? 0) }).reduce(0.0, +)
                 
             } else {
                 filteredTokens = filterBlackListedToken(tokens: tokens).filter { $0.server == each }
                     .map { TokensViewModel.TokenOrRpcServer.token($0) }
-                totalSum = filteredTokens.map({ $0.token?.balance.valueDecimal ?? 0 }).reduce(0.0, +)
+                totalSum = filteredTokens.map({ Decimal($0.token?.balance.amountInFiat ?? 0) }).reduce(0.0, +)
+               
             }
             guard !tokens.isEmpty else { continue }
             results.append(.rpcServer(each, totalSum))

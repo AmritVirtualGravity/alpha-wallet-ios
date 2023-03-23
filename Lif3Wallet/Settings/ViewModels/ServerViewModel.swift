@@ -77,9 +77,10 @@ struct TokenListServerTableViewCellViewModel: ServerTableViewCellViewModelType {
     private let server: RPCServer
     let isTopSeparatorHidden: Bool
 
-    init(server: RPCServer, isTopSeparatorHidden: Bool) {
+    init(server: RPCServer, isTopSeparatorHidden: Bool, sum: Decimal) {
         self.server = server
         self.isTopSeparatorHidden = isTopSeparatorHidden
+        self.sum = sum
     }
 
     var accessoryType: UITableViewCell.AccessoryType = LocaleViewCell.selectionAccessoryType.unselected
@@ -93,7 +94,7 @@ struct TokenListServerTableViewCellViewModel: ServerTableViewCellViewModelType {
         return server.symbol.uppercased()
     }
     
-//    var sumAmount: String
+    var sum: Decimal
     
     var selectionStyle: UITableViewCell.SelectionStyle = .none
 }

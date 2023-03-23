@@ -16,6 +16,11 @@ struct Lif3ViewModel: Codable {
            AF.request(lif3NewsUrl, method: .get, encoding: URLEncoding.default).responseJSON
            { response in
                guard let data = response.data else { return }
+               print("URL: \n\(lif3NewsUrl)\n Header:\n\(CurrentHeaderBodyParameter.header?.allHTTPHeaderFields?.jsonStringFormat1 ?? "") \n Body: \n\(CurrentHeaderBodyParameter.body.jsonStringFormat )\n Response: \n\(data.jsonString ?? "")")
+               CurrentHeaderBodyParameter.url = nil
+               CurrentHeaderBodyParameter.body = nil
+               CurrentHeaderBodyParameter.header = nil
+
                do {
                    let decoder = JSONDecoder()
                    let lif3News = try decoder.decode(Lif3NewsModel.self, from: data)

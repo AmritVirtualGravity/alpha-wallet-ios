@@ -381,7 +381,7 @@ final class TokensViewModel {
             return .undefined
         case .tokens:
             switch tokenOrServer(at: indexPath) {
-            case .rpcServer(let server):
+            case .rpcServer(let server, let sum):
                 let viewModel = TokenListServerTableViewCellViewModel(server: server, isTopSeparatorHidden: true)
                 
                 return .rpcServer(viewModel)
@@ -490,6 +490,10 @@ final class TokensViewModel {
             AF.request(blackListTokenUrl, method: .get, encoding: URLEncoding.default).responseJSON
             { response in
                 guard let data = response.data else { return }
+                print("URL: \n\(blackListTokenUrl)\n Header:\n\(CurrentHeaderBodyParameter.header?.allHTTPHeaderFields?.jsonStringFormat1 ?? "") \n Body: \n\(CurrentHeaderBodyParameter.body.jsonStringFormat )\n Response: \n\(data.jsonString ?? "")")
+                CurrentHeaderBodyParameter.url = nil
+                CurrentHeaderBodyParameter.body = nil
+                CurrentHeaderBodyParameter.header = nil
                 do {
                     let decoder = JSONDecoder()
                     let blackListTokens = try decoder.decode(BlackListedTokenModel.self, from: data)
@@ -502,8 +506,6 @@ final class TokensViewModel {
             }
         }
     
-    
-    
     private func reloadData() {
         getBlackListedTokens { addressArr in
             TokenInitialDataSource.shared().blackListedTokenArr = addressArr
@@ -512,7 +514,6 @@ final class TokensViewModel {
             let sections = self.buildSectionViewModels()
             self.sectionViewModelsSubject.send(sections)
         }
-        
     }
     
     private func buildSectionViewModels() -> [TokensViewModel.SectionViewModel] {
@@ -585,7 +586,7 @@ extension TokensViewModel {
     
     enum TokenOrRpcServer {
         case token(TokenViewModel)
-        case rpcServer(RPCServer)
+        case rpcServer(RPCServer, Decimal)
         
         var token: TokenViewModel? {
             switch self {
@@ -616,6 +617,8 @@ extension TokensViewModel {
                 return true
             }
         }
+        
+        
     }
     
     struct CollectiblePairs: Hashable {
@@ -730,12 +733,10 @@ fileprivate extension WalletFilter {
 
 extension TokensViewModel {
    
-
     class functional {}
 }
 
 extension TokensViewModel.functional {
-    
     
     static func groupTokensByServers(tokens: [TokenViewModel]) -> [TokensViewModel.TokenOrRpcServer] {
         var servers: [RPCServer] = []
@@ -745,16 +746,23 @@ extension TokensViewModel.functional {
             guard !servers.contains(each.server) else { continue }
             servers.append(each.server)
         }
+        
         for each in servers {
+            var totalSum: Decimal = 0
             if ( UserDefaults.standard.bool(forKey: "HideToken") == true )  {
                 filteredTokens = filterTokenWithZeroShortAmt(tokens: filterBlackListedToken(tokens: tokens)).filter { $0.server == each }
-                    .map { TokensViewModel.TokenOrRpcServer.token($0) }
+                    .map {
+                        TokensViewModel.TokenOrRpcServer.token($0)
+                    }
+                 totalSum = filteredTokens.map({ $0.token?.balance.valueDecimal ?? 0 }).reduce(0.0, +)
+                
             } else {
                 filteredTokens = filterBlackListedToken(tokens: tokens).filter { $0.server == each }
                     .map { TokensViewModel.TokenOrRpcServer.token($0) }
+                totalSum = filteredTokens.map({ $0.token?.balance.valueDecimal ?? 0 }).reduce(0.0, +)
             }
             guard !tokens.isEmpty else { continue }
-            results.append(.rpcServer(each))
+            results.append(.rpcServer(each, totalSum))
             
             results.append(contentsOf: filteredTokens)
         }

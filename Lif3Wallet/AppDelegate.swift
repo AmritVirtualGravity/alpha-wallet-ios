@@ -8,6 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appCoordinator: AppCoordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        printChangedViewControllerEveryTime()
         do {
             
             // register coder, on AppDelegate
@@ -60,4 +61,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         //no op
     }
+}
+
+
+
+// MARK: Print Current VC
+extension AppDelegate {
+    func printChangedViewControllerEveryTime(previousViewController: String = "") {
+        let currentViewController = String(describing: type(of: UIApplication.topViewController() ?? UIViewController()))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if (currentViewController != previousViewController) {
+                print("\n---------------- \(currentViewController.replacingOccurrences(of: "ViewController", with: "")) ------------------- ")
+            }
+            self.printChangedViewControllerEveryTime(previousViewController: currentViewController)
+        }
+    }
+    
 }

@@ -92,6 +92,9 @@ struct TokenListServerTableViewCellViewModel: ServerTableViewCellViewModelType {
     var serverSymbol:String {
         return server.symbol.uppercased()
     }
+    
+//    var sumAmount: String
+    
     var selectionStyle: UITableViewCell.SelectionStyle = .none
 }
 

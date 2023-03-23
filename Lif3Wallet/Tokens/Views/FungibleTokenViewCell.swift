@@ -30,8 +30,8 @@ class FungibleTokenViewCell: UITableViewCell {
 
         contentView.addSubview(background)
         background.translatesAutoresizingMaskIntoConstraints = false
-        priceChangeLabel.textAlignment = .center
-        fiatValueLabel.textAlignment = .center
+        priceChangeLabel.textAlignment                       = .center
+        fiatValueLabel.textAlignment                         = .center
         fiatValueLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         fiatValueLabel.setContentHuggingPriority(.required, for: .horizontal)
 

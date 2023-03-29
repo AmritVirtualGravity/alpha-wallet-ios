@@ -108,9 +108,10 @@ struct companySection: View {
             .padding( 10)
             
             ForEach(company, id: \.self) { company in
-                Link(destination: URL(string: "https://www.apple.com")!) {
-                    CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
-                }
+                CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+//                Link(destination: URL(string: "https://www.apple.com")!) {
+//                    CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+//                }
             }
         }
         

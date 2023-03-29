@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import AlphaWalletFoundation
+import SwiftUI
 
 protocol FungibleTokenDetailsViewControllerDelegate: AnyObject, CanOpenURL {
     func didTapSwap(swapTokenFlow: SwapTokenFlow, in viewController: FungibleTokenDetailsViewController)
@@ -126,9 +127,10 @@ class FungibleTokenDetailsViewController: UIViewController {
             case .stakeSwap:
                 let buttonsStackView = [
                     //todo: hidden for now. Showed after stake feature implementation
-//                    stakeButton,
+                    stakeButton,
                     swapButton
                 ].asStackView(axis: .horizontal)
+                buttonsStackView.distribution = .fillEqually
                 subviews += [buttonsStackView]
                 subviews += [UIView.spacer(height: 20)]
             }
@@ -220,6 +222,7 @@ class FungibleTokenDetailsViewController: UIViewController {
     @objc private func didTapStake(_ sender: UIButton) {
         print("Stake button tapped")
 //        delegate?.didTapSwap(swapTokenFlow:  .swapToken(token: viewModel.token), in: self)
+        self.gotoPools()
     }
 
 }
@@ -233,3 +236,14 @@ extension FungibleTokenDetailsViewController: FungibleTokenHeaderViewDelegate {
 
 
 
+// MARK: Navigation
+extension FungibleTokenDetailsViewController {
+    
+    private func gotoPools() {
+        let swiftUIController = UIHostingController(rootView: ContentView(poolList: PreviewData.load(name: "PoolList")))
+        swiftUIController.modalPresentationStyle = .popover
+//        tokensViewController.present(swiftUIController, animated: true)
+        show(swiftUIController, sender: nil)
+    }
+    
+}

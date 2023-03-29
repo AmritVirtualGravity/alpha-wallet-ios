@@ -270,11 +270,11 @@ extension TokensCoordinator: TokensViewControllerDelegate {
 
         alertController.addAction(swapAction)
         
-        let gotoPool = UIAlertAction(title: "Goto Pools", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            self.gotoPools()
-        }
-        alertController.addAction(gotoPool)
+//        let gotoPool = UIAlertAction(title: "Goto Pools", style: .default) { [weak self] _ in
+//            guard let self = self else { return }
+//            self.gotoPools()
+//        }
+//        alertController.addAction(gotoPool)
 
 //        let renameThisWalletAction = UIAlertAction(title: R.string.localizable.tokensWalletRenameThisWallet(), style: .default) { [weak self] _ in
 //            guard let strongSelf = self else { return }
@@ -551,14 +551,3 @@ extension TokensCoordinator: AddHideTokensCoordinatorDelegate {
 }
 
 
-// MARK: Navigation
-extension TokensCoordinator {
-    
-    private func gotoPools() {
-        let swiftUIController = UIHostingController(rootView: ContentView(poolList: PreviewData.load(name: "PoolList")))
-        swiftUIController.modalPresentationStyle = .popover
-//        tokensViewController.present(swiftUIController, animated: true)
-        tokensViewController.show(swiftUIController, sender: nil)
-    }
-    
-}

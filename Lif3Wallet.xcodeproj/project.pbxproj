@@ -21,6 +21,23 @@
 		02CEFAFB2808027E00CF8722 /* urlUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CEFAFA2808027E00CF8722 /* urlUtilities.swift */; };
 		02D255782807E5B900B97A05 /* CachedERC1155ContractDictionaryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D255772807E5B900B97A05 /* CachedERC1155ContractDictionaryTestCase.swift */; };
 		02EFD0FC27DF0815008B5808 /* RepeatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD0FB27DF0815008B5808 /* RepeatTests.swift */; };
+		040D1C2E29D3F7D200FEBA29 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C2D29D3F7C900FEBA29 /* TestHelper.swift */; };
+		040D1C2F29D3F7D200FEBA29 /* AgreementPayToJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C2B29D3F7C700FEBA29 /* AgreementPayToJson.swift */; };
+		040D1C3029D3F7D200FEBA29 /* PoolList.json in Resources */ = {isa = PBXBuildFile; fileRef = 040D1C2C29D3F7C800FEBA29 /* PoolList.json */; };
+		040D1C4529D3F82400FEBA29 /* UIDevice + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3D29D3F7EC00FEBA29 /* UIDevice + Extension.swift */; };
+		040D1C4629D3F82400FEBA29 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3529D3F7EC00FEBA29 /* Date+Extension.swift */; };
+		040D1C4729D3F82400FEBA29 /* String+ExtensionBlankEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C4129D3F7EC00FEBA29 /* String+ExtensionBlankEmpty.swift */; };
+		040D1C4829D3F82400FEBA29 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3429D3F7EC00FEBA29 /* View.swift */; };
+		040D1C4929D3F82400FEBA29 /* NSNotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3A29D3F7EC00FEBA29 /* NSNotificationNameExtension.swift */; };
+		040D1C4A29D3F82400FEBA29 /* Sequence + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3E29D3F7EC00FEBA29 /* Sequence + Extension.swift */; };
+		040D1C4B29D3F82400FEBA29 /* UIScreen + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C4229D3F7EC00FEBA29 /* UIScreen + Extension.swift */; };
+		040D1C4D29D3F82400FEBA29 /* DataTaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C4029D3F7EC00FEBA29 /* DataTaskExtension.swift */; };
+		040D1C4E29D3F82400FEBA29 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3829D3F7EC00FEBA29 /* UIViewControllerExtension.swift */; };
+		040D1C4F29D3F82400FEBA29 /* UIApplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3329D3F7EC00FEBA29 /* UIApplication + Extension.swift */; };
+		040D1C5129D3F82400FEBA29 /* ViewModifier + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3F29D3F7EC00FEBA29 /* ViewModifier + Extension.swift */; };
+		040D1C5329D3F82400FEBA29 /* Int + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3C29D3F7EC00FEBA29 /* Int + extension.swift */; };
+		040D1C5529D3F82400FEBA29 /* Decimal+Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3729D3F7EC00FEBA29 /* Decimal+Double+Extension.swift */; };
+		040D1C5629D3F82400FEBA29 /* Binding + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3629D3F7EC00FEBA29 /* Binding + Extension.swift */; };
 		04CFF73929CC345200E6E8AB /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */; };
 		04CFF73B29CC606400E6E8AB /* Data + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF73A29CC606400E6E8AB /* Data + Extension.swift */; };
 		04CFF73E29CC60BF00E6E8AB /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF73D29CC60BB00E6E8AB /* GlobalConstants.swift */; };
@@ -946,6 +963,23 @@
 		02CEFAFA2808027E00CF8722 /* urlUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlUtilities.swift; sourceTree = "<group>"; };
 		02D255772807E5B900B97A05 /* CachedERC1155ContractDictionaryTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedERC1155ContractDictionaryTestCase.swift; sourceTree = "<group>"; };
 		02EFD0FB27DF0815008B5808 /* RepeatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatTests.swift; sourceTree = "<group>"; };
+		040D1C2B29D3F7C700FEBA29 /* AgreementPayToJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementPayToJson.swift; sourceTree = "<group>"; };
+		040D1C2C29D3F7C800FEBA29 /* PoolList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PoolList.json; sourceTree = "<group>"; };
+		040D1C2D29D3F7C900FEBA29 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		040D1C3329D3F7EC00FEBA29 /* UIApplication + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extension.swift"; sourceTree = "<group>"; };
+		040D1C3429D3F7EC00FEBA29 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		040D1C3529D3F7EC00FEBA29 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		040D1C3629D3F7EC00FEBA29 /* Binding + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding + Extension.swift"; sourceTree = "<group>"; };
+		040D1C3729D3F7EC00FEBA29 /* Decimal+Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Double+Extension.swift"; sourceTree = "<group>"; };
+		040D1C3829D3F7EC00FEBA29 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		040D1C3A29D3F7EC00FEBA29 /* NSNotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotificationNameExtension.swift; sourceTree = "<group>"; };
+		040D1C3C29D3F7EC00FEBA29 /* Int + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + extension.swift"; sourceTree = "<group>"; };
+		040D1C3D29D3F7EC00FEBA29 /* UIDevice + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice + Extension.swift"; sourceTree = "<group>"; };
+		040D1C3E29D3F7EC00FEBA29 /* Sequence + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence + Extension.swift"; sourceTree = "<group>"; };
+		040D1C3F29D3F7EC00FEBA29 /* ViewModifier + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModifier + Extension.swift"; sourceTree = "<group>"; };
+		040D1C4029D3F7EC00FEBA29 /* DataTaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskExtension.swift; sourceTree = "<group>"; };
+		040D1C4129D3F7EC00FEBA29 /* String+ExtensionBlankEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ExtensionBlankEmpty.swift"; sourceTree = "<group>"; };
+		040D1C4229D3F7EC00FEBA29 /* UIScreen + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + Extension.swift"; sourceTree = "<group>"; };
 		04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		04CFF73A29CC606400E6E8AB /* Data + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extension.swift"; sourceTree = "<group>"; };
 		04CFF73D29CC60BB00E6E8AB /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
@@ -1905,9 +1939,49 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		040D1C2A29D3F7B600FEBA29 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				040D1C2B29D3F7C700FEBA29 /* AgreementPayToJson.swift */,
+				040D1C2C29D3F7C800FEBA29 /* PoolList.json */,
+				040D1C2D29D3F7C900FEBA29 /* TestHelper.swift */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		040D1C3129D3F7EC00FEBA29 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				040D1C3329D3F7EC00FEBA29 /* UIApplication + Extension.swift */,
+				040D1C3429D3F7EC00FEBA29 /* View.swift */,
+				040D1C3529D3F7EC00FEBA29 /* Date+Extension.swift */,
+				040D1C3629D3F7EC00FEBA29 /* Binding + Extension.swift */,
+				040D1C3729D3F7EC00FEBA29 /* Decimal+Double+Extension.swift */,
+				040D1C3829D3F7EC00FEBA29 /* UIViewControllerExtension.swift */,
+				040D1C3A29D3F7EC00FEBA29 /* NSNotificationNameExtension.swift */,
+				040D1C3B29D3F7EC00FEBA29 /* Swift */,
+				040D1C3E29D3F7EC00FEBA29 /* Sequence + Extension.swift */,
+				040D1C3F29D3F7EC00FEBA29 /* ViewModifier + Extension.swift */,
+				040D1C4029D3F7EC00FEBA29 /* DataTaskExtension.swift */,
+				040D1C4129D3F7EC00FEBA29 /* String+ExtensionBlankEmpty.swift */,
+				040D1C4229D3F7EC00FEBA29 /* UIScreen + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		040D1C3B29D3F7EC00FEBA29 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				040D1C3C29D3F7EC00FEBA29 /* Int + extension.swift */,
+				040D1C3D29D3F7EC00FEBA29 /* UIDevice + Extension.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
 		04CFF73729CC341800E6E8AB /* Additional Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				040D1C3129D3F7EC00FEBA29 /* Extensions */,
 				04CFF74129CCBA7D00E6E8AB /* Decimal+Extension.swift */,
 				04CFF73F29CC61D500E6E8AB /* String+Extension.swift */,
 				04CFF73A29CC606400E6E8AB /* Data + Extension.swift */,
@@ -2012,6 +2086,7 @@
 		08A252DA294073EE00A31193 /* Lif3Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				040D1C2A29D3F7B600FEBA29 /* Preview Content */,
 				04CFF73C29CC60B200E6E8AB /* Helper */,
 				100DD7152991585500D3ABEA /* Contacts */,
 				10B2A2E929911A6700908F41 /* WalletConnect */,
@@ -4857,6 +4932,7 @@
 				08A2564E294073EF00A31193 /* ERC20-TokenScript.tsml in Resources */,
 				08A2564B294073EF00A31193 /* DAI.tsml in Resources */,
 				08A25654294073EF00A31193 /* SourceSansPro-Semibold.otf in Resources */,
+				040D1C3029D3F7D200FEBA29 /* PoolList.json in Resources */,
 				08760CAD29407C2000F83AB3 /* termsOfService.html in Resources */,
 				08760CAC29407C2000F83AB3 /* howDoIGetMyMoneyInfo.html in Resources */,
 				08760CAE29407C2000F83AB3 /* whatIsEthereumInfo.html in Resources */,
@@ -5334,6 +5410,7 @@
 				08A257A6294073F000A31193 /* ShowSeedPhraseCoordinator.swift in Sources */,
 				08A256E6294073F000A31193 /* UIViewInspectableEnhancements.swift in Sources */,
 				08A2582B294073F100A31193 /* TokenAttributeView.swift in Sources */,
+				040D1C4B29D3F82400FEBA29 /* UIScreen + Extension.swift in Sources */,
 				08A257FF294073F100A31193 /* BlockchainTagLabelViewModel.swift in Sources */,
 				08A25752294073F000A31193 /* ButtonsBarStyle.swift in Sources */,
 				08A2574C294073F000A31193 /* TokenCardRowViewModelProtocol.swift in Sources */,
@@ -5374,6 +5451,7 @@
 				08A25735294073F000A31193 /* GasViewModel.swift in Sources */,
 				08A257CB294073F100A31193 /* WordCollectionViewCell.swift in Sources */,
 				08A257AA294073F000A31193 /* ShowSeedPhraseIntroductionViewModel.swift in Sources */,
+				040D1C4F29D3F82400FEBA29 /* UIApplication + Extension.swift in Sources */,
 				10B2A31B29911A6700908F41 /* WalletConnectRequestConverter.swift in Sources */,
 				08A2566E294073EF00A31193 /* SelectableSlippageView.swift in Sources */,
 				08A257B1294073F000A31193 /* SeedPhraseCollectionViewModel.swift in Sources */,
@@ -5452,6 +5530,7 @@
 				08A256C6294073F000A31193 /* TransitionButton.swift in Sources */,
 				08A257DB294073F100A31193 /* ActivityStateView.swift in Sources */,
 				08A2568C294073EF00A31193 /* WalletPupupItemViewModel.swift in Sources */,
+				040D1C5329D3F82400FEBA29 /* Int + extension.swift in Sources */,
 				10C9A4D6296C02B3009738A7 /* TokenInitialDataSource.swift in Sources */,
 				08A2582C294073F100A31193 /* NFTAssetSelectionSectionHeaderView.swift in Sources */,
 				1013956229A88CDE000AD3EF /* BannerCell.swift in Sources */,
@@ -5472,6 +5551,7 @@
 				08A257B3294073F000A31193 /* VerifySeedPhraseViewModel.swift in Sources */,
 				08A257D4294073F100A31193 /* ActivitiesViewController.swift in Sources */,
 				08A25770294073F000A31193 /* LayoutConstraintsWrapper.swift in Sources */,
+				040D1C2F29D3F7D200FEBA29 /* AgreementPayToJson.swift in Sources */,
 				08A256D2294073F000A31193 /* RedeemTokenCardQuantitySelectionViewModel.swift in Sources */,
 				10B2A31829911A6700908F41 /* WalletConnectServer.swift in Sources */,
 				08A25783294073F000A31193 /* JailbreakChecker.swift in Sources */,
@@ -5521,6 +5601,7 @@
 				08760C9C294079AD00F83AB3 /* BrowserErrorView.swift in Sources */,
 				08A257D8294073F100A31193 /* DefaultActivityView.swift in Sources */,
 				08A25660294073EF00A31193 /* SwapToolCollectionViewCellViewModel.swift in Sources */,
+				040D1C4529D3F82400FEBA29 /* UIDevice + Extension.swift in Sources */,
 				08A25720294073F000A31193 /* TransactionsViewModel.swift in Sources */,
 				08A256E2294073F000A31193 /* UIBarButtonItem.swift in Sources */,
 				08A256EC294073F000A31193 /* AlphaWalletAddress+UI.swift in Sources */,
@@ -5538,10 +5619,13 @@
 				08A257A7294073F000A31193 /* RenameWalletViewModel.swift in Sources */,
 				10D0D6C829477C89001A87EC /* ThemeSwitchTableViewCellViewModel.swift in Sources */,
 				08A2582E294073F100A31193 /* TokenCardTableViewCellFactory.swift in Sources */,
+				040D1C5129D3F82400FEBA29 /* ViewModifier + Extension.swift in Sources */,
 				08A25807294073F100A31193 /* WalletTokenViewCellViewModel.swift in Sources */,
 				08A256FC294073F000A31193 /* PriceAlertsPageViewModel.swift in Sources */,
 				08A257BA294073F000A31193 /* EnterKeystorePasswordViewController.swift in Sources */,
 				08A256CC294073F000A31193 /* TransactionConfirmationHeaderView.swift in Sources */,
+				040D1C4629D3F82400FEBA29 /* Date+Extension.swift in Sources */,
+				040D1C2E29D3F7D200FEBA29 /* TestHelper.swift in Sources */,
 				08A2568F294073F000A31193 /* TokenScriptCoordinator.swift in Sources */,
 				10B2A32729911A6700908F41 /* WalletConnectV2Client.swift in Sources */,
 				08A256FE294073F000A31193 /* PriceAlertsViewController.swift in Sources */,
@@ -5670,6 +5754,7 @@
 				08A25823294073F100A31193 /* FungibleTokenHeaderView.swift in Sources */,
 				08A2576E294073F000A31193 /* TextField.swift in Sources */,
 				1013956C29A88E06000AD3EF /* UICollectionViewExtensions.swift in Sources */,
+				040D1C4829D3F82400FEBA29 /* View.swift in Sources */,
 				08A2574D294073F000A31193 /* RoundedEnsViewModel.swift in Sources */,
 				08A256AF294073F000A31193 /* SendViewModel.swift in Sources */,
 				08A256D8294073F000A31193 /* WhatsNewViewModels.swift in Sources */,
@@ -5725,6 +5810,7 @@
 				10B2A32B29911A6700908F41 /* WalletConnectSessionCell.swift in Sources */,
 				10B2A33429911A6700908F41 /* WalletConnectSessionsViewController.swift in Sources */,
 				08A257F3294073F100A31193 /* FungibleTokenCoordinator.swift in Sources */,
+				040D1C4729D3F82400FEBA29 /* String+ExtensionBlankEmpty.swift in Sources */,
 				08A2566A294073EF00A31193 /* SwapOptionsHeaderViewModel.swift in Sources */,
 				08A25761294073F000A31193 /* DateEntryField.swift in Sources */,
 				100DD7272991585500D3ABEA /* ContactsListViewController.swift in Sources */,
@@ -5739,6 +5825,7 @@
 				10EAA3C229921B7600636ABC /* ContactListViewModel.swift in Sources */,
 				08A257B6294073F000A31193 /* ImportSelectionType.swift in Sources */,
 				08A255F6294073EF00A31193 /* EnabledServersViewModel.swift in Sources */,
+				040D1C4D29D3F82400FEBA29 /* DataTaskExtension.swift in Sources */,
 				08A2584D294073F100A31193 /* TokenCardWebView.swift in Sources */,
 				08A2572E294073F000A31193 /* WalletApiCoordinator.swift in Sources */,
 				08760C83294079AD00F83AB3 /* MyDappCellViewModel.swift in Sources */,
@@ -5793,6 +5880,7 @@
 				10B2A33229911A6700908F41 /* CAIP10AccountProvidable.swift in Sources */,
 				08A2561E294073EF00A31193 /* LocalesViewController.swift in Sources */,
 				08A257D3294073F100A31193 /* DefaultActivityCellViewModel.swift in Sources */,
+				040D1C5529D3F82400FEBA29 /* Decimal+Double+Extension.swift in Sources */,
 				08A257B0294073F000A31193 /* KeystoreBackupIntroductionViewModel.swift in Sources */,
 				104E54332991153800C49760 /* ImportMagicTokenViewController.swift in Sources */,
 				08A256F8294073F000A31193 /* UINavigationController.swift in Sources */,
@@ -5839,6 +5927,7 @@
 				08A25600294073EF00A31193 /* ExportJsonKeystorePasswordViewModel.swift in Sources */,
 				08A25809294073F100A31193 /* TokenHistoryChartViewModel.swift in Sources */,
 				08A25674294073EF00A31193 /* SwapQuoteFieldViewModel.swift in Sources */,
+				040D1C4E29D3F82400FEBA29 /* UIViewControllerExtension.swift in Sources */,
 				08A25774294073F000A31193 /* TimeEntryField.swift in Sources */,
 				08A2577B294073F000A31193 /* ScrollableSegmentedControlHighlightableLineView.swift in Sources */,
 				08A25724294073F000A31193 /* TransactionRowCellViewModel.swift in Sources */,
@@ -5891,6 +5980,7 @@
 				08A256F1294073F000A31193 /* UIGestureRecognizer+Closure.swift in Sources */,
 				08A2565D294073EF00A31193 /* SelectSwapToolViewModel.swift in Sources */,
 				08A257D6294073F100A31193 /* ActivitiesView.swift in Sources */,
+				040D1C4929D3F82400FEBA29 /* NSNotificationNameExtension.swift in Sources */,
 				08A25762294073F000A31193 /* WebImageView.swift in Sources */,
 				08A25676294073EF00A31193 /* SwapTokensCoordinator.swift in Sources */,
 				08A25824294073F100A31193 /* TokenInfoHeaderView.swift in Sources */,
@@ -5900,7 +5990,9 @@
 				08A257FB294073F100A31193 /* OpenSeaNonFungibleTokenCardRowViewModel.swift in Sources */,
 				08A257AE294073F000A31193 /* SeedPhraseBackupIntroductionViewModel.swift in Sources */,
 				08A257F4294073F100A31193 /* ClaimPaidOrderCoordinator.swift in Sources */,
+				040D1C4A29D3F82400FEBA29 /* Sequence + Extension.swift in Sources */,
 				10DADA9E294B172C00413AA0 /* SettingsWalletViewController.swift in Sources */,
+				040D1C5629D3F82400FEBA29 /* Binding + Extension.swift in Sources */,
 				08A25806294073F100A31193 /* TokensViewModel.swift in Sources */,
 				08A25681294073EF00A31193 /* LockViewModel.swift in Sources */,
 				08A256FD294073F000A31193 /* EditPriceAlertViewController.swift in Sources */,

@@ -1,0 +1,50 @@
+{
+  "lif3_staking_list": [
+    {
+      "name": "LIF3 Trade",
+      "icon": "icon url",
+      "tvl": "$99,800",
+      "apr": "133.889",
+      "token": "FTM"
+    },
+    {
+      "name": "LIF3 Greenhoues",
+      "icon": "icon url",
+      "tvl": "$99,800",
+      "apr": "133.88%",
+      "token": "FTM"
+    }
+  ],
+  "crypo_banner_suggested_staking_list": [
+    {
+      "name": "LIF3 Trade",
+      "icon": "icon url",
+      "tvl": "$99,800",
+      "apr": "133.889",
+      "token": "FTM"
+    },
+    {
+      "name": "LIF3 Greenhoues",
+      "icon": "icon url",
+      "tvl": "$99,800",
+      "apr": "133.889",
+      "token": "FTM"
+    }
+  ],
+  "tech_suggested_staking_list": [
+    {
+      "name": "LIF3 Trade",
+      "icon": "icon url",
+      "tvl": "$99,800",
+      "apr": "133.889",
+      "token": "FTM"
+    },
+    {
+      "name": "LIF3 Greenhoues",
+      "icon": "icon url",
+      "tvl": "$99,800",
+      "apr": "133.889",
+      "token": "FTM"
+    }
+  ]
+}

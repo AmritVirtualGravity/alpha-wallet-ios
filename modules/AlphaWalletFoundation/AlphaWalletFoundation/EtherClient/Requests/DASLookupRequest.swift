@@ -47,8 +47,8 @@ struct DASLookupResponse: Decodable {
         errno = try container.decode(Int.self, forKey: .errno)
         errmsg = try container.decode(String.self, forKey: .errmsg)
         if let value = try? container.decodeIfPresent(DataClass.self, forKey: .data) {
-            records = value?.accountData.records ?? []
-            if value?.accountData.ownerAddressChain == "ETH", let address = value?.accountData.ownerAddress {
+            records = value.accountData.records ?? []
+            if value.accountData.ownerAddressChain == "ETH", let address = value.accountData.ownerAddress {
                 ownerAddress = AlphaWallet.Address(string: address)
             } else {
                 ownerAddress = nil

@@ -68,17 +68,21 @@ let lightGreyColor    = #colorLiteral(red: 0.9490196078, green: 0.9490196078, bl
 let darkestGreyColor  = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1) // 212121
 
 //let darkestGreyColor  = pinkColor
-//let themeColor        = Colors.themeColor
-let darkerGreyColor   = #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1) //666666
+let themeColor        = pinkColor
+//let darkerGreyColor   = #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1) //666666
 let darkGreyColor     = #colorLiteral(red: 0.6196078431, green: 0.6196078431, blue: 0.6196078431, alpha: 1) //#9E9E9E
 let redColor          = #colorLiteral(red: 0.9529411765, green: 0.3137254902, blue: 0.3137254902, alpha: 1) //F35050
 let yellowColor       = #colorLiteral(red: 0.9529411765, green: 0.7764705882, blue: 0.3137254902, alpha: 1) //F3C650
 let lightYellowColor  = #colorLiteral(red: 1, green: 0.9843137255, blue: 0.9490196078, alpha: 1) //FFFBF2
+
 //let lightYellowColor  = #colorLiteral(red: 1, green: 0.9843137255, blue: 0.9490196078, alpha: 1) //FFFBF2
 
 let darkestGreyColorDim = darkestGreyColor.withAlphaComponent(0.4)
 let pinkColor  = #colorLiteral(red: 0.7921568627, green: 0.6549019608, blue: 0.8196078431, alpha: 1) //CAA7D1
 
+
+let darkColor    = #colorLiteral(red: 0.137254902, green: 0.137254902, blue: 0.137254902, alpha: 1) //#232323
+let lightDarkColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1) //#888888
 
 //struct Fonts {
 //

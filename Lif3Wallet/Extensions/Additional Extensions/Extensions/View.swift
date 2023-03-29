@@ -12,25 +12,25 @@ extension View {
     /// - Parameters:
     ///   - view: View to navigate to.
     ///   - binding: Only navigates when this condition is `true`.
-    func navigate<NewView: View>(to view: NewView, when binding: Binding<Bool>) -> some View {
-        NavigationView {
-            ZStack {
-                self
-                    .navigationBarTitle("")
-                    .navigationBarHidden(true)
-
-                NavigationLink(
-                    destination: view
-                        .navigationBarTitle("")
-                        .navigationBarHidden(true),
-                    isActive: binding
-                ) {
-                    EmptyView()
-                }
-            }
-        }
-        .navigationViewStyle(.stack)
-    }
+//    func navigate<NewView: View>(to view: NewView, when binding: Binding<Bool>) -> some View {
+//        NavigationView {
+//            ZStack {
+//                self
+//                    .navigationBarTitle("")
+//                    .navigationBarHidden(true)
+//
+//                NavigationLink(
+//                    destination: view
+//                        .navigationBarTitle("")
+//                        .navigationBarHidden(true),
+//                    isActive: binding
+//                ) {
+//                    EmptyView()
+//                }
+//            }
+//        }
+//        .navigationViewStyle(.stack)
+//    }
     
     
 }
@@ -63,12 +63,22 @@ extension View {
 
 struct PrimaryLabel: ViewModifier {
     func body(content: Content) -> some View {
-        content
-            .padding()
-            .background(.black)
-            .foregroundColor(.white)
-            .font(.largeTitle)
-            .cornerRadius(10)
+        if #available(iOS 15.0, *) {
+            content
+                .padding()
+                .background(.black)
+                .foregroundColor(.white)
+                .font(.largeTitle)
+                .cornerRadius(10)
+        } else {
+            // Fallback on earlier versions
+            content
+                .padding()
+//                .background(.black)
+                .foregroundColor(.white)
+                .font(.largeTitle)
+                .cornerRadius(10)
+        }
     }
 }
 /* uses

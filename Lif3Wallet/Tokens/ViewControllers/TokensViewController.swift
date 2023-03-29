@@ -492,27 +492,22 @@ fileprivate extension TokensViewController {
                 let cell: OpenSeaNonFungibleTokenPairTableCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.delegate = strongSelf
                 cell.configure(viewModel: viewModel)
-                print("@@@@@@nftCollection(let viewModel)")
                 return cell
             case .nonFungible(let viewModel):
                 let cell: NonFungibleTokenViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: viewModel)
-                print("@@@@@@nonFungible(let viewModel")
                 return cell
             case .fungibleToken(let viewModel):
                 let cell: FungibleTokenViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: viewModel)
-                print("@@@@@@fungibleToken(let viewModel)")
                 return cell
             case .nativeCryptocurrency(let viewModel):
                 let cell: EthTokenViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: viewModel)
-                print("@@@@@@nativeCryptocurrency(let viewModel)")
                 return cell
             case .rpcServer(let viewModel):
                 let cell: ServerTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.configure(viewModel: viewModel)
-                print("@@@@@@rpcServer(let viewModel)")
                 return cell
             }
         })
@@ -697,3 +692,5 @@ extension UISearchBar {
         searchBar.backgroundColor = backgroundColor
     }
 }
+
+

@@ -268,6 +268,13 @@ extension TokensCoordinator: TokensViewControllerDelegate {
         }
 
         alertController.addAction(swapAction)
+        
+        let gotoPool = UIAlertAction(title: "Goto Pools", style: .default) { [weak self] _ in
+            guard let strongSelf = self else { return }
+
+            
+        }
+        alertController.addAction(gotoPool)
 
 //        let renameThisWalletAction = UIAlertAction(title: R.string.localizable.tokensWalletRenameThisWallet(), style: .default) { [weak self] _ in
 //            guard let strongSelf = self else { return }

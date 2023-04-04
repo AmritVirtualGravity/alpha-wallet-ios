@@ -21,8 +21,6 @@ protocol FungibleTokenDetailsViewControllerDelegate: AnyObject, CanOpenURL {
     func didTapAlert(in viewController: FungibleTokenDetailsViewController)
 }
 
-
-
 class FungibleTokenDetailsViewController: UIViewController {
     private let containerView: ScrollableStackView = ScrollableStackView()
     private let buttonsBar = HorizontalButtonsBar(configuration: .combined(buttons: 2))
@@ -94,8 +92,6 @@ class FungibleTokenDetailsViewController: UIViewController {
         willAppear.send(())
     }
     
-    
-
     private func buildSubviews(for viewTypes: [FungibleTokenDetailsViewModel.ViewType]) -> [UIView] {
         var subviews: [UIView] = []
         subviews += [headerView]
@@ -112,7 +108,6 @@ class FungibleTokenDetailsViewController: UIViewController {
                 subviews += [view]
             case .charts:
                 subviews += [chartView]
-
                 subviews += [UIView.spacer(height: 10)]
                 subviews += [UIView.spacer(backgroundColor: Configuration.Color.Semantic.tableViewSeparator)]
                 subviews += [UIView.spacer(height: 10)]
@@ -131,6 +126,9 @@ class FungibleTokenDetailsViewController: UIViewController {
                     swapButton
                 ].asStackView(axis: .horizontal)
                 buttonsStackView.distribution = .fillEqually
+                buttonsStackView.spacing = 12.0
+                buttonsStackView.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+                buttonsStackView.isLayoutMarginsRelativeArrangement = true
                 subviews += [buttonsStackView]
                 subviews += [UIView.spacer(height: 20)]
             }

@@ -3,7 +3,7 @@
 import UIKit
 
 protocol BrowserErrorViewDelegate: AnyObject {
-    func didTapReload(_ sender: Button)
+    func didTapReload(_ sender: Lif3WalletButton)
 }
 
 final class BrowserErrorView: UIView {
@@ -20,8 +20,8 @@ final class BrowserErrorView: UIView {
         return label
     }()
 
-    private lazy var reloadButton: Button = {
-        let button = Button(size: .normal, style: .borderless)
+    private lazy var reloadButton: Lif3WalletButton = {
+        let button = Lif3WalletButton(size: .normal, style: .borderless)
         button.addTarget(self, action: #selector(reloadTapped), for: .touchUpInside)
         button.setTitle(R.string.localizable.browserReloadButtonTitle(), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false

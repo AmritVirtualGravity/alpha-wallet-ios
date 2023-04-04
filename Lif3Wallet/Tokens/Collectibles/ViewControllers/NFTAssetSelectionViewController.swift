@@ -355,8 +355,8 @@ extension NFTAssetSelectionViewController {
             return label
         }()
         
-        lazy var selectAllButton: Button = {
-            let button: Button = .init(size: .normal, style: .system)
+        lazy var selectAllButton: Lif3WalletButton = {
+            let button: Lif3WalletButton = .init(size: .normal, style: .system)
             button.setTitle(R.string.localizable.semifungiblesSelectionSelectAll(), for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.setContentCompressionResistancePriority(.required, for: .horizontal)

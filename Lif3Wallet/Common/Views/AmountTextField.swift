@@ -42,8 +42,8 @@ final class AmountTextField: UIControl {
         return textField
     }()
 
-    let allFundsButton: Button = {
-        let button = Button(size: .normal, style: .borderless)
+    let allFundsButton: Lif3WalletButton = {
+        let button = Lif3WalletButton(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.sendAllFunds(), for: .normal)
         button.titleLabel?.font = Configuration.Font.accessory

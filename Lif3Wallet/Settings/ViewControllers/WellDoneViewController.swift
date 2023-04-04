@@ -34,7 +34,7 @@ class WellDoneViewController: UIViewController {
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
 
-        let otherButton = Button(size: .normal, style: .solid)
+        let otherButton = Lif3WalletButton(size: .normal, style: .solid)
         otherButton.translatesAutoresizingMaskIntoConstraints = false
         otherButton.layer.cornerRadius = 15
         otherButton.setBackgroundColor(.white, forState: .normal)

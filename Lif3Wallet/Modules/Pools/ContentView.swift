@@ -26,16 +26,17 @@ struct ContentView: View {
             .overlay(
                 ScrollView {
                     VStack {
-                        VStack {
-                            Picker("What is your favorite color? ", selection: $favoriteColor) {
-                                Text("My Pools").tag(0)
-                                Text("Available Pools").tag(1)
-                            }
-                            .pickerStyle(.segmented)
-                            .cornerRadius(6, corners: .allCorners)
-                            .padding(.horizontal, 10)
-                            .padding(.top, 10)
-                        }
+                        // MARK: segmented picker
+//                        VStack {
+//                            Picker("What is your favorite color? ", selection: $favoriteColor) {
+//                                Text("My Pools").tag(0)
+//                                Text("Available Pools").tag(1)
+//                            }
+//                            .pickerStyle(.segmented)
+//                            .cornerRadius(6, corners: .allCorners)
+//                            .padding(.horizontal, 10)
+//                            .padding(.top, 10)
+//                        }
                         //            Text("Value: \(favoriteColor)")
                         VStack {
                             companySection(title: "Lif3 Staking List", company: poolList?.lif3StakingList ?? [])

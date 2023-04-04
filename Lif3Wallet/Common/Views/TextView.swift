@@ -27,8 +27,8 @@ class TextView: UIControl {
         return clearAndPastControlsContainer
     }()
 
-    private var pasteButton: Button = {
-        let button = Button(size: .normal, style: .borderless)
+    private var pasteButton: Lif3WalletButton = {
+        let button = Lif3WalletButton(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.sendPasteButtonTitle(), for: .normal)
         button.titleLabel?.font = Configuration.Font.accessory
@@ -41,8 +41,8 @@ class TextView: UIControl {
         return button
     }()
 
-    private var clearButton: Button = {
-        let button = Button(size: .normal, style: .borderless)
+    private var clearButton: Lif3WalletButton = {
+        let button = Lif3WalletButton(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(R.string.localizable.clearButtonTitle(), for: .normal)
         button.titleLabel?.font = Configuration.Font.accessory

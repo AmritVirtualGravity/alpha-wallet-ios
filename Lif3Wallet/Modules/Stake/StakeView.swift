@@ -37,8 +37,6 @@ struct StakeView: View {
 }
 
 
-
-
 struct StakeCell: View {
     let title: String
     var body: some View {

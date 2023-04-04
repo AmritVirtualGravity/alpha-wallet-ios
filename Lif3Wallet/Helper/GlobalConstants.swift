@@ -78,11 +78,18 @@ let lightYellowColor  = #colorLiteral(red: 1, green: 0.9843137255, blue: 0.94901
 //let lightYellowColor  = #colorLiteral(red: 1, green: 0.9843137255, blue: 0.9490196078, alpha: 1) //FFFBF2
 
 let darkestGreyColorDim = darkestGreyColor.withAlphaComponent(0.4)
-let pinkColor  = #colorLiteral(red: 0.7921568627, green: 0.6549019608, blue: 0.8196078431, alpha: 1) //CAA7D1
-
-
+// MARK: For Lif3 app
+let darkestBlack = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)  //000000
+let darkerBlack = #colorLiteral(red: 0.07843137255, green: 0.07843137255, blue: 0.07843137255, alpha: 1)  //1E1E1E
 let darkColor    = #colorLiteral(red: 0.137254902, green: 0.137254902, blue: 0.137254902, alpha: 1) //#232323
+let lightestDarkColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) //#FFFFFF
+let lighterDarkColor = #colorLiteral(red: 0.8143547177, green: 0.8143547177, blue: 0.8143546581, alpha: 1) //#888888
 let lightDarkColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1) //#888888
+
+let blueColor  = #colorLiteral(red: 0.1837692261, green: 0.5399141908, blue: 0.9605662227, alpha: 1) //CAA7D1
+
+
+let pinkColor  = #colorLiteral(red: 0.7921568627, green: 0.6549019608, blue: 0.8196078431, alpha: 1) //CAA7D1
 
 //struct Fonts {
 //

@@ -16,7 +16,7 @@ struct PrimaryButton: View {
     var borderWidth: CGFloat?
     var maxHeight: CGFloat = 44
     var clicked: (() -> Void) /// use closure for callback
-    
+
     var body: some View {
         Button(action: clicked) {
             Button(text, action: clicked)
@@ -31,7 +31,7 @@ struct PrimaryButton: View {
                     )
                 }
         }
-        
+
     }
 }
 
@@ -43,7 +43,7 @@ struct SecondaryButton: View {
     var backgroundColor: UIColor = .white
     var borderColor: UIColor = darkestGreyColor
     var clicked: (() -> Void) /// use closure for callback
-    
+
     var body: some View {
         Button(text, action: clicked)
             .frame(maxWidth: .infinity, maxHeight: 50)
@@ -54,7 +54,7 @@ struct SecondaryButton: View {
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(Color(borderColor), lineWidth: 1)
             )
-        
+
     }
 }
 

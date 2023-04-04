@@ -27,16 +27,16 @@ struct ContentView: View {
                 ScrollView {
                     VStack {
                         // MARK: segmented picker
-//                        VStack {
-//                            Picker("What is your favorite color? ", selection: $favoriteColor) {
-//                                Text("My Pools").tag(0)
-//                                Text("Available Pools").tag(1)
-//                            }
-//                            .pickerStyle(.segmented)
-//                            .cornerRadius(6, corners: .allCorners)
-//                            .padding(.horizontal, 10)
-//                            .padding(.top, 10)
-//                        }
+                        //                        VStack {
+                        //                            Picker("What is your favorite color? ", selection: $favoriteColor) {
+                        //                                Text("My Pools").tag(0)
+                        //                                Text("Available Pools").tag(1)
+                        //                            }
+                        //                            .pickerStyle(.segmented)
+                        //                            .cornerRadius(6, corners: .allCorners)
+                        //                            .padding(.horizontal, 10)
+                        //                            .padding(.top, 10)
+                        //                        }
                         //            Text("Value: \(favoriteColor)")
                         VStack {
                             companySection(title: "Lif3 Staking List", company: poolList?.lif3StakingList ?? [])
@@ -52,7 +52,7 @@ struct ContentView: View {
     
 }
 
-fileprivate func getRandomImageName() -> String {
+func getRandomImageName() -> String {
     let arrayOfImageName = ["lif3_nursery", "lif3_lif3_trade", "lif3_leverage"]
     return arrayOfImageName[Int.random(in: 0..<2)]
 }
@@ -109,10 +109,17 @@ struct companySection: View {
             .padding( 10)
             
             ForEach(company, id: \.self) { company in
-                CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
-//                Link(destination: URL(string: "https://www.apple.com")!) {
-//                    CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
-//                }
+                //                CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+                NavigationLink {
+                    StakeView()
+                } label: {
+                    CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+                }
+                
+                //                Link(destination: StakeView()) {
+                //                    CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+                //                }
+                
             }
         }
         

@@ -23,7 +23,7 @@ struct StakeView: View {
                         VStack(spacing: 16) {
                             StakeViewTitleDescription(title: "Staking Page:", description: "https://trade.lif3.com/earn")
                             StakeViewTitleDescription(title: "About Protocol:", description: "Lif3.com is a complete multi-chain DeFi Ecosystem.")
-                            StakeViewTitleDescription(title: "About Staking Pool:", description: "By depositing LIF3 into this pool, you are earning  protocol fees from the Lif3 Trade platform and additional Lif3 rewards.")
+                            StakeViewTitleDescription(title: "About Staking Pool:", description: "By depositing LIF3 into this pool, you are earning  protocol fees from the Lif3 Trade platform and additional Lif3 rewa1rds.")
                         }
                         PrimaryButton(text: "Begin Staking", clicked: {})
                             .frame(height: 44)
@@ -33,6 +33,7 @@ struct StakeView: View {
                 
                 //
             )
+            .navigationTitle("Stake LIF3")
     }
 }
 
@@ -49,8 +50,8 @@ struct StakeCell: View {
                 CustomText(name: "https://lif3.com/", textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12, maxWidth: true)
             }
         }
-//        .padding(.vertical, 10)
-//        .padding(.horizontal, 10)
+        //        .padding(.vertical, 10)
+        //        .padding(.horizontal, 10)
         //        .background(.black)
         
     }

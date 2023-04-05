@@ -30,7 +30,6 @@
 		040D1C4929D3F82400FEBA29 /* NSNotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3A29D3F7EC00FEBA29 /* NSNotificationNameExtension.swift */; };
 		040D1C4A29D3F82400FEBA29 /* Sequence + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3E29D3F7EC00FEBA29 /* Sequence + Extension.swift */; };
 		040D1C4B29D3F82400FEBA29 /* UIScreen + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C4229D3F7EC00FEBA29 /* UIScreen + Extension.swift */; };
-		040D1C4D29D3F82400FEBA29 /* DataTaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C4029D3F7EC00FEBA29 /* DataTaskExtension.swift */; };
 		040D1C4E29D3F82400FEBA29 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3829D3F7EC00FEBA29 /* UIViewControllerExtension.swift */; };
 		040D1C4F29D3F82400FEBA29 /* UIApplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3329D3F7EC00FEBA29 /* UIApplication + Extension.swift */; };
 		040D1C5129D3F82400FEBA29 /* ViewModifier + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C3F29D3F7EC00FEBA29 /* ViewModifier + Extension.swift */; };
@@ -51,6 +50,13 @@
 		040D1C8129D3FDB500FEBA29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C8029D3FD7500FEBA29 /* ContentView.swift */; };
 		040D1C8429D3FDE500FEBA29 /* Complany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C8329D3FDE000FEBA29 /* Complany.swift */; };
 		040D1C8629D4133D00FEBA29 /* SafariViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C8529D4133D00FEBA29 /* SafariViewControllerExtension.swift */; };
+		04A371BE29DDDA9900B883C0 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371BB29DDDA8E00B883C0 /* Endpoints.swift */; };
+		04A371BF29DDDA9900B883C0 /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371BD29DDDA9000B883C0 /* TokenAPI.swift */; };
+		04A371C029DDDA9900B883C0 /* PoolAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371BC29DDDA8F00B883C0 /* PoolAPI.swift */; };
+		04A371C429DDDAAD00B883C0 /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371C329DDDAAD00B883C0 /* Pool.swift */; };
+		04A371C529DDDAAD00B883C0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371C129DDDAAB00B883C0 /* Token.swift */; };
+		04A371C629DDDAAE00B883C0 /* GeneralBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371C229DDDAAC00B883C0 /* GeneralBody.swift */; };
+		04A371C829DDDB4F00B883C0 /* DataTaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371C729DDDB4F00B883C0 /* DataTaskExtension.swift */; };
 		04CF129F29DC7911005DF119 /* StakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF129E29DC78FE005DF119 /* StakeView.swift */; };
 		04CF12A129DC794B005DF119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF12A029DC7946005DF119 /* Button.swift */; };
 		04CFF73929CC345200E6E8AB /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */; };
@@ -990,7 +996,6 @@
 		040D1C3D29D3F7EC00FEBA29 /* UIDevice + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice + Extension.swift"; sourceTree = "<group>"; };
 		040D1C3E29D3F7EC00FEBA29 /* Sequence + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence + Extension.swift"; sourceTree = "<group>"; };
 		040D1C3F29D3F7EC00FEBA29 /* ViewModifier + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModifier + Extension.swift"; sourceTree = "<group>"; };
-		040D1C4029D3F7EC00FEBA29 /* DataTaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskExtension.swift; sourceTree = "<group>"; };
 		040D1C4129D3F7EC00FEBA29 /* String+ExtensionBlankEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ExtensionBlankEmpty.swift"; sourceTree = "<group>"; };
 		040D1C4229D3F7EC00FEBA29 /* UIScreen + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + Extension.swift"; sourceTree = "<group>"; };
 		040D1C5829D3FAB700FEBA29 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -1006,6 +1011,13 @@
 		040D1C8029D3FD7500FEBA29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		040D1C8329D3FDE000FEBA29 /* Complany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complany.swift; sourceTree = "<group>"; };
 		040D1C8529D4133D00FEBA29 /* SafariViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewControllerExtension.swift; sourceTree = "<group>"; };
+		04A371BB29DDDA8E00B883C0 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		04A371BC29DDDA8F00B883C0 /* PoolAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolAPI.swift; sourceTree = "<group>"; };
+		04A371BD29DDDA9000B883C0 /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
+		04A371C129DDDAAB00B883C0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		04A371C229DDDAAC00B883C0 /* GeneralBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralBody.swift; sourceTree = "<group>"; };
+		04A371C329DDDAAD00B883C0 /* Pool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pool.swift; sourceTree = "<group>"; };
+		04A371C729DDDB4F00B883C0 /* DataTaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskExtension.swift; sourceTree = "<group>"; };
 		04CF129E29DC78FE005DF119 /* StakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeView.swift; sourceTree = "<group>"; };
 		04CF12A029DC7946005DF119 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -1990,7 +2002,6 @@
 				040D1C3B29D3F7EC00FEBA29 /* Swift */,
 				040D1C3E29D3F7EC00FEBA29 /* Sequence + Extension.swift */,
 				040D1C3F29D3F7EC00FEBA29 /* ViewModifier + Extension.swift */,
-				040D1C4029D3F7EC00FEBA29 /* DataTaskExtension.swift */,
 				040D1C4129D3F7EC00FEBA29 /* String+ExtensionBlankEmpty.swift */,
 				040D1C4229D3F7EC00FEBA29 /* UIScreen + Extension.swift */,
 			);
@@ -2002,6 +2013,7 @@
 			children = (
 				040D1C3C29D3F7EC00FEBA29 /* Int + extension.swift */,
 				040D1C3D29D3F7EC00FEBA29 /* UIDevice + Extension.swift */,
+				04A371C729DDDB4F00B883C0 /* DataTaskExtension.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -2071,9 +2083,22 @@
 		040D1C8229D3FDE000FEBA29 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04A371C229DDDAAC00B883C0 /* GeneralBody.swift */,
+				04A371C329DDDAAD00B883C0 /* Pool.swift */,
+				04A371C129DDDAAB00B883C0 /* Token.swift */,
 				040D1C8329D3FDE000FEBA29 /* Complany.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		04A371BA29DDDA7F00B883C0 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				04A371BB29DDDA8E00B883C0 /* Endpoints.swift */,
+				04A371BC29DDDA8F00B883C0 /* PoolAPI.swift */,
+				04A371BD29DDDA9000B883C0 /* TokenAPI.swift */,
+			);
+			path = APIs;
 			sourceTree = "<group>";
 		};
 		04CF129D29DC78EF005DF119 /* Stake */ = {
@@ -2198,6 +2223,7 @@
 		08A252DA294073EE00A31193 /* Lif3Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				04A371BA29DDDA7F00B883C0 /* APIs */,
 				040D1C8229D3FDE000FEBA29 /* Models */,
 				040D1C7E29D3FD4800FEBA29 /* Modules */,
 				040D1C2A29D3F7B600FEBA29 /* Preview Content */,
@@ -5564,6 +5590,7 @@
 				08A2573E294073F000A31193 /* InputError.swift in Sources */,
 				08A2563F294073EF00A31193 /* AddMultipleCustomRpcViewModel.swift in Sources */,
 				08A2562D294073EF00A31193 /* RPCDisplaySelectableTableViewCell.swift in Sources */,
+				04A371C829DDDB4F00B883C0 /* DataTaskExtension.swift in Sources */,
 				08A256B4294073F000A31193 /* TransferCollectiblesCoordinator.swift in Sources */,
 				08A25735294073F000A31193 /* GasViewModel.swift in Sources */,
 				08A257CB294073F100A31193 /* WordCollectionViewCell.swift in Sources */,
@@ -5676,6 +5703,7 @@
 				08A256E8294073F000A31193 /* UIActivityViewController.swift in Sources */,
 				10645E622949F98F00187A49 /* SecurityViewController.swift in Sources */,
 				08A2583D294073F100A31193 /* TokensViewControllerTableViewSectionHeader.swift in Sources */,
+				04A371BF29DDDA9900B883C0 /* TokenAPI.swift in Sources */,
 				08A2580E294073F100A31193 /* NFTCollectionViewModel.swift in Sources */,
 				08A25661294073EF00A31193 /* SelectSwapToolViewController.swift in Sources */,
 				08A2574F294073F000A31193 /* VerticalButtonsBar.swift in Sources */,
@@ -5850,6 +5878,7 @@
 				08A25835294073F100A31193 /* TokenInstanceActionViewController.swift in Sources */,
 				08A257CC294073F100A31193 /* ActivitiesCoordinator.swift in Sources */,
 				08760C99294079AD00F83AB3 /* DappsHomeViewControllerHeaderView.swift in Sources */,
+				04A371BE29DDDA9900B883C0 /* Endpoints.swift in Sources */,
 				08A2560F294073EF00A31193 /* CurrencyTableViewCell.swift in Sources */,
 				08A2578D294073F000A31193 /* KeyboardInitializer.swift in Sources */,
 				08A257CD294073F100A31193 /* DefaultActivityViewModel.swift in Sources */,
@@ -5862,6 +5891,7 @@
 				040D1C7329D3FADE00FEBA29 /* Cancellable.swift in Sources */,
 				08A2580A294073F100A31193 /* AddHideTokensViewModel.swift in Sources */,
 				08A256B0294073F000A31193 /* SignatureConfirmationConfirmationViewModel.swift in Sources */,
+				04A371C029DDDA9900B883C0 /* PoolAPI.swift in Sources */,
 				08760C9D294079AD00F83AB3 /* BookmarksHeaderView.swift in Sources */,
 				08A256B9294073F000A31193 /* ConfigureTransactionViewController.swift in Sources */,
 				08A25625294073EF00A31193 /* EnableServersHeaderView.swift in Sources */,
@@ -5913,6 +5943,7 @@
 				08A25740294073F000A31193 /* Coordinator.swift in Sources */,
 				10D0D6C629477BF7001A87EC /* ThemeSwitchTableViewCell.swift in Sources */,
 				08A2584A294073F100A31193 /* TokenInstanceWebView.swift in Sources */,
+				04A371C629DDDAAE00B883C0 /* GeneralBody.swift in Sources */,
 				08A2576B294073F000A31193 /* WhereIsWalletAddressFoundOverlayView.swift in Sources */,
 				040D1C7229D3FADE00FEBA29 /* GlobalConstants.swift in Sources */,
 				04CFF74229CCBA7D00E6E8AB /* Decimal+Extension.swift in Sources */,
@@ -5930,6 +5961,7 @@
 				08A256C1294073F000A31193 /* TransactionConfirmationViewController.swift in Sources */,
 				08A257F5294073F100A31193 /* SingleChainTokenCoordinator.swift in Sources */,
 				08760C86294079AD00F83AB3 /* BrowserHomeViewModel.swift in Sources */,
+				04A371C429DDDAAD00B883C0 /* Pool.swift in Sources */,
 				10B2A32B29911A6700908F41 /* WalletConnectSessionCell.swift in Sources */,
 				10B2A33429911A6700908F41 /* WalletConnectSessionsViewController.swift in Sources */,
 				08A257F3294073F100A31193 /* FungibleTokenCoordinator.swift in Sources */,
@@ -5948,7 +5980,6 @@
 				10EAA3C229921B7600636ABC /* ContactListViewModel.swift in Sources */,
 				08A257B6294073F000A31193 /* ImportSelectionType.swift in Sources */,
 				08A255F6294073EF00A31193 /* EnabledServersViewModel.swift in Sources */,
-				040D1C4D29D3F82400FEBA29 /* DataTaskExtension.swift in Sources */,
 				08A2584D294073F100A31193 /* TokenCardWebView.swift in Sources */,
 				08A2572E294073F000A31193 /* WalletApiCoordinator.swift in Sources */,
 				08760C83294079AD00F83AB3 /* MyDappCellViewModel.swift in Sources */,
@@ -5986,6 +6017,7 @@
 				08A2565A294073EF00A31193 /* SelectSwapRouteViewController.swift in Sources */,
 				10DADAA0294B17EA00413AA0 /* SettingsWalletViewModel.swift in Sources */,
 				08A257DA294073F100A31193 /* ActivityPageView.swift in Sources */,
+				04A371C529DDDAAD00B883C0 /* Token.swift in Sources */,
 				08A25682294073EF00A31193 /* LockEnterPasscodeViewController.swift in Sources */,
 				08760C8D294079AD00F83AB3 /* DappRequestSwitchCustomChainCoordinator.swift in Sources */,
 				08A257EB294073F100A31193 /* PromptBackupWalletAfterReceivingEtherViewViewModel.swift in Sources */,

@@ -235,8 +235,7 @@ struct GlobalConstants {
 
 
 struct CurrentHeaderBodyParameter {
-    static var url: String?
+    static var request: URLRequest?
     static var body: [String: Any]?
     static var header: URLRequest?
 }
-

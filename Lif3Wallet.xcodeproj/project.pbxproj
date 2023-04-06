@@ -57,6 +57,10 @@
 		04A371C529DDDAAD00B883C0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371C129DDDAAB00B883C0 /* Token.swift */; };
 		04A371C629DDDAAE00B883C0 /* GeneralBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371C229DDDAAC00B883C0 /* GeneralBody.swift */; };
 		04A371C829DDDB4F00B883C0 /* DataTaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371C729DDDB4F00B883C0 /* DataTaskExtension.swift */; };
+		04A371CB29DDDD9300B883C0 /* PlaceHolderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371CA29DDDD9300B883C0 /* PlaceHolderImageView.swift */; };
+		04A371CD29DDDD9C00B883C0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371CC29DDDD9B00B883C0 /* Image.swift */; };
+		04A371CF29DDDE0C00B883C0 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371CE29DDDE0700B883C0 /* ContentViewModel.swift */; };
+		04A371D129DDE15500B883C0 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371D029DDE15400B883C0 /* Auth.swift */; };
 		04CF129F29DC7911005DF119 /* StakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF129E29DC78FE005DF119 /* StakeView.swift */; };
 		04CF12A129DC794B005DF119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF12A029DC7946005DF119 /* Button.swift */; };
 		04CFF73929CC345200E6E8AB /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */; };
@@ -1018,6 +1022,11 @@
 		04A371C229DDDAAC00B883C0 /* GeneralBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralBody.swift; sourceTree = "<group>"; };
 		04A371C329DDDAAD00B883C0 /* Pool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pool.swift; sourceTree = "<group>"; };
 		04A371C729DDDB4F00B883C0 /* DataTaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskExtension.swift; sourceTree = "<group>"; };
+		04A371C929DDDD7800B883C0 /* Pools.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pools.json; sourceTree = "<group>"; };
+		04A371CA29DDDD9300B883C0 /* PlaceHolderImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderImageView.swift; sourceTree = "<group>"; };
+		04A371CC29DDDD9B00B883C0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		04A371CE29DDDE0700B883C0 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		04A371D029DDE15400B883C0 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		04CF129E29DC78FE005DF119 /* StakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeView.swift; sourceTree = "<group>"; };
 		04CF12A029DC7946005DF119 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -1982,6 +1991,7 @@
 		040D1C2A29D3F7B600FEBA29 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				04A371C929DDDD7800B883C0 /* Pools.json */,
 				040D1C2C29D3F7C800FEBA29 /* PoolList.json */,
 				040D1C2D29D3F7C900FEBA29 /* TestHelper.swift */,
 			);
@@ -2094,6 +2104,7 @@
 		04A371BA29DDDA7F00B883C0 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
+				04A371D029DDE15400B883C0 /* Auth.swift */,
 				04A371BB29DDDA8E00B883C0 /* Endpoints.swift */,
 				04A371BC29DDDA8F00B883C0 /* PoolAPI.swift */,
 				04A371BD29DDDA9000B883C0 /* TokenAPI.swift */,
@@ -2105,6 +2116,7 @@
 			isa = PBXGroup;
 			children = (
 				04CF129E29DC78FE005DF119 /* StakeView.swift */,
+				04A371CE29DDDE0700B883C0 /* ContentViewModel.swift */,
 			);
 			path = Stake;
 			sourceTree = "<group>";
@@ -2124,6 +2136,8 @@
 		04CFF73C29CC60B200E6E8AB /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				04A371CC29DDDD9B00B883C0 /* Image.swift */,
+				04A371CA29DDDD9300B883C0 /* PlaceHolderImageView.swift */,
 				040D1C5B29D3FAB900FEBA29 /* Cancellable.swift */,
 				040D1C5A29D3FAB800FEBA29 /* Colors.swift */,
 				040D1C5929D3FAB800FEBA29 /* Font.swift */,
@@ -5656,6 +5670,7 @@
 				08A2572B294073F000A31193 /* CheckDeviceCoordinator.swift in Sources */,
 				08A2576F294073F000A31193 /* ContainerViewWithShadow.swift in Sources */,
 				08A25636294073EF00A31193 /* GenerateSellMagicLinkViewControllerViewModel.swift in Sources */,
+				04A371CD29DDDD9C00B883C0 /* Image.swift in Sources */,
 				08A256B3294073F000A31193 /* SignatureConfirmationDetailsViewModel.swift in Sources */,
 				10511C81296C71E800F3E826 /* AmountTextField.swift in Sources */,
 				08760C8F294079AD00F83AB3 /* BookmarksViewController.swift in Sources */,
@@ -5729,6 +5744,7 @@
 				08A2579F294073F000A31193 /* WhereAreMyTokensCoordinator.swift in Sources */,
 				08A257C6294073F100A31193 /* SeedPhraseCollectionView.swift in Sources */,
 				08A2565E294073EF00A31193 /* SelectableSwapToolTableViewCellViewModel.swift in Sources */,
+				04A371CF29DDDE0C00B883C0 /* ContentViewModel.swift in Sources */,
 				08A2572C294073F000A31193 /* AcceptProposalCoordinator.swift in Sources */,
 				08A25841294073F100A31193 /* TokenRowView.swift in Sources */,
 				08A2583F294073F100A31193 /* OpenSeaNonFungibleTokenTraitCell.swift in Sources */,
@@ -5917,6 +5933,7 @@
 				08A255EB294073EF00A31193 /* EnabledServersCoordinator.swift in Sources */,
 				08760C8E294079AD00F83AB3 /* DappRequestSwitchExistingChainCoordinator.swift in Sources */,
 				08A256F7294073F000A31193 /* UIAlertController.swift in Sources */,
+				04A371CB29DDDD9300B883C0 /* PlaceHolderImageView.swift in Sources */,
 				10B2A33029911A6700908F41 /* TransactionConfirmationCoordinatorBridgeToPromise.swift in Sources */,
 				08A2578E294073F000A31193 /* ConfigureImageStorage.swift in Sources */,
 				08A25602294073EF00A31193 /* SwitchTableViewCellViewModel.swift in Sources */,
@@ -6144,6 +6161,7 @@
 				08A2580C294073F100A31193 /* NFTAssetSelectionCoordinator.swift in Sources */,
 				100DD7282991585500D3ABEA /* ContactListTableViewCell.swift in Sources */,
 				08A256D4294073F000A31193 /* TokenCardRedemptionViewController.swift in Sources */,
+				04A371D129DDE15500B883C0 /* Auth.swift in Sources */,
 				08A257FB294073F100A31193 /* OpenSeaNonFungibleTokenCardRowViewModel.swift in Sources */,
 				08A257AE294073F000A31193 /* SeedPhraseBackupIntroductionViewModel.swift in Sources */,
 				08A257F4294073F100A31193 /* ClaimPaidOrderCoordinator.swift in Sources */,

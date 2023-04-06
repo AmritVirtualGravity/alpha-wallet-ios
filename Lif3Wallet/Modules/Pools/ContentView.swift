@@ -10,46 +10,78 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var favoriteColor = 0
-    var poolList: CompanyList?
+//    var poolList: PoolParent?
+    @StateObject private var viewModel = ContentViewModel()
+    @State var showAlert               = false
+    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
     
-    init(poolList: CompanyList?) {
+    init(fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?) {
         UISegmentedControl.appearance().selectedSegmentTintColor = .white
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-        self.poolList = poolList
+        self.fungibleTokenDetailsViewModel = fungibleTokenDetailsViewModel
     }
     
     var body: some View {
         Color(darkColor)
-        //            .ignoresSafeArea()
-            .edgesIgnoringSafeArea(.top)
+            .ignoresSafeArea()
             .overlay(
-                ScrollView {
-                    VStack {
-                        // MARK: segmented picker
-                        //                        VStack {
-                        //                            Picker("What is your favorite color? ", selection: $favoriteColor) {
-                        //                                Text("My Pools").tag(0)
-                        //                                Text("Available Pools").tag(1)
-                        //                            }
-                        //                            .pickerStyle(.segmented)
-                        //                            .cornerRadius(6, corners: .allCorners)
-                        //                            .padding(.horizontal, 10)
-                        //                            .padding(.top, 10)
-                        //                        }
-                        //            Text("Value: \(favoriteColor)")
-                        VStack {
-                            companySection(title: "Lif3 Staking List", company: poolList?.lif3StakingList ?? [])
-                            companySection(title: "Crypto Banter Suggesed Staking List", company: poolList?.crypoBannerSuggestedStakingList ?? [])
-                            companySection(title: "Tech suggested staking list", company: poolList?.techSuggestedStakingList ?? [])
+                ZStack {
+                    if(viewModel.isBusy) {
+                        ProgressView()
+                            .onAppear {
+                                viewModel.getPool(name: "ftm")
+                            }
+                    } else {
+                        
+                        let showAlert = Binding<Bool>(
+                            get: { viewModel.showAlert ?? false },
+                            set: { _ in viewModel.showAlert = viewModel.showAlert}
+                        )
+                        
+                        //                  VStack(spacing: 20) {
+                        //                      Text("Overlay").font(.largeTitle)
+                        //                      Text("Example").font(.title).foregroundColor(.white)
+                        //              }
+                        ScrollView {
+                            VStack {
+//                                Spacer()
+//                                    .frame(height: 40)
+                                //                        VStack {
+                                //                            Picker("What is your favorite color? ", selection: $favoriteColor) {
+                                //                                Text("My Pools").tag(0)
+                                //                                Text("Available Pools").tag(1)
+                                //                                //                Text("Blue").tag(2)
+                                //                            }
+                                //                            .pickerStyle(.segmented)
+                                //                            .cornerRadius(6, corners: .allCorners)
+                                //                            .padding(.horizontal, 10)
+                                //
+                                //
+                                //                        }
+                                //            Text("Value: \(favoriteColor)")
+                                //            List {
+                                VStack {
+                                    
+                                    ForEach(viewModel.pools ?? [], id: \.self) { poolSection in
+                                        //                                CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+                                        companySection(title: poolSection.stakingList ?? "", company: poolSection.list ?? [], image: poolSection.imageURL ?? "", fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel)
+                                    }
+                                }
+                            }
+                        }
+                        .alert(viewModel.error?.localizedDescription ?? "", isPresented: showAlert) {
+                            Button("OK") {
+                                // Handle acknowledgement.
+                                viewModel.showAlert = false
+                            }
                         }
                     }
                 }
-                
+                    .navigationTitle("Lif3")
+                    .navigationBarTitleDisplayMode(.inline)
             )
-            .navigationTitle("Stake LIF3")
     }
-    
 }
 
 func getRandomImageName() -> String {
@@ -61,19 +93,27 @@ struct CompanyCell: View {
     let amount: String
     let percentage: String
     let title: String
+    let description: String
+    let image: String
     var body: some View {
         HStack (alignment: .center, spacing: 8) {
-            Image(getRandomImageName())
-                .resizable()
-                .frame(width: 30, height: 30)
+            //            Image(getRandomImageName())
+            //                .resizable()
+            //                .frame(width: 30, height: 30)
+            AsyncImage(
+                url: image ,
+                placeholder: { PlaceHolderImageView() },
+                image: { Image(uiImage: $0).resizable() })
+            .frame(width: 30, height: 30)
+            .clipShape(Circle())
             VStack(spacing: 0) {
                 CustomText(name: title, padding: 0, font: mediumFont14)
-                CustomText(name: "tradeLif3.com.com/quaidfy", textColor: lightDarkColor, alignment: .trailing, padding: 0, font: regularFont12)
+                CustomText(name: description, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12)
             }
             //                Spacer()
             HStack(spacing: 0) {
                 CustomText(name: amount,alignment: .trailing ,padding: 0, font: mediumFont12)
-                CustomText(name: "\(percentage.replacingOccurrences(of: "%",with: ""))%", alignment: .trailing, padding: 0, font: mediumFont12)
+                CustomText(name: percentage, alignment: .trailing, padding: 0, font: mediumFont12)
             }
         }
         .padding(.vertical, 10)
@@ -86,13 +126,18 @@ struct CompanyCell: View {
 
 struct companySection: View {
     let title: String
-    let company: [Company]
+    let company: [PoolCompany]
+    let image: String
+    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
     var body: some View {
         VStack(spacing: 0) {
             HStack (alignment: .center, spacing: 8) {
-                Image(getRandomImageName())
-                    .resizable()
-                    .frame(width: 30, height: 30)
+                AsyncImage(
+                    url: image ,
+                    placeholder: { PlaceHolderImageView() },
+                    image: { Image(uiImage: $0).resizable() })
+                .frame(width: 30, height: 30)
+                .clipShape(Circle())
                 CustomText(name: title, textColor: lightDarkColor, padding: 0, font: mediumFont14)
             }
             .padding(.horizontal, 10)
@@ -100,26 +145,21 @@ struct companySection: View {
             HStack {
                 CustomText(name: "Protocol", textColor: lightDarkColor, padding: 0, font: mediumFont14)
                 HStack {
-                    CustomText(name: "TVL", textColor: lightDarkColor, alignment: .trailing, padding: 0 , font: mediumFont14)
+                    CustomText(name: "Type", textColor: lightDarkColor, alignment: .trailing, padding: 0 , font: mediumFont14)
                     Spacer()
-                    CustomText(name: "APR", textColor: lightDarkColor, alignment: .trailing, padding: 0, font: mediumFont14)
+                    CustomText(name: "Score", textColor: lightDarkColor, alignment: .trailing, padding: 0, font: mediumFont14)
                 }
             }
             .background(Color(darkColor))
             .padding( 10)
             
             ForEach(company, id: \.self) { company in
-                //                CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+                //                CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlProtocol ?? "", image: company.bannerImage ?? "")
                 NavigationLink {
-                    StakeView()
+                    StakeView(poolCompany: company, fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel )
                 } label: {
-                    CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+                    CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlStake ?? "", image: company.bannerImage ?? "")
                 }
-                
-                //                Link(destination: StakeView()) {
-                //                    CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
-                //                }
-                
             }
         }
         
@@ -128,7 +168,10 @@ struct companySection: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(poolList: PreviewData.load(name: "PoolList"))
+        NavigationView {
+//            ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
+            ContentView(fungibleTokenDetailsViewModel: nil)
+        }
+        
     }
-    
 }

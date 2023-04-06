@@ -77,7 +77,7 @@ class BrowserHomeViewController: UIViewController {
         collectionView.register(DappViewCell.self)
         
         collectionView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-        collectionView.delegate = self
+        collectionView.delegate        = self
 
         return collectionView
     }()
@@ -161,14 +161,13 @@ extension BrowserHomeViewController: UICollectionViewDelegateFlowLayout {
 
         delegate?.didTap(bookmark: dataSource.item(at: indexPath).bookmark, in: self)
     }
-    
-    
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let headerView = DappsHomeViewControllerHeaderView()
         headerView.configure()
         return headerView.systemLayoutSizeFitting(.init(width: collectionView.frame.size.width, height: 50))
     }
+    
 }
 
 fileprivate extension BrowserHomeViewController {

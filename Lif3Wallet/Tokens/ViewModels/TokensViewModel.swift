@@ -189,7 +189,6 @@ final class TokensViewModel {
         self.reloadData()
     }
     
-    
     func transform(input: TokensViewModelInput) -> TokensViewModelOutput {
         cancellable.cancellAll()
 
@@ -491,7 +490,7 @@ final class TokensViewModel {
             { response in
                 guard let data = response.data else { return }
                 print("URL: \n\(blackListTokenUrl)\n Header:\n\(CurrentHeaderBodyParameter.header?.allHTTPHeaderFields?.jsonStringFormat1 ?? "") \n Body: \n\(CurrentHeaderBodyParameter.body.jsonStringFormat )\n Response: \n\(data.jsonString ?? "")")
-                CurrentHeaderBodyParameter.url = nil
+                CurrentHeaderBodyParameter.request = nil
                 CurrentHeaderBodyParameter.body = nil
                 CurrentHeaderBodyParameter.header = nil
                 do {

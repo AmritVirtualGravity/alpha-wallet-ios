@@ -77,21 +77,21 @@ final class DappBrowserCoordinator: NSObject, Coordinator {
          wallet: Wallet,
          networkService: NetworkService) {
 
-        self.networkService = networkService
-        self.wallet = wallet
-        self.navigationController = NavigationController(navigationBarClass: DappBrowserNavigationBar.self, toolbarClass: nil)
-        self.sessionsProvider = sessionsProvider
-        self.config = config
-        self.bookmarksStore = bookmarksStore
-        self.browserHistoryStorage = browserHistoryStorage
-        self.browserOnly = browserOnly
-        self.analytics = analytics
+        self.networkService          = networkService
+        self.wallet                  = wallet
+        self.navigationController    = NavigationController(navigationBarClass: DappBrowserNavigationBar.self, toolbarClass: nil)
+        self.sessionsProvider        = sessionsProvider
+        self.config                  = config
+        self.bookmarksStore          = bookmarksStore
+        self.browserHistoryStorage   = browserHistoryStorage
+        self.browserOnly             = browserOnly
+        self.analytics               = analytics
         self.domainResolutionService = domainResolutionService
         super.init()
         //Necessary so that some sites don't bleed into (under) navigation bar after we tweak global styles for navigationBars after adding large title support
         navigationController.navigationBar.isTranslucent = false
 
-        browserNavBar?.navigationBarDelegate = self
+        browserNavBar?.navigationBarDelegate             = self
         browserNavBar?.configure(server: server)
     }
 

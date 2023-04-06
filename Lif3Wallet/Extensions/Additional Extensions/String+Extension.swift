@@ -239,3 +239,12 @@ func htmlToAttributed(stringData: String) -> NSAttributedString{
     }
     return NSAttributedString()
 }
+
+
+extension String {
+    var url: String {
+//        return URL(string: self.replacingOccurrences(of: " ", with: "%20")) ?? URL(string: "https://api.adeyelta.com/image/1625658923Catering.png")!
+ return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    }
+    
+}

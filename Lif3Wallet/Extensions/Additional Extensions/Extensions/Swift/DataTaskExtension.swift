@@ -43,30 +43,30 @@ extension URLSession {
         return task
     }
     
-    @discardableResult
-    func upload<T: Codable>(request: AppRequest, params: [String: String], files: [File], success: @escaping (T) -> (), failure: @escaping (Error) -> ()) -> URLSessionUploadTask {
-        //        let url = URL(string: "http://api-host-name/v1/api/uploadfile/single")
-
-        // generate boundary string using a unique per-app string
-        let boundary = UUID().uuidString
-
-        // Set the URLRequest to POST and to the specified URL
-        var urlRequest = request.request
-
-        // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
-        // And the boundary is also set here
-        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        let data = createBodyWithParameters(parameters: params, files: files, boundary: boundary)
-
-        // Send a POST request to the URL, with the data we created earlier
-        let task = uploadTask(with: urlRequest, from: data) { [weak self] (data, response, error) in
-            self?.handle(data: data, response: response, error: error, success: { (successData: SingleContainer<T>) in
-                success(successData.data!)
-            }, failure: failure)
-        }
-        task.resume()
-        return task
-    }
+//    @discardableResult
+//    func upload<T: Codable>(request: AppRequest, params: [String: String], files: [File], success: @escaping (T) -> (), failure: @escaping (Error) -> ()) -> URLSessionUploadTask {
+//        //        let url = URL(string: "http://api-host-name/v1/api/uploadfile/single")
+//
+//        // generate boundary string using a unique per-app string
+//        let boundary = UUID().uuidString
+//
+//        // Set the URLRequest to POST and to the specified URL
+//        var urlRequest = request.request
+//
+//        // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
+//        // And the boundary is also set here
+//        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+//        let data = createBodyWithParameters(parameters: params, files: files, boundary: boundary)
+//
+//        // Send a POST request to the URL, with the data we created earlier
+//        let task = uploadTask(with: urlRequest, from: data) { [weak self] (data, response, error) in
+//            self?.handle(data: data, response: response, error: error, success: { (successData: SingleContainer<T>) in
+//                success(successData.data!)
+//            }, failure: failure)
+//        }
+//        task.resume()
+//        return task
+//    }
     
     private func createBodyWithParameters(parameters: [String: String], files: [File], boundary: String) -> Data {
         var body = Data()

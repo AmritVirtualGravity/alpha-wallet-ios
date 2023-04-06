@@ -3,6 +3,22 @@
 import UIKit
 import SDWebImageSVGCoder
 
+
+let deploymentMode: DeploymentMode = {
+#if DEV
+    return .dev
+#endif
+    
+#if UAT
+    return .uat
+#endif
+    
+#if LIVE
+    return .live
+#endif
+    return .dev //default
+}()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appCoordinator: AppCoordinator!

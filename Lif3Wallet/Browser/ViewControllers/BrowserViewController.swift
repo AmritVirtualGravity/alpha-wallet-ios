@@ -20,10 +20,10 @@ final class BrowserViewController: UIViewController {
     private let server: RPCServer
 
     private struct Keys {
-        static let estimatedProgress = "estimatedProgress"
+        static let estimatedProgress      = "estimatedProgress"
         static let developerExtrasEnabled = "developerExtrasEnabled"
-        static let URL = "URL"
-        static let ClientName = "AlphaWallet"
+        static let URL                    = "URL"
+        static let ClientName             = "AlphaWallet"
     }
 
     private lazy var userClient: String = {

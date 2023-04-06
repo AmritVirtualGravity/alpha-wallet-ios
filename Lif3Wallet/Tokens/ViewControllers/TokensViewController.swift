@@ -521,7 +521,7 @@ fileprivate extension TokensViewController {
         for each in viewModels {
             snapshot.appendItems(each.views, toSection: each.section)
         }
-
+        #warning("Diffable data source detected item identifiers that are equal but have different hash values. Two identifiers which compare as equal must return the same hash value. You must fix this in the Hashable (Swift) or hash property (Objective-C) implementation for the type of these identifiers. Identifiers that are equal but have different hash values: (Lif3Wallet.TokensViewModel.ViewModelType.rpcServer(Lif3Wallet.TokenListServerTableViewCellViewModel(server: AlphaWalletFoundation.RPCServer.fantom, isTopSeparatorHidden: true, accessoryType: __C.UITableViewCellAccessoryType, backgroundColor: <UIDynamicProviderColor: 0x6000016a4ea0; provider = <__NSMallocBlock__: 0x600001d78300>>, serverFont: <UICTFont: 0x7fdc3810c650> font-family: \"SourceSansPro-Semibold\"; font-weight: bold; font-style: normal; font-size: 15.00pt, serverColor: <UIDynamicProviderColor: 0x6000011ebc20; provider = <__NSMallocBlock__: 0x600001cdc7b0>>, sum: 87675.0353846380160773786112, selectionStyle: __C.UITableViewCellSelectionStyle))) and (Lif3Walle")
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 }

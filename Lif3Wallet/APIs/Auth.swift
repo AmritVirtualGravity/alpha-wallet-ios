@@ -21,7 +21,7 @@ struct DeploymentMode: OptionSet {
     static let live: DeploymentMode = DeploymentMode(rawValue: 2)
 }
 
-struct Configuration {
+struct Lif3WalletConfiguration {
     let clientId: String
     let scope: String
     let clientSecret: String
@@ -41,10 +41,10 @@ struct Configuration {
     let googleClientId: String
     let lineChannelID: String
     
-    static var conf: Configuration {
+    static var conf: Lif3WalletConfiguration {
         switch deploymentMode {
         case .uat:
-            return Configuration(
+            return Lif3WalletConfiguration(
                 clientId: "2",
                 scope: "",
                 clientSecret: "ajjWqmKsXmUheMJCbENABZagpfTPkvBpezFsZ4Yd",
@@ -58,7 +58,7 @@ struct Configuration {
                 googleClientId: "",
                 lineChannelID: "")
         case .live:
-            return Configuration(
+            return Lif3WalletConfiguration(
                 clientId: "2",
                 scope: "",
                 clientSecret: "ajjWqmKsXmUheMJCbENABZagpfTPkvBpezFsZ4Yd",
@@ -72,7 +72,7 @@ struct Configuration {
                 googleClientId: "144742788734-h6o8d4a4j7n2i3apfhn829mmdcvsj9f7.apps.googleusercontent.com",
                 lineChannelID: "1655234542")
         default:
-            return Configuration(
+            return Lif3WalletConfiguration(
                 clientId: "2",
                 scope: "",
                 clientSecret: "ajjWqmKsXmUheMJCbENABZagpfTPkvBpezFsZ4Yd",

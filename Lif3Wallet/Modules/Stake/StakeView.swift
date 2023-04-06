@@ -6,40 +6,79 @@
 //
 
 import SwiftUI
+import WalletCore
+import AlphaWalletFoundation
+import SafariServices
 
 struct StakeView: View {
+    
+    let poolCompany: PoolCompany
+    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+    
+    @State private var showSafari: Bool = false
+    
     var body: some View {
-        Color(darkerBlack)
+        return Color(darkerBlack)
             .ignoresSafeArea()
             .overlay(
                 ScrollView {
                     VStack(spacing: 16) {
-                        Image("stake")
-                            .resizable()
-                            .frame(height: 151)
-                            .cornerRadius(10, corners: .allCorners)
+                        AsyncImage(
+                            url: poolCompany.bannerImage ?? "" ,
+                            placeholder: { PlaceHolderImageView() },
+                            image: { Image(uiImage: $0).resizable() })
+                        .frame(height: 151)
+                        .cornerRadius(10, corners: .allCorners)
+                        //                        .clipShape(Circle())
                         CustomText(name: "About", padding: 0, font: mediumFont14)
-                        StakeCell(title: "Lif3 Trade")
+                        StakeCell(title: poolCompany.title ?? "", urlString: poolCompany.urlProtocol ?? "")
                         VStack(spacing: 16) {
-                            StakeViewTitleDescription(title: "Staking Page:", description: "https://trade.lif3.com/earn")
-                            StakeViewTitleDescription(title: "About Protocol:", description: "Lif3.com is a complete multi-chain DeFi Ecosystem.")
-                            StakeViewTitleDescription(title: "About Staking Pool:", description: "By depositing LIF3 into this pool, you are earning  protocol fees from the Lif3 Trade platform and additional Lif3 rewa1rds.")
+                            StakeViewTitleDescription(title: "Staking Page:", description: poolCompany.urlStake ?? "")
+                            StakeViewTitleDescription(title: "About Protocol:", description: poolCompany.aboutProtocol ?? "")
+                            StakeViewTitleDescription(title: "About Staking Pool:", description: poolCompany.aboutStake ?? "")
                         }
-                        PrimaryButton(text: "Begin Staking", clicked: {})
-                            .frame(height: 44)
+//                        NavigationLink {
+//                            if let fungibleTokenDetailsViewModel = fungibleTokenDetailsViewModel {
+//                                //                                BrowserViewController(account: fungibleTokenDetailsViewModel.wallet, server: fungibleTokenDetailsViewModel.token.server)
+//                                MyMasterViewController(fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel, poolCompany: poolCompany)
+//                            } else {
+//                                Spacer()
+//                            }
+//
+//                        } label: {
+                            PrimaryButton(text: "Begin Staking", clicked: {
+//                                let config = SFSafariViewController.Configuration()
+//                                config.entersReaderIfAvailable = true
+//
+//                                let url = URL(string: poolCompany.urlStake ?? "")
+//                                let vc = SFSafariViewController(url: url, configuration: config)
+//                                present(vc, animated: true)
+                                showSafari = true
+                                
+                            })
+                                .frame(height: 44)
+//                                .overlay (
+//                                    RoundedRectangle(cornerRadius: 0).allowsHitTesting(true).background(.clear)
+//                                )
+//                        }
+                        
                     }
                     .padding(.horizontal, 16)
                 }
-                
-                //
+                    .navigationTitle("Lif3")
+                    .navigationBarTitleDisplayMode(.inline)
+           
             )
-            .navigationTitle("Stake LIF3")
+            .ignoresSafeArea()
+            .fullScreenCover(isPresented: $showSafari, content: {
+                SFSafariViewWrapper(url: URL(string: poolCompany.urlStake ?? "")!)
+            })
     }
 }
 
-
 struct StakeCell: View {
     let title: String
+    let urlString: String
     var body: some View {
         HStack (alignment: .center, spacing: 8) {
             Image(getRandomImageName())
@@ -47,20 +86,20 @@ struct StakeCell: View {
                 .frame(width: 30, height: 30)
             VStack(spacing: 0) {
                 CustomText(name: title, padding: 0, font: mediumFont14)
-                CustomText(name: "https://lif3.com/", textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12, maxWidth: true)
+                CustomText(name: urlString, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12, maxWidth: true)
             }
         }
         //        .padding(.vertical, 10)
         //        .padding(.horizontal, 10)
         //        .background(.black)
-        
     }
     
 }
 
 struct StakeView_Previews: PreviewProvider {
     static var previews: some View {
-        StakeView()
+        let poolList: PoolParent = PreviewData.load(name: "Pools", returnType: PoolParent.self)!
+        StakeView(poolCompany: poolList.pools?.first?.list?.first ?? PoolCompany(token: nil, title: nil, subtitle: nil, aboutProtocol: nil, aboutStake: nil, urlProtocol: nil, urlStake: nil, icon: nil, bannerImage: nil, poolType: nil, score: nil, isNative: nil, urlStaking: nil, image: nil), fungibleTokenDetailsViewModel: nil)
     }
 }
 
@@ -72,5 +111,66 @@ struct StakeViewTitleDescription: View {
             CustomText(name: title, textColor: lighterDarkColor, padding: 0,font: mediumFont12)
             CustomText(name: description, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12, maxWidth: true)
         }
+    }
+}
+
+struct MyMasterViewController: UIViewControllerRepresentable {
+
+    var fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel
+    var poolCompany: PoolCompany
+    typealias UIViewControllerType = BrowserHomeViewController
+    
+    func makeUIViewController(context: Context) -> BrowserHomeViewController {
+        //        let storyboard = UIStoryboard(name: "Esewa", bundle: Bundle.main)
+        let viewModel = BrowserHomeViewModel(bookmarksStore: BookmarksStore())
+        let vc        = BrowserHomeViewController(viewModel: viewModel)
+//        discoverVC.didT
+//        discoverVC.delegate = self
+//        if let url = URL(string: poolCompany.urlStake ?? "") {
+//            discoverVC.goTo(url: url)
+//        }
+//        let loginViewController = storyboard.instantiateInitialViewController()
+        return vc
+    }
+    
+    func updateUIViewController(_ uiViewController: BrowserHomeViewController, context: Context) {
+        
+    }
+    
+}
+
+//struct MyMasterViewController: UIViewControllerRepresentable {
+//
+//    var fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel
+//    var poolCompany: PoolCompany
+//    typealias UIViewControllerType = BrowserViewController
+//
+//    func makeUIViewController(context: Context) -> BrowserViewController {
+//        //        let storyboard = UIStoryboard(name: "Esewa", bundle: Bundle.main)
+//        let discoverVC = BrowserViewController(account: fungibleTokenDetailsViewModel.wallet, server: fungibleTokenDetailsViewModel.token.server)
+//        if let url = URL(string: poolCompany.urlStake ?? "") {
+//            discoverVC.goTo(url: url)
+//        }
+////        let loginViewController = storyboard.instantiateInitialViewController()
+//        return discoverVC
+//    }
+//
+//    func updateUIViewController(_ uiViewController: BrowserViewController, context: Context) {
+//
+//    }
+//
+//
+//}
+
+
+struct SFSafariViewWrapper: UIViewControllerRepresentable {
+    let url: URL
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<Self>) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
+    }
+
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SFSafariViewWrapper>) {
+        return
     }
 }

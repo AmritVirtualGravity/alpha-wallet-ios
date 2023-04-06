@@ -60,7 +60,9 @@ class FungibleTokenDetailsViewController: UIViewController {
     private let willAppear = PassthroughSubject<Void, Never>()
 
     weak var delegate: FungibleTokenDetailsViewControllerDelegate?
-
+    
+    private var tokens: [PoolToken]?
+  
     init(viewModel: FungibleTokenDetailsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -81,15 +83,26 @@ class FungibleTokenDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        stakeButton.addTarget(self, action: #selector(didTapStake), for: .touchUpInside)
-        swapButton.addTarget(self, action: #selector(didTapSwap), for: .touchUpInside)
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-        bind(viewModel: viewModel)
+        setup()
+        stakeButton.isHidden = true
+        switch self.viewModel.token.server {
+        case .fantom: getToken(name: "ftm")
+        case .binance_smart_chain, .binance_smart_chain_testnet: getToken(name: "bnb")
+        default: break
+        }
+   
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         willAppear.send(())
+    }
+    
+    fileprivate func setup() {
+        stakeButton.addTarget(self, action: #selector(didTapStake), for: .touchUpInside)
+        swapButton.addTarget(self, action: #selector(didTapSwap), for: .touchUpInside)
+        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        bind(viewModel: viewModel)
     }
     
     private func buildSubviews(for viewTypes: [FungibleTokenDetailsViewModel.ViewType]) -> [UIView] {
@@ -220,7 +233,7 @@ class FungibleTokenDetailsViewController: UIViewController {
     @objc private func didTapStake(_ sender: UIButton) {
         print("Stake button tapped")
 //        delegate?.didTapSwap(swapTokenFlow:  .swapToken(token: viewModel.token), in: self)
-        self.gotoPools()
+        self.gotoPools(viewModel: self.viewModel)
     }
 
 }
@@ -230,18 +243,40 @@ extension FungibleTokenDetailsViewController: FungibleTokenHeaderViewDelegate {
     func didPressViewContractWebPage(inHeaderView: FungibleTokenHeaderView) {
         delegate?.didPressViewContractWebPage(forContract: viewModel.token.contractAddress, server: viewModel.token.server, in: self)
     }
+    
 }
-
 
 
 // MARK: Navigation
 extension FungibleTokenDetailsViewController {
     
-    private func gotoPools() {
-        let swiftUIController = UIHostingController(rootView: ContentView(poolList: PreviewData.load(name: "PoolList")))
+    private func gotoPools(viewModel: FungibleTokenDetailsViewModel) {
+        let swiftUIController = UIHostingController(rootView: ContentView(fungibleTokenDetailsViewModel: viewModel))
         swiftUIController.modalPresentationStyle = .popover
 //        tokensViewController.present(swiftUIController, animated: true)
         show(swiftUIController, sender: nil)
+    }
+    
+    
+    private func showOrHideStakeButton(tokens: [PoolToken]) {
+        let token: PoolToken? = tokens.first(where: { $0.token?.lowercased() == viewModel.token.symbol.lowercased() })
+        stakeButton.isHidden = (token?.staking ?? "false") != "true"
+    }
+    
+}
+
+
+extension FungibleTokenDetailsViewController: TokenAPI {
+    
+    private func getToken(name: String) {
+        getToken(name: name) { [weak self] tokenParent in
+            guard let self = self else { return }
+            self.tokens = tokenParent.tokens
+            self.showOrHideStakeButton(tokens: self.tokens ?? [])
+        } failure: { error in
+            self.alert(message: error.localizedDescription)
+        }
+
     }
     
 }

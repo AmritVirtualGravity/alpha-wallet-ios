@@ -110,15 +110,15 @@ public enum EndPoint {
     }
     
     func request(body: [String: Any]? = nil) -> AppRequest {
-        let urlString = Configuration.conf.baseURL + "/" + path
+        let urlString = Lif3WalletConfiguration.conf.baseURL + "/" + path
         return request(urlString: urlString, body: body)
     }
     
     private func getURL(query: [String: String]? = nil) -> URL {
         var components    = URLComponents()
-        components.scheme = Configuration.conf.scheme
-        components.host   = Configuration.conf.host
-        components.path   = Configuration.conf.apiPath + "/" + path
+        components.scheme = Lif3WalletConfiguration.conf.scheme
+        components.host   = Lif3WalletConfiguration.conf.host
+        components.path   = Lif3WalletConfiguration.conf.apiPath + "/" + path
         components.queryItems = query?.map({
             return URLQueryItem(name: $0, value: $1)
         })
@@ -126,4 +126,3 @@ public enum EndPoint {
     }
     
 }
-

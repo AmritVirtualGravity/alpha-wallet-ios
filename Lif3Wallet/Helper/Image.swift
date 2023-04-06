@@ -40,11 +40,11 @@ struct AsyncImage<Placeholder: View>: View {
     }
 }
 
-protocol ImageCache {
+protocol Lif3WalletImageCache {
     subscript(_ url: URL) -> UIImage? { get set }
 }
 
-struct TemporaryImageCache: ImageCache {
+struct TemporaryImageCache: Lif3WalletImageCache {
     private let cache = NSCache<NSURL, UIImage>()
     
     subscript(_ key: URL) -> UIImage? {
@@ -59,12 +59,12 @@ class ImageLoader: ObservableObject {
     private(set) var isLoading = false
     
     private let url: URL
-    private var cache: ImageCache?
+    private var cache: Lif3WalletImageCache?
     private var cancellable: AnyCancellable?
     
     private static let imageProcessingQueue = DispatchQueue(label: "image-processing")
     
-    init(url: URL, cache: ImageCache? = nil) {
+    init(url: URL, cache: Lif3WalletImageCache? = nil) {
         self.url = url
         self.cache = cache
     }
@@ -111,11 +111,11 @@ class ImageLoader: ObservableObject {
 }
 
 struct ImageCacheKey: EnvironmentKey {
-    static let defaultValue: ImageCache = TemporaryImageCache()
+    static let defaultValue: Lif3WalletImageCache = TemporaryImageCache()
 }
 
 extension EnvironmentValues {
-    var imageCache: ImageCache {
+    var imageCache: Lif3WalletImageCache {
         get { self[ImageCacheKey.self] }
         set { self[ImageCacheKey.self] = newValue }
     }

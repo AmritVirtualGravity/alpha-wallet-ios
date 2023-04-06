@@ -435,7 +435,6 @@ class ActiveWalletCoordinator: NSObject, Coordinator {
         coordinator.start()
         coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.browser.tabBarItem
         addCoordinator(coordinator)
-
         return coordinator
     }
 

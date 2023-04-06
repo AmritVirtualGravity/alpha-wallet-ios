@@ -91,11 +91,11 @@ extension WalletSummaryViewModel {
 
                 switch helper.change24h(from: changePercentage.amount) {
                 case .appreciate(let percentageChange24h):
-                    return "(\(formatter.string(double: percentageChange24h) ?? ""))"
-//                    "(\(formatter.string(double: percentageChange24h) ?? "")%)"
+//                    return "(\(formatter.string(double: percentageChange24h) ?? ""))"
+                    return "(\(formatter.string(double: percentageChange24h) ?? "")%)".replacingOccurrences(of: "$", with: "")
                 case .depreciate(let percentageChange24h):
-                    return "(\(formatter.string(double: percentageChange24h) ?? ""))"
-//                    "(\(formatter.string(double: percentageChange24h) ?? "")%)"
+//                    return "(\(formatter.string(double: percentageChange24h) ?? ""))"
+                    return "(\(formatter.string(double: percentageChange24h) ?? "")%)".replacingOccurrences(of: "$", with: "")
                 case .none:
                     return "-"
                 }

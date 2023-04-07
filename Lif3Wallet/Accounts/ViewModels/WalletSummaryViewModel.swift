@@ -100,7 +100,6 @@ extension WalletSummaryViewModel {
                     return "-"
                 }
             }()
-
             let value = R.string.localizable.walletSummaryToday(changeString + " " + changePercentage)
             return (value, helper.valueChangeValueColor(from: summary?.changePercentage?.amount))
         }

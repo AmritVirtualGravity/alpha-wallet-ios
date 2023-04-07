@@ -19,7 +19,7 @@ final class TokensViewController: UIViewController {
     private let _pullToRefresh = PassthroughSubject<Void, Never>()
     private let selection = PassthroughSubject<TokensViewModel.SelectionSource, Never>()
     let viewModel: TokensViewModel
-
+    
     lazy private var filterView: ScrollableSegmentedControl = {
         let control = ScrollableSegmentedControl(cells: viewModel.filterViewModel.cells, configuration: viewModel.filterViewModel.configuration)
         control.setSelection(cellIndex: 0, animated: false)
@@ -48,18 +48,16 @@ final class TokensViewController: UIViewController {
         ])
         return view
     }()
-
-
-
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView.grouped
-
+        
         tableView.register(FungibleTokenViewCell.self)
         tableView.register(EthTokenViewCell.self)
         tableView.register(NonFungibleTokenViewCell.self)
         tableView.register(ServerTableViewCell.self)
         tableView.register(OpenSeaNonFungibleTokenPairTableCell.self)
-
+        
         tableView.registerHeaderFooterView(GeneralTableViewSectionHeader<ScrollableSegmentedControl>.self)
         tableView.registerHeaderFooterView(GeneralTableViewSectionHeader<AddHideTokensView>.self)
         tableView.registerHeaderFooterView(ActiveWalletSessionView.self)
@@ -70,7 +68,7 @@ final class TokensViewController: UIViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.refreshControl = refreshControl
         tableView.tableFooterView = footerView
-
+        
         return tableView
     }()
     private lazy var refreshControl: UIRefreshControl = {
@@ -82,7 +80,7 @@ final class TokensViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
-
+        
         return searchController
     }()
     private lazy var consoleButton: UIButton = {
@@ -92,7 +90,7 @@ final class TokensViewController: UIViewController {
         consoleButton.setTitle(R.string.localizable.tokenScriptShowErrors(), for: .normal)
         consoleButton.bounds.size.height = 44
         consoleButton.isHidden = true
-
+        
         return consoleButton
     }()
     private var promptBackupWalletViewHolder: UIView {
@@ -106,22 +104,22 @@ final class TokensViewController: UIViewController {
     private lazy var bottomConstraint: NSLayoutConstraint = {
         return tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     }()
-
+    
     private lazy var keyboardChecker: KeyboardChecker = {
         let keyboardChecker = KeyboardChecker(self, resetHeightDefaultValue: 0, ignoreBottomSafeArea: true)
         keyboardChecker.constraints = [bottomConstraint]
-
+        
         return keyboardChecker
     }()
-
+    
     private lazy var whereAreMyTokensView: AddHideTokensView = {
         let view = AddHideTokensView()
         view.delegate = self
         view.configure(viewModel: ShowAddHideTokensViewModel.configuredForTestnet())
-
+        
         return view
     }()
-
+    
     private var isConsoleButtonHidden: Bool {
         get { consoleButton.isHidden }
         set {
@@ -130,7 +128,7 @@ final class TokensViewController: UIViewController {
             adjustTableViewHeaderHeightToFitContents()
         }
     }
-
+    
     private var isPromptBackupWalletViewHolderHidden: Bool {
         get { promptBackupWalletViewHolder.isHidden }
         set {
@@ -139,9 +137,9 @@ final class TokensViewController: UIViewController {
             adjustTableViewHeaderHeightToFitContents()
         }
     }
-
+    
     weak var delegate: TokensViewControllerDelegate?
-
+    
     var promptBackupWalletView: UIView? {
         didSet {
             oldValue?.removeFromSuperview()
@@ -151,7 +149,7 @@ final class TokensViewController: UIViewController {
                 NSLayoutConstraint.activate([
                     promptBackupWalletView.anchorsConstraint(to: promptBackupWalletViewHolder, edgeInsets: .init(top: 7, left: 7, bottom: 4, right: 7)),
                 ])
-
+                
                 isPromptBackupWalletViewHolderHidden = shouldHidePromptBackupWalletViewHolderBecauseSearchIsActive
             } else {
                 isPromptBackupWalletViewHolderHidden = true
@@ -163,7 +161,7 @@ final class TokensViewController: UIViewController {
         let searchBarHeader = DummySearchView(closure: { [weak self] in
             self?.enterSearchMode()
         })
-
+        
         return searchBarHeader
     }()
     private lazy var dataSource = makeDataSource()
@@ -173,59 +171,59 @@ final class TokensViewController: UIViewController {
         result.backgroundColor = viewModel.buyButtonFooterBarBackgroundColor
         return result
     }()
-
+    
     init(viewModel: TokensViewModel) {
         self.viewModel = viewModel
-
+        
         super.init(nibName: nil, bundle: nil)
-
+        
         view.addSubview(tableView)
         
         tableView.addSubview(emptyTableView)
-//        view.addSubview(footerBar)
-
+        //        view.addSubview(footerBar)
+        
         NSLayoutConstraint.activate([
-//            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            //            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            //            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            //            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             //            bottomConstraint,
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-
-//            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            //            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -60),
             tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
             emptyTableView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
             emptyTableViewHeightConstraint,
-//            footerBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            footerBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            footerBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            //            footerBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            //            footerBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            //            footerBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-//        footerBar.isHidden = true
+        //        footerBar.isHidden = true
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFilteringWithKeyword()
-
+        
         tableView.delegate = self
-
+        
         filterView.addTarget(self, action: #selector(didTapSegment), for: .touchUpInside)
         consoleButton.addTarget(self, action: #selector(openConsole), for: .touchUpInside)
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-
+        
         buttonsBar.configure(.primary(buttons: 1))
         buttonsBar.buttons[0].addTarget(self, action: #selector(buyCryptoSelected), for: .touchUpInside)
-//        buttonsBar.isHidden = true
-
+        //        buttonsBar.isHidden = true
+        
         bind(viewModel: viewModel)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         navigationController?.applyTintAdjustment()
         hidesBottomBarWhenPushed = false
         appear.send(())
@@ -234,86 +232,86 @@ final class TokensViewController: UIViewController {
         delegate?.viewWillAppear(in: self)
         hideNavigationBarTopSeparatorLine()
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         keyboardChecker.viewWillDisappear()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         showNavigationBarTopSeparatorLine()
     }
-
+    
     @objc func pullToRefresh() {
         _pullToRefresh.send(())
     }
-
+    
     @objc func openConsole() {
         delegate?.didTapOpenConsole(in: self)
     }
-
+    
     @objc func buyCryptoSelected(_ sender: UIButton) {
         delegate?.buyCryptoSelected(in: self)
     }
-
+    
     override func viewDidLayoutSubviews() {
         //viewDidLayoutSubviews() is called many times
         configureSearchBarOnce()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         return nil
     }
-
+    
     private func showOrHideBackupWalletViewHolder() {
         isPromptBackupWalletViewHolderHidden = !(viewModel.shouldShowBackupPromptViewHolder && !promptBackupWalletViewHolder.subviews.isEmpty) || shouldHidePromptBackupWalletViewHolderBecauseSearchIsActive
     }
-
+    
     private func bind(viewModel: TokensViewModel) {
         navigationItem.largeTitleDisplayMode = viewModel.largeTitleDisplayMode
         view.backgroundColor = viewModel.backgroundColor
         tableView.backgroundColor = viewModel.backgroundColor
-
+        
         buttonsBar.buttons[0].setTitle(viewModel.buyCryptoTitle, for: .normal)
-
+        
         let input = TokensViewModelInput(
             appear: appear.eraseToAnyPublisher(),
             pullToRefresh: _pullToRefresh.eraseToAnyPublisher(),
             selection: selection.eraseToAnyPublisher(),
             keyboard: keyboardChecker.publisher)
-
+        
         let output = viewModel.transform(input: input)
-
+        
         dataSource.numberOfRowsInSection
             .sink { [weak self, viewModel] section in
                 guard viewModel.sections[section] == .tokens || viewModel.sections[section] == .collectiblePairs else { return }
                 self?.handleTokensCountChange(rows: viewModel.numberOfItems(for: section))
             }.store(in: &cancellable)
-
+        
         output.viewState
             .sink { [weak self, weak walletSummaryView, blockieImageView, navigationItem] state in
                 self?.showOrHideBackupWalletViewHolder()
-
+                
                 walletSummaryView?.configure(viewModel: .init(walletSummary: state.summary, config: viewModel.config, alignment: .center))
                 blockieImageView.setBlockieImage(image: state.blockiesImage)
-
+                
                 navigationItem.title = state.title
                 self?.isConsoleButtonHidden = state.isConsoleButtonHidden
                 self?.footerBar.isHidden = state.isFooterHidden
                 self?.applySnapshot(with: state.sections, animatingDifferences: false)
             }.store(in: &cancellable)
-
+        
         output.deletion
             .sink { [dataSource] indexPaths in
                 var snapshot = dataSource.snapshot()
-
+                
                 let ids = indexPaths.compactMap { dataSource.itemIdentifier(for: $0) }
                 snapshot.deleteItems(ids)
-
+                
                 dataSource.apply(snapshot, animatingDifferences: true)
             }.store(in: &cancellable)
-
+        
         output.pullToRefreshState
             .sink { [refreshControl] state in
                 switch state {
@@ -321,17 +319,17 @@ final class TokensViewController: UIViewController {
                 case .beginLoading: refreshControl.beginRefreshing()
                 }
             }.store(in: &cancellable)
-
+        
         output.selection
             .sink { [weak self] token in
                 guard let strongSelf = self else { return }
                 strongSelf.delegate?.didSelect(token: token, in: strongSelf)
             }.store(in: &cancellable)
-
+        
         output.applyTableInset
             .map { [footerBar] hasInset -> UIEdgeInsets in
                 switch hasInset {
-//                case .some(let noNeedInInset): return noNeedInInset ? UIEdgeInsets.zero : UIEdgeInsets(top: 0, left: 0, bottom: footerBar.height, right: 0)
+                    //                case .some(let noNeedInInset): return noNeedInInset ? UIEdgeInsets.zero : UIEdgeInsets(top: 0, left: 0, bottom: footerBar.height, right: 0)
                 case .some(let noNeedInInset): return noNeedInInset ? UIEdgeInsets.zero : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 case .none: return UIEdgeInsets.zero
                 }
@@ -341,22 +339,22 @@ final class TokensViewController: UIViewController {
                 tableView.scrollIndicatorInsets = $0
             }.store(in: &cancellable)
     }
-
+    
     private func adjustTableViewHeaderHeightToFitContents() {
         let size = tableViewHeader.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         tableViewHeader.bounds.size.height = size.height
         tableView.tableHeaderView = tableViewHeader
     }
-
+    
     @objc private func enterSearchMode() {
         let searchController = searchController
         navigationItem.searchController = searchController
-
+        
         viewModel.set(isSearchActive: true)
-
+        
         DispatchQueue.main.async {
             searchController.isActive = true
-
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 searchController.searchBar.becomeFirstResponder()
             }
@@ -367,92 +365,93 @@ final class TokensViewController: UIViewController {
 extension TokensViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         selection.send(.cell(indexPath: indexPath))
     }
-
+    
     //Hide the footer
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         .leastNormalMagnitude
     }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         nil
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.heightForHeaderInSection(for: section)
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch viewModel.sections[section] {
         case .walletSummary:
             let header: TokensViewController.GeneralTableViewSectionHeader<WalletSummaryView> = tableView.dequeueReusableHeaderFooterView()
             header.subview = walletSummaryView
-
+            
             return header
         case .filters:
             let header: TokensViewController.GeneralTableViewSectionHeader<ScrollableSegmentedControl> = tableView.dequeueReusableHeaderFooterView()
             header.subview = filterView
             header.useSeparatorLine = false
-
+            
             return header
         case .activeWalletSession:
             let header: ActiveWalletSessionView = tableView.dequeueReusableHeaderFooterView()
             header.configure(viewModel: .init(count: viewModel.walletConnectSessions))
             header.delegate = self
-
+            
             return header
         case .testnetTokens:
             let header: TokensViewController.GeneralTableViewSectionHeader<AddHideTokensView> = tableView.dequeueReusableHeaderFooterView()
             header.useSeparatorTopLine = true
             header.useSeparatorBottomLine = viewModel.isBottomSeparatorLineHiddenForTestnetHeader(section: section)
             header.subview = whereAreMyTokensView
-
+            
             return header
         case .search:
             let header: TokensViewController.GeneralTableViewSectionHeader<DummySearchView> = tableView.dequeueReusableHeaderFooterView()
             header.useSeparatorLine = false
             header.subview = searchBarHeader
-
+            
             return header
         case .tokens, .collectiblePairs:
             return nil
         }
     }
-
+    
     func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
         hideNavigationBarTopSeparatorLineInScrollEdgeAppearance()
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentOffset.y == 0 ? hideNavigationBarTopSeparatorLineInScrollEdgeAppearance() : showNavigationBarTopSeparatorLineInScrollEdgeAppearance()
     }
-
+    
 }
 
 extension TokensViewController: ActiveWalletSessionViewDelegate {
-
+    
     func view(_ view: ActiveWalletSessionView, didSelectTap sender: UITapGestureRecognizer) {
         delegate?.walletConnectSelected(in: self)
     }
 }
 
 extension TokensViewController {
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return viewModel.cellHeight(for: indexPath)
     }
-
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? OpenSeaNonFungibleTokenPairTableCell else { return }
-
+        
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
     }
-
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return viewModel.trailingSwipeActionsConfiguration(for: indexPath)
     }
-
+    
     private func handleTokensCountChange(rows: Int) {
         let isEmpty = rows == 0
         if isEmpty {
@@ -465,7 +464,7 @@ extension TokensViewController {
         }
         emptyTableView.isHidden = !isEmpty
     }
-
+    
     private func tableHeight() -> CGFloat? {
         guard let delegate = tableView.delegate else { return nil }
         let sectionCount = viewModel.sections.count
@@ -480,6 +479,7 @@ extension TokensViewController {
         }
         return height
     }
+    
 }
 
 fileprivate extension TokensViewController {
@@ -512,22 +512,22 @@ fileprivate extension TokensViewController {
             }
         })
     }
-
+    
     private func applySnapshot(with viewModels: [TokensViewModel.SectionViewModel], animatingDifferences: Bool = true) {
         var snapshot = NSDiffableDataSourceSnapshot<TokensViewModel.Section, TokensViewModel.ViewModelType>()
         let sections = viewModels.map { $0.section }
         snapshot.appendSections(sections)
-
+        
         for each in viewModels {
             snapshot.appendItems(each.views, toSection: each.section)
         }
-        #warning("Diffable data source detected item identifiers that are equal but have different hash values. Two identifiers which compare as equal must return the same hash value. You must fix this in the Hashable (Swift) or hash property (Objective-C) implementation for the type of these identifiers. Identifiers that are equal but have different hash values: (Lif3Wallet.TokensViewModel.ViewModelType.rpcServer(Lif3Wallet.TokenListServerTableViewCellViewModel(server: AlphaWalletFoundation.RPCServer.fantom, isTopSeparatorHidden: true, accessoryType: __C.UITableViewCellAccessoryType, backgroundColor: <UIDynamicProviderColor: 0x6000016a4ea0; provider = <__NSMallocBlock__: 0x600001d78300>>, serverFont: <UICTFont: 0x7fdc3810c650> font-family: \"SourceSansPro-Semibold\"; font-weight: bold; font-style: normal; font-size: 15.00pt, serverColor: <UIDynamicProviderColor: 0x6000011ebc20; provider = <__NSMallocBlock__: 0x600001cdc7b0>>, sum: 87675.0353846380160773786112, selectionStyle: __C.UITableViewCellSelectionStyle))) and (Lif3Walle")
+#warning("Diffable data source detected item identifiers that are equal but have different hash values. Two identifiers which compare as equal must return the same hash value. You must fix this in the Hashable (Swift) or hash property (Objective-C) implementation for the type of these identifiers. Identifiers that are equal but have different hash values: (Lif3Wallet.TokensViewModel.ViewModelType.rpcServer(Lif3Wallet.TokenListServerTableViewCellViewModel(server: AlphaWalletFoundation.RPCServer.fantom, isTopSeparatorHidden: true, accessoryType: __C.UITableViewCellAccessoryType, backgroundColor: <UIDynamicProviderColor: 0x6000016a4ea0; provider = <__NSMallocBlock__: 0x600001d78300>>, serverFont: <UICTFont: 0x7fdc3810c650> font-family: \"SourceSansPro-Semibold\"; font-weight: bold; font-style: normal; font-size: 15.00pt, serverColor: <UIDynamicProviderColor: 0x6000011ebc20; provider = <__NSMallocBlock__: 0x600001cdc7b0>>, sum: 87675.0353846380160773786112, selectionStyle: __C.UITableViewCellSelectionStyle))) and (Lif3Walle")
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 }
 
 extension TokensViewController: AddHideTokensViewDelegate {
-
+    
     func view(_ view: AddHideTokensView, didSelectAddHideTokensButton sender: UIButton) {
         delegate?.whereAreMyTokensSelected(in: self)
     }
@@ -538,11 +538,11 @@ extension TokensViewController {
         guard let filter = viewModel.convertSegmentedControlSelectionToFilter(control.selectedSegment) else { return }
         apply(filter: filter, withSegmentAtSelection: control.selectedSegment)
     }
-
+    
     private func apply(filter: WalletFilter, withSegmentAtSelection selection: ControlSelection?) {
         let previousFilter = viewModel.filter
         viewModel.set(filter: filter)
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [filterView] in
             //Important to update the segmented control (and hence add the segmented control back to the table) after they have been re-added to the table header through the table reload. Otherwise adding to the table header will break the animation for segmented control
             if let selection = selection, case let ControlSelection.selected(index) = selection {
@@ -564,12 +564,12 @@ extension TokensViewController {
 }
 
 extension TokensViewController: UISearchControllerDelegate {
-
+    
     func didDismissSearchController(_ searchController: UISearchController) {
         guard viewModel.isSearchActive else { return }
-
+        
         navigationItem.searchController = nil
-
+        
         viewModel.set(isSearchActive: false)
     }
 }
@@ -582,7 +582,7 @@ extension TokensViewController: UISearchResultsUpdating {
             self.processSearchWithKeywords()
         }
     }
-
+    
     private func processSearchWithKeywords() {
         shouldHidePromptBackupWalletViewHolderBecauseSearchIsActive = searchController.isActive
         guard searchController.isActive else {
@@ -598,19 +598,19 @@ extension TokensViewController: UISearchResultsUpdating {
         let keyword = searchController.searchBar.text ?? ""
         updateResults(withKeyword: keyword)
     }
-
+    
     private func updateResults(withKeyword keyword: String) {
         filterView.unselect()
         apply(filter: .keyword(keyword), withSegmentAtSelection: nil)
     }
-
+    
     private func setDefaultFilter() {
         apply(filter: .all, withSegmentAtSelection: .selected(0))
     }
 }
 
 extension TokensViewController: OpenSeaNonFungibleTokenPairTableCellDelegate {
-
+    
     func didSelect(cell: OpenSeaNonFungibleTokenPairTableCell, indexPath: IndexPath, isLeftCardSelected: Bool) {
         selection.send(.gridItem(indexPath: indexPath, isLeftCardSelected: isLeftCardSelected))
     }
@@ -621,15 +621,15 @@ extension TokensViewController {
     private func makeSwitchToAnotherTabWorkWhileFiltering() {
         definesPresentationContext = true
     }
-
+    
     private func wireUpSearchController() {
         searchController.searchResultsUpdater = self
     }
-
+    
     private func fixNavigationBarAndStatusBarBackgroundColorForiOS13Dot1() {
         view.superview?.backgroundColor = viewModel.backgroundColor
     }
-
+    
     private func setupFilteringWithKeyword() {
         navigationItem.hidesSearchBarWhenScrolling = false
         wireUpSearchController()
@@ -637,11 +637,11 @@ extension TokensViewController {
         doNotDimTableViewToReuseTableForFilteringResult()
         makeSwitchToAnotherTabWorkWhileFiltering()
     }
-
+    
     private func doNotDimTableViewToReuseTableForFilteringResult() {
         searchController.obscuresBackgroundDuringPresentation = false
     }
-
+    
     //Makes a difference where this is called from. Can't be too early
     private func configureSearchBarOnce() {
         guard !isSearchBarConfigured else { return }
@@ -671,6 +671,7 @@ extension TokensViewController.functional {
 }
 
 extension UISearchBar {
+    
     static func configure(searchBar: UISearchBar, backgroundColor: UIColor = Configuration.Color.Semantic.searchbarBackground) {
         if let placeholderLabel = searchBar.firstSubview(ofType: UILabel.self) {
             placeholderLabel.textColor = Colors.lightGray
@@ -691,6 +692,5 @@ extension UISearchBar {
         searchBar.placeholder = R.string.localizable.tokensSearchbarPlaceholder()
         searchBar.backgroundColor = backgroundColor
     }
+    
 }
-
-

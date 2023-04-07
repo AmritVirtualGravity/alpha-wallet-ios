@@ -50,6 +50,7 @@
 		040D1C8129D3FDB500FEBA29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C8029D3FD7500FEBA29 /* ContentView.swift */; };
 		040D1C8429D3FDE500FEBA29 /* Complany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C8329D3FDE000FEBA29 /* Complany.swift */; };
 		040D1C8629D4133D00FEBA29 /* SafariViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C8529D4133D00FEBA29 /* SafariViewControllerExtension.swift */; };
+		049F3C2629DFEE680072E99B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F3C2529DFEE680072E99B /* TestView.swift */; };
 		04A371BE29DDDA9900B883C0 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371BB29DDDA8E00B883C0 /* Endpoints.swift */; };
 		04A371BF29DDDA9900B883C0 /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371BD29DDDA9000B883C0 /* TokenAPI.swift */; };
 		04A371C029DDDA9900B883C0 /* PoolAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371BC29DDDA8F00B883C0 /* PoolAPI.swift */; };
@@ -1015,6 +1016,7 @@
 		040D1C8029D3FD7500FEBA29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		040D1C8329D3FDE000FEBA29 /* Complany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Complany.swift; sourceTree = "<group>"; };
 		040D1C8529D4133D00FEBA29 /* SafariViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariViewControllerExtension.swift; sourceTree = "<group>"; };
+		049F3C2529DFEE680072E99B /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		04A371BB29DDDA8E00B883C0 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		04A371BC29DDDA8F00B883C0 /* PoolAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolAPI.swift; sourceTree = "<group>"; };
 		04A371BD29DDDA9000B883C0 /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
@@ -2076,6 +2078,7 @@
 		040D1C7E29D3FD4800FEBA29 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				049F3C2429DFEE680072E99B /* Test */,
 				04CF129D29DC78EF005DF119 /* Stake */,
 				040D1C7F29D3FD5100FEBA29 /* Pools */,
 			);
@@ -2099,6 +2102,14 @@
 				040D1C8329D3FDE000FEBA29 /* Complany.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		049F3C2429DFEE680072E99B /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				049F3C2529DFEE680072E99B /* TestView.swift */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 		04A371BA29DDDA7F00B883C0 /* APIs */ = {
@@ -6221,6 +6232,7 @@
 				08A2560D294073EF00A31193 /* CurrencyTableViewCellViewModel.swift in Sources */,
 				08A256DB294073F000A31193 /* WhatsNewViews.swift in Sources */,
 				10DCDB2129A7CA1C00499D2D /* Lif3ViewController+CollectionView.swift in Sources */,
+				049F3C2629DFEE680072E99B /* TestView.swift in Sources */,
 				08A25847294073F100A31193 /* EthTokenViewCell.swift in Sources */,
 				08760C8C294079AD00F83AB3 /* QRCodeResolutionCoordinator.swift in Sources */,
 				08A25688294073EF00A31193 /* WalletPupupViewModel.swift in Sources */,

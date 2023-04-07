@@ -169,6 +169,5 @@ public struct Constants {
         .byField(field: .value, direction: .descending)
     ]
     
-    
     public static let blackListedJsonWebSite = "https://assets.lif3.com/wallet/tokens/token-blacklist.json"
 }

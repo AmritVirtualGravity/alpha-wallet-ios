@@ -106,16 +106,13 @@ class Lif3ViewController: UIViewController {
     }
     
     var delegate:lifeViewControllerDelegate?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionViewSetup()
         getLif3NewsListData()
-       
         // Do any additional setup after loading the view.
     }
-    
 
     @objc func tapSwapToken(_ sender: UITapGestureRecognizer? = nil) {
         delegate?.didTapSwapTokens()

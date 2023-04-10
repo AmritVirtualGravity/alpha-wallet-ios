@@ -14,7 +14,6 @@ import AlphaWalletFoundation
 
 #endif
 
-
 import SafariServices
 
 struct StakeView: View {
@@ -26,7 +25,6 @@ struct StakeView: View {
 #else
     let fungibleTokenDetailsViewModel: String?
 #endif
-    
     
     @State private var showSafari: Bool = false
     
@@ -83,7 +81,9 @@ struct StakeView: View {
             )
             .ignoresSafeArea()
             .fullScreenCover(isPresented: $showSafari, content: {
-                SFSafariViewWrapper(url: URL(string: poolCompany.urlStake ?? "")!)
+                if let url = URL(string: poolCompany.urlStake ?? "") {
+                    SFSafariViewWrapper(url: url)
+                }
             })
     }
 }

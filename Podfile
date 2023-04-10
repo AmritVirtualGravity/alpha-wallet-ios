@@ -2,8 +2,9 @@ platform :ios, '13.0'
 inhibit_all_warnings!
 source 'https://cdn.cocoapods.org/'
 
-target 'Lif3Wallet' do
-  use_frameworks!
+
+
+def installed_pods
   pod 'BigInt', '~> 3.1'
   pod 'R.swift'
   pod 'MBProgressHUD'
@@ -46,6 +47,13 @@ target 'Lif3Wallet' do
   pod 'Starscream', '3.1.1'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '3.x'
   pod 'Ramp', :git => 'https://github.com/RampNetwork/ramp-sdk-ios', :tag => '4.0.0'
+  end
+
+
+target 'Lif3Wallet' do
+  use_frameworks!
+
+  installed_pods
   
   target 'Lif3WalletTests' do
       inherit! :search_paths
@@ -59,6 +67,13 @@ target 'Lif3Wallet' do
   end
 
 end
+
+target 'Development' do
+  use_frameworks!
+  installed_pods
+
+end
+
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|

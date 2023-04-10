@@ -10,29 +10,25 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var favoriteColor = 0
-    //    var poolList: PoolParent?
+    
     @StateObject private var viewModel = ContentViewModel()
     @State var showAlert               = false
 #warning("uncomment")
-    //    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
-    //
-    //    init(fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?) {
-    //        UISegmentedControl.appearance().selectedSegmentTintColor = .white
-    //        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
-    //        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-    //        self.fungibleTokenDetailsViewModel = fungibleTokenDetailsViewModel
-    //    }
     
+#if DEVELOPMENT
+    //        var poolList: PoolParent?
+#else
+    var poolList: PoolParent?
+    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
     
-    
-    let fungibleTokenDetailsViewModel: String?
-    
-    init(fungibleTokenDetailsViewModel: String?) {
+    init(fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?) {
         UISegmentedControl.appearance().selectedSegmentTintColor = .white
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
         self.fungibleTokenDetailsViewModel = fungibleTokenDetailsViewModel
     }
+    
+#endif
     
     var body: some View {
         Color(darkerBlack)
@@ -141,8 +137,13 @@ struct companySection: View {
     let company: [PoolCompany]
     let image: String
 #warning("uncomment")
-    //    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+    
+#if DEVELOPMENT
     let fungibleTokenDetailsViewModel: String?
+#else
+    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+#endif
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack (alignment: .center, spacing: 8) {
@@ -171,7 +172,7 @@ struct companySection: View {
                 //                CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlProtocol ?? "", image: company.bannerImage ?? "")
                 NavigationLink {
 #warning("uncomment")
-                                        StakeView(poolCompany: company, fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel )
+                    StakeView(poolCompany: company, fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel )
                 } label: {
                     CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlStake ?? "", image: company.bannerImage ?? "")
                 }

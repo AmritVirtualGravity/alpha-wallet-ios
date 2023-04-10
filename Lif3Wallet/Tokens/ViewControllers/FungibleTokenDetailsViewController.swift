@@ -27,8 +27,7 @@ class FungibleTokenDetailsViewController: UIViewController {
     private let buttonsBar = HorizontalButtonsBar(configuration: .combined(buttons: 2))
     private var stakeButton: UIButton =  {
         let button = UIButton()
-        button.setBackgroundImage(R.image.stakeButtonBackgroundImage()!, for: .normal)
-       
+//        button.setBackgroundImage(R.image.stakeButtonBackgroundImage()!, for: .normal)
         return button
     }()
     private var swapButton: UIButton =  {

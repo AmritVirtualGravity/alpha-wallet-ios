@@ -61,7 +61,6 @@ struct StakeView: View {
 //                                    RoundedRectangle(cornerRadius: 0).allowsHitTesting(true).background(.clear)
 //                                )
 //                        }
-                        
                     }
                     .padding(.horizontal, 16)
                 }

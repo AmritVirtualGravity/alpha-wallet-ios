@@ -33,6 +33,7 @@ class FungibleTokenDetailsViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1
         button.layer.borderColor = blueColor.cgColor
+        button.layer.backgroundColor = blueColor.cgColor
         return button
     }()
     private var swapButton: UIButton =  {

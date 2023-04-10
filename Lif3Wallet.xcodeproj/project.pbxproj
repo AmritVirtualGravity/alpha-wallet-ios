@@ -784,7 +784,6 @@
 		10F6DAB3295B24D300715C7F /* Lif3WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */; };
 		10F9207529A3C320009604CE /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F9207429A3C320009604CE /* ContactTableViewCell.swift */; };
 		10F9207829A3C410009604CE /* ContactTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F9207729A3C410009604CE /* ContactTableViewCellViewModel.swift */; };
-		1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */; };
 		290B2B6A1F92C0440053C83E /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B691F92C0440053C83E /* ConfigTests.swift */; };
 		290B2B6C1F92C35B0053C83E /* RPCServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */; };
 		290B2B6E1F92C3980053C83E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B2B6D1F92C3980053C83E /* UserDefaults.swift */; };
@@ -818,7 +817,8 @@
 		29FF13081F75F0AE00AFD326 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF13071F75F0AE00AFD326 /* AppCoordinatorTests.swift */; };
 		29FF130A1F75F67200AFD326 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF13091F75F67200AFD326 /* Address.swift */; };
 		29FF130D1F7626E800AFD326 /* FakeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF130C1F7626E800AFD326 /* FakeNavigationController.swift */; };
-		2CC1EC4A35D8CF29724E3CE0 /* Pods_Lif3WalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CBB212D64856DD68288EE6E /* Pods_Lif3WalletTests.framework */; };
+		3A37D6D26E0DEC6EEA9ABCE6 /* Pods_Lif3Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DE29075D60A3C7B4C5D0E3 /* Pods_Lif3Wallet.framework */; };
+		3E3D65ECA7427C70246858C6 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7D909114FBB2FCCAD8C187 /* Pods_Lif3WalletShare.framework */; };
 		442FC8E82231273273B95D85 /* FakeClaimOrderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FCE526E2089CAE88D5602 /* FakeClaimOrderCoordinator.swift */; };
 		442FCBA4A5E39A4C4B16426A /* EventsRestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FCBCF749F0FDA53FB88A3 /* EventsRestTest.swift */; };
 		5E7C7110A4DF17DA65B912AC /* EnterSellTokensCardPriceQuantityViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C7ABB1538A0E83EEAEB0C /* EnterSellTokensCardPriceQuantityViewControllerTests.swift */; };
@@ -860,6 +860,7 @@
 		61C359E22002AC9D0097B04D /* TransactionSigningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C359E12002AC9D0097B04D /* TransactionSigningTests.swift */; };
 		61DCE17D2001A7A20053939F /* RLPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DCE17C2001A7A20053939F /* RLPTests.swift */; };
 		61FC5ED11FCFBDEB00CCB12A /* EtherNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC5ED01FCFBDEB00CCB12A /* EtherNumberFormatterTests.swift */; };
+		6EFD5BCD57DF42D25BA9DE03 /* Pods_Lif3WalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECDD3C17B4CA40CFBE91390 /* Pods_Lif3WalletTests.framework */; };
 		732E0F502022716700B39C1F /* LockEnterPasscodeCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732E0F4F2022716700B39C1F /* LockEnterPasscodeCoordinatorTest.swift */; };
 		732E0F522022754600B39C1F /* FakeLockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732E0F512022754600B39C1F /* FakeLockProtocol.swift */; };
 		732E0F542022786400B39C1F /* LockCreatePasscodeCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732E0F532022786400B39C1F /* LockCreatePasscodeCoordinatorTest.swift */; };
@@ -931,7 +932,6 @@
 		87FBF2B128056AC200616B7D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 87FBF2B028056AC200616B7D /* FirebaseCrashlytics */; };
 		CCA4FE331FD3655900749AE4 /* CheckDeviceCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA4FE321FD3655900749AE4 /* CheckDeviceCoordinatorTests.swift */; };
 		CCA4FE3A1FD42B4100749AE4 /* FakeJailbreakChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA4FE391FD42B4100749AE4 /* FakeJailbreakChecker.swift */; };
-		D5FD4A1B6AEACEF471054F9E /* Pods_Lif3Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1600DDA01E1557D2498F48D /* Pods_Lif3Wallet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1670,6 +1670,7 @@
 		08A255E7294073EF00A31193 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08B108B7294A2ABC00B658F8 /* ActiveNewtworkTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveNewtworkTableVIewCell.swift; sourceTree = "<group>"; };
 		08F0AE4B2940D93D00FBF77B /* LifeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeDataSource.swift; sourceTree = "<group>"; };
+		0E907A064CFE3FACCB176CDD /* Pods-Lif3Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3Wallet.release.xcconfig"; path = "Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet.release.xcconfig"; sourceTree = "<group>"; };
 		100DD7172991585500D3ABEA /* AddContactCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactCoordinator.swift; sourceTree = "<group>"; };
 		100DD7182991585500D3ABEA /* ContactListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListCoordinator.swift; sourceTree = "<group>"; };
 		100DD71A2991585500D3ABEA /* AddContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewModel.swift; sourceTree = "<group>"; };
@@ -1797,9 +1798,11 @@
 		29FF13071F75F0AE00AFD326 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		29FF13091F75F67200AFD326 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		29FF130C1F7626E800AFD326 /* FakeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNavigationController.swift; sourceTree = "<group>"; };
+		2ECDD3C17B4CA40CFBE91390 /* Pods_Lif3WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38DE29075D60A3C7B4C5D0E3 /* Pods_Lif3Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		442FCBCF749F0FDA53FB88A3 /* EventsRestTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsRestTest.swift; sourceTree = "<group>"; };
 		442FCE526E2089CAE88D5602 /* FakeClaimOrderCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeClaimOrderCoordinator.swift; sourceTree = "<group>"; };
-		49A3D3987B25AEC53535E854 /* Pods-Lif3Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3Wallet.release.xcconfig"; path = "Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet.release.xcconfig"; sourceTree = "<group>"; };
+		4B24EE225570445A244D0AD0 /* Pods-Lif3Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3Wallet.debug.xcconfig"; path = "Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		5E7C7021EE19C4B81CAAF3C0 /* TransferTokensCardQuantitySelectionViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferTokensCardQuantitySelectionViewControllerTests.swift; sourceTree = "<group>"; };
 		5E7C702300BB7DB0FD7788EF /* XMLHandlerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLHandlerTest.swift; sourceTree = "<group>"; };
 		5E7C702A684DF27DC8ED4E42 /* TokenObjectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenObjectTest.swift; sourceTree = "<group>"; };
@@ -1839,6 +1842,8 @@
 		61C359E12002AC9D0097B04D /* TransactionSigningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningTests.swift; sourceTree = "<group>"; };
 		61DCE17C2001A7A20053939F /* RLPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLPTests.swift; sourceTree = "<group>"; };
 		61FC5ED01FCFBDEB00CCB12A /* EtherNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtherNumberFormatterTests.swift; sourceTree = "<group>"; };
+		6E7D909114FBB2FCCAD8C187 /* Pods_Lif3WalletShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3WalletShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7257BFE9ACFF3825825D2BD1 /* Pods-Lif3WalletShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletShare.release.xcconfig"; path = "Target Support Files/Pods-Lif3WalletShare/Pods-Lif3WalletShare.release.xcconfig"; sourceTree = "<group>"; };
 		732E0F4F2022716700B39C1F /* LockEnterPasscodeCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockEnterPasscodeCoordinatorTest.swift; sourceTree = "<group>"; };
 		732E0F512022754600B39C1F /* FakeLockProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLockProtocol.swift; sourceTree = "<group>"; };
 		732E0F532022786400B39C1F /* LockCreatePasscodeCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockCreatePasscodeCoordinatorTest.swift; sourceTree = "<group>"; };
@@ -1853,8 +1858,6 @@
 		771A8484203242B400528D28 /* ActiveWalletViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalletViewModelTests.swift; sourceTree = "<group>"; };
 		77872D2C202514AD0032D687 /* EnterPasswordCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPasswordCoordinatorTests.swift; sourceTree = "<group>"; };
 		778EAF7C1FF10AF400C8E2AB /* SettingsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorTests.swift; sourceTree = "<group>"; };
-		786133F1D95347797AA05C3D /* Pods-Lif3WalletShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletShare.debug.xcconfig"; path = "Target Support Files/Pods-Lif3WalletShare/Pods-Lif3WalletShare.debug.xcconfig"; sourceTree = "<group>"; };
-		7CBB212D64856DD68288EE6E /* Pods_Lif3WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8499DDC9B09F49E7799DA0E1 /* SmartContractHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartContractHelperTests.swift; sourceTree = "<group>"; };
 		8703FBFD270366DA0062C416 /* Lif3WalletSafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Lif3WalletSafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8703FBFF270366DA0062C416 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
@@ -1906,15 +1909,12 @@
 		87DD0C43279980E500460260 /* ValidatorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorsTests.swift; sourceTree = "<group>"; };
 		87E960DC28868D3600218E7E /* TickerIdsFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerIdsFetcherTests.swift; sourceTree = "<group>"; };
 		87F9972724E155280092D262 /* SeedPhraseBackupIntroductionViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseBackupIntroductionViewControllerTests.swift; sourceTree = "<group>"; };
-		8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3WalletShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9741408922F69290D9000B21 /* Pods-Lif3WalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletTests.debug.xcconfig"; path = "Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C1600DDA01E1557D2498F48D /* Pods_Lif3Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A9E62C950D305B56A4CD988 /* Pods-Lif3WalletShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletShare.debug.xcconfig"; path = "Target Support Files/Pods-Lif3WalletShare/Pods-Lif3WalletShare.debug.xcconfig"; sourceTree = "<group>"; };
+		9D949C6F2FBDF5E23F49402E /* Pods-Lif3WalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletTests.debug.xcconfig"; path = "Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C4C4C12B54BBA713E984000B /* Pods-Lif3WalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletTests.release.xcconfig"; path = "Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		C846409321B6DFA200031CA2 /* libxslt.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxslt.tbd; path = usr/lib/libxslt.tbd; sourceTree = SDKROOT; };
 		CCA4FE321FD3655900749AE4 /* CheckDeviceCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDeviceCoordinatorTests.swift; sourceTree = "<group>"; };
 		CCA4FE391FD42B4100749AE4 /* FakeJailbreakChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeJailbreakChecker.swift; sourceTree = "<group>"; };
-		CF1CEA48C87CBFD6EEFFE303 /* Pods-Lif3WalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletTests.release.xcconfig"; path = "Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests.release.xcconfig"; sourceTree = "<group>"; };
-		D5D6C557E9086D371573B41E /* Pods-Lif3WalletShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletShare.release.xcconfig"; path = "Target Support Files/Pods-Lif3WalletShare/Pods-Lif3WalletShare.release.xcconfig"; sourceTree = "<group>"; };
-		F7B69CDA584468B84F2FE845 /* Pods-Lif3Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3Wallet.debug.xcconfig"; path = "Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1925,7 +1925,7 @@
 				87FBF2B128056AC200616B7D /* FirebaseCrashlytics in Frameworks */,
 				87B1B5D928C73C170072A5E2 /* WalletConnectSwift in Frameworks */,
 				87BDF47028423DC30018DC68 /* WalletConnect in Frameworks */,
-				D5FD4A1B6AEACEF471054F9E /* Pods_Lif3Wallet.framework in Frameworks */,
+				3A37D6D26E0DEC6EEA9ABCE6 /* Pods_Lif3Wallet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1933,7 +1933,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CC1EC4A35D8CF29724E3CE0 /* Pods_Lif3WalletTests.framework in Frameworks */,
+				6EFD5BCD57DF42D25BA9DE03 /* Pods_Lif3WalletTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1948,7 +1948,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1957E331609677EFD11A8F97 /* Pods_Lif3WalletShare.framework in Frameworks */,
+				3E3D65ECA7427C70246858C6 /* Pods_Lif3WalletShare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4520,12 +4520,12 @@
 		43808306B29324D6D43098CB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F7B69CDA584468B84F2FE845 /* Pods-Lif3Wallet.debug.xcconfig */,
-				49A3D3987B25AEC53535E854 /* Pods-Lif3Wallet.release.xcconfig */,
-				786133F1D95347797AA05C3D /* Pods-Lif3WalletShare.debug.xcconfig */,
-				D5D6C557E9086D371573B41E /* Pods-Lif3WalletShare.release.xcconfig */,
-				9741408922F69290D9000B21 /* Pods-Lif3WalletTests.debug.xcconfig */,
-				CF1CEA48C87CBFD6EEFFE303 /* Pods-Lif3WalletTests.release.xcconfig */,
+				4B24EE225570445A244D0AD0 /* Pods-Lif3Wallet.debug.xcconfig */,
+				0E907A064CFE3FACCB176CDD /* Pods-Lif3Wallet.release.xcconfig */,
+				9A9E62C950D305B56A4CD988 /* Pods-Lif3WalletShare.debug.xcconfig */,
+				7257BFE9ACFF3825825D2BD1 /* Pods-Lif3WalletShare.release.xcconfig */,
+				9D949C6F2FBDF5E23F49402E /* Pods-Lif3WalletTests.debug.xcconfig */,
+				C4C4C12B54BBA713E984000B /* Pods-Lif3WalletTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -4759,9 +4759,9 @@
 			isa = PBXGroup;
 			children = (
 				C846409321B6DFA200031CA2 /* libxslt.tbd */,
-				C1600DDA01E1557D2498F48D /* Pods_Lif3Wallet.framework */,
-				8B693FD5F19026A92B08395B /* Pods_Lif3WalletShare.framework */,
-				7CBB212D64856DD68288EE6E /* Pods_Lif3WalletTests.framework */,
+				38DE29075D60A3C7B4C5D0E3 /* Pods_Lif3Wallet.framework */,
+				6E7D909114FBB2FCCAD8C187 /* Pods_Lif3WalletShare.framework */,
+				2ECDD3C17B4CA40CFBE91390 /* Pods_Lif3WalletTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -4914,7 +4914,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2912CD1F1F6A830700C6CBE3 /* Build configuration list for PBXNativeTarget "Lif3Wallet" */;
 			buildPhases = (
-				2F4B40F8E55CFF9EAE20CD44 /* [CP] Check Pods Manifest.lock */,
+				691934DC6B1C99439E48BAEE /* [CP] Check Pods Manifest.lock */,
 				87D5BBC12727CBB70053E6D2 /* Apollo */,
 				C83F787024A1C1DB00783B67 /* Check correct credentials used for API keys */,
 				C887FD5D280806C20030E4BA /* Check correct GoogleService-Info.plist (for Crashlytics) */,
@@ -4925,8 +4925,8 @@
 				29282B511F7629DB0067F88D /* Run SwiftLint */,
 				878EE8F6255ADA49000210DE /* Embed App Extensions */,
 				87FBF2B828056D8600616B7D /* Upload debug symbols to Crashlytics */,
-				51196EA27EEEE799BB1393A5 /* [CP] Embed Pods Frameworks */,
-				1DD5ABBDCA90553CE4B266D3 /* [CP] Copy Pods Resources */,
+				CE3C1C5ECE62F20B65B11032 /* [CP] Embed Pods Frameworks */,
+				B58FDEB4B7DE84F4A4778AD3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4948,12 +4948,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2912CD221F6A830700C6CBE3 /* Build configuration list for PBXNativeTarget "Lif3WalletTests" */;
 			buildPhases = (
-				B9BD4D32BD5D2B7C6FB9CFC1 /* [CP] Check Pods Manifest.lock */,
+				A082A56A738AED1F253024DF /* [CP] Check Pods Manifest.lock */,
 				C8FC0401219E9CC000445E21 /* R.swift */,
 				2912CD071F6A830700C6CBE3 /* Sources */,
 				2912CD081F6A830700C6CBE3 /* Frameworks */,
 				2912CD091F6A830700C6CBE3 /* Resources */,
-				B22ACF59CDE378A074AB8E6C /* [CP] Embed Pods Frameworks */,
+				27062722AB3A608F831DEC6F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4986,7 +4986,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 878EE8F9255ADA49000210DE /* Build configuration list for PBXNativeTarget "Lif3WalletShare" */;
 			buildPhases = (
-				70ECBB382DB02145AF6D897B /* [CP] Check Pods Manifest.lock */,
+				775C102A6F1393E91E0D8DA1 /* [CP] Check Pods Manifest.lock */,
 				878EE8E7255ADA49000210DE /* Sources */,
 				878EE8E8255ADA49000210DE /* Frameworks */,
 				878EE8E9255ADA49000210DE /* Resources */,
@@ -5067,7 +5067,7 @@
 			packageReferences = (
 				87FBF2AF28056AC200616B7D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				87BDF46E28423DC30018DC68 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
-				87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
+				87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */,
 			);
 			productRefGroup = 2912CCF61F6A830700C6CBE3 /* Products */;
 			projectDirPath = "";
@@ -5165,22 +5165,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1DD5ABBDCA90553CE4B266D3 /* [CP] Copy Pods Resources */ = {
+		27062722AB3A608F831DEC6F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/AlphaWalletWeb3Provider/AlphaWalletWeb3Provider.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/iOSSnapshotTestCase/FBSnapshotTestCase.framework",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AlphaWalletWeb3Provider.bundle",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		29282B511F7629DB0067F88D /* Run SwiftLint */ = {
@@ -5211,7 +5211,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/Lif3Wallet/R.generated.swift\"\n\n";
 		};
-		2F4B40F8E55CFF9EAE20CD44 /* [CP] Check Pods Manifest.lock */ = {
+		691934DC6B1C99439E48BAEE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5233,7 +5233,157 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		51196EA27EEEE799BB1393A5 /* [CP] Embed Pods Frameworks */ = {
+		775C102A6F1393E91E0D8DA1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lif3WalletShare-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87D5BBC12727CBB70053E6D2 /* Apollo */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Apollo;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Don't run this during index builds\nif [ $ACTION = \"indexbuild\" ]; then exit 0; fi\n\nSCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\nSCHEMA_PATH=\"${SRCROOT}/modules/AlphaWalletFoundation/AlphaWalletFoundation/NFT/Enjin\"\n\ncd \"${SCHEMA_PATH}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"${SCHEMA_PATH}/schema.json\" API.swift\n#Download graphql scheme \n#\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=\"https://cloud.enjin.io/graphql/default\" API.swift\n";
+		};
+		87FBF2B828056D8600616B7D /* Upload debug symbols to Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Upload debug symbols to Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+		A082A56A738AED1F253024DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lif3WalletTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B58FDEB4B7DE84F4A4778AD3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/AlphaWalletWeb3Provider/AlphaWalletWeb3Provider.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AlphaWalletWeb3Provider.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C83F787024A1C1DB00783B67 /* Check correct credentials used for API keys */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Check correct credentials used for API keys";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=modules/AlphaWalletFoundation/AlphaWalletFoundation/Settings/Types/Constants+Credentials.swift\nif test -f \"$FILE\"; then\n    #echo \"Found: $FILE\"\n    echo \"\"\nelse\n    echo \"Not found credentials file. Could be due to a refactoring and we forgot to update this Run Script Phase: $FILE\"\n    exit 1\nfi\n\nif [ \"${CONFIGURATION}\" = \"Release\" ]; then\n  if [ \"${PRODUCT_BUNDLE_IDENTIFIER}\" = \"com.stormbird.lif3wallet\" ]; then\n    if grep -q 'static let infuraKey = \"3f22' \"$FILE\"; then\n        echo \"\"\n    else\n        echo \"Expecting production infuraKey. Check credentials\"\n        exit 1\n    fi\n    #We use `ag` because grep is much slower. Since this only runs on the Release configuration, this is not a problem for day to day development\n    if /opt/homebrew/bin/ag --silent 'static let analyticsKey = \"\"'; then\n        echo \"Found development analytics key (which is empty). Check credentials. Probably just need to remove the extension entirely\"\n        exit 1\n    else\n        echo \"\"\n    fi\n  fi\nfi\n";
+		};
+		C887FD5D280806C20030E4BA /* Check correct GoogleService-Info.plist (for Crashlytics) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Check correct GoogleService-Info.plist (for Crashlytics)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n  if [ \"${PRODUCT_BUNDLE_IDENTIFIER}\" = \"com.stormbird.lif3wallet\" ]; then\n    if grep -q '598539835570' \"Lif3Wallet/GoogleService-Info.plist\"; then\n        exit 0\n    else\n        echo \"Make sure GoogleService-Info.plist is for production builds\"\n        exit 1\n    fi\n  fi\nfi\n";
+		};
+		C8FC0401219E9CC000445E21 /* R.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = R.swift;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate --disable-input-output-files-validation \"$SRCROOT/Lif3Wallet/R.generated.swift\"\n";
+		};
+		CE3C1C5ECE62F20B65B11032 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5374,156 +5524,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		70ECBB382DB02145AF6D897B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Lif3WalletShare-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		87D5BBC12727CBB70053E6D2 /* Apollo */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Apollo;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Don't run this during index builds\nif [ $ACTION = \"indexbuild\" ]; then exit 0; fi\n\nSCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\nSCHEMA_PATH=\"${SRCROOT}/modules/AlphaWalletFoundation/AlphaWalletFoundation/NFT/Enjin\"\n\ncd \"${SCHEMA_PATH}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"${SCHEMA_PATH}/schema.json\" API.swift\n#Download graphql scheme \n#\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=\"https://cloud.enjin.io/graphql/default\" API.swift\n";
-		};
-		87FBF2B828056D8600616B7D /* Upload debug symbols to Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = "Upload debug symbols to Crashlytics";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
-		};
-		B22ACF59CDE378A074AB8E6C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/iOSSnapshotTestCase/FBSnapshotTestCase.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B9BD4D32BD5D2B7C6FB9CFC1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Lif3WalletTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C83F787024A1C1DB00783B67 /* Check correct credentials used for API keys */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Check correct credentials used for API keys";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "FILE=modules/AlphaWalletFoundation/AlphaWalletFoundation/Settings/Types/Constants+Credentials.swift\nif test -f \"$FILE\"; then\n    #echo \"Found: $FILE\"\n    echo \"\"\nelse\n    echo \"Not found credentials file. Could be due to a refactoring and we forgot to update this Run Script Phase: $FILE\"\n    exit 1\nfi\n\nif [ \"${CONFIGURATION}\" = \"Release\" ]; then\n  if [ \"${PRODUCT_BUNDLE_IDENTIFIER}\" = \"com.stormbird.lif3wallet\" ]; then\n    if grep -q 'static let infuraKey = \"3f22' \"$FILE\"; then\n        echo \"\"\n    else\n        echo \"Expecting production infuraKey. Check credentials\"\n        exit 1\n    fi\n    #We use `ag` because grep is much slower. Since this only runs on the Release configuration, this is not a problem for day to day development\n    if /opt/homebrew/bin/ag --silent 'static let analyticsKey = \"\"'; then\n        echo \"Found development analytics key (which is empty). Check credentials. Probably just need to remove the extension entirely\"\n        exit 1\n    else\n        echo \"\"\n    fi\n  fi\nfi\n";
-		};
-		C887FD5D280806C20030E4BA /* Check correct GoogleService-Info.plist (for Crashlytics) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Check correct GoogleService-Info.plist (for Crashlytics)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n  if [ \"${PRODUCT_BUNDLE_IDENTIFIER}\" = \"com.stormbird.lif3wallet\" ]; then\n    if grep -q '598539835570' \"Lif3Wallet/GoogleService-Info.plist\"; then\n        exit 0\n    else\n        echo \"Make sure GoogleService-Info.plist is for production builds\"\n        exit 1\n    fi\n  fi\nfi\n";
-		};
-		C8FC0401219E9CC000445E21 /* R.swift */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = R.swift;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate --disable-input-output-files-validation \"$SRCROOT/Lif3Wallet/R.generated.swift\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -6592,7 +6592,7 @@
 		};
 		2912CD201F6A830700C6CBE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7B69CDA584468B84F2FE845 /* Pods-Lif3Wallet.debug.xcconfig */;
+			baseConfigurationReference = 4B24EE225570445A244D0AD0 /* Pods-Lif3Wallet.debug.xcconfig */;
 			buildSettings = {
 				ALPHAWALLET_INFO_PLIST_FILE = AlphaWallet/Info.plist;
 				ALPHAWALLET_PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.alphawallet;
@@ -6637,7 +6637,7 @@
 		};
 		2912CD211F6A830700C6CBE3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49A3D3987B25AEC53535E854 /* Pods-Lif3Wallet.release.xcconfig */;
+			baseConfigurationReference = 0E907A064CFE3FACCB176CDD /* Pods-Lif3Wallet.release.xcconfig */;
 			buildSettings = {
 				ALPHAWALLET_INFO_PLIST_FILE = AlphaWallet/Info.plist;
 				ALPHAWALLET_PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.alphawallet;
@@ -6680,7 +6680,7 @@
 		};
 		2912CD231F6A830700C6CBE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9741408922F69290D9000B21 /* Pods-Lif3WalletTests.debug.xcconfig */;
+			baseConfigurationReference = 9D949C6F2FBDF5E23F49402E /* Pods-Lif3WalletTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6702,7 +6702,7 @@
 		};
 		2912CD241F6A830700C6CBE3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF1CEA48C87CBFD6EEFFE303 /* Pods-Lif3WalletTests.release.xcconfig */;
+			baseConfigurationReference = C4C4C12B54BBA713E984000B /* Pods-Lif3WalletTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6798,7 +6798,7 @@
 		};
 		878EE8F7255ADA49000210DE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 786133F1D95347797AA05C3D /* Pods-Lif3WalletShare.debug.xcconfig */;
+			baseConfigurationReference = 9A9E62C950D305B56A4CD988 /* Pods-Lif3WalletShare.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -6828,7 +6828,7 @@
 		};
 		878EE8F8255ADA49000210DE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5D6C557E9086D371573B41E /* Pods-Lif3WalletShare.release.xcconfig */;
+			baseConfigurationReference = 7257BFE9ACFF3825825D2BD1 /* Pods-Lif3WalletShare.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -6905,7 +6905,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
+		87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AlphaWallet/WalletConnectSwift.git";
 			requirement = {
@@ -6934,7 +6934,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		87B1B5D828C73C170072A5E2 /* WalletConnectSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
+			package = 87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */;
 			productName = WalletConnectSwift;
 		};
 		87BDF46F28423DC30018DC68 /* WalletConnect */ = {

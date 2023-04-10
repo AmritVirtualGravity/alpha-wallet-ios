@@ -10,12 +10,24 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var favoriteColor = 0
-//    var poolList: PoolParent?
+    //    var poolList: PoolParent?
     @StateObject private var viewModel = ContentViewModel()
     @State var showAlert               = false
-    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+#warning("uncomment")
+    //    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+    //
+    //    init(fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?) {
+    //        UISegmentedControl.appearance().selectedSegmentTintColor = .white
+    //        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
+    //        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+    //        self.fungibleTokenDetailsViewModel = fungibleTokenDetailsViewModel
+    //    }
     
-    init(fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?) {
+    
+    
+    let fungibleTokenDetailsViewModel: String?
+    
+    init(fungibleTokenDetailsViewModel: String?) {
         UISegmentedControl.appearance().selectedSegmentTintColor = .white
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
@@ -23,7 +35,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        Color(darkColor)
+        Color(darkerBlack)
             .ignoresSafeArea()
             .overlay(
                 ZStack {
@@ -45,8 +57,8 @@ struct ContentView: View {
                         //              }
                         ScrollView {
                             VStack {
-//                                Spacer()
-//                                    .frame(height: 40)
+                                //                                Spacer()
+                                //                                    .frame(height: 40)
                                 //                        VStack {
                                 //                            Picker("What is your favorite color? ", selection: $favoriteColor) {
                                 //                                Text("My Pools").tag(0)
@@ -128,7 +140,9 @@ struct companySection: View {
     let title: String
     let company: [PoolCompany]
     let image: String
-    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+#warning("uncomment")
+    //    let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+    let fungibleTokenDetailsViewModel: String?
     var body: some View {
         VStack(spacing: 0) {
             HStack (alignment: .center, spacing: 8) {
@@ -156,12 +170,13 @@ struct companySection: View {
             ForEach(company, id: \.self) { company in
                 //                CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlProtocol ?? "", image: company.bannerImage ?? "")
                 NavigationLink {
-                    StakeView(poolCompany: company, fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel )
+#warning("uncomment")
+                                        StakeView(poolCompany: company, fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel )
                 } label: {
                     CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlStake ?? "", image: company.bannerImage ?? "")
                 }
             }
-        }
+        }           .background(Color(darkColor))
         
     }
 }
@@ -169,7 +184,7 @@ struct companySection: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-//            ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
+            //            ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
             ContentView(fungibleTokenDetailsViewModel: nil)
         }
         

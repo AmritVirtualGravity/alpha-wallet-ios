@@ -13,7 +13,8 @@ import SwiftUI
 protocol FungibleTokenDetailsViewControllerDelegate: AnyObject, CanOpenURL {
     func didTapSwap(swapTokenFlow: SwapTokenFlow, in viewController: FungibleTokenDetailsViewController)
     func didTapBridge(for token: Token, service: TokenActionProvider, in viewController: FungibleTokenDetailsViewController)
-    func didTapBuy(for token: Token, service: TokenActionProvider, in viewController: FungibleTokenDetailsViewController)
+    func didTapBuy(for token: Token, service: TokenActionProvider, in viewController: FungibleTokenDetailsViewController
+    )
     func didTapSend(for token: Token, in viewController: FungibleTokenDetailsViewController)
     func didTapReceive(for token: Token, in viewController: FungibleTokenDetailsViewController)
     func didTap(action: TokenInstanceAction, token: Token, in viewController: FungibleTokenDetailsViewController)

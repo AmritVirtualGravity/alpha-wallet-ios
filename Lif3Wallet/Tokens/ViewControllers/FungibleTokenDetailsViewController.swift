@@ -28,6 +28,11 @@ class FungibleTokenDetailsViewController: UIViewController {
     private var stakeButton: UIButton =  {
         let button = UIButton()
 //        button.setBackgroundImage(R.image.stakeButtonBackgroundImage()!, for: .normal)
+        button.setTitle("Stake", for: .normal)
+        button.titleLabel?.textColor = .white
+        button.layer.cornerRadius = 12
+        button.layer.borderWidth = 1
+        button.layer.borderColor = blueColor.cgColor
         return button
     }()
     private var swapButton: UIButton =  {

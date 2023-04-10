@@ -30,11 +30,9 @@ struct StakeView: View {
     
     var body: some View {
         return Color(darkerBlack)
-            .ignoresSafeArea()
             .overlay(
                 ScrollView {
                     VStack(spacing: 16) {
-                        Spacer().frame(height: 85)
                         AsyncImage(
                             url: poolCompany.bannerImage ?? "" ,
                             placeholder: { PlaceHolderImageView() },
@@ -65,7 +63,8 @@ struct StakeView: View {
                             //                                let url = URL(string: poolCompany.urlStake ?? "")
                             //                                let vc = SFSafariViewController(url: url, configuration: config)
                             //                                present(vc, animated: true)
-                            showSafari = true
+                            //                            showSafari = true
+                            NotificationCenter.default.post(name: .gotoBrowser, object: poolCompany.urlStake ?? "")
                             
                         })
                         .frame(height: 44)
@@ -79,12 +78,6 @@ struct StakeView: View {
                     .navigationTitle("Lif3")
                     .navigationBarTitleDisplayMode(.inline)
             )
-            .ignoresSafeArea()
-            .fullScreenCover(isPresented: $showSafari, content: {
-                if let url = URL(string: poolCompany.urlStake ?? "") {
-                    SFSafariViewWrapper(url: url)
-                }
-            })
     }
 }
 

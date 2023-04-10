@@ -15,9 +15,8 @@ struct ContentView: View {
     @State var showAlert               = false
 #warning("uncomment")
     
-#if DEVELOPMENT
-    //        var poolList: PoolParent?
-#else
+#if PRODUCTION
+    
     var poolList: PoolParent?
     let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
     
@@ -28,6 +27,9 @@ struct ContentView: View {
         self.fungibleTokenDetailsViewModel = fungibleTokenDetailsViewModel
     }
     
+#else
+//            var poolList: PoolParent?
+    let fungibleTokenDetailsViewModel: String?
 #endif
     
     var body: some View {
@@ -96,7 +98,6 @@ func getRandomImageName() -> String {
     let arrayOfImageName = ["lif3_nursery", "lif3_lif3_trade", "lif3_leverage"]
     return arrayOfImageName[Int.random(in: 0..<2)]
 }
-
 struct CompanyCell: View {
     let amount: String
     let percentage: String
@@ -138,10 +139,10 @@ struct companySection: View {
     let image: String
 #warning("uncomment")
     
-#if DEVELOPMENT
-    let fungibleTokenDetailsViewModel: String?
-#else
+#if PRODUCTION
     let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+#else
+    let fungibleTokenDetailsViewModel: String?
 #endif
     
     var body: some View {
@@ -174,7 +175,7 @@ struct companySection: View {
 #warning("uncomment")
                     StakeView(poolCompany: company, fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel )
                 } label: {
-                    CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlStake ?? "", image: company.bannerImage ?? "")
+                    CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlStake ?? "", image: company.icon ?? "")
                 }
             }
         }           .background(Color(darkColor))

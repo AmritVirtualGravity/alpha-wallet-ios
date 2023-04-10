@@ -153,7 +153,6 @@ final class FungibleTokenDetailsViewModel {
                 .field(viewModel: circulatingSupplyViewModel(for: ticker))
             ]
         }
-
         return views
     }
 

@@ -6,14 +6,27 @@
 //
 
 import SwiftUI
+
+#if PRODUCTION
 import WalletCore
 import AlphaWalletFoundation
+#else
+
+#endif
+
+
 import SafariServices
 
 struct StakeView: View {
     
     let poolCompany: PoolCompany
+    
+#if PRODUCTION
     let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
+#else
+    let fungibleTokenDetailsViewModel: String?
+#endif
+    
     
     @State private var showSafari: Bool = false
     
@@ -23,6 +36,7 @@ struct StakeView: View {
             .overlay(
                 ScrollView {
                     VStack(spacing: 16) {
+                        Spacer().frame(height: 85)
                         AsyncImage(
                             url: poolCompany.bannerImage ?? "" ,
                             placeholder: { PlaceHolderImageView() },
@@ -37,36 +51,35 @@ struct StakeView: View {
                             StakeViewTitleDescription(title: "About Protocol:", description: poolCompany.aboutProtocol ?? "")
                             StakeViewTitleDescription(title: "About Staking Pool:", description: poolCompany.aboutStake ?? "")
                         }
-//                        NavigationLink {
-//                            if let fungibleTokenDetailsViewModel = fungibleTokenDetailsViewModel {
-//                                //                                BrowserViewController(account: fungibleTokenDetailsViewModel.wallet, server: fungibleTokenDetailsViewModel.token.server)
-//                                MyMasterViewController(fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel, poolCompany: poolCompany)
-//                            } else {
-//                                Spacer()
-//                            }
-//
-//                        } label: {
-                            PrimaryButton(text: "Begin Staking", clicked: {
-//                                let config = SFSafariViewController.Configuration()
-//                                config.entersReaderIfAvailable = true
-//
-//                                let url = URL(string: poolCompany.urlStake ?? "")
-//                                let vc = SFSafariViewController(url: url, configuration: config)
-//                                present(vc, animated: true)
-                                showSafari = true
-                                
-                            })
-                                .frame(height: 44)
-//                                .overlay (
-//                                    RoundedRectangle(cornerRadius: 0).allowsHitTesting(true).background(.clear)
-//                                )
-//                        }
+                        //                        NavigationLink {
+                        //                            if let fungibleTokenDetailsViewModel = fungibleTokenDetailsViewModel {
+                        //                                //                                BrowserViewController(account: fungibleTokenDetailsViewModel.wallet, server: fungibleTokenDetailsViewModel.token.server)
+                        //                                MyMasterViewController(fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel, poolCompany: poolCompany)
+                        //                            } else {
+                        //                                Spacer()
+                        //                            }
+                        //
+                        //                        } label: {
+                        PrimaryButton(text: "Begin Staking", clicked: {
+                            //                                let config = SFSafariViewController.Configuration()
+                            //                                config.entersReaderIfAvailable = true
+                            //
+                            //                                let url = URL(string: poolCompany.urlStake ?? "")
+                            //                                let vc = SFSafariViewController(url: url, configuration: config)
+                            //                                present(vc, animated: true)
+                            showSafari = true
+                            
+                        })
+                        .frame(height: 44)
+                        //                                .overlay (
+                        //                                    RoundedRectangle(cornerRadius: 0).allowsHitTesting(true).background(.clear)
+                        //                                )
+                        //                        }
                     }
                     .padding(.horizontal, 16)
                 }
                     .navigationTitle("Lif3")
                     .navigationBarTitleDisplayMode(.inline)
-           
             )
             .ignoresSafeArea()
             .fullScreenCover(isPresented: $showSafari, content: {
@@ -113,8 +126,9 @@ struct StakeViewTitleDescription: View {
     }
 }
 
+#if PRODUCTION
 struct MyMasterViewController: UIViewControllerRepresentable {
-
+    
     var fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel
     var poolCompany: PoolCompany
     typealias UIViewControllerType = BrowserHomeViewController
@@ -123,12 +137,12 @@ struct MyMasterViewController: UIViewControllerRepresentable {
         //        let storyboard = UIStoryboard(name: "Esewa", bundle: Bundle.main)
         let viewModel = BrowserHomeViewModel(bookmarksStore: BookmarksStore())
         let vc        = BrowserHomeViewController(viewModel: viewModel)
-//        discoverVC.didT
-//        discoverVC.delegate = self
-//        if let url = URL(string: poolCompany.urlStake ?? "") {
-//            discoverVC.goTo(url: url)
-//        }
-//        let loginViewController = storyboard.instantiateInitialViewController()
+        //        discoverVC.didT
+        //        discoverVC.delegate = self
+        //        if let url = URL(string: poolCompany.urlStake ?? "") {
+        //            discoverVC.goTo(url: url)
+        //        }
+        //        let loginViewController = storyboard.instantiateInitialViewController()
         return vc
     }
     
@@ -161,14 +175,18 @@ struct MyMasterViewController: UIViewControllerRepresentable {
 //
 //}
 
+#else
+
+#endif
+
 
 struct SFSafariViewWrapper: UIViewControllerRepresentable {
     let url: URL
-
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<Self>) -> SFSafariViewController {
         return SFSafariViewController(url: url)
     }
-
+    
     func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SFSafariViewWrapper>) {
         return
     }

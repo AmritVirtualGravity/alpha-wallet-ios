@@ -75,7 +75,7 @@ struct StakeView: View {
                     }
                     .padding(.horizontal, 16)
                 }
-                    .navigationTitle("Lif3")
+                    .navigationTitle(fungibleTokenDetailsViewModel?.token.symbol.lowercased().capitalizingFirstLetter() ?? "")
                     .navigationBarTitleDisplayMode(.inline)
             )
     }

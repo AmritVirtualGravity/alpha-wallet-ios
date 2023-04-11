@@ -16,7 +16,6 @@ struct ContentView: View {
 #warning("uncomment")
     
 #if PRODUCTION
-    
     var poolList: PoolParent?
     let fungibleTokenDetailsViewModel: FungibleTokenDetailsViewModel?
     
@@ -28,7 +27,7 @@ struct ContentView: View {
     }
     
 #else
-//            var poolList: PoolParent?
+    //            var poolList: PoolParent?
     let fungibleTokenDetailsViewModel: String?
 #endif
     
@@ -40,7 +39,17 @@ struct ContentView: View {
                     if(viewModel.isBusy) {
                         ProgressView()
                             .onAppear {
-                                viewModel.getPool(name: "ftm")
+                                let contactAddress = "\(self.fungibleTokenDetailsViewModel?.token.primaryKey.lowercased() ?? "")".components(separatedBy: "-").first ?? ""
+                                let nativeToken = "0x0000000000000000000000000000000000000000"
+                                
+                                let key = contactAddress == nativeToken ? "\(self.fungibleTokenDetailsViewModel?.token.symbol.lowercased() ?? "")".lowercased() : contactAddress
+                                switch self.fungibleTokenDetailsViewModel?.token.server {
+                                case .fantom:
+                                    viewModel.getPool(name: "ftm/\(key)")
+                                case .binance_smart_chain, .binance_smart_chain_testnet:
+                                    viewModel.getPool(name: "bnb/\(key)")
+                                default: break
+                                }
                             }
                     } else {
                         
@@ -88,7 +97,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                    .navigationTitle("Lif3")
+                    .navigationTitle(fungibleTokenDetailsViewModel?.token.symbol.lowercased().capitalizingFirstLetter() ?? "")
                     .navigationBarTitleDisplayMode(.inline)
             )
     }

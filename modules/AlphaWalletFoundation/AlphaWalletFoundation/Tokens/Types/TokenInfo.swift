@@ -15,9 +15,9 @@ public struct TokenInfo: Hashable {
 
 extension TokenInfo {
     init(tokenInfoObject: TokenInfoObject) {
-        self.uid = tokenInfoObject.uid
+        self.uid         = tokenInfoObject.uid
         self.coinGeckoId = tokenInfoObject.coinGeckoId
-        self.imageUrl = tokenInfoObject.imageUrl
+        self.imageUrl    = tokenInfoObject.imageUrl
     }
 
     public init(uid: String) {

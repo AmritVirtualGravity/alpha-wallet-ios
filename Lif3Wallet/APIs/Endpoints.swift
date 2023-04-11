@@ -55,7 +55,7 @@ public enum EndPoint {
         switch self {
 //        case .login: return "users/login-pin"
         case .login: return "users/mobile/signup"
-        case .pool(let name): return "wallet/staking/chain/\(name)/pools.json"
+        case .pool(let name): return "wallet/staking/chain/\(name).json"
         case .getTokens(let name): return "wallet/staking/chain/\(name)/tokens.json"
         }
     }

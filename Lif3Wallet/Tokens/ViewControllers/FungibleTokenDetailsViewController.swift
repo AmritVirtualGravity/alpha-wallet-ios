@@ -91,12 +91,12 @@ class FungibleTokenDetailsViewController: UIViewController {
         super.viewDidLoad()
         setup()
         stakeButton.isHidden = true
+        print(self.viewModel.token)
         switch self.viewModel.token.server {
         case .fantom: getToken(name: "ftm")
         case .binance_smart_chain, .binance_smart_chain_testnet: getToken(name: "bnb")
         default: break
         }
-   
     }
 
     override func viewWillAppear(_ animated: Bool) {

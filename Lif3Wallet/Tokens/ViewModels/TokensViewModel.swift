@@ -140,7 +140,8 @@ final class TokensViewModel {
         case .walletSummary:
             return 80
         case .filters:
-            return DataEntry.Metric.Tokens.Filter.height
+//            return DataEntry.Metric.Tokens.Filter.height
+            return 0
         case .activeWalletSession:
             return 80
         case .search, .testnetTokens:

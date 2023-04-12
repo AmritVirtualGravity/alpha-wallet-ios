@@ -39,6 +39,8 @@ struct ContentView: View {
                     if(viewModel.isBusy) {
                         ProgressView()
                             .onAppear {
+                                
+#if PRODUCTION
                                 let contactAddress = "\(self.fungibleTokenDetailsViewModel?.token.primaryKey.lowercased() ?? "")".components(separatedBy: "-").first ?? ""
                                 let nativeToken = "0x0000000000000000000000000000000000000000"
                                 
@@ -50,6 +52,10 @@ struct ContentView: View {
                                     viewModel.getPool(name: "bnb/\(key)")
                                 default: break
                                 }
+#else
+                                viewModel.isBusy = false
+#endif
+                                
                             }
                     } else {
                         
@@ -97,9 +103,17 @@ struct ContentView: View {
                         }
                     }
                 }
-                    .navigationTitle(fungibleTokenDetailsViewModel?.token.symbol.lowercased().capitalizingFirstLetter() ?? "")
+                    .navigationTitle(getTitle())
                     .navigationBarTitleDisplayMode(.inline)
             )
+    }
+    
+    func getTitle() -> String {
+#if PRODUCTION
+        return "Stake \(fungibleTokenDetailsViewModel?.token.symbol ?? "")"
+#else
+        return fungibleTokenDetailsViewModel ?? "Title"
+#endif
     }
 }
 

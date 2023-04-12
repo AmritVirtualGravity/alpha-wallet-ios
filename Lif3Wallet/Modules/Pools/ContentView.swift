@@ -117,10 +117,10 @@ struct ContentView: View {
     }
 }
 
-func getRandomImageName() -> String {
-    let arrayOfImageName = ["lif3_nursery", "lif3_lif3_trade", "lif3_leverage"]
-    return arrayOfImageName[Int.random(in: 0..<2)]
-}
+//func getRandomImageName() -> String {
+//    let arrayOfImageName = ["lif3_nursery", "lif3_lif3_trade", "lif3_leverage"]
+//    return arrayOfImageName[Int.random(in: 0..<2)]
+//}
 struct CompanyCell: View {
     let amount: String
     let percentage: String
@@ -132,12 +132,16 @@ struct CompanyCell: View {
             //            Image(getRandomImageName())
             //                .resizable()
             //                .frame(width: 30, height: 30)
-            AsyncImage(
-                url: image ,
-                placeholder: { PlaceHolderImageView() },
-                image: { Image(uiImage: $0).resizable() })
-            .frame(width: 30, height: 30)
-            .clipShape(Circle())
+//            AsyncImage(
+//                url: image ,
+//                placeholder: { PlaceHolderImageView() },
+//                image: { Image(uiImage: $0).resizable() })
+            
+//                SVGKFastImageViewSUI(url: .constant(url), size: .constant(CGSize(width: 30,height: 30)))
+//                setSvgImage(imageUrl: "")
+            setSvgImage(imageUrl: image, width: 30, height: 30)
+                .frame(width: 30, height: 30)
+                .clipShape(Circle())
             VStack(spacing: 0) {
                 CustomText(name: title, padding: 0, font: mediumFont14)
                 CustomText(name: description, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12)
@@ -171,12 +175,9 @@ struct companySection: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack (alignment: .center, spacing: 8) {
-                AsyncImage(
-                    url: image ,
-                    placeholder: { PlaceHolderImageView() },
-                    image: { Image(uiImage: $0).resizable() })
-                .frame(width: 30, height: 30)
-                .clipShape(Circle())
+                setSvgImage(imageUrl: image, width: 30, height: 30)
+                    .frame(width: 30, height: 30)
+                    .clipShape(Circle())
                 CustomText(name: title, textColor: lightDarkColor, padding: 0, font: mediumFont14)
             }
             .padding(.horizontal, 10)

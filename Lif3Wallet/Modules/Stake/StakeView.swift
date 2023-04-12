@@ -41,7 +41,7 @@ struct StakeView: View {
                         .cornerRadius(10, corners: .allCorners)
                         //                        .clipShape(Circle())
                         CustomText(name: "About", padding: 0, font: mediumFont14)
-                        StakeCell(title: poolCompany.title ?? "", urlString: poolCompany.urlProtocol ?? "")
+                        StakeCell(title: poolCompany.title ?? "", urlString: poolCompany.image ?? "")
                         VStack(spacing: 16) {
                             StakeViewTitleDescription(title: "Staking Page:", description: poolCompany.urlStake ?? "")
                             StakeViewTitleDescription(title: "About Protocol:", description: poolCompany.aboutProtocol ?? "")
@@ -100,9 +100,12 @@ struct StakeCell: View {
     let urlString: String
     var body: some View {
         HStack (alignment: .center, spacing: 8) {
-            Image(getRandomImageName())
-                .resizable()
+//            Image(getRandomImageName())
+//                .resizable()
+//                .frame(width: 30, height: 30)
+            setSvgImage(imageUrl: urlString, width: 30, height: 30)
                 .frame(width: 30, height: 30)
+                .clipShape(Circle())
             VStack(spacing: 0) {
                 CustomText(name: title, padding: 0, font: mediumFont14)
                 CustomText(name: urlString, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12, maxWidth: true)

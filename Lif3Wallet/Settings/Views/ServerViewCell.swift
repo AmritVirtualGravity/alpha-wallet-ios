@@ -40,7 +40,6 @@ class ServerTableViewCell: UITableViewCell {
             topSeparator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             topSeparator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             stackView.anchorsConstraint(to: contentView, edgeInsets: .init(top: 0, left: DataEntry.Metric.sideMargin, bottom: 0, right: DataEntry.Metric.sideMargin)),
-          
         ])
     }
 

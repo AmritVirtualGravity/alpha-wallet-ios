@@ -64,7 +64,11 @@ struct StakeView: View {
                             //                                let vc = SFSafariViewController(url: url, configuration: config)
                             //                                present(vc, animated: true)
                             //                            showSafari = true
+#if PRODUCTION
                             NotificationCenter.default.post(name: .gotoBrowser, object: poolCompany.urlStake ?? "")
+#else
+#endif
+                            
                             
                         })
                         .frame(height: 44)
@@ -75,9 +79,19 @@ struct StakeView: View {
                     }
                     .padding(.horizontal, 16)
                 }
-                    .navigationTitle(fungibleTokenDetailsViewModel?.token.symbol.lowercased().capitalizingFirstLetter() ?? "")
+                    .navigationTitle(getTitle())
                     .navigationBarTitleDisplayMode(.inline)
+                
             )
+        
+        func getTitle() -> String {
+#if PRODUCTION
+            return "Stake \(fungibleTokenDetailsViewModel?.token.symbol ?? "")"
+#else
+            return fungibleTokenDetailsViewModel ?? "Title"
+#endif
+        }
+
     }
 }
 

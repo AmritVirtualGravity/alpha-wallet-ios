@@ -56,8 +56,8 @@ final class DropDownView<T: DropDownItemType>: UIView, ReusableTableHeaderViewTy
         return pickerView
     }()
 
-    private lazy var selectionButton: Button = {
-        let button = Button(size: .normal, style: .special)
+    private lazy var selectionButton: Lif3WalletButton = {
+        let button = Lif3WalletButton(size: .normal, style: .special)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(selectionButtonSelected), for: .touchUpInside)
         button.setImage(R.image.iconsSystemExpandMore(), for: .normal)

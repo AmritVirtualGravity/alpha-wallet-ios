@@ -4,6 +4,7 @@ import UIKit
 import AlphaWalletAddress
 import Combine
 import AlphaWalletFoundation
+import SwiftUI
 
 protocol TokensCoordinatorDelegate: CanOpenURL, SendTransactionDelegate, BuyCryptoDelegate {
     func didTapSwap(swapTokenFlow: SwapTokenFlow, in coordinator: TokensCoordinator)
@@ -268,6 +269,12 @@ extension TokensCoordinator: TokensViewControllerDelegate {
         }
 
         alertController.addAction(swapAction)
+        
+//        let gotoPool = UIAlertAction(title: "Goto Pools", style: .default) { [weak self] _ in
+//            guard let self = self else { return }
+//            self.gotoPools()
+//        }
+//        alertController.addAction(gotoPool)
 
 //        let renameThisWalletAction = UIAlertAction(title: R.string.localizable.tokensWalletRenameThisWallet(), style: .default) { [weak self] _ in
 //            guard let strongSelf = self else { return }
@@ -542,3 +549,5 @@ extension TokensCoordinator: AddHideTokensCoordinatorDelegate {
         removeCoordinator(coordinator)
     }
 }
+
+

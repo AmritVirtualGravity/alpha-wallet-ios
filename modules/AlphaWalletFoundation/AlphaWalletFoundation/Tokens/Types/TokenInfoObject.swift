@@ -24,9 +24,9 @@ class TokenInfoObject: Object {
 
     convenience init(tokenInfo: TokenInfo) {
         self.init()
-        self.uid = tokenInfo.uid
+        self.uid         = tokenInfo.uid
         self.coinGeckoId = tokenInfo.coinGeckoId
-        self.imageUrl = tokenInfo.imageUrl
+        self.imageUrl    = tokenInfo.imageUrl
     }
 
     override func isEqual(_ object: Any?) -> Bool {

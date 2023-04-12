@@ -1,0 +1,38 @@
+{
+  "pools": [
+    {
+      "staking-list":"Lif3-Staking-List",
+      "image-url":"https://assets.lif3.com/wallet/staking/list-icons/lif3.svg",
+      "list": [
+        {
+          "token":"FTM",
+          "title": "Lif3 Trade",
+          "subtitle": "Bridging now available at lif3.com/bridge",
+          "about-protocol": "Lif3.com is a complete multi-chain DeFi Ecosystem.",
+          "about-stake": "By depositing LIF3 into this pool, you are earning  protocol fees from the Lif3 Trade platform and additional Lif3 rewards.",
+          "url-protocol": "https://lif3.com/",
+          "url-stake": "https://trade.lif3.com/earn",
+          "icon": "https://assets.lif3.com/swap/tokens/LLP.svg",
+          "banner-image": "https://assets.lif3.com/wallet/lif3-news/images/230221-multichain.jpg",
+          "pool-type":"Liquidity",
+          "score":"10",
+          "isNative":"false"
+        },
+        {
+          "token":"FTM",
+          "title": "Lif3.com",
+          "subtitle": "Bridging now available at lif3.com/bridge",
+          "about-protocol": "Lif3.com is a complete multi-chain DeFi Ecosystem.",
+          "about-stake": "By depositing LIF3 into this pool, you are providing liquidity for users to borrow Lif3 and leverage their LPs.",
+          "url-protocol": "https://lif3.com/",
+          "url-staking": "https://lif3.com/staking",
+          "icon": "https://assets.lif3.com/swap/tokens/LIF3.svg",
+          "image": "https://assets.lif3.com/wallet/lif3-news/images/230221-multichain.jpg",
+          "pool-type":"Lending",
+          "score":"8",
+          "isNative":"false"
+        }
+      ]
+    }
+  ]
+}

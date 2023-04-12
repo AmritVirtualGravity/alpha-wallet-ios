@@ -152,6 +152,7 @@ PODS:
   - PromisesObjC (2.1.1)
   - QRCodeReaderViewController (4.0.2)
   - R.swift (7.2.4)
+  - Ramp (4.0.0)
   - Realm (10.32.3):
     - Realm/Headers (= 10.32.3)
   - Realm/Headers (10.32.3)
@@ -240,6 +241,7 @@ DEPENDENCIES:
   - PromiseKit/CorePromise
   - QRCodeReaderViewController (from `https://github.com/AlphaWallet/QRCodeReaderViewController.git`, commit `30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65`)
   - R.swift
+  - Ramp (from `https://github.com/RampNetwork/ramp-sdk-ios`, tag `4.0.0`)
   - SAMKeychain
   - SDWebImage
   - SDWebImageSVGCoder
@@ -341,6 +343,9 @@ EXTERNAL SOURCES:
   QRCodeReaderViewController:
     :commit: 30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65
     :git: https://github.com/AlphaWallet/QRCodeReaderViewController.git
+  Ramp:
+    :git: https://github.com/RampNetwork/ramp-sdk-ios
+    :tag: 4.0.0
   SVGKit:
     :branch: 3.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -373,6 +378,9 @@ CHECKOUT OPTIONS:
   QRCodeReaderViewController:
     :commit: 30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65
     :git: https://github.com/AlphaWallet/QRCodeReaderViewController.git
+  Ramp:
+    :git: https://github.com/RampNetwork/ramp-sdk-ios
+    :tag: 4.0.0
   SVGKit:
     :commit: 8c290ceee19254f6d0da1940201d5efa31b48f9f
     :git: https://github.com/SVGKit/SVGKit.git
@@ -435,6 +443,7 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   QRCodeReaderViewController: e8f27d035b3e72b1d4b1c61ff66458287e3be0ff
   R.swift: 681bb9135f482e7a81d9d27445b837fef5467e11
+  Ramp: e0988926ce78f6cd0870b4f3565651c6cc0555a2
   Realm: fdf6732924dc5e69e30e0db2c11e869f92b53f3d
   RealmSwift: 7c181da8fa1c2fe613656a77c198d6a3dc3879a1
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
@@ -458,6 +467,6 @@ SPEC CHECKSUMS:
   WalletConnectSwiftV2: 52e67915f8d861ed3ba4eabb0f69fee0990f0a5f
   xcbeautify: df17aa32d769add7af523a8be9b0ef8fb9eb75a8
 
-PODFILE CHECKSUM: e3b2a2c8d00769d4d59d418b223274f5fe661c01
+PODFILE CHECKSUM: 72976b1e2636f7f9f06baff4b981513abe7d6dcc
 
 COCOAPODS: 1.11.3

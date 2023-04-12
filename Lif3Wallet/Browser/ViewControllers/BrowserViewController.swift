@@ -20,10 +20,10 @@ final class BrowserViewController: UIViewController {
     private let server: RPCServer
 
     private struct Keys {
-        static let estimatedProgress = "estimatedProgress"
+        static let estimatedProgress      = "estimatedProgress"
         static let developerExtrasEnabled = "developerExtrasEnabled"
-        static let URL = "URL"
-        static let ClientName = "AlphaWallet"
+        static let URL                    = "URL"
+        static let ClientName             = "AlphaWallet"
     }
 
     private lazy var userClient: String = {
@@ -264,7 +264,7 @@ extension BrowserViewController: WKScriptMessageHandler {
 }
 
 extension BrowserViewController: BrowserErrorViewDelegate {
-    func didTapReload(_ sender: Button) {
+    func didTapReload(_ sender: Lif3WalletButton) {
         reload()
     }
 }

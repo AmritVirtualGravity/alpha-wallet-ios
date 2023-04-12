@@ -31,25 +31,25 @@ class CoinTickerObject: Object {
 
     convenience init(coinTicker: CoinTicker) {
         self.init()
-        self.primaryKey = "\(coinTicker.id)-\(coinTicker.currency.code)"
-        self.lastUpdatedAt = coinTicker.lastUpdatedAt
-        self.currency = coinTicker.currency.code
-        self.id = coinTicker.id
-        self.symbol = coinTicker.symbol
-        self.price_usd = coinTicker.price_usd
-        self.percent_change_24h = coinTicker.percent_change_24h
-        self.market_cap.value = coinTicker.market_cap
-        self.market_cap_rank.value = coinTicker.market_cap_rank
-        self.total_volume.value = coinTicker.total_volume
-        self.high_24h.value = coinTicker.high_24h
-        self.low_24h.value = coinTicker.low_24h
-        self.market_cap_change_24h.value = coinTicker.market_cap_change_24h
+        self.primaryKey                             = "\(coinTicker.id)-\(coinTicker.currency.code)"
+        self.lastUpdatedAt                          = coinTicker.lastUpdatedAt
+        self.currency                               = coinTicker.currency.code
+        self.id                                     = coinTicker.id
+        self.symbol                                 = coinTicker.symbol
+        self.price_usd                              = coinTicker.price_usd
+        self.percent_change_24h                     = coinTicker.percent_change_24h
+        self.market_cap.value                       = coinTicker.market_cap
+        self.market_cap_rank.value                  = coinTicker.market_cap_rank
+        self.total_volume.value                     = coinTicker.total_volume
+        self.high_24h.value                         = coinTicker.high_24h
+        self.low_24h.value                          = coinTicker.low_24h
+        self.market_cap_change_24h.value            = coinTicker.market_cap_change_24h
         self.market_cap_change_percentage_24h.value = coinTicker.market_cap_change_percentage_24h
-        self.circulating_supply.value = coinTicker.circulating_supply
-        self.total_supply.value = coinTicker.total_supply
-        self.max_supply.value = coinTicker.max_supply
-        self.ath.value = coinTicker.ath
-        self.ath_change_percentage.value = coinTicker.ath_change_percentage
+        self.circulating_supply.value               = coinTicker.circulating_supply
+        self.total_supply.value                     = coinTicker.total_supply
+        self.max_supply.value                       = coinTicker.max_supply
+        self.ath.value                              = coinTicker.ath
+        self.ath_change_percentage.value            = coinTicker.ath_change_percentage
     }
 
     override static func primaryKey() -> String? {

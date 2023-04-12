@@ -104,7 +104,7 @@ public class CoinGeckoNetworkProvider: CoinTickerNetworkProviderType {
 
     struct CoinGeckoError: Decodable, Error {
         enum CodingKeys: String, CodingKey {
-            case code = "error_code"
+            case code    = "error_code"
             case message = "error_message"
         }
 

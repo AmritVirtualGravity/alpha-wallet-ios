@@ -91,14 +91,15 @@ extension WalletSummaryViewModel {
 
                 switch helper.change24h(from: changePercentage.amount) {
                 case .appreciate(let percentageChange24h):
-                    return "(\(formatter.string(double: percentageChange24h) ?? "")%)"
+//                    return "(\(formatter.string(double: percentageChange24h) ?? ""))"
+                    return "(\(formatter.string(double: percentageChange24h) ?? "")%)".replacingOccurrences(of: "$", with: "")
                 case .depreciate(let percentageChange24h):
-                    return "(\(formatter.string(double: percentageChange24h) ?? "")%)"
+//                    return "(\(formatter.string(double: percentageChange24h) ?? ""))"
+                    return "(\(formatter.string(double: percentageChange24h) ?? "")%)".replacingOccurrences(of: "$", with: "")
                 case .none:
                     return "-"
                 }
             }()
-
             let value = R.string.localizable.walletSummaryToday(changeString + " " + changePercentage)
             return (value, helper.valueChangeValueColor(from: summary?.changePercentage?.amount))
         }
@@ -108,12 +109,9 @@ extension WalletSummaryViewModel {
 extension TickerHelper {
     func valueChangeValueColor(from value: Double?) -> UIColor {
         switch change24h(from: value) {
-        case .appreciate:
-            return Configuration.Color.Semantic.appreciation
-        case .depreciate:
-            return Configuration.Color.Semantic.depreciation
-        case .none:
-            return Configuration.Color.Semantic.defaultSubtitleText
+        case .appreciate: return Configuration.Color.Semantic.appreciation
+        case .depreciate: return Configuration.Color.Semantic.depreciation
+        case .none:       return Configuration.Color.Semantic.defaultSubtitleText
         }
     }
 }

@@ -11,6 +11,8 @@ extension RPCServer {
 
 // swiftlint:disable type_body_length
 public enum RPCServer: Hashable, CaseIterable {
+    
+    
     enum RpcNodeBatchSupport {
         case noBatching
         case batch(Int)

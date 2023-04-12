@@ -9,6 +9,8 @@ class ServerTableViewCell: UITableViewCell {
 
     private let nameLabel = UILabel()
     
+    private let priceChangeLabel = UILabel()
+    
     private let serverImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,6 +25,8 @@ class ServerTableViewCell: UITableViewCell {
             serverImageView,
             .spacerWidth(8),
             nameLabel,
+            .spacer(),
+            priceChangeLabel
         ].asStackView(axis: .horizontal, alignment: .center)
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -36,7 +40,6 @@ class ServerTableViewCell: UITableViewCell {
             topSeparator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             topSeparator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             stackView.anchorsConstraint(to: contentView, edgeInsets: .init(top: 0, left: DataEntry.Metric.sideMargin, bottom: 0, right: DataEntry.Metric.sideMargin)),
-          
         ])
     }
 
@@ -44,19 +47,22 @@ class ServerTableViewCell: UITableViewCell {
         return nil
     }
 
-    func configure(viewModel: ServerTableViewCellViewModelType) {
-        selectionStyle = viewModel.selectionStyle
-        backgroundColor = viewModel.backgroundColor
-        accessoryType = viewModel.accessoryType
-        topSeparator.isHidden = viewModel.isTopSeparatorHidden
+    func configure(viewModel: TokenListServerTableViewCellViewModel) {
+        selectionStyle          = viewModel.selectionStyle
+        backgroundColor         = viewModel.backgroundColor
+        accessoryType           = viewModel.accessoryType
+        topSeparator.isHidden   = viewModel.isTopSeparatorHidden
         nameLabel.textAlignment = .left
-        nameLabel.font = viewModel.serverFont
-        nameLabel.textColor = viewModel.serverColor
-        nameLabel.text = viewModel.serverName
+        nameLabel.font          = viewModel.serverFont
+        nameLabel.textColor     = viewModel.serverColor
+        nameLabel.text          = viewModel.serverName
+        
+        priceChangeLabel.textAlignment = .right
+        priceChangeLabel.font          = viewModel.serverFont
+        priceChangeLabel.textColor     = viewModel.serverColor
+        priceChangeLabel.text          = viewModel.sum.rC.dollar
         let url = returnServerImageUrl(symbol: viewModel.serverSymbol)
         
-        
-       
         if let imageUrl = URL(string: url) {
             self.serverImageView.sd_setImage(with: imageUrl)
         }

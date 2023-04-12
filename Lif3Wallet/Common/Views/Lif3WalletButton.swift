@@ -103,7 +103,7 @@ enum ButtonStyle {
     }
 }
 
-class Button: UIButton {
+class Lif3WalletButton: UIButton {
     var heightConstraint: NSLayoutConstraint?
 
     init(size: ButtonSize, style: ButtonStyle) {

@@ -223,10 +223,21 @@ class ActiveWalletCoordinator: NSObject, Coordinator {
         swapButton.addTarget(self, action: #selector(swapButtonSelected), for: .touchUpInside)
 
         addCoordinator(promptBackupCoordinator)
+        NotificationCenter.default.addObserver(self, selector: #selector(gotoBrowser(_:)), name: .gotoBrowser, object: nil)
+    }
+    
+    @objc private func gotoBrowser(_ notification: Notification) {
+        if let url = notification.object as? String {
+            guard let url = URL(string: url) else {
+                return
+            }
+            openURLInBrowser(url: url)
+        }
     }
 
     deinit {
         notificationService.unregister(source: transactionNotificationService)
+        NotificationCenter.default.removeObserver(self)
     }
 
     func start(animated: Bool) {
@@ -435,7 +446,6 @@ class ActiveWalletCoordinator: NSObject, Coordinator {
         coordinator.start()
         coordinator.rootViewController.tabBarItem = ActiveWalletViewModel.Tabs.browser.tabBarItem
         addCoordinator(coordinator)
-
         return coordinator
     }
 

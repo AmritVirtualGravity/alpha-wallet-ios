@@ -219,7 +219,6 @@
 		04BF87BC29E40F3400478F44 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08760C6A294079AC00F83AB3 /* BookmarksViewController.swift */; };
 		04BF87BD29E40F3400478F44 /* WalletConnectV1Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B2A2FE29911A6700908F41 /* WalletConnectV1Provider.swift */; };
 		04BF87BE29E40F3400478F44 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25312294073EE00A31193 /* ServersViewController.swift */; };
-		04BF87BF29E40F3400478F44 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C5929D3FAB800FEBA29 /* Font.swift */; };
 		04BF87C029E40F3400478F44 /* StateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254BB294073EF00A31193 /* StateViewModel.swift */; };
 		04BF87C129E40F3400478F44 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2548E294073EF00A31193 /* Configuration.swift */; };
 		04BF87C229E40F3400478F44 /* WhatsNewExperimentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25403294073EF00A31193 /* WhatsNewExperimentCoordinator.swift */; };
@@ -843,6 +842,9 @@
 		04CFF73B29CC606400E6E8AB /* Data + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF73A29CC606400E6E8AB /* Data + Extension.swift */; };
 		04CFF74029CC61D500E6E8AB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF73F29CC61D500E6E8AB /* String+Extension.swift */; };
 		04CFF74229CCBA7D00E6E8AB /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF74129CCBA7D00E6E8AB /* Decimal+Extension.swift */; };
+		04D0FA1029E8302D00E477E8 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FA0F29E8302C00E477E8 /* UIViewExtension.swift */; };
+		04D0FA1529E830DF00E477E8 /* Lif3SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FA1329E830D200E477E8 /* Lif3SVGImage.swift */; };
+		04D0FA1629E830DF00E477E8 /* Lif3SVGImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D0FA1429E830DB00E477E8 /* Lif3SVGImage.xib */; };
 		08760C532940780100F83AB3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08760C522940780100F83AB3 /* R.generated.swift */; };
 		08760C7D294079AD00F83AB3 /* DappsHomeEmptyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08760C56294079AC00F83AB3 /* DappsHomeEmptyViewModel.swift */; };
 		08760C7E294079AD00F83AB3 /* DappViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08760C57294079AC00F83AB3 /* DappViewCellViewModel.swift */; };
@@ -1842,6 +1844,9 @@
 		04CFF73D29CC60BB00E6E8AB /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		04CFF73F29CC61D500E6E8AB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		04CFF74129CCBA7D00E6E8AB /* Decimal+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extension.swift"; sourceTree = "<group>"; };
+		04D0FA0F29E8302C00E477E8 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		04D0FA1329E830D200E477E8 /* Lif3SVGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3SVGImage.swift; sourceTree = "<group>"; };
+		04D0FA1429E830DB00E477E8 /* Lif3SVGImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Lif3SVGImage.xib; sourceTree = "<group>"; };
 		08760C522940780100F83AB3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		08760C56294079AC00F83AB3 /* DappsHomeEmptyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsHomeEmptyViewModel.swift; sourceTree = "<group>"; };
 		08760C57294079AC00F83AB3 /* DappViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -2832,6 +2837,7 @@
 				040D1C3729D3F7EC00FEBA29 /* Decimal+Double+Extension.swift */,
 				040D1C3829D3F7EC00FEBA29 /* UIViewControllerExtension.swift */,
 				040D1C3A29D3F7EC00FEBA29 /* NSNotificationNameExtension.swift */,
+				04D0FA0F29E8302C00E477E8 /* UIViewExtension.swift */,
 				040D1C3B29D3F7EC00FEBA29 /* Swift */,
 				040D1C3E29D3F7EC00FEBA29 /* Sequence + Extension.swift */,
 				040D1C3F29D3F7EC00FEBA29 /* ViewModifier + Extension.swift */,
@@ -2968,6 +2974,7 @@
 		04CFF73C29CC60B200E6E8AB /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				04D0FA0A29E82F4100E477E8 /* SVGImage */,
 				043D013829E71CCC002FE935 /* SVGKFastImageViewSUI.swift */,
 				04A371CC29DDDD9B00B883C0 /* Image.swift */,
 				04A371CA29DDDD9300B883C0 /* PlaceHolderImageView.swift */,
@@ -2980,6 +2987,15 @@
 				04CFF73D29CC60BB00E6E8AB /* GlobalConstants.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		04D0FA0A29E82F4100E477E8 /* SVGImage */ = {
+			isa = PBXGroup;
+			children = (
+				04D0FA1429E830DB00E477E8 /* Lif3SVGImage.xib */,
+				04D0FA1329E830D200E477E8 /* Lif3SVGImage.swift */,
+			);
+			path = SVGImage;
 			sourceTree = "<group>";
 		};
 		08760C54294079AC00F83AB3 /* Browser */ = {
@@ -6011,6 +6027,7 @@
 				08760CAC29407C2000F83AB3 /* howDoIGetMyMoneyInfo.html in Resources */,
 				08760CAE29407C2000F83AB3 /* whatIsEthereumInfo.html in Resources */,
 				08A25649294073EF00A31193 /* XDAI-bridge.tsml in Resources */,
+				04D0FA1629E830DF00E477E8 /* Lif3SVGImage.xib in Resources */,
 				08A25644294073EF00A31193 /* non_asset_catalog_redemption_location@2x.png in Resources */,
 				87B93B102726C59D00F6EA73 /* config.js in Resources */,
 				08A2564D294073EF00A31193 /* ETH.tsml in Resources */,
@@ -6881,7 +6898,6 @@
 				04BF87BC29E40F3400478F44 /* BookmarksViewController.swift in Sources */,
 				04BF87BD29E40F3400478F44 /* WalletConnectV1Provider.swift in Sources */,
 				04BF87BE29E40F3400478F44 /* ServersViewController.swift in Sources */,
-				04BF87BF29E40F3400478F44 /* Font.swift in Sources */,
 				04BF87C029E40F3400478F44 /* StateViewModel.swift in Sources */,
 				04BF87C129E40F3400478F44 /* Configuration.swift in Sources */,
 				04BF87C229E40F3400478F44 /* WhatsNewExperimentCoordinator.swift in Sources */,
@@ -7520,6 +7536,7 @@
 				08A256F9294073F000A31193 /* EditPriceAlertCoordinator.swift in Sources */,
 				08A256D1294073F000A31193 /* TokenCardRedemptionViewModel.swift in Sources */,
 				08760C7D294079AD00F83AB3 /* DappsHomeEmptyViewModel.swift in Sources */,
+				04D0FA1029E8302D00E477E8 /* UIViewExtension.swift in Sources */,
 				1013957329A8A052000AD3EF /* Lif3ViewModel.swift in Sources */,
 				08A25624294073EF00A31193 /* EmptyTableView.swift in Sources */,
 				08A25613294073EF00A31193 /* EnabledServersViewController.swift in Sources */,
@@ -7616,6 +7633,7 @@
 				10511C81296C71E800F3E826 /* AmountTextField.swift in Sources */,
 				08760C8F294079AD00F83AB3 /* BookmarksViewController.swift in Sources */,
 				10B2A32329911A6700908F41 /* WalletConnectV1Provider.swift in Sources */,
+				04D0FA1529E830DF00E477E8 /* Lif3SVGImage.swift in Sources */,
 				08A25617294073EF00A31193 /* ServersViewController.swift in Sources */,
 				040D1C7929D3FADE00FEBA29 /* Font.swift in Sources */,
 				08A2576A294073F000A31193 /* StateViewModel.swift in Sources */,

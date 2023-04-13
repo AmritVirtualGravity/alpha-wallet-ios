@@ -25,6 +25,7 @@ let regularFont18 = UIFont.systemFont(ofSize: CGFloat(18), weight: .regular)
 let regularFont16 = UIFont.systemFont(ofSize: CGFloat(16), weight: .regular)
 let regularFont14 = UIFont.systemFont(ofSize: CGFloat(14), weight: .regular)
 let regularFont12 = UIFont.systemFont(ofSize: CGFloat(12), weight: .regular)
+let regularFont10 = UIFont.systemFont(ofSize: CGFloat(10), weight: .regular)
 
 
 let boldFont18    = UIFont.systemFont(ofSize: CGFloat(18), weight: .bold)

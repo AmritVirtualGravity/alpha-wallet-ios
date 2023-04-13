@@ -219,7 +219,6 @@
 		04BF87BC29E40F3400478F44 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08760C6A294079AC00F83AB3 /* BookmarksViewController.swift */; };
 		04BF87BD29E40F3400478F44 /* WalletConnectV1Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B2A2FE29911A6700908F41 /* WalletConnectV1Provider.swift */; };
 		04BF87BE29E40F3400478F44 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25312294073EE00A31193 /* ServersViewController.swift */; };
-		04BF87BF29E40F3400478F44 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1C5929D3FAB800FEBA29 /* Font.swift */; };
 		04BF87C029E40F3400478F44 /* StateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A254BB294073EF00A31193 /* StateViewModel.swift */; };
 		04BF87C129E40F3400478F44 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2548E294073EF00A31193 /* Configuration.swift */; };
 		04BF87C229E40F3400478F44 /* WhatsNewExperimentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A25403294073EF00A31193 /* WhatsNewExperimentCoordinator.swift */; };
@@ -6899,7 +6898,6 @@
 				04BF87BC29E40F3400478F44 /* BookmarksViewController.swift in Sources */,
 				04BF87BD29E40F3400478F44 /* WalletConnectV1Provider.swift in Sources */,
 				04BF87BE29E40F3400478F44 /* ServersViewController.swift in Sources */,
-				04BF87BF29E40F3400478F44 /* Font.swift in Sources */,
 				04BF87C029E40F3400478F44 /* StateViewModel.swift in Sources */,
 				04BF87C129E40F3400478F44 /* Configuration.swift in Sources */,
 				04BF87C229E40F3400478F44 /* WhatsNewExperimentCoordinator.swift in Sources */,

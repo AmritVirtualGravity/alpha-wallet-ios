@@ -41,7 +41,7 @@ struct StakeView: View {
                         .cornerRadius(10, corners: .allCorners)
                         //                        .clipShape(Circle())
                         CustomText(name: "About", padding: 0, font: mediumFont14)
-                        StakeCell(title: poolCompany.title ?? "", urlString: poolCompany.image ?? "")
+                        StakeCell(title: poolCompany.title ?? "", urlString: poolCompany.icon ?? "")
                         VStack(spacing: 16) {
                             StakeViewTitleDescription(title: "Staking Page:", description: poolCompany.urlStake ?? "")
                             StakeViewTitleDescription(title: "About Protocol:", description: poolCompany.aboutProtocol ?? "")

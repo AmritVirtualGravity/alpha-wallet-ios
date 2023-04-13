@@ -103,7 +103,7 @@ struct StakeCell: View {
 //            Image(getRandomImageName())
 //                .resizable()
 //                .frame(width: 30, height: 30)
-            setSvgImage(imageUrl: urlString, width: 30, height: 30)
+            SVGImageSwiftUIView(url:  urlString)
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
             VStack(spacing: 0) {

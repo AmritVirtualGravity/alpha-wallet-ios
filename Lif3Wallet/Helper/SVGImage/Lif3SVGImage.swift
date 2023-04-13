@@ -50,7 +50,7 @@ import SDWebImage
     
 
     private func setImage(url: String) {
-        if let imageUrl = URL(string: "https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/Steps.svg") {
+        if let imageUrl = URL(string: url) {
 //            self.svgImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "logo"))
             self.svgImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "icons-tokens-a-lend"))
         }

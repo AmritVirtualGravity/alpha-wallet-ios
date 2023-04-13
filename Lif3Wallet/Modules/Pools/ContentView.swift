@@ -60,7 +60,7 @@ struct ContentView: View {
                                 let poolParent = PreviewData.load(name: "Pools", returnType:  PoolParent.self)
                                 viewModel.pools = poolParent?.pools
                                 viewModel.isBusy = false
-//                                ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
+                                //                                ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
 #endif
                                 
                             }
@@ -93,11 +93,16 @@ struct ContentView: View {
                                 //                        }
                                 //            Text("Value: \(favoriteColor)")
                                 //            List {
-                                VStack {
+                                VStack(spacing: 0) {
                                     
                                     ForEach(viewModel.pools ?? [], id: \.self) { poolSection in
                                         //                                CompanyCell(amount: company.tvl ?? "", percentage: company.apr ?? "", title: company.name ?? "")
+                                        Divider()
+                                            .frame(height: 0.25)
+                                            .background(Color(lighterDarkColor))
+                                        
                                         companySection(title: poolSection.stakingList ?? "", company: poolSection.list ?? [], image: poolSection.imageURL ?? "", fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel)
+                                        
                                     }
                                 }
                             }
@@ -139,23 +144,23 @@ struct CompanyCell: View {
             //            Image(getRandomImageName())
             //                .resizable()
             //                .frame(width: 30, height: 30)
-//            AsyncImage(
-//                url: image ,
-//                placeholder: { PlaceHolderImageView() },
-//                image: { Image(uiImage: $0).resizable() })
+            //            AsyncImage(
+            //                url: image ,
+            //                placeholder: { PlaceHolderImageView() },
+            //                image: { Image(uiImage: $0).resizable() })
             
-//                SVGKFastImageViewSUI(url: .constant(url), size: .constant(CGSize(width: 30,height: 30)))
-//                setSvgImage(imageUrl: "")
-//            setSvgImage(imageUrl: image, width: 30, height: 30)
-//                .frame(width: 30, height: 30)
-//                .clipShape(Circle())
+            //                SVGKFastImageViewSUI(url: .constant(url), size: .constant(CGSize(width: 30,height: 30)))
+            //                setSvgImage(imageUrl: "")
+            //            setSvgImage(imageUrl: image, width: 30, height: 30)
+            //                .frame(width: 30, height: 30)
+            //                .clipShape(Circle())
             SVGImageSwiftUIView(url:  image)
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
-//            SVGKFastImageViewSUI(url:URL(string:"https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/android.svg"))
+            //            SVGKFastImageViewSUI(url:URL(string:"https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/android.svg"))
             VStack(spacing: 0) {
-                CustomText(name: title, padding: 0, font: mediumFont14)
-                CustomText(name: description, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12)
+                CustomText(name: title, padding: 0, font: mediumFont12)
+                CustomText(name: description, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont10)
             }
             //                Spacer()
             HStack(spacing: 0) {
@@ -165,7 +170,8 @@ struct CompanyCell: View {
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 10)
-        .background(.black)
+        //        .background(.black)
+        .background(Color(darkerBlack))
         
     }
     
@@ -186,28 +192,28 @@ struct companySection: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack (alignment: .center, spacing: 8) {
-//                setSvgImage(imageUrl: image, width: 30, height: 30)
-//                    .frame(width: 30, height: 30)
-//                    .clipShape(Circle())
-
+                //                setSvgImage(imageUrl: image, width: 30, height: 30)
+                //                    .frame(width: 30, height: 30)
+                //                    .clipShape(Circle())
                 SVGImageSwiftUIView(url:  image)
                     .frame(width: 30, height: 30)
                     .clipShape(Circle())
-
-                CustomText(name: title, textColor: lightDarkColor, padding: 0, font: mediumFont14)
+                CustomText(name: title, textColor: lightDarkColor, padding: 0, font: mediumFont12)
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 10)
+            .background(Color(darkerSecondLastBlack))
             HStack {
-                CustomText(name: "Protocol", textColor: lightDarkColor, padding: 0, font: mediumFont14)
+                CustomText(name: "Protocol", textColor: lightDarkColor, padding: 0, font: mediumFont12)
                 HStack {
-                    CustomText(name: "Type", textColor: lightDarkColor, alignment: .trailing, padding: 0 , font: mediumFont14)
+                    CustomText(name: "Type", textColor: lightDarkColor, alignment: .trailing, padding: 0 , font: mediumFont12)
                     Spacer()
-                    CustomText(name: "Score", textColor: lightDarkColor, alignment: .trailing, padding: 0, font: mediumFont14)
+                    CustomText(name: "Score", textColor: lightDarkColor, alignment: .trailing, padding: 0, font: mediumFont12)
                 }
             }
             .background(Color(darkColor))
             .padding( 10)
+            .padding(.vertical, 3)
             
             ForEach(company, id: \.self) { company in
                 //                CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlProtocol ?? "", image: company.bannerImage ?? "")
@@ -218,7 +224,7 @@ struct companySection: View {
                     CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlStake ?? "", image: company.icon ?? "")
                 }
             }
-        }           .background(Color(darkColor))
+        }.background(Color(darkColor))
         
     }
 }
@@ -235,26 +241,25 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-
 struct SVGImageSwiftUIView: UIViewRepresentable {
     
     
-    typealias UIViewType = SVGImage
+    typealias UIViewType = Lif3SVGImage
     var url: String
-//    typealias UIViewType = BackAndForth
-//    @Binding var forthButtonPressed: Bool
+    //    typealias UIViewType = BackAndForth
+    //    @Binding var forthButtonPressed: Bool
     
-    func makeUIView(context: Context) -> SVGImage {
-        let view = SVGImage()
-//        view.forthText = "Submit Agreement"
+    func makeUIView(context: Context) -> Lif3SVGImage {
+        let view = Lif3SVGImage()
+        //        view.forthText = "Submit Agreement"
         view.imageUrl = url
         // Do some configurations here if needed.
         return view
     }
     
-    func updateUIView(_ uiView: SVGImage, context: Context) {
+    func updateUIView(_ uiView: Lif3SVGImage, context: Context) {
         // Updates the state of the specified view controller with new information from SwiftUI.
-    
+        
     }
     
 }

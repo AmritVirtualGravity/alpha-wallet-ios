@@ -8,7 +8,10 @@
 
 import UIKit
 import CoreLocation
+#if PRODUCTION
 import Alamofire
+#else
+#endif
 //import Frames
 
 //struct Colors {
@@ -80,6 +83,7 @@ let lightYellowColor  = #colorLiteral(red: 1, green: 0.9843137255, blue: 0.94901
 let darkestGreyColorDim = darkestGreyColor.withAlphaComponent(0.4)
 // MARK: For Lif3 app
 let darkestBlack = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)  //000000
+let darkerSecondLastBlack = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)  //181818
 let darkerBlack = #colorLiteral(red: 0.07843137255, green: 0.07843137255, blue: 0.07843137255, alpha: 1)  //1E1E1E
 let darkColor    = #colorLiteral(red: 0.137254902, green: 0.137254902, blue: 0.137254902, alpha: 1) //#232323
 let lightestDarkColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) //#FFFFFF

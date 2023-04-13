@@ -1,7 +1,7 @@
 // Copyright © 2018 Stormbird PTE. LTD.
 
 import UIKit
-import SVGKit
+//import SVGKit
 import SDWebImage
 
 class ServerTableViewCell: UITableViewCell {

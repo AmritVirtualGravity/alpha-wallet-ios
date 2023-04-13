@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import SVGKit
+import Kingfisher
+import UIKit
 
 struct ContentView: View {
     
@@ -53,7 +56,11 @@ struct ContentView: View {
                                 default: break
                                 }
 #else
+                                
+                                let poolParent = PreviewData.load(name: "Pools", returnType:  PoolParent.self)
+                                viewModel.pools = poolParent?.pools
                                 viewModel.isBusy = false
+//                                ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
 #endif
                                 
                             }
@@ -139,9 +146,13 @@ struct CompanyCell: View {
             
 //                SVGKFastImageViewSUI(url: .constant(url), size: .constant(CGSize(width: 30,height: 30)))
 //                setSvgImage(imageUrl: "")
-            setSvgImage(imageUrl: image, width: 30, height: 30)
+//            setSvgImage(imageUrl: image, width: 30, height: 30)
+//                .frame(width: 30, height: 30)
+//                .clipShape(Circle())
+            SVGImageSwiftUIView(url:  image)
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
+//            SVGKFastImageViewSUI(url:URL(string:"https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/android.svg"))
             VStack(spacing: 0) {
                 CustomText(name: title, padding: 0, font: mediumFont14)
                 CustomText(name: description, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont12)
@@ -175,9 +186,14 @@ struct companySection: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack (alignment: .center, spacing: 8) {
-                setSvgImage(imageUrl: image, width: 30, height: 30)
+//                setSvgImage(imageUrl: image, width: 30, height: 30)
+//                    .frame(width: 30, height: 30)
+//                    .clipShape(Circle())
+
+                SVGImageSwiftUIView(url:  image)
                     .frame(width: 30, height: 30)
                     .clipShape(Circle())
+
                 CustomText(name: title, textColor: lightDarkColor, padding: 0, font: mediumFont14)
             }
             .padding(.horizontal, 10)
@@ -211,8 +227,34 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             //            ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
+            
             ContentView(fungibleTokenDetailsViewModel: nil)
         }
         
     }
+}
+
+
+
+struct SVGImageSwiftUIView: UIViewRepresentable {
+    
+    
+    typealias UIViewType = SVGImage
+    var url: String
+//    typealias UIViewType = BackAndForth
+//    @Binding var forthButtonPressed: Bool
+    
+    func makeUIView(context: Context) -> SVGImage {
+        let view = SVGImage()
+//        view.forthText = "Submit Agreement"
+        view.imageUrl = url
+        // Do some configurations here if needed.
+        return view
+    }
+    
+    func updateUIView(_ uiView: SVGImage, context: Context) {
+        // Updates the state of the specified view controller with new information from SwiftUI.
+    
+    }
+    
 }

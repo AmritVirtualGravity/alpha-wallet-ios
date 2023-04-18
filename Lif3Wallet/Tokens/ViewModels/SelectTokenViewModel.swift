@@ -66,6 +66,7 @@ final class SelectTokenViewModel {
                 }
                 let displayedTokens = tokensFilter.filterTokens(tokens: filteredTokens, filter: filter)
                 return tokensFilter.sortDisplayedTokens(tokens: displayedTokens)
+//                return tokens
             }.handleEvents(receiveOutput: { self.filteredTokens = $0 })
             .map { self.buildViewModels(for: $0) }
             .handleEvents(receiveOutput: { [_loadingState] _ in

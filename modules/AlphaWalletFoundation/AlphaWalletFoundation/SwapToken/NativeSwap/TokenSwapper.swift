@@ -214,6 +214,8 @@ open class TokenSwapper: ObservableObject {
 
         return publisher
     }
+    
+
 }
 
 extension TokenSwapper {
@@ -234,4 +236,28 @@ fileprivate extension TokenSwapper.functional {
 
         return (transaction, configuration)
     }
+}
+
+
+// MARK: customchanges
+extension TokenSwapper {
+    
+//    @discardableResult private func fetchSupportedToken() -> AnyPublisher<[RPCServer], PromiseError> {
+//        if let pendingPublisher = inflightFetchSupportedServersPublisher { return pendingPublisher }
+//        #warning(".fantom is static value")
+//        let publisher = networkProvider.fetchSupportedTokens(for: .fantom)
+//            .receive(on: queue)
+//            .handleEvents(receiveOutput: { _ in
+//                self.inflightFetchSupportedServersPublisher = nil
+//            }, receiveCompletion: { [analyticsLogger] result in
+//                guard case .failure(let error) = result else { return }
+//                infoLog("[Swap] Error while fetching supported chains. Error: \(error)")
+//                Self.logSwapError(Analytics.WebApiErrors.lifiFetchSupportedChainsError, analyticsLogger: analyticsLogger)
+//            }).share()
+//            .eraseToAnyPublisher()
+//
+//        self.inflightFetchSupportedServersPublisher = publisher
+//
+//        return publisher
+//    }
 }

@@ -12,6 +12,8 @@ public struct SwapPairs {
     }
 
     func getToTokens(forFromToken fromToken: SwappableToken) -> [SwappableToken] {
+//        let swappableTokens =  connections.connections.flatMap { $0.toTokens }
+//        return swappableTokens
         connections.connections.flatMap { connection -> [SwappableToken] in
             if fromToken.server == connection.fromServer, connection.fromTokens.contains(fromToken) {
                 return connection.toTokens

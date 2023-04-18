@@ -56,7 +56,7 @@ struct StakeView: View {
                         //                            }
                         //
                         //                        } label: {
-                        PrimaryButton(text: "Begin Staking", clicked: {
+                        PrimaryButton(text: poolCompany.buttonText ?? "Begin Staking", clicked: {
                             //                                let config = SFSafariViewController.Configuration()
                             //                                config.entersReaderIfAvailable = true
                             //
@@ -65,7 +65,7 @@ struct StakeView: View {
                             //                                present(vc, animated: true)
                             //                            showSafari = true
 #if PRODUCTION
-                            NotificationCenter.default.post(name: .gotoBrowser, object: poolCompany.urlStake ?? "")
+                            NotificationCenter.default.post(name: .gotoBrowser, object: poolCompany.buttonUrl ?? "")
 #else
 #endif
                             
@@ -121,7 +121,7 @@ struct StakeCell: View {
 struct StakeView_Previews: PreviewProvider {
     static var previews: some View {
         let poolList: PoolParent = PreviewData.load(name: "Pools", returnType: PoolParent.self)!
-        StakeView(poolCompany: poolList.pools?.first?.list?.first ?? PoolCompany(token: nil, title: nil, subtitle: nil, aboutProtocol: nil, aboutStake: nil, urlProtocol: nil, urlStake: nil, icon: nil, bannerImage: nil, poolType: nil, score: nil, isNative: nil, urlStaking: nil, image: nil), fungibleTokenDetailsViewModel: nil)
+        StakeView(poolCompany: poolList.pools?.first?.list?.first ?? PoolCompany(token: nil, title: nil, subtitle: nil, aboutProtocol: nil, aboutStake: nil, urlProtocol: nil, urlStake: nil, icon: nil, bannerImage: nil, poolType: nil, score: nil, isNative: nil, urlStaking: nil, image: nil, buttonUrl: nil, buttonText: nil), fungibleTokenDetailsViewModel: nil)
     }
 }
 

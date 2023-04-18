@@ -47,28 +47,38 @@ struct AppRequest {
 }
 
 public enum EndPoint {
-    case login
+//    case login
     case pool(name: String)
     case getTokens(name: String)
+    case getLiQuest
     
     private var path: String {
         switch self {
 //        case .login: return "users/login-pin"
-        case .login: return "users/mobile/signup"
+//        case .login: return "users/mobile/signup"
         case .pool(let name): return "wallet/staking/chain/\(name).json"
         case .getTokens(let name): return "wallet/staking/chain/\(name)/tokens.json"
+        case .getLiQuest: return "https://li.quest/v1/connections"
         }
     }
     
     private var method: String {
         switch self {
-        case .login: return "POST"
+        case .getLiQuest: return "POST"
 //        case .cancelOrder, .editAddress: return "PUT"
 ////        case .withdraw:
 ////            return "DELETE"
 //        case .deleteAddress: return "DELETE"
         default: return "GET"
         }
+    }
+    
+    private var appendBaseUrl: Bool {
+        switch self {
+        case .getLiQuest: return false
+        default: return true
+        }
+        
     }
     
     fileprivate var shouldCache: Bool {
@@ -80,7 +90,7 @@ public enum EndPoint {
     
     private var authentication: Bool {
         switch self {
-        case .login: return false
+        case .getLiQuest: return false
         default: return true
         }
     }
@@ -110,7 +120,11 @@ public enum EndPoint {
     }
     
     func request(body: [String: Any]? = nil) -> AppRequest {
-        let urlString = Lif3WalletConfiguration.conf.baseURL + "/" + path
+        var urlString = ""
+        switch appendBaseUrl {
+        case true:  urlString = Lif3WalletConfiguration.conf.baseURL + "/" + path
+        case false: urlString = path
+        }
         return request(urlString: urlString, body: body)
     }
     

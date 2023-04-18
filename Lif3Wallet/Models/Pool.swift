@@ -35,6 +35,8 @@ struct PoolCompany: Codable, Hashable {
     let poolType, score, isNative: String?
     let urlStaking: String?
     let image: String?
+    let buttonUrl: String?
+    let buttonText: String?
 
     enum CodingKeys: String, CodingKey {
         case token, title, subtitle
@@ -48,5 +50,7 @@ struct PoolCompany: Codable, Hashable {
         case score, isNative
         case urlStaking = "url-staking"
         case image
+        case buttonUrl = "button-url"
+        case buttonText = "button-text"
     }
 }

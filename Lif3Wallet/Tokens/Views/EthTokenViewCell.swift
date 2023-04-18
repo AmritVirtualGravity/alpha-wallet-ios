@@ -127,6 +127,7 @@ class EthTokenViewCell: UITableViewCell {
     }
 
     func configure(viewModel: EthTokenViewCellViewModel) {
+        printGlobal(data: viewModel)
         selectionStyle = .none
 
         backgroundColor = Configuration.Color.Semantic.tableViewCellBackground

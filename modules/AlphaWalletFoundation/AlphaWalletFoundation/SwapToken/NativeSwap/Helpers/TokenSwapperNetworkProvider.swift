@@ -35,6 +35,7 @@ public final class LiQuestTokenSwapperNetworkProvider: TokenSwapperNetworkProvid
             .receive(on: DispatchQueue.global())
             .mapError { SwapError.inner($0.unwrapped) }
             .flatMap { [decoder] data, _ -> AnyPublisher<[SwapTool], SwapError> in
+//                print("\(#function) \-(data.jsonStringLif3)")
                 if let response: SwapToolsResponse = try? decoder.decode(SwapToolsResponse.self, from: data) {
                     return .just(response.tools)
                 } else {
@@ -49,6 +50,7 @@ public final class LiQuestTokenSwapperNetworkProvider: TokenSwapperNetworkProvid
             .receive(on: DispatchQueue.global())
             .mapError { SwapError.inner($0.unwrapped) }
             .flatMap { [decoder] data, _ -> AnyPublisher<[SwapRoute], SwapError> in
+//                print("\(#function) \(d-ata.jsonStringLif3)")
                 if let response: SwapRouteReponse = try? decoder.decode(SwapRouteReponse.self, from: data) {
                     return .just(response.routes)
                 } else {
@@ -62,6 +64,7 @@ public final class LiQuestTokenSwapperNetworkProvider: TokenSwapperNetworkProvid
             .dataTaskPublisher(SupportedChainsRequest())
             .receive(on: DispatchQueue.global())
             .map { data, _ -> [RPCServer] in
+//                print("\(#function) \(data-.jsonStringLif3)")
                 let chains = JSON(data)["chains"].arrayValue
                 return chains.compactMap { each in return RPCServer(chainIdOptional: each["id"].intValue) }
             }.mapError { PromiseError(error: $0) }
@@ -73,6 +76,8 @@ public final class LiQuestTokenSwapperNetworkProvider: TokenSwapperNetworkProvid
             .dataTaskPublisher(SupportedTokensRequest(server: server))
             .receive(on: DispatchQueue.global())
             .map { [decoder] data, _ -> SwapPairs in
+                
+//                print("\(#function) \(data.jsonStringLif3)")
                 if let connections: Swap.Connections = try? decoder.decode(Swap.Connections.self, from: data) {
                     return SwapPairs(connections: connections)
                 } else {
@@ -88,15 +93,41 @@ public final class LiQuestTokenSwapperNetworkProvider: TokenSwapperNetworkProvid
             .receive(on: DispatchQueue.global())
             .mapError { SwapError.inner($0.unwrapped) }
             .flatMap { [decoder] data, _ -> AnyPublisher<SwapQuote, SwapError> in
-                if let swapQuote = try? decoder.decode(SwapQuote.self, from: data) {
-                    return .just(swapQuote)
-                } else if let error = try? decoder.decode(SwapQuote.Error.self, from: data) {
-                    return .fail(SwapError.unableToBuildSwapUnsignedTransaction(message: error.message))
-                } else {
-                    return .fail(SwapError.unableToBuildSwapUnsignedTransactionFromSwapProvider)
+//                print("\(#function) \(data.jsonStringLif3 ?? "")")
+                do {
+                    let test = try decoder.decode(SwapQuote.self, from: data)
+                } catch let parsingError {
+                    debugPrint( parsingError)
+           
                 }
+                    if let swapQuote = try? decoder.decode(SwapQuote.self, from: data) {
+                        return .just(swapQuote)
+                    } else if let error = try? decoder.decode(SwapQuote.Error.self, from: data) {
+                        return .fail(SwapError.unableToBuildSwapUnsignedTransaction(message: error.message))
+                    } else {
+                        return .fail(SwapError.unableToBuildSwapUnsignedTransactionFromSwapProvider)
+                    }
+                
+                
             }.eraseToAnyPublisher()
     }
+}
+
+
+extension Data {
+    
+    var jsonStringLif3: String? { //prettyPrintedBody
+        guard
+            let object = try? JSONSerialization.jsonObject(with: self, options: []),
+            let prettyPrintedData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+            let prettyPrintedBody = String(data: prettyPrintedData, encoding: .utf8)
+        else {
+            return nil
+        }
+        
+        return prettyPrintedBody
+    }
+    
 }
 
 fileprivate extension LiQuestTokenSwapperNetworkProvider {
@@ -173,7 +204,6 @@ fileprivate extension LiQuestTokenSwapperNetworkProvider {
             guard var components = URLComponents(url: LiQuestTokenSwapperNetworkProvider.baseUrl, resolvingAgainstBaseURL: false) else { throw URLError(.badURL) }
             components.path = "/v1/connections"
             var request = try URLRequest(url: components.asURL(), method: .post)
-
             return try URLEncoding().encode(request, with: [
                 "fromChain": server.chainID,
                 "toChain": server.chainID,
@@ -227,4 +257,22 @@ extension URLRequest {
         return command.joined(separator: " \\\n\t")
     }
 
+}
+
+// MARK: customchanges
+extension LiQuestTokenSwapperNetworkProvider {
+    
+//    public func customFetchSupportedTokens(for server: RPCServer) -> AnyPublisher<[RPCServer], PromiseError> {
+//        return networkService
+//            .dataTaskPublisher(SupportedTokensRequest(server: server))
+//            .receive(on: DispatchQueue.global())
+//            .map { [decoder] data, _ -> SwapPairs in
+//                if let connections: Swap.Connections = try? decoder.decode(Swap.Connections.self, from: data) {
+//                    return SwapPairs(connections: connections).fromTokens
+//                } else {
+//                    return SwapPairs(connections: .init(connections: []))
+//                }
+//            }.mapError { PromiseError(error: $0) }
+//            .eraseToAnyPublisher()
+//    }
 }

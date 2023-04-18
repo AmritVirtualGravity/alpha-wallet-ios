@@ -94,7 +94,7 @@ final class SwapTokensCoordinator: Coordinator {
         coordinator.start()
     }
 
-    private func showSelectToken() {
+    private func showSelectToken() { //#4
         let coordinator = SelectTokenCoordinator(
             tokenCollection: tokenCollection,
             tokensFilter: tokensFilter,
@@ -155,7 +155,7 @@ extension SwapTokensCoordinator: SwapTokensViewControllerDelegate {
         navigationController.pushViewController(viewController, animated: true)
     }
 
-    func chooseTokenSelected(in viewController: SwapTokensViewController, selection: SwapTokens.TokenSelection) {
+    func chooseTokenSelected(in viewController: SwapTokensViewController, selection: SwapTokens.TokenSelection) { //#2
         tokenSelectionProvider.set(pendingTokenSelection: selection)
         showSelectToken()
     }

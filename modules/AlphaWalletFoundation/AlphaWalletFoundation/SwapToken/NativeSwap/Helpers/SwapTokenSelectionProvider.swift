@@ -22,7 +22,7 @@ public final class SwapTokenSelectionProvider: TokenFilterProtocol {
         self.configurator = configurator
     }
 
-    public func set(pendingTokenSelection: SwapTokens.TokenSelection) {
+    public func set(pendingTokenSelection: SwapTokens.TokenSelection) { //#3
         self.pendingTokenSelection = pendingTokenSelection
     }
 
@@ -30,7 +30,7 @@ public final class SwapTokenSelectionProvider: TokenFilterProtocol {
         pendingTokenSelection = .none
     }
 
-    public func filter(token: TokenFilterable) -> Bool {
+    public func filter(token: TokenFilterable) -> Bool { //#3
         guard
             let swapPairs = configurator.swapPairs(for: configurator.server),
             let selection = pendingTokenSelection

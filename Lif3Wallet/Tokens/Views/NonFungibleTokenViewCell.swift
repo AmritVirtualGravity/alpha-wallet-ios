@@ -47,6 +47,8 @@ class NonFungibleTokenViewCell: UITableViewCell {
     }
 
     func configure(viewModel: NonFungibleTokenViewCellViewModel) {
+//        print("\(viewModel)")
+        printGlobal(data: viewModel)
         selectionStyle = .none
         backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
         background.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground

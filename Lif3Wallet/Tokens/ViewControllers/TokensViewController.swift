@@ -63,11 +63,11 @@ final class TokensViewController: UIViewController {
         tableView.registerHeaderFooterView(ActiveWalletSessionView.self)
         tableView.registerHeaderFooterView(GeneralTableViewSectionHeader<WalletSummaryView>.self)
         tableView.registerHeaderFooterView(GeneralTableViewSectionHeader<DummySearchView>.self)
-        tableView.estimatedRowHeight = DataEntry.Metric.TableView.estimatedRowHeight
-        tableView.separatorInset = .zero
+        tableView.estimatedRowHeight             = DataEntry.Metric.TableView.estimatedRowHeight
+        tableView.separatorInset                 = .zero
         tableView.contentInsetAdjustmentBehavior = .never
-        tableView.refreshControl = refreshControl
-        tableView.tableFooterView = footerView
+        tableView.refreshControl                 = refreshControl
+        tableView.tableFooterView                = footerView
         
         return tableView
     }()

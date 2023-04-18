@@ -836,6 +836,7 @@
 		04BF8A2929E40F3400478F44 /* howDoITransferETHIntoMyWalletInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 08760CA129407C1E00F83AB3 /* howDoITransferETHIntoMyWalletInfo.html */; };
 		04BF8A2C29E40F3400478F44 /* Lif3WalletSafariExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8703FBFD270366DA0062C416 /* Lif3WalletSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		04BF8A2D29E40F3400478F44 /* Lif3WalletShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 878EE8EB255ADA49000210DE /* Lif3WalletShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04C8D03F29EEA15E004A7799 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8D03E29EEA15E004A7799 /* Array+Extension.swift */; };
 		04CF129F29DC7911005DF119 /* StakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF129E29DC78FE005DF119 /* StakeView.swift */; };
 		04CF12A129DC794B005DF119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF12A029DC7946005DF119 /* Button.swift */; };
 		04CFF73929CC345200E6E8AB /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */; };
@@ -845,6 +846,10 @@
 		04D0FA1029E8302D00E477E8 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FA0F29E8302C00E477E8 /* UIViewExtension.swift */; };
 		04D0FA1529E830DF00E477E8 /* Lif3SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FA1329E830D200E477E8 /* Lif3SVGImage.swift */; };
 		04D0FA1629E830DF00E477E8 /* Lif3SVGImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D0FA1429E830DB00E477E8 /* Lif3SVGImage.xib */; };
+		04F277AB29ED52A0009BC3A6 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F277AA29ED52A0009BC3A6 /* GlobalFunctions.swift */; };
+		04F277AD29ED5BFF009BC3A6 /* LiQuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F277AC29ED5BFF009BC3A6 /* LiQuest.swift */; };
+		04F277AF29ED5C2E009BC3A6 /* LiquestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F277AE29ED5C2D009BC3A6 /* LiquestAPI.swift */; };
+		04F277B029ED5C2E009BC3A6 /* LiquestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F277AE29ED5C2D009BC3A6 /* LiquestAPI.swift */; };
 		08760C532940780100F83AB3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08760C522940780100F83AB3 /* R.generated.swift */; };
 		08760C7D294079AD00F83AB3 /* DappsHomeEmptyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08760C56294079AC00F83AB3 /* DappsHomeEmptyViewModel.swift */; };
 		08760C7E294079AD00F83AB3 /* DappViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08760C57294079AC00F83AB3 /* DappViewCellViewModel.swift */; };
@@ -1837,6 +1842,7 @@
 		04A371D029DDE15400B883C0 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		04BF8A3429E40F3400478F44 /* Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04BF8A3529E40F3600478F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/mac/Documents/Australia/alpha-wallet-ios/Info.plist"; sourceTree = "<absolute>"; };
+		04C8D03E29EEA15E004A7799 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		04CF129E29DC78FE005DF119 /* StakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeView.swift; sourceTree = "<group>"; };
 		04CF12A029DC7946005DF119 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -1847,6 +1853,9 @@
 		04D0FA0F29E8302C00E477E8 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		04D0FA1329E830D200E477E8 /* Lif3SVGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3SVGImage.swift; sourceTree = "<group>"; };
 		04D0FA1429E830DB00E477E8 /* Lif3SVGImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Lif3SVGImage.xib; sourceTree = "<group>"; };
+		04F277AA29ED52A0009BC3A6 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		04F277AC29ED5BFF009BC3A6 /* LiQuest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiQuest.swift; sourceTree = "<group>"; };
+		04F277AE29ED5C2D009BC3A6 /* LiquestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquestAPI.swift; sourceTree = "<group>"; };
 		08760C522940780100F83AB3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		08760C56294079AC00F83AB3 /* DappsHomeEmptyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsHomeEmptyViewModel.swift; sourceTree = "<group>"; };
 		08760C57294079AC00F83AB3 /* DappViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -2927,6 +2936,7 @@
 				04A371C329DDDAAD00B883C0 /* Pool.swift */,
 				04A371C129DDDAAB00B883C0 /* Token.swift */,
 				040D1C8329D3FDE000FEBA29 /* Complany.swift */,
+				04F277AC29ED5BFF009BC3A6 /* LiQuest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2945,6 +2955,7 @@
 				04A371D029DDE15400B883C0 /* Auth.swift */,
 				04A371BB29DDDA8E00B883C0 /* Endpoints.swift */,
 				04A371BC29DDDA8F00B883C0 /* PoolAPI.swift */,
+				04F277AE29ED5C2D009BC3A6 /* LiquestAPI.swift */,
 				04A371BD29DDDA9000B883C0 /* TokenAPI.swift */,
 			);
 			path = APIs;
@@ -2967,6 +2978,7 @@
 				04CFF73F29CC61D500E6E8AB /* String+Extension.swift */,
 				04CFF73A29CC606400E6E8AB /* Data + Extension.swift */,
 				04CFF73829CC343F00E6E8AB /* UIApplication+Extension.swift */,
+				04C8D03E29EEA15E004A7799 /* Array+Extension.swift */,
 			);
 			path = "Additional Extensions";
 			sourceTree = "<group>";
@@ -2985,6 +2997,7 @@
 				040D1C5C29D3FAB900FEBA29 /* Redirection.swift */,
 				040D1C5D29D3FABA00FEBA29 /* Views */,
 				04CFF73D29CC60BB00E6E8AB /* GlobalConstants.swift */,
+				04F277AA29ED52A0009BC3A6 /* GlobalFunctions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -7297,6 +7310,7 @@
 				04BF894C29E40F3400478F44 /* UIColor.swift in Sources */,
 				04BF894D29E40F3400478F44 /* R.generated.swift in Sources */,
 				04BF894E29E40F3400478F44 /* SeedPhraseContractView.swift in Sources */,
+				04F277B029ED5C2E009BC3A6 /* LiquestAPI.swift in Sources */,
 				04BF894F29E40F3400478F44 /* NFTCollectionCoordinator.swift in Sources */,
 				04BF895029E40F3400478F44 /* AddHideTokenSectionHeaderView.swift in Sources */,
 				04BF895129E40F3400478F44 /* ConfigureTransactionViewModel.swift in Sources */,
@@ -7537,6 +7551,7 @@
 				08A256D1294073F000A31193 /* TokenCardRedemptionViewModel.swift in Sources */,
 				08760C7D294079AD00F83AB3 /* DappsHomeEmptyViewModel.swift in Sources */,
 				04D0FA1029E8302D00E477E8 /* UIViewExtension.swift in Sources */,
+				04F277AF29ED5C2E009BC3A6 /* LiquestAPI.swift in Sources */,
 				1013957329A8A052000AD3EF /* Lif3ViewModel.swift in Sources */,
 				08A25624294073EF00A31193 /* EmptyTableView.swift in Sources */,
 				08A25613294073EF00A31193 /* EnabledServersViewController.swift in Sources */,
@@ -8007,6 +8022,7 @@
 				08A25673294073EF00A31193 /* SwapStepsViewModel.swift in Sources */,
 				08A25817294073F100A31193 /* NFTAssetSelectionViewModel.swift in Sources */,
 				10B2A31D29911A6700908F41 /* WalletConnect.swift in Sources */,
+				04F277AB29ED52A0009BC3A6 /* GlobalFunctions.swift in Sources */,
 				08A256E9294073F000A31193 /* UIImageAsset+Extension.swift in Sources */,
 				10B2A33229911A6700908F41 /* CAIP10AccountProvidable.swift in Sources */,
 				08A2561E294073EF00A31193 /* LocalesViewController.swift in Sources */,
@@ -8034,6 +8050,7 @@
 				08A2569B294073F000A31193 /* ClaimPaidErc875MagicLinkViewModel.swift in Sources */,
 				08A256E3294073F000A31193 /* UIColor.swift in Sources */,
 				08760C532940780100F83AB3 /* R.generated.swift in Sources */,
+				04F277AD29ED5BFF009BC3A6 /* LiQuest.swift in Sources */,
 				105E45B52954058A00CDC40C /* SeedPhraseContractView.swift in Sources */,
 				08A2580B294073F100A31193 /* NFTCollectionCoordinator.swift in Sources */,
 				08A25842294073F100A31193 /* AddHideTokenSectionHeaderView.swift in Sources */,
@@ -8185,6 +8202,7 @@
 				08760C8C294079AD00F83AB3 /* QRCodeResolutionCoordinator.swift in Sources */,
 				08A25688294073EF00A31193 /* WalletPupupViewModel.swift in Sources */,
 				08760CA0294079AD00F83AB3 /* DappBrowserNavigationBar.swift in Sources */,
+				04C8D03F29EEA15E004A7799 /* Array+Extension.swift in Sources */,
 				10E5AC6429A4B99400CDE4CF /* AddAddressToContactPopViewModel.swift in Sources */,
 				08A2581E294073F100A31193 /* NFTCollectionInfoPageView.swift in Sources */,
 				08A255E8294073EF00A31193 /* CustomRpcTableViewSection.swift in Sources */,

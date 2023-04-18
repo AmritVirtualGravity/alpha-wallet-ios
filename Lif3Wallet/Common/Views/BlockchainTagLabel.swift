@@ -44,6 +44,7 @@ class BlockchainTagLabel: UIView {
     }
 
     func configure(viewModel: BlockchainTagLabelViewModel) {
+        printGlobal(data: viewModel)
         backgroundColor = viewModel.backgroundColor
         isHidden = viewModel.isHidden
 

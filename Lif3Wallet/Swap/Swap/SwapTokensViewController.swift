@@ -183,7 +183,14 @@ class SwapTokensViewController: UIViewController {
 
     @objc private func chooseTokenSelected(_ sender: UIButton) {
         let isFromActionButton = sender == fromAmountTextField.selectCurrencyButton.actionButton
-        delegate?.chooseTokenSelected(in: self, selection: isFromActionButton ? .from : .to)
+        delegate?.chooseTokenSelected(in: self, selection: isFromActionButton ? .from : .to) //#1
+//        switch isFromActionButton {
+//        case true: // from
+//            break
+//        case false: // To
+//            getLiQuestConnections(token: viewModel.swapPair.value.from)
+//        }
+        
     }
 
     @objc private func swapTokensSelected(_ sender: UIButton) {
@@ -213,4 +220,20 @@ extension SwapTokensViewController: AmountTextFieldDelegate {
         textField.resignFirstResponder()
         return false
     }
+}
+
+// MARK: Network Call
+extension SwapTokensViewController: LiquestAPI {
+    
+    private func getLiQuestConnections(token: Token) {
+        getLiQuestConnections(fromChain: token.symbol) { [weak self] connections in
+            guard let self = self else { return }
+//            printGlobal(data: connections)
+            
+        } failure: { [weak self] error in
+            guard let self = self else { return }
+            self.alert(message: error.localizedDescription)
+        }
+    }
+    
 }

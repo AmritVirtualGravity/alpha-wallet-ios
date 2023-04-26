@@ -48,7 +48,7 @@ extension Constants {
         static let avalancheExplorerApiKey = env("AVALANCHEEXPLORERAPIKEY")
         static let paperTrail = (host: env("PAPERTRAILHOST") ?? "", port: (env("PAPERTRAILPORT") ?? "").toInt() ?? 0)
         static let openseaKey = env("OPENSEAKEY") ?? nil
-        public static let rampApiKey = env("RAMPAPIKEY") ?? "k4jnfagsmjemjbfaxocxsnbtq2g76wfyvkdv42cs"
+        public static let rampApiKey = env("RAMPAPIKEY") ?? "bwey2brwwg4djc85m8z6tu6en7kp4v32brr6sr63"
         static let coinbaseAppId = env("COINBASEAPPID") ?? ""
         static let enjinUserName = env("ENJINUSERNAME") ?? "vlad_shepitko@outlook.com"
         static let enjinUserPassword = env("ENJINUSERPASSWORD") ?? "wf@qJPz75CL9Tw$"

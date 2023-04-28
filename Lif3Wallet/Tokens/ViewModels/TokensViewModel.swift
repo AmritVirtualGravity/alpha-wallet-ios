@@ -186,6 +186,11 @@ final class TokensViewModel {
         self.assetDefinitionStore = assetDefinitionStore
         NotificationCenter.default.addObserver(self, selector: #selector(self.HideTokenWith0Balance(notification:)), name: Notification.Name("HideTokenNotification"), object: nil)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc func HideTokenWith0Balance(notification: Notification) {
         self.reloadData()
     }

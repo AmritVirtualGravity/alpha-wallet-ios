@@ -170,8 +170,13 @@ class SettingsCoordinator: Coordinator, ContactListCoordinatorDelegate {
     }
     
     func start() {
-        let tokenCoordinator = createTokensCoordinator()
-//        let txnCoordinator =  createTransactionCoordinator(transactionDataStore: transactionsDataStore)
+        #warning("Check if tokenCoordinator hamper it is commented for now")
+//        let tokenCoordinator = createTokensCoordinator()
+        
+        
+////        let txnCoordinator =  createTransactionCoordinator(transactionDataStore: transactionsDataStore)
+//        navigationController.viewControllers = [rootViewController]
+        
         navigationController.viewControllers = [rootViewController]
     }
     

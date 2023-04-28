@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 #if PRODUCTION
 import Alamofire
+import AlphaWalletFoundation
 #else
 #endif
 //import Frames
@@ -113,6 +114,9 @@ struct GlobalConstants {
     
     static var showProfileActive = false
     static var backButtonBounds: CGRect?
+    
+        // lif3
+    static var filteredTokens: [TokensViewModel.TokenOrRpcServer] = []
 
     struct KeyValues {
         
@@ -243,3 +247,5 @@ struct CurrentHeaderBodyParameter {
     static var body: [String: Any]?
     static var header: URLRequest?
 }
+
+

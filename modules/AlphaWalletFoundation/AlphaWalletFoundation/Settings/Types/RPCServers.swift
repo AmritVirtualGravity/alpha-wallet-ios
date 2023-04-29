@@ -137,7 +137,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .avalanche_testnet: return "Avalanche FUJI C-Chain"
         case .polygon: return "Polygon"
         case .mumbai_testnet: return "Mumbai Testnet"
-        case .optimistic: return "Optimistic Ethereum"
+        case .optimistic: return "Optimism"
         case .cronosMainnet: return "Cronos"
         case .cronosTestnet: return "Cronos Testnet"
         case .arbitrum: return "Arbitrum One"

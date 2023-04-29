@@ -47,6 +47,7 @@ extension RPCServer {
         case .optimismGoerli: return "Optimism Goerli"
         case .arbitrumGoerli: return "Arbitrum Goerli"
         case .tomb_chain: return "Tomb Chain"
+        case .metis: return "Metis"
         }
     }
 
@@ -77,6 +78,7 @@ extension RPCServer {
         case .optimismGoerli: return nil
         case .arbitrumGoerli: return nil
         case .tomb_chain: return R.image.iconsTokensTombChain()
+        case .metis: return R.image.iconsTokensMetis()
         }
     }
 
@@ -111,6 +113,7 @@ extension RPCServer {
         case .arbitrumGoerli: return .red
         case .custom: return .red
         case .tomb_chain: return .red
+        case .metis: return .blue
         }
     }
 
@@ -140,6 +143,7 @@ extension RPCServer {
         case .optimismGoerli: return nil
         case .arbitrumGoerli: return nil
         case .tomb_chain: return R.image.iconsTokensTombChain()
+        case .metis: return R.image.iconsTokensMetis()
         }
     }
 }

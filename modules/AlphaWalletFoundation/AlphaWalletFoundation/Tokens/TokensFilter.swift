@@ -151,12 +151,7 @@ public class TokensFilter {
                 }
             }
         }
-        print("filteredTokens Count \(filteredTokens.count)")
-        print("filteredTokens \(filteredTokens)")
-        if filteredTokens.count == 4 {
-            #warning("bug is here")
-            print("bug is here \(filteredTokens)")
-        }
+
         return filteredTokens
     }
 

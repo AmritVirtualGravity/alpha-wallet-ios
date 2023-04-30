@@ -836,8 +836,6 @@
 		04BF8A2929E40F3400478F44 /* howDoITransferETHIntoMyWalletInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 08760CA129407C1E00F83AB3 /* howDoITransferETHIntoMyWalletInfo.html */; };
 		04BF8A2C29E40F3400478F44 /* Lif3WalletSafariExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8703FBFD270366DA0062C416 /* Lif3WalletSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		04BF8A2D29E40F3400478F44 /* Lif3WalletShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 878EE8EB255ADA49000210DE /* Lif3WalletShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		04C27B5D29FC42AA00407ED0 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C27B5C29FC42A900407ED0 /* UserDefaults+Extension.swift */; };
-		04C27B5F29FC42BB00407ED0 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C27B5C29FC42A900407ED0 /* UserDefaults+Extension.swift */; };
 		04C8D03F29EEA15E004A7799 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8D03E29EEA15E004A7799 /* Array+Extension.swift */; };
 		04CF129F29DC7911005DF119 /* StakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF129E29DC78FE005DF119 /* StakeView.swift */; };
 		04CF12A129DC794B005DF119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF12A029DC7946005DF119 /* Button.swift */; };
@@ -1844,7 +1842,6 @@
 		04A371D029DDE15400B883C0 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		04BF8A3429E40F3400478F44 /* Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04BF8A3529E40F3600478F44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/mac/Documents/Australia/alpha-wallet-ios/Info.plist"; sourceTree = "<absolute>"; };
-		04C27B5C29FC42A900407ED0 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		04C8D03E29EEA15E004A7799 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		04CF129E29DC78FE005DF119 /* StakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeView.swift; sourceTree = "<group>"; };
 		04CF12A029DC7946005DF119 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -2841,7 +2838,6 @@
 		040D1C3129D3F7EC00FEBA29 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				04C27B5C29FC42A900407ED0 /* UserDefaults+Extension.swift */,
 				040D1C8529D4133D00FEBA29 /* SafariViewControllerExtension.swift */,
 				040D1C3329D3F7EC00FEBA29 /* UIApplication + Extension.swift */,
 				040D1C3429D3F7EC00FEBA29 /* View.swift */,
@@ -7187,7 +7183,6 @@
 				04BF88CD29E40F3400478F44 /* SwitchTableViewCell.swift in Sources */,
 				04BF88CE29E40F3400478F44 /* SwitchChainRequestViewController.swift in Sources */,
 				04BF88CF29E40F3400478F44 /* XYMarkerView.swift in Sources */,
-				04C27B5F29FC42BB00407ED0 /* UserDefaults+Extension.swift in Sources */,
 				04BF88D029E40F3400478F44 /* ContactRmModel.swift in Sources */,
 				04BF88D129E40F3400478F44 /* DappViewCell.swift in Sources */,
 				04BF88D229E40F3400478F44 /* NoViewCardTokenScriptActionCoordinator.swift in Sources */,
@@ -7902,7 +7897,6 @@
 				08A2576E294073F000A31193 /* TextField.swift in Sources */,
 				1013956C29A88E06000AD3EF /* UICollectionViewExtensions.swift in Sources */,
 				040D1C4829D3F82400FEBA29 /* View.swift in Sources */,
-				04C27B5D29FC42AA00407ED0 /* UserDefaults+Extension.swift in Sources */,
 				08A2574D294073F000A31193 /* RoundedEnsViewModel.swift in Sources */,
 				08A256AF294073F000A31193 /* SendViewModel.swift in Sources */,
 				08A256D8294073F000A31193 /* WhatsNewViewModels.swift in Sources */,

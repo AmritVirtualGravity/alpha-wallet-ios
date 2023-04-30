@@ -6,7 +6,6 @@ import Combine
 import AlphaWalletFoundation
 import Alamofire
 
-
 struct TokensViewModelInput {
     let appear: AnyPublisher<Void, Never>
     let pullToRefresh: AnyPublisher<Void, Never>
@@ -129,6 +128,8 @@ final class TokensViewModel {
         return !collectiblePairs.isEmpty
     }
     
+  
+    
 //    func set(listOfBadTokenScriptFiles: [TokenScriptFileIndices.FileName]) {
 //        self.listOfBadTokenScriptFiles = listOfBadTokenScriptFiles
 //        reloadData()
@@ -183,22 +184,8 @@ final class TokensViewModel {
         self.domainResolutionService = domainResolutionService
         self.blockiesGenerator = blockiesGenerator
         self.assetDefinitionStore = assetDefinitionStore
-        
-        var count = 0
-        
-        tokenCollection.tokenViewModels
-            .sink { [weak self] tokensaaa in
-                print("tokensaaa.count \(tokensaaa.count)")
-//                self?.tokens = tokensaaa
-//                self?.reloadData()
-                count += count
-            }.store(in: &cancellable)
         NotificationCenter.default.addObserver(self, selector: #selector(self.HideTokenWith0Balance(notification:)), name: Notification.Name("HideTokenNotification"), object: nil)
-        
-        print("tokensaaa.count \(count)")
     }
-    
-    // MARK: HideTokenWith0Balance
     @objc func HideTokenWith0Balance(notification: Notification) {
         self.reloadData()
     }
@@ -520,22 +507,11 @@ final class TokensViewModel {
         }
     
     private func reloadData() {
-        getBlackListedTokens { addressArr in  //[String]?
+        getBlackListedTokens { addressArr in
             TokenInitialDataSource.shared().blackListedTokenArr = addressArr
-        let filteredAndSortedTokens = self.filteredAndSortedTokens()
-             
-            #warning("Find when default 4 tomchain are arising later")
-            if filteredAndSortedTokens.count == 4 && GlobalConstants.filteredTokens.count != 0 && filteredAndSortedTokens.last?.token?.symbol == "L3USD"{
-                self.filteredTokens = GlobalConstants.filteredTokens
-//                GlobalConstants.filteredTokens = self.filteredAndSortedTokens()
-            } else {
-                self.filteredTokens = self.filteredAndSortedTokens()
-                GlobalConstants.filteredTokens = self.filteredAndSortedTokens()
-            }
+            self.filteredTokens = self.filteredAndSortedTokens()
             self.refreshSections(walletConnectSessions: self.walletConnectSessions)
-            let sections: [TokensViewModel.SectionViewModel] = self.buildSectionViewModels()
-            
-            print("\(#function) Sections count \(sections.count)")
+            let sections = self.buildSectionViewModels()
             self.sectionViewModelsSubject.send(sections)
         }
     }
@@ -602,15 +578,13 @@ final class TokensViewModel {
 }
 // swiftlint:enable type_body_length
 
-
-
 extension TokensViewModel {
     enum HideTokenResult {
         case success(indexPaths: [IndexPath])
         case failure
     }
     
-   enum TokenOrRpcServer {
+    enum TokenOrRpcServer {
         case token(TokenViewModel)
         case rpcServer(RPCServer, Decimal)
         

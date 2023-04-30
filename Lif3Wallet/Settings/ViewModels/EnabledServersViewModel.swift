@@ -88,7 +88,7 @@ struct EnabledServersViewModel {
         if isUnchanged {
             //no-op
         } else {
-            restartQueue.add(.reloadServers(servers)) // added the to reload server
+            restartQueue.add(.reloadServers(servers))
         }
         return !isUnchanged
     }

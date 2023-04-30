@@ -11,7 +11,6 @@ import SwiftyJSON
 import BigInt
 import AlphaWalletCore
 
-
 public protocol TokenSwapperNetworkProvider {
     func fetchSupportedTools() -> AnyPublisher<[SwapTool], SwapError>
     func fetchSupportedChains() -> AnyPublisher<[RPCServer], PromiseError>

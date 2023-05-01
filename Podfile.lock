@@ -74,7 +74,7 @@ PODS:
   - CocoaLumberjack/Swift (3.7.0):
     - CocoaLumberjack/Core
   - CombineExt (1.8.0)
-  - CryptoSwift (1.6.0)
+  - CryptoSwift (1.7.1)
   - EthereumABI (1.3.0):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 1.0)
@@ -102,16 +102,16 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
-  - FloatingPanel (2.5.5)
-  - GoogleDataTransport (9.2.1):
+  - FloatingPanel (2.6.1)
+  - GoogleDataTransport (9.2.2):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Environment (7.11.0):
+  - GoogleUtilities/Environment (7.11.1):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.11.0):
+  - GoogleUtilities/Logger (7.11.1):
     - GoogleUtilities/Environment
-  - GoogleUtilities/UserDefaults (7.11.0):
+  - GoogleUtilities/UserDefaults (7.11.1):
     - GoogleUtilities/Logger
   - iOSSnapshotTestCase (6.2.0):
     - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
@@ -123,7 +123,7 @@ PODS:
     - Result (~> 3.0)
   - Kanna (5.0.0)
   - KeychainSwift (10.0.0)
-  - Kingfisher (7.6.1)
+  - Kingfisher (7.6.2)
   - MailchimpSDK (2.0.4)
   - MBProgressHUD (1.2.0)
   - Mixpanel-swift (3.5.1):
@@ -149,9 +149,9 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.3.5):
     - PromiseKit/CorePromise
-  - PromisesObjC (2.1.1)
+  - PromisesObjC (2.2.0)
   - QRCodeReaderViewController (4.0.2)
-  - R.swift (7.2.4)
+  - R.swift (7.3.2)
   - Ramp (4.0.0)
   - Realm (10.32.3):
     - Realm/Headers (= 10.32.3)
@@ -160,9 +160,9 @@ PODS:
     - Realm (= 10.32.3)
   - Result (3.2.4)
   - SAMKeychain (1.5.3)
-  - SDWebImage (5.15.2):
-    - SDWebImage/Core (= 5.15.2)
-  - SDWebImage/Core (5.15.2)
+  - SDWebImage (5.15.6):
+    - SDWebImage/Core (= 5.15.6)
+  - SDWebImage/Core (5.15.6)
   - SDWebImageSVGCoder (1.6.1):
     - SDWebImage/Core (~> 5.6)
   - secp256k1_ios (0.1.3)
@@ -172,7 +172,7 @@ PODS:
   - SVGKit (3.1.0):
     - CocoaLumberjack (~> 3.0)
   - SwiftAlgorithms (1.0.0)
-  - SwiftFormat/CLI (0.50.8)
+  - SwiftFormat/CLI (0.51.7)
   - SwiftLint (0.50.3)
   - SwiftProtobuf (1.18.0)
   - SwiftyJSON (5.0.0)
@@ -211,7 +211,7 @@ PODS:
   - WalletConnectSwiftV2/Web3Wallet (1.3.1):
     - WalletConnectSwiftV2/WalletConnect
     - WalletConnectSwiftV2/WalletConnectAuth
-  - xcbeautify (0.15.0)
+  - xcbeautify (0.17.0)
 
 DEPENDENCIES:
   - AlphaWalletAddress (from `.`)
@@ -418,37 +418,37 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   CombineExt: c4daa97ef75754d8ef319bd79edeef82652f3eea
-  CryptoSwift: 562f8eceb40e80796fffc668b0cad9313284cfa6
+  CryptoSwift: d3d18dc357932f7e6d580689e065cf1f176007c1
   EthereumABI: c021720744d260b87def6aa45d94554d260cb5a9
   EthereumAddress: 39fe8e11cf04e4e9902b55ae653dbc4e0aee5f30
   FirebaseCore: 5743c5785c074a794d35f2fff7ecc254a91e08b1
   FirebaseCoreDiagnostics: 92e07a649aeb66352b319d43bdd2ee3942af84cb
   FirebaseCrashlytics: 3b7f17cdf5bf1ae6ad5956696a6c26edeb39cca7
   FirebaseInstallations: 40bd9054049b2eae9a2c38ef1c3dd213df3605cd
-  FloatingPanel: a27e7827e0f710fa6236fe2596dd1b5484cb4fc1
-  GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
-  GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
+  FloatingPanel: de6bb891912ede28da7b1140f7b583c474fec28a
+  GoogleDataTransport: 8378d1fa8ac49753ea6ce70d65a7cb70ce5f66e6
+  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
   IQKeyboardManager: ef43ce1ba1e5aaf4adf222c0a46f39761f246879
   JSONRPCKit: b2991f2f242d72022083f9d869140dabd26d65c7
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   KeychainSwift: c0d1b0c2901b9873f07f0e560fde92929069e863
-  Kingfisher: 93a3c6d0d551658a31e19f21747e1d15cb39d525
+  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   MailchimpSDK: 794fd7cb1095e55c764d8a699eb11fb61849ed76
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Mixpanel-swift: 89d88f4d3dd1b4b3b69bd05060756eb1248b76f0
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PaperTrailLumberjack: 449587968d5aeb3eab2d4de041ffc61ee2d49f25
   PromiseKit: 32c36425387e9cfc7f1206f27bfd906d0b53c0d6
-  PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   QRCodeReaderViewController: e8f27d035b3e72b1d4b1c61ff66458287e3be0ff
-  R.swift: 681bb9135f482e7a81d9d27445b837fef5467e11
+  R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
   Ramp: e0988926ce78f6cd0870b4f3565651c6cc0555a2
   Realm: fdf6732924dc5e69e30e0db2c11e869f92b53f3d
   RealmSwift: 7c181da8fa1c2fe613656a77c198d6a3dc3879a1
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SDWebImage: 8ab87d4b3e5cc4927bd47f78db6ceb0b94442577
+  SDWebImage: d47d81bea8a77187896b620dc79c3c528e8906b9
   SDWebImageSVGCoder: 6fc109f9c2a82ab44510fff410b88b1a6c271ee8
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
@@ -456,7 +456,7 @@ SPEC CHECKSUMS:
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
   SVGKit: 3c8468aab0026048532a3b27a0c81cdd939f0649
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
-  SwiftFormat: 16f04fcde066f40004f51e26bc95bc14dc377d6f
+  SwiftFormat: 4825ab6f229b31bc7a89104ee9ed7c4fd30da226
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   SwiftProtobuf: c3c12645230d9b09c72267e0de89468c5543bd86
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
@@ -465,8 +465,8 @@ SPEC CHECKSUMS:
   TrustWalletCore: a92d85baa15932279cce925559e93695558cafdd
   WalletConnectSwift: 6309bf3011b0b30e3e9d1e7449535302a9240f71
   WalletConnectSwiftV2: 52e67915f8d861ed3ba4eabb0f69fee0990f0a5f
-  xcbeautify: df17aa32d769add7af523a8be9b0ef8fb9eb75a8
+  xcbeautify: 6e2f57af5c3a86d490376d5758030a8dcc201c1b
 
 PODFILE CHECKSUM: 0b2c7e0fe74c710de0a444ccbe805bd37cb3e794
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0

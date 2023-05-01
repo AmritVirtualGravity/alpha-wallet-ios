@@ -14,9 +14,11 @@ class ServerTableViewCell: UITableViewCell {
     private let serverImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .center
+//        imageView.contentMode = .center
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
     private lazy var topSeparator: UIView = UIView.spacer(backgroundColor: R.color.mike()!)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -61,11 +63,29 @@ class ServerTableViewCell: UITableViewCell {
         priceChangeLabel.font          = viewModel.serverFont
         priceChangeLabel.textColor     = viewModel.serverColor
         priceChangeLabel.text          = viewModel.sum.rC.dollar
-        let url = returnServerImageUrl(symbol: viewModel.serverSymbol)
+        let urlServer = returnServerImageUrl(chainId: "\(viewModel.server.chainID)")
+        let urlChain =  URL(string: "https://assets.lif3.com/wallet/chains/\(viewModel.server.chainID)-I.svg")
         
-        if let imageUrl = URL(string: url) {
-            self.serverImageView.sd_setImage(with: imageUrl)
-        }
+        
+        let imageName = "icons-tokens-a-lend"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        
+        self.serverImageView.sd_setImage(with: URL(string: urlServer) , placeholderImage: GlobalConstants.secondaryPlaceHolderImage)
+        
+//        if canOpenURL(string: urlServer) {
+//            self.serverImageView.sd_setImage(with: URL(string: urlServer))
+//        } else {
+////            self.serverImageView.sd_setImage(with: urlChain)
+//            self.serverImageView.sd_setImage(with: urlChain)
+//        }
+//        if let imageUrl = URL(string: url) {
+//            self.serverImageView.sd_setImage(with: imageUrl)
+////        self.serverImageView.sd_setImage(with: URL(named: url), placeholderImage: GlobalConstants.secondaryPlaceHolderImage))
+//        } else {
+//            self.serverImageView.sd_setImage(with: URL(string: "https://assets.lif3.com/wallet/chains/\(viewModel.server.chainID)-I.svg"))
+//        }
+        
 //
 //        if let imageUrl = URL(string: url) {
 //            if let image = SVGKImage(contentsOf: imageUrl) {
@@ -75,8 +95,32 @@ class ServerTableViewCell: UITableViewCell {
 //              }
 //        }
     }
-    
-    func returnServerImageUrl(symbol: String)  -> String{
-        return "https://assets.lif3.com/wallet/chains/\(symbol)-Isolated.svg"
+
+    func returnServerImageUrl(chainId: String)  -> String{
+    //        return "https://assets.lif3.com/wallet/chains/\(symbol)-Isolated.svg"
+        return "https://assets.lif3.com/wallet/chains/\(chainId)-I.svg"
     }
+
+  
+}
+
+// Swift 5
+func verifyUrl (urlString: String?) -> Bool {
+    if let urlString = urlString {
+        if let url = NSURL(string: urlString) {
+            return UIApplication.shared.canOpenURL(url as URL)
+        }
+    }
+    return false
+}
+
+func canOpenURL(string: String?) -> Bool {
+    guard let urlString = string else {return false}
+    guard let url = URL(string: urlString) else {return false}
+    if !UIApplication.shared.canOpenURL(url) {return false}
+
+    //
+    let regEx = "((https|http)://)((\\w|-)+)(([.]|[/])((\\w|-)+))+"
+    let predicate = NSPredicate(format:"SELF MATCHES %@", argumentArray:[regEx])
+    return predicate.evaluate(with: string)
 }

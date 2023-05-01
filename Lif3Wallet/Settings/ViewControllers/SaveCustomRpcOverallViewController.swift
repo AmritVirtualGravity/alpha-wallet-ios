@@ -325,6 +325,7 @@ extension SaveCustomRpcBrowseDataController: UITableViewDataSource {
         let server = section.serverAt(row: indexPath.row)
         let viewModel = ServerImageViewModel(server: .server(.custom(server)), isSelected: section.isMarked(chainID: server.chainID))
         cell.configure(viewModel: viewModel)
+        cell.configureForSaveCustomRpcBrowseData(viewModel: viewModel)
         return cell
     }
 

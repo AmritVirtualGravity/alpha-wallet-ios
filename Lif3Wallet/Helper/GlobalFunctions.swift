@@ -22,3 +22,6 @@ func printGlobal<T>(data: T) {
  print("Generic Function:")
  print("Data Passed:", data)
 }
+
+
+

@@ -532,7 +532,7 @@ public enum RPCServer: Hashable, CaseIterable {
     public var rpcURL: URL {
         let urlString: String = {
             switch self {
-            case .main: return "https://mainnet.infura.io/v3/\(Constants.Credentials.infuraKey)"
+            case .main: return "https://rpc.ankr.com/eth"
             case .classic: return "https://www.ethercluster.com/etc"
             case .callisto: return "https://explorer.callisto.network/api/eth-rpc"
             case .poa: return "https://core.poa.network"
@@ -548,16 +548,16 @@ public enum RPCServer: Hashable, CaseIterable {
             case .heco: return "https://http-mainnet.hecochain.com"
             case .heco_testnet: return "https://http-testnet.hecochain.com"
             case .custom(let custom): return custom.rpcEndpoint
-            case .fantom: return "https://rpc.ftm.tools"
+            case .fantom: return "https://rpc.ankr.com/fantom"
             case .fantom_testnet: return "https://rpc.ankr.com/fantom_testnet"
             case .avalanche: return "https://api.avax.network/ext/bc/C/rpc"
             case .avalanche_testnet: return "https://api.avax-test.network/ext/bc/C/rpc"
             case .polygon: return "https://polygon-rpc.com"
-            case .mumbai_testnet: return "https://polygon-mumbai.infura.io/v3/\(Constants.Credentials.infuraKey)"
-            case .optimistic: return "https://optimism-mainnet.infura.io/v3/\(Constants.Credentials.infuraKey)"
+            case .mumbai_testnet: return "https://rpc.ankr.com/polygon_mumbai"
+            case .optimistic: return "https://rpc.ankr.com/optimism"
             case .cronosMainnet: return "https://evm.cronos.org"
             case .cronosTestnet: return "https://cronos-testnet.crypto.org:8545"
-            case .arbitrum: return "https://arbitrum-mainnet.infura.io/v3/\(Constants.Credentials.infuraKey)"
+            case .arbitrum: return "https://rpc.ankr.com/arbitrum"
             case .palm: return "https://palm-mainnet.infura.io/v3/\(Constants.Credentials.infuraKey)"
             case .palmTestnet: return "https://palm-testnet.infura.io/v3/\(Constants.Credentials.infuraKey)"
             case .klaytnCypress:
@@ -576,7 +576,7 @@ public enum RPCServer: Hashable, CaseIterable {
                 }
             case .ioTeX: return "https://babel-api.mainnet.iotex.io"
             case .ioTeXTestnet: return "https://babel-api.testnet.iotex.io"
-            case .optimismGoerli: return "https://arbitrum-goerli.infura.io/v3/\(Constants.Credentials.infuraKey)"
+            case .optimismGoerli: return "https://rpc.ankr.com/optimism_testnet"
             case .arbitrumGoerli: return "https://optimism-goerli.infura.io/v3/\(Constants.Credentials.infuraKey)"
             case .tomb_chain: return "https://rpc.tombchain.com"
             }

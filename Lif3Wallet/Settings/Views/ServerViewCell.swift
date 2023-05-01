@@ -76,8 +76,5 @@ class ServerTableViewCell: UITableViewCell {
 //        }
     }
     
-    func returnServerImageUrl(symbol: String)  -> String{
-//        return "https://assets.lif3.com/wallet/chains/\(symbol)-Isolated.svg"
-        return "https://assets.lif3.com/wallet/chains/\(symbol).svg"
-    }
+  
 }

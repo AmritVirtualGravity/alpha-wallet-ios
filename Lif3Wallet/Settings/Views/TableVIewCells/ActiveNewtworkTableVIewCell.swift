@@ -123,11 +123,21 @@ class ActiveNewtworkTableVIewCell: UITableViewCell {
     }
 
     private func configureChainIconView(viewModel: ServerImageTableViewCellViewModelType) {
+        
+        
         switch viewModel.server {
         case .auto:
             chainIconView.image = R.image.launch_icon()!
         case .server(let server):
             chainIconView.subscribable = server.walletConnectIconImage
+        }
+        
+    }
+    
+    func configureForSaveCustomRpcBrowseData(viewModel: ServerImageTableViewCellViewModelType) {
+        let url = returnServerImageUrl(symbol: "\(viewModel.server.server.chainID)")
+        if let imageUrl = URL(string: url) {
+            self.chainIconView.sd_setImage(with: imageUrl)
         }
     }
 

@@ -206,7 +206,7 @@
 "detecting.serverAutomatically" = "Detect Automatically";
 "detecting.serverAutomatically.buttonTitle" = "Auto";
 "editTokens.searchBar.placeholder.title" = "토큰 검색";
-"gettingStarted.alertSheet.option.watch.title" = "Track Wallet Address";
+"gettingStarted.alertSheet.option.watch.title" = "Watch Wallet Address";
 "gettingStarted.alertSheet.option.import.title" = "Import Existing Wallet";
 "importWallet.import.alertSheet.option.title" = "iCloud/Dropbox/Google Drive";
 "importWallet.import.alertSheet.title" = "지갑 옵션 가져오기";

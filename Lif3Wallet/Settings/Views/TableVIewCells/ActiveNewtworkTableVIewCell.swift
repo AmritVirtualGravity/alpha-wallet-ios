@@ -137,12 +137,18 @@ class ActiveNewtworkTableVIewCell: UITableViewCell {
     func configureForSaveCustomRpcBrowseData(viewModel: ServerImageTableViewCellViewModelType) {
         let url = returnServerImageUrl(symbol: "\(viewModel.server.server.chainID)")
         if let imageUrl = URL(string: url) {
-            self.chainIconView.sd_setImage(with: imageUrl)
+//            self.chainIconView.sd_setImage(with: imageUrl)
+            self.chainIconView.sd_setImage(with: imageUrl, placeholderImage: GlobalConstants.secondaryPlaceHolderImage)
         }
     }
 
     private func configureInfoView(viewModel: ServerImageTableViewCellViewModelType) {
         infoView.configure(viewModel: viewModel)
+    }
+    
+    func returnServerImageUrl(symbol: String)  -> String{
+    //        return "https://assets.lif3.com/wallet/chains/\(symbol)-Isolated.svg"
+        return "https://assets.lif3.com/wallet/chains/\(symbol).svg"
     }
 }
 

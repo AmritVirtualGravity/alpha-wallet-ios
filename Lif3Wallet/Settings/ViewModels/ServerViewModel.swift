@@ -74,7 +74,7 @@ struct ServerImageViewModel: ServerImageTableViewCellViewModelType, Hashable {
 }
 
 struct TokenListServerTableViewCellViewModel: ServerTableViewCellViewModelType {
-    private let server: RPCServer
+    let server: RPCServer  // making this public just to access its chainID
     let isTopSeparatorHidden: Bool
 
     init(server: RPCServer, isTopSeparatorHidden: Bool, sum: Decimal) {

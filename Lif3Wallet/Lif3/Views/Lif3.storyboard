@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -77,7 +77,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eAc-3X-hPA">
                                         <rect key="frame" x="15" y="50" width="384" height="226"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="226" id="5FT-zh-gRb"/>
                                         </constraints>
@@ -101,7 +101,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lif3 Ecosystem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDN-91-Qfl">
                                         <rect key="frame" x="20" y="301" width="374" height="21.666666666666686"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="pureBlackAndpureWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAf-dS-gpT">
@@ -123,7 +123,7 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lif3 Trade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ph-Rc-V86">
                                                                 <rect key="frame" x="65" y="20" width="74.333333333333314" height="21.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" name="pureBlackAndpureWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJ7-BL-0Le">
@@ -131,20 +131,30 @@
                                                                 <string key="text">Trade FTM, BOO, BTC and ETH with up to
 50x leverage directly from your wallet</string>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" name="pureBlackAndpureWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" translatesAutoresizingMaskIntoConstraints="NO" id="hnp-t4-8zP">
+                                                                <rect key="frame" x="353" y="44" width="7" height="12"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="7" id="DEw-E9-4GY"/>
+                                                                    <constraint firstAttribute="height" constant="12" id="Ea0-Fh-dMO"/>
+                                                                </constraints>
+                                                            </imageView>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="whiteAnddarkGrey"/>
                                                         <constraints>
                                                             <constraint firstItem="qJ7-BL-0Le" firstAttribute="leading" secondItem="6Ph-Rc-V86" secondAttribute="leading" id="CTr-HV-dsl"/>
                                                             <constraint firstAttribute="trailing" secondItem="qJ7-BL-0Le" secondAttribute="trailing" constant="80" id="KOc-Js-LLB"/>
                                                             <constraint firstItem="6Ph-Rc-V86" firstAttribute="top" secondItem="CGf-FK-0gk" secondAttribute="top" constant="-10" id="LLh-XD-OcB"/>
                                                             <constraint firstItem="qJ7-BL-0Le" firstAttribute="top" secondItem="6Ph-Rc-V86" secondAttribute="bottom" constant="5" id="PCT-VN-qnp"/>
+                                                            <constraint firstAttribute="trailing" secondItem="hnp-t4-8zP" secondAttribute="trailing" constant="14" id="Ryc-de-Vq5"/>
                                                             <constraint firstItem="CGf-FK-0gk" firstAttribute="leading" secondItem="A9y-o1-4eJ" secondAttribute="leading" constant="15" id="ZGD-hs-but"/>
                                                             <constraint firstItem="CGf-FK-0gk" firstAttribute="centerY" secondItem="A9y-o1-4eJ" secondAttribute="centerY" id="dLS-hj-kv5"/>
                                                             <constraint firstAttribute="height" constant="100" id="kdt-9s-Yap"/>
                                                             <constraint firstItem="6Ph-Rc-V86" firstAttribute="leading" secondItem="CGf-FK-0gk" secondAttribute="trailing" constant="10" id="qvJ-9j-7wq"/>
+                                                            <constraint firstItem="hnp-t4-8zP" firstAttribute="centerY" secondItem="A9y-o1-4eJ" secondAttribute="centerY" id="yy6-nm-7Db"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -177,11 +187,11 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swap Tokens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocw-0z-uZd">
                                                                 <rect key="frame" x="8.6666666666666643" y="59.999999999999993" width="97.333333333333343" height="21.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" name="pureBlackAndpureWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="whiteAnddarkGrey"/>
                                                         <constraints>
                                                             <constraint firstItem="Ocw-0z-uZd" firstAttribute="top" secondItem="w4t-U7-ieQ" secondAttribute="bottom" constant="5" id="bCS-x6-cqU"/>
                                                             <constraint firstItem="Ocw-0z-uZd" firstAttribute="centerX" secondItem="2Fo-hm-3mG" secondAttribute="centerX" id="h7R-XP-qSf"/>
@@ -202,11 +212,11 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Farm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7QK-rI-SJ7">
                                                                 <rect key="frame" x="38" y="59.999999999999993" width="38.666666666666657" height="21.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" name="pureBlackAndpureWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="whiteAnddarkGrey"/>
                                                         <constraints>
                                                             <constraint firstItem="f38-bm-7Re" firstAttribute="top" secondItem="cnk-co-0jv" secondAttribute="top" constant="15" id="3Kq-NK-rRE"/>
                                                             <constraint firstItem="7QK-rI-SJ7" firstAttribute="top" secondItem="f38-bm-7Re" secondAttribute="bottom" constant="5" id="4aD-ol-ILh"/>
@@ -227,11 +237,11 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stake Lif3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8I-k6-GKE">
                                                                 <rect key="frame" x="20.666666666666686" y="59.999999999999993" width="73.666666666666671" height="21.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" name="pureBlackAndpureWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="whiteAnddarkGrey"/>
                                                         <constraints>
                                                             <constraint firstItem="F8I-k6-GKE" firstAttribute="top" secondItem="BCy-6P-qGf" secondAttribute="bottom" constant="5" id="7xC-rj-vlq"/>
                                                             <constraint firstItem="BCy-6P-qGf" firstAttribute="top" secondItem="2Qb-sZ-MJ5" secondAttribute="top" constant="15" id="88E-R3-bJc"/>
@@ -270,11 +280,11 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fountain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYe-t6-wFs">
                                                                 <rect key="frame" x="24" y="59.999999999999993" width="67" height="21.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" name="pureBlackAndpureWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="whiteAnddarkGrey"/>
                                                         <constraints>
                                                             <constraint firstItem="LYe-t6-wFs" firstAttribute="centerX" secondItem="5nh-lv-Ncw" secondAttribute="centerX" id="3IM-Kj-jiH"/>
                                                             <constraint firstItem="LYe-t6-wFs" firstAttribute="top" secondItem="MZX-aa-Lr6" secondAttribute="bottom" constant="5" id="COt-Ic-TIB"/>
@@ -295,11 +305,11 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leverage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ia3-pm-lpA">
                                                                 <rect key="frame" x="23.666666666666686" y="59.999999999999993" width="67.666666666666671" height="21.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" name="pureBlackAndpureWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="whiteAnddarkGrey"/>
                                                         <constraints>
                                                             <constraint firstItem="GVi-n6-2By" firstAttribute="top" secondItem="hd9-LF-7rX" secondAttribute="top" constant="15" id="HOY-8c-bTe"/>
                                                             <constraint firstItem="Ia3-pm-lpA" firstAttribute="centerX" secondItem="hd9-LF-7rX" secondAttribute="centerX" id="YMi-DE-sb8"/>
@@ -310,7 +320,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Atj-7c-QZR">
                                                         <rect key="frame" x="259.33333333333331" y="0.0" width="114.66666666666669" height="100"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lif3_single_stake" translatesAutoresizingMaskIntoConstraints="NO" id="MgJ-Mq-vCu">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="singStake" translatesAutoresizingMaskIntoConstraints="NO" id="MgJ-Mq-vCu">
                                                                 <rect key="frame" x="37.333333333333371" y="15" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="A6t-U9-W96"/>
@@ -320,11 +330,11 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single Stake" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERs-zm-drg">
                                                                 <rect key="frame" x="11.333333333333371" y="59.999999999999993" width="92" height="21.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="17"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="textColor" name="pureBlackAndpureWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="whiteAnddarkGrey"/>
                                                         <constraints>
                                                             <constraint firstItem="ERs-zm-drg" firstAttribute="centerX" secondItem="Atj-7c-QZR" secondAttribute="centerX" id="HRz-iG-GmQ"/>
                                                             <constraint firstItem="ERs-zm-drg" firstAttribute="top" secondItem="MgJ-Mq-vCu" secondAttribute="bottom" constant="5" id="e1U-v8-SXx"/>
@@ -345,6 +355,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" name="lightGreyAndDarkestColor"/>
                                 <constraints>
                                     <constraint firstItem="L7U-5n-L0g" firstAttribute="top" secondItem="kf6-SE-l6A" secondAttribute="bottom" constant="15" id="7UD-CN-Oc4"/>
                                     <constraint firstItem="yAf-dS-gpT" firstAttribute="leading" secondItem="OJs-q4-TBE" secondAttribute="leading" constant="20" id="Ho9-xT-QMS"/>
@@ -370,7 +381,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="F2X-DE-efy"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="lightGreyAndDarkestColor"/>
                         <constraints>
                             <constraint firstItem="9CR-IB-4b7" firstAttribute="leading" secondItem="F2X-DE-efy" secondAttribute="leading" id="9Hz-cg-Cik"/>
                             <constraint firstItem="9CR-IB-4b7" firstAttribute="trailing" secondItem="F2X-DE-efy" secondAttribute="trailing" id="NBI-Sa-laq"/>
@@ -397,15 +408,22 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.right" width="8" height="13"/>
         <image name="lif3_farm" width="40" height="41"/>
         <image name="lif3_fountain_of_lif3" width="40" height="41"/>
         <image name="lif3_leverage" width="40" height="41"/>
         <image name="lif3_lif3_trade" width="40" height="40"/>
         <image name="lif3_nursery" width="40" height="41"/>
-        <image name="lif3_single_stake" width="53" height="19"/>
         <image name="popSwap" width="38" height="38"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="singStake" width="50" height="50"/>
+        <namedColor name="lightGreyAndDarkestColor">
+            <color red="0.95320504900000003" green="0.95053225760000004" blue="0.96572452779999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="pureBlackAndpureWhite">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="whiteAnddarkGrey">
+            <color red="1" green="0.99999994039999995" blue="0.99999994039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

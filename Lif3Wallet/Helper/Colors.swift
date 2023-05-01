@@ -20,26 +20,34 @@ extension UIColor {
         return color
     }
     
-    ///3893B0
-    static var superManColor: UIColor {  UIColor.named("SuperManColor")  }
-    static var superManColorDim: UIColor {  UIColor.named("SuperManColorDim")  }
-    static var wonderWomanColor: UIColor {  UIColor.named("WonderWomanColor")  }
-    static var wonderWomanColorDim: UIColor {  UIColor.named("WonderWomanColorDim")  }
-    static var appTextHighContrastColor: UIColor {  UIColor.named("AppTextHighContrastColor")  }
-    static var appTextLowContrastColor: UIColor {  UIColor.named("AppTextLowContrastColor")  }
-    static var appBackgroundColor: UIColor {  UIColor.named("AppBackgroundColor")  }
-    static var oppositeHighContrastColor: UIColor {  UIColor.named("OppositeHighContrastColor")  }
-    static var secondaryButtonColor: UIColor {  UIColor.named("SecondaryButtonColor")
-    }
-    static var lightGreyWhite: UIColor {  UIColor.named("LightGreyWhite")
-    }
     
-    static var lightGreyAndDarkColor: UIColor {  UIColor.named("LightGreyAndDarkColor") }
-    static var whiteAndDarkGreyColor: UIColor {  UIColor.named("WhiteAndLightGrey") }
-    static var greyAndDarkGrey: UIColor {
-        UIColor.named("GreyAndDarkGrey") }
-    static var greyAndWhiteColor: UIColor {
-        UIColor.named("GreyAndWhiteColor") }
+    
+    // lif3
+    static var pureBlackAndpureWhite: UIColor {  UIColor.named("pureBlackAndpureWhite")  }
+    static var lightGreyAndDarkestColor: UIColor {  UIColor.named("lightGreyAndDarkestColor")  }
+    static var whiteAnddarkGrey: UIColor {  UIColor.named("whiteAnddarkGrey")  }
+    
+    
+    ///3893B0
+//    static var superManColor: UIColor {  UIColor.named("SuperManColor")  }
+//    static var superManColorDim: UIColor {  UIColor.named("SuperManColorDim")  }
+//    static var wonderWomanColor: UIColor {  UIColor.named("WonderWomanColor")  }
+//    static var wonderWomanColorDim: UIColor {  UIColor.named("WonderWomanColorDim")  }
+//    static var appTextHighContrastColor: UIColor {  UIColor.named("AppTextHighContrastColor")  }
+//    static var appTextLowContrastColor: UIColor {  UIColor.named("AppTextLowContrastColor")  }
+//    static var appBackgroundColor: UIColor {  UIColor.named("AppBackgroundColor")  }
+//    static var oppositeHighContrastColor: UIColor {  UIColor.named("OppositeHighContrastColor")  }
+//    static var secondaryButtonColor: UIColor {  UIColor.named("SecondaryButtonColor")
+//    }
+//    static var lightGreyWhite: UIColor {  UIColor.named("LightGreyWhite")
+//    }
+//    
+//    static var lightGreyAndDarkColor: UIColor {  UIColor.named("LightGreyAndDarkColor") }
+//    static var whiteAndDarkGreyColor: UIColor {  UIColor.named("WhiteAndLightGrey") }
+//    static var greyAndDarkGrey: UIColor {
+//        UIColor.named("GreyAndDarkGrey") }
+//    static var greyAndWhiteColor: UIColor {
+//        UIColor.named("GreyAndWhiteColor") }
     
     
 //    static var secondaryButtonColor: UIColor {  UIColor.named("SecondaryButtonColor") }

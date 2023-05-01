@@ -1518,14 +1518,14 @@ extension ActiveWalletCoordinator: lifeViewControllerDelegate {
     }
     
     func didTapLeverage() {
-        guard let url = URL(string: Constants.lifeWebUrl) else {
+        guard let url = URL(string: "https://lif3.com/terrace") else {
             return
         }
         openURLInBrowser(url: url)
     }
     
     func didTapSingleStake() {
-        guard let url = URL(string: Constants.lifeWebUrl) else {
+        guard let url = URL(string: "https://lif3.com/staking") else {
             return
         }
         openURLInBrowser(url: url)

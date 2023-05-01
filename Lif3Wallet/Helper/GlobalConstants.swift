@@ -117,15 +117,18 @@ struct GlobalConstants {
     struct KeyValues {
         
 //        static var backgroundEnterDate: Date?
+        static let userDefault = UserDefaults.standard
         
-//        static var globalDeliveryMethod: DeliveryMethod? {
-//            get {
+        static var isDarkModeOn: Bool? {
+            get {
 //                return decode(key: "globalDeliveryMethod")
-//            }
-//            set {
+                return userDefault.bool(forKey: "DarkModeOn") ?? false
+            }
+            set {
 //                encodeAndSave(key: "globalDeliveryMethod", value: newValue)
-//            }
-//        }
+                userDefault.set(true, forKey: "DarkModeOn")
+            }
+        }
 //
 //        static var globalCountry: LegalRemitCountry? {
 //            get {

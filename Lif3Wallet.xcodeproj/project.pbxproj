@@ -846,6 +846,7 @@
 		04D0FA1029E8302D00E477E8 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FA0F29E8302C00E477E8 /* UIViewExtension.swift */; };
 		04D0FA1529E830DF00E477E8 /* Lif3SVGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FA1329E830D200E477E8 /* Lif3SVGImage.swift */; };
 		04D0FA1629E830DF00E477E8 /* Lif3SVGImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D0FA1429E830DB00E477E8 /* Lif3SVGImage.xib */; };
+		04D69CD129FFD3E300756141 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D69CD029FFD3E300756141 /* Color.xcassets */; };
 		04F277AB29ED52A0009BC3A6 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F277AA29ED52A0009BC3A6 /* GlobalFunctions.swift */; };
 		04F277AD29ED5BFF009BC3A6 /* LiQuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F277AC29ED5BFF009BC3A6 /* LiQuest.swift */; };
 		04F277AF29ED5C2E009BC3A6 /* LiquestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F277AE29ED5C2D009BC3A6 /* LiquestAPI.swift */; };
@@ -1853,6 +1854,7 @@
 		04D0FA0F29E8302C00E477E8 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		04D0FA1329E830D200E477E8 /* Lif3SVGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3SVGImage.swift; sourceTree = "<group>"; };
 		04D0FA1429E830DB00E477E8 /* Lif3SVGImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Lif3SVGImage.xib; sourceTree = "<group>"; };
+		04D69CD029FFD3E300756141 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		04F277AA29ED52A0009BC3A6 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		04F277AC29ED5BFF009BC3A6 /* LiQuest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiQuest.swift; sourceTree = "<group>"; };
 		04F277AE29ED5C2D009BC3A6 /* LiquestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquestAPI.swift; sourceTree = "<group>"; };
@@ -3370,6 +3372,7 @@
 				08A25354294073EE00A31193 /* Fonts */,
 				08A2535B294073EE00A31193 /* tokens.json */,
 				08A2535C294073EE00A31193 /* LaunchScreen.xcassets */,
+				04D69CD029FFD3E300756141 /* Color.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -6035,6 +6038,7 @@
 				08A2564E294073EF00A31193 /* ERC20-TokenScript.tsml in Resources */,
 				08A2564B294073EF00A31193 /* DAI.tsml in Resources */,
 				08A25654294073EF00A31193 /* SourceSansPro-Semibold.otf in Resources */,
+				04D69CD129FFD3E300756141 /* Color.xcassets in Resources */,
 				040D1C3029D3F7D200FEBA29 /* PoolList.json in Resources */,
 				08760CAD29407C2000F83AB3 /* termsOfService.html in Resources */,
 				08760CAC29407C2000F83AB3 /* howDoIGetMyMoneyInfo.html in Resources */,

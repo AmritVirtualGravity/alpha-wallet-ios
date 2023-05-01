@@ -113,7 +113,10 @@ struct GlobalConstants {
     
     static var showProfileActive = false
     static var backButtonBounds: CGRect?
-
+    
+    static let placeHolderImage = UIImage(named: "logo")
+    static let secondaryPlaceHolderImage = UIImage(named: "awLogoSmall")
+    
     struct KeyValues {
         
 //        static var backgroundEnterDate: Date?

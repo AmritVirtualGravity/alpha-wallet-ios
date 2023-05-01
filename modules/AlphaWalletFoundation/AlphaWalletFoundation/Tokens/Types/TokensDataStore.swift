@@ -695,15 +695,15 @@ extension MultipleChainsTokensDataStore.functional {
 
     public static func erc20AddressForNativeTokenFilter(servers: [RPCServer], tokens: [Token]) -> [Token] {
         var result = tokens
+        var serverTokenDict: [RPCServer: [Token]] = [:]
         for server in servers {
             if let address = server.erc20AddressForNativeToken, result.contains(where: { $0.contractAddress == address }) {
-                result = result.filter { $0.contractAddress != Constants.nativeCryptoAddressInDatabase && $0.server == server }
+                serverTokenDict[server] = result.filter { $0.contractAddress != Constants.nativeCryptoAddressInDatabase && $0.server == server }
             } else {
-                continue
+                serverTokenDict[server] = result.filter { $0.server == server }
             }
         }
-
-        return result
+        return serverTokenDict.values.flatMap({ $0 })
     }
 
     public static func recreateMissingInfoTokenObjects(for store: RealmStore) {

@@ -78,8 +78,9 @@ class RoundedEnsView: UIView, ViewRoundingSupportable {
         rounding = .circle
         label.text = viewModel.text
         label.font = viewModel.labelFont
-        label.textColor = viewModel.labelTextColor
-        backgroundColor = viewModel.backgroundColor
+//        label.textColor = viewModel.labelTextColor
+        label.textColor = Configuration.Color.Semantic.tableViewHeaderPrimaryFont
+        backgroundColor = Configuration.Color.Semantic.tableViewHeaderBackground
     }
 
     required init?(coder: NSCoder) {

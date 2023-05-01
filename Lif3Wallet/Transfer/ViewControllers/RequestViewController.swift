@@ -15,7 +15,7 @@ class RequestViewController: UIViewController {
         let label = UILabel()
         label.attributedText = viewModel.instructionAttributedString
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .white
+        label.textColor = Configuration.Color.Semantic.tableViewHeaderPrimaryFont
         return label
     }()
     
@@ -93,7 +93,8 @@ class RequestViewController: UIViewController {
     }
 
     private func bind(viewModel: RequestViewModel) {
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        view.backgroundColor = Configuration.Color.Semantic.blackWhiteBackgroundColor
 
         let input = RequestViewModelInput(copyEns: ensNameView.tapPublisher, copyAddress: addressView.tapPublisher)
         let output = viewModel.transform(input: input)
@@ -102,6 +103,7 @@ class RequestViewController: UIViewController {
             .sink { [imageView, ensNameView, addressView, navigationItem] viewState in
                 imageView.image = viewState.qrCode
                 imageView.layoutIfNeeded()
+                imageView.backgroundColor = .black
 
                 ensNameView.configure(viewModel: .init(text: viewState.ensName))
                 addressView.configure(viewModel: .init(text: viewState.address))

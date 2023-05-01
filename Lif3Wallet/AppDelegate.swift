@@ -22,9 +22,10 @@ let deploymentMode: DeploymentMode = {
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appCoordinator: AppCoordinator!
-    
+    var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         printChangedViewControllerEveryTime()
+        applyTheSystemAppearance()
         do {
             
             // register coder, on AppDelegate
@@ -39,6 +40,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    private func applyTheSystemAppearance() {
+        let userDefault = UserDefaults.standard
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        if (userDefault.bool(forKey: "DarkModeOn") == true) {
+//
+//            window?.overrideUserInterfaceStyle = .dark
+////            userDefault.set(false, forKey: "DarkModeOn")
+//        } else {
+//            window?.overrideUserInterfaceStyle = .light
+////            userDefault.set(true, forKey: "DarkModeOn")
+//        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let window =  UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+             switch  (userDefault.bool(forKey: "DarkModeOn")) {
+             case true: window?.overrideUserInterfaceStyle  = .dark
+             case false: window?.overrideUserInterfaceStyle = .light
+             }
+         }
+
+  
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {

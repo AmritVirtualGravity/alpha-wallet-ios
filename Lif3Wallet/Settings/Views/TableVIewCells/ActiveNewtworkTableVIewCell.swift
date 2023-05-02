@@ -129,7 +129,10 @@ class ActiveNewtworkTableVIewCell: UITableViewCell {
         case .auto:
             chainIconView.image = R.image.launch_icon()!
         case .server(let server):
-            chainIconView.subscribable = server.walletConnectIconImage
+            chainIconView.sd_setImage(with: URL.getImageUrlFromChainId(server.chainID), placeholderImage: GlobalConstants.secondaryPlaceHolderImage) { [weak chainIconView] image,_,_,_  in
+                guard image == nil else { return }
+                chainIconView?.sd_setImage(with: URL.getImageUrlFromChainIdAlternative(server.chainID), placeholderImage: GlobalConstants.secondaryPlaceHolderImage)
+            }
         }
         
     }

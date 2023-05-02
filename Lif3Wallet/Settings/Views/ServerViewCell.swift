@@ -63,37 +63,11 @@ class ServerTableViewCell: UITableViewCell {
         priceChangeLabel.font          = viewModel.serverFont
         priceChangeLabel.textColor     = viewModel.serverColor
         priceChangeLabel.text          = viewModel.sum.rC.dollar
-        let urlServer = returnServerImageUrl(chainId: "\(viewModel.server.chainID)")
-        let urlChain =  URL(string: "https://assets.lif3.com/wallet/chains/\(viewModel.server.chainID)-I.svg")
         
-        
-        let imageName = "icons-tokens-a-lend"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
-        
-        self.serverImageView.sd_setImage(with: URL(string: urlServer) , placeholderImage: GlobalConstants.secondaryPlaceHolderImage)
-        
-//        if canOpenURL(string: urlServer) {
-//            self.serverImageView.sd_setImage(with: URL(string: urlServer))
-//        } else {
-////            self.serverImageView.sd_setImage(with: urlChain)
-//            self.serverImageView.sd_setImage(with: urlChain)
-//        }
-//        if let imageUrl = URL(string: url) {
-//            self.serverImageView.sd_setImage(with: imageUrl)
-////        self.serverImageView.sd_setImage(with: URL(named: url), placeholderImage: GlobalConstants.secondaryPlaceHolderImage))
-//        } else {
-//            self.serverImageView.sd_setImage(with: URL(string: "https://assets.lif3.com/wallet/chains/\(viewModel.server.chainID)-I.svg"))
-//        }
-        
-//
-//        if let imageUrl = URL(string: url) {
-//            if let image = SVGKImage(contentsOf: imageUrl) {
-//                 if let uiImageInstance = image.uiImage {
-//                     self.serverImageView.image = uiImageInstance
-//                 }
-//              }
-//        }
+        serverImageView.sd_setImage(with: URL.getImageUrlFromChainId(viewModel.server.chainID), placeholderImage: GlobalConstants.secondaryPlaceHolderImage) { [weak serverImageView] image,_,_,_  in
+            guard image == nil else { return }
+            serverImageView?.sd_setImage(with: URL.getImageUrlFromChainIdAlternative(viewModel.server.chainID), placeholderImage: GlobalConstants.secondaryPlaceHolderImage)
+        }
     }
 
     func returnServerImageUrl(chainId: String)  -> String{

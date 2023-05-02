@@ -91,12 +91,13 @@ class FungibleTokenDetailsViewController: UIViewController {
         super.viewDidLoad()
         setup()
         stakeButton.isHidden = true
-        print(self.viewModel.token)
-        switch self.viewModel.token.server {
-        case .fantom: getToken(name: "ftm")
-        case .binance_smart_chain, .binance_smart_chain_testnet: getToken(name: "bnb")
-        default: break
-        }
+        print(self.viewModel.token.server.symbol)
+        getToken(name: self.viewModel.token.server.symbol.lowercased().removeWhiteSpace)
+//        switch self.viewModel.token.server {
+//        case .fantom: getToken(name: "ftm")
+//        case .binance_smart_chain, .binance_smart_chain_testnet: getToken(name: "bnb")
+//        default: break
+//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -280,7 +281,7 @@ extension FungibleTokenDetailsViewController: TokenAPI {
             self.tokens = tokenParent.tokens
             self.showOrHideStakeButton(tokens: self.tokens ?? [])
         } failure: { error in
-            self.alert(message: error.localizedDescription)
+//            self.alert(message: error.localizedDescription)
         }
 
     }

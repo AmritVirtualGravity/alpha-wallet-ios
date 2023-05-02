@@ -42,7 +42,7 @@ class SaveCustomRpcBrowseDataController: NSObject {
 
     init(customRpcs: [CustomRPC], dataObserver: SaveCustomRpcBrowseDataObserver? = nil) {
         self.originalCustomRpcList = customRpcs.sorted(by: { prev, next in
-            return prev.chainID < next.chainID
+            return (prev.chainName.first ?? Character("")) < (next.chainName.first ?? Character(""))
         })
         self.dataObserver = dataObserver
         super.init()

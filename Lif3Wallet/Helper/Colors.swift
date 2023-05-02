@@ -20,12 +20,17 @@ extension UIColor {
         return color
     }
     
-    
-    
     // lif3
     static var pureBlackAndpureWhite: UIColor {  UIColor.named("pureBlackAndpureWhite")  }
+    static var pureWhiteAndpureBlack: UIColor {  UIColor.named("pureWhiteAndpureBlack")  }
+    
     static var lightGreyAndDarkestColor: UIColor {  UIColor.named("lightGreyAndDarkestColor")  }
     static var whiteAnddarkGrey: UIColor {  UIColor.named("whiteAnddarkGrey")  }
+    static var darkestColorAndLightGrey: UIColor { UIColor.named("darkestColorAndLightGrey")  }
+    static var lighterWhiteAndDarkerBlack: UIColor { UIColor.named("lighterWhiteAndDarkerBlack")  }
+    static var lighterWhiteAndDarkBlack: UIColor { UIColor.named("lighterWhiteAndDarkBlack")  }
+    static var lighterWhiteAndDarkerBlack2: UIColor { UIColor.named("lighterWhiteAndDarkerBlack2")  }
+    
     
     
     ///3893B0

@@ -56,13 +56,11 @@ struct ContentView: View {
                                 default: break
                                 }
 #else
-                                
                                 let poolParent = PreviewData.load(name: "Pools", returnType:  PoolParent.self)
                                 viewModel.pools = poolParent?.pools
                                 viewModel.isBusy = false
                                 //                                ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
 #endif
-                                
                             }
                     } else {
                         
@@ -234,7 +232,7 @@ struct ContentView_Previews: PreviewProvider {
         NavigationView {
             //            ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
             
-            ContentView(fungibleTokenDetailsViewModel: nil)
+            ContentView(fungibleTokenDetailsViewModel: nil).preferredColorScheme(.light)
         }
         
     }

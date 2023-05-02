@@ -1644,6 +1644,7 @@
 		61C359E22002AC9D0097B04D /* TransactionSigningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C359E12002AC9D0097B04D /* TransactionSigningTests.swift */; };
 		61DCE17D2001A7A20053939F /* RLPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DCE17C2001A7A20053939F /* RLPTests.swift */; };
 		61FC5ED11FCFBDEB00CCB12A /* EtherNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC5ED01FCFBDEB00CCB12A /* EtherNumberFormatterTests.swift */; };
+		6A844CDF2A016E0F0023AAC8 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A844CDE2A016E0F0023AAC8 /* URL.swift */; };
 		6EFD5BCD57DF42D25BA9DE03 /* Pods_Lif3WalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECDD3C17B4CA40CFBE91390 /* Pods_Lif3WalletTests.framework */; };
 		732E0F502022716700B39C1F /* LockEnterPasscodeCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732E0F4F2022716700B39C1F /* LockEnterPasscodeCoordinatorTest.swift */; };
 		732E0F522022754600B39C1F /* FakeLockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732E0F512022754600B39C1F /* FakeLockProtocol.swift */; };
@@ -2666,6 +2667,7 @@
 		61C359E12002AC9D0097B04D /* TransactionSigningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningTests.swift; sourceTree = "<group>"; };
 		61DCE17C2001A7A20053939F /* RLPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLPTests.swift; sourceTree = "<group>"; };
 		61FC5ED01FCFBDEB00CCB12A /* EtherNumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtherNumberFormatterTests.swift; sourceTree = "<group>"; };
+		6A844CDE2A016E0F0023AAC8 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		6E7D909114FBB2FCCAD8C187 /* Pods_Lif3WalletShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3WalletShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7257BFE9ACFF3825825D2BD1 /* Pods-Lif3WalletShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletShare.release.xcconfig"; path = "Target Support Files/Pods-Lif3WalletShare/Pods-Lif3WalletShare.release.xcconfig"; sourceTree = "<group>"; };
 		732E0F4F2022716700B39C1F /* LockEnterPasscodeCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockEnterPasscodeCoordinatorTest.swift; sourceTree = "<group>"; };
@@ -2988,6 +2990,7 @@
 		04CFF73C29CC60B200E6E8AB /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				6A844CDD2A016E0F0023AAC8 /* Extensions */,
 				04D0FA0A29E82F4100E477E8 /* SVGImage */,
 				043D013829E71CCC002FE935 /* SVGKFastImageViewSUI.swift */,
 				04A371CC29DDDD9B00B883C0 /* Image.swift */,
@@ -5625,6 +5628,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6A844CDD2A016E0F0023AAC8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6A844CDE2A016E0F0023AAC8 /* URL.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		76F1D16C3A06F5B2041BCBB3 /* Redeem */ = {
 			isa = PBXGroup;
 			children = (
@@ -8126,6 +8137,7 @@
 				04CF12A129DC794B005DF119 /* Button.swift in Sources */,
 				08A25694294073F000A31193 /* SignMessageCoordinator.swift in Sources */,
 				08A256EA294073F000A31193 /* RPCServer+Extensions.swift in Sources */,
+				6A844CDF2A016E0F0023AAC8 /* URL.swift in Sources */,
 				08A255EC294073EF00A31193 /* ExportJsonKeystoreCoordinator.swift in Sources */,
 				08A25736294073F000A31193 /* DappRequesterViewModel.swift in Sources */,
 				08A256C8294073F000A31193 /* ActivityIndicatorControl.swift in Sources */,

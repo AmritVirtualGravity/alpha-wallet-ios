@@ -60,7 +60,8 @@ extension Constants {
         DefaultToken(address: "0x80D2Fe89b6C6c24edfB553DAF35599649AC55283", server: .binance_smart_chain),
         DefaultToken(address: "0xF70B6D6AcD652612f24F7DD2CA2F1727eB20793a", server: .binance_smart_chain),
         DefaultToken(address: "0x56ac3cb5e74b8a5a25ec9dc05155af1dad2715bd", server: .polygon),
-        DefaultToken(address: "0xFB40b1eFe90D4b786D2D9d9dc799B18BDe92923b", server: .polygon)
+        DefaultToken(address: "0xFB40b1eFe90D4b786D2D9d9dc799B18BDe92923b", server: .polygon),
+        DefaultToken(address: "0x69fdb77064ec5c84fa2f21072973eb28441f43f3", server: .metis)
     ]
     
     static func updateSwapTokenName(swapTool: String) -> String {

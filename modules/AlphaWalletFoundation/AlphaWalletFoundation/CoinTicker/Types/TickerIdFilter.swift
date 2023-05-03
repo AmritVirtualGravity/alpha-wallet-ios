@@ -74,7 +74,9 @@ public class TickerIdFilter {
 
     func filterMathesInPlatforms(token: TokenMappedToTicker, tickerId object: TickerIdObject) -> Bool {
         func isMatchingSymbolAndName(token: TokenMappedToTicker, tickerIdObject object: TickerIdObject) -> Bool {
-            return object.symbol.compare(token.symbol, options: .caseInsensitive) == .orderedSame && object.name.compare(token.name, options: .caseInsensitive) == .orderedSame
+            let objectName = object.name.lowercased()
+            let tokenName = token.name.lowercased()
+            return object.symbol.compare(token.symbol, options: .caseInsensitive) == .orderedSame && (objectName.contains(tokenName) || tokenName.contains(objectName))
         }
 
         //We just filter out those that we don't think are supported by the API. One problem this helps to alleviate is in the API output, certain tickers have a non-empty platform yet the platform list might not be complete, eg. Ether on Ethereum mainnet:

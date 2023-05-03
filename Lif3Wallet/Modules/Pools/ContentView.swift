@@ -35,14 +35,13 @@ struct ContentView: View {
 #endif
     
     var body: some View {
-        Color(darkerBlack)
+        Color(UIColor.lightGreyAndDarkestColor)
             .ignoresSafeArea()
             .overlay(
                 ZStack {
                     if(viewModel.isBusy) {
                         ProgressView()
                             .onAppear {
-                                
 #if PRODUCTION
                                 let contactAddress = "\(self.fungibleTokenDetailsViewModel?.token.primaryKey.lowercased() ?? "")".components(separatedBy: "-").first ?? ""
                                 let nativeToken = "0x0000000000000000000000000000000000000000"
@@ -56,13 +55,11 @@ struct ContentView: View {
                                 default: break
                                 }
 #else
-                                
                                 let poolParent = PreviewData.load(name: "Pools", returnType:  PoolParent.self)
                                 viewModel.pools = poolParent?.pools
                                 viewModel.isBusy = false
                                 //                                ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
 #endif
-                                
                             }
                     } else {
                         
@@ -102,7 +99,6 @@ struct ContentView: View {
                                             .background(Color(lighterDarkColor))
                                         
                                         companySection(title: poolSection.stakingList ?? "", company: poolSection.list ?? [], image: poolSection.imageURL ?? "", fungibleTokenDetailsViewModel: fungibleTokenDetailsViewModel)
-                                        
                                     }
                                 }
                             }
@@ -159,20 +155,18 @@ struct CompanyCell: View {
                 .clipShape(Circle())
             //            SVGKFastImageViewSUI(url:URL(string:"https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/android.svg"))
             VStack(spacing: 0) {
-                CustomText(name: title, padding: 0, font: mediumFont12)
+                CustomText(name: title, textColor: UIColor.pureBlackAndpureWhite, padding: 0, font: mediumFont12)
                 CustomText(name: description, textColor: lightDarkColor, alignment: .leading, padding: 0, font: regularFont10)
             }
             //                Spacer()
             HStack(spacing: 0) {
-                CustomText(name: amount,alignment: .trailing ,padding: 0, font: mediumFont12)
-                CustomText(name: percentage, alignment: .trailing, padding: 0, font: mediumFont12)
+                CustomText(name: amount, textColor: UIColor.pureBlackAndpureWhite,alignment: .trailing ,padding: 0, font: mediumFont12)
+                CustomText(name: percentage, textColor: UIColor.pureBlackAndpureWhite, alignment: .trailing, padding: 0, font: mediumFont12)
             }
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 10)
-        //        .background(.black)
-        .background(Color(darkerBlack))
-        
+        .background(Color(UIColor.lighterWhiteAndDarkerBlack))
     }
     
 }
@@ -202,7 +196,7 @@ struct companySection: View {
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 10)
-            .background(Color(darkerSecondLastBlack))
+            .background(Color(UIColor.lighterWhiteAndDarkerBlack2))
             HStack {
                 CustomText(name: "Protocol", textColor: lightDarkColor, padding: 0, font: mediumFont12)
                 HStack {
@@ -211,10 +205,12 @@ struct companySection: View {
                     CustomText(name: "Score", textColor: lightDarkColor, alignment: .trailing, padding: 0, font: mediumFont12)
                 }
             }
-            .background(Color(darkColor))
+            .background(Color(UIColor.lighterWhiteAndDarkBlack))
             .padding( 10)
             .padding(.vertical, 3)
-            
+            Divider()
+                .frame(height: 0.25)
+                .background(Color(lighterDarkColor))
             ForEach(company, id: \.self) { company in
                 //                CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlProtocol ?? "", image: company.bannerImage ?? "")
                 NavigationLink {
@@ -224,7 +220,7 @@ struct companySection: View {
                     CompanyCell(amount: company.poolType ?? "", percentage: company.score ?? "", title: company.title ?? "", description: company.urlStake ?? "", image: company.icon ?? "")
                 }
             }
-        }.background(Color(darkColor))
+        }.background(Color(UIColor.lighterWhiteAndDarkBlack))
         
     }
 }
@@ -234,7 +230,7 @@ struct ContentView_Previews: PreviewProvider {
         NavigationView {
             //            ContentView(poolList: PreviewData.load(name: "Pools", returnType: PoolParent.self))
             
-            ContentView(fungibleTokenDetailsViewModel: nil)
+            ContentView(fungibleTokenDetailsViewModel: nil).preferredColorScheme(.dark)
         }
         
     }

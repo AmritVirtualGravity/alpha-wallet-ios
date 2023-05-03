@@ -417,13 +417,13 @@
         <image name="popSwap" width="38" height="38"/>
         <image name="singStake" width="50" height="50"/>
         <namedColor name="lightGreyAndDarkestColor">
-            <color red="0.95320504900000003" green="0.95053225760000004" blue="0.96572452779999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.95300000905990601" green="0.95099997520446777" blue="0.9660000205039978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="pureBlackAndpureWhite">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="whiteAnddarkGrey">
-            <color red="1" green="0.99999994039999995" blue="0.99999994039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

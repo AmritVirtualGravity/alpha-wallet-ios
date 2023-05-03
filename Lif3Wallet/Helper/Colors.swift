@@ -20,12 +20,17 @@ extension UIColor {
         return color
     }
     
-    
-    
     // lif3
     static var pureBlackAndpureWhite: UIColor {  UIColor.named("pureBlackAndpureWhite")  }
+    static var pureWhiteAndpureBlack: UIColor {  UIColor.named("pureWhiteAndpureBlack")  }
+    
     static var lightGreyAndDarkestColor: UIColor {  UIColor.named("lightGreyAndDarkestColor")  }
     static var whiteAnddarkGrey: UIColor {  UIColor.named("whiteAnddarkGrey")  }
+    static var darkestColorAndLightGrey: UIColor { UIColor.named("darkestColorAndLightGrey")  }
+    static var lighterWhiteAndDarkerBlack: UIColor { UIColor.named("lighterWhiteAndDarkerBlack")  }
+    static var lighterWhiteAndDarkBlack: UIColor { UIColor.named("lighterWhiteAndDarkBlack")  }
+    static var lighterWhiteAndDarkerBlack2: UIColor { UIColor.named("lighterWhiteAndDarkerBlack2")  }
+    
     
     
     ///3893B0
@@ -51,6 +56,33 @@ extension UIColor {
     
     
 //    static var secondaryButtonColor: UIColor {  UIColor.named("SecondaryButtonColor") }
+    
+    
+    
+    // MARK: Other colors
+    
+    ///3893B0
+    static var superManColor: UIColor {  UIColor.named("SuperManColor")  }
+    static var superManColorDim: UIColor {  UIColor.named("SuperManColorDim")  }
+    static var wonderWomanColor: UIColor {  UIColor.named("WonderWomanColor")  }
+    static var wonderWomanColorDim: UIColor {  UIColor.named("WonderWomanColorDim")  }
+    static var appTextHighContrastColor: UIColor {  UIColor.named("AppTextHighContrastColor")  }
+    static var appTextLowContrastColor: UIColor {  UIColor.named("AppTextLowContrastColor")  }
+    static var appBackgroundColor: UIColor {  UIColor.named("AppBackgroundColor")  }
+    static var oppositeHighContrastColor: UIColor {  UIColor.named("OppositeHighContrastColor")  }
+    static var secondaryButtonColor: UIColor {  UIColor.named("SecondaryButtonColor")
+    }
+    static var lightGreyWhite: UIColor {  UIColor.named("LightGreyWhite")
+    }
+    
+    static var lightGreyAndDarkColor: UIColor {  UIColor.named("LightGreyAndDarkColor") }
+    static var whiteAndDarkGreyColor: UIColor {  UIColor.named("WhiteAndLightGrey") }
+    static var greyAndDarkGrey: UIColor {
+        UIColor.named("GreyAndDarkGrey") }
+    static var greyAndWhiteColor: UIColor {
+        UIColor.named("GreyAndWhiteColor") }
+    
+    
     
     func darker(by percentage: CGFloat = 30.0) -> UIColor? {
         return self.adjust(by: -1 * abs(percentage) )

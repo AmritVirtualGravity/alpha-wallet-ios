@@ -222,14 +222,14 @@ class AppCoordinator: NSObject, Coordinator {
         applyStyle()
         
         //make dark theme by default
-        let userDefault = UserDefaults.standard
-        userDefault.set(true, forKey: "DarkModeOn")
-        
+//        let userDefault = UserDefaults.standard
+//        userDefault.set(true, forKey: "DarkModeOn")
+//
         let window = UIWindow(frame: UIScreen.main.bounds)
-        
-        if UserDefaults.standard.bool(forKey: "DarkModeOn") {
-            window.overrideUserInterfaceStyle = .dark
-        }
+//
+//        if UserDefaults.standard.bool(forKey: "DarkModeOn") {
+//            window.overrideUserInterfaceStyle = .dark
+//        }
         let analytics = AnalyticsService()
         let walletAddressesStore: WalletAddressesStore = EtherKeystore.migratedWalletAddressesStore(userDefaults: .standardOrForTests)
         let securedStorage: SecuredStorage & SecuredPasswordStorage = try KeychainStorage()
@@ -254,6 +254,8 @@ class AppCoordinator: NSObject, Coordinator {
 
         return coordinator
     }
+    
+    
 
     init(window: UIWindow,
          analytics: AnalyticsServiceType,

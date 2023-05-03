@@ -247,4 +247,8 @@ extension String {
  return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
     
+    var lif3CapitalizeFirstLetter : String {
+        return prefix(1).capitalized + dropFirst()
+    }
+    
 }

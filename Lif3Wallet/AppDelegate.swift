@@ -22,11 +22,11 @@ let deploymentMode: DeploymentMode = {
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appCoordinator: AppCoordinator!
-    
+    var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         printChangedViewControllerEveryTime()
+        applyTheSystemAppearance()
         do {
-            
             // register coder, on AppDelegate
             let SVGCoder = SDImageSVGCoder.shared
             SDImageCodersManager.shared.addCoder(SVGCoder)
@@ -39,6 +39,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    private func applyTheSystemAppearance() {
+//        let userDefault = UserDefaults.standard
+        switch GlobalConstants.KeyValues.darkMode {
+        case .on:
+            window?.overrideUserInterfaceStyle  = .dark
+//            userDefault.set(true, forKey: "DarkModeOn")
+        case .off:
+            window?.overrideUserInterfaceStyle = .light
+//            userDefault.set(false, forKey: "DarkModeOn")
+        default: break
+        }
+    }
+    
+    // App Delegate Change Theme method
+    func darkMode(darkMode: DarkMode) {
+        if #available(iOS 13.0, *) {
+            switch darkMode {
+            case .on:
+                window?.overrideUserInterfaceStyle = .dark
+                break
+            case .off:
+                window?.overrideUserInterfaceStyle = .light
+                break
+            default:
+                window?.overrideUserInterfaceStyle = .unspecified
+            }
+        }
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {

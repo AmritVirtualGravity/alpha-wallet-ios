@@ -56,6 +56,8 @@ class ThemeSwitchTableViewCell: UITableViewCell {
 
             stackView.anchorsConstraint(to: contentView, edgeInsets: .init(top: 10, left: 16, bottom: 10, right: 20))
         ])
+        
+        switchView.isHidden = true
     }
 
     @objc private func switchChanged(_ sender: UISwitch) {
@@ -75,6 +77,7 @@ class ThemeSwitchTableViewCell: UITableViewCell {
 //        switchView.isOn = viewModel.value
         let usrDefault = UserDefaults.standard
         switchView.isOn =   usrDefault.bool(forKey: "DarkModeOn")
+        accessoryView = UIImageView.chevronImageView
     }
 }
 

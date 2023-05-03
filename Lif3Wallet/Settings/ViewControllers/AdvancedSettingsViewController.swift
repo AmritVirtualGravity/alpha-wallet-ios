@@ -8,6 +8,7 @@
 import UIKit
 import AlphaWalletFoundation
 import Combine
+import SwiftUI
 
 protocol AdvancedSettingsViewControllerDelegate: AnyObject {
     func moreSelected(in controller: AdvancedSettingsViewController)
@@ -235,6 +236,8 @@ extension AdvancedSettingsViewController: UITableViewDelegate {
                 delegate?.changeLanguageSelected(in: self)
             case .changeCurrency:
                 delegate?.changeCurrencySelected(in: self)
+            case .theme:
+                gotoDarkMode()
             default:
                  break
             }
@@ -281,4 +284,12 @@ extension AdvancedSettingsViewController: ThemeSwitchTableViewCellDelegate {
         self.view.isUserInteractionEnabled = true
     }
     
+}
+
+extension AdvancedSettingsViewController {
+    
+    private func gotoDarkMode() {
+        let swiftUIController = UIHostingController(rootView: DarkModeOptionsView())
+        show(swiftUIController, sender: nil)
+    }
 }

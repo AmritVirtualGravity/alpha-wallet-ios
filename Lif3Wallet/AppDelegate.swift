@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         printChangedViewControllerEveryTime()
         applyTheSystemAppearance()
         do {
-            
             // register coder, on AppDelegate
             let SVGCoder = SDImageSVGCoder.shared
             SDImageCodersManager.shared.addCoder(SVGCoder)
@@ -43,26 +42,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func applyTheSystemAppearance() {
-        let userDefault = UserDefaults.standard
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        if (userDefault.bool(forKey: "DarkModeOn") == true) {
-//
-//            window?.overrideUserInterfaceStyle = .dark
-////            userDefault.set(false, forKey: "DarkModeOn")
-//        } else {
-//            window?.overrideUserInterfaceStyle = .light
-////            userDefault.set(true, forKey: "DarkModeOn")
-//        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let window =  UIApplication.shared.windows.first(where: { $0.isKeyWindow })
-             switch  (userDefault.bool(forKey: "DarkModeOn")) {
-             case true: window?.overrideUserInterfaceStyle  = .dark
-             case false: window?.overrideUserInterfaceStyle = .light
-             }
-         }
-
-  
+//        let userDefault = UserDefaults.standard
+        switch GlobalConstants.KeyValues.darkMode {
+        case .on:
+            window?.overrideUserInterfaceStyle  = .dark
+//            userDefault.set(true, forKey: "DarkModeOn")
+        case .off:
+            window?.overrideUserInterfaceStyle = .light
+//            userDefault.set(false, forKey: "DarkModeOn")
+        default: break
+        }
+    }
+    
+    // App Delegate Change Theme method
+    func darkMode(darkMode: DarkMode) {
+        if #available(iOS 13.0, *) {
+            switch darkMode {
+            case .on:
+                window?.overrideUserInterfaceStyle = .dark
+                break
+            case .off:
+                window?.overrideUserInterfaceStyle = .light
+                break
+            default:
+                window?.overrideUserInterfaceStyle = .unspecified
+            }
+        }
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {

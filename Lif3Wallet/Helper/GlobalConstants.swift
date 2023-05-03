@@ -131,6 +131,25 @@ struct GlobalConstants {
                 userDefault.set(true, forKey: "DarkModeOn")
             }
         }
+        
+        static var darkModeStr: String? {
+            get {
+                return decode(key: "darkMode")
+            }
+            set {
+                encodeAndSave(key: "darkMode", value: newValue)
+            }
+        }
+        
+        static var darkMode: DarkMode {
+            get {
+                DarkMode(rawValue: darkModeStr ?? "") ?? .system
+            }
+            set {
+                darkModeStr = newValue.rawValue
+//                self.darkMode = DarkMode(rawValue: newValue.rawValue) ?? .system
+            }
+        }
 //
 //        static var globalCountry: LegalRemitCountry? {
 //            get {

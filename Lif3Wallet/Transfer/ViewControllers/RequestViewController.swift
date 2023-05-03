@@ -94,7 +94,7 @@ class RequestViewController: UIViewController {
 
     private func bind(viewModel: RequestViewModel) {
 //        view.backgroundColor = viewModel.backgroundColor
-        view.backgroundColor = Configuration.Color.Semantic.blackWhiteBackgroundColor
+        view.backgroundColor = Configuration.Color.Semantic.tableViewBackground
 
         let input = RequestViewModelInput(copyEns: ensNameView.tapPublisher, copyAddress: addressView.tapPublisher)
         let output = viewModel.transform(input: input)

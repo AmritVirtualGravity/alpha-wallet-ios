@@ -165,3 +165,26 @@ extension UICollectionView {
         self.showsHorizontalScrollIndicator = false
     }
 }
+
+
+
+//MARK: UIScrollViewDelegate
+extension Lif3ViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView == newsCollectionView {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView == newsCollectionView {
+            if timer == nil {
+                startBannerScroll()
+            }
+        }
+    }
+    
+}
+

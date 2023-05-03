@@ -691,7 +691,6 @@ extension UISearchBar {
         searchBar.backgroundImage = UIImage()
         searchBar.placeholder = R.string.localizable.tokensSearchbarPlaceholder()
         searchBar.backgroundColor = backgroundColor
-        searchBar.superview?.backgroundColor = .clear
     }
     
 }

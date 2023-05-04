@@ -39,11 +39,11 @@ class FungibleTokenDetailsViewController: UIViewController {
     private var swapButton: UIButton =  {
         let button = UIButton()
         button.setTitle("Swap", for: .normal)
-        button.titleLabel?.textColor = UIColor.pureWhiteAndpureBlack
+        button.titleLabel?.textColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.pureWhiteAndpureBlack.cgColor
-        button.layer.backgroundColor = UIColor.pureBlackAndpureWhite.cgColor
+        button.layer.borderColor = Configuration.Color.Semantic.pureWhiteAndpureBlack.cgColor
+        button.layer.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite.cgColor
         NSLayoutConstraint.activate([
             button.heightAnchor.constraint(equalToConstant: 50),
         ])

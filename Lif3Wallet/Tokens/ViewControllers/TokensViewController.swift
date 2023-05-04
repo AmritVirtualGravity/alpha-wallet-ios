@@ -270,8 +270,8 @@ final class TokensViewController: UIViewController {
     
     private func bind(viewModel: TokensViewModel) {
         navigationItem.largeTitleDisplayMode = viewModel.largeTitleDisplayMode
-        view.backgroundColor = viewModel.backgroundColor
-        tableView.backgroundColor = viewModel.backgroundColor
+        view.backgroundColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
+        tableView.backgroundColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
         
         buttonsBar.buttons[0].setTitle(viewModel.buyCryptoTitle, for: .normal)
         

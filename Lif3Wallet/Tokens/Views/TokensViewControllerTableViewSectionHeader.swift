@@ -20,7 +20,8 @@ extension TokensViewController {
                     return
                 }
 
-                subview.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+//                subview.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+                contentView.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite
                 subview.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(subview)
                 contentView.addSubview(bottomSeparator)
@@ -85,6 +86,7 @@ extension TokensViewController {
             super.init(reuseIdentifier: reuseIdentifier)
 
             contentView.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+//            contentView.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite
             bottomSeparator.isHidden = true
             topSeparator.isHidden = true
 

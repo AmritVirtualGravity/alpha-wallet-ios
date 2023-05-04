@@ -1,4 +1,4 @@
-//
+
 //  Configuration.swift
 //  AlphaWallet
 //
@@ -168,18 +168,20 @@ struct Configuration {
 
             static let tableViewBackground = UIColor { trait in
 //                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
-                return colorFrom(trait: trait, lightColor: UIColor.lightGreyAndDarkestColor, darkColor: UIColor.lightGreyAndDarkestColor)
+//                return colorFrom(trait: trait, lightColor: UIColor.lightGreyAndDarkestColor, darkColor: UIColor.lightGreyAndDarkestColor)
+                
+                return colorFrom(trait: trait, lightColor: R.color.lightGreyAndDarkestColor()!, darkColor: R.color.lightGreyAndDarkestColor()!)
             }
             
             
             static let pureWhiteAndpureBlack = UIColor { trait in
 //                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
-                return colorFrom(trait: trait, lightColor: UIColor.pureWhiteAndpureBlack, darkColor: UIColor.pureWhiteAndpureBlack)
+                return colorFrom(trait: trait, lightColor: R.color.pureWhiteAndpureBlack()!, darkColor: R.color.pureWhiteAndpureBlack()!)
             }
             
             static let pureBlackAndpureWhite = UIColor { trait in
 //                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
-                return colorFrom(trait: trait, lightColor: UIColor.pureBlackAndpureWhite, darkColor: UIColor.pureBlackAndpureWhite)
+                return colorFrom(trait: trait, lightColor: R.color.pureBlackAndpureWhite()!, darkColor: R.color.pureBlackAndpureWhite()!)
             }
             
             static let tableViewCellBackground = UIColor { trait in

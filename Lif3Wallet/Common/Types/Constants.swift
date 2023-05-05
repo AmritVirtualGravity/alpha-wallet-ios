@@ -55,7 +55,6 @@ extension Constants {
     static let  defaultTokens = [
         DefaultToken(address: "0xbf60e7414EF09026733c1E7de72E7393888C64DA", server: .fantom),
         DefaultToken(address: "0xCbE0CA46399Af916784cADF5bCC3aED2052D6C45", server: .fantom),
-        DefaultToken(address: "0xCbE0CA46399Af916784cADF5bCC3aED2052D6C45", server: .fantom),
         DefaultToken(address: "0x4200000000000000000000000000000000000108", server: .tomb_chain),
         DefaultToken(address: "0x4200000000000000000000000000000000000109", server: .tomb_chain),
         DefaultToken(address: "0x80D2Fe89b6C6c24edfB553DAF35599649AC55283", server: .binance_smart_chain),

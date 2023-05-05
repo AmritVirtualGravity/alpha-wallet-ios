@@ -90,7 +90,7 @@ open class TokenSwapper: ObservableObject {
     public func supports(contractAddress: AlphaWallet.Address, server: RPCServer) -> Bool {
         guard let swapPaints = swapPairs(for: server) else { return false }
         let tokenToSupport = SwappableToken(address: contractAddress, server: server)
-        return swapPaints.fromTokens.contains(tokenToSupport)
+        return swapPaints.fromTokens.contains(where: { $0.address == tokenToSupport.address })
     }
 
     public func fetchSupportedTokens(for server: RPCServer) -> AnyPublisher<SwapSupportState, Never> {

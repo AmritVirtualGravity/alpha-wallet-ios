@@ -221,19 +221,3 @@ extension SwapTokensViewController: AmountTextFieldDelegate {
         return false
     }
 }
-
-// MARK: Network Call
-extension SwapTokensViewController: LiquestAPI {
-    
-    private func getLiQuestConnections(token: Token) {
-        getLiQuestConnections(fromChain: token.symbol) { [weak self] connections in
-            guard let self = self else { return }
-//            printGlobal(data: connections)
-            
-        } failure: { [weak self] error in
-            guard let self = self else { return }
-            self.alert(message: error.localizedDescription)
-        }
-    }
-    
-}

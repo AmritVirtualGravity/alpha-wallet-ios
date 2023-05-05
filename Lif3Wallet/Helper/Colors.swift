@@ -21,6 +21,7 @@ extension UIColor {
     }
     
     // lif3
+    static var pureWhiteAndDarkerColor: UIColor {  UIColor.named("pureWhiteAndDarkerColor")  }
     static var pureBlackAndpureWhite: UIColor {  UIColor.named("pureBlackAndpureWhite")  }
     static var pureWhiteAndpureBlack: UIColor {  UIColor.named("pureWhiteAndpureBlack")  }
     

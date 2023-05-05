@@ -29,21 +29,24 @@ class FungibleTokenDetailsViewController: UIViewController {
         let button = UIButton()
 //        button.setBackgroundImage(R.image.stakeButtonBackgroundImage()!, for: .normal)
         button.setTitle("Stake", for: .normal)
-        button.titleLabel?.textColor = .white
+//        button.titleLabel?.textColor = .white
+        button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1
         button.layer.borderColor = blueColor.cgColor
-        button.layer.backgroundColor = blueColor.cgColor
+        button.backgroundColor = blueColor
         return button
     }()
     private var swapButton: UIButton =  {
         let button = UIButton()
         button.setTitle("Swap", for: .normal)
-        button.titleLabel?.textColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
+//        button.titleLabel?.textColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
+        button.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .normal)
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1
         button.layer.borderColor = Configuration.Color.Semantic.pureWhiteAndpureBlack.cgColor
-        button.layer.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite.cgColor
+//        button.layer.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite.cgColor
+        button.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite
         NSLayoutConstraint.activate([
             button.heightAnchor.constraint(equalToConstant: 50),
         ])

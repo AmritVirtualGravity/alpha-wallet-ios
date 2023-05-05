@@ -115,7 +115,8 @@ class DappViewCell: UICollectionViewCell {
 
 //        contentView.backgroundColor = viewModel.backgroundColor
         contentView.layer.cornerRadius = 12
-        contentView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+//        contentView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        contentView.backgroundColor = Configuration.Color.Semantic.pureWhiteAndDarkerColor
 //        background.backgroundColor = viewModel.backgroundColor
 //        background.clipsToBounds = true
 

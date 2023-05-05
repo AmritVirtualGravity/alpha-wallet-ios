@@ -72,7 +72,7 @@ class FungibleTokenHeaderView: UIView {
     }
 
     private func bind(viewModel: FungibleTokenHeaderViewModel) {
-        backgroundColor = viewModel.backgroundColor
+        backgroundColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
 
         tokenIconImageView.subscribable = viewModel.iconImage
         blockChainTagLabel.configure(viewModel: viewModel.blockChainTagViewModel)

@@ -1,4 +1,4 @@
-//
+
 //  Configuration.swift
 //  AlphaWallet
 //
@@ -36,6 +36,10 @@ struct Configuration {
 //                return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.cod()!)
                 return tableViewBackground
             }
+            static let pureWhiteAndDarkerColor = UIColor { trait in
+                return colorFrom(trait: trait, lightColor: UIColor.pureWhiteAndDarkerColor, darkColor: UIColor.pureWhiteAndDarkerColor)
+            }
+            
             
             static let blackWhiteBackgroundColor = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.white()!, darkColor: R.color.black()!)
@@ -79,7 +83,7 @@ struct Configuration {
             static let qrCodeRectBorders = UIColor(red: 216, green: 216, blue: 216)
             
             static let primaryButtonBackground = UIColor { trait in
-                return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.alabaster()!)
+                return colorFrom(trait: trait, lightColor: R.color.alabaster()!, darkColor: R.color.alabaster()!)  //light white
             }
 //            static let primaryButtonHighlightedBackground = UIColor { trait in
 //                return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.concrete()!)

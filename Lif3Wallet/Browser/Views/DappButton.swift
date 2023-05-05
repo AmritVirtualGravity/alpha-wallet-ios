@@ -61,11 +61,13 @@ class DappButton: UIControl {
         }
 
         label.font = viewModel.font
-        label.textColor = viewModel.textColor
+//        label.textColor = viewModel.textColor
+        label.textColor = Configuration.Color.Semantic.pureBlackAndpureWhite
         label.text = viewModel.title
         layer.cornerRadius = 12
         layer.borderWidth = 1
-        backgroundColor = UIColor.white.withAlphaComponent(0.1)
+//        backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        backgroundColor = Configuration.Color.Semantic.pureWhiteAndDarkerColor
         layer.borderColor  = UIColor.clear.cgColor
     }
 }

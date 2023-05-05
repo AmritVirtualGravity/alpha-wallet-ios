@@ -101,7 +101,7 @@ extension UITabBarController {
 
 struct Colors {
     static let appText = R.color.black()!
-    static let appTint = R.color.azure()!
+    static let appTint = R.color.azure()!  // blue
     static let appWhite = UIColor.white
     static let black = UIColor(hex: "313849")
     static let concrete = R.color.concrete()!

@@ -127,7 +127,7 @@ struct GlobalConstants {
         static var isDarkModeOn: Bool? {
             get {
 //                return decode(key: "globalDeliveryMethod")
-                return userDefault.bool(forKey: "DarkModeOn") ?? false
+                return userDefault.bool(forKey: "DarkModeOn")
             }
             set {
 //                encodeAndSave(key: "globalDeliveryMethod", value: newValue)

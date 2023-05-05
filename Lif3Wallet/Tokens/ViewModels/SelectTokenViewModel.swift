@@ -31,7 +31,7 @@ final class SelectTokenViewModel {
 
     var headerBackgroundColor: UIColor = Configuration.Color.Semantic.tableViewHeaderBackground
     var title: String = R.string.localizable.assetsSelectAssetTitle()
-    
+
     init(tokenCollection: TokenCollection, tokensFilter: TokensFilter, filter: WalletFilter, swapOptionConfigurator: SwapOptionsConfigurator?, selection: SwapTokens.TokenSelection) {
         self.tokenCollection = tokenCollection
         self.tokensFilter = tokensFilter
@@ -45,12 +45,63 @@ final class SelectTokenViewModel {
         case .all, .defi, .governance, .assets, .collectiblesOnly, .keyword:
             whenFilterHasChanged = Empty<Void, Never>(completeImmediately: true).eraseToAnyPublisher()
         }
+
+        fetchTokensFromLiQuest()
+        
+    }
+    
+    func fetchTokensFromLiQuest() {
+        guard let swapOptionConfigurator = swapOptionConfigurator else { return }
+        guard let swapPairs = swapOptionConfigurator.tokenSwapper.swapPairs(for: swapOptionConfigurator.server) else { return }
+        let tokens = swapPairs.getFromTokens()
+        let newTokenViewModels = tokens.compactMap({ $0.getAppToken() }).map({ TokenViewModel(token: $0) })
+        let wallet = self.tokenCollection as! WalletDataProcessingPipeline
+        let sortedTokenViewModels = self.tokensFilter.sortDisplayedTokens(tokens: newTokenViewModels).map({ wallet.applyTicker(token: $0) }).map({ wallet.applyTokenScriptOverrides(token: $0) }).compactMap({ $0 })
+        self.filteredTokens = sortedTokenViewModels
+        self.newTokenPublisher.send(sortedTokenViewModels)
     }
 
     func selectTokenViewModel(at indexPath: IndexPath) -> Token? {
-        let token = filteredTokens[indexPath.row]
+        let tokenViewModel = filteredTokens[indexPath.row]
 
-        return tokenCollection.token(for: token.contractAddress, server: token.server)
+        return tokenViewModel.getToken()
+    }
+    
+    func filterTokens(tokenViewModels: [[TokenViewModel]]) -> [TokenViewModel] {
+        if let swapOptionConfigurator = swapOptionConfigurator {
+            var activeTokens = tokenViewModels.last!.filter({ $0.server == swapOptionConfigurator.server })
+            let activeTokensAddresses = activeTokens.map({ $0.contractAddress })
+            let fromTokens = tokenViewModels.first!.filter({  !activeTokensAddresses.contains($0.contractAddress) })
+            activeTokens += fromTokens
+            var filteredTokens = [TokenViewModel]()
+            if (  UserDefaults.standard.bool(forKey: "HideToken") == true )  {
+                filteredTokens = self.filterTokenWithZeroShortAmt(tokens: activeTokens)
+            } else {
+                filteredTokens = activeTokens
+            }
+            
+            switch selection {
+                case .from:
+                    //remove the to token and zero balance tokens
+                    filteredTokens.removeAll(where: { $0.contractAddress == swapOptionConfigurator.swapPair.to?.contractAddress })
+                    filteredTokens.removeAll(where: { $0.balance.amountShort == "0" })
+                case .to:
+                    //remove the from token
+                    filteredTokens.removeAll(where: { $0.contractAddress == swapOptionConfigurator.swapPair.from.contractAddress })
+            }
+            //remove the balance zero tokens if selecting from token
+            return tokensFilter.sortDisplayedTokens(tokens: filteredTokens)
+        } else {
+            let tokens = tokenViewModels.flatMap({ $0 })
+            var filteredTokens = [TokenViewModel]()
+            if (  UserDefaults.standard.bool(forKey: "HideToken") == true )  {
+                filteredTokens = self.filterTokenWithZeroShortAmt(tokens: tokens)
+            } else {
+                filteredTokens = tokens
+            }
+            let displayedTokens = tokensFilter.filterTokens(tokens: filteredTokens, filter: filter)
+            return tokensFilter.sortDisplayedTokens(tokens: displayedTokens)
+        }
     }
 
     func transform(input: SelectTokenViewModelInput) -> SelectTokenViewModelOutput {
@@ -61,17 +112,10 @@ final class SelectTokenViewModel {
                 _loadingState.send(.beginLoading)
             }).flatMap { [tokenCollection] _ in tokenCollection.tokenViewModels.first() }
 
-        let snapshot = tokenCollection.tokenViewModels.merge(with: whenAppearOrFetchOrFilterHasChanged)
-            .map { [tokensFilter, filter] tokens -> [TokenViewModel] in
-                var filteredTokens = [TokenViewModel]()
-                if (  UserDefaults.standard.bool(forKey: "HideToken") == true )  {
-                    filteredTokens = self.filterTokenWithZeroShortAmt(tokens: tokens)
-                } else {
-                    filteredTokens = tokens
-                }
-                let displayedTokens = tokensFilter.filterTokens(tokens: filteredTokens, filter: filter)
-                return tokensFilter.sortDisplayedTokens(tokens: displayedTokens)
-//                return tokens
+        let snapshot = newTokenPublisher.merge(with: whenAppearOrFetchOrFilterHasChanged)
+            .collect(swapOptionConfigurator == nil ? 1 : 2)
+            .map { tokens -> [TokenViewModel] in
+                self.filterTokens(tokenViewModels: tokens)
             }.handleEvents(receiveOutput: { self.filteredTokens = $0 })
             .map { self.buildViewModels(for: $0) }
             .handleEvents(receiveOutput: { [_loadingState] _ in
@@ -173,4 +217,12 @@ extension SelectTokenViewModel.ViewModelType: Hashable {
             return false
         }
     }
+}
+
+extension TokenViewModel {
+    
+    func getToken() -> Token {
+        Token(contract: contractAddress, server: server, name: name, symbol: symbol, decimals: decimals, shouldDisplay: true)
+    }
+    
 }

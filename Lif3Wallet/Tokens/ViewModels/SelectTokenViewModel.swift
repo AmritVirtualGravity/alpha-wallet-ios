@@ -25,14 +25,19 @@ final class SelectTokenViewModel {
     private var filteredTokens: [TokenViewModel] = []
     private let tokensFilter: TokensFilter
     private let whenFilterHasChanged: AnyPublisher<Void, Never>
+    private let newTokenPublisher = CurrentValueSubject<[TokenViewModel],Never>([])
+    private let swapOptionConfigurator: SwapOptionsConfigurator?
+    private let selection: SwapTokens.TokenSelection
 
     var headerBackgroundColor: UIColor = Configuration.Color.Semantic.tableViewHeaderBackground
     var title: String = R.string.localizable.assetsSelectAssetTitle()
-
-    init(tokenCollection: TokenCollection, tokensFilter: TokensFilter, filter: WalletFilter) {
+    
+    init(tokenCollection: TokenCollection, tokensFilter: TokensFilter, filter: WalletFilter, swapOptionConfigurator: SwapOptionsConfigurator?, selection: SwapTokens.TokenSelection) {
         self.tokenCollection = tokenCollection
         self.tokensFilter = tokensFilter
         self.filter = filter
+        self.swapOptionConfigurator = swapOptionConfigurator
+        self.selection = selection
 
         switch filter {
         case .filter(let extendedFilter):

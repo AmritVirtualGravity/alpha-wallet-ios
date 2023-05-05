@@ -22,4 +22,8 @@ public struct SwapPairs {
             }
         }
     }
+    
+    public func getFromTokens() -> [SwappableToken] {
+        fromTokens
+    }
 }

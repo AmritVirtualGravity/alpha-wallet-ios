@@ -119,18 +119,33 @@ class VerticalButtonsBar: UIView {
 
     private func setup(viewModel: ButtonsBarViewModel, view: ContainerViewWithShadow<BarButton>) {
         view.configureShadow(color: viewModel.buttonShadowColor, offset: viewModel.buttonShadowOffset, opacity: viewModel.buttonShadowOpacity, radius: viewModel.buttonShadowRadius, cornerRadius: viewModel.buttonCornerRadius)
-
+        
+        view.layer.cornerRadius = viewModel.buttonCornerRadius
+        
         let button = view.childView
-        button.setBackgroundColor(viewModel.buttonBackgroundColor, forState: .normal)
-        button.setBackgroundColor(viewModel.disabledButtonBackgroundColor, forState: .disabled)
+        
+        switch viewModel {
+        case .primaryButton:
+            button.setBorderColor(viewModel.buttonBorderColor, for: .normal)
+            button.setBorderColor(viewModel.disabledButtonBorderColor, for: .disabled)
+            button.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite
+//            button.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .normal)
+//            button.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .disabled)
+            button.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .normal)
+            button.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .disabled)
+        default:
+            button.setBorderColor(viewModel.buttonBorderColor, for: .normal)
+            button.setBorderColor(viewModel.disabledButtonBorderColor, for: .disabled)
+            button.setBackgroundColor(viewModel.buttonBackgroundColor, forState: .normal)
+            button.setBackgroundColor(viewModel.disabledButtonBackgroundColor, forState: .disabled)
+            button.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+            button.setTitleColor(viewModel.disabledButtonTitleColor, for: .disabled)
+        }
+        
 
-        viewModel.highlightedButtonBackgroundColor.flatMap { button.setBackgroundColor($0, forState: .highlighted) }
-        viewModel.highlightedButtonTitleColor.flatMap { button.setTitleColor($0, for: .highlighted) }
+//        viewModel.highlightedButtonBackgroundColor.flatMap { button.setBackgroundColor($0, forState: .highlighted) }
+//        viewModel.highlightedButtonTitleColor.flatMap { button.setTitleColor($0, for: .highlighted) }
 
-        button.setTitleColor(viewModel.buttonTitleColor, for: .normal)
-        button.setTitleColor(viewModel.disabledButtonTitleColor, for: .disabled)
-        button.setBorderColor(viewModel.buttonBorderColor, for: .normal)
-        button.setBorderColor(viewModel.disabledButtonBorderColor, for: .disabled)
         button.titleLabel?.font = viewModel.buttonFont
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         //So long titles (that cause font to be adjusted) have some margins on the left and right

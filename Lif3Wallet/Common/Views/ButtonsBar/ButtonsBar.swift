@@ -337,7 +337,7 @@ class HorizontalButtonsBar: UIView, ButtonsBarViewType {
     }
 }
 
-struct ButtonsBarViewModel {
+struct ButtonsBarViewModel: Equatable {
 
     static let primaryButton = ButtonsBarViewModel(
         buttonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackground,

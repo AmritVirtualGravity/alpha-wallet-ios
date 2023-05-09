@@ -157,7 +157,7 @@ extension EmptyView {
             .configure(title: R.string.localizable.emptyViewNoTokensLabelTitle())
             .configure(buttonTitle: R.string.localizable.refresh(), width: 240, buttonSelectionClosure: completion)
             .configure(spacing: 30)
-            .configure(insets: .init(top: DataEntry.Metric.SearchBar.height, left: 0, bottom: 0, right: 0))
+            .configure(insets: .init(top: 100, left: 0, bottom: 0, right: 0))
     }
 
     static func walletSessionEmptyView(completion: @escaping () -> Void) -> EmptyView {

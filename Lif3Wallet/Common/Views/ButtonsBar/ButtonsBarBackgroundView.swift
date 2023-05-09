@@ -31,7 +31,6 @@ class ButtonsBarBackgroundView: UIView {
         addSubview(buttonsBar)
         translatesAutoresizingMaskIntoConstraints = false
 //        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
-        backgroundColor = .clear
         NSLayoutConstraint.activate([
             separatorLine.leadingAnchor.constraint(equalTo: leadingAnchor),
             separatorLine.trailingAnchor.constraint(equalTo: trailingAnchor),

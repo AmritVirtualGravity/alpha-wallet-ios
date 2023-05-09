@@ -21,6 +21,7 @@ protocol TokensCoordinatorDelegate: CanOpenURL, SendTransactionDelegate, BuyCryp
     func whereAreMyTokensSelected(in coordinator: TokensCoordinator)
     func didSelectAccount(account: Wallet, in coordinator: TokensCoordinator)
     func viewWillAppearOnce(in coordinator: TokensCoordinator)
+    func openDeBankUrl(in coordinator: TokensCoordinator)
 }
 
 class TokensCoordinator: Coordinator {
@@ -247,7 +248,11 @@ extension TokensCoordinator: TokensViewControllerDelegate {
             strongSelf.delegate?.didTap(suggestedPaymentFlow: .payment(type: .request, server: server), viewController: .none, in: strongSelf)
         }
         alertController.addAction(showMyWalletAddressAction)
-
+        let viewOnDeBankAction = UIAlertAction(title: R.string.localizable.settingsViewOnDebankTitle(), style: .default) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.delegate?.openDeBankUrl(in: strongSelf)
+        }
+        alertController.addAction(viewOnDeBankAction)
         if config.enabledServers.contains(.main) {
             let buyAction = UIAlertAction(title: R.string.localizable.buyCryptoTitle(), style: .default) { [weak self] _ in
                 guard let strongSelf = self else { return }

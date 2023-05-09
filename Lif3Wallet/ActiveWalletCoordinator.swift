@@ -139,7 +139,7 @@ class ActiveWalletCoordinator: NSObject, Coordinator {
     private let tokenScriptOverridesFileManager: TokenScriptOverridesFileManager
     private var cancelable = Set<AnyCancellable>()
     private let networkService: NetworkService
-    
+    private var defaultTokenFailureDictionary = [AlphaWallet.Address:Int]()
 
 
     init(navigationController: UINavigationController = NavigationController(),
@@ -277,9 +277,17 @@ class ActiveWalletCoordinator: NSObject, Coordinator {
     private func importToken(contract: AlphaWallet.Address, server: RPCServer) {
         guard let session = sessionsProvider.session(for: server) else { return }
         session.importToken.importToken(for: contract, onlyIfThereIsABalance: false)
-            .sinkAsync(receiveCompletion: { result in
+            .sinkAsync(receiveCompletion: { [weak self] result in
+                guard let self = self else { return }
                 guard case .failure(let error) = result else { return }
-                debugLog("Error while adding imported token contract: \(contract.eip55String) server: \(server) wallet: \(self.wallet.address.eip55String) error: \(error)")
+                guard self.defaultTokenFailureDictionary[contract] != 5 else {
+                    print("Error while adding imported token contract: \(contract.eip55String) server: \(server) wallet: \(self.wallet.address.eip55String) error: \(error)")
+                    debugLog("Error while adding imported token contract: \(contract.eip55String) server: \(server) wallet: \(self.wallet.address.eip55String) error: \(error)")
+                    return }
+                print("Error while adding imported token contract: \(contract.eip55String) server: \(server)fetching")
+                self.defaultTokenFailureDictionary[contract, default: 0] += 1
+                self.importToken(contract: contract, server: server)
+                
             })
     }
 

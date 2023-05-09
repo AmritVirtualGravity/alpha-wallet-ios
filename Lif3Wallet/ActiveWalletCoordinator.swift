@@ -1512,7 +1512,7 @@ extension ActiveWalletCoordinator {
 
 extension ActiveWalletCoordinator: lifeViewControllerDelegate {
     func didTapFarm() {
-        guard let url = URL(string: Constants.lifeWebUrl) else {
+        guard let url = URL(string: "https://lif3.com/garden") else {
             return
         }
         openURLInBrowser(url: url)
@@ -1533,7 +1533,7 @@ extension ActiveWalletCoordinator: lifeViewControllerDelegate {
     }
     
     func didTapSingleStake() {
-        guard let url = URL(string: "https://lif3.com/staking") else {
+        guard let url = URL(string: "https://lif3.com/earn") else { // same as Constants.lifeNurseryWebUrl
             return
         }
         openURLInBrowser(url: url)
@@ -1554,7 +1554,7 @@ extension ActiveWalletCoordinator: lifeViewControllerDelegate {
     }
     
     func didTapNursery() {
-        guard let url = URL(string: Constants.lifeNurseryWebUrl) else {
+        guard let url = URL(string: Constants.lifeNurseryWebUrl) else { // same as didTapSingleStake
             return
         }
         openURLInBrowser(url: url)

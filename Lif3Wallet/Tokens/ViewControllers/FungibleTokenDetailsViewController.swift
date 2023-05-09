@@ -38,7 +38,7 @@ class FungibleTokenDetailsViewController: UIViewController {
     }()
     private var swapButton: UIButton =  {
         let button = UIButton()
-        button.setTitle("Swap", for: .normal)
+        button.setTitle("Swap (Beta)", for: .normal)
         button.titleLabel?.textColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1

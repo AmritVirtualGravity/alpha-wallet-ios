@@ -85,7 +85,8 @@ public class SendTransaction {
 
     private func signAndSend(transaction: UnsignedTransaction) -> Promise<ConfirmResult> {
         firstly {
-            keystore.signTransactionPromise(transaction, prompt: prompt)
+           let result: Promise<Data> = keystore.signTransactionPromise(transaction, prompt: prompt)
+            return result
         }.then { data -> Promise<ConfirmResult> in
             switch self.confirmType {
             case .sign:

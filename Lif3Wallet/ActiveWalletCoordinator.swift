@@ -1504,7 +1504,7 @@ extension ActiveWalletCoordinator {
 
 extension ActiveWalletCoordinator: lifeViewControllerDelegate {
     func didTapFarm() {
-        guard let url = URL(string: Constants.lifeWebUrl) else {
+        guard let url = URL(string: "https://lif3.com/garden") else {
             return
         }
         openURLInBrowser(url: url)

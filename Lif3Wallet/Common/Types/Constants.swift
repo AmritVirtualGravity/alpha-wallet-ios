@@ -43,6 +43,7 @@ extension Constants {
     static let swapWebsiteUrl  = "https://lif3.com/swap"
     //Life URL
     static let lifeWebUrl  = "https://lif3.com"
+    
     static let lifeSwapTokenWebUrl  = "https://lif3.com/swap"
     static let lifeGardenWebUrl  = "https://lif3.com/garden"
     static let lifeFountainWebUrl  = "https://lif3.com/fountain"

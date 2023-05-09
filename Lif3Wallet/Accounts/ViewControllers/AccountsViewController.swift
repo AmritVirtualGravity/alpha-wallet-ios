@@ -242,7 +242,7 @@ extension UITableViewDiffableDataSource {
     }
 
     func delete(at indexPath: IndexPath, animatingDifferences: Bool = true) {
-        let item = item(at: indexPath)
+        let item: ItemIdentifierType = item(at: indexPath)
         var snapshot = snapshot()
         snapshot.deleteItems([item])
         apply(snapshot, animatingDifferences: animatingDifferences)

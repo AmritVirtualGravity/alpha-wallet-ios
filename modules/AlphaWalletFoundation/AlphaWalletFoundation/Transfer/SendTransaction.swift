@@ -85,7 +85,7 @@ public class SendTransaction {
 
     private func signAndSend(transaction: UnsignedTransaction) -> Promise<ConfirmResult> {
         firstly {
-            Promise<Data> = keystore.signTransactionPromise(transaction, prompt: prompt)
+            keystore.signTransactionPromise(transaction, prompt: prompt)
         }.then { data -> Promise<ConfirmResult> in
             switch self.confirmType {
             case .sign:
@@ -95,7 +95,7 @@ public class SendTransaction {
             }
         }
     }
-    
+
     private func sendTransactionRequest(transaction: UnsignedTransaction, data: Data) -> Promise<ConfirmResult> {
         let rawTransaction = SendRawTransactionRequest(signedTransaction: data.hexEncoded)
         let (rpcURL, rpcHeaders) = rpcURLAndHeaders

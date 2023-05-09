@@ -306,6 +306,8 @@ class ImportWalletViewController: UIViewController {
         importSeedDescriptionLabel.attributedText = viewModel.importSeedAttributedText
 
         importButton.addTarget(self, action: #selector(importWallet), for: .touchUpInside)
+//        importButton.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite
+//        importButton.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .normal)
         configureImportButtonTitle(R.string.localizable.importWalletImportButtonTitle())
     }
 

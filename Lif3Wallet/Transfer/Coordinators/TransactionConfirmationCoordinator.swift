@@ -146,7 +146,6 @@ extension TransactionConfirmationCoordinator: TransactionConfirmationViewControl
         }
     }
 
-    // MARK: sendTransaction
     private func sendTransaction() -> Promise<ConfirmResult> {
         let prompt = R.string.localizable.keystoreAccessKeySign()
         let sender = SendTransaction(session: configurator.session, keystore: keystore, confirmType: configuration.confirmType, config: configurator.session.config, analytics: analytics, prompt: prompt)

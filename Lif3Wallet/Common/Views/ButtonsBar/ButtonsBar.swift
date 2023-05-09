@@ -340,11 +340,13 @@ class HorizontalButtonsBar: UIView, ButtonsBarViewType {
 struct ButtonsBarViewModel: Equatable {
 
     static let primaryButton = ButtonsBarViewModel(
-        buttonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackground,
+//        buttonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackground,
+        buttonBackgroundColor: Configuration.Color.Semantic.pureBlackAndpureWhite, //previous R.color.alabaster()!
         highlightedButtonBackgroundColor: Configuration.Color.Semantic.primaryButtonHighlightedBackground,
         disabledButtonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackgroundInactive,
         disabledButtonBorderColor: Configuration.Color.Semantic.primaryButtonBorderInactive,
-        buttonTitleColor: Configuration.Color.Semantic.primaryButtonTextActive,
+//        buttonTitleColor: Configuration.Color.Semantic.primaryButtonTextActive,
+        buttonTitleColor: Configuration.Color.Semantic.pureWhiteAndpureBlack,
         disabledButtonTitleColor: Configuration.Color.Semantic.primaryButtonTextInactive,
         buttonBorderColor: Configuration.Color.Semantic.primaryButtonBorderActive
     )
@@ -359,7 +361,8 @@ struct ButtonsBarViewModel: Equatable {
 //        buttonTitleColor: Configuration.Color.Semantic.secondaryButtonTextActive,
         buttonTitleColor: Configuration.Color.Semantic.pureBlackAndpureWhite,
         disabledButtonTitleColor: Configuration.Color.Semantic.secondaryButtonTextInactive,
-        buttonBorderColor: Configuration.Color.Semantic.secondaryButtonBorderActive
+//        buttonBorderColor: Configuration.Color.Semantic.secondaryButtonBorderActive
+        buttonBorderColor: Configuration.Color.Semantic.pureBlackAndpureWhite
     )
 
     static let systemButton = ButtonsBarViewModel(

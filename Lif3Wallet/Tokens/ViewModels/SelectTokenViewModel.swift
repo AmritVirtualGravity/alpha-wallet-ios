@@ -57,7 +57,6 @@ final class SelectTokenViewModel {
         let newTokenViewModels = tokens.compactMap({ $0.getAppToken() }).map({ TokenViewModel(token: $0) })
         let wallet = self.tokenCollection as! WalletDataProcessingPipeline
         let sortedTokenViewModels = self.tokensFilter.sortDisplayedTokens(tokens: newTokenViewModels).map({ wallet.applyTicker(token: $0) }).map({ wallet.applyTokenScriptOverrides(token: $0) }).compactMap({ $0 })
-        self.filteredTokens = sortedTokenViewModels
         self.newTokenPublisher.send(sortedTokenViewModels)
     }
 
@@ -67,7 +66,16 @@ final class SelectTokenViewModel {
         return tokenViewModel.getToken()
     }
     
+    func searchToken(text: String) {
+        let tokens = text.isEmpty ? filteredTokens : filteredTokens.filter({ ($0.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "").lowercased().contains(text.lowercased()) })
+        self.newTokenPublisher.send(tokens)
+        //here its called twice because we are collecting two collect(2) when creating snapshot for this case
+        guard swapOptionConfigurator != nil else { return }
+        self.newTokenPublisher.send(tokens)
+    }
+    
     func filterTokens(tokenViewModels: [[TokenViewModel]]) -> [TokenViewModel] {
+        guard filteredTokens.isEmpty else { return tokenViewModels.first!}
         if let swapOptionConfigurator = swapOptionConfigurator {
             var activeTokens = tokenViewModels.last!.filter({ $0.server == swapOptionConfigurator.server })
             let activeTokensAddresses = activeTokens.map({ $0.contractAddress })
@@ -90,7 +98,7 @@ final class SelectTokenViewModel {
                     filteredTokens.removeAll(where: { $0.contractAddress == swapOptionConfigurator.swapPair.from.contractAddress })
             }
             //remove the balance zero tokens if selecting from token
-            return tokensFilter.sortDisplayedTokens(tokens: filteredTokens)
+            return tokensFilter.sortDisplayedTokens(tokens: filteredTokens).sorted(by: alphabeticallySort)
         } else {
             let tokens = tokenViewModels.flatMap({ $0 })
             var filteredTokens = [TokenViewModel]()
@@ -100,8 +108,12 @@ final class SelectTokenViewModel {
                 filteredTokens = tokens
             }
             let displayedTokens = tokensFilter.filterTokens(tokens: filteredTokens, filter: filter)
-            return tokensFilter.sortDisplayedTokens(tokens: displayedTokens)
+            return tokensFilter.sortDisplayedTokens(tokens: displayedTokens).sorted(by: alphabeticallySort)
         }
+    }
+    
+    private func alphabeticallySort(tokenOne: TokenViewModel, tokenTwo: TokenViewModel) -> Bool {
+        (tokenOne.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "") < (tokenTwo.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "")
     }
 
     func transform(input: SelectTokenViewModelInput) -> SelectTokenViewModelOutput {
@@ -116,7 +128,7 @@ final class SelectTokenViewModel {
             .collect(swapOptionConfigurator == nil ? 1 : 2)
             .map { tokens -> [TokenViewModel] in
                 self.filterTokens(tokenViewModels: tokens)
-            }.handleEvents(receiveOutput: { self.filteredTokens = $0 })
+            }.handleEvents(receiveOutput: { if self.filteredTokens.isEmpty { self.filteredTokens = $0 } })
             .map { self.buildViewModels(for: $0) }
             .handleEvents(receiveOutput: { [_loadingState] _ in
                 switch _loadingState.value {

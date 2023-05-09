@@ -168,7 +168,6 @@ struct Configuration {
 
             static let labelTextActive = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.mine()!, darkColor: R.color.white()!)
-//                mine -> light grey
             }
 
             static let tableViewBackground = UIColor { trait in

@@ -28,6 +28,13 @@ class SelectTokenViewController: UIViewController {
 
         return tableView
     }()
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Search"
+        searchBar.delegate = self
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
     private lazy var dataSource = makeDataSource()
     private let willAppear = PassthroughSubject<Void, Never>()
     private let fetch = PassthroughSubject<Void, Never>()
@@ -38,11 +45,24 @@ class SelectTokenViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
+        view.addSubview(searchBar)
         view.addSubview(tableView)
-
+        
         NSLayoutConstraint.activate([
-            tableView.anchorsConstraint(to: view)
+            
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.heightAnchor.constraint(equalToConstant: 30),
+            
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
         ])
+
+       
 
         loadingView = LoadingView.tokenSelectionLoadingView()
         emptyView = EmptyView.tokensEmptyView(completion: { [fetch] in
@@ -125,6 +145,14 @@ extension SelectTokenViewController {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         nil
     }
+}
+
+extension SelectTokenViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.searchToken(text: searchText)
+    }
+    
 }
 
 fileprivate extension SelectTokenViewController {

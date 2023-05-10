@@ -237,7 +237,7 @@ public final class WalletDataProcessingPipeline: TokensProcessingPipeline {
         return .just(overrides)
     }
 
-    private func applyTokenScriptOverrides(token: TokenViewModel?) -> TokenViewModel? {
+    public func applyTokenScriptOverrides(token: TokenViewModel?) -> TokenViewModel? {
         guard let token = token else { return token }
         guard let session = sessionsProvider.session(for: token.server) else { return token }
         let overrides = session.tokenAdaptor.tokenScriptOverrides(token: token)
@@ -248,7 +248,7 @@ public final class WalletDataProcessingPipeline: TokensProcessingPipeline {
         return .just(tokens.compactMap { applyTicker(token: $0) })
     }
 
-    private func applyTicker(token: TokenViewModel?) -> TokenViewModel? {
+    public func applyTicker(token: TokenViewModel?) -> TokenViewModel? {
         guard let token = token else { return nil }
         let ticker = coinTickersFetcher.ticker(for: .init(address: token.contractAddress, server: token.server), currency: currencyService.currency)
         let balance: BalanceViewModel

@@ -94,12 +94,15 @@ final class SwapTokensCoordinator: Coordinator {
         coordinator.start()
     }
 
-    private func showSelectToken() { //#4
+    private func showSelectToken(selection: SwapTokens.TokenSelection) { //#4
         let coordinator = SelectTokenCoordinator(
             tokenCollection: tokenCollection,
             tokensFilter: tokensFilter,
             navigationController: navigationController,
-            filter: .filter(tokenSelectionProvider))
+            filter: .filter(tokenSelectionProvider),
+            swapOptionConfigurator: configurator,
+            selection: selection
+        )
 
         coordinator.rootViewController.navigationItem.leftBarButtonItem = UIBarButtonItem.logoBarButton()
         coordinator.delegate = self
@@ -157,7 +160,7 @@ extension SwapTokensCoordinator: SwapTokensViewControllerDelegate {
 
     func chooseTokenSelected(in viewController: SwapTokensViewController, selection: SwapTokens.TokenSelection) { //#2
         tokenSelectionProvider.set(pendingTokenSelection: selection)
-        showSelectToken()
+        showSelectToken(selection: selection)
     }
 
     func swapSelected(in viewController: SwapTokensViewController) {

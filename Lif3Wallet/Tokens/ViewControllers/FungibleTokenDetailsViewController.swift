@@ -111,7 +111,8 @@ class FungibleTokenDetailsViewController: UIViewController {
     fileprivate func setup() {
         stakeButton.addTarget(self, action: #selector(didTapStake), for: .touchUpInside)
         swapButton.addTarget(self, action: #selector(didTapSwap), for: .touchUpInside)
-        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+//        view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
+        view.backgroundColor = UIColor.pureWhiteAndpureBlack
         bind(viewModel: viewModel)
     }
     

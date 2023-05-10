@@ -23,6 +23,7 @@ final class SelectTokenViewModel {
     private let tokenCollection: TokenCollection
     private var cancelable = Set<AnyCancellable>()
     private var filteredTokens: [TokenViewModel] = []
+    private var displayedTokens: [TokenViewModel] = []
     private let tokensFilter: TokensFilter
     private let whenFilterHasChanged: AnyPublisher<Void, Never>
     private let newTokenPublisher = CurrentValueSubject<[TokenViewModel],Never>([])
@@ -61,13 +62,14 @@ final class SelectTokenViewModel {
     }
 
     func selectTokenViewModel(at indexPath: IndexPath) -> Token? {
-        let tokenViewModel = filteredTokens[indexPath.row]
+        let tokenViewModel = displayedTokens.isEmpty ? filteredTokens[indexPath.row] :  displayedTokens[indexPath.row]
 
         return tokenViewModel.getToken()
     }
     
     func searchToken(text: String) {
         let tokens = text.isEmpty ? filteredTokens : filteredTokens.filter({ ($0.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "").lowercased().contains(text.lowercased()) })
+        displayedTokens = tokens
         self.newTokenPublisher.send(tokens)
         //here its called twice because we are collecting two collect(2) when creating snapshot for this case
         guard swapOptionConfigurator != nil else { return }

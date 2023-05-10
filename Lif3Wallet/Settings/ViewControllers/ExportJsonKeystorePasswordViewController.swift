@@ -66,6 +66,18 @@ class ExportJsonKeystorePasswordViewController: UIViewController {
 
         view.backgroundColor = Configuration.Color.Semantic.defaultViewBackground
         bind(viewModel: viewModel)
+//        setButtonColors()
+    }
+    
+    // Overwriting for .disabled button
+    private func setButtonColors() {
+       let viewModel = ButtonsBarViewModel.primaryButton
+        exportJsonButton.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .normal)
+        exportJsonButton.setBackgroundColor(viewModel.disabledButtonBackgroundColor, forState: .disabled)
+        exportJsonButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        exportJsonButton.setTitleColor(viewModel.disabledButtonTitleColor, for: .disabled)
+        exportJsonButton.titleLabel?.font = viewModel.buttonFont
+        exportJsonButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
 
     override func viewDidAppear(_ animated: Bool) {

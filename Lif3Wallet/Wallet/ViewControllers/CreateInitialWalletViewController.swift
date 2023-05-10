@@ -18,7 +18,7 @@ class CreateInitialWalletViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    private let buttonsBar = VerticalButtonsBar(numberOfButtons: 2)
+    private let buttonsBar = VerticalButtonsBar(numberOfButtons: 2, isCameFromCreateInitialWalletPage: true)
     weak var delegate: CreateInitialWalletViewControllerDelegate?
 
     init(keystore: Keystore) {

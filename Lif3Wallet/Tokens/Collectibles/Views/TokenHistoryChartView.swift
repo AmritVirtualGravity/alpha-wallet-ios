@@ -20,9 +20,9 @@ class TokenHistoryChartView: UIView {
 
     private lazy var chartView: LineChartView = {
         let chartView = LineChartView()
-
+        
         chartView.translatesAutoresizingMaskIntoConstraints = false
-        chartView.backgroundColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
+        chartView.backgroundColor = .clear
         chartView.drawGridBackgroundEnabled = false
         chartView.drawBordersEnabled = false
         
@@ -51,7 +51,6 @@ class TokenHistoryChartView: UIView {
         marker.chartView = chartView
         marker.minimumSize = CGSize(width: 80, height: 40)
         chartView.marker = marker
-
         return chartView
     }()
 
@@ -68,7 +67,6 @@ class TokenHistoryChartView: UIView {
     init(viewModel: TokenHistoryChartViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
-
         addSubview(chartView)
         addSubview(periodSelectorView)
 
@@ -84,7 +82,6 @@ class TokenHistoryChartView: UIView {
             periodSelectorView.trailingAnchor.constraint(equalTo: trailingAnchor),
             periodSelectorView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-
         bind(viewModel: viewModel)
         periodSelectorView.set(selectedIndex: viewModel.initialSelectionIndex)
     }

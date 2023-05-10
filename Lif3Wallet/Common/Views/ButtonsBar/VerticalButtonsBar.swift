@@ -22,10 +22,12 @@ class VerticalButtonsBar: UIView {
 
     // MARK: Public
     var buttons: [UIButton] = []
+    var isCameFromCreateInitialWalletPage: Bool = false
 
     // MARK: - Init
 
-    init(numberOfButtons: Int) {
+    init(numberOfButtons: Int, isCameFromCreateInitialWalletPage: Bool = false) {
+        self.isCameFromCreateInitialWalletPage = isCameFromCreateInitialWalletPage
         buttonCount = numberOfButtons
         maxButtonCount = numberOfButtons
         super.init(frame: .zero)
@@ -126,13 +128,24 @@ class VerticalButtonsBar: UIView {
         
         switch viewModel {
         case .primaryButton:
-            button.setBorderColor(viewModel.buttonBorderColor, for: .normal)
-            button.setBorderColor(viewModel.disabledButtonBorderColor, for: .disabled)
-            button.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite
-//            button.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .normal)
-//            button.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .disabled)
-            button.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .normal)
-            button.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .disabled)
+            if isCameFromCreateInitialWalletPage {
+                button.setBorderColor(.white, for: .normal)
+                button.setBorderColor(.white, for: .disabled)
+                button.backgroundColor = .white
+    //            button.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .normal)
+    //            button.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .disabled)
+                button.setTitleColor(.black, for: .normal)
+                button.setTitleColor(.black, for: .disabled)
+            } else {
+                button.setBorderColor(viewModel.buttonBorderColor, for: .normal)
+                button.setBorderColor(viewModel.disabledButtonBorderColor, for: .disabled)
+                button.backgroundColor = Configuration.Color.Semantic.pureBlackAndpureWhite
+    //            button.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .normal)
+    //            button.setBackgroundColor(Configuration.Color.Semantic.pureBlackAndpureWhite, forState: .disabled)
+                button.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .normal)
+                button.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .disabled)
+            }
+           
         default:
             button.setBorderColor(viewModel.buttonBorderColor, for: .normal)
             button.setBorderColor(viewModel.disabledButtonBorderColor, for: .disabled)

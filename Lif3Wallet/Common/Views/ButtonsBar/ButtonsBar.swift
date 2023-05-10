@@ -233,6 +233,7 @@ class HorizontalButtonsBar: UIView, ButtonsBarViewType {
         button.cornerRadius = viewModel.buttonCornerRadius
         button.borderColor = viewModel.buttonBorderColor
         button.borderWidth = viewModel.buttonBorderWidth
+        
     }
 
     private func resetIsHiddenObservers() {
@@ -340,28 +341,34 @@ class HorizontalButtonsBar: UIView, ButtonsBarViewType {
 struct ButtonsBarViewModel: Equatable {
 
     static let primaryButton = ButtonsBarViewModel(
-        buttonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackground,
-        highlightedButtonBackgroundColor: Configuration.Color.Semantic.primaryButtonHighlightedBackground,
-        disabledButtonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackgroundInactive,
-        disabledButtonBorderColor: Configuration.Color.Semantic.primaryButtonBorderInactive,
-        buttonTitleColor: Configuration.Color.Semantic.primaryButtonTextActive,
-        disabledButtonTitleColor: Configuration.Color.Semantic.primaryButtonTextInactive,
-        buttonBorderColor: Configuration.Color.Semantic.primaryButtonBorderActive
+//        buttonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackground,
+        buttonBackgroundColor: Configuration.Color.Semantic.pureBlackAndpureWhite, //previous R.color.alabaster()!
+        highlightedButtonBackgroundColor: Configuration.Color.Semantic.pureBlackAndpureWhite,
+//        disabledButtonBackgroundColor: Configuration.Color.Semantic.primaryButtonBackgroundInactive,
+        disabledButtonBackgroundColor: Configuration.Color.Semantic.pureBlackAndpureWhite,
+//        disabledButtonBorderColor: Configuration.Color.Semantic.primaryButtonBorderInactive,
+        disabledButtonBorderColor: Configuration.Color.Semantic.pureBlackAndpureWhite,
+//        buttonTitleColor: Configuration.Color.Semantic.primaryButtonTextActive,
+        buttonTitleColor: Configuration.Color.Semantic.pureWhiteAndpureBlack,
+        disabledButtonTitleColor: Configuration.Color.Semantic.pureWhiteAndpureBlack,
+        buttonBorderColor: Configuration.Color.Semantic.pureBlackAndpureWhite
     )
     
 
     static let secondaryButton = ButtonsBarViewModel(
 //        buttonBackgroundColor: Configuration.Color.Semantic.secondaryButtonBackground,
         buttonBackgroundColor: Configuration.Color.Semantic.pureWhiteAndpureBlack,
-        highlightedButtonBackgroundColor: Configuration.Color.Semantic.secondaryButtonHighlightedBackground,
-        disabledButtonBackgroundColor: Configuration.Color.Semantic.secondaryButtonBackgroundInactive,
-        disabledButtonBorderColor: Configuration.Color.Semantic.secondaryButtonBorderInactive,
-//        buttonTitleColor: Configuration.Color.Semantic.secondaryButtonTextActive,
+        highlightedButtonBackgroundColor: Configuration.Color.Semantic.pureWhiteAndpureBlack,
+        disabledButtonBackgroundColor: Configuration.Color.Semantic.pureWhiteAndpureBlack,
+        disabledButtonBorderColor: UIColor.pureBlackAndpureWhite,
         buttonTitleColor: Configuration.Color.Semantic.pureBlackAndpureWhite,
-        disabledButtonTitleColor: Configuration.Color.Semantic.secondaryButtonTextInactive,
-        buttonBorderColor: Configuration.Color.Semantic.secondaryButtonBorderActive
+//        buttonTitleColor: Configuration.Color.Semantic.pureBlackAndpureWhite,
+        disabledButtonTitleColor: Configuration.Color.Semantic.pureBlackAndpureWhite,
+//        buttonBorderColor: Configuration.Color.Semantic.secondaryButtonBorderActive
+        buttonBorderColor: UIColor.pureBlackAndpureWhite
     )
-
+#warning("border color is not dynamically changing check in secondaryButton")
+    
     static let systemButton = ButtonsBarViewModel(
         buttonBackgroundColor: Colors.appWhite,
         highlightedButtonBackgroundColor: Colors.appWhite,

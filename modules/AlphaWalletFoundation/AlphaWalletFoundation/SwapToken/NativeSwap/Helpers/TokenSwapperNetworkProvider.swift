@@ -164,7 +164,8 @@ fileprivate extension LiQuestTokenSwapperNetworkProvider {
                 "toChainId": toToken.server.chainID,
                 "fromTokenAddress": fromToken.address.eip55String,
                 "toTokenAddress": toToken.address.eip55String,
-                "fromAmount": String(fromAmount)
+                "fromAmount": String(fromAmount),
+                "integrator": "lif3"
             ]).appending(httpHeaders: ["accept": "application/json"])
         }
     }
@@ -193,6 +194,7 @@ fileprivate extension LiQuestTokenSwapperNetworkProvider {
                 "slippage": slippage,
                 //"allowExchanges": "paraswap,openocean,0x,uniswap,sushiswap,quickswap,honeyswap,pancakeswap,spookyswap,viperswap,solarbeam,dodo",
                 "allowExchanges": exchange,
+                "integrator": "lif3"
             ])
         }
     }

@@ -95,12 +95,13 @@ class AppCoordinator: NSObject, Coordinator {
         honeySwapService.theme = navigationController.traitCollection.honeyswapTheme
 
         let quickSwap = QuickSwap(action: R.string.localizable.aWalletTokenErc20ExchangeOnQuickSwapButtonTitle())
+        let tombSwap = TombSwap(action: R.string.localizable.aWalletTokenErc20ExchangeOnTombSwapButtonTitle())
         quickSwap.theme = navigationController.traitCollection.uniswapTheme
         var availableSwapProviders: [SupportedTokenActionsProvider & TokenActionProvider] = [
             honeySwapService,
             quickSwap,
             Oneinch(action: R.string.localizable.aWalletTokenErc20ExchangeOn1inchButtonTitle(), networkProvider: OneinchNetworkProvider(networkService: networkService)),
-            //uniswap
+            tombSwap
         ]
         availableSwapProviders += Features.default.isAvailable(.isSwapEnabled) ? [SwapTokenNativeProvider(tokenSwapper: tokenSwapper)] : []
 

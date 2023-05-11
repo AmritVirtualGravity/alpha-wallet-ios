@@ -121,9 +121,16 @@ final class SelectTokenViewModel {
     
     private func lif3TokenSort(_ tokens: [TokenViewModel]) -> [TokenViewModel] {
         let tokenNames = ["lif3","lshare","l3usd"]
-        let lif3Tokens = tokens.filter({ tokenNames.contains(($0.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "").lowercased()) })
-        let otherTokens = tokens.filter({ !tokenNames.contains(($0.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "").lowercased()) })
-        return lif3Tokens + otherTokens
+        
+        var allTokens = tokens
+        var lif3Tokens = [TokenViewModel]()
+        
+        for tokenName in tokenNames {
+            if let tokenIndex = allTokens.firstIndex(where: { ($0.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "").lowercased() == tokenName }) {
+                lif3Tokens.append(allTokens.remove(at: tokenIndex))
+            }
+        }
+        return lif3Tokens + allTokens
     }
 
     func transform(input: SelectTokenViewModelInput) -> SelectTokenViewModelOutput {

@@ -100,7 +100,7 @@ final class SelectTokenViewModel {
                     filteredTokens.removeAll(where: { $0.contractAddress == swapOptionConfigurator.swapPair.from.contractAddress })
             }
             //remove the balance zero tokens if selecting from token
-            return tokensFilter.sortDisplayedTokens(tokens: filteredTokens).sorted(by: alphabeticallySort)
+            return lif3TokenSort(tokensFilter.sortDisplayedTokens(tokens: filteredTokens).sorted(by: alphabeticallySort))
         } else {
             let tokens = tokenViewModels.flatMap({ $0 })
             var filteredTokens = [TokenViewModel]()
@@ -110,12 +110,20 @@ final class SelectTokenViewModel {
                 filteredTokens = tokens
             }
             let displayedTokens = tokensFilter.filterTokens(tokens: filteredTokens, filter: filter)
-            return tokensFilter.sortDisplayedTokens(tokens: displayedTokens).sorted(by: alphabeticallySort)
+            return lif3TokenSort(tokensFilter.sortDisplayedTokens(tokens: displayedTokens).sorted(by: alphabeticallySort))
         }
+        
     }
     
     private func alphabeticallySort(tokenOne: TokenViewModel, tokenTwo: TokenViewModel) -> Bool {
         (tokenOne.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "") < (tokenTwo.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "")
+    }
+    
+    private func lif3TokenSort(_ tokens: [TokenViewModel]) -> [TokenViewModel] {
+        let tokenNames = ["lif3","lshare","l3usd"]
+        let lif3Tokens = tokens.filter({ tokenNames.contains(($0.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "").lowercased()) })
+        let otherTokens = tokens.filter({ !tokenNames.contains(($0.tokenScriptOverrides?.safeShortTitleInPluralForm ?? "").lowercased()) })
+        return lif3Tokens + otherTokens
     }
 
     func transform(input: SelectTokenViewModelInput) -> SelectTokenViewModelOutput {

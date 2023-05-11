@@ -117,7 +117,7 @@ class ScrollableSegmentedControlCell: UIView {
         cellWidthConstraint = widthConstraint
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = true
-        backgroundColor = configuration.backgroundColor
+        backgroundColor = Configuration.Color.Semantic.defaultViewBackground
     }
 
     private func configureLabel(configuration: ScrollableSegmentedControlCellConfiguration) {

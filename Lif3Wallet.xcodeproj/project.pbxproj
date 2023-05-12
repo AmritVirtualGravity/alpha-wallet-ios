@@ -1603,7 +1603,7 @@
 		29FF130A1F75F67200AFD326 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF13091F75F67200AFD326 /* Address.swift */; };
 		29FF130D1F7626E800AFD326 /* FakeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF130C1F7626E800AFD326 /* FakeNavigationController.swift */; };
 		3A11DDAB121523387A4EAD87 /* Pods_Development.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D408BB8268FCB118EA295D7 /* Pods_Development.framework */; };
-		3A37D6D26E0DEC6EEA9ABCE6 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		3A37D6D26E0DEC6EEA9ABCE6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		3E3D65ECA7427C70246858C6 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7D909114FBB2FCCAD8C187 /* Pods_Lif3WalletShare.framework */; };
 		442FC8E82231273273B95D85 /* FakeClaimOrderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FCE526E2089CAE88D5602 /* FakeClaimOrderCoordinator.swift */; };
 		442FCBA4A5E39A4C4B16426A /* EventsRestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FCBCF749F0FDA53FB88A3 /* EventsRestTest.swift */; };
@@ -2588,6 +2588,7 @@
 		10F6DAB2295B24D300715C7F /* Lif3WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lif3WebViewController.swift; sourceTree = "<group>"; };
 		10F9207429A3C320009604CE /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		10F9207729A3C410009604CE /* ContactTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		19AB68A22F735B00FACA8E0B /* Pods-Development.virtualgravitydev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Development.virtualgravitydev.xcconfig"; path = "Target Support Files/Pods-Development/Pods-Development.virtualgravitydev.xcconfig"; sourceTree = "<group>"; };
 		290B2B691F92C0440053C83E /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		290B2B6B1F92C35B0053C83E /* RPCServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCServerTests.swift; sourceTree = "<group>"; };
 		290B2B6D1F92C3980053C83E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -2627,6 +2628,7 @@
 		2D408BB8268FCB118EA295D7 /* Pods_Development.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Development.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECDD3C17B4CA40CFBE91390 /* Pods_Lif3WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C3D46700A0E29CDD6689CD /* Pods-Development.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Development.release.xcconfig"; path = "Target Support Files/Pods-Development/Pods-Development.release.xcconfig"; sourceTree = "<group>"; };
+		43E2B11E50166A06E4C0D129 /* Pods-Lif3WalletShare.virtualgravitydev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletShare.virtualgravitydev.xcconfig"; path = "Target Support Files/Pods-Lif3WalletShare/Pods-Lif3WalletShare.virtualgravitydev.xcconfig"; sourceTree = "<group>"; };
 		442FCBCF749F0FDA53FB88A3 /* EventsRestTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsRestTest.swift; sourceTree = "<group>"; };
 		442FCE526E2089CAE88D5602 /* FakeClaimOrderCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeClaimOrderCoordinator.swift; sourceTree = "<group>"; };
 		49DC595E7BA39A35D236C914 /* Pods-Development.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Development.debug.xcconfig"; path = "Target Support Files/Pods-Development/Pods-Development.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2687,6 +2689,7 @@
 		771A8484203242B400528D28 /* ActiveWalletViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWalletViewModelTests.swift; sourceTree = "<group>"; };
 		77872D2C202514AD0032D687 /* EnterPasswordCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPasswordCoordinatorTests.swift; sourceTree = "<group>"; };
 		778EAF7C1FF10AF400C8E2AB /* SettingsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorTests.swift; sourceTree = "<group>"; };
+		8030BD320DEDFC55812771AA /* Pods-Lif3WalletTests.virtualgravitydev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletTests.virtualgravitydev.xcconfig"; path = "Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests.virtualgravitydev.xcconfig"; sourceTree = "<group>"; };
 		8499DDC9B09F49E7799DA0E1 /* SmartContractHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartContractHelperTests.swift; sourceTree = "<group>"; };
 		8703FBFD270366DA0062C416 /* Lif3WalletSafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Lif3WalletSafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8703FBFF270366DA0062C416 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
@@ -2741,6 +2744,7 @@
 		9A9E62C950D305B56A4CD988 /* Pods-Lif3WalletShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletShare.debug.xcconfig"; path = "Target Support Files/Pods-Lif3WalletShare/Pods-Lif3WalletShare.debug.xcconfig"; sourceTree = "<group>"; };
 		9D949C6F2FBDF5E23F49402E /* Pods-Lif3WalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletTests.debug.xcconfig"; path = "Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7E91900650D0B6B29100407 /* Pods_Lif3Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lif3Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2C0D04C30333C441E545FA /* Pods-Lif3Wallet.virtualgravitydev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3Wallet.virtualgravitydev.xcconfig"; path = "Target Support Files/Pods-Lif3Wallet/Pods-Lif3Wallet.virtualgravitydev.xcconfig"; sourceTree = "<group>"; };
 		C4C4C12B54BBA713E984000B /* Pods-Lif3WalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lif3WalletTests.release.xcconfig"; path = "Target Support Files/Pods-Lif3WalletTests/Pods-Lif3WalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		C846409321B6DFA200031CA2 /* libxslt.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxslt.tbd; path = usr/lib/libxslt.tbd; sourceTree = SDKROOT; };
 		CCA4FE321FD3655900749AE4 /* CheckDeviceCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDeviceCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -2766,7 +2770,7 @@
 				87FBF2B128056AC200616B7D /* FirebaseCrashlytics in Frameworks */,
 				87B1B5D928C73C170072A5E2 /* WalletConnectSwift in Frameworks */,
 				87BDF47028423DC30018DC68 /* WalletConnect in Frameworks */,
-				3A37D6D26E0DEC6EEA9ABCE6 /* (null) in Frameworks */,
+				3A37D6D26E0DEC6EEA9ABCE6 /* BuildFile in Frameworks */,
 				7563B5B257FCD47F28DFEEB0 /* Pods_Lif3Wallet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5399,6 +5403,10 @@
 				C4C4C12B54BBA713E984000B /* Pods-Lif3WalletTests.release.xcconfig */,
 				49DC595E7BA39A35D236C914 /* Pods-Development.debug.xcconfig */,
 				40C3D46700A0E29CDD6689CD /* Pods-Development.release.xcconfig */,
+				19AB68A22F735B00FACA8E0B /* Pods-Development.virtualgravitydev.xcconfig */,
+				AC2C0D04C30333C441E545FA /* Pods-Lif3Wallet.virtualgravitydev.xcconfig */,
+				43E2B11E50166A06E4C0D129 /* Pods-Lif3WalletShare.virtualgravitydev.xcconfig */,
+				8030BD320DEDFC55812771AA /* Pods-Lif3WalletTests.virtualgravitydev.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -5983,7 +5991,7 @@
 			packageReferences = (
 				87FBF2AF28056AC200616B7D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				87BDF46E28423DC30018DC68 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
-				87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
+				87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */,
 			);
 			productRefGroup = 2912CCF61F6A830700C6CBE3 /* Products */;
 			projectDirPath = "";
@@ -8819,6 +8827,256 @@
 			};
 			name = Release;
 		};
+		6A13E2192A0E5FF2006FAAA3 /* VirtualGravityDev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cyrus Goh (47455VP7P2)";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 453;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = LRAW5PL536;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 3.52;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = VirtualGravityDev;
+		};
+		6A13E21A2A0E5FF2006FAAA3 /* VirtualGravityDev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC2C0D04C30333C441E545FA /* Pods-Lif3Wallet.virtualgravitydev.xcconfig */;
+			buildSettings = {
+				ALPHAWALLET_INFO_PLIST_FILE = AlphaWallet/Info.plist;
+				ALPHAWALLET_PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.alphawallet;
+				ALPHAWALLET_PRODUCT_NAME = "Lif3 Wallet";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Lif3Wallet/Lif3Wallet.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 230501;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = DUFLX74ACR;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"${PODS_ROOT}/Headers/Private/BRCybertron/BRCybertron/libxslt\"",
+					"\"${PODS_ROOT}/Headers/Private/BRCybertron/libxslt\"",
+					"$(SDKROOT)/usr/include/libxml2",
+					"\"$(PODS_ROOT)/libsodium/src/libsodium/include/sodium\"",
+					"\"$(PODS_ROOT)/libsodium/src/libsodium/include\"",
+				);
+				INFOPLIST_FILE = Lif3Wallet/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Lif3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				OTHER_SWIFT_FLAGS = "-DPRODUCTION";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.virtual-gravity.lif3Wallet";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = VirtualGravityDev;
+		};
+		6A13E21B2A0E5FF2006FAAA3 /* VirtualGravityDev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8030BD320DEDFC55812771AA /* Pods-Lif3WalletTests.virtualgravitydev.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = W6945M9UKD;
+				INFOPLIST_FILE = AlphaWalletTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.lif3.wallet.Lif3WalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lif3Wallet.app/Lif3Wallet";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = VirtualGravityDev;
+		};
+		6A13E21C2A0E5FF2006FAAA3 /* VirtualGravityDev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43E2B11E50166A06E4C0D129 /* Pods-Lif3WalletShare.virtualgravitydev.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = Lif3WalletShare/Lif3WalletShare.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 230501;
+				DEVELOPMENT_TEAM = DUFLX74ACR;
+				INFOPLIST_FILE = Lif3WalletShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.virtual-gravity.lif3Wallet.share";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = VirtualGravityDev;
+		};
+		6A13E21D2A0E5FF2006FAAA3 /* VirtualGravityDev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = Lif3WalletSafariExtension/Lif3WalletSafariExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 230501;
+				DEVELOPMENT_TEAM = DUFLX74ACR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Lif3WalletSafariExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Lif3WalletSafariExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.virtual-gravity.lif3Wallet.safariExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = VirtualGravityDev;
+		};
+		6A13E21E2A0E5FF2006FAAA3 /* VirtualGravityDev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19AB68A22F735B00FACA8E0B /* Pods-Development.virtualgravitydev.xcconfig */;
+			buildSettings = {
+				ALPHAWALLET_INFO_PLIST_FILE = AlphaWallet/Info.plist;
+				ALPHAWALLET_PRODUCT_BUNDLE_IDENTIFIER = com.stormbird.alphawallet;
+				ALPHAWALLET_PRODUCT_NAME = "Lif3 Wallet";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Lif3Wallet/Lif3Wallet.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 230501;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = W6945M9UKD;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"\"${PODS_ROOT}/Headers/Private/BRCybertron/BRCybertron/libxslt\"",
+					"\"${PODS_ROOT}/Headers/Private/BRCybertron/libxslt\"",
+					"$(SDKROOT)/usr/include/libxml2",
+					"\"$(PODS_ROOT)/libsodium/src/libsodium/include/sodium\"",
+					"\"$(PODS_ROOT)/libsodium/src/libsodium/include\"",
+				);
+				INFOPLIST_FILE = "Lif3Wallet copy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Lif3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				OTHER_SWIFT_FLAGS = "-DDEVELOPMENT";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lif3.lif3wallet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = VirtualGravityDev;
+		};
 		8703FC16270366DA0062C416 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -8959,6 +9217,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04BF8A3229E40F3400478F44 /* Debug */,
+				6A13E21E2A0E5FF2006FAAA3 /* VirtualGravityDev */,
 				04BF8A3329E40F3400478F44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -8968,6 +9227,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2912CD1D1F6A830700C6CBE3 /* Debug */,
+				6A13E2192A0E5FF2006FAAA3 /* VirtualGravityDev */,
 				2912CD1E1F6A830700C6CBE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -8977,6 +9237,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2912CD201F6A830700C6CBE3 /* Debug */,
+				6A13E21A2A0E5FF2006FAAA3 /* VirtualGravityDev */,
 				2912CD211F6A830700C6CBE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -8986,6 +9247,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2912CD231F6A830700C6CBE3 /* Debug */,
+				6A13E21B2A0E5FF2006FAAA3 /* VirtualGravityDev */,
 				2912CD241F6A830700C6CBE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -8995,6 +9257,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8703FC16270366DA0062C416 /* Debug */,
+				6A13E21D2A0E5FF2006FAAA3 /* VirtualGravityDev */,
 				8703FC17270366DA0062C416 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -9004,6 +9267,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				878EE8F7255ADA49000210DE /* Debug */,
+				6A13E21C2A0E5FF2006FAAA3 /* VirtualGravityDev */,
 				878EE8F8255ADA49000210DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -9028,7 +9292,7 @@
 				kind = branch;
 			};
 		};
-		04BF871D29E40F3400478F44 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
+		04BF871D29E40F3400478F44 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AlphaWallet/WalletConnectSwift.git";
 			requirement = {
@@ -9036,7 +9300,7 @@
 				kind = branch;
 			};
 		};
-		87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
+		87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AlphaWallet/WalletConnectSwift.git";
 			requirement = {
@@ -9075,12 +9339,12 @@
 		};
 		04BF871C29E40F3400478F44 /* WalletConnectSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 04BF871D29E40F3400478F44 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
+			package = 04BF871D29E40F3400478F44 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */;
 			productName = WalletConnectSwift;
 		};
 		87B1B5D828C73C170072A5E2 /* WalletConnectSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
+			package = 87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */;
 			productName = WalletConnectSwift;
 		};
 		87BDF46F28423DC30018DC68 /* WalletConnect */ = {

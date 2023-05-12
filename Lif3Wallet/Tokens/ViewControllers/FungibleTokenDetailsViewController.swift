@@ -37,9 +37,9 @@ class FungibleTokenDetailsViewController: UIViewController {
         button.backgroundColor = blueColor
         return button
     }()
-    private var swapButton: UIButton =  {
+    private lazy var swapButton: UIButton =  {
         let button = UIButton()
-        button.setTitle("Swap (Beta)", for: .normal)
+        button.setTitle( viewModel.token.server == .tomb_chain ? "Swap" : "Swap (Beta)", for: .normal)
 //        button.titleLabel?.textColor = Configuration.Color.Semantic.pureWhiteAndpureBlack
         button.setTitleColor(Configuration.Color.Semantic.pureWhiteAndpureBlack, for: .normal)
         button.layer.cornerRadius = 12

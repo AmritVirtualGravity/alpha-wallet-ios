@@ -231,6 +231,7 @@ final class TokensViewController: UIViewController {
         keyboardChecker.viewWillAppear()
         delegate?.viewWillAppear(in: self)
         hideNavigationBarTopSeparatorLine()
+        navigationController?.view.backgroundColor = UIColor.pureWhiteAndpureBlack
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -354,7 +355,9 @@ final class TokensViewController: UIViewController {
         
         DispatchQueue.main.async {
             searchController.isActive = true
-            
+//            if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+//                textField.superview?.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+//            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 searchController.searchBar.becomeFirstResponder()
             }
@@ -646,7 +649,7 @@ extension TokensViewController {
     private func configureSearchBarOnce() {
         guard !isSearchBarConfigured else { return }
         isSearchBarConfigured = true
-        UISearchBar.configure(searchBar: searchController.searchBar)
+        UISearchBar.configure(searchBar: searchController.searchBar, barTintColor: UIColor.pureWhiteAndpureBlack)
     }
 }
 
@@ -672,7 +675,7 @@ extension TokensViewController.functional {
 
 extension UISearchBar {
     
-    static func configure(searchBar: UISearchBar, backgroundColor: UIColor = Configuration.Color.Semantic.searchbarBackground) {
+    static func configure(searchBar: UISearchBar, backgroundColor: UIColor = Configuration.Color.Semantic.searchbarBackground, barTintColor: UIColor? = nil) {
         if let placeholderLabel = searchBar.firstSubview(ofType: UILabel.self) {
             placeholderLabel.textColor = Colors.lightGray
         }
@@ -691,6 +694,13 @@ extension UISearchBar {
         searchBar.backgroundImage = UIImage()
         searchBar.placeholder = R.string.localizable.tokensSearchbarPlaceholder()
         searchBar.backgroundColor = backgroundColor
+        if let barTintColor = barTintColor {
+
+            if let textField = searchBar.value(forKey: "searchField") as? UITextField {
+                textField.superview?.backgroundColor = barTintColor
+            }
+        }
     }
     
 }
+

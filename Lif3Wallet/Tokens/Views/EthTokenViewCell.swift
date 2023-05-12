@@ -130,9 +130,13 @@ class EthTokenViewCell: UITableViewCell {
         printGlobal(data: viewModel)
         selectionStyle = .none
 
-        backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
-        background.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
-        contentView.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+//        backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+//        background.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+//        contentView.backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+        
+        backgroundColor = UIColor.pureWhiteAndpureBlack
+        background.backgroundColor = UIColor.pureWhiteAndpureBlack
+        contentView.backgroundColor = UIColor.pureWhiteAndpureBlack
 
         titleLabel.attributedText = viewModel.titleAttributedString
         titleLabel.baselineAdjustment = .alignCenters

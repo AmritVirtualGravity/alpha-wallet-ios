@@ -48,7 +48,7 @@ class WalletSummaryView: UIView, ReusableTableHeaderViewType {
     }
 
     func configure(viewModel: WalletSummaryViewModel) {
-        backgroundColor = Configuration.Color.Semantic.tableViewCellBackground
+        backgroundColor = UIColor.pureWhiteAndpureBlack
         balanceLabel.attributedText = viewModel.balanceAttributedString
         apprecation24HoursLabel.attributedText = viewModel.apprecation24HoursAttributedString
     }

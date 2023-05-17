@@ -13,8 +13,8 @@ final class DummySearchView: UIView {
         let searchBar: UISearchBar = UISearchBar(frame: .init(x: 0, y: 0, width: 100, height: 50))
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.isUserInteractionEnabled = false
-        UISearchBar.configure(searchBar: searchBar)
-
+        UISearchBar.configure(searchBar: searchBar, barTintColor: UIColor.pureWhiteAndpureBlack)
+    
         return searchBar
     }()
 

@@ -37,7 +37,8 @@ extension UINavigationBarAppearance {
     static var defaultAppearence: UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = Configuration.Color.Semantic.navigationbarBackgroundColor
+//        appearance.backgroundColor = Configuration.Color.Semantic.navigationbarBackgroundColor
+        appearance.backgroundColor = UIColor.pureWhiteAndpureBlack
         appearance.shadowColor = Configuration.Color.Semantic.navigationbarSeparator
         appearance.shadowImage = nil
         appearance.setBackIndicatorImage(R.image.backWhite(), transitionMaskImage: R.image.backWhite())

@@ -93,7 +93,7 @@ class TransactionHeaderView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = Fonts.semibold(size: 17)
+        label.font = Fonts.semibold(size: 20)
         label.textColor = Configuration.Color.Semantic.defaultHeadlineText
         label.numberOfLines = 0
         
@@ -166,8 +166,8 @@ class TransactionHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: TransactionHeaderViewModel) {
-        titleLabel.text = viewModel.title
+    func configure(viewModel: TransactionHeaderViewModel, amount:  NSAttributedString ) {
+        titleLabel.text = "\(viewModel.title) \(amount.string.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""))"
         titleLabel.textColor = viewModel.titleTextColor
         toLabel.text = viewModel.subTitle
         tokenIconImageView.subscribable = viewModel.subscribable

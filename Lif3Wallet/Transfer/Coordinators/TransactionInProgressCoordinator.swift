@@ -12,14 +12,21 @@ protocol TransactionInProgressCoordinatorDelegate: AnyObject {
     func didDismiss(in coordinator: TransactionInProgressCoordinator)
 }
 
-class TransactionInProgressCoordinator: Coordinator {
+class TransactionInProgressCoordinator: Coordinator, FloatingPanelControllerDelegate {
     private let session: WalletSession
-    private lazy var viewControllerToPresent: UINavigationController = {
+    private lazy var viewControllerToPresent: FloatingPanelController = {
         let controller = TransactionInProgressViewController(viewModel: .init(server: session.server))
         controller.delegate = self
+        
         let navigationController = NavigationController(rootViewController: controller)
-        navigationController.makePresentationFullScreenForiOS13Migration()
-        return navigationController
+        let panel = FloatingPanelController(isPanEnabled: false)
+        panel.layout = CustomPanelLayout()
+        panel.set(contentViewController: navigationController)
+        panel.surfaceView.contentPadding = .init(top: 0, left: 0, bottom: 0, right: 0)
+        panel.shouldDismissOnBackdrop = true
+        panel.delegate = self
+
+        return panel
     }()
     private let presentingViewController: UIViewController
 

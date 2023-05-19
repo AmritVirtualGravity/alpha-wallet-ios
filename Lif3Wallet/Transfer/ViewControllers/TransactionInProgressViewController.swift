@@ -54,25 +54,25 @@ class TransactionInProgressViewController: UIViewController {
         view.addSubview(footerBar)
         view.addSubview(titleLabel)
         view.addSubview(subtitleLabel)
-        view.addSubview(imageView)
 
+        titleLabel.setContentHuggingPriority( .defaultHigh, for: .vertical)
+        subtitleLabel.setContentHuggingPriority( .defaultLow, for: .vertical)
+        footerBar.setContentHuggingPriority( .defaultHigh, for: .vertical)
+        
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ScreenChecker().isNarrowScreen ? 20 : 30),
-
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ScreenChecker().isNarrowScreen ? 10 : 50),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            titleLabel.bottomAnchor.constraint(equalTo: subtitleLabel.topAnchor, constant: 5),
 
             buttonsBar.leadingAnchor.constraint(equalTo: footerBar.leadingAnchor),
             buttonsBar.trailingAnchor.constraint(equalTo: footerBar.trailingAnchor),
             buttonsBar.topAnchor.constraint(equalTo: footerBar.topAnchor),
-            buttonsBar.heightAnchor.constraint(equalToConstant: HorizontalButtonsBar.buttonsHeight),
+            buttonsBar.bottomAnchor.constraint(equalTo: footerBar.bottomAnchor),
 
             subtitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             subtitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            subtitleLabel.bottomAnchor.constraint(equalTo: footerBar.topAnchor, constant: -30),
+            subtitleLabel.bottomAnchor.constraint(equalTo: footerBar.topAnchor, constant: -5),
 
             footerBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),

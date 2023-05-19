@@ -102,11 +102,11 @@ extension ActivitiesView: UITableViewDelegate {
                 delegate?.didPressTransaction(transaction: transaction, in: self)
             }
         case .standaloneTransaction(transaction: let transaction, let activity):
-            if let activity = activity {
-                delegate?.didPressActivity(activity: activity, in: self)
-            } else {
+//            if let activity = activity {
+//                delegate?.didPressActivity(activity: activity, in: self)
+//            } else {
                 delegate?.didPressTransaction(transaction: transaction, in: self)
-            }
+//            }
         case .standaloneActivity(activity: let activity):
             delegate?.didPressActivity(activity: activity, in: self)
         }

@@ -95,8 +95,8 @@ class TransactionDetailsViewController: UIViewController {
         output.viewState
             .sink { [weak self, navigationItem] viewState in
                 navigationItem.title = viewState.title
-
-                self?.header.configure(viewModel: viewState.header)
+              
+                self?.header.configure(viewModel: viewState.header, amount: viewState.header.amount)
                 self?.amount.configure(attributedValueText: viewState.header.amount)
                 self?.from.configure(value: viewState.from)
                 self?.to.configure(value: viewState.to)

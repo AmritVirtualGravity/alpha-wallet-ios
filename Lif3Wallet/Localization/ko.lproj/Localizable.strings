@@ -583,7 +583,7 @@
 "token.transactionConfirmation.error.linkTitle.gasLimitTooLow" = "Learn more about Gas Limit";
 "token.transactionConfirmation.error.linkTitle.gasLimitTooHigh" = "Learn more about Gas Limit";
 "a.wallet.token.transaction.inProgress.title" = "Transaction in Progress";
-"a.wallet.token.transaction.inProgress.subtitle" = "The transaction has been sent to the %@ blockchain.\nIt may take a few minutes to be confirmed.";
+"a.wallet.token.transaction.inProgress.subtitle" = "The transaction has been sent to the blockchain.\nIt may take a few minutes to be confirmed.";
 "a.wallet.token.transaction.inProgress.confirm" = "OK, great!";
 "a.wallet.token.swap.button.title" = "Swap";
 "a.wallet.token.erc20ExchangeOnUniswap.button.title" = "Swap using Uniswap";

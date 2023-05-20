@@ -28,7 +28,7 @@ struct TransactionInProgressViewModel {
     }
 
     var subtitleAttributedText: NSAttributedString {
-        let x = R.string.localizable.aWalletTokenTransactionInProgressSubtitle(server.name)
+        let x = R.string.localizable.aWalletTokenTransactionInProgressSubtitle()
         let style = NSMutableParagraphStyle()
         style.alignment = .center
 

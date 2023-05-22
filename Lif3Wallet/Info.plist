@@ -48,7 +48,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>awallet</string>
+				<string>awallet1</string>
 			</array>
 		</dict>
 		<dict>

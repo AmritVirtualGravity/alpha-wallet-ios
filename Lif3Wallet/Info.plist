@@ -48,7 +48,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>awallet</string>
+				<string>lif3wallet</string>
 			</array>
 		</dict>
 		<dict>

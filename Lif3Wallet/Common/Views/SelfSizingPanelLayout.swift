@@ -37,6 +37,23 @@ class SelfSizingPanelLayout: FloatingPanelBottomLayout {
 
 }
 
+class CustomPanelLayout: FloatingPanelBottomLayout {
+
+    override init() {
+        super.init()
+    }
+
+    override var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+        return [
+            .half: FloatingPanelLayoutAnchor(fractionalInset: 0.3, edge: .bottom, referenceGuide: .safeArea)
+        ]
+    }
+
+    override func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+        0.4
+    }
+}
+
 class FixedSizePanelLayout: FloatingPanelBottomLayout {
 
     let panelHeight: CGFloat

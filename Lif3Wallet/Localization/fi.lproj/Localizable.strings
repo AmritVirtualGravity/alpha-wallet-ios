@@ -585,7 +585,7 @@
 "token.transactionConfirmation.error.linkTitle.gasLimitTooLow" = "Lue lisää kulurajasta (Gas Limit)";
 "token.transactionConfirmation.error.linkTitle.gasLimitTooHigh" = "Lue lisää kulurajasta (Gas Limit)";
 "a.wallet.token.transaction.inProgress.title" = "Tilitapahtuma käynnissä";
-"a.wallet.token.transaction.inProgress.subtitle" = "The transaction is sent to the %@\nblockchain. It might take few minutes\nto be confirmed by miners.";
+"a.wallet.token.transaction.inProgress.subtitle" = "The transaction has been sent to the blockchain.\nIt may take a few minutes to be confirmed.";
 "a.wallet.token.transaction.inProgress.confirm" = "OK!";
 "a.wallet.token.swap.button.title" = "Vaihda";
 "a.wallet.token.erc20ExchangeOnUniswap.button.title" = "Swap using Uniswap";

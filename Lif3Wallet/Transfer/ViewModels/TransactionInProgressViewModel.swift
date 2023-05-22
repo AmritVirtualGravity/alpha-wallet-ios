@@ -22,20 +22,19 @@ struct TransactionInProgressViewModel {
 
         return NSAttributedString(string: R.string.localizable.aWalletTokenTransactionInProgressTitle(), attributes: [
             .paragraphStyle: style,
-            .font: Fonts.regular(size: 28),
+            .font: Fonts.semibold(size: 20),
             .foregroundColor: Configuration.Color.Semantic.defaultTitleText
         ])
     }
 
     var subtitleAttributedText: NSAttributedString {
-        let x = R.string.localizable.aWalletTokenTransactionInProgressSubtitle(server.name)
+        let x = R.string.localizable.aWalletTokenTransactionInProgressSubtitle()
         let style = NSMutableParagraphStyle()
         style.alignment = .center
-        style.lineSpacing = ScreenChecker().isNarrowScreen ? 7 : 14
 
         return NSMutableAttributedString(string: x, attributes: [
             .paragraphStyle: style,
-            .font: Fonts.regular(size: 17),
+            .font: Fonts.semibold(size: 15),
             .foregroundColor: Configuration.Color.Semantic.defaultHeadlineText
         ])
     }

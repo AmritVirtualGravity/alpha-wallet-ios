@@ -44,35 +44,58 @@ class TransactionInProgressViewController: UIViewController {
     }()
 
     weak var delegate: TransactionInProgressViewControllerDelegate?
+    
+    let closeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.setImage(R.image.close(), for: .normal)
+
+        return button
+    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 
     init(viewModel: TransactionInProgressViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem.closeBarButton(self, selector: #selector(dismiss))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem.closeBarButton(self, selector: #selector(dismiss))
 
+        closeButton.addTarget(self, action: #selector(closeButtonClicked), for: .touchUpInside)
+        
         view.addSubview(footerBar)
         view.addSubview(titleLabel)
+        view.addSubview(closeButton)
         view.addSubview(subtitleLabel)
-        view.addSubview(imageView)
 
+        titleLabel.setContentHuggingPriority( .defaultHigh, for: .vertical)
+        subtitleLabel.setContentHuggingPriority( .defaultLow, for: .vertical)
+        footerBar.setContentHuggingPriority( .defaultHigh, for: .vertical)
+        
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ScreenChecker().isNarrowScreen ? 20 : 30),
-
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ScreenChecker().isNarrowScreen ? 10 : 50),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            titleLabel.bottomAnchor.constraint(equalTo: subtitleLabel.topAnchor, constant: 5),
 
             buttonsBar.leadingAnchor.constraint(equalTo: footerBar.leadingAnchor),
             buttonsBar.trailingAnchor.constraint(equalTo: footerBar.trailingAnchor),
             buttonsBar.topAnchor.constraint(equalTo: footerBar.topAnchor),
-            buttonsBar.heightAnchor.constraint(equalToConstant: HorizontalButtonsBar.buttonsHeight),
+            buttonsBar.bottomAnchor.constraint(equalTo: footerBar.bottomAnchor),
+            
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            closeButton.widthAnchor.constraint(equalToConstant: 30),
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
 
             subtitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             subtitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            subtitleLabel.bottomAnchor.constraint(equalTo: footerBar.topAnchor, constant: -30),
+            subtitleLabel.bottomAnchor.constraint(equalTo: footerBar.topAnchor, constant: -5),
 
             footerBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -104,7 +127,7 @@ class TransactionInProgressViewController: UIViewController {
         imageView.image = viewModel.image
     }
 
-    @objc private func dismiss(_ sender: UIBarButtonItem) {
+    @objc private func closeButtonClicked() {
         delegate?.didDismiss(in: self)
     }
 

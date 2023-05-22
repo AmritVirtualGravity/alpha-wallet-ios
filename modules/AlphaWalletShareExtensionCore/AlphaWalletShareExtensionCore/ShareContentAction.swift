@@ -8,7 +8,7 @@
 import Foundation
 
 public enum ShareContentAction {
-    static let scheme = "awallet1"
+    static let scheme = "lif3wallet"
 
     private enum Host: String {
         case openURL

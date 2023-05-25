@@ -68,6 +68,10 @@ class BlockscoutApiNetworking: ApiNetworking {
             break
         case .heco, .heco_testnet, .fantom, .fantom_testnet, .mumbai_testnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .okx:
             return .fail(PromiseError(error: ApiNetworkingError.methodNotSupported))
+        case .tomb_chain:
+            break // made just executable find solution later
+        case .metis:
+            break // made just executable find solution later
         }
 
         let request = Request(
@@ -97,6 +101,10 @@ class BlockscoutApiNetworking: ApiNetworking {
             break
         case .heco, .heco_testnet, .fantom, .fantom_testnet, .mumbai_testnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .okx:
             return .fail(PromiseError(error: ApiNetworkingError.methodNotSupported))
+        case .tomb_chain:
+            break // not sure
+        case .metis:
+            break // not sure
         }
 
         let request = Request(

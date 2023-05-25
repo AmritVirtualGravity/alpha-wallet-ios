@@ -263,19 +263,19 @@ extension URLRequest {
 }
 
 // MARK: customchanges
-extension LiQuestTokenSwapperNetworkProvider {
-    
-//    public func customFetchSupportedTokens(for server: RPCServer) -> AnyPublisher<[RPCServer], PromiseError> {
-//        return networkService
-//            .dataTaskPublisher(SupportedTokensRequest(server: server))
-//            .receive(on: DispatchQueue.global())
-//            .map { [decoder] data, _ -> SwapPairs in
-//                if let connections: Swap.Connections = try? decoder.decode(Swap.Connections.self, from: data) {
-//                    return SwapPairs(connections: connections).fromTokens
-//                } else {
-//                    return SwapPairs(connections: .init(connections: []))
-//                }
-//            }.mapError { PromiseError(error: $0) }
-//            .eraseToAnyPublisher()
-//    }
-}
+//extension LiQuestTokenSwapperNetworkProvider {
+//    
+////    public func customFetchSupportedTokens(for server: RPCServer) -> AnyPublisher<[RPCServer], PromiseError> {
+////        return networkService
+////            .dataTaskPublisher(SupportedTokensRequest(server: server))
+////            .receive(on: DispatchQueue.global())
+////            .map { [decoder] data, _ -> SwapPairs in
+////                if let connections: Swap.Connections = try? decoder.decode(Swap.Connections.self, from: data) {
+////                    return SwapPairs(connections: connections).fromTokens
+////                } else {
+////                    return SwapPairs(connections: .init(connections: []))
+////                }
+////            }.mapError { PromiseError(error: $0) }
+////            .eraseToAnyPublisher()
+////    }
+//}

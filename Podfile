@@ -1,5 +1,6 @@
 platform :ios, '13.0'
 inhibit_all_warnings!
+project 'Lif3Wallet.xcodeproj'
 source 'https://cdn.cocoapods.org/'
 
 def installed_pods

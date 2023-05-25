@@ -68,6 +68,12 @@ class EtherscanCompatibleApiNetworking: ApiNetworking {
             break
         case .heco, .heco_testnet, .fantom, .fantom_testnet, .mumbai_testnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .okx:
             return .fail(PromiseError(error: ApiNetworkingError.methodNotSupported))
+        case .tomb_chain:
+            break
+            #warning("Check again")
+        case .metis:
+            break
+            #warning("Check again")
         }
 
         let request = Request(
@@ -98,6 +104,12 @@ class EtherscanCompatibleApiNetworking: ApiNetworking {
             break
         case .heco, .heco_testnet, .fantom, .fantom_testnet, .mumbai_testnet, .klaytnCypress, .klaytnBaobabTestnet, .ioTeX, .ioTeXTestnet, .okx:
             return .fail(PromiseError(error: ApiNetworkingError.methodNotSupported))
+        case .tomb_chain:
+            break
+            #warning("Check again")
+        case .metis:
+            break
+            #warning("Check again")
         }
 
         let request = Request(
@@ -225,6 +237,12 @@ class EtherscanCompatibleApiNetworking: ApiNetworking {
             break
         case .heco, .heco_testnet:
             return .fail(PromiseError(error: ApiNetworkingError.methodNotSupported))
+        case .tomb_chain:
+            break
+            #warning("Check again")
+        case .metis:
+            break
+            #warning("Check again")
         }
 
         return getErc1155Transactions(walletAddress: walletAddress, server: server, startBlock: pagination.startBlock)

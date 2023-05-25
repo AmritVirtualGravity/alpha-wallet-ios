@@ -173,28 +173,28 @@ public enum RPCServer: Hashable, CaseIterable {
         customRpc != nil
     }
     #warning("need more info")
-    private var etherscanURLForGeneralTransactionHistory: URL? {
-        switch self {
-        case .main, .poa, .classic, .goerli, .xDai, .artis_sigma1, .artis_tau1, .polygon, .binance_smart_chain, .binance_smart_chain_testnet, .callisto, .optimistic, .cronosMainnet, .cronosTestnet, .custom, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .avalanche, .avalanche_testnet, .tomb_chain, .metis:
-            return etherscanApiRoot?.appendingQueryString("module=account&action=txlist")
-        case .heco: return nil
-        case .heco_testnet: return nil
-        case .fantom: return nil
-        case .fantom_testnet: return nil
-        case .mumbai_testnet: return nil
-        case .klaytnCypress, .klaytnBaobabTestnet: return nil
-        case .ioTeX, .ioTeXTestnet: return nil
-        }
-    }
+//    private var etherscanURLForGeneralTransactionHistory: URL? {
+//        switch self {
+//        case .main, .classic, .goerli, .xDai, .polygon, .binance_smart_chain, .binance_smart_chain_testnet, .callisto, .optimistic, .cronosMainnet, .cronosTestnet, .custom, .arbitrum, .palm, .palmTestnet, .optimismGoerli, .arbitrumGoerli, .avalanche, .avalanche_testnet, .tomb_chain, .metis:
+//            return etherscanApiRoot?.appendingQueryString("module=account&action=txlist")
+//        case .heco: return nil
+//        case .heco_testnet: return nil
+//        case .fantom: return nil
+//        case .fantom_testnet: return nil
+//        case .mumbai_testnet: return nil
+//        case .klaytnCypress, .klaytnBaobabTestnet: return nil
+//        case .ioTeX, .ioTeXTestnet: return nil
+//        }
+//    }
 
     ///etherscan-compatible erc20 transaction event APIs
     ///The fetch ERC20 transactions endpoint from Etherscan returns only ERC20 token transactions but the Blockscout version also includes ERC721 transactions too (so it's likely other types that it can detect will be returned too); thus we should check the token type rather than assume that they are all ERC20
-    private var etherscanURLForTokenTransactionHistory: URL? {
-        switch etherscanCompatibleType {
-        case .etherscan, .blockscout: return etherscanApiRoot?.appendingQueryString("module=account&action=tokentx")
-        case .unknown: return nil
-        }
-    }
+//    private var etherscanURLForTokenTransactionHistory: URL? {
+//        switch etherscanCompatibleType {
+//        case .etherscan, .blockscout: return etherscanApiRoot?.appendingQueryString("module=account&action=tokentx")
+//        case .unknown: return nil
+//        }
+//    }
     #warning("need more info")
     var etherscanWebpageRoot: URL? {
         let urlString: String? = {
@@ -334,6 +334,14 @@ public enum RPCServer: Hashable, CaseIterable {
             return .covalent(apiKey: Constants.Credentials.covalentApiKey)
         case .okx:
             return .oklink(apiKey: Constants.Credentials.oklinkKey)
+        case .tomb_chain:
+            guard let url = URL(string: "https://api-cn.etherscan.com/api") else { return .unknown }
+            return .etherscan(apiKey: Constants.Credentials.etherscanKey, apiUrl: url)
+             #warning("check again")
+        case .metis:
+            guard let url = URL(string: "https://api-cn.etherscan.com/api") else { return .unknown }
+            return .etherscan(apiKey: Constants.Credentials.etherscanKey, apiUrl: url)
+             #warning("check again")
         }
     }
     #warning("need more info")
@@ -636,7 +644,7 @@ public enum RPCServer: Hashable, CaseIterable {
             .optimismGoerli,
             .arbitrumGoerli,
             .tomb_chain,
-            .metis
+            .metis,
             .okx,
             .sepolia,
         ]
@@ -665,6 +673,12 @@ public enum RPCServer: Hashable, CaseIterable {
             return 0
         case .okx:
             return 2322601
+        case .tomb_chain:
+            return 0
+            #warning("Check again")
+        case .metis:
+            return 0
+            #warning("Check again")
         }
     }
 
@@ -738,6 +752,10 @@ public enum RPCServer: Hashable, CaseIterable {
         case .metis: return 39
         case .okx: return 39
         case .sepolia: return 40
+        case .fantom:
+            return 1
+        case .avalanche:
+            return 6
         }
     }
     public var explorerName: String {
@@ -762,7 +780,7 @@ public enum RPCServer: Hashable, CaseIterable {
         case .arbitrum: return .arbitrum
         case .klaytnCypress: return .klaytnCypress
         case .klaytnBaobabTestnet: return .klaytnBaobabTestnet
-        case .main, .goerli, .custom, .callisto, .xDai, .classic, .binance_smart_chain_testnet, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .mumbai_testnet, .optimistic, .cronosTestnet, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet, .okx, .sepolia.tomb_chain, .metis: return nil
+        case .main, .goerli, .custom, .callisto, .xDai, .classic, .binance_smart_chain_testnet, .heco_testnet, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .mumbai_testnet, .optimistic, .cronosTestnet, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .cronosMainnet, .okx, .sepolia, .tomb_chain, .metis: return nil
         }
     }
     #warning("need more info")
@@ -795,7 +813,7 @@ public enum RPCServer: Hashable, CaseIterable {
     var shouldExcludeZeroGasPrice: Bool {
         switch self {
         case .klaytnCypress, .klaytnBaobabTestnet: return true
-        case .binance_smart_chain, .binance_smart_chain_testnet, .heco, .heco_testnet, .optimistic, .polygon, .mumbai_testnet, .cronosTestnet, .arbitrum, .main, .classic, .callisto, .goerli, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .xDai, .optimismGoerli, .arbitrumGoerli, .cronosMainnet, .okx, .sepolia.tomb_chain, .metis: return false
+        case .binance_smart_chain, .binance_smart_chain_testnet, .heco, .heco_testnet, .optimistic, .polygon, .mumbai_testnet, .cronosTestnet, .arbitrum, .main, .classic, .callisto, .goerli, .fantom, .fantom_testnet, .avalanche, .avalanche_testnet, .custom, .palm, .palmTestnet, .ioTeX, .ioTeXTestnet, .xDai, .optimismGoerli, .arbitrumGoerli, .cronosMainnet, .okx, .sepolia, .tomb_chain, .metis: return false
         }
     }
     #warning("need more info")

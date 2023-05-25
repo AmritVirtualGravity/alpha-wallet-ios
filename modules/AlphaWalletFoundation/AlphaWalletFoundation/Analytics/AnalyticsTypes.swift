@@ -85,6 +85,7 @@ public enum Analytics {
         case addCustomChain = "Add Custom Chain"
         case editCustomChain = "Edit Custom Chain"
         case subscribeToEmailNewsletter = "Subscribe Email Newsletter"
+        case sharedAppWhenPrompted = "Shared App When Prompted"
         case tapSafariExtensionRewrittenUrl = "Tap Safari Extension Rewritten URL"
         case deepLinkCancel = "DeepLink Cancel"
         case deeplinkVisited = "DeepLink Visit"
@@ -113,6 +114,7 @@ public enum Analytics {
         case lifiFetchSwapRouteError
         case lifiFetchSupportedToolsError
         case lifiFetchSupportedChainsError
+        case coinGeckoRateLimited
     }
 
     public enum Properties: String {

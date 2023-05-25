@@ -9,7 +9,6 @@ protocol TokensViewControllerDelegate: AnyObject {
     func didSelect(token: Token, in viewController: UIViewController)
     func didTapOpenConsole(in viewController: UIViewController)
     func walletConnectSelected(in viewController: UIViewController)
-    func whereAreMyTokensSelected(in viewController: UIViewController)
     func buyCryptoSelected(in viewController: UIViewController)
 }
 
@@ -36,7 +35,7 @@ final class TokensViewController: UIViewController {
     }()
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.buildGroupedTableView()
 
         tableView.register(FungibleTokenViewCell.self)
         tableView.register(EthTokenViewCell.self)
@@ -95,14 +94,6 @@ final class TokensViewController: UIViewController {
         keyboardChecker.constraints = [bottomConstraint]
 
         return keyboardChecker
-    }()
-
-    private lazy var whereAreMyTokensView: AddHideTokensView = {
-        let view = AddHideTokensView()
-        view.delegate = self
-        view.configure(viewModel: ShowAddHideTokensViewModel.configuredForTestnet())
-
-        return view
     }()
 
     private var isConsoleButtonHidden: Bool {
@@ -263,7 +254,7 @@ final class TokensViewController: UIViewController {
             .sink { [weak self, weak walletSummaryView, blockieImageView, navigationItem] state in
                 self?.showOrHideBackupWalletViewHolder()
 
-                walletSummaryView?.configure(viewModel: .init(walletSummary: state.summary, config: viewModel.config, alignment: .center))
+                walletSummaryView?.configure(viewModel: .init(walletSummary: state.summary, alignment: .center))
                 blockieImageView.set(blockieImage: state.blockiesImage)
 
                 navigationItem.title = state.title
@@ -367,13 +358,6 @@ extension TokensViewController: UITableViewDelegate {
             let header: ActiveWalletSessionView = tableView.dequeueReusableHeaderFooterView()
             header.configure(viewModel: .init(count: viewModel.walletConnectSessions))
             header.delegate = self
-
-            return header
-        case .testnetTokens:
-            let header: TokensViewController.GeneralTableViewSectionHeader<AddHideTokensView> = tableView.dequeueReusableHeaderFooterView()
-            header.useSeparatorTopLine = true
-            header.useSeparatorBottomLine = viewModel.isBottomSeparatorLineHiddenForTestnetHeader(section: section)
-            header.subview = whereAreMyTokensView
 
             return header
         case .search:
@@ -496,13 +480,6 @@ fileprivate extension TokensViewController {
         }
 
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-    }
-}
-
-extension TokensViewController: AddHideTokensViewDelegate {
-
-    func view(_ view: AddHideTokensView, didSelectAddHideTokensButton sender: UIButton) {
-        delegate?.whereAreMyTokensSelected(in: self)
     }
 }
 
@@ -631,7 +608,7 @@ extension TokensViewController {
 }
 
 extension TokensViewController {
-    class functional {}
+    enum functional {}
 }
 
 extension TokensViewController.functional {

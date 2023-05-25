@@ -93,6 +93,10 @@ public struct Config {
         "\(Keys.lastFetchedAutoDetectedTransactedTokenErc721BlockNumber)-\(wallet.eip55String)"
     }
 
+    private static func generateLastFetchedErc1155InteractionBlockNumberKey(_ wallet: AlphaWallet.Address) -> String {
+        "\(Keys.lastFetchedAutoDetectedTransactedTokenErc1155BlockNumber)-\(wallet.eip55String)"
+    }
+
     private static func generateLastFetchedAutoDetectedTransactedTokenErc20BlockNumberKey(_ wallet: AlphaWallet.Address) -> String {
         "\(Keys.lastFetchedAutoDetectedTransactedTokenErc20BlockNumber)-\(wallet.eip55String)"
     }
@@ -118,8 +122,19 @@ public struct Config {
         defaults.set(dictionary, forKey: generateLastFetchedErc721InteractionBlockNumberKey(wallet))
     }
 
+    public static func setLastFetchedErc1155InteractionBlockNumber(_ blockNumber: Int, server: RPCServer, wallet: AlphaWallet.Address, defaults: UserDefaults = UserDefaults.standardOrForTests) {
+        var dictionary: [String: NSNumber] = (defaults.value(forKey: generateLastFetchedErc1155InteractionBlockNumberKey(wallet)) as? [String: NSNumber]) ?? .init()
+        dictionary["\(server.chainID)"] = NSNumber(value: blockNumber)
+        defaults.set(dictionary, forKey: generateLastFetchedErc1155InteractionBlockNumberKey(wallet))
+    }
+
     public static func getLastFetchedErc721InteractionBlockNumber(_ server: RPCServer, wallet: AlphaWallet.Address, defaults: UserDefaults = UserDefaults.standardOrForTests) -> Int? {
         guard let dictionary = defaults.value(forKey: generateLastFetchedErc721InteractionBlockNumberKey(wallet)) as? [String: NSNumber] else { return nil }
+        return dictionary["\(server.chainID)"]?.intValue
+    }
+
+    public static func getLastFetchedErc1155InteractionBlockNumber(_ server: RPCServer, wallet: AlphaWallet.Address, defaults: UserDefaults = UserDefaults.standardOrForTests) -> Int? {
+        guard let dictionary = defaults.value(forKey: generateLastFetchedErc1155InteractionBlockNumberKey(wallet)) as? [String: NSNumber] else { return nil }
         return dictionary["\(server.chainID)"]?.intValue
     }
 
@@ -157,6 +172,7 @@ public struct Config {
         static let lastFetchedErc20InteractionBlockNumber = "lastFetchedErc20InteractionBlockNumber"
         static let lastFetchedAutoDetectedTransactedTokenErc20BlockNumber = "lastFetchedAutoDetectedTransactedTokenErc20BlockNumber"
         static let lastFetchedAutoDetectedTransactedTokenErc721BlockNumber = "lastFetchedAutoDetectedTransactedTokenErc721BlockNumber"
+        static let lastFetchedAutoDetectedTransactedTokenErc1155BlockNumber = "lastFetchedAutoDetectedTransactedTokenErc1155BlockNumber"
         static let lastFetchedAutoDetectedTransactedTokenNonErc20BlockNumber = "lastFetchedAutoDetectedTransactedTokenNonErc20BlockNumber"
         static let walletNames = "walletNames"
         //We don't write to this key anymore as we support more than 1 service provider. Reading this key only for legacy reasons
@@ -235,15 +251,7 @@ public struct Config {
                 } else {
                     //Remove duplicates. Useful for the occasion where users have enabled a chain, then we disable that chain in an update and the user might now end up with the Ethereum mainnet twice (default when we can't find a chain that we removed) in their enabled list
                     let servers: [RPCServer] = Array(Set(chainIds.map { .init(chainID: $0) }.filter { $0.conflictedServer == nil }))
-                    //TODO remove filter after some time as every user should have upgraded and no longer has a mix of mainnet and testnet enabled at the same time. We could have done this filtering one-time per wallet outside of here, but doing it here is more localized
-                    if servers.contains(where: { $0.isTestnet }) && servers.contains(where: { !$0.isTestnet }) {
-                        let filteredServers = servers.filter { !$0.isTestnet }
-                        var configForEditing = self
-                        configForEditing.enabledServers = filteredServers
-                        return filteredServers
-                    } else {
-                        return servers
-                    }
+                    return servers
                 }
             } else {
                 return Constants.defaultEnabledServers
@@ -334,44 +342,5 @@ extension Config {
 
     func removeAllWalletNames() {
         defaults.removeObject(forKey: Keys.walletNames)
-    }
-}
-
-extension Config {
-
-    private static func notificationKey(for transaction: TransactionInstance) -> String {
-        String(format: "%@-%d", transaction.id, transaction.chainId)
-    }
-
-    private static func notificationsStorageKey(wallet: Wallet) -> String {
-        return "presentedNotifications-\(wallet.address.eip55String)"
-    }
-
-    func hasScheduledNotification(for transaction: TransactionInstance, in wallet: Wallet) -> Bool {
-        let key = Config.notificationKey(for: transaction)
-        return notifications(wallet: wallet).contains(key)
-    }
-
-    private func notifications(wallet: Wallet) -> [String] {
-        let storageKey = Config.notificationsStorageKey(wallet: wallet)
-        if let values = defaults.array(forKey: storageKey) {
-            return values as! [String]
-        } else {
-            return []
-        }
-    }
-
-    func markScheduledNotification(transaction: TransactionInstance, in wallet: Wallet) {
-        let key = Config.notificationKey(for: transaction)
-        let notifications = notifications(wallet: wallet)
-        let updatedNotifications = Array(Set(notifications + [key]))
-
-        let storageKey = Config.notificationsStorageKey(wallet: wallet)
-        defaults.set(updatedNotifications, forKey: storageKey)
-    }
-
-    func removeAllNotifications(for wallet: Wallet) {
-        let storageKey = Config.notificationsStorageKey(wallet: wallet)
-        defaults.removeObject(forKey: storageKey)
     }
 }

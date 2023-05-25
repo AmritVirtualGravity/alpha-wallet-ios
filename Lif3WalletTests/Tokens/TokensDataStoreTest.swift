@@ -1,17 +1,17 @@
 // Copyright © 2018 Stormbird PTE. LTD.
 
-import XCTest
 @testable import AlphaWallet
-import Foundation
 import AlphaWalletFoundation
+import Foundation
+import XCTest
 
 class TokensDataStoreTest: XCTestCase {
     private let storage = FakeTokensDataStore()
     private let token = Token(
-            contract: AlphaWallet.Address.make(),
-            server: .main,
-            value: "0",
-            type: .erc20
+        contract: AlphaWallet.Address.make(),
+        server: .main,
+        value: "0",
+        type: .erc20
     )
 
     override func setUp() {

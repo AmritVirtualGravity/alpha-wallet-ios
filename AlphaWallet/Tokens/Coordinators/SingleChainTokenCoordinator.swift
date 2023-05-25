@@ -13,10 +13,10 @@ struct NoTokenError: LocalizedError {
 
 protocol SingleChainTokenCoordinatorDelegate: CanOpenURL, SendTransactionDelegate {
     func didTapSwap(swapTokenFlow: SwapTokenFlow, in coordinator: SingleChainTokenCoordinator)
-    func didTapBridge(transactionType: TransactionType, service: TokenActionProvider, in coordinator: SingleChainTokenCoordinator)
-    func didTapBuy(transactionType: TransactionType, service: TokenActionProvider, in coordinator: SingleChainTokenCoordinator)
+    func didTapBridge(token: Token, service: TokenActionProvider, in coordinator: SingleChainTokenCoordinator)
+    func didTapBuy(token: Token, service: TokenActionProvider, in coordinator: SingleChainTokenCoordinator)
     func didPress(for type: PaymentFlow, viewController: UIViewController, in coordinator: SingleChainTokenCoordinator)
-    func didTap(transaction: TransactionInstance, viewController: UIViewController, in coordinator: SingleChainTokenCoordinator)
+    func didTap(transaction: Transaction, viewController: UIViewController, in coordinator: SingleChainTokenCoordinator)
     func didTap(activity: Activity, viewController: UIViewController, in coordinator: SingleChainTokenCoordinator)
     func didPostTokenScriptTransaction(_ transaction: SentTransaction, in coordinator: SingleChainTokenCoordinator)
     func didTapAddAlert(for token: Token, in coordinator: SingleChainTokenCoordinator)
@@ -31,12 +31,12 @@ class SingleChainTokenCoordinator: Coordinator {
     private let tokenActionsProvider: SupportedTokenActionsProvider
     private let coinTickersFetcher: CoinTickersFetcher
     private let activitiesService: ActivitiesServiceType
-    private let sessions: ServerDictionary<WalletSession>
+    private let sessionsProvider: SessionsProvider
     private let alertService: PriceAlertServiceType
-    private let tokensService: TokenBalanceRefreshable & TokenViewModelState & TokenHolderState
+    private let tokensPipeline: TokensProcessingPipeline
     private let currencyService: CurrencyService
     private let tokenImageFetcher: TokenImageFetcher
-
+    private let tokensService: TokensService
     let session: WalletSession
     weak var delegate: SingleChainTokenCoordinatorDelegate?
     var coordinators: [Coordinator] = []
@@ -54,15 +54,17 @@ class SingleChainTokenCoordinator: Coordinator {
          coinTickersFetcher: CoinTickersFetcher,
          activitiesService: ActivitiesServiceType,
          alertService: PriceAlertServiceType,
-         tokensService: TokenBalanceRefreshable & TokenViewModelState & TokenHolderState,
-         sessions: ServerDictionary<WalletSession>,
+         tokensPipeline: TokensProcessingPipeline,
+         sessionsProvider: SessionsProvider,
          currencyService: CurrencyService,
-         tokenImageFetcher: TokenImageFetcher) {
+         tokenImageFetcher: TokenImageFetcher,
+         tokensService: TokensService) {
 
+        self.tokensService = tokensService
         self.tokenImageFetcher = tokenImageFetcher
         self.currencyService = currencyService
-        self.sessions = sessions
-        self.tokensService = tokensService
+        self.sessionsProvider = sessionsProvider
+        self.tokensPipeline = tokensPipeline
         self.session = session
         self.keystore = keystore
         self.assetDefinitionStore = assetDefinitionStore
@@ -96,10 +98,11 @@ class SingleChainTokenCoordinator: Coordinator {
             analytics: analytics,
             nftProvider: nftProvider,
             activitiesService: activitiesService,
-            tokensService: tokensService,
-            sessions: sessions,
+            tokensService: tokensPipeline,
+            sessionsProvider: sessionsProvider,
             currencyService: currencyService,
-            tokenImageFetcher: tokenImageFetcher)
+            tokenImageFetcher: tokenImageFetcher,
+            tokenActionsProvider: tokenActionsProvider)
 
         addCoordinator(coordinator)
         coordinator.delegate = self
@@ -111,7 +114,23 @@ class SingleChainTokenCoordinator: Coordinator {
         let activitiesFilterStrategy = token.activitiesFilterStrategy
         let activitiesService = self.activitiesService.copy(activitiesFilterStrategy: activitiesFilterStrategy, transactionsFilterStrategy: TransactionDataStore.functional.transactionsFilter(for: activitiesFilterStrategy, token: token))
 
-        let coordinator = FungibleTokenCoordinator(token: token, navigationController: navigationController, session: session, keystore: keystore, assetDefinitionStore: assetDefinitionStore, analytics: analytics, tokenActionsProvider: tokenActionsProvider, coinTickersFetcher: coinTickersFetcher, activitiesService: activitiesService, alertService: alertService, tokensService: tokensService, sessions: sessions, currencyService: currencyService, tokenImageFetcher: tokenImageFetcher)
+        let coordinator = FungibleTokenCoordinator(
+            token: token,
+            navigationController: navigationController,
+            session: session,
+            keystore: keystore,
+            assetDefinitionStore: assetDefinitionStore,
+            analytics: analytics,
+            tokenActionsProvider: tokenActionsProvider,
+            coinTickersFetcher: coinTickersFetcher,
+            activitiesService: activitiesService,
+            alertService: alertService,
+            tokensPipeline: tokensPipeline,
+            sessionsProvider: sessionsProvider,
+            currencyService: currencyService,
+            tokenImageFetcher: tokenImageFetcher,
+            tokensService: tokensService)
+
         addCoordinator(coordinator)
         coordinator.delegate = self
         coordinator.start()
@@ -128,19 +147,19 @@ extension SingleChainTokenCoordinator: FungibleTokenCoordinatorDelegate {
         delegate?.didTapSwap(swapTokenFlow: swapTokenFlow, in: self)
     }
 
-    func didTapBridge(transactionType: TransactionType, service: TokenActionProvider, in coordinator: FungibleTokenCoordinator) {
-        delegate?.didTapBridge(transactionType: transactionType, service: service, in: self)
+    func didTapBridge(token: Token, service: TokenActionProvider, in coordinator: FungibleTokenCoordinator) {
+        delegate?.didTapBridge(token: token, service: service, in: self)
     }
 
-    func didTapBuy(transactionType: TransactionType, service: TokenActionProvider, in coordinator: FungibleTokenCoordinator) {
-        delegate?.didTapBuy(transactionType: transactionType, service: service, in: self)
+    func didTapBuy(token: Token, service: TokenActionProvider, in coordinator: FungibleTokenCoordinator) {
+        delegate?.didTapBuy(token: token, service: service, in: self)
     }
 
     func didPress(for type: PaymentFlow, viewController: UIViewController, in coordinator: FungibleTokenCoordinator) {
         delegate?.didPress(for: type, viewController: viewController, in: self)
     }
 
-    func didTap(transaction: TransactionInstance, viewController: UIViewController, in coordinator: FungibleTokenCoordinator) {
+    func didTap(transaction: Transaction, viewController: UIViewController, in coordinator: FungibleTokenCoordinator) {
         delegate?.didTap(transaction: transaction, viewController: viewController, in: self)
     }
 
@@ -154,7 +173,7 @@ extension SingleChainTokenCoordinator: FungibleTokenCoordinatorDelegate {
 }
 
 extension SingleChainTokenCoordinator: NFTCollectionCoordinatorDelegate {
-    func didTap(transaction: TransactionInstance, in coordinator: NFTCollectionCoordinator) {
+    func didTap(transaction: Transaction, in coordinator: NFTCollectionCoordinator) {
         delegate?.didTap(transaction: transaction, viewController: coordinator.rootViewController, in: self)
     }
 

@@ -10,7 +10,7 @@ import AlphaWalletOpenSea
 
 protocol BalanceRepresentable {
     var balanceNft: [TokenBalanceValue] { get }
-    var valueBI: BigInt { get }
+    var valueBI: BigUInt { get }
     var type: TokenType { get }
     var decimals: Int { get }
     var symbol: String { get }
@@ -27,8 +27,8 @@ struct Erc20BalanceViewModel: BalanceViewModelType {
     }
 
     var balance: [TokenBalanceValue] { return [] }
-    var value: BigInt { _balance.valueBI }
-    var valueDecimal: Decimal { Decimal(bigInt: value, decimals: _balance.decimals) ?? .zero }
+    var value: BigUInt { _balance.valueBI }
+    var valueDecimal: Decimal { Decimal(bigUInt: value, decimals: _balance.decimals) ?? .zero }
 
     var amountString: String {
         guard !isZero else { return "0.00 \(_balance.symbol)" }

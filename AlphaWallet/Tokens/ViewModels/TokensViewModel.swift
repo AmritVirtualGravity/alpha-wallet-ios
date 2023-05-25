@@ -23,7 +23,8 @@ struct TokensViewModelOutput {
 //Must be a class, and not a struct, otherwise changing `filter` will silently create a copy of TokensViewModel when user taps to change the filter in the UI and break filtering
 // swiftlint:disable type_body_length
 final class TokensViewModel {
-    private let tokenCollection: TokenCollection
+    private let tokensService: TokensService
+    private let tokensPipeline: TokensProcessingPipeline
     private let walletConnectProvider: WalletConnectProvider
     private let walletBalanceService: WalletBalanceService
         //Must be computed because localization can be overridden by user dynamically
@@ -55,6 +56,8 @@ final class TokensViewModel {
     private let wallet: Wallet
     private let assetDefinitionStore: AssetDefinitionStore
     private let tokenImageFetcher: TokenImageFetcher
+    private let serversProvider: ServersProvidable
+
     let config: Config
     let largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode = .never
     var filterViewModel: (cells: [ScrollableSegmentedControlCell], configuration: ScrollableSegmentedControlConfiguration) {
@@ -64,20 +67,6 @@ final class TokensViewModel {
             ScrollableSegmentedControlCell(frame: .zero, title: title, configuration: cellConfiguration)
         }
         return (cells: cells, configuration: controlConfiguration)
-    }
-
-        //NOTE: For case with empty tokens list we want
-    func isBottomSeparatorLineHiddenForTestnetHeader(section: Int) -> Bool {
-        switch sections[section] {
-        case .walletSummary, .filters, .activeWalletSession, .search, .tokens, .collectiblePairs:
-            return true
-        case .testnetTokens:
-            if let index = sections.firstIndex(where: { $0 == tokenListSection }) {
-                return numberOfItems(for: Int(index)) == 0
-            } else {
-                return true
-            }
-        }
     }
 
     var emptyTokensTitle: String {
@@ -137,7 +126,7 @@ final class TokensViewModel {
             return DataEntry.Metric.Tokens.Filter.height
         case .activeWalletSession:
             return 80
-        case .search, .testnetTokens:
+        case .search:
             return DataEntry.Metric.AddHideToken.Header.height
         case .tokens, .collectiblePairs:
             return 0.01
@@ -146,7 +135,7 @@ final class TokensViewModel {
 
     func numberOfItems(for section: Int) -> Int {
         switch sections[section] {
-        case .search, .testnetTokens, .walletSummary, .filters, .activeWalletSession:
+        case .search, .walletSummary, .filters, .activeWalletSession:
             return 0
         case .tokens, .collectiblePairs:
             switch filter {
@@ -159,7 +148,7 @@ final class TokensViewModel {
     }
 
     init(wallet: Wallet,
-         tokenCollection: TokenCollection,
+         tokensPipeline: TokensProcessingPipeline,
          tokensFilter: TokensFilter,
          walletConnectProvider: WalletConnectProvider,
          walletBalanceService: WalletBalanceService,
@@ -167,11 +156,14 @@ final class TokensViewModel {
          domainResolutionService: DomainResolutionServiceType,
          blockiesGenerator: BlockiesGenerator,
          assetDefinitionStore: AssetDefinitionStore,
-         tokenImageFetcher: TokenImageFetcher) {
+         tokenImageFetcher: TokenImageFetcher,
+         serversProvider: ServersProvidable,
+         tokensService: TokensService) {
 
+        self.tokensService = tokensService
         self.tokenImageFetcher = tokenImageFetcher
         self.wallet = wallet
-        self.tokenCollection = tokenCollection
+        self.tokensPipeline = tokensPipeline
         self.tokensFilter = tokensFilter
         self.walletConnectProvider = walletConnectProvider
         self.walletBalanceService = walletBalanceService
@@ -179,6 +171,7 @@ final class TokensViewModel {
         self.domainResolutionService = domainResolutionService
         self.blockiesGenerator = blockiesGenerator
         self.assetDefinitionStore = assetDefinitionStore
+        self.serversProvider = serversProvider
     }
 
     func transform(input: TokensViewModelInput) -> TokensViewModelOutput {
@@ -188,7 +181,7 @@ final class TokensViewModel {
 
         Publishers.Merge(input.appear, input.pullToRefresh)
             .receive(on: RunLoop.main)
-            .sink { [tokenCollection] _ in tokenCollection.refresh() }
+            .sink { [tokensService] _ in tokensService.refresh() }
             .store(in: &cancellable)
 
         walletConnectProvider.sessionsPublisher
@@ -198,7 +191,7 @@ final class TokensViewModel {
                 self?.reloadData()
             }.store(in: &cancellable)
 
-        tokenCollection.tokenViewModels
+        tokensPipeline.tokenViewModels
             .sink { [weak self] tokens in
                 self?.tokens = tokens
                 self?.reloadData()
@@ -284,7 +277,7 @@ final class TokensViewModel {
     }
 
     private func selection(trigger: AnyPublisher<TokensViewModel.SelectionSource, Never>) -> AnyPublisher<Token, Never> {
-        trigger.compactMap { [unowned self, tokenCollection] source -> Token? in
+        trigger.compactMap { [unowned self, tokensService] source -> Token? in
             switch source {
             case .gridItem(let indexPath, let isLeftCardSelected):
                 switch self.sections[indexPath.section] {
@@ -292,15 +285,15 @@ final class TokensViewModel {
                     let pair = collectiblePairs[indexPath.row]
                     guard let viewModel: TokenViewModel = isLeftCardSelected ? pair.left : pair.right else { return nil }
 
-                    return tokenCollection.token(for: viewModel.contractAddress, server: viewModel.server)
-                case .tokens, .testnetTokens, .activeWalletSession, .filters, .search, .walletSummary:
+                    return tokensService.token(for: viewModel.contractAddress, server: viewModel.server)
+                case .tokens, .activeWalletSession, .filters, .search, .walletSummary:
                     return nil
                 }
             case .cell(let indexPath):
                 let tokenOrServer = self.tokenOrServer(at: indexPath)
                 switch (self.sections[indexPath.section], tokenOrServer) {
                 case (.tokens, .token(let viewModel)):
-                    return tokenCollection.token(for: viewModel.contractAddress, server: viewModel.server)
+                    return tokensService.token(for: viewModel.contractAddress, server: viewModel.server)!
                 case (_, _):
                     return nil
                 }
@@ -309,7 +302,7 @@ final class TokensViewModel {
     }
 
     private var isFooterHidden: Bool {
-        !config.enabledServers.contains(.main)
+        !serversProvider.enabledServers.contains(.main)
     }
 
     func set(isSearchActive: Bool) {
@@ -359,7 +352,7 @@ final class TokensViewModel {
         }
 
         switch sections[indexPath.section] {
-        case .collectiblePairs, .testnetTokens, .search, .walletSummary, .filters, .activeWalletSession:
+        case .collectiblePairs, .search, .walletSummary, .filters, .activeWalletSession:
             return nil
         case .tokens:
             return trailingSwipeActionsConfiguration(forRowAt: indexPath)
@@ -368,7 +361,7 @@ final class TokensViewModel {
 
     private func viewModel(for indexPath: IndexPath) -> ViewModelType {
         switch sections[indexPath.section] {
-        case .search, .testnetTokens, .walletSummary, .filters, .activeWalletSession:
+        case .search, .walletSummary, .filters, .activeWalletSession:
             return .undefined
         case .tokens:
             switch tokenOrServer(at: indexPath) {
@@ -405,7 +398,7 @@ final class TokensViewModel {
 
     func cellHeight(for indexPath: IndexPath) -> CGFloat {
         switch sections[indexPath.section] {
-        case .tokens, .testnetTokens:
+        case .tokens:
             switch tokenOrServer(at: indexPath) {
             case .rpcServer:
                 return DataEntry.Metric.Tokens.headerHeight
@@ -420,7 +413,7 @@ final class TokensViewModel {
     }
 
     @discardableResult private func markTokenHidden(token: TokenViewModel) -> Bool {
-        tokenCollection.mark(token: token, isHidden: true)
+        tokensService.mark(token: token, isHidden: true)
 
         if let index = tokens.firstIndex(where: { $0 == token }) {
             tokens.remove(at: index)
@@ -524,20 +517,13 @@ final class TokensViewModel {
             sections = [varyTokenOrCollectiblePeirsSection]
         } else {
             let initialSections: [Section]
-            let testnetHeaderSections: [Section]
-
-            if config.enabledServers.allSatisfy({ $0.isTestnet }) {
-                testnetHeaderSections = [.testnetTokens]
-            } else {
-                testnetHeaderSections = []
-            }
 
             if count == .zero {
                 initialSections = [.walletSummary, .filters, .search]
             } else {
                 initialSections = [.walletSummary, .filters, .search, .activeWalletSession]
             }
-            sections = initialSections + testnetHeaderSections + [varyTokenOrCollectiblePeirsSection]
+            sections = initialSections + [varyTokenOrCollectiblePeirsSection]
         }
         tokenListSection = varyTokenOrCollectiblePeirsSection
     }
@@ -593,7 +579,6 @@ extension TokensViewModel {
     enum Section: Int, Hashable {
         case walletSummary
         case filters
-        case testnetTokens
         case search
         case tokens
         case collectiblePairs
@@ -695,7 +680,7 @@ fileprivate extension WalletFilter {
 }
 
 extension TokensViewModel {
-    class functional {}
+    enum functional {}
 }
 
 extension TokensViewModel.functional {

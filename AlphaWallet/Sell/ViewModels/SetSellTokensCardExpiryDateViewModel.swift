@@ -5,8 +5,7 @@ import UIKit
 import AlphaWalletFoundation
 
 struct SetSellTokensCardExpiryDateViewModel {
-    private let server: RPCServer
-    private let assetDefinitionStore: AssetDefinitionStore
+    private let session: WalletSession
 
     let ethCost: Double
     let token: Token
@@ -25,31 +24,31 @@ struct SetSellTokensCardExpiryDateViewModel {
     }
     
     var descriptionLabelText: String {
-        let tokenTypeName = XMLHandler(token: token, assetDefinitionStore: assetDefinitionStore).getNameInPluralForm()
+        let tokenTypeName = session.tokenAdaptor.xmlHandler(token: token).getNameInPluralForm()
         return R.string.localizable.aWalletTokenSellMagicLinkDescriptionTitle(tokenTypeName)
     }
 
     var tokenCountLabelText: String {
         if tokenCount == 1 {
-            let tokenTypeName = XMLHandler(token: token, assetDefinitionStore: assetDefinitionStore).getLabel()
+            let tokenTypeName = session.tokenAdaptor.xmlHandler(token: token).getLabel()
             return R.string.localizable.aWalletTokenSellSingleTokenSelectedTitle(tokenTypeName)
         } else {
-            let tokenTypeName = XMLHandler(token: token, assetDefinitionStore: assetDefinitionStore).getNameInPluralForm()
+            let tokenTypeName = session.tokenAdaptor.xmlHandler(token: token).getNameInPluralForm()
             return R.string.localizable.aWalletTokenSellMultipleTokenSelectedTitle(tokenHolder.count, tokenTypeName)
         }
     }
     
     var perTokenPriceLabelText: String {
-        let tokenTypeName = XMLHandler(token: token, assetDefinitionStore: assetDefinitionStore).getLabel()
+        let tokenTypeName = session.tokenAdaptor.xmlHandler(token: token).getLabel()
         let amount = NumberFormatter.shortCrypto.string(double: ethCost / Double(tokenCount), minimumFractionDigits: 4, maximumFractionDigits: 8).droppedTrailingZeros
         
-        return R.string.localizable.aWalletTokenSellPerTokenEthPriceTitle(amount, server.symbol, tokenTypeName)
+        return R.string.localizable.aWalletTokenSellPerTokenEthPriceTitle(amount, session.server.symbol, tokenTypeName)
     }
     
     var totalEthLabelText: String {
         let amount = NumberFormatter.shortCrypto.string(double: ethCost, minimumFractionDigits: 4, maximumFractionDigits: 8).droppedTrailingZeros
 
-        return R.string.localizable.aWalletTokenSellTotalEthPriceTitle(amount, server.symbol)
+        return R.string.localizable.aWalletTokenSellTotalEthPriceTitle(amount, session.server.symbol)
     }
     
     var noteTitleLabelText: String {
@@ -57,7 +56,7 @@ struct SetSellTokensCardExpiryDateViewModel {
     }
 
     var noteLabelText: String {
-        let tokenTypeName = XMLHandler(token: token, assetDefinitionStore: assetDefinitionStore).getNameInPluralForm()
+        let tokenTypeName = session.tokenAdaptor.xmlHandler(token: token).getNameInPluralForm()
         return R.string.localizable.aWalletTokenSellNoteLabelTitle(tokenTypeName)
     }
     
@@ -68,13 +67,11 @@ struct SetSellTokensCardExpiryDateViewModel {
     init(token: Token,
          tokenHolder: TokenHolder,
          ethCost: Double,
-         server: RPCServer,
-         assetDefinitionStore: AssetDefinitionStore) {
+         session: WalletSession) {
 
         self.token = token
         self.tokenHolder = tokenHolder
         self.ethCost = ethCost
-        self.server = server
-        self.assetDefinitionStore = assetDefinitionStore
+        self.session = session
     }
 }

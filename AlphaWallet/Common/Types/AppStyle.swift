@@ -82,9 +82,9 @@ extension UITabBarAppearance {
     }
 }
 
-extension UITabBarController {
-    static func withOverridenBarAppearence(appearence tabBarAppearance: UITabBarAppearance = .defaultAppearence) -> UITabBarController {
-        let tabBarController = UITabBarController()
+extension TabBarController {
+    static func withOverridenBarAppearence(appearence tabBarAppearance: UITabBarAppearance = .defaultAppearence) -> TabBarController {
+        let tabBarController = TabBarController()
         tabBarController.tabBar.isTranslucent = false
         tabBarController.tabBar.tintColor = Configuration.Color.Semantic.tabBarTint
         tabBarController.tabBar.standardAppearance = tabBarAppearance
@@ -109,6 +109,10 @@ struct Colors {
     static let lightBlack = UIColor(hex: "313849")
     static let lightGray = UIColor.lightGray
     static let navigationTitleColor = UIColor.black
+class TabBarController: UITabBarController, PopInteractable {
+    func shouldBeginPopInteraction() -> Bool {
+        return false
+    }
 }
 
 struct Fonts {

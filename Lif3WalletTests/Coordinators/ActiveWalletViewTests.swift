@@ -5,9 +5,29 @@ import XCTest
 import AlphaWalletFoundation
 import Combine
 import AlphaWalletCore
-import PromiseKit
+import Alamofire
+
+final class FakeApiTransporter: ApiTransporter {
+    
+    func responseTaskPublisher(_ request: AlphaWalletFoundation.URLRequestConvertible) -> AnyPublisher<HTTPURLResponse, AlphaWalletFoundation.SessionTaskError> {
+        return .empty()
+    }
+
+    func dataTaskPublisher(_ request: URLRequestConvertible) -> AnyPublisher<URLRequest.Response, SessionTaskError> {
+        return .empty()
+    }
+
+    func dataPublisher(_ request: URLRequestConvertible) -> AnyPublisher<Alamofire.DataResponsePublisher<Data>.Output, SessionTaskError> {
+        return .empty()
+    }
+}
 
 final class FakeNetworkService: NetworkService {
+    func dataTask(_ request: AlphaWalletFoundation.URLRequestConvertible) async throws -> URLRequest.Response {
+        let url = URL(string: "https://github.com/AlphaWallet/alpha-wallet-ios")!
+        let response = HTTPURLResponse(url: url, statusCode: 500, httpVersion: nil, headerFields: nil)!
+        return (data: Data(), response: response)
+    }
 
     var response: Swift.Result<URLRequest.Response, AlphaWalletFoundation.SessionTaskError>?
     var callbackQueue: DispatchQueue = .main
@@ -92,14 +112,14 @@ class ActiveWalletViewTests: XCTestCase {
             assetDefinitionStore: .make(),
             config: config,
             analytics: FakeAnalyticsService(),
-            restartQueue: .init(),
+            restartHandler: .init(),
             universalLinkCoordinator: FakeUniversalLinkCoordinator.make(),
             accountsCoordinator: ac,
             walletBalanceService: FakeMultiWalletBalanceService(),
             coinTickersFetcher: CoinTickersFetcherImpl.make(),
             tokenActionsService: FakeSwapTokenService(),
             walletConnectCoordinator: .fake(),
-            notificationService: .fake(),
+            localNotificationsService: .fake(),
             blockiesGenerator: .make(),
             domainResolutionService: FakeDomainResolutionService(),
             tokenSwapper: TokenSwapper.make(),
@@ -107,13 +127,17 @@ class ActiveWalletViewTests: XCTestCase {
             tokenCollection: dep.pipeline,
             transactionsDataStore: dep.transactionsDataStore,
             tokensService: dep.tokensService,
+            tokenGroupIdentifier: FakeTokenGroupIdentifier(),
             lock: FakeLock(),
             currencyService: currencyService,
             tokenScriptOverridesFileManager: .fake(),
             networkService: FakeNetworkService(),
             promptBackup: .make(),
             caip10AccountProvidable: AnyCAIP10AccountProvidable.make(),
-            tokenImageFetcher: FakeTokenImageFetcher())
+            tokenImageFetcher: FakeTokenImageFetcher(),
+            serversProvider: BaseServersProvider(),
+            transactionsService: dep.transactionsService,
+            pushNotificationsService: BasePushNotificationsService.fake())
 
         coordinator.start(animated: false)
 
@@ -175,14 +199,14 @@ class ActiveWalletViewTests: XCTestCase {
             assetDefinitionStore: .make(),
             config: .make(),
             analytics: FakeAnalyticsService(),
-            restartQueue: .init(),
+            restartHandler: .init(),
             universalLinkCoordinator: FakeUniversalLinkCoordinator.make(),
             accountsCoordinator: ac,
             walletBalanceService: FakeMultiWalletBalanceService(),
             coinTickersFetcher: CoinTickersFetcherImpl.make(),
             tokenActionsService: FakeSwapTokenService(),
             walletConnectCoordinator: .fake(),
-            notificationService: .fake(),
+            localNotificationsService: .fake(),
             blockiesGenerator: .make(),
             domainResolutionService: FakeDomainResolutionService(),
             tokenSwapper: TokenSwapper.make(),
@@ -190,13 +214,17 @@ class ActiveWalletViewTests: XCTestCase {
             tokenCollection: dep1.pipeline,
             transactionsDataStore: dep1.transactionsDataStore,
             tokensService: dep1.tokensService,
+            tokenGroupIdentifier: FakeTokenGroupIdentifier(),
             lock: FakeLock(),
             currencyService: currencyService,
             tokenScriptOverridesFileManager: .fake(),
             networkService: FakeNetworkService(),
             promptBackup: .make(),
             caip10AccountProvidable: AnyCAIP10AccountProvidable.make(),
-            tokenImageFetcher: FakeTokenImageFetcher())
+            tokenImageFetcher: FakeTokenImageFetcher(),
+            serversProvider: BaseServersProvider(),
+            transactionsService: dep1.transactionsService,
+            pushNotificationsService: BasePushNotificationsService.fake())
 
         c1.start(animated: false)
 
@@ -212,14 +240,14 @@ class ActiveWalletViewTests: XCTestCase {
             assetDefinitionStore: .make(),
             config: .make(),
             analytics: FakeAnalyticsService(),
-            restartQueue: .init(),
+            restartHandler: .init(),
             universalLinkCoordinator: FakeUniversalLinkCoordinator.make(),
             accountsCoordinator: ac,
             walletBalanceService: FakeMultiWalletBalanceService(),
             coinTickersFetcher: CoinTickersFetcherImpl.make(),
             tokenActionsService: FakeSwapTokenService(),
             walletConnectCoordinator: .fake(),
-            notificationService: .fake(),
+            localNotificationsService: .fake(),
             blockiesGenerator: .make(),
             domainResolutionService: FakeDomainResolutionService(),
             tokenSwapper: TokenSwapper.make(),
@@ -227,13 +255,17 @@ class ActiveWalletViewTests: XCTestCase {
             tokenCollection: dep2.pipeline,
             transactionsDataStore: dep2.transactionsDataStore,
             tokensService: dep2.tokensService,
+            tokenGroupIdentifier: FakeTokenGroupIdentifier(),
             lock: FakeLock(),
             currencyService: currencyService,
             tokenScriptOverridesFileManager: .fake(),
             networkService: FakeNetworkService(),
             promptBackup: .make(),
             caip10AccountProvidable: AnyCAIP10AccountProvidable.make(),
-            tokenImageFetcher: FakeTokenImageFetcher())
+            tokenImageFetcher: FakeTokenImageFetcher(),
+            serversProvider: BaseServersProvider(),
+            transactionsService: dep2.transactionsService,
+            pushNotificationsService: BasePushNotificationsService.fake())
 
         c1.start(animated: false)
 
@@ -267,14 +299,14 @@ class ActiveWalletViewTests: XCTestCase {
                 assetDefinitionStore: .make(),
                 config: .make(),
                 analytics: FakeAnalyticsService(),
-                restartQueue: .init(),
+                restartHandler: .init(),
                 universalLinkCoordinator: FakeUniversalLinkCoordinator.make(),
                 accountsCoordinator: ac,
                 walletBalanceService: FakeMultiWalletBalanceService(),
                 coinTickersFetcher: CoinTickersFetcherImpl.make(),
                 tokenActionsService: FakeSwapTokenService(),
                 walletConnectCoordinator: .fake(),
-                notificationService: .fake(),
+                localNotificationsService: .fake(),
                 blockiesGenerator: .make(),
                 domainResolutionService: FakeDomainResolutionService(),
                 tokenSwapper: TokenSwapper.make(),
@@ -282,13 +314,17 @@ class ActiveWalletViewTests: XCTestCase {
                 tokenCollection: dep.pipeline,
                 transactionsDataStore: dep.transactionsDataStore,
                 tokensService: dep.tokensService,
+                tokenGroupIdentifier: FakeTokenGroupIdentifier(),
                 lock: FakeLock(),
                 currencyService: currencyService,
                 tokenScriptOverridesFileManager: .fake(),
                 networkService: FakeNetworkService(),
                 promptBackup: .make(),
                 caip10AccountProvidable: AnyCAIP10AccountProvidable.make(),
-                tokenImageFetcher: FakeTokenImageFetcher())
+                tokenImageFetcher: FakeTokenImageFetcher(),
+                serversProvider: BaseServersProvider(),
+                transactionsService: dep.transactionsService,
+                pushNotificationsService: BasePushNotificationsService.fake())
 
         coordinator.start(animated: false)
         coordinator.showPaymentFlow(
@@ -326,14 +362,14 @@ class ActiveWalletViewTests: XCTestCase {
             assetDefinitionStore: .make(),
             config: .make(),
             analytics: FakeAnalyticsService(),
-            restartQueue: .init(),
+            restartHandler: .init(),
             universalLinkCoordinator: FakeUniversalLinkCoordinator.make(),
             accountsCoordinator: ac,
             walletBalanceService: FakeMultiWalletBalanceService(),
             coinTickersFetcher: CoinTickersFetcherImpl.make(),
             tokenActionsService: FakeSwapTokenService(),
             walletConnectCoordinator: .fake(),
-            notificationService: .fake(),
+            localNotificationsService: .fake(),
             blockiesGenerator: .make(),
             domainResolutionService: FakeDomainResolutionService(),
             tokenSwapper: TokenSwapper.make(),
@@ -341,13 +377,17 @@ class ActiveWalletViewTests: XCTestCase {
             tokenCollection: dep.pipeline,
             transactionsDataStore: dep.transactionsDataStore,
             tokensService: dep.tokensService,
+            tokenGroupIdentifier: FakeTokenGroupIdentifier(),
             lock: FakeLock(),
             currencyService: currencyService,
             tokenScriptOverridesFileManager: .fake(),
             networkService: FakeNetworkService(),
             promptBackup: .make(),
             caip10AccountProvidable: AnyCAIP10AccountProvidable.make(),
-            tokenImageFetcher: FakeTokenImageFetcher())
+            tokenImageFetcher: FakeTokenImageFetcher(),
+            serversProvider: BaseServersProvider(),
+            transactionsService: dep.transactionsService,
+            pushNotificationsService: BasePushNotificationsService.fake())
 
         coordinator.start(animated: false)
         coordinator.showPaymentFlow(for: .request, server: .main, navigationController: coordinator.navigationController)
@@ -382,14 +422,14 @@ class ActiveWalletViewTests: XCTestCase {
             assetDefinitionStore: .make(),
             config: .make(),
             analytics: FakeAnalyticsService(),
-            restartQueue: .init(),
+            restartHandler: .init(),
             universalLinkCoordinator: FakeUniversalLinkCoordinator.make(),
             accountsCoordinator: ac,
             walletBalanceService: FakeMultiWalletBalanceService(),
             coinTickersFetcher: CoinTickersFetcherImpl.make(),
             tokenActionsService: FakeSwapTokenService(),
             walletConnectCoordinator: .fake(),
-            notificationService: .fake(),
+            localNotificationsService: .fake(),
             blockiesGenerator: .make(),
             domainResolutionService: FakeDomainResolutionService(),
             tokenSwapper: TokenSwapper.make(),
@@ -397,13 +437,18 @@ class ActiveWalletViewTests: XCTestCase {
             tokenCollection: dep.pipeline,
             transactionsDataStore: dep.transactionsDataStore,
             tokensService: dep.tokensService,
+            tokenGroupIdentifier: FakeTokenGroupIdentifier(),
             lock: FakeLock(),
             currencyService: currencyService,
             tokenScriptOverridesFileManager: .fake(),
             networkService: FakeNetworkService(),
             promptBackup: .make(),
             caip10AccountProvidable: AnyCAIP10AccountProvidable.make(),
-            tokenImageFetcher: FakeTokenImageFetcher())
+            tokenImageFetcher: FakeTokenImageFetcher(),
+            serversProvider: BaseServersProvider(),
+            transactionsService: dep.transactionsService,
+            pushNotificationsService: BasePushNotificationsService.fake())
+
         coordinator.start(animated: false)
 
         let viewController = (coordinator.tabBarController.selectedViewController as? UINavigationController)?.viewControllers[0]
@@ -460,14 +505,14 @@ class ActiveWalletViewTests: XCTestCase {
                         assetDefinitionStore: .make(),
                         config: .make(),
                         analytics: FakeAnalyticsService(),
-                        restartQueue: .init(),
+                        restartHandler: .init(),
                         universalLinkCoordinator: FakeUniversalLinkCoordinator.make(),
                         accountsCoordinator: ac,
                         walletBalanceService: FakeMultiWalletBalanceService(),
                         coinTickersFetcher: CoinTickersFetcherImpl.make(),
                         tokenActionsService: FakeSwapTokenService(),
                         walletConnectCoordinator: .fake(),
-                        notificationService: .fake(),
+                        localNotificationsService: .fake(),
                         blockiesGenerator: .make(),
                         domainResolutionService: FakeDomainResolutionService(),
                         tokenSwapper: TokenSwapper.make(),
@@ -475,13 +520,17 @@ class ActiveWalletViewTests: XCTestCase {
                         tokenCollection: dep.pipeline,
                         transactionsDataStore: dep.transactionsDataStore,
                         tokensService: dep.tokensService,
+                        tokenGroupIdentifier: FakeTokenGroupIdentifier(),
                         lock: FakeLock(),
                         currencyService: self.currencyService,
                         tokenScriptOverridesFileManager: .fake(),
                         networkService: FakeNetworkService(),
                         promptBackup: .make(),
                         caip10AccountProvidable: AnyCAIP10AccountProvidable.make(),
-                        tokenImageFetcher: FakeTokenImageFetcher())
+                        tokenImageFetcher: FakeTokenImageFetcher(),
+                        serversProvider: BaseServersProvider(),
+                        transactionsService: dep.transactionsService,
+                        pushNotificationsService: BasePushNotificationsService.fake())
 
                 coordinator.start(animated: false)
 
@@ -494,3 +543,37 @@ class ActiveWalletViewTests: XCTestCase {
     }
 }
 // swiftlint:enable type_body_length
+
+import AlphaWalletNotifications
+
+extension BasePushNotificationsService {
+    static func fake(keystore: Keystore = FakeEtherKeystore(),
+                     notificationHandler: NotificationHandler = FakeNotificationHandler(),
+                     systemSettingsRequestable: SystemSettingsRequestable = FakeSystemSettingsRequestable()) -> PushNotificationsService {
+
+        let unUserNotificationService = UNUserNotificationsService(
+            application: .shared,
+            systemSettingsRequestable: systemSettingsRequestable)
+
+        return BasePushNotificationsService(
+            unUserNotificationService: unUserNotificationService,
+            keystore: keystore,
+            networking: BasePushNotificationsNetworking(transporter: BaseApiTransporter(), apiKey: nil),
+            notificationHandler: notificationHandler,
+            isSubscribedStorage: BaseNotificationSubscribersStorage(defaults: .standard))
+    }
+
+    class FakeSystemSettingsRequestable: SystemSettingsRequestable {
+        @MainActor func promptOpenSettings() async -> Result<Void, Error> {
+            return .success(())
+        }
+    }
+
+    class FakeNotificationHandler: NotificationHandler {
+        var navigation: PushNotificationNavigatable?
+
+        func process(userInfo: RemoteNotificationUserInfo, appStartedFromPush: Bool) async -> UIBackgroundFetchResult {
+            return .failed
+        }
+    }
+}

@@ -4,11 +4,12 @@ import UIKit
 import AlphaWalletFoundation
 
 struct GenerateSellMagicLinkViewModel {
-    let tokenHolder: TokenHolder
-    let ethCost: Double
-    let linkExpiryDate: Date
-    let server: RPCServer
-    private let assetDefinitionStore: AssetDefinitionStore
+    private let keystore: Keystore
+    private let session: WalletSession
+    private let magicLinkData: MagicLinkGenerator.MagicLinkData
+    private let ethCost: Double
+    private let linkExpiryDate: Date
+
     var contentsBackgroundColor: UIColor {
         return Configuration.Color.Semantic.defaultViewBackground
     }
@@ -22,9 +23,9 @@ struct GenerateSellMagicLinkViewModel {
         return R.string.localizable.aWalletTokenSellConfirmSubtitle()
     }
 
-	var headerTitle: String {
-		return R.string.localizable.aWalletTokenSellConfirmTitle()
-	}
+    var headerTitle: String {
+        return R.string.localizable.aWalletTokenSellConfirmTitle()
+    }
 
     var actionButtonTitleColor: UIColor {
         return Configuration.Color.Semantic.defaultForegroundText
@@ -64,45 +65,60 @@ struct GenerateSellMagicLinkViewModel {
     }
 
     var tokenCountLabelText: String {
-        if tokenCount == 1 {
-            let tokenTypeName = XMLHandler(contract: tokenHolder.contractAddress, tokenType: tokenHolder.tokenType, assetDefinitionStore: assetDefinitionStore).getLabel()
+        if magicLinkData.count == 1 {
+
+            let tokenTypeName = session.tokenAdaptor.xmlHandler(contract: magicLinkData.contractAddress, tokenType: magicLinkData.tokenType).getLabel()
             return R.string.localizable.aWalletTokenSellConfirmSingleTokenSelectedTitle(tokenTypeName)
         } else {
-            let tokenTypeName = XMLHandler(contract: tokenHolder.contractAddress, tokenType: tokenHolder.tokenType, assetDefinitionStore: assetDefinitionStore).getNameInPluralForm()
-            return R.string.localizable.aWalletTokenSellConfirmMultipleTokenSelectedTitle(tokenHolder.count, tokenTypeName)
+            let tokenTypeName = session.tokenAdaptor.xmlHandler(contract: magicLinkData.contractAddress, tokenType: magicLinkData.tokenType).getNameInPluralForm()
+            return R.string.localizable.aWalletTokenSellConfirmMultipleTokenSelectedTitle(magicLinkData.count, tokenTypeName)
         }
     }
 
     var perTokenPriceLabelText: String {
-        let tokenTypeName = XMLHandler(contract: tokenHolder.contractAddress, tokenType: tokenHolder.tokenType, assetDefinitionStore: assetDefinitionStore).getLabel()
-        let amount = NumberFormatter.shortCrypto.string(double: ethCost / Double(tokenCount), minimumFractionDigits: 4, maximumFractionDigits: 8).droppedTrailingZeros
+        let tokenTypeName = session.tokenAdaptor.xmlHandler(contract: magicLinkData.contractAddress, tokenType: magicLinkData.tokenType).getLabel()
+        let amount = NumberFormatter.shortCrypto.string(
+            double: ethCost / Double(magicLinkData.count),
+            minimumFractionDigits: 4,
+            maximumFractionDigits: 8).droppedTrailingZeros
 
-        return R.string.localizable.aWalletTokenSellPerTokenEthPriceTitle(amount, server.symbol, tokenTypeName)
+        return R.string.localizable.aWalletTokenSellPerTokenEthPriceTitle(amount, session.server.symbol, tokenTypeName)
     }
 
     var totalEthLabelText: String {
-        let amount = NumberFormatter.shortCrypto.string(double: ethCost, minimumFractionDigits: 4, maximumFractionDigits: 8).droppedTrailingZeros
-        return R.string.localizable.aWalletTokenSellTotalEthPriceTitle(amount, server.symbol)
+        let amount = NumberFormatter.shortCrypto.string(
+            double: ethCost,
+            minimumFractionDigits: 4,
+            maximumFractionDigits: 8).droppedTrailingZeros
+
+        return R.string.localizable.aWalletTokenSellTotalEthPriceTitle(amount, session.server.symbol)
     }
 
     var detailsBackgroundBackgroundColor: UIColor {
         return Configuration.Color.Semantic.defaultViewBackground
     }
 
-    private var tokenCount: Int {
-        return tokenHolder.count
-    }
-
-    init(tokenHolder: TokenHolder,
+    init(magicLinkData: MagicLinkGenerator.MagicLinkData,
          ethCost: Double,
          linkExpiryDate: Date,
-         server: RPCServer,
-         assetDefinitionStore: AssetDefinitionStore) {
+         keystore: Keystore,
+         session: WalletSession) {
 
-        self.tokenHolder = tokenHolder
+        self.magicLinkData = magicLinkData
         self.ethCost = ethCost
         self.linkExpiryDate = linkExpiryDate
-        self.server = server
-        self.assetDefinitionStore = assetDefinitionStore
+        self.session = session
+        self.keystore = keystore
     }
+
+    func generateSellLink() async throws -> String {
+        return try await MagicLinkGenerator(
+            keystore: keystore,
+            session: session,
+            prompt: R.string.localizable.keystoreAccessKeySign()).generateSellLink(
+                magicLinkData: magicLinkData,
+                linkExpiryDate: linkExpiryDate,
+                ethCost: ethCost)
+    }
+
 }

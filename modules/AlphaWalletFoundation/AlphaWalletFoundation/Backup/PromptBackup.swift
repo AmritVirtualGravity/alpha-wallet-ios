@@ -126,7 +126,7 @@ public class PromptBackup {
         showHideCurrentPrompt(wallet: wallet)
     }
 
-    private func showCreateBackupAfterReceiveNativeCryptoCurrencyPrompt(wallet: Wallet, etherReceived: BigInt) {
+    public func showCreateBackupAfterReceiveNativeCryptoCurrencyPrompt(wallet: Wallet, etherReceived: BigInt) {
         guard canBackupWallet(wallet: wallet) else { return }
         guard !isBackedUp(wallet: wallet) else { return }
         guard !isImported(wallet: wallet) else { return }
@@ -266,7 +266,7 @@ public class PromptBackup {
         switch wallet.type {
         case .real:
             return true
-        case .watch:
+        case .watch, .hardware:
             return false
         }
     }
@@ -298,7 +298,7 @@ public class PromptBackup {
             } else {
                 return .notBackedUp
             }
-        case .watch:
+        case .watch, .hardware:
             return nil
         }
     }
@@ -316,12 +316,6 @@ public class PromptBackup {
             block(&state)
             writeState(state)
         }
-    }
-}
-
-extension PromptBackup: NotificationSourceServiceDelegate {
-    public func showCreateBackup(in service: NotificationSourceService, etherReceived: BigInt, wallet: Wallet) {
-        showCreateBackupAfterReceiveNativeCryptoCurrencyPrompt(wallet: wallet, etherReceived: etherReceived)
     }
 }
 

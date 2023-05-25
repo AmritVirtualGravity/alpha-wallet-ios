@@ -2,6 +2,8 @@
 
 import Foundation
 import AlphaWalletFoundation
+import Combine
+import AlphaWalletCore
 
 struct ImportMagicTokenCardRowViewModel: TokenCardRowViewModelProtocol {
     private var importMagicTokenViewControllerViewModel: ImportMagicTokenViewControllerViewModel
@@ -122,6 +124,30 @@ struct ImportMagicTokenCardRowViewModel: TokenCardRowViewModelProtocol {
                     country: country
             )
         }
+    func buildingPublisher() -> AnyPublisher<String, Never> {
+        return (viewModel.tokenHolder?.values.buildingSubscribableValue?.publisher ?? .empty())
+            .compactMap { $0?.stringValue }
+            .eraseToAnyPublisher()
+    }
+
+    func streetLocalityStateCountryPublisher() -> AnyPublisher<String, Never> {
+        let street = (viewModel.tokenHolder?.values.streetSubscribableValue?.publisher ?? .empty())
+            .map { $0?.stringValue }
+            .replaceEmpty(with: nil)
+
+        let state = (viewModel.tokenHolder?.values.stateSubscribableValue?.publisher ?? .empty())
+            .map { $0?.stringValue }
+            .replaceEmpty(with: nil)
+
+        let locality = (viewModel.tokenHolder?.values.localitySubscribableValue?.publisher ?? .empty())
+            .map { $0?.stringValue }
+            .replaceEmpty(with: nil)
+
+        let country = Just(viewModel.tokenHolder?.values.countryStringValue)
+
+        return Publishers.CombineLatest4(street, locality, state, country)
+            .map { [$0, $1, $2, $3].compactMap { $0 }.joined(separator: ", ") }
+            .eraseToAnyPublisher()
     }
 
     var tokenScriptHtml: String {

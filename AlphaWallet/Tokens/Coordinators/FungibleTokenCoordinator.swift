@@ -7,15 +7,14 @@
 
 import Foundation
 import AlphaWalletFoundation
-import PromiseKit
 import Combine
 
 protocol FungibleTokenCoordinatorDelegate: AnyObject, CanOpenURL {
     func didTapSwap(swapTokenFlow: SwapTokenFlow, in coordinator: FungibleTokenCoordinator)
-    func didTapBridge(transactionType: TransactionType, service: TokenActionProvider, in coordinator: FungibleTokenCoordinator)
-    func didTapBuy(transactionType: TransactionType, service: TokenActionProvider, in coordinator: FungibleTokenCoordinator)
+    func didTapBridge(token: Token, service: TokenActionProvider, in coordinator: FungibleTokenCoordinator)
+    func didTapBuy(token: Token, service: TokenActionProvider, in coordinator: FungibleTokenCoordinator)
     func didPress(for type: PaymentFlow, viewController: UIViewController, in coordinator: FungibleTokenCoordinator)
-    func didTap(transaction: TransactionInstance, viewController: UIViewController, in coordinator: FungibleTokenCoordinator)
+    func didTap(transaction: Transaction, viewController: UIViewController, in coordinator: FungibleTokenCoordinator)
     func didTap(activity: Activity, viewController: UIViewController, in coordinator: FungibleTokenCoordinator)
 
     func didClose(in coordinator: FungibleTokenCoordinator)
@@ -28,17 +27,23 @@ class FungibleTokenCoordinator: Coordinator {
     private let tokenActionsProvider: SupportedTokenActionsProvider
     private let coinTickersFetcher: CoinTickersFetcher
     private let activitiesService: ActivitiesServiceType
-    private let sessions: ServerDictionary<WalletSession>
+    private let sessionsProvider: SessionsProvider
     private let session: WalletSession
     private let alertService: PriceAlertServiceType
-    private let tokensService: TokenBalanceRefreshable & TokenViewModelState & TokenHolderState
+    private let tokensPipeline: TokensProcessingPipeline
     private let token: Token
     private let navigationController: UINavigationController
     private var cancelable = Set<AnyCancellable>()
     private let currencyService: CurrencyService
     private let tokenImageFetcher: TokenImageFetcher
+    private let tokensService: TokensService
     private lazy var rootViewController: FungibleTokenTabViewController = {
-        let viewModel = FungibleTokenTabViewModel(token: token, session: session, tokensService: tokensService, assetDefinitionStore: assetDefinitionStore)
+        let viewModel = FungibleTokenTabViewModel(
+            token: token,
+            session: session,
+            tokensPipeline: tokensPipeline,
+            assetDefinitionStore: assetDefinitionStore,
+            tokensService: tokensService)
         let viewController = FungibleTokenTabViewController(viewModel: viewModel)
         let viewControlers = viewModel.tabBarItems.map { buildViewController(tabBarItem: $0) }
         viewController.set(viewControllers: viewControlers)
@@ -60,17 +65,19 @@ class FungibleTokenCoordinator: Coordinator {
          coinTickersFetcher: CoinTickersFetcher,
          activitiesService: ActivitiesServiceType,
          alertService: PriceAlertServiceType,
-         tokensService: TokenBalanceRefreshable & TokenViewModelState & TokenHolderState,
-         sessions: ServerDictionary<WalletSession>,
+         tokensPipeline: TokensProcessingPipeline,
+         sessionsProvider: SessionsProvider,
          currencyService: CurrencyService,
-         tokenImageFetcher: TokenImageFetcher) {
+         tokenImageFetcher: TokenImageFetcher,
+         tokensService: TokensService) {
 
+        self.tokensService = tokensService
         self.tokenImageFetcher = tokenImageFetcher
         self.currencyService = currencyService
         self.token = token
         self.navigationController = navigationController
-        self.sessions = sessions
-        self.tokensService = tokensService
+        self.sessionsProvider = sessionsProvider
+        self.tokensPipeline = tokensPipeline
         self.session = session
         self.keystore = keystore
         self.assetDefinitionStore = assetDefinitionStore
@@ -105,7 +112,7 @@ class FungibleTokenCoordinator: Coordinator {
             keystore: keystore,
             wallet: session.account,
             viewModel: .init(collection: .init(activities: [])),
-            sessions: sessions,
+            sessionsProvider: sessionsProvider,
             assetDefinitionStore: assetDefinitionStore,
             tokenImageFetcher: tokenImageFetcher)
         
@@ -136,7 +143,7 @@ class FungibleTokenCoordinator: Coordinator {
         lazy var viewModel = FungibleTokenDetailsViewModel(
             token: token,
             coinTickersFetcher: coinTickersFetcher,
-            tokensService: tokensService,
+            tokensService: tokensPipeline,
             session: session,
             assetDefinitionStore: assetDefinitionStore,
             tokenActionsProvider: tokenActionsProvider,
@@ -156,11 +163,11 @@ extension FungibleTokenCoordinator: FungibleTokenDetailsViewControllerDelegate {
     }
 
     func didTapBridge(for token: Token, service: TokenActionProvider, in viewController: FungibleTokenDetailsViewController) {
-        delegate?.didTapBridge(transactionType: .init(fungibleToken: token), service: service, in: self)
+        delegate?.didTapBridge(token: token, service: service, in: self)
     }
 
     func didTapBuy(for token: Token, service: TokenActionProvider, in viewController: FungibleTokenDetailsViewController) {
-        delegate?.didTapBuy(transactionType: .init(fungibleToken: token), service: service, in: self)
+        delegate?.didTapBuy(token: token, service: service, in: self)
     }
 
     func didTapSend(for token: Token, in viewController: FungibleTokenDetailsViewController) {
@@ -199,7 +206,7 @@ extension FungibleTokenCoordinator: PriceAlertsViewControllerDelegate {
             configuration: .edit(alert),
             token: token,
             session: session,
-            tokensService: tokensService,
+            tokensService: tokensPipeline,
             alertService: alertService,
             currencyService: currencyService,
             tokenImageFetcher: tokenImageFetcher)
@@ -215,7 +222,7 @@ extension FungibleTokenCoordinator: PriceAlertsViewControllerDelegate {
             configuration: .create,
             token: token,
             session: session,
-            tokensService: tokensService,
+            tokensService: tokensPipeline,
             alertService: alertService,
             currencyService: currencyService,
             tokenImageFetcher: tokenImageFetcher)
@@ -231,7 +238,7 @@ extension FungibleTokenCoordinator: ActivitiesViewControllerDelegate {
         delegate?.didTap(activity: activity, viewController: viewController, in: self)
     }
 
-    func didPressTransaction(transaction: AlphaWalletFoundation.TransactionInstance, in viewController: ActivitiesViewController) {
+    func didPressTransaction(transaction: AlphaWalletFoundation.Transaction, in viewController: ActivitiesViewController) {
         delegate?.didTap(transaction: transaction, viewController: viewController, in: self)
     }
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -836,8 +836,8 @@
 		04BF8A2729E40F3400478F44 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 08A25359294073EE00A31193 /* README.md */; };
 		04BF8A2829E40F3400478F44 /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 08A25358294073EE00A31193 /* SourceSansPro-Regular.otf */; };
 		04BF8A2929E40F3400478F44 /* howDoITransferETHIntoMyWalletInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 08760CA129407C1E00F83AB3 /* howDoITransferETHIntoMyWalletInfo.html */; };
-		04BF8A2C29E40F3400478F44 /* Lif3WalletSafariExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8703FBFD270366DA0062C416 /* Lif3WalletSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		04BF8A2D29E40F3400478F44 /* Lif3WalletShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 878EE8EB255ADA49000210DE /* Lif3WalletShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04BF8A2C29E40F3400478F44 /* Lif3WalletSafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8703FBFD270366DA0062C416 /* Lif3WalletSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04BF8A2D29E40F3400478F44 /* Lif3WalletShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 878EE8EB255ADA49000210DE /* Lif3WalletShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		04C8D03F29EEA15E004A7799 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8D03E29EEA15E004A7799 /* Array+Extension.swift */; };
 		04CF129F29DC7911005DF119 /* StakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF129E29DC78FE005DF119 /* StakeView.swift */; };
 		04CF12A129DC794B005DF119 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF12A029DC7946005DF119 /* Button.swift */; };
@@ -1603,7 +1603,7 @@
 		29FF130A1F75F67200AFD326 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF13091F75F67200AFD326 /* Address.swift */; };
 		29FF130D1F7626E800AFD326 /* FakeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FF130C1F7626E800AFD326 /* FakeNavigationController.swift */; };
 		3A11DDAB121523387A4EAD87 /* Pods_Development.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D408BB8268FCB118EA295D7 /* Pods_Development.framework */; };
-		3A37D6D26E0DEC6EEA9ABCE6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		3A37D6D26E0DEC6EEA9ABCE6 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		3E3D65ECA7427C70246858C6 /* Pods_Lif3WalletShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7D909114FBB2FCCAD8C187 /* Pods_Lif3WalletShare.framework */; };
 		442FC8E82231273273B95D85 /* FakeClaimOrderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FCE526E2089CAE88D5602 /* FakeClaimOrderCoordinator.swift */; };
 		442FCBA4A5E39A4C4B16426A /* EventsRestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FCBCF749F0FDA53FB88A3 /* EventsRestTest.swift */; };
@@ -1672,7 +1672,7 @@
 		8703FC0D270366DA0062C416 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 8703FC0C270366DA0062C416 /* popup.html */; };
 		8703FC0F270366DA0062C416 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 8703FC0E270366DA0062C416 /* popup.css */; };
 		8703FC11270366DA0062C416 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 8703FC10270366DA0062C416 /* popup.js */; };
-		8703FC15270366DA0062C416 /* Lif3WalletSafariExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8703FBFD270366DA0062C416 /* Lif3WalletSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8703FC15270366DA0062C416 /* Lif3WalletSafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8703FBFD270366DA0062C416 /* Lif3WalletSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		870415A125E8FBD30013F3E2 /* MixpanelCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870415A025E8FBD30013F3E2 /* MixpanelCoordinatorTests.swift */; };
 		871442FD27FB1EE6008819D1 /* FunctionCallArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871442FC27FB1EE6008819D1 /* FunctionCallArgumentTests.swift */; };
 		8722323E28D84913001A9BCC /* RampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722323D28D84913001A9BCC /* RampTests.swift */; };
@@ -1697,7 +1697,7 @@
 		87831C822849E47A002E856E /* AddressStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87831C812849E47A002E856E /* AddressStorageTests.swift */; };
 		87831C842849E4E0002E856E /* tikersForTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 87831C832849E4E0002E856E /* tikersForTest.json */; };
 		878EE8EE255ADA49000210DE /* ShareContextHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878EE8ED255ADA49000210DE /* ShareContextHandler.swift */; };
-		878EE8F5255ADA49000210DE /* Lif3WalletShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 878EE8EB255ADA49000210DE /* Lif3WalletShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		878EE8F5255ADA49000210DE /* Lif3WalletShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 878EE8EB255ADA49000210DE /* Lif3WalletShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		878EE941255BBF9B000210DE /* ItemProviderValueResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878EE940255BBF9B000210DE /* ItemProviderValueResolver.swift */; };
 		878EE951255BEC20000210DE /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878EE950255BEC20000210DE /* ItemType.swift */; };
 		878EE952255BEC20000210DE /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878EE950255BEC20000210DE /* ItemType.swift */; };
@@ -1761,28 +1761,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		04BF8A2B29E40F3400478F44 /* Embed App Extensions */ = {
+		04BF8A2B29E40F3400478F44 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				04BF8A2C29E40F3400478F44 /* Lif3WalletSafariExtension.appex in Embed App Extensions */,
-				04BF8A2D29E40F3400478F44 /* Lif3WalletShare.appex in Embed App Extensions */,
+				04BF8A2C29E40F3400478F44 /* Lif3WalletSafariExtension.appex in Embed Foundation Extensions */,
+				04BF8A2D29E40F3400478F44 /* Lif3WalletShare.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		878EE8F6255ADA49000210DE /* Embed App Extensions */ = {
+		878EE8F6255ADA49000210DE /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8703FC15270366DA0062C416 /* Lif3WalletSafariExtension.appex in Embed App Extensions */,
-				878EE8F5255ADA49000210DE /* Lif3WalletShare.appex in Embed App Extensions */,
+				8703FC15270366DA0062C416 /* Lif3WalletSafariExtension.appex in Embed Foundation Extensions */,
+				878EE8F5255ADA49000210DE /* Lif3WalletShare.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -2770,7 +2770,7 @@
 				87FBF2B128056AC200616B7D /* FirebaseCrashlytics in Frameworks */,
 				87B1B5D928C73C170072A5E2 /* WalletConnectSwift in Frameworks */,
 				87BDF47028423DC30018DC68 /* WalletConnect in Frameworks */,
-				3A37D6D26E0DEC6EEA9ABCE6 /* BuildFile in Frameworks */,
+				3A37D6D26E0DEC6EEA9ABCE6 /* (null) in Frameworks */,
 				7563B5B257FCD47F28DFEEB0 /* Pods_Lif3Wallet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5813,7 +5813,7 @@
 				04BF89FC29E40F3400478F44 /* Frameworks */,
 				04BF8A0129E40F3400478F44 /* Resources */,
 				04BF8A2A29E40F3400478F44 /* Run SwiftLint */,
-				04BF8A2B29E40F3400478F44 /* Embed App Extensions */,
+				04BF8A2B29E40F3400478F44 /* Embed Foundation Extensions */,
 				04BF8A2E29E40F3400478F44 /* Upload debug symbols to Crashlytics */,
 				04BF8A2F29E40F3400478F44 /* [CP] Embed Pods Frameworks */,
 				04BF8A3029E40F3400478F44 /* [CP] Copy Pods Resources */,
@@ -5847,7 +5847,7 @@
 				2912CCF21F6A830700C6CBE3 /* Frameworks */,
 				2912CCF31F6A830700C6CBE3 /* Resources */,
 				29282B511F7629DB0067F88D /* Run SwiftLint */,
-				878EE8F6255ADA49000210DE /* Embed App Extensions */,
+				878EE8F6255ADA49000210DE /* Embed Foundation Extensions */,
 				87FBF2B828056D8600616B7D /* Upload debug symbols to Crashlytics */,
 				CE3C1C5ECE62F20B65B11032 /* [CP] Embed Pods Frameworks */,
 				B58FDEB4B7DE84F4A4778AD3 /* [CP] Copy Pods Resources */,
@@ -5930,9 +5930,10 @@
 		2912CCED1F6A830700C6CBE3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				DefaultBuildSystemTypeForWorkspace = Original;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					2912CCF41F6A830700C6CBE3 = {
 						CreatedOnToolsVersion = 9.0;
@@ -5991,7 +5992,7 @@
 			packageReferences = (
 				87FBF2AF28056AC200616B7D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				87BDF46E28423DC30018DC68 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
-				87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */,
+				87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
 			);
 			productRefGroup = 2912CCF61F6A830700C6CBE3 /* Products */;
 			projectDirPath = "";
@@ -9308,7 +9309,7 @@
 				kind = branch;
 			};
 		};
-		04BF871D29E40F3400478F44 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */ = {
+		04BF871D29E40F3400478F44 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AlphaWallet/WalletConnectSwift.git";
 			requirement = {
@@ -9316,7 +9317,7 @@
 				kind = branch;
 			};
 		};
-		87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */ = {
+		87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AlphaWallet/WalletConnectSwift.git";
 			requirement = {
@@ -9355,12 +9356,12 @@
 		};
 		04BF871C29E40F3400478F44 /* WalletConnectSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 04BF871D29E40F3400478F44 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */;
+			package = 04BF871D29E40F3400478F44 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
 			productName = WalletConnectSwift;
 		};
 		87B1B5D828C73C170072A5E2 /* WalletConnectSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift.git" */;
+			package = 87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
 			productName = WalletConnectSwift;
 		};
 		87BDF46F28423DC30018DC68 /* WalletConnect */ = {

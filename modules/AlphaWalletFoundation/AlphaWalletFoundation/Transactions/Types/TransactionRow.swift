@@ -2,12 +2,12 @@
 import Foundation
 
 public enum TransactionRow {
-    case standalone(TransactionInstance)
+    case standalone(Transaction)
     //TODO this seems to overlap with the `ActivityRowModel.parentTransaction`
-    case group(TransactionInstance)
-    case item(transaction: TransactionInstance, operation: LocalizedOperationObjectInstance)
+    case group(Transaction)
+    case item(transaction: Transaction, operation: LocalizedOperation)
 
-    public var transaction: TransactionInstance {
+    public var transaction: Transaction {
         switch self {
         case .standalone(let transaction), .group(let transaction), .item(transaction: let transaction, _):
             return transaction
@@ -52,14 +52,14 @@ public enum TransactionRow {
     }
 
     public var gas: String { transaction.gas }
-    public var gasPrice: String { transaction.gasPrice }
+    public var gasPrice: String { transaction.gasPrice.flatMap { String(describing: $0.max) } ?? "" }
     public var gasUsed: String { transaction.gasUsed }
     public var nonce: String { transaction.nonce }
     public var date: Date { transaction.date }
     public var state: TransactionState { transaction.state }
     public var server: RPCServer { transaction.server }
 
-    public var operation: LocalizedOperationObjectInstance? {
+    public var operation: LocalizedOperation? {
         switch self {
         case .standalone(let transaction):
             return transaction.operation

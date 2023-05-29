@@ -10,12 +10,14 @@ import AlphaWalletFoundation
 import Combine
 
 struct WalletConnectSessionDetailsViewModelInput {
+    let copyToClipboard: AnyPublisher<Void, Never>
     let disconnect: AnyPublisher<Void, Never>
 }
 
 struct WalletConnectSessionDetailsViewModelOutput {
     let didDisconnect: AnyPublisher<Void, Never>
     let viewState: AnyPublisher<WalletConnectSessionDetailsViewModel.ViewState, Never>
+    let copiedToClipboard: AnyPublisher<String, Never>
 }
 
 class WalletConnectSessionDetailsViewModel {
@@ -23,15 +25,15 @@ class WalletConnectSessionDetailsViewModel {
     private let walletConnectProvider: WalletConnectProvider
     private var cancellable = Set<AnyCancellable>()
     private let analytics: AnalyticsLogger
-    private let config: Config = Config()
+    private let serversProvider: ServersProvidable
     private var rpcServers: [RPCServer] { session.servers }
     private var serverChoices: [RPCServer] {
-        ServersCoordinator.serversOrdered.filter { config.enabledServers.contains($0) }
+        ServersCoordinator.serversOrdered.filter { serversProvider.enabledServers.contains($0) }
     }
 
     var serversViewModel: ServersViewModel {
         let selectedServers: [RPCServerOrAuto] = rpcServers.map { return .server($0) }
-        let servers = serverChoices.filter { config.enabledServers.contains($0) } .compactMap { RPCServerOrAuto.server($0) }
+        let servers = serverChoices.filter { serversProvider.enabledServers.contains($0) } .compactMap { RPCServerOrAuto.server($0) }
         var viewModel = ServersViewModel(servers: servers, selectedServers: selectedServers, displayWarningFooter: false)
         viewModel.multipleSessionSelectionEnabled = session.multipleServersSelection == .enabled
 
@@ -40,8 +42,10 @@ class WalletConnectSessionDetailsViewModel {
 
     init(walletConnectProvider: WalletConnectProvider,
          session: AlphaWallet.WalletConnect.Session,
-         analytics: AnalyticsLogger) {
-        
+         analytics: AnalyticsLogger,
+         serversProvider: ServersProvidable) {
+
+        self.serversProvider = serversProvider
         self.walletConnectProvider = walletConnectProvider
         self.analytics = analytics
         self.session = session
@@ -64,6 +68,8 @@ class WalletConnectSessionDetailsViewModel {
             }).mapToVoid()
             .eraseToAnyPublisher()
 
+        let copiedToClipboard = copyToClipboard(trigger: input.copyToClipboard)
+
         let viewState = $session
             .map { [walletConnectProvider] session -> WalletConnectSessionDetailsViewModel.ViewState in
                 let isConnected = walletConnectProvider.isConnected(session.topicOrUrl)
@@ -82,7 +88,17 @@ class WalletConnectSessionDetailsViewModel {
                     viewTypes: self.buildViewTypes(session: session))
             }.eraseToAnyPublisher()
 
-        return .init(didDisconnect: didDisconnect, viewState: viewState)
+        return .init(
+            didDisconnect: didDisconnect,
+            viewState: viewState,
+            copiedToClipboard: copiedToClipboard)
+    }
+
+    private func copyToClipboard(trigger: AnyPublisher<Void, Never>) -> AnyPublisher<String, Never> {
+        trigger.map { _ -> String in
+            UIPasteboard.general.string = self.session.dappUrl.absoluteString
+            return R.string.localizable.copiedToClipboardTitle(R.string.localizable.url())
+        }.eraseToAnyPublisher()
     }
 
     private func buildViewTypes(session: AlphaWallet.WalletConnect.Session) -> [WalletConnectSessionDetailsViewModel.ViewType] {

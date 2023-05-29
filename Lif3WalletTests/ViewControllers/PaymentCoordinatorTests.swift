@@ -24,7 +24,10 @@ extension CurrencyService {
 }
 
 extension WalletDataProcessingPipeline {
-    static func make(wallet: Wallet = .make(), server: RPCServer = .main) -> AppCoordinator.WalletDependencies {
+    static func make(wallet: Wallet = .make(),
+                     server: RPCServer = .main,
+                     coinTickersFetcher: CoinTickersFetcher = CoinTickersFetcherImpl.make(),
+                     currencyService: CurrencyService = .make()) -> WalletDependencies {
         let fas = FakeAnalyticsService()
 
         let tokensDataStore = FakeTokensDataStore(account: wallet, servers: [server])
@@ -44,16 +47,14 @@ extension WalletDataProcessingPipeline {
 
         let eventsDataStore = FakeEventsDataStore()
         let transactionsDataStore = FakeTransactionsStorage()
-        let coinTickersFetcher = CoinTickersFetcherImpl.make()
-        let currencyService: CurrencyService = .make()
-
+        
         let tokensService = AlphaWalletTokensService(
             sessionsProvider: sessionsProvider,
             tokensDataStore: tokensDataStore,
             analytics: fas,
             transactionsStorage: transactionsDataStore,
             assetDefinitionStore: .make(),
-            networkService: FakeNetworkService())
+            transporter: FakeApiTransporter())
 
         let pipeline: TokensProcessingPipeline = WalletDataProcessingPipeline(
             wallet: wallet,
@@ -64,7 +65,11 @@ extension WalletDataProcessingPipeline {
             currencyService: currencyService,
             sessionsProvider: sessionsProvider)
 
-        let fetcher = WalletBalanceFetcher(wallet: wallet, tokensService: pipeline, currencyService: .make())
+        let fetcher = WalletBalanceFetcher(
+            wallet: wallet,
+            tokensPipeline: pipeline,
+            currencyService: .make(),
+            tokensService: tokensService)
 
         let activitiesPipeLine = ActivitiesPipeLine(
             config: .make(),
@@ -76,7 +81,16 @@ extension WalletDataProcessingPipeline {
             eventsActivityDataStore: eventsActivityDataStore,
             eventsDataStore: eventsDataStore)
 
-        let dep = AppCoordinator.WalletDependencies(
+        let transactionsService = TransactionsService(
+            sessionsProvider: sessionsProvider,
+            transactionDataStore: transactionsDataStore,
+            analytics: fas,
+            tokensService: tokensService,
+            networkService: FakeNetworkService(),
+            config: .make(),
+            assetDefinitionStore: .make())
+
+        let dep = WalletDependencies(
             activitiesPipeLine: activitiesPipeLine,
             transactionsDataStore: transactionsDataStore,
             tokensDataStore: tokensDataStore,
@@ -85,7 +99,7 @@ extension WalletDataProcessingPipeline {
             fetcher: fetcher,
             sessionsProvider: sessionsProvider,
             eventsDataStore: eventsDataStore,
-            currencyService: currencyService)
+            transactionsService: transactionsService)
         
         dep.sessionsProvider.start()
         dep.fetcher.start()
@@ -112,13 +126,14 @@ class PaymentCoordinatorTests: XCTestCase {
             keystore: FakeEtherKeystore(),
             assetDefinitionStore: .make(),
             analytics: FakeAnalyticsService(),
-            tokenCollection: dep.pipeline,
+            tokensPipeline: dep.pipeline,
             domainResolutionService: FakeDomainResolutionService(),
             tokenSwapper: TokenSwapper.make(),
             tokensFilter: .make(),
             networkService: FakeNetworkService(),
             transactionDataStore: FakeTransactionsStorage(wallet: wallet),
-            tokenImageFetcher: FakeTokenImageFetcher())
+            tokenImageFetcher: FakeTokenImageFetcher(),
+            tokensService: dep.tokensService)
         coordinator.start()
 
         XCTAssertEqual(1, coordinator.coordinators.count)
@@ -138,13 +153,14 @@ class PaymentCoordinatorTests: XCTestCase {
             keystore: FakeEtherKeystore(),
             assetDefinitionStore: .make(),
             analytics: FakeAnalyticsService(),
-            tokenCollection: dep.pipeline,
+            tokensPipeline: dep.pipeline,
             domainResolutionService: FakeDomainResolutionService(),
             tokenSwapper: TokenSwapper.make(),
             tokensFilter: .make(),
             networkService: FakeNetworkService(),
             transactionDataStore: FakeTransactionsStorage(wallet: wallet),
-            tokenImageFetcher: FakeTokenImageFetcher())
+            tokenImageFetcher: FakeTokenImageFetcher(),
+            tokensService: dep.tokensService)
 
         coordinator.start()
 

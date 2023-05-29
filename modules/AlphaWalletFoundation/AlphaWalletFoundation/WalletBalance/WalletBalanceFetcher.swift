@@ -8,13 +8,7 @@
 import Foundation
 import BigInt
 import Combine
-
-public protocol WalletBalanceFetcherTypeTests {
-    func setNftBalanceTestsOnly(_ value: NonFungibleBalance, forToken token: Token)
-    func setBalanceTestsOnly(_ value: BigInt, forToken token: Token)
-    func deleteTokenTestsOnly(token: Token)
-    func addOrUpdateTokenTestsOnly(token: Token)
-}
+import AlphaWalletCore
 
 public protocol WalletBalanceFetcherType: AnyObject {
     var walletBalance: AnyPublisher<WalletBalance, Never> { get }
@@ -25,37 +19,55 @@ public protocol WalletBalanceFetcherType: AnyObject {
 
 public class WalletBalanceFetcher: NSObject, WalletBalanceFetcherType {
     private static let updateBalanceInterval: TimeInterval = 60
-    private var timer: Timer?
+    private let scheduler: Scheduler
     private let wallet: Wallet
     private var cancelable = Set<AnyCancellable>()
-    private let tokensService: TokenViewModelState & TokenBalanceRefreshable
-    private lazy var walletBalanceSubject = CurrentValueSubject<WalletBalance, Never>(WalletBalance(wallet: wallet, tokens: [], currency: currencyService.currency))
+    private let tokensPipeline: TokensProcessingPipeline
+    private let tokensService: TokensService
+    private lazy var subject = CurrentValueSubject<WalletBalance, Never>(WalletBalance(wallet: wallet, tokens: [], currency: currencyService.currency))
     private let currencyService: CurrencyService
     public var walletBalance: AnyPublisher<WalletBalance, Never> {
-        walletBalanceSubject.eraseToAnyPublisher()
+        subject.eraseToAnyPublisher()
     }
 
     public init(wallet: Wallet,
-                tokensService: TokenViewModelState & TokenBalanceRefreshable,
-                currencyService: CurrencyService) {
+                tokensPipeline: TokensProcessingPipeline,
+                currencyService: CurrencyService,
+                tokensService: TokensService) {
 
-        self.wallet = wallet
         self.tokensService = tokensService
+        self.wallet = wallet
+        self.tokensPipeline = tokensPipeline
         self.currencyService = currencyService
+        let provider = ReloadTokensSchedulerProvider(tokensService: tokensService)
+        self.scheduler = Scheduler(provider: provider)
         super.init()
     }
 
     public func start() {
         guard !isRunningTests() else { return }
 
-        timer = Timer.scheduledTimer(withTimeInterval: Self.updateBalanceInterval, repeats: true) { [weak self] _ in
-            self?.refreshBalance(updatePolicy: .all)
-        }
+        scheduler.start()
 
-        tokensService.tokenViewModels
+        tokensPipeline.tokenViewModels
             .map { [wallet, currencyService] in WalletBalance(wallet: wallet, tokens: $0, currency: currencyService.currency) }
             .removeDuplicates()
-            .assign(to: \.value, on: walletBalanceSubject)
+            .assign(to: \.value, on: subject)
+            .store(in: &cancelable)
+
+        NotificationCenter.default.applicationState
+            .receive(on: RunLoop.main)
+            .sink { [weak scheduler] state in
+                switch state {
+                case .didEnterBackground:
+                    scheduler?.cancel()
+                case .willEnterForeground:
+                    scheduler?.restart()
+                }
+            }.store(in: &cancelable)
+
+        tokensService.providersHasChanged
+            .sink { [weak scheduler] _ in scheduler?.restart(force: true) }
             .store(in: &cancelable)
     }
 
@@ -68,7 +80,26 @@ public class WalletBalanceFetcher: NSObject, WalletBalanceFetcherType {
     }
 
     public func stop() {
-        timer?.invalidate()
-        timer = nil
+        scheduler.cancel()
+    }
+
+    private class ReloadTokensSchedulerProvider: SchedulerProvider {
+        private let tokensService: TokensService
+
+        let name: String = ""
+        let interval: TimeInterval = 60
+
+        var operation: AnyPublisher<Void, PromiseError> {
+            AnyPublisher.create { [tokensService] seal in
+                seal.send(completion: .finished)
+                tokensService.refreshBalance(updatePolicy: .all)
+
+                return AnyCancellable { }
+            }
+        }
+
+        init(tokensService: TokensService) {
+            self.tokensService = tokensService
+        }
     }
 }

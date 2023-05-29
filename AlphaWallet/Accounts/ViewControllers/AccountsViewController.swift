@@ -23,7 +23,7 @@ class AccountsViewController: UIViewController {
 
     private lazy var dataSource = makeDataSource()
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.buildGroupedTableView()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(AccountViewCell.self)
         tableView.register(WalletSummaryTableViewCell.self)
@@ -118,7 +118,7 @@ class AccountsViewController: UIViewController {
 
     @objc private func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
         guard let cell = recognizer.view as? AccountViewCell, let indexPath = cell.indexPath, recognizer.state == .began else { return }
-        
+
         switch dataSource.item(at: indexPath) {
         case .wallet(let viewModel):
             delegate?.didSelectInfoForAccount(account: viewModel.wallet, sender: cell, in: self)
@@ -179,21 +179,21 @@ extension AccountsViewController: UITableViewDelegate {
         nil
     }
 
-    private func askDeleteWallet(indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
-        confirm(title: R.string.localizable.accountsConfirmDeleteTitle(),
-                message: R.string.localizable.accountsConfirmDeleteMessage(),
-                okTitle: R.string.localizable.accountsConfirmDeleteOkTitle(),
-                okStyle: .destructive) { [deleteWallet, dataSource] result in
+    private func askDeleteWallet(indexPath: IndexPath) async -> Bool {
+        let result = await confirm(
+            title: R.string.localizable.accountsConfirmDeleteTitle(),
+            message: R.string.localizable.accountsConfirmDeleteMessage(),
+            okTitle: R.string.localizable.accountsConfirmDeleteOkTitle(),
+            okStyle: .destructive)
 
-            switch result {
-            case .success:
-                dataSource.delete(at: indexPath)
+        switch result {
+        case .success:
+            dataSource.delete(at: indexPath)
 
-                deleteWallet.send(indexPath)
-                completion(true)
-            case .failure:
-                completion(false)
-            }
+            deleteWallet.send(indexPath)
+            return true
+        case .failure:
+            return false
         }
     }
 
@@ -205,7 +205,10 @@ extension AccountsViewController: UITableViewDelegate {
                     copyToClipboard.send(indexPath)
                     complete(true)
                 case .deleteWallet:
-                    self.askDeleteWallet(indexPath: indexPath, completion: complete)
+                    Task { @MainActor in
+                        let result = await self.askDeleteWallet(indexPath: indexPath)
+                        complete(result)
+                    }
                 }
             }
 

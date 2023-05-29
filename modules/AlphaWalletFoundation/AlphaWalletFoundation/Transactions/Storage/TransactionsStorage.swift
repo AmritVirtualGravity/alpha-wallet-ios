@@ -6,7 +6,7 @@ import Combine
 
 open class TransactionDataStore {
     //TODO if we move this to instance-side, we have to be careful it's the same instance we are accessing, otherwise we wouldn't find the pending transaction information when we need it
-    public static var pendingTransactionsInformation: [String: (server: RPCServer, data: Data, transactionType: TransactionType, gasPrice: BigUInt)] = .init()
+    public static var pendingTransactionsInformation: [String: (server: RPCServer, data: Data, transactionType: TransactionType, gasPrice: GasPrice)] = .init()
 
     private let store: RealmStore
 
@@ -18,22 +18,22 @@ open class TransactionDataStore {
         return transactions(forServer: server).count
     }
 
-    public func transactions(forServer server: RPCServer, sortedDateAscending: Bool = false) -> [TransactionInstance] {
-        var results: [TransactionInstance] = []
+    public func transactions(forServer server: RPCServer, sortedDateAscending: Bool = false) -> [Transaction] {
+        var results: [Transaction] = []
         store.performSync { realm in
-            results = realm.objects(Transaction.self)
+            results = realm.objects(TransactionObject.self)
                 .filter(TransactionDataStore.functional.nonEmptyIdTransactionPredicate(server: server))
                 .sorted(byKeyPath: "date", ascending: sortedDateAscending)
-                .map { TransactionInstance(transaction: $0) }
+                .map { Transaction(transaction: $0) }
         }
 
         return results
     }
 
-    public func transactionsChangeset(filter: TransactionsFilterStrategy, servers: [RPCServer]) -> AnyPublisher<ChangeSet<[TransactionInstance]>, Never> {
-        var publisher: AnyPublisher<ChangeSet<[TransactionInstance]>, Never>!
+    public func transactionsChangeset(filter: TransactionsFilterStrategy, servers: [RPCServer]) -> AnyPublisher<ChangeSet<[Transaction]>, Never> {
+        var publisher: AnyPublisher<ChangeSet<[Transaction]>, Never>!
         store.performSync { realm in
-            publisher = realm.objects(Transaction.self)
+            publisher = realm.objects(TransactionObject.self)
                 .filter(filter.predicate(servers: servers))
                 .sorted(byKeyPath: "date", ascending: false)
                 .changesetPublisher
@@ -42,9 +42,9 @@ open class TransactionDataStore {
                 .map { change in
                     switch change {
                     case .initial(let transactions):
-                        return .initial(Array(transactions.map { TransactionInstance(transaction: $0) }))
+                        return .initial(Array(transactions.map { Transaction(transaction: $0) }))
                     case .update(let transactions, let deletions, let insertions, let modifications):
-                        return .update(Array(transactions.map { TransactionInstance(transaction: $0) }), deletions: deletions, insertions: insertions, modifications: modifications)
+                        return .update(Array(transactions.map { Transaction(transaction: $0) }), deletions: deletions, insertions: insertions, modifications: modifications)
                     case .error(let error):
                         return .error(error)
                     }
@@ -54,24 +54,24 @@ open class TransactionDataStore {
         return publisher
     }
 
-    public func transactionPublisher(for transactionId: String, server: RPCServer) -> AnyPublisher<TransactionInstance?, DataStoreError> {
-        let publisher: CurrentValueSubject<TransactionInstance?, DataStoreError> = .init(nil)
+    public func transactionPublisher(for transactionId: String, server: RPCServer) -> AnyPublisher<Transaction?, DataStoreError> {
+        let publisher: CurrentValueSubject<Transaction?, DataStoreError> = .init(nil)
         var notificationToken: NotificationToken?
 
         store.performSync { realm in
-            let primaryKey = Transaction.generatePrimaryKey(for: transactionId, server: server)
-            guard let transaction = realm.object(ofType: Transaction.self, forPrimaryKey: primaryKey) else {
+            let primaryKey = TransactionObject.generatePrimaryKey(for: transactionId, server: server)
+            guard let transaction = realm.object(ofType: TransactionObject.self, forPrimaryKey: primaryKey) else {
                 publisher.send(completion: .failure(DataStoreError.objectNotFound))
                 return
             }
 
-            publisher.send(TransactionInstance(transaction: transaction))
+            publisher.send(Transaction(transaction: transaction))
 
             notificationToken = transaction.observe { change in
                 switch change {
                 case .change(let object, _):
-                    guard let token = object as? Transaction else { return }
-                    publisher.send(TransactionInstance(transaction: transaction))
+                    guard let token = object as? TransactionObject else { return }
+                    publisher.send(Transaction(transaction: transaction))
                 case .deleted:
                     publisher.send(completion: .failure(.objectDeleted))
                 case .error(let e):
@@ -86,40 +86,40 @@ open class TransactionDataStore {
             }).eraseToAnyPublisher()
     }
 
-    public func transactions(forFilter filter: TransactionsFilterStrategy, servers: [RPCServer], oldestBlockNumber: Int? = nil) -> [TransactionInstance] {
+    public func transactions(forFilter filter: TransactionsFilterStrategy, servers: [RPCServer], oldestBlockNumber: Int? = nil) -> [Transaction] {
         let predicate: NSPredicate = filter.predicate(servers: servers, oldestBlockNumber: oldestBlockNumber)
-        var transactions: [TransactionInstance] = []
+        var transactions: [Transaction] = []
 
         store.performSync { realm in
-            transactions = realm.objects(Transaction.self)
+            transactions = realm.objects(TransactionObject.self)
                 .filter(predicate)
                 .sorted(byKeyPath: "date", ascending: false)
-                .map { TransactionInstance(transaction: $0) }
+                .map { Transaction(transaction: $0) }
 
         }
 
         return transactions
     }
 
-    public func transactions(forServer server: RPCServer, withTransactionState transactionState: TransactionState) -> [TransactionInstance] {
-        var transactions: [TransactionInstance] = []
+    public func transactions(forServer server: RPCServer, withTransactionState transactionState: TransactionState) -> [Transaction] {
+        var transactions: [Transaction] = []
         store.performSync { realm in
-            transactions = realm.objects(Transaction.self)
+            transactions = realm.objects(TransactionObject.self)
                 .filter(TransactionDataStore.functional.transactionPredicate(server: server, transactionState: transactionState))
                 .sorted(byKeyPath: "date", ascending: false)
-                .map { TransactionInstance(transaction: $0) }
+                .map { Transaction(transaction: $0) }
         }
 
         return transactions
     }
 
-    public func lastTransaction(forServer server: RPCServer, withTransactionState transactionState: TransactionState) -> TransactionInstance? {
-        var transaction: TransactionInstance?
+    public func lastTransaction(forServer server: RPCServer) -> Transaction? {
+        var transaction: Transaction?
         store.performSync { realm in
-            transaction = realm.objects(Transaction.self)
-                .filter(TransactionDataStore.functional.transactionPredicate(server: server, transactionState: transactionState))
+            transaction = realm.objects(TransactionObject.self)
+                .filter(TransactionDataStore.functional.nonEmptyIdTransactionPredicate(server: server))
                 .sorted(byKeyPath: "date", ascending: false)
-                .map { TransactionInstance(transaction: $0) }
+                .map { Transaction(transaction: $0) }
                 .last
         }
 
@@ -133,51 +133,60 @@ open class TransactionDataStore {
         var hasCompletedTransaction: Bool = false
 
         store.performSync { realm in
-            hasCompletedTransaction = !realm.objects(Transaction.self)
+            hasCompletedTransaction = !realm.objects(TransactionObject.self)
                 .filter(predicate)
                 .isEmpty
         }
         return hasCompletedTransaction
     }
 
-    public func transactionObjectsThatDoNotComeFromEventLogs(forServer server: RPCServer) -> TransactionInstance? {
+    public func transactionObjectsThatDoNotComeFromEventLogs(forServer server: RPCServer) -> Transaction? {
         let predicate = TransactionDataStore
             .functional
             .nonERC20InteractionTransactionPredicate(server: server, transactionState: .completed)
 
-        var transaction: TransactionInstance?
+        var transaction: Transaction?
 
         store.performSync { realm in
-            transaction = realm.objects(Transaction.self)
+            transaction = realm.objects(TransactionObject.self)
                 .filter(predicate)
                 .sorted(byKeyPath: "date", ascending: false)
-                .map { TransactionInstance(transaction: $0) }
+                .map { Transaction(transaction: $0) }
                 .first
         }
 
         return transaction
     }
 
-    public func transaction(withTransactionId transactionId: String, forServer server: RPCServer) -> TransactionInstance? {
+    public func transaction(withTransactionId transactionId: String, forServer server: RPCServer) -> Transaction? {
         let predicate = TransactionDataStore
             .functional
             .transactionPredicate(withTransactionId: transactionId, server: server)
-        var transaction: TransactionInstance?
+        var transaction: Transaction?
         store.performSync { realm in
-            transaction = realm.objects(Transaction.self)
+            transaction = realm.objects(TransactionObject.self)
                 .filter(predicate)
                 .sorted(byKeyPath: "date", ascending: false)
-                .map { TransactionInstance(transaction: $0) }
+                .map { Transaction(transaction: $0) }
                 .first
         }
         return transaction
     }
 
-    public func delete(transactions: [TransactionInstance]) {
+    public func deleteAll() {
+        store.performSync { realm in
+            let objects = realm.objects(TransactionObject.self)
+            try? realm.safeWrite {
+                realm.delete(objects)
+            }
+        }
+    }
+
+    public func delete(transactions: [Transaction]) {
         guard !transactions.isEmpty else { return }
 
         store.performSync { realm in
-            let objects = transactions.compactMap { realm.object(ofType: Transaction.self, forPrimaryKey: $0.primaryKey) }
+            let objects = transactions.compactMap { realm.object(ofType: TransactionObject.self, forPrimaryKey: $0.primaryKey) }
             guard !objects.isEmpty else { return }
 
             try? realm.safeWrite {
@@ -186,35 +195,38 @@ open class TransactionDataStore {
         }
     }
 
-    public func update(state: TransactionState, for primaryKey: String, withPendingTransaction pendingTransaction: EthereumTransaction?) {
+    public func update(state: TransactionState, for primaryKey: String, pendingTransaction: EthereumTransaction) {
         store.performSync { realm in
-            guard let value = realm.object(ofType: Transaction.self, forPrimaryKey: primaryKey) else { return }
+            guard let value = realm.object(ofType: TransactionObject.self, forPrimaryKey: primaryKey) else { return }
             try? realm.safeWrite {
-                if let pendingTransaction = pendingTransaction {
-                    value.gas = pendingTransaction.gas
-                    value.gasPrice = pendingTransaction.gasPrice
-                    value.nonce = pendingTransaction.nonce
-                    //We assume that by the time we get here, the block number is valid
-                    value.blockNumber = Int(pendingTransaction.blockNumber)!
+                value.gas = pendingTransaction.gas
+                if let value = value.gasPrice {
+                    realm.delete(value)
                 }
+
+                value.gasPrice = pendingTransaction.gasPrice.flatMap { GasPriceObject(gasPrice: $0, primaryKey: primaryKey) }
+                value.nonce = pendingTransaction.nonce
+                //We assume that by the time we get here, the block number is valid
+                value.blockNumber = Int(pendingTransaction.blockNumber)!
+
                 value.internalState = state.rawValue
             }
         }
     }
 
-    @discardableResult func addOrUpdate(transactions: [TransactionInstance]) -> [TransactionInstance] {
+    @discardableResult func addOrUpdate(transactions: [Transaction]) -> [Transaction] {
         guard !transactions.isEmpty else { return [] }
 
-        var transactionsToReturn: [TransactionInstance] = []
+        var transactionsToReturn: [Transaction] = []
 
         store.performSync { realm in
             transactionsToReturn = self.filterTransactionsToNotOverrideErc20Transactions(transactions, realm: realm)
             guard !transactionsToReturn.isEmpty else { return }
 
-            let transactionsToCommit = transactionsToReturn.map { Transaction(object: $0) }
+            let transactionsToCommit = transactionsToReturn.map { TransactionObject(transaction: $0) }
             try? realm.safeWrite {
                 for each in transactionsToCommit {
-                    if let tx = realm.object(ofType: Transaction.self, forPrimaryKey: each.primaryKey) {
+                    if let tx = realm.object(ofType: TransactionObject.self, forPrimaryKey: each.primaryKey) {
                         realm.delete(tx.localizedOperations)
                     }
                     realm.add(each, update: .all)
@@ -225,12 +237,12 @@ open class TransactionDataStore {
     }
 
     //We pull transactions data from the normal transactions API as well as ERC20 event log. For the same transaction, we only want data from the latter. Otherwise the UI will show the cell display switching between data from the 2 source as we fetch (or re-fetch)
-    private func filterTransactionsToNotOverrideErc20Transactions(_ transactions: [TransactionInstance], realm: Realm) -> [TransactionInstance] {
+    private func filterTransactionsToNotOverrideErc20Transactions(_ transactions: [Transaction], realm: Realm) -> [Transaction] {
         return transactions.filter { each in
             if each.isERC20Interaction {
                 return true
             } else {
-                if let tx = realm.object(ofType: Transaction.self, forPrimaryKey: each.primaryKey) {
+                if let tx = realm.object(ofType: TransactionObject.self, forPrimaryKey: each.primaryKey) {
                     return each.blockNumber != tx.blockNumber && each.blockNumber != 0
                 } else {
                     return true
@@ -239,14 +251,14 @@ open class TransactionDataStore {
         }
     }
 
-    @discardableResult public func add(transactions: [TransactionInstance]) -> [TransactionInstance] {
+    @discardableResult public func add(transactions: [Transaction]) -> [Transaction] {
         guard !transactions.isEmpty else { return [] }
 
-        let transactionsToCommit = transactions.map { Transaction(object: $0) }
+        let transactionsToCommit = transactions.map { TransactionObject(transaction: $0) }
         store.performSync { realm in
             try? realm.safeWrite {
                 for each in transactionsToCommit {
-                    if let tx = realm.object(ofType: Transaction.self, forPrimaryKey: each.primaryKey) {
+                    if let tx = realm.object(ofType: TransactionObject.self, forPrimaryKey: each.primaryKey) {
                         realm.delete(tx.localizedOperations)
                     }
                     realm.add(each, update: .all)
@@ -259,7 +271,7 @@ open class TransactionDataStore {
 
     public func removeTransactions(for states: [TransactionState], servers: [RPCServer]) {
         store.performSync { realm in
-            let objects = realm.objects(Transaction.self)
+            let objects = realm.objects(TransactionObject.self)
                 .filter("chainId IN %@", servers.map { $0.chainID })
                 .filter { states.contains($0.state) }
 
@@ -273,7 +285,7 @@ open class TransactionDataStore {
         store.performSync { realm in
             try? realm.safeWrite {
                 realm.delete(realm.objects(LocalizedOperationObject.self))
-                realm.delete(realm.objects(Transaction.self))
+                realm.delete(realm.objects(TransactionObject.self))
             }
         }
     }
@@ -297,7 +309,7 @@ extension TransactionDataStore: Erc721TokenIdsFetcher {
             //TODO why are some isERC20Interaction = false
             var tokenIds: Set<String> = .init()
             store.performSync { realm in
-                let transactions = realm.objects(Transaction.self)
+                let transactions = realm.objects(TransactionObject.self)
                     .filter(TransactionDataStore.functional.transactionPredicate(server: server, operationContract: contract))
                     .sorted(byKeyPath: "date", ascending: true)
 
@@ -325,7 +337,7 @@ extension TransactionDataStore: Erc721TokenIdsFetcher {
 }
 
 extension TransactionDataStore {
-    public class functional {}
+    public enum functional {}
 }
 
 extension TransactionDataStore.functional {
@@ -341,13 +353,13 @@ extension TransactionDataStore.functional {
             let contract: String
             let tokenId: String
         }
-        struct Transaction: Encodable {
+        struct TransactionObject: Encodable {
             let transactionHash: String
             let operations: [Operation]
         }
 
         let transactions = transactionStorage.transactions(forServer: server, sortedDateAscending: true)
-        let transactionsToWrite: [Transaction] = transactions.map { eachTransaction in
+        let transactionsToWrite: [TransactionObject] = transactions.map { eachTransaction in
             let operations = eachTransaction.localizedOperations
             let operationsToWrite: [Operation] = operations.map { eachOp in
                 .init(from: eachOp.from, to: eachOp.to, contract: eachOp.contractAddress?.eip55String ?? "", tokenId: eachOp.tokenId)
@@ -381,7 +393,7 @@ extension TransactionDataStore.functional {
         return NSPredicate(format: "nonce == '\(nonce)'")
     }
 
-    static func blockNumberPredicate(blockNumber: Int) -> NSPredicate {
+    public static func blockNumberPredicate(blockNumber: Int) -> NSPredicate {
         return NSPredicate(format: "blockNumber > \(blockNumber)")
     }
 
@@ -439,7 +451,7 @@ extension TransactionDataStore.functional {
 }
 
 extension TransactionState {
-    static func predicate(state: TransactionState) -> NSPredicate {
+    public static func predicate(state: TransactionState) -> NSPredicate {
         return NSPredicate(format: "internalState == \(state.rawValue)")
     }
 }

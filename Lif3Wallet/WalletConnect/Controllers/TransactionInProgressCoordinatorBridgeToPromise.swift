@@ -15,11 +15,24 @@ private class TransactionInProgressCoordinatorBridgeToPromise {
     private var retainCycle: TransactionInProgressCoordinatorBridgeToPromise?
     private let session: WalletSession
 
+<<<<<<< HEAD:Lif3Wallet/WalletConnect/Controllers/TransactionInProgressCoordinatorBridgeToPromise.swift
     init(navigationController: UINavigationController, coordinator: Coordinator, session: WalletSession) {
         self.session = session
         retainCycle = self
         
         let newCoordinator = TransactionInProgressCoordinator(presentingViewController: navigationController, session: session)
+=======
+    init(navigationController: UINavigationController,
+         coordinator: Coordinator,
+         server: RPCServer) {
+
+        retainCycle = self
+
+        let newCoordinator = TransactionInProgressCoordinator(
+            presentingViewController: navigationController,
+            server: server)
+        
+>>>>>>> master:AlphaWallet/WalletConnect/Controllers/TransactionInProgressCoordinatorBridgeToPromise.swift
         newCoordinator.delegate = self
         coordinator.addCoordinator(newCoordinator)
 
@@ -46,7 +59,18 @@ extension TransactionInProgressCoordinatorBridgeToPromise: TransactionInProgress
 
 extension TransactionInProgressCoordinator {
 
+<<<<<<< HEAD:Lif3Wallet/WalletConnect/Controllers/TransactionInProgressCoordinatorBridgeToPromise.swift
     static func promise(_ navigationController: UINavigationController, coordinator: Coordinator, session: WalletSession) -> Promise<Void> {
         return TransactionInProgressCoordinatorBridgeToPromise(navigationController: navigationController, coordinator: coordinator, session: session).promise
+=======
+    static func promise(_ navigationController: UINavigationController,
+                        coordinator: Coordinator,
+                        server: RPCServer) -> Promise<Void> {
+
+        return TransactionInProgressCoordinatorBridgeToPromise(
+            navigationController: navigationController,
+            coordinator: coordinator,
+            server: server).promise
+>>>>>>> master:AlphaWallet/WalletConnect/Controllers/TransactionInProgressCoordinatorBridgeToPromise.swift
     }
 }

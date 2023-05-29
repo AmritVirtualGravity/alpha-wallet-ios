@@ -2,7 +2,6 @@
 
 import UIKit
 import StatefulViewController
-import PromiseKit
 import Combine
 import AlphaWalletFoundation
 
@@ -16,7 +15,7 @@ class AddHideTokensViewController: UIViewController {
     private let searchController: UISearchController
     private var isSearchBarConfigured = false
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.buildGroupedTableView()
         tableView.register(WalletTokenViewCell.self)
         tableView.register(PopularTokenViewCell.self)
         tableView.registerHeaderFooterView(TokensViewController.GeneralTableViewSectionHeader<DropDownView<SortTokensParam>>.self)
@@ -51,7 +50,7 @@ class AddHideTokensViewController: UIViewController {
 
         searchController.delegate = self
 
-        emptyView = EmptyView.filterTokensEmptyView(completion: { [weak self] in
+        emptyView = EmptyView.addHideTokensEmptyView(completion: { [weak self] in
             guard let strongSelf = self, let delegate = strongSelf.delegate else { return }
             let addressString = strongSelf.searchController.searchBar.text ?? ""
             delegate.didPressAddToken(in: strongSelf, with: addressString)

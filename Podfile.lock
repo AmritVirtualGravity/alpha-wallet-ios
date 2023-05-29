@@ -18,9 +18,11 @@ PODS:
     - AlphaWalletCore
     - AlphaWalletENS
     - AlphaWalletGoBack
+    - AlphaWalletHardwareWallet
     - AlphaWalletLogger
     - AlphaWalletOpenSea
     - AlphaWalletShareExtensionCore
+    - AlphaWalletTrustWalletCoreExtensions
     - AlphaWalletWeb3
     - AlphaWalletWeb3Provider
     - APIKit (= 5.1.0)
@@ -39,10 +41,20 @@ PODS:
     - SwiftyJSON (= 5.0.0)
     - TrezorCrypto
     - TrustKeystore
-    - TrustWalletCore (= 2.6.34)
   - AlphaWalletGoBack (1.0.0)
+  - AlphaWalletHardwareWallet (1.0.0):
+    - AlphaWalletAddress
+    - AlphaWalletTrustWalletCoreExtensions
+    - AlphaWalletWeb3
+    - TrustKeystore
   - AlphaWalletLogger (1.0.0):
     - CocoaLumberjack (= 3.7.0)
+  - AlphaWalletNotifications (1.0.1):
+    - AlphaWalletCore
+    - AlphaWalletFoundation
+    - Firebase/Messaging
+    - FirebaseCrashlytics
+    - SwiftyJSON
   - AlphaWalletOpenSea (1.0.0):
     - AlphaWalletAddress
     - AlphaWalletCore
@@ -50,6 +62,9 @@ PODS:
     - SwiftyJSON (= 5.0.0)
   - AlphaWalletShareExtensionCore (1.0.0)
   - AlphaWalletTrackAPICalls (1.0.0)
+  - AlphaWalletTrustWalletCoreExtensions (1.0.0):
+    - BigInt
+    - TrustWalletCore (= 2.6.34)
   - AlphaWalletWeb3 (0.0.1):
     - BigInt
     - CryptoSwift
@@ -219,27 +234,30 @@ DEPENDENCIES:
   - AlphaWalletENS (from `.`)
   - AlphaWalletFoundation (from `.`)
   - AlphaWalletGoBack (from `.`)
+  - AlphaWalletHardwareWallet (from `.`)
   - AlphaWalletLogger (from `.`)
+  - AlphaWalletNotifications (from `.`)
   - AlphaWalletOpenSea (from `.`)
   - AlphaWalletShareExtensionCore (from `.`)
   - AlphaWalletTrackAPICalls (from `.`)
+  - AlphaWalletTrustWalletCoreExtensions (from `.`)
   - AlphaWalletWeb3 (from `.`)
-  - AlphaWalletWeb3Provider (from `https://github.com/AlphaWallet/AlphaWallet-web3-provider`, commit `9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870`)
+  - AlphaWalletWeb3Provider (from `https://github.com/AlphaWallet/AlphaWallet-web3-provider`, commit `bdb38b06eeedeb4ca1e32d3ecd81783b5116ae68`)
   - BigInt (~> 3.1)
   - Charts
   - EthereumABI (from `https://github.com/AlphaWallet/EthereumABI.git`, commit `877b77e8e7cbc54ab0712d509b74fec21b79d1bb`)
-  - FirebaseCrashlytics (= 8.10.0)
+  - Firebase/Crashlytics
   - FloatingPanel
   - iOSSnapshotTestCase (= 6.2.0)
   - IQKeyboardManager
   - Kanna (from `https://github.com/tid-kijyun/Kanna.git`, commit `06a04bc28783ccbb40efba355dee845a024033e8`)
   - KeychainSwift (from `https://github.com/AlphaWallet/keychain-swift.git`, commit `b797d40a9d08ec509db4335140cf2259b226e6a2`)
-  - Kingfisher (~> 7.0)
+  - Kingfisher (~> 7.6.2)
   - MailchimpSDK
   - MBProgressHUD
   - Mixpanel-swift (~> 3.1)
   - PromiseKit/CorePromise
-  - QRCodeReaderViewController (from `https://github.com/AlphaWallet/QRCodeReaderViewController.git`, commit `30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65`)
+  - QRCodeReaderViewController (from `https://github.com/AlphaWallet/QRCodeReaderViewController.git`, commit `09da2d4b835589972ecacd022a75bc27b2c1d1bd`)
   - R.swift
   - Ramp (from `https://github.com/RampNetwork/ramp-sdk-ios`, tag `4.0.0`)
   - SAMKeychain
@@ -253,8 +271,6 @@ DEPENDENCIES:
   - TrezorCrypto (from `https://github.com/AlphaWallet/trezor-crypto-ios.git`, commit `50c16ba5527e269bbc838e80aee5bac0fe304cc7`)
   - TrustKeystore (from `https://github.com/AlphaWallet/latest-keystore-snapshot`, commit `c0bdc4f6ffc117b103e19d17b83109d4f5a0e764`)
   - WalletConnectSwift (from `https://github.com/AlphaWallet/WalletConnectSwift.git`, branch `alphaWallet`)
-  - WalletConnectSwiftV2 (from `https://github.com/WalletConnect/WalletConnectSwiftV2.git`, tag `1.3.1`)
-  - WalletConnectSwiftV2/Web3Wallet (from `https://github.com/WalletConnect/WalletConnectSwiftV2.git`, tag `1.3.1`)
   - xcbeautify
 
 SPEC REPOS:
@@ -270,10 +286,12 @@ SPEC REPOS:
     - CombineExt
     - CryptoSwift
     - EthereumAddress
+    - Firebase
     - FirebaseCore
-    - FirebaseCoreDiagnostics
+    - FirebaseCoreInternal
     - FirebaseCrashlytics
     - FirebaseInstallations
+    - FirebaseMessaging
     - FloatingPanel
     - GoogleDataTransport
     - GoogleUtilities
@@ -318,7 +336,11 @@ EXTERNAL SOURCES:
     :path: "."
   AlphaWalletGoBack:
     :path: "."
+  AlphaWalletHardwareWallet:
+    :path: "."
   AlphaWalletLogger:
+    :path: "."
+  AlphaWalletNotifications:
     :path: "."
   AlphaWalletOpenSea:
     :path: "."
@@ -326,10 +348,12 @@ EXTERNAL SOURCES:
     :path: "."
   AlphaWalletTrackAPICalls:
     :path: "."
+  AlphaWalletTrustWalletCoreExtensions:
+    :path: "."
   AlphaWalletWeb3:
     :path: "."
   AlphaWalletWeb3Provider:
-    :commit: 9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870
+    :commit: bdb38b06eeedeb4ca1e32d3ecd81783b5116ae68
     :git: https://github.com/AlphaWallet/AlphaWallet-web3-provider
   EthereumABI:
     :commit: 877b77e8e7cbc54ab0712d509b74fec21b79d1bb
@@ -341,7 +365,7 @@ EXTERNAL SOURCES:
     :commit: b797d40a9d08ec509db4335140cf2259b226e6a2
     :git: https://github.com/AlphaWallet/keychain-swift.git
   QRCodeReaderViewController:
-    :commit: 30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65
+    :commit: 09da2d4b835589972ecacd022a75bc27b2c1d1bd
     :git: https://github.com/AlphaWallet/QRCodeReaderViewController.git
   Ramp:
     :git: https://github.com/RampNetwork/ramp-sdk-ios
@@ -358,13 +382,10 @@ EXTERNAL SOURCES:
   WalletConnectSwift:
     :branch: alphaWallet
     :git: https://github.com/AlphaWallet/WalletConnectSwift.git
-  WalletConnectSwiftV2:
-    :git: https://github.com/WalletConnect/WalletConnectSwiftV2.git
-    :tag: 1.3.1
 
 CHECKOUT OPTIONS:
   AlphaWalletWeb3Provider:
-    :commit: 9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870
+    :commit: bdb38b06eeedeb4ca1e32d3ecd81783b5116ae68
     :git: https://github.com/AlphaWallet/AlphaWallet-web3-provider
   EthereumABI:
     :commit: 877b77e8e7cbc54ab0712d509b74fec21b79d1bb
@@ -376,7 +397,7 @@ CHECKOUT OPTIONS:
     :commit: b797d40a9d08ec509db4335140cf2259b226e6a2
     :git: https://github.com/AlphaWallet/keychain-swift.git
   QRCodeReaderViewController:
-    :commit: 30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65
+    :commit: 09da2d4b835589972ecacd022a75bc27b2c1d1bd
     :git: https://github.com/AlphaWallet/QRCodeReaderViewController.git
   Ramp:
     :git: https://github.com/RampNetwork/ramp-sdk-ios
@@ -393,9 +414,6 @@ CHECKOUT OPTIONS:
   WalletConnectSwift:
     :commit: cb8dfc428ec70499a585c43e33a5e5c695b135a2
     :git: https://github.com/AlphaWallet/WalletConnectSwift.git
-  WalletConnectSwiftV2:
-    :git: https://github.com/WalletConnect/WalletConnectSwiftV2.git
-    :tag: 1.3.1
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
@@ -407,8 +425,9 @@ SPEC CHECKSUMS:
   AlphaWalletLogger: 1c0f115e624b6b6e67e9767560fddb6bda2aaa75
   AlphaWalletOpenSea: 71e255612529b04ae4d66dca54bd181185593b1d
   AlphaWalletShareExtensionCore: e5fc88c6120d5b77b3ba44a37e7b58da5ccbb7b6
-  AlphaWalletTrackAPICalls: 1e5d1f0a1858bd4d383aa412677a642be7d21e17
-  AlphaWalletWeb3: 86d0be33c612d75685a5797ef4492e42c295f1a5
+  AlphaWalletTrackAPICalls: 0e18ad5b389b054ee30673e7f1caf095a17c1b33
+  AlphaWalletTrustWalletCoreExtensions: 290b1c05cada7715c29b52622688da01ab88ffa7
+  AlphaWalletWeb3: 1603f0e60dd63598c5c939f9c46ef8178cd28bb9
   AlphaWalletWeb3Provider: 7ca1e1c1dc841dc1915f970daace48bf34931655
   APIKit: 9e1a4069608bf0ae5238811e6cfc26928ad4d01e
   Apollo: 204819ea82022fbc59ad05056820df867f19bd02

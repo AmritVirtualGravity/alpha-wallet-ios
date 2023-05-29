@@ -15,7 +15,7 @@ protocol BrowserHistoryViewControllerDelegate: AnyObject {
 
 final class BrowserHistoryViewController: UIViewController {
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.grouped
+        let tableView = UITableView.buildGroupedTableView()
         tableView.delegate = self
         tableView.tableHeaderView = headerView
         tableView.separatorStyle = .none
@@ -131,7 +131,13 @@ extension BrowserHistoryViewController: UITableViewDelegate {
         let title = R.string.localizable.removeButtonTitle()
         let deleteAction = UIContextualAction(style: .destructive, title: title) { [dataSource, deleteRecord] _, _, completion in
             let history = dataSource.item(at: indexPath).history
-            self.confirm(title: R.string.localizable.browserHistoryConfirmDeleteTitle(), message: history.url.absoluteString, okTitle: R.string.localizable.removeButtonTitle(), okStyle: .destructive) { result in
+            Task { @MainActor in
+                let result = await self.confirm(
+                    title: R.string.localizable.browserHistoryConfirmDeleteTitle(),
+                    message: history.url.absoluteString,
+                    okTitle: R.string.localizable.removeButtonTitle(),
+                    okStyle: .destructive)
+
                 switch result {
                 case .success:
                     deleteRecord.send(.record(history))

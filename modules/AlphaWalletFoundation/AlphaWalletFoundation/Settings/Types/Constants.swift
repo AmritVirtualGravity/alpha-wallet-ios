@@ -40,7 +40,8 @@ public struct Constants {
     static let arbitrumGoerliMagicLinkHost      = "arbitrumGoerli.aw.app"
     static let tombChainLinkHost                = "tombchain.aw.app"
     static let metisChainLinkHost                = "metis.aw.app"
-
+    static let okxMagicLinkHost = "okx.aw.app"
+    static let sepoliaMagicLinkHost = "sepolia.aw.app"
 
     // Magic link networks
     public static let legacyMagicLinkPrefix = "https://app.awallet.io/"
@@ -152,10 +153,6 @@ public struct Constants {
 
     enum Image {
         static let numberOfCharactersOfSymbolToShowInIcon = 4
-    }
-
-    enum Phi {
-        static let baseUrl = URL(string: "https://price.phi.network")!
     }
 
     //CurrencyFormatter

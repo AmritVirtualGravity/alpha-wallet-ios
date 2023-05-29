@@ -17,18 +17,18 @@ struct TransactionsViewModelOutput {
 
 class TransactionsViewModel {
     private let transactionsService: TransactionsService
-    private let sessions: ServerDictionary<WalletSession>
+    private let sessionsProvider: SessionsProvider
 
-    init(transactionsService: TransactionsService, sessions: ServerDictionary<WalletSession>) {
+    init(transactionsService: TransactionsService, sessionsProvider: SessionsProvider) {
         self.transactionsService = transactionsService
-        self.sessions = sessions
+        self.sessionsProvider = sessionsProvider
     }
 
     func transform(input: TransactionsViewModelInput) -> TransactionsViewModelOutput {
         let pullToRefreshState = reloadTransactions(input: input.pullToRefresh)
 
         let snapshot = transactionsService
-            .transactionsChangeset
+            .transactions(filter: .all)
             .map { TransactionsViewModel.functional.buildSectionViewModels(for: $0) }
             .receive(on: DispatchQueue.main)
             .prepend([])
@@ -52,8 +52,9 @@ class TransactionsViewModel {
             .eraseToAnyPublisher()
     }
 
-    func buildCellViewModel(for transactionRow: TransactionRow) -> TransactionRowCellViewModel {
-        let session = sessions[transactionRow.server]
+    func buildCellViewModel(for transactionRow: TransactionRow) -> TransactionRowCellViewModel? {
+        guard let session = sessionsProvider.session(for: transactionRow.server) else { return nil }
+
         return .init(transactionRow: transactionRow, blockNumberProvider: session.blockNumberProvider, wallet: session.account)
     }
 }
@@ -62,7 +63,7 @@ extension TransactionsViewModel {
     class DataSource: UITableViewDiffableDataSource<TransactionsViewModel.Section, TransactionRow> {}
     typealias Snapshot = NSDiffableDataSourceSnapshot<TransactionsViewModel.Section, TransactionRow>
     typealias Section = String
-    class functional {}
+    enum functional {}
 
     typealias SectionViewModel = (date: String, transactionRows: [TransactionRow])
 
@@ -89,7 +90,7 @@ extension TransactionsViewModel.functional {
         return snapshot
     }
 
-    fileprivate static func buildSectionViewModels(for transactions: [TransactionInstance]) -> [TransactionsViewModel.SectionViewModel] {
+    fileprivate static func buildSectionViewModels(for transactions: [Transaction]) -> [TransactionsViewModel.SectionViewModel] {
         //Uses NSMutableArray instead of Swift array for performance. Really slow when dealing with 10k events, which is hardly a big wallet
         var newItems: [String: NSMutableArray] = [:]
         for transaction in transactions {
@@ -99,9 +100,9 @@ extension TransactionsViewModel.functional {
             newItems[date] = currentItems
         }
         let tuple = newItems.map { each in
-            (date: each.key, transactions: (each.value as? [TransactionInstance] ?? []).sorted { $0.date > $1.date })
+            (date: each.key, transactions: (each.value as? [Transaction] ?? []).sorted { $0.date > $1.date })
         }
-        let collapsedTransactions: [(date: String, transactions: [TransactionInstance])] = tuple.sorted { (o1, o2) -> Bool in
+        let collapsedTransactions: [(date: String, transactions: [Transaction])] = tuple.sorted { (o1, o2) -> Bool in
             guard let d1 = formatter.date(from: o1.date), let d2 = formatter.date(from: o2.date) else {
                 return false
             }
@@ -117,11 +118,13 @@ extension TransactionsViewModel.functional {
                     items.append(.standalone(each))
                 } else {
                     items.append(.group(each))
-                    items.append(contentsOf: each.localizedOperations.map { .item(transaction: each, operation: $0) })
+                    //NOTE: already stored localized operations might be dublicated, that could cause crash when building datasource snapshot, catched few times
+                    //apply .uniqued() to remove dublicates, updated code to filter operations when creating transaction object.
+                    items.append(contentsOf: each.localizedOperations.uniqued().map { .item(transaction: each, operation: $0) })
                 }
             }
 
-            return (date: date, transactionRows: items)
+            return (date: date, transactionRows: items.uniqued())
         }
     }
 

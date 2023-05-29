@@ -39,24 +39,29 @@ extension Constants {
         }
 
         public static let analyticsKey = ""
-        public static let mailChimpListSpecificKey = "df306008c71da38ba3940d8643e25362"
-        public static let walletConnectProjectId = "73a6c37191ac566feabe6ef5c8e8dda7"
-        static let infuraKey = env("INFURAKEY") ?? "cda4f16979b941298843c90c14dc967f"
-        static let etherscanKey = env("ETHERSCANKEY") ?? "JGST1ZY7VTCFDCU5PXTMPCBWCY5JA7QCIA"
-        static let binanceSmartChainExplorerApiKey: String? = env("BINANCESMARTCHAINEXPLORERAPIKEY") ?? "BN85QQZAWGTSFPWCU3M4VQ6C7HNXTUBG5F"
-        static let polygonScanExplorerApiKey: String? = env("POLYGONSCANEXPLORERAPIKEY") ?? "DI5EXE24AKK6C3HSPP718D4UZHWK92QHXX"
+        public static let mailChimpListSpecificKey = ""
+        public static let walletConnectProjectId = env("WALLETCONNECTPROJECTID") ?? "8ba9ee138960775e5231b70cc5ef1c3a"
+        static let infuraKey = env("INFURAKEY") ?? "ad6d834b7a1e4d03a7fde92020616149"
+        static let oklinkKey = env("OKLINKKEY") ?? "5698875f-1b76-45a1-8790-e1671f14cdeb"
+        static let etherscanKey = env("ETHERSCANKEY") ?? "1PX7RG8H4HTDY8X55YRMCAKPZK476M23ZR"
+        static let binanceSmartChainExplorerApiKey: String? = env("BINANCESMARTCHAINEXPLORERAPIKEY")
+        static let polygonScanExplorerApiKey: String? = env("POLYGONSCANEXPLORERAPIKEY")
         static let avalancheExplorerApiKey = env("AVALANCHEEXPLORERAPIKEY")
+        static let arbiscanExplorerApiKey = env("ARBISCANEXPLORERAPIKEY")
+        static let xDaiExplorerKey = env("XDAIEXPLORERKEY")
         static let paperTrail = (host: env("PAPERTRAILHOST") ?? "", port: (env("PAPERTRAILPORT") ?? "").toInt() ?? 0)
         static let openseaKey = env("OPENSEAKEY") ?? "a596f6b77cb74f278271fd07effda3d8"
         public static let rampApiKey = env("RAMPAPIKEY") ?? "bwey2brwwg4djc85m8z6tu6en7kp4v32brr6sr63"
         static let coinbaseAppId = env("COINBASEAPPID") ?? ""
-        static let enjinUserName = env("ENJINUSERNAME") ?? "vlad_shepitko@outlook.com"
-        static let enjinUserPassword = env("ENJINUSERPASSWORD") ?? "wf@qJPz75CL9Tw$"
+        static let enjinUserName = env("ENJINUSERNAME")
+        static let enjinUserPassword = env("ENJINUSERPASSWORD")
         static let unstoppableDomainsV2ApiKey = env("UNSTOPPABLEDOMAINSV2KEY") ?? "Bearer rLuujk_dLBN-JDE6Xl8QSCg-FeIouRKM"
         static let blockscanChatProxyKey = env("BLOCKSCHATPROXYKEY") ?? ""
-        static let covalentApiKey = env("COVALENTAPIKEY") ?? "ckey_12ee4a2d24db45f39c4b6c4df6e"
-        //Without the "Basic " prefix
         static let klaytnRpcNodeKeyBasicAuth = env("KLAYTNRPCNODEKEYBASICAUTH") ?? ""
+        static let covalentApiKey = env("COVALENTAPIKEY") ?? "ckey_7ee61be7f8364ba784f697510bd"
+        static let klaytnRpcNodeCypressKey = env("KLAYTNRPCNODECYPRESSKEY") ?? ""
+        static let klaytnRpcNodeBaobabKey = env("KLAYTNRPCNODEBAOBABKEY") ?? ""
+        public static let notificationsApiKey = env("NOTIFICATIONSAPIKEY")
     }
 }
 

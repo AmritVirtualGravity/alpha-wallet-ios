@@ -103,7 +103,7 @@ public class TickerIdFilter {
                 return false
             }
         } else {
-            return isMatchingSymbolAndName(token: token, tickerIdObject: object)
+            return false
         }
     }
 }

@@ -7,7 +7,7 @@ import Combine
 
 struct TransactionHeaderViewModel {
     private let transactionViewModel: TransactionViewModel
-    private let tokensService: TokenViewModelState
+    private let tokensService: TokensProcessingPipeline
     private let tokenImageFetcher: TokenImageFetcher
 
     var server: RPCServer { transactionViewModel.server }
@@ -19,7 +19,7 @@ struct TransactionHeaderViewModel {
     }
 
     init(transactionViewModel: TransactionViewModel,
-         tokensService: TokenViewModelState,
+         tokensService: TokensProcessingPipeline,
          tokenImageFetcher: TokenImageFetcher) {
 
         self.tokenImageFetcher = tokenImageFetcher
@@ -27,7 +27,7 @@ struct TransactionHeaderViewModel {
         self.tokensService = tokensService
     }
 
-    private var operation: LocalizedOperationObjectInstance? {
+    private var operation: LocalizedOperation? {
         switch transactionViewModel.transactionRow {
         case .standalone(let transaction): return transaction.operation
         case .group: return nil

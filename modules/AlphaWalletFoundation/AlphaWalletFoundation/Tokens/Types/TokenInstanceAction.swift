@@ -121,7 +121,7 @@ public struct TokenInstanceAction {
         }
     }
 
-    public func activeExcludingSelection(selectedTokenHolders: [TokenHolder], forWalletAddress walletAddress: AlphaWallet.Address, fungibleBalance: BigInt? = nil) -> TokenScriptSelection? {
+    public func activeExcludingSelection(selectedTokenHolders: [TokenHolder], forWalletAddress walletAddress: AlphaWallet.Address, fungibleBalance: BigUInt? = nil) -> TokenScriptSelection? {
         switch type {
         case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .stake, .activity, .alert:
             return nil
@@ -141,7 +141,7 @@ public struct TokenInstanceAction {
         }
     }
 
-    public func activeExcludingSelection(selectedTokenHolder tokenHolder: TokenHolder, tokenId: TokenId, forWalletAddress walletAddress: AlphaWallet.Address, fungibleBalance: BigInt? = nil) -> TokenScriptSelection? {
+    public func activeExcludingSelection(selectedTokenHolder tokenHolder: TokenHolder, tokenId: TokenId, forWalletAddress walletAddress: AlphaWallet.Address, fungibleBalance: BigUInt? = nil) -> TokenScriptSelection? {
         switch type {
         case .erc20Send, .erc20Receive, .swap, .buy, .bridge, .stake, .activity, .alert:
             return nil

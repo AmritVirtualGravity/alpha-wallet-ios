@@ -12,24 +12,14 @@ import CombineExt
 public class AlphaWalletTokensService: TokensService {
     private var cancelable = Set<AnyCancellable>()
     private let providers: CurrentValueSubject<ServerDictionary<TokenSourceProvider>, Never> = .init(.init())
-    private let autoDetectTransactedTokensQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.name = "Auto-detect Transacted Tokens"
-        queue.maxConcurrentOperationCount = 1
-        return queue
-    }()
-    private let autoDetectTokensQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.name = "Auto-detect Tokens"
-        queue.maxConcurrentOperationCount = 1
-        return queue
-    }()
     private let sessionsProvider: SessionsProvider
     private let analytics: AnalyticsLogger
     private let tokensDataStore: TokensDataStore
     private let transactionsStorage: TransactionDataStore
     private let assetDefinitionStore: AssetDefinitionStore
-    private let networkService: NetworkService
+    private let transporter: ApiTransporter
+    private let fetchTokenScriptFiles: FetchTokenScriptFiles
+    private lazy var tokenRepairService = TokenRepairService(tokensDataStore: tokensDataStore, sessionsProvider: sessionsProvider)
 
     public lazy var tokensPublisher: AnyPublisher<[Token], Never> = {
         providers.map { $0.values }
@@ -42,24 +32,24 @@ public class AlphaWalletTokensService: TokensService {
             .eraseToAnyPublisher()
     }()
 
-    public func tokensPublisher(servers: [RPCServer]) -> AnyPublisher<[Token], Never> {
-        providers.map { $0.values.filter { servers.contains($0.session.server) } }
-            .flatMapLatest { $0.map { $0.tokensPublisher }.combineLatest() }
-            .map { $0.flatMap { $0 } }
-            .map { [providers] tokens -> [Token] in
-                let servers = Array(providers.value.keys)
-                return MultipleChainsTokensDataStore.functional.erc20AddressForNativeTokenFilter(servers: servers, tokens: tokens)
-            }.map { AlphaWalletTokensService.filterAwaySpuriousTokens($0) }
-            .eraseToAnyPublisher()
+    public func tokensChangesetPublisher(servers: [RPCServer]) -> AnyPublisher<ChangeSet<[Token]>, Never> {
+        tokensDataStore.tokensChangesetPublisher(for: servers, predicate: nil)
     }
 
     public var tokens: [Token] {
         AlphaWalletTokensService.filterAwaySpuriousTokens(providers.value.flatMap { $0.value.tokens })
     }
 
-    public lazy var newTokens: AnyPublisher<[Token], Never> = {
+    public lazy var addedTokensPublisher: AnyPublisher<[Token], Never> = {
         providers.map { $0.values }
-            .flatMapLatest { $0.map { $0.newTokens }.merge() }
+            .flatMapLatest { $0.map { $0.addedTokensPublisher }.merge() }
+            .eraseToAnyPublisher()
+    }()
+
+    /// Fires each time we recreate token source, e.g when servers are chenging
+    public lazy var providersHasChanged: AnyPublisher<Void, Never> = {
+        providers.filter { !$0.isEmpty }
+            .mapToVoid()
             .eraseToAnyPublisher()
     }()
 
@@ -68,18 +58,22 @@ public class AlphaWalletTokensService: TokensService {
                 analytics: AnalyticsLogger,
                 transactionsStorage: TransactionDataStore,
                 assetDefinitionStore: AssetDefinitionStore,
-                networkService: NetworkService) {
+                transporter: ApiTransporter) {
 
-        self.networkService = networkService
+        self.transporter = transporter
         self.sessionsProvider = sessionsProvider
         self.tokensDataStore = tokensDataStore
         self.analytics = analytics
         self.transactionsStorage = transactionsStorage
         self.assetDefinitionStore = assetDefinitionStore
+        self.fetchTokenScriptFiles = FetchTokenScriptFiles(
+            assetDefinitionStore: assetDefinitionStore,
+            tokensDataStore: tokensDataStore,
+            sessionsProvider: sessionsProvider)
     }
 
     public func tokens(for servers: [RPCServer]) -> [Token] {
-        return tokensDataStore.enabledTokens(for: servers)
+        return tokensDataStore.tokens(for: servers)
     }
 
     public func mark(token: TokenIdentifiable, isHidden: Bool) {
@@ -88,11 +82,11 @@ public class AlphaWalletTokensService: TokensService {
     }
 
     public func token(for contract: AlphaWallet.Address) -> Token? {
-        return tokensDataStore.token(forContract: contract)
+        return tokensDataStore.token(for: contract)
     }
 
     public func token(for contract: AlphaWallet.Address, server: RPCServer) -> Token? {
-        return tokensDataStore.token(forContract: contract, server: server)
+        return tokensDataStore.token(for: contract, server: server)
     }
 
     public func refresh() {
@@ -103,56 +97,50 @@ public class AlphaWalletTokensService: TokensService {
     public func stop() {
         //NOTE: TokenBalanceFetcher has strong ref to Tokens Service, so we need to remove fetchers manually
         providers.value = .init()
-        autoDetectTransactedTokensQueue.cancelAllOperations()
-        autoDetectTokensQueue.cancelAllOperations()
     }
 
     public func start() {
-        sessionsProvider.sessions.map { [weak self] sessions in
-            var providers: ServerDictionary<TokenSourceProvider> = .init()
-            for session in sessions {
-                if let provider = self?.providers.value[safe: session.key] {
-                    providers[session.key] = provider
-                } else {
-                    guard let provider = self?.buildTokenSource(session: session.value) else { continue }
-                    provider.start()
+        sessionsProvider.sessions
+            .map { [weak self] sessions in
+                var providers: ServerDictionary<TokenSourceProvider> = .init()
+                for session in sessions {
+                    if let provider = self?.providers.value[safe: session.key] {
+                        providers[session.key] = provider
+                    } else {
+                        guard let provider = self?.buildTokenSource(session: session.value) else { continue }
+                        provider.start()
 
-                    providers[session.key] = provider
+                        providers[session.key] = provider
+                    }
                 }
-            }
 
-            return providers
-        }.assign(to: \.value, on: providers, ownership: .weak)
-        .store(in: &cancelable)
+                return providers
+            }.assign(to: \.value, on: providers, ownership: .weak)
+            .store(in: &cancelable)
+
+        fetchTokenScriptFiles.start()
+        //tokenRepairService.start()
     }
 
     private func buildTokenSource(session: WalletSession) -> TokenSourceProvider {
-        let etherToken = MultipleChainsTokensDataStore.functional.etherToken(forServer: session.server)
         let balanceFetcher = TokenBalanceFetcher(
             session: session,
-            tokensService: self,
-            etherToken: etherToken,
+            tokensDataStore: tokensDataStore,
+            etherToken: MultipleChainsTokensDataStore.functional.etherToken(forServer: session.server),
             assetDefinitionStore: assetDefinitionStore,
             analytics: analytics,
-            networkService: networkService)
+            transporter: transporter)
 
         balanceFetcher.erc721TokenIdsFetcher = transactionsStorage
 
         return ClientSideTokenSourceProvider(
             session: session,
-            autoDetectTransactedTokensQueue: autoDetectTransactedTokensQueue,
-            autoDetectTokensQueue: autoDetectTokensQueue,
             tokensDataStore: tokensDataStore,
-            balanceFetcher: balanceFetcher,
-            networkService: networkService)
+            balanceFetcher: balanceFetcher)
     }
 
     deinit {
         stop()
-    }
-
-    public func addOrUpdate(tokensOrContracts: [TokenOrContract]) -> [Token] {
-        tokensDataStore.addOrUpdate(tokensOrContracts: tokensOrContracts)
     }
 
     public func addOrUpdate(with actions: [AddOrUpdateTokenAction]) -> [Token] {
@@ -209,7 +197,7 @@ public class AlphaWalletTokensService: TokensService {
     }
 }
 
-extension AlphaWalletTokensService: TokensServiceTests {
+extension AlphaWalletTokensService {
     public func setBalanceTestsOnly(balance: Balance, for token: Token) {
         tokensDataStore.updateToken(addressAndRpcServer: token.addressAndRPCServer, action: .value(balance.value))
     }
@@ -230,7 +218,7 @@ extension AlphaWalletTokensService: TokensServiceTests {
 extension AlphaWalletTokensService {
 
     public func alreadyAddedContracts(for server: RPCServer) -> [AlphaWallet.Address] {
-        tokensDataStore.enabledTokens(for: [server]).map { $0.contractAddress }
+        tokensDataStore.tokens(for: [server]).map { $0.contractAddress }
     }
 
     public func deletedContracts(for server: RPCServer) -> [AlphaWallet.Address] {

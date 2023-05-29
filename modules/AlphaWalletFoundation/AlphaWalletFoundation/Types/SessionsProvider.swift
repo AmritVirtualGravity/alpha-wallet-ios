@@ -27,7 +27,7 @@ open class BaseSessionsProvider: SessionsProvider {
     private let reachability: ReachabilityManagerProtocol
     private let wallet: Wallet
     private let eventsDataStore: NonActivityEventsDataStore
-
+    private let apiTransporterFactory: ApiTransporterFactory
     public var sessions: AnyPublisher<ServerDictionary<WalletSession>, Never> {
         return sessionsSubject.eraseToAnyPublisher()
     }
@@ -43,8 +43,10 @@ open class BaseSessionsProvider: SessionsProvider {
                 eventsDataStore: NonActivityEventsDataStore,
                 assetDefinitionStore: AssetDefinitionStore,
                 reachability: ReachabilityManagerProtocol,
-                wallet: Wallet) {
+                wallet: Wallet,
+                apiTransporterFactory: ApiTransporterFactory) {
 
+        self.apiTransporterFactory = apiTransporterFactory
         self.eventsDataStore = eventsDataStore
         self.wallet = wallet
         self.reachability = reachability
@@ -69,9 +71,21 @@ open class BaseSessionsProvider: SessionsProvider {
                         sessions[blockchain.server] = strongSelf.buildSession(blockchain: blockchain)
                     }
                 }
+
                 return sessions
             }.assign(to: \.value, on: sessionsSubject, ownership: .weak)
             .store(in: &cancelable)
+
+        NotificationCenter.default.applicationState
+            .receive(on: RunLoop.main)
+            .sink { [sessionsSubject] state in
+                switch state {
+                case .didEnterBackground:
+                    sessionsSubject.value.forEach { $0.value.blockNumberProvider.cancel() }
+                case .willEnterForeground:
+                    sessionsSubject.value.forEach { $0.value.blockNumberProvider.restart() }
+                }
+            }.store(in: &cancelable)
     }
 
     private func buildSession(blockchain: BlockchainProvider) -> WalletSession {
@@ -105,6 +119,8 @@ open class BaseSessionsProvider: SessionsProvider {
             wallet: wallet,
             nftProvider: nftProvider)
 
+        let apiNetworking = buildApiNetworking(server: blockchain.server, wallet: wallet, ercTokenProvider: ercTokenProvider)
+
         return WalletSession(
             account: wallet,
             server: blockchain.server,
@@ -114,10 +130,91 @@ open class BaseSessionsProvider: SessionsProvider {
             importToken: importToken,
             blockchainProvider: blockchain,
             nftProvider: nftProvider,
-            tokenAdaptor: tokenAdaptor)
+            tokenAdaptor: tokenAdaptor,
+            apiNetworking: apiNetworking)
     }
 
     public func session(for server: RPCServer) -> WalletSession? {
         sessionsSubject.value[safe: server]
+    }
+
+    private func buildApiNetworking(server: RPCServer, wallet: Wallet, ercTokenProvider: TokenProviderType) -> ApiNetworking {
+        let transporter = apiTransporterFactory.transporter(server: server)
+
+        switch server.transactionsSource {
+        case .etherscan(let apiKey, let url):
+            let transactionBuilder = TransactionBuilder(
+                tokensDataStore: tokensDataStore,
+                server: server,
+                ercTokenProvider: ercTokenProvider)
+            
+            return EtherscanCompatibleApiNetworking(
+                server: server,
+                transporter: transporter,
+                transactionBuilder: transactionBuilder,
+                baseUrl: url,
+                apiKey: apiKey)
+        case .blockscout(let apiKey, let url):
+            let transactionBuilder = TransactionBuilder(
+                tokensDataStore: tokensDataStore,
+                server: server,
+                ercTokenProvider: ercTokenProvider)
+
+            return BlockscoutApiNetworking(
+                server: server,
+                transporter: transporter,
+                transactionBuilder: transactionBuilder,
+                apiKey: apiKey,
+                baseUrl: url)
+        case .covalent(let apiKey):
+            return CovalentApiNetworking(
+                server: server,
+                apiKey: apiKey,
+                transporter: transporter)
+
+        case .oklink(let apiKey):
+            let transactionBuilder = TransactionBuilder(
+                tokensDataStore: tokensDataStore,
+                server: server,
+                ercTokenProvider: ercTokenProvider)
+
+            return OklinkApiNetworking(
+                server: server,
+                apiKey: apiKey,
+                transporter: transporter,
+                ercTokenProvider: ercTokenProvider,
+                transactionBuilder: transactionBuilder)
+        case .unknown:
+            return FallbackApiNetworking()
+        }
+    }
+}
+
+public class ApiTransporterFactory {
+    private var transportes: [RPCServer: ApiTransporter] = [:]
+
+    public init(transportes: [RPCServer: ApiTransporter] = [:]) {
+        self.transportes = transportes
+    }
+
+    public func transporter(server: RPCServer) -> ApiTransporter {
+        if let transporter = transportes[server] {
+            return transporter
+        } else {
+            let policy: RetryPolicy
+
+            switch server {
+            case .goerli, .mumbai_testnet, .sepolia:
+                //NOTE: goerli as well as mumbai_testnet and sepolia retrun 403 error code
+                policy = ApiTransporterRetryPolicy(retryableHTTPStatusCodes: [429, 408, 500, 502, 503, 504, 403])
+            case .xDai, .classic, .main, .callisto, .binance_smart_chain, .heco, .fantom, .avalanche, .polygon, .optimistic, .arbitrum, .palm, .klaytnCypress, .ioTeX, .cronosMainnet, .okx, .binance_smart_chain_testnet, .heco_testnet, .fantom_testnet, .avalanche_testnet, .cronosTestnet, .palmTestnet, .klaytnBaobabTestnet, .ioTeXTestnet, .optimismGoerli, .arbitrumGoerli, .custom:
+                policy = ApiTransporterRetryPolicy()
+            }
+
+            let transporter = BaseApiTransporter(policy: policy)
+
+            transportes[server] = transporter
+            return transporter
+        }
     }
 }

@@ -7,7 +7,7 @@ import AlphaWalletFoundation
 
 protocol ActivitiesViewControllerDelegate: AnyObject {
     func didPressActivity(activity: Activity, in viewController: ActivitiesViewController)
-    func didPressTransaction(transaction: TransactionInstance, in viewController: ActivitiesViewController)
+    func didPressTransaction(transaction: Transaction, in viewController: ActivitiesViewController)
 }
 
 class ActivitiesViewController: UIViewController {
@@ -25,7 +25,7 @@ class ActivitiesViewController: UIViewController {
          keystore: Keystore,
          wallet: Wallet,
          viewModel: ActivitiesViewModel,
-         sessions: ServerDictionary<WalletSession>,
+         sessionsProvider: SessionsProvider,
          assetDefinitionStore: AssetDefinitionStore,
          tokenImageFetcher: TokenImageFetcher) {
 
@@ -36,7 +36,7 @@ class ActivitiesViewController: UIViewController {
             keystore: keystore,
             wallet: wallet,
             viewModel: viewModel,
-            sessions: sessions,
+            sessionsProvider: sessionsProvider,
             assetDefinitionStore: assetDefinitionStore,
             tokenImageFetcher: tokenImageFetcher)
         super.init(nibName: nil, bundle: nil)
@@ -110,7 +110,7 @@ extension ActivitiesViewController: ActivitiesViewDelegate {
         delegate?.didPressActivity(activity: activity, in: self)
     }
 
-    func didPressTransaction(transaction: TransactionInstance, in view: ActivitiesView) {
+    func didPressTransaction(transaction: Transaction, in view: ActivitiesView) {
         delegate?.didPressTransaction(transaction: transaction, in: self)
     }
 }
@@ -165,7 +165,7 @@ extension ActivitiesViewController {
 }
 
 extension ActivitiesViewController {
-    class functional {}
+    enum functional {}
 }
 
 extension ActivitiesViewController.functional {

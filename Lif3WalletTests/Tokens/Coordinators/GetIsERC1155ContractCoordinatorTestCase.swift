@@ -7,7 +7,6 @@
 
 @testable import AlphaWallet
 import AlphaWalletAddress
-import PromiseKit
 import XCTest
 import AlphaWalletFoundation
 
@@ -22,10 +21,6 @@ import AlphaWalletFoundation
 //        if FileManager.default.fileExists(atPath: url.path) && FileManager.default.isDeletableFile(atPath: url.path) {
 //            try FileManager.default.removeItem(at: url)
 //        }
-//    }
-//
-//    override func tearDownWithError() throws {
-//        // Put teardown code here. This method is called after the invocation of each test method in the class.
 //    }
 //
 //    func testgetIsErc1155Contract() throws {

@@ -15,7 +15,7 @@ public class DatabaseMigration: Initializer {
 
     // swiftlint:disable function_body_length
     public func perform() {
-        config.schemaVersion = 12
+        config.schemaVersion = 13
         config.objectTypes = [
             DelegateContract.self,
             DeletedContract.self,
@@ -26,11 +26,12 @@ public class DatabaseMigration: Initializer {
             TokenBalance.self,
             TokenInfoObject.self,
             TokenObject.self,
-            Transaction.self,
+            TransactionObject.self,
             //It is necessary to include these 2 classes even though they are no longer managed in this Realm database (since 8814bd234dec8fc01be2cf9e7201724572627c97 and earlier) because they can still be accessed by users for database migration
             Bookmark.self,
             History.self,
-            EnjinTokenObject.self
+            EnjinTokenObject.self,
+            GasPriceObject.self
         ]
         //NOTE: use [weak self] to avoid memory leak
         config.migrationBlock = { [weak self] migration, oldSchemaVersion in
@@ -48,7 +49,7 @@ public class DatabaseMigration: Initializer {
                 }
             }
             if oldSchemaVersion < 3 {
-                migration.enumerateObjects(ofType: Transaction.className()) { oldObject, newObject in
+                migration.enumerateObjects(ofType: "Transaction") { oldObject, newObject in
                     guard oldObject != nil else { return }
                     guard let newObject = newObject else { return }
                     newObject["isERC20Interaction"] = false
@@ -83,7 +84,7 @@ public class DatabaseMigration: Initializer {
             }
             if oldSchemaVersion < 7 {
                 //Fix bug where we marked all transactions as completed successfully without checking `isError` from Etherscan
-                migration.deleteData(forType: Transaction.className())
+                migration.deleteData(forType: "Transaction")
                 for each in RPCServer.availableServers {
                     Config.setLastFetchedErc20InteractionBlockNumber(0, server: each, wallet: strongSelf.account.address)
                 }
@@ -91,7 +92,7 @@ public class DatabaseMigration: Initializer {
             }
             if oldSchemaVersion < 8 {
                 //Clear all transactions data so we can fetch them again and capture `LocalizedOperationObject` children correctly
-                migration.deleteData(forType: Transaction.className())
+                migration.deleteData(forType: "Transaction")
                 migration.deleteData(forType: LocalizedOperationObject.className())
                 for each in RPCServer.availableServers {
                     Config.setLastFetchedErc20InteractionBlockNumber(0, server: each, wallet: strongSelf.account.address)
@@ -121,6 +122,11 @@ public class DatabaseMigration: Initializer {
             if oldSchemaVersion < 12 {
                 migration.deleteData(forType: TokenBalance.className())
             }
+
+            if oldSchemaVersion < 13 {
+                migration.deleteData(forType: "Transaction")
+            }
+
         }
     }
     // swiftlint:enable function_body_length
@@ -217,57 +223,6 @@ extension DatabaseMigration {
             for each in oldPerWalletDatabase.objects(Bookmark.self) {
                 realm.create(Bookmark.self, value: each, update: .all)
             }
-        }
-    }
-
-    public func oneTimeCreationOfOneDatabaseToHoldAllChains(assetDefinitionStore: AssetDefinitionStore) {
-        let migration = self
-
-        debugLog("Database filepath: \(migration.config.fileURL!)")
-        debugLog("Database directory: \(migration.config.fileURL!.deletingLastPathComponent())")
-
-        let exists: Bool
-        if let path = migration.config.fileURL?.path {
-            exists = FileManager.default.fileExists(atPath: path)
-        } else {
-            exists = false
-        }
-        guard !exists else { return }
-
-        migration.perform()
-        let realm = try! Realm(configuration: migration.config)
-
-        do {
-            try realm.write {
-                for each in RPCServer.availableServers {
-                    let migration = MigrationInitializerForOneChainPerDatabase(account: account, server: each, assetDefinitionStore: assetDefinitionStore)
-                    migration.perform()
-                    let oldPerChainDatabase = try! Realm(configuration: migration.config)
-                    for each in oldPerChainDatabase.objects(DelegateContract.self) {
-                        realm.create(DelegateContract.self, value: each)
-                    }
-                    for each in oldPerChainDatabase.objects(DeletedContract.self) {
-                        realm.create(DeletedContract.self, value: each)
-                    }
-                    for each in oldPerChainDatabase.objects(HiddenContract.self) {
-                        realm.create(HiddenContract.self, value: each)
-                    }
-                    for each in oldPerChainDatabase.objects(TokenObject.self) {
-                        realm.create(TokenObject.self, value: each)
-                    }
-                    for each in oldPerChainDatabase.objects(Transaction.self) {
-                        realm.create(Transaction.self, value: each)
-                    }
-                }
-            }
-            for each in RPCServer.availableServers {
-                let migration = MigrationInitializerForOneChainPerDatabase(account: account, server: each, assetDefinitionStore: assetDefinitionStore)
-                for each in DatabaseMigration.realmFilesUrls(config: migration.config) {
-                    try? FileManager.default.removeItem(at: each)
-                }
-            }
-        } catch {
-            //no-op
         }
     }
 }

@@ -36,7 +36,7 @@ PODS:
     - Kanna
     - PaperTrailLumberjack/Swift
     - PromiseKit/CorePromise
-    - RealmSwift (= 10.32.3)
+    - RealmSwift (= 10.36.0)
     - SwiftProtobuf (~> 1.18.0)
     - SwiftyJSON (= 5.0.0)
     - TrezorCrypto
@@ -96,6 +96,11 @@ PODS:
     - EthereumAddress (~> 1.3)
   - EthereumAddress (1.3.0):
     - CryptoSwift (~> 1.0)
+  - Firebase/CoreOnly (8.15.0):
+    - FirebaseCore (= 8.15.0)
+  - Firebase/Messaging (8.15.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 8.15.0)
   - FirebaseCore (8.15.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.7)
@@ -117,15 +122,35 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
+  - FirebaseMessaging (8.15.0):
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleDataTransport (~> 9.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
+    - GoogleUtilities/Environment (~> 7.7)
+    - GoogleUtilities/Reachability (~> 7.7)
+    - GoogleUtilities/UserDefaults (~> 7.7)
+    - nanopb (~> 2.30908.0)
   - FloatingPanel (2.6.1)
-  - GoogleDataTransport (9.2.2):
+  - GoogleDataTransport (9.2.3):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
   - GoogleUtilities/Environment (7.11.1):
     - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/Logger (7.11.1):
     - GoogleUtilities/Environment
+  - GoogleUtilities/Network (7.11.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.11.1)"
+  - GoogleUtilities/Reachability (7.11.1):
+    - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.11.1):
     - GoogleUtilities/Logger
   - iOSSnapshotTestCase (6.2.0):
@@ -138,7 +163,7 @@ PODS:
     - Result (~> 3.0)
   - Kanna (5.0.0)
   - KeychainSwift (10.0.0)
-  - Kingfisher (7.6.2)
+  - Kingfisher (7.7.0)
   - MailchimpSDK (2.0.4)
   - MBProgressHUD (1.2.0)
   - Mixpanel-swift (3.5.1):
@@ -168,17 +193,17 @@ PODS:
   - QRCodeReaderViewController (4.0.2)
   - R.swift (7.3.2)
   - Ramp (4.0.0)
-  - Realm (10.32.3):
-    - Realm/Headers (= 10.32.3)
-  - Realm/Headers (10.32.3)
-  - RealmSwift (10.32.3):
-    - Realm (= 10.32.3)
+  - Realm (10.36.0):
+    - Realm/Headers (= 10.36.0)
+  - Realm/Headers (10.36.0)
+  - RealmSwift (10.36.0):
+    - Realm (= 10.36.0)
   - Result (3.2.4)
   - SAMKeychain (1.5.3)
-  - SDWebImage (5.15.6):
-    - SDWebImage/Core (= 5.15.6)
-  - SDWebImage/Core (5.15.6)
-  - SDWebImageSVGCoder (1.6.1):
+  - SDWebImage (5.15.8):
+    - SDWebImage/Core (= 5.15.8)
+  - SDWebImage/Core (5.15.8)
+  - SDWebImageSVGCoder (1.7.0):
     - SDWebImage/Core (~> 5.6)
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
@@ -187,7 +212,7 @@ PODS:
   - SVGKit (3.1.0):
     - CocoaLumberjack (~> 3.0)
   - SwiftAlgorithms (1.0.0)
-  - SwiftFormat/CLI (0.51.7)
+  - SwiftFormat/CLI (0.51.10)
   - SwiftLint (0.50.3)
   - SwiftProtobuf (1.18.0)
   - SwiftyJSON (5.0.0)
@@ -242,22 +267,22 @@ DEPENDENCIES:
   - AlphaWalletTrackAPICalls (from `.`)
   - AlphaWalletTrustWalletCoreExtensions (from `.`)
   - AlphaWalletWeb3 (from `.`)
-  - AlphaWalletWeb3Provider (from `https://github.com/AlphaWallet/AlphaWallet-web3-provider`, commit `bdb38b06eeedeb4ca1e32d3ecd81783b5116ae68`)
+  - AlphaWalletWeb3Provider (from `https://github.com/AlphaWallet/AlphaWallet-web3-provider`, commit `9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870`)
   - BigInt (~> 3.1)
   - Charts
   - EthereumABI (from `https://github.com/AlphaWallet/EthereumABI.git`, commit `877b77e8e7cbc54ab0712d509b74fec21b79d1bb`)
-  - Firebase/Crashlytics
+  - FirebaseCrashlytics (= 8.10.0)
   - FloatingPanel
   - iOSSnapshotTestCase (= 6.2.0)
   - IQKeyboardManager
   - Kanna (from `https://github.com/tid-kijyun/Kanna.git`, commit `06a04bc28783ccbb40efba355dee845a024033e8`)
   - KeychainSwift (from `https://github.com/AlphaWallet/keychain-swift.git`, commit `b797d40a9d08ec509db4335140cf2259b226e6a2`)
-  - Kingfisher (~> 7.6.2)
+  - Kingfisher (~> 7.0)
   - MailchimpSDK
   - MBProgressHUD
   - Mixpanel-swift (~> 3.1)
   - PromiseKit/CorePromise
-  - QRCodeReaderViewController (from `https://github.com/AlphaWallet/QRCodeReaderViewController.git`, commit `09da2d4b835589972ecacd022a75bc27b2c1d1bd`)
+  - QRCodeReaderViewController (from `https://github.com/AlphaWallet/QRCodeReaderViewController.git`, commit `30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65`)
   - R.swift
   - Ramp (from `https://github.com/RampNetwork/ramp-sdk-ios`, tag `4.0.0`)
   - SAMKeychain
@@ -271,6 +296,8 @@ DEPENDENCIES:
   - TrezorCrypto (from `https://github.com/AlphaWallet/trezor-crypto-ios.git`, commit `50c16ba5527e269bbc838e80aee5bac0fe304cc7`)
   - TrustKeystore (from `https://github.com/AlphaWallet/latest-keystore-snapshot`, commit `c0bdc4f6ffc117b103e19d17b83109d4f5a0e764`)
   - WalletConnectSwift (from `https://github.com/AlphaWallet/WalletConnectSwift.git`, branch `alphaWallet`)
+  - WalletConnectSwiftV2 (from `https://github.com/WalletConnect/WalletConnectSwiftV2.git`, tag `1.3.1`)
+  - WalletConnectSwiftV2/Web3Wallet (from `https://github.com/WalletConnect/WalletConnectSwiftV2.git`, tag `1.3.1`)
   - xcbeautify
 
 SPEC REPOS:
@@ -288,7 +315,7 @@ SPEC REPOS:
     - EthereumAddress
     - Firebase
     - FirebaseCore
-    - FirebaseCoreInternal
+    - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
     - FirebaseInstallations
     - FirebaseMessaging
@@ -353,7 +380,7 @@ EXTERNAL SOURCES:
   AlphaWalletWeb3:
     :path: "."
   AlphaWalletWeb3Provider:
-    :commit: bdb38b06eeedeb4ca1e32d3ecd81783b5116ae68
+    :commit: 9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870
     :git: https://github.com/AlphaWallet/AlphaWallet-web3-provider
   EthereumABI:
     :commit: 877b77e8e7cbc54ab0712d509b74fec21b79d1bb
@@ -365,7 +392,7 @@ EXTERNAL SOURCES:
     :commit: b797d40a9d08ec509db4335140cf2259b226e6a2
     :git: https://github.com/AlphaWallet/keychain-swift.git
   QRCodeReaderViewController:
-    :commit: 09da2d4b835589972ecacd022a75bc27b2c1d1bd
+    :commit: 30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65
     :git: https://github.com/AlphaWallet/QRCodeReaderViewController.git
   Ramp:
     :git: https://github.com/RampNetwork/ramp-sdk-ios
@@ -382,10 +409,13 @@ EXTERNAL SOURCES:
   WalletConnectSwift:
     :branch: alphaWallet
     :git: https://github.com/AlphaWallet/WalletConnectSwift.git
+  WalletConnectSwiftV2:
+    :git: https://github.com/WalletConnect/WalletConnectSwiftV2.git
+    :tag: 1.3.1
 
 CHECKOUT OPTIONS:
   AlphaWalletWeb3Provider:
-    :commit: bdb38b06eeedeb4ca1e32d3ecd81783b5116ae68
+    :commit: 9a4496d02b7ddb2f6307fd0510d8d7c9fcef9870
     :git: https://github.com/AlphaWallet/AlphaWallet-web3-provider
   EthereumABI:
     :commit: 877b77e8e7cbc54ab0712d509b74fec21b79d1bb
@@ -397,13 +427,13 @@ CHECKOUT OPTIONS:
     :commit: b797d40a9d08ec509db4335140cf2259b226e6a2
     :git: https://github.com/AlphaWallet/keychain-swift.git
   QRCodeReaderViewController:
-    :commit: 09da2d4b835589972ecacd022a75bc27b2c1d1bd
+    :commit: 30d1a2a7d167d0d207ae0ae3a4d81bcf473d7a65
     :git: https://github.com/AlphaWallet/QRCodeReaderViewController.git
   Ramp:
     :git: https://github.com/RampNetwork/ramp-sdk-ios
     :tag: 4.0.0
   SVGKit:
-    :commit: 8c290ceee19254f6d0da1940201d5efa31b48f9f
+    :commit: 87fcc6384bee87a7eba12eb367abcad315433478
     :git: https://github.com/SVGKit/SVGKit.git
   TrezorCrypto:
     :commit: 50c16ba5527e269bbc838e80aee5bac0fe304cc7
@@ -414,16 +444,21 @@ CHECKOUT OPTIONS:
   WalletConnectSwift:
     :commit: cb8dfc428ec70499a585c43e33a5e5c695b135a2
     :git: https://github.com/AlphaWallet/WalletConnectSwift.git
+  WalletConnectSwiftV2:
+    :git: https://github.com/WalletConnect/WalletConnectSwiftV2.git
+    :tag: 1.3.1
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
-  AlphaWalletAddress: 72c3fc97248fc0cdc50d137faaa295bc9610c7ec
-  AlphaWalletCore: ad96bd240255db44aaeaecc10928e82a24ef54c3
-  AlphaWalletENS: 33e4fd3d46929938c271190fe7804811c1e9dc8f
-  AlphaWalletFoundation: e97c2a03998da61def0623b72af303dc8327f3ff
-  AlphaWalletGoBack: 1d55b51e6cfd999740d3cfab09d9fa723ba85ff2
-  AlphaWalletLogger: 1c0f115e624b6b6e67e9767560fddb6bda2aaa75
-  AlphaWalletOpenSea: 71e255612529b04ae4d66dca54bd181185593b1d
+  AlphaWalletAddress: e9f10243983ac7f51671671b7964eb49d14854ab
+  AlphaWalletCore: 6f67a6ce7b25614a4cad4ca7330afeaea1b9ad03
+  AlphaWalletENS: 8f611f655728c8f2a6b91fb8f1417144d33a4915
+  AlphaWalletFoundation: 7cf355ef9b4aff7acd54621290a533dd2659ed69
+  AlphaWalletGoBack: 665101a1185145ef0a4a92943dcb11ae1fe697ca
+  AlphaWalletHardwareWallet: 01e02d59b25853134c823063e27a9e05fbfde0a7
+  AlphaWalletLogger: 54208bad850ec92a32fa4f969d0026305b6ce028
+  AlphaWalletNotifications: bdf36020ac1ed564c06a01f60d10f42b402e96d7
+  AlphaWalletOpenSea: f2711af0cbce462bcd569cff276a9a17fe16e6b8
   AlphaWalletShareExtensionCore: e5fc88c6120d5b77b3ba44a37e7b58da5ccbb7b6
   AlphaWalletTrackAPICalls: 0e18ad5b389b054ee30673e7f1caf095a17c1b33
   AlphaWalletTrustWalletCoreExtensions: 290b1c05cada7715c29b52622688da01ab88ffa7
@@ -440,19 +475,21 @@ SPEC CHECKSUMS:
   CryptoSwift: d3d18dc357932f7e6d580689e065cf1f176007c1
   EthereumABI: c021720744d260b87def6aa45d94554d260cb5a9
   EthereumAddress: 39fe8e11cf04e4e9902b55ae653dbc4e0aee5f30
+  Firebase: 5f8193dff4b5b7c5d5ef72ae54bb76c08e2b841d
   FirebaseCore: 5743c5785c074a794d35f2fff7ecc254a91e08b1
   FirebaseCoreDiagnostics: 92e07a649aeb66352b319d43bdd2ee3942af84cb
   FirebaseCrashlytics: 3b7f17cdf5bf1ae6ad5956696a6c26edeb39cca7
   FirebaseInstallations: 40bd9054049b2eae9a2c38ef1c3dd213df3605cd
+  FirebaseMessaging: 5e5118a2383b3531e730d974680954c679ca0a13
   FloatingPanel: de6bb891912ede28da7b1140f7b583c474fec28a
-  GoogleDataTransport: 8378d1fa8ac49753ea6ce70d65a7cb70ce5f66e6
+  GoogleDataTransport: f0308f5905a745f94fb91fea9c6cbaf3831cb1bd
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
   IQKeyboardManager: ef43ce1ba1e5aaf4adf222c0a46f39761f246879
   JSONRPCKit: b2991f2f242d72022083f9d869140dabd26d65c7
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   KeychainSwift: c0d1b0c2901b9873f07f0e560fde92929069e863
-  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
+  Kingfisher: f043ac666dfc96c1f37604f93effb45a7ee3a3e1
   MailchimpSDK: 794fd7cb1095e55c764d8a699eb11fb61849ed76
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Mixpanel-swift: 89d88f4d3dd1b4b3b69bd05060756eb1248b76f0
@@ -463,19 +500,19 @@ SPEC CHECKSUMS:
   QRCodeReaderViewController: e8f27d035b3e72b1d4b1c61ff66458287e3be0ff
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
   Ramp: e0988926ce78f6cd0870b4f3565651c6cc0555a2
-  Realm: fdf6732924dc5e69e30e0db2c11e869f92b53f3d
-  RealmSwift: 7c181da8fa1c2fe613656a77c198d6a3dc3879a1
+  Realm: 3fd136cb4c83a927482a7f1612496d37beed3cf5
+  RealmSwift: 513d4dcbf5bfc4d573454088b592685fc48dd716
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SDWebImage: d47d81bea8a77187896b620dc79c3c528e8906b9
-  SDWebImageSVGCoder: 6fc109f9c2a82ab44510fff410b88b1a6c271ee8
+  SDWebImage: cb032eba469c54e0000e78bcb0a13cdde0a52798
+  SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
   SVGKit: 3c8468aab0026048532a3b27a0c81cdd939f0649
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
-  SwiftFormat: 4825ab6f229b31bc7a89104ee9ed7c4fd30da226
+  SwiftFormat: dd051faa673f262603fe4b287a51dc5f3b973e27
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   SwiftProtobuf: c3c12645230d9b09c72267e0de89468c5543bd86
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
@@ -486,6 +523,6 @@ SPEC CHECKSUMS:
   WalletConnectSwiftV2: 52e67915f8d861ed3ba4eabb0f69fee0990f0a5f
   xcbeautify: 6e2f57af5c3a86d490376d5758030a8dcc201c1b
 
-PODFILE CHECKSUM: 0b2c7e0fe74c710de0a444ccbe805bd37cb3e794
+PODFILE CHECKSUM: 448d3ba211ec66597445609e99ba866d6b42c6e0
 
 COCOAPODS: 1.12.1

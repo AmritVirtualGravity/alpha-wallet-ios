@@ -1,6 +1,7 @@
 platform :ios, '13.0'
 inhibit_all_warnings!
 source 'https://cdn.cocoapods.org/'
+project 'Lif3Wallet.xcodeproj'
 
 def installed_pods
   pod 'BigInt', '~> 3.1' 
@@ -30,6 +31,7 @@ def installed_pods
   pod 'AlphaWalletTrackAPICalls', :path => '.' 
   pod 'AlphaWalletWeb3', :path => '.' 
   pod 'AlphaWalletShareExtensionCore', :path => '.'
+  pod 'AlphaWalletTrustWalletCoreExtensions', :path => '.'
   pod 'AlphaWalletNotifications', :path => '.'
   pod 'MailchimpSDK' 
   pod 'xcbeautify' 

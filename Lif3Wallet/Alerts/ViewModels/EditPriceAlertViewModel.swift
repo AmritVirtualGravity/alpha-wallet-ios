@@ -35,7 +35,7 @@ final class EditPriceAlertViewModel {
     var title: String { configuration.title } 
     let token: Token
 
-    init(configuration: EditPriceAlertViewModel.Configuration, token: Token, tokensService: TokenViewModelState, alertService: PriceAlertServiceType, currencyService: CurrencyService) {
+    init(configuration: EditPriceAlertViewModel.Configuration, token: Token, tokensService: TokensProcessingPipeline, alertService: PriceAlertServiceType, currencyService: CurrencyService) {
         self.currencyService = currencyService
         self.configuration = configuration
         self.token = token

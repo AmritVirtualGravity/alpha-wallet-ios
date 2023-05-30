@@ -10,6 +10,7 @@ import BigInt
 import PromiseKit
 import AlphaWalletFoundation
 import AlphaWalletLogger
+import Combine
 
 protocol TransactionConfirmationCoordinatorDelegate: CanOpenURL, SendTransactionDelegate, BuyCryptoDelegate {
     func didFinish(_ result: ConfirmResult, in coordinator: TransactionConfirmationCoordinator)
@@ -44,15 +45,41 @@ class TransactionConfirmationCoordinator: Coordinator {
     private let navigationController: UIViewController
     private let keystore: Keystore
     private let assetDefinitionStore: AssetDefinitionStore
-    private let tokensService: TokenViewModelState
-
+    private let tokensService: TokensProcessingPipeline
+    private var cancellable = Set<AnyCancellable>()
+    
     var coordinators: [Coordinator] = []
     weak var delegate: TransactionConfirmationCoordinatorDelegate?
 
-    init(presentingViewController: UIViewController, session: WalletSession, transaction: UnconfirmedTransaction, configuration: TransactionType.Configuration, analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType, keystore: Keystore, assetDefinitionStore: AssetDefinitionStore, tokensService: TokenViewModelState, networkService: NetworkService) {
-        configurator = TransactionConfigurator(session: session, analytics: analytics, transaction: transaction, networkService: networkService)
+//    init(presentingViewController: UIViewController, session: WalletSession, transaction: UnconfirmedTransaction, configuration: TransactionType.Configuration, analytics: AnalyticsLogger, domainResolutionService: DomainResolutionServiceType, keystore: Keystore, assetDefinitionStore: AssetDefinitionStore, tokensService: TokenViewModelState, networkService: NetworkService) {
+//        configurator = TransactionConfigurator(session: session, analytics: analytics, transaction: transaction, networkService: networkService)
+//        self.keystore = keystore
+//        self.assetDefinitionStore = assetDefinitionStore
+//        self.configuration = configuration
+//        self.analytics = analytics
+//        self.domainResolutionService = domainResolutionService
+//        self.navigationController = presentingViewController
+//        self.tokensService = tokensService
+//    }
+    
+    init(presentingViewController: UIViewController,
+         session: WalletSession,
+         transaction: UnconfirmedTransaction,
+         configuration: TransactionType.Configuration,
+         analytics: AnalyticsLogger,
+         domainResolutionService: DomainResolutionServiceType,
+         keystore: Keystore,
+         tokensService: TokensProcessingPipeline,
+         networkService: NetworkService) {
+
+        configurator = TransactionConfigurator(
+            session: session,
+            transaction: transaction,
+            networkService: networkService,
+            tokensService: tokensService,
+            configuration: configuration)
+
         self.keystore = keystore
-        self.assetDefinitionStore = assetDefinitionStore
         self.configuration = configuration
         self.analytics = analytics
         self.domainResolutionService = domainResolutionService
@@ -64,7 +91,6 @@ class TransactionConfirmationCoordinator: Coordinator {
         let presenter = UIApplication.shared.presentedViewController(or: navigationController)
         presenter.present(hostViewController, animated: true)
 
-        configurator.delegate = self
         configurator.start()
 
         logStartActionSheetForTransactionConfirmation(source: source)
@@ -84,7 +110,9 @@ class TransactionConfirmationCoordinator: Coordinator {
         case .insufficientFunds:
             delegate?.buyCrypto(wallet: configurator.session.account, server: server, viewController: rootViewController, source: .transactionActionSheetInsufficientFunds)
         case .nonceTooLow:
-            showConfigureTransactionViewController(configurator, recoveryMode: .invalidNonce)
+            #warning("Handle later")
+//            showConfigureTransactionViewController(configurator, recoveryMode: .invalidNonce)
+                break
         case .gasPriceTooLow:
             showConfigureTransactionViewController(configurator)
         case .gasLimitTooLow:
@@ -122,42 +150,66 @@ extension TransactionConfirmationCoordinator: TransactionConfirmationViewControl
         }
     }
 
+//    func controller(_ controller: TransactionConfirmationViewController, continueButtonTapped sender: UIButton) {
+//        sender.isEnabled = false
+//        canBeDismissed = false
+//        rootViewController.set(state: .pending)
+//
+//        firstly { () -> Promise<ConfirmResult> in
+//            return sendTransaction()
+//        }.done { result in
+//            self.handleSendTransactionSuccessfully(result: result)
+//            self.logCompleteActionSheetForTransactionConfirmationSuccessfully()
+//        }.catch { error in
+//            self.logActionSheetForTransactionConfirmationFailed()
+//            //TODO remove delay which is currently needed because the starting animation may not have completed and internal state (whether animation is running) is in correct
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+//                self.rootViewController.set(state: .done(withError: true)) {
+//                    self.handleSendTransactionError(error)
+//                }
+//            }
+//        }.finally {
+//            sender.isEnabled = true
+//            self.canBeDismissed = true
+//        }
+//    }
+    
     func controller(_ controller: TransactionConfirmationViewController, continueButtonTapped sender: UIButton) {
         sender.isEnabled = false
         canBeDismissed = false
         rootViewController.set(state: .pending)
 
-        firstly { () -> Promise<ConfirmResult> in
-            return sendTransaction()
-        }.done { result in
-            self.handleSendTransactionSuccessfully(result: result)
-            self.logCompleteActionSheetForTransactionConfirmationSuccessfully()
-        }.catch { error in
-            self.logActionSheetForTransactionConfirmationFailed()
-            //TODO remove delay which is currently needed because the starting animation may not have completed and internal state (whether animation is running) is in correct
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.rootViewController.set(state: .done(withError: true)) {
-                    self.handleSendTransactionError(error)
+        Task { @MainActor in
+            do {
+                let result = try await sendTransaction()
+                handleSendTransactionSuccessfully(result: result)
+                logCompleteActionSheetForTransactionConfirmationSuccessfully()
+            } catch {
+                logActionSheetForTransactionConfirmationFailed()
+                //TODO remove delay which is currently needed because the starting animation may not have completed and internal state (whether animation is running) is in correct
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    self.rootViewController.set(state: .done(withError: true)) {
+                        self.handleSendTransactionError(error)
+                    }
                 }
             }
-        }.finally {
+
             sender.isEnabled = true
             self.canBeDismissed = true
-        }
+        }.store(in: &cancellable)
     }
 
-    private func sendTransaction() -> Promise<ConfirmResult> {
+    private func sendTransaction() async throws -> ConfirmResult {
         let prompt = R.string.localizable.keystoreAccessKeySign()
         let sender = SendTransaction(session: configurator.session, keystore: keystore, confirmType: configuration.confirmType, config: configurator.session.config, analytics: analytics, prompt: prompt)
         let transaction = configurator.formUnsignedTransaction()
         infoLog("[TransactionConfirmation] form unsigned transaction: \(transaction)")
         if configurator.session.config.development.shouldNotSendTransactions {
-            return Promise(error: DevelopmentForcedError(message: "Did not send transaction because of development flag"))
+            throw DevelopmentForcedError(message: "Did not send transaction because of development flag")
         } else {
-            return sender.send(transaction: transaction)
+            return try await sender.send(transaction: transaction)
         }
     }
-
     private func handleSendTransactionSuccessfully(result: ConfirmResult) {
         switch result {
         case .sentTransaction(let tx):
@@ -216,13 +268,8 @@ extension TransactionConfirmationCoordinator: TransactionConfirmationViewControl
 }
 
 extension TransactionConfirmationCoordinator: ConfigureTransactionViewControllerDelegate {
-    func didSavedToUseDefaultConfigurationType(_ configurationType: TransactionConfigurationType, in viewController: ConfigureTransactionViewController) {
-        configurator.chooseDefaultConfigurationType(configurationType)
-        viewController.navigationController?.dismiss(animated: true)
-    }
 
-    func didSaved(customConfiguration: TransactionConfiguration, in viewController: ConfigureTransactionViewController) {
-        configurator.chooseCustomConfiguration(customConfiguration)
+    func didSaved(in viewController: ConfigureTransactionViewController) {
         viewController.navigationController?.dismiss(animated: true)
     }
 }

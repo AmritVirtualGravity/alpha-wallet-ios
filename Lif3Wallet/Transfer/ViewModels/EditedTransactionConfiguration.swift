@@ -3,6 +3,17 @@
 import Foundation
 import BigInt
 import AlphaWalletFoundation
+import Combine
+
+
+struct EditTransactionViewModelInput {
+
+}
+
+struct EditTransactionViewModelOutput {
+    let gasLimitHeader: AnyPublisher<String, Never>
+    let isDataFieldHidden: AnyPublisher<Bool, Never>
+}
 
 struct EditedTransactionConfiguration {
     private let formatter = EtherNumberFormatter.full
@@ -69,7 +80,7 @@ struct EditedTransactionConfiguration {
         }
     }
 
-    init(configuration: TransactionConfiguration, server: RPCServer) {
+    init(configuration: TransactionConfigurator, server: RPCServer) {
         defaultMaxGasLimit = Int(GasLimitConfiguration.maxGasLimit(forServer: server))
         gasLimitRawValue = Int(configuration.gasLimit.description) ?? 21000
         gasPriceRawValue = Int(configuration.gasPrice / BigUInt(UnitConfiguration.gasPriceUnit.rawValue))
@@ -81,7 +92,7 @@ struct EditedTransactionConfiguration {
         updateMaxGasPriceIfNeeded(gasPriceRawValue)
     }
 
-    var configuration: TransactionConfiguration {
+    var configuration: TransactionConfigurator {
         return .init(gasPrice: gasPrice, gasLimit: gasLimit, data: data, nonce: nonceRawValue)
     }
 
@@ -104,5 +115,20 @@ struct EditedTransactionConfiguration {
     var isNonceValid: Bool {
         guard let nonce = nonceRawValue else { return true }
         return nonce >= 0
+    }
+}
+
+
+extension EditTransactionViewModel {
+    enum RecoveryMode {
+        case invalidNonce
+        case none
+    }
+}
+
+extension Decimal {
+    init?(float: Float) {
+        guard !float.isNaN && !float.isInfinite else { return nil }
+        self.init(Double(float))
     }
 }

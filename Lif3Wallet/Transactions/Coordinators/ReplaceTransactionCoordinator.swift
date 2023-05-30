@@ -15,15 +15,15 @@ class ReplaceTransactionCoordinator: Coordinator {
         case cancel
     }
 
-    private let tokensService: TokenViewModelState
+    private let tokensService: TokensProcessingPipeline
     private let analytics: AnalyticsLogger
     private let domainResolutionService: DomainResolutionServiceType
-    private let pendingTransactionInformation: (server: RPCServer, data: Data, transactionType: TransactionType, gasPrice: BigUInt)
+    private let pendingTransactionInformation: (server: RPCServer, data: Data, transactionType: TransactionType, gasPrice: GasPrice)
     private let nonce: BigUInt
     private let keystore: Keystore
     private let presentingViewController: UIViewController
     private let session: WalletSession
-    private let transaction: TransactionInstance
+    private let transaction: Transaction
     private let mode: Mode
     private var transactionConfirmationResult: ConfirmResult? = .none
     private let assetDefinitionStore: AssetDefinitionStore
@@ -86,11 +86,11 @@ class ReplaceTransactionCoordinator: Coordinator {
           keystore: Keystore,
           presentingViewController: UIViewController,
           session: WalletSession,
-          transaction: TransactionInstance,
+          transaction: Transaction,
           mode: Mode,
-          assetDefinitionStore: AssetDefinitionStore,
-          tokensService: TokenViewModelState,
+          tokensService: TokensProcessingPipeline,
           networkService: NetworkService) {
+
         guard let pendingTransactionInformation = TransactionDataStore.pendingTransactionsInformation[transaction.id] else { return nil }
         guard let nonce = BigUInt(transaction.nonce) else { return nil }
         self.networkService = networkService
@@ -104,7 +104,6 @@ class ReplaceTransactionCoordinator: Coordinator {
         self.transaction = transaction
         self.mode = mode
         self.nonce = nonce
-        self.assetDefinitionStore = assetDefinitionStore
     }
 
     func start() {
@@ -114,7 +113,7 @@ class ReplaceTransactionCoordinator: Coordinator {
             recipient: recipient,
             contract: contract,
             data: transactionData,
-            gasPrice: computeGasPriceForReplacementTransaction(pendingTransactionInformation.gasPrice),
+            gasPrice: pendingTransactionInformation.gasPrice.computeGasPriceForReplacementTransaction(),
             nonce: nonce)
 
         let coordinator = TransactionConfirmationCoordinator(
@@ -212,5 +211,22 @@ extension ReplaceTransactionCoordinator: CanOpenURL {
 
     func didPressOpenWebPage(_ url: URL, in viewController: UIViewController) {
         delegate?.didPressOpenWebPage(url, in: viewController)
+    }
+}
+
+extension GasPrice {
+    fileprivate func computeGasPriceForReplacementTransaction() -> GasPrice {
+        switch self {
+        case .legacy(let gasPrice):
+            let gasPrice = GasPriceBuffer.percentage(10).bufferedGasPrice(estimatedGasPrice: gasPrice).value
+
+            return .legacy(gasPrice: gasPrice)
+        case .eip1559(let maxFeePerGas, let maxPriorityFeePerGas):
+            //e.g https://support.metamask.io/hc/en-us/articles/360015489251-How-to-Speed-Up-or-Cancel-a-Pending-Transaction
+            let maxFeePerGas = GasPriceBuffer.percentage(10).bufferedGasPrice(estimatedGasPrice: maxFeePerGas).value
+            let maxPriorityFeePerGas = GasPriceBuffer.percentage(30).bufferedGasPrice(estimatedGasPrice: maxPriorityFeePerGas).value
+
+            return .eip1559(maxFeePerGas: maxFeePerGas, maxPriorityFeePerGas: maxPriorityFeePerGas)
+        }
     }
 }

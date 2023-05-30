@@ -54,6 +54,17 @@
 		043D013A29E71CCC002FE935 /* SVGKFastImageViewSUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D013829E71CCC002FE935 /* SVGKFastImageViewSUI.swift */; };
 		043F2DEA2A0267390073317B /* DarkModeOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043F2DE92A0266310073317B /* DarkModeOptionsView.swift */; };
 		043F2DEB2A02673A0073317B /* DarkModeOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043F2DE92A0266310073317B /* DarkModeOptionsView.swift */; };
+		045231172A25F6A0008EC833 /* WalletConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 045231162A25F6A0008EC833 /* WalletConnect */; };
+		045231192A25F6A0008EC833 /* WalletConnectAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 045231182A25F6A0008EC833 /* WalletConnectAuth */; };
+		0452311B2A25F6A0008EC833 /* WalletConnectChat in Frameworks */ = {isa = PBXBuildFile; productRef = 0452311A2A25F6A0008EC833 /* WalletConnectChat */; };
+		0452311D2A25F6A0008EC833 /* WalletConnectEcho in Frameworks */ = {isa = PBXBuildFile; productRef = 0452311C2A25F6A0008EC833 /* WalletConnectEcho */; };
+		0452311F2A25F6A0008EC833 /* WalletConnectNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 0452311E2A25F6A0008EC833 /* WalletConnectNetworking */; };
+		045231212A25F6A0008EC833 /* WalletConnectPairing in Frameworks */ = {isa = PBXBuildFile; productRef = 045231202A25F6A0008EC833 /* WalletConnectPairing */; };
+		045231232A25F6A0008EC833 /* WalletConnectPush in Frameworks */ = {isa = PBXBuildFile; productRef = 045231222A25F6A0008EC833 /* WalletConnectPush */; };
+		045231252A25F6A0008EC833 /* WalletConnectRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 045231242A25F6A0008EC833 /* WalletConnectRouter */; };
+		045231272A25F6A0008EC833 /* WalletConnectVerify in Frameworks */ = {isa = PBXBuildFile; productRef = 045231262A25F6A0008EC833 /* WalletConnectVerify */; };
+		045231292A25F6A0008EC833 /* Web3Inbox in Frameworks */ = {isa = PBXBuildFile; productRef = 045231282A25F6A0008EC833 /* Web3Inbox */; };
+		0452312B2A25F6A0008EC833 /* Web3Wallet in Frameworks */ = {isa = PBXBuildFile; productRef = 0452312A2A25F6A0008EC833 /* Web3Wallet */; };
 		049F3C2629DFEE680072E99B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F3C2529DFEE680072E99B /* TestView.swift */; };
 		04A371BE29DDDA9900B883C0 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371BB29DDDA8E00B883C0 /* Endpoints.swift */; };
 		04A371BF29DDDA9900B883C0 /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A371BD29DDDA9000B883C0 /* TokenAPI.swift */; };
@@ -1710,14 +1721,12 @@
 		87B93B112726C59D00F6EA73 /* BrowserStorageSubscription.js in Resources */ = {isa = PBXBuildFile; fileRef = 87B93B0D2726A46500F6EA73 /* BrowserStorageSubscription.js */; };
 		87B93B132726C75900F6EA73 /* helpers.js in Resources */ = {isa = PBXBuildFile; fileRef = 87B93B122726C75900F6EA73 /* helpers.js */; };
 		87B93B142726C79400F6EA73 /* helpers.js in Resources */ = {isa = PBXBuildFile; fileRef = 87B93B122726C75900F6EA73 /* helpers.js */; };
-		87BDF47028423DC30018DC68 /* WalletConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 87BDF46F28423DC30018DC68 /* WalletConnect */; };
 		87D1F91228900E2800056EBE /* FakeSessionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D1F91128900E2800056EBE /* FakeSessionsProvider.swift */; };
 		87D1F91428900E4600056EBE /* FakeUniversalLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D1F91328900E4600056EBE /* FakeUniversalLinkCoordinator.swift */; };
 		87D1F91628900EDD00056EBE /* FakeNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D1F91528900EDD00056EBE /* FakeNotificationService.swift */; };
 		87DD0C44279980E500460260 /* ValidatorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DD0C43279980E500460260 /* ValidatorsTests.swift */; };
 		87E960DD28868D3600218E7E /* TickerIdsFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E960DC28868D3600218E7E /* TickerIdsFetcherTests.swift */; };
 		87F9972824E155280092D262 /* SeedPhraseBackupIntroductionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F9972724E155280092D262 /* SeedPhraseBackupIntroductionViewControllerTests.swift */; };
-		87FBF2B128056AC200616B7D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 87FBF2B028056AC200616B7D /* FirebaseCrashlytics */; };
 		CCA4FE331FD3655900749AE4 /* CheckDeviceCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA4FE321FD3655900749AE4 /* CheckDeviceCoordinatorTests.swift */; };
 		CCA4FE3A1FD42B4100749AE4 /* FakeJailbreakChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA4FE391FD42B4100749AE4 /* FakeJailbreakChecker.swift */; };
 /* End PBXBuildFile section */
@@ -2767,10 +2776,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87FBF2B128056AC200616B7D /* FirebaseCrashlytics in Frameworks */,
+				045231292A25F6A0008EC833 /* Web3Inbox in Frameworks */,
+				045231172A25F6A0008EC833 /* WalletConnect in Frameworks */,
 				87B1B5D928C73C170072A5E2 /* WalletConnectSwift in Frameworks */,
-				87BDF47028423DC30018DC68 /* WalletConnect in Frameworks */,
+				045231252A25F6A0008EC833 /* WalletConnectRouter in Frameworks */,
+				045231272A25F6A0008EC833 /* WalletConnectVerify in Frameworks */,
+				045231232A25F6A0008EC833 /* WalletConnectPush in Frameworks */,
+				0452311F2A25F6A0008EC833 /* WalletConnectNetworking in Frameworks */,
+				0452311B2A25F6A0008EC833 /* WalletConnectChat in Frameworks */,
+				045231212A25F6A0008EC833 /* WalletConnectPairing in Frameworks */,
 				3A37D6D26E0DEC6EEA9ABCE6 /* (null) in Frameworks */,
+				045231192A25F6A0008EC833 /* WalletConnectAuth in Frameworks */,
+				0452311D2A25F6A0008EC833 /* WalletConnectEcho in Frameworks */,
+				0452312B2A25F6A0008EC833 /* Web3Wallet in Frameworks */,
 				7563B5B257FCD47F28DFEEB0 /* Pods_Lif3Wallet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5860,9 +5878,18 @@
 			);
 			name = Lif3Wallet;
 			packageProductDependencies = (
-				87FBF2B028056AC200616B7D /* FirebaseCrashlytics */,
-				87BDF46F28423DC30018DC68 /* WalletConnect */,
 				87B1B5D828C73C170072A5E2 /* WalletConnectSwift */,
+				045231162A25F6A0008EC833 /* WalletConnect */,
+				045231182A25F6A0008EC833 /* WalletConnectAuth */,
+				0452311A2A25F6A0008EC833 /* WalletConnectChat */,
+				0452311C2A25F6A0008EC833 /* WalletConnectEcho */,
+				0452311E2A25F6A0008EC833 /* WalletConnectNetworking */,
+				045231202A25F6A0008EC833 /* WalletConnectPairing */,
+				045231222A25F6A0008EC833 /* WalletConnectPush */,
+				045231242A25F6A0008EC833 /* WalletConnectRouter */,
+				045231262A25F6A0008EC833 /* WalletConnectVerify */,
+				045231282A25F6A0008EC833 /* Web3Inbox */,
+				0452312A2A25F6A0008EC833 /* Web3Wallet */,
 			);
 			productName = etherwallet;
 			productReference = 2912CCF51F6A830700C6CBE3 /* Lif3Wallet.app */;
@@ -5990,9 +6017,8 @@
 			);
 			mainGroup = 2912CCEC1F6A830700C6CBE3;
 			packageReferences = (
-				87FBF2AF28056AC200616B7D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				87BDF46E28423DC30018DC68 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
 				87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
+				045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
 			);
 			productRefGroup = 2912CCF61F6A830700C6CBE3 /* Products */;
 			projectDirPath = "";
@@ -9293,6 +9319,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WalletConnect/WalletConnectSwiftV2";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		04BF871929E40F3400478F44 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -9325,25 +9359,64 @@
 				kind = branch;
 			};
 		};
-		87BDF46E28423DC30018DC68 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/WalletConnect/WalletConnectSwiftV2";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		87FBF2AF28056AC200616B7D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.10.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		045231162A25F6A0008EC833 /* WalletConnect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnect;
+		};
+		045231182A25F6A0008EC833 /* WalletConnectAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnectAuth;
+		};
+		0452311A2A25F6A0008EC833 /* WalletConnectChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnectChat;
+		};
+		0452311C2A25F6A0008EC833 /* WalletConnectEcho */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnectEcho;
+		};
+		0452311E2A25F6A0008EC833 /* WalletConnectNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnectNetworking;
+		};
+		045231202A25F6A0008EC833 /* WalletConnectPairing */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnectPairing;
+		};
+		045231222A25F6A0008EC833 /* WalletConnectPush */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnectPush;
+		};
+		045231242A25F6A0008EC833 /* WalletConnectRouter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnectRouter;
+		};
+		045231262A25F6A0008EC833 /* WalletConnectVerify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = WalletConnectVerify;
+		};
+		045231282A25F6A0008EC833 /* Web3Inbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = Web3Inbox;
+		};
+		0452312A2A25F6A0008EC833 /* Web3Wallet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 045231152A25F6A0008EC833 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
+			productName = Web3Wallet;
+		};
 		04BF871829E40F3400478F44 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 04BF871929E40F3400478F44 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -9363,16 +9436,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 87B1B5D728C73C170072A5E2 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
 			productName = WalletConnectSwift;
-		};
-		87BDF46F28423DC30018DC68 /* WalletConnect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 87BDF46E28423DC30018DC68 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */;
-			productName = WalletConnect;
-		};
-		87FBF2B028056AC200616B7D /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 87FBF2AF28056AC200616B7D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

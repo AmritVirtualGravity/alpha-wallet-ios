@@ -12,7 +12,7 @@ class TransactionsCoordinator: Coordinator {
     private let analytics: AnalyticsLogger
     private let sessions: ServerDictionary<WalletSession>
     private let transactionsService: TransactionsService
-    private let tokensService: TokenViewModelState
+    private let tokensService: TokensProcessingPipeline
     
     lazy var rootViewController: TransactionsViewController = {
         let viewModel = TransactionsViewModel(transactionsService: transactionsService, sessions: sessions)
@@ -30,7 +30,7 @@ class TransactionsCoordinator: Coordinator {
          sessions: ServerDictionary<WalletSession>,
          navigationController: UINavigationController = .withOverridenBarAppearence(),
          transactionsService: TransactionsService,
-         tokensService: TokenViewModelState) {
+         tokensService: TokensProcessingPipeline) {
 
         self.tokensService = tokensService
         self.analytics = analytics

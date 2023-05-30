@@ -115,7 +115,7 @@ class ReplaceTransactionCoordinator: Coordinator {
             data: transactionData,
             gasPrice: pendingTransactionInformation.gasPrice.computeGasPriceForReplacementTransaction(),
             nonce: nonce)
-
+#warning("Handle later")
         let coordinator = TransactionConfirmationCoordinator(
             presentingViewController: presentingViewController,
             session: session,
@@ -124,18 +124,21 @@ class ReplaceTransactionCoordinator: Coordinator {
             analytics: analytics,
             domainResolutionService: domainResolutionService,
             keystore: keystore,
-            assetDefinitionStore: assetDefinitionStore,
+//            assetDefinitionStore: assetDefinitionStore,
             tokensService: tokensService,
             networkService: networkService)
         
         coordinator.delegate = self
         addCoordinator(coordinator)
 
+        #warning("Handle later")
         switch mode {
         case .speedup:
-            coordinator.start(fromSource: .speedupTransaction)
+//            coordinator.start(fromSource: .speedupTransaction)
+            break
         case .cancel:
-            coordinator.start(fromSource: .cancelTransaction)
+//            coordinator.start(fromSource: .cancelTransaction)
+            break
         }
     }
 

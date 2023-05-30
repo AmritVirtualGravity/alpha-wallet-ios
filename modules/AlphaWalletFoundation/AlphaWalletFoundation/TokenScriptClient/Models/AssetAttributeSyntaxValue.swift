@@ -75,6 +75,10 @@ public struct AssetAttributeSyntaxValue: Hashable {
     public var subscribableValue: Subscribable<AssetInternalValue>? {
         return value.subscribableValue
     }
+    
+    public var subscribableStringValue: String? {
+        return value.subscribableValue?.value?.stringValue
+    }
 }
 
 extension Dictionary where Key == AttributeId, Value == AssetAttributeSyntaxValue {
@@ -261,6 +265,14 @@ extension Dictionary where Key == AttributeId, Value == AssetAttributeSyntaxValu
 
     public var localitySubscribableValue: Subscribable<AssetInternalValue>? {
         self["locality"]?.subscribableValue
+    }
+    
+    public var stateSubscribableStringValue: String? {
+        self["state"]?.subscribableStringValue
+    }
+    
+    public var streetSubscribableStringValue: String? {
+        self["street"]?.subscribableStringValue
     }
 
     public var traitsValue: [OpenSeaNonFungibleTrait]? {

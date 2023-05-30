@@ -255,7 +255,8 @@ extension TransactionConfirmationCoordinator: TransactionConfirmationViewControl
 
         let navigationController = NavigationController(rootViewController: controller)
         navigationController.makePresentationFullScreenForiOS13Migration()
-        controller.navigationItem.rightBarButtonItem = .closeBarButton(self, selector: #selector(configureTransactionDidDismiss))
+        #warning("handle later")
+//        controller.navigationItem.rightBarButtonItem = .closeBarButton(self, selector: #selector(configureTransactionDidDismiss))
 
         hostViewController.present(navigationController, animated: true)
 
@@ -306,7 +307,7 @@ extension TransactionConfirmationCoordinator: TransactionConfiguratorDelegate {
 extension TransactionConfirmationCoordinator {
     private func logCompleteActionSheetForTransactionConfirmationSuccessfully() {
         let speedType: Analytics.TransactionConfirmationSpeedType
-        switch configurator.selectedConfigurationType {
+        switch configurator.selectedGasSpeed {
         case .slow:
             speedType = .slow
         case .standard:
@@ -319,7 +320,7 @@ extension TransactionConfirmationCoordinator {
             speedType = .custom
         }
 
-        let transactionType: Analytics.TransactionType = functional.analyticsTransactionType(fromConfiguration: configuration, data: configurator.currentConfiguration.data)
+        let transactionType: Analytics.TransactionType = functional.analyticsTransactionType(fromConfiguration: configuration, data: configurator.data)
         let overridingRpcUrl: URL? = configurator.session.config.sendPrivateTransactionsProvider?.rpcUrl(forServer: configurator.session.server)
         let privateNetworkProvider: SendPrivateTransactionsProvider?
         if overridingRpcUrl == nil {
@@ -367,7 +368,7 @@ extension TransactionConfirmationCoordinator {
     }
 
     private func logStartActionSheetForTransactionConfirmation(source: Analytics.TransactionConfirmationSource) {
-        let transactionType: Analytics.TransactionType = functional.analyticsTransactionType(fromConfiguration: configuration, data: configurator.currentConfiguration.data)
+        let transactionType: Analytics.TransactionType = functional.analyticsTransactionType(fromConfiguration: configuration, data: configurator.data)
         var analyticsProperties: [String: AnalyticsEventPropertyValue] = [
             Analytics.Properties.source.rawValue: source.rawValue,
             Analytics.Properties.chain.rawValue: server.chainID,

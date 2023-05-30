@@ -6,14 +6,14 @@ import AlphaWalletFoundation
 import Combine
 
 
-struct EditTransactionViewModelInput {
-
-}
-
-struct EditTransactionViewModelOutput {
-    let gasLimitHeader: AnyPublisher<String, Never>
-    let isDataFieldHidden: AnyPublisher<Bool, Never>
-}
+//struct EditTransactionViewModelInput {
+//
+//}
+//
+//struct EditTransactionViewModelOutput {
+//    let gasLimitHeader: AnyPublisher<String, Never>
+//    let isDataFieldHidden: AnyPublisher<Bool, Never>
+//}
 
 struct EditedTransactionConfiguration {
     private let formatter = EtherNumberFormatter.full
@@ -79,22 +79,23 @@ struct EditedTransactionConfiguration {
             overriddenMaxGasPrice = nil
         }
     }
-
+#warning("Handle later")
     init(configuration: TransactionConfigurator, server: RPCServer) {
         defaultMaxGasLimit = Int(GasLimitConfiguration.maxGasLimit(forServer: server))
-        gasLimitRawValue = Int(configuration.gasLimit.description) ?? 21000
-        gasPriceRawValue = Int(configuration.gasPrice / BigUInt(UnitConfiguration.gasPriceUnit.rawValue))
+//        gasLimitRawValue = Int(configuration.gasLimit.description) ?? 21000
+//        gasPriceRawValue = Int(configuration.gasPrice / BigUInt(UnitConfiguration.gasPriceUnit.rawValue))
         nonceRawValue = Int(configuration.nonce.flatMap { String($0) } ?? "")
         dataRawValue = configuration.data.hexEncoded.add0x
         defaultMaxGasPrice = Int(GasPriceConfiguration.maxPrice(forServer: server) / BigUInt(UnitConfiguration.gasPriceUnit.rawValue))
 
-        updateMaxGasLimitIfNeeded(gasLimitRawValue)
-        updateMaxGasPriceIfNeeded(gasPriceRawValue)
+//        updateMaxGasLimitIfNeeded(gasLimitRawValue)
+//        updateMaxGasPriceIfNeeded(gasPriceRawValue)
     }
-
-    var configuration: TransactionConfigurator {
-        return .init(gasPrice: gasPrice, gasLimit: gasLimit, data: data, nonce: nonceRawValue)
-    }
+    
+#warning("Handle later")
+//    var configuration: TransactionConfigurator {
+//        return .init(gasPrice: gasPrice, gasLimit: gasLimit, data: data, nonce: nonceRawValue)
+//    }
 
     var isGasPriceValid: Bool {
         return gasPrice >= 0
@@ -115,20 +116,5 @@ struct EditedTransactionConfiguration {
     var isNonceValid: Bool {
         guard let nonce = nonceRawValue else { return true }
         return nonce >= 0
-    }
-}
-
-
-extension EditTransactionViewModel {
-    enum RecoveryMode {
-        case invalidNonce
-        case none
-    }
-}
-
-extension Decimal {
-    init?(float: Float) {
-        guard !float.isNaN && !float.isInfinite else { return nil }
-        self.init(Double(float))
     }
 }

@@ -36,7 +36,9 @@ extension TransactionConfirmationViewModel {
         }
         private let configurator: TransactionConfigurator
         private var configurationTitle: String {
-            return configurator.selectedConfigurationType.title
+            #warning("Handle later")
+//            return configurator.selectedConfigurationType.title
+            return ""
         }
         let session: WalletSession
         var rate: CurrencyRate?
@@ -58,7 +60,8 @@ extension TransactionConfirmationViewModel {
             case .gas:
                 let gasFee = gasFeeString(for: configurator, rate: rate)
                 if let warning = configurator.gasPriceWarning {
-                    return .init(title: .warning(warning.shortTitle), headerName: headerName, details: gasFee, configuration: configuration)
+#warning("Handle later")
+                    return .init(title: .warning(""), headerName: headerName, details: gasFee, configuration: configuration)
                 } else {
                     return .init(title: .normal(configurationTitle), headerName: headerName, details: gasFee, configuration: configuration)
                 }
@@ -75,67 +78,67 @@ extension TransactionConfirmationViewModel {
     }
 }
 
-extension TransactionConfigurationType {
-    public var title: String {
-        switch self {
-        case .standard:
-            return R.string.localizable.transactionConfigurationTypeAverage()
-        case .slow:
-            return R.string.localizable.transactionConfigurationTypeSlow()
-        case .fast:
-            return R.string.localizable.transactionConfigurationTypeFast()
-        case .rapid:
-            return R.string.localizable.transactionConfigurationTypeRapid()
-        case .custom:
-            return R.string.localizable.transactionConfigurationTypeCustom()
-        }
-    }
-
-    public var estimatedProcessingTime: String {
-        switch self {
-        case .standard:
-            return R.string.localizable.transactionConfigurationTypeAverageTime()
-        case .slow:
-            return R.string.localizable.transactionConfigurationTypeSlowTime()
-        case .fast:
-            return R.string.localizable.transactionConfigurationTypeFastTime()
-        case .rapid:
-            return R.string.localizable.transactionConfigurationTypeRapidTime()
-        case .custom:
-            return ""
-        }
-    }
-}
+//extension TransactionConfigurationType {
+//    public var title: String {
+//        switch self {
+//        case .standard:
+//            return R.string.localizable.transactionConfigurationTypeAverage()
+//        case .slow:
+//            return R.string.localizable.transactionConfigurationTypeSlow()
+//        case .fast:
+//            return R.string.localizable.transactionConfigurationTypeFast()
+//        case .rapid:
+//            return R.string.localizable.transactionConfigurationTypeRapid()
+//        case .custom:
+//            return R.string.localizable.transactionConfigurationTypeCustom()
+//        }
+//    }
+//
+//    public var estimatedProcessingTime: String {
+//        switch self {
+//        case .standard:
+//            return R.string.localizable.transactionConfigurationTypeAverageTime()
+//        case .slow:
+//            return R.string.localizable.transactionConfigurationTypeSlowTime()
+//        case .fast:
+//            return R.string.localizable.transactionConfigurationTypeFastTime()
+//        case .rapid:
+//            return R.string.localizable.transactionConfigurationTypeRapidTime()
+//        case .custom:
+//            return ""
+//        }
+//    }
+//}
 
 extension TransactionConfigurator.GasPriceWarning {
-    public var shortTitle: String {
-        switch self {
-        case .tooHighCustomGasPrice, .networkCongested:
-            return R.string.localizable.transactionConfigurationGasPriceTooHighShort()
-        case .tooLowCustomGasPrice:
-            return R.string.localizable.transactionConfigurationGasPriceTooLowShort()
-        }
-    }
+//    public var shortTitle: String {
+//        switch self {
+//        case .tooHighCustomGasPrice, .networkCongested:
+//            return R.string.localizable.transactionConfigurationGasPriceTooHighShort()
+//        case .tooLowCustomGasPrice:
+//            return R.string.localizable.transactionConfigurationGasPriceTooLowShort()
+//        }
+//    }
 
-    var longTitle: String {
-        switch self {
-        case .tooHighCustomGasPrice, .networkCongested:
-            return R.string.localizable.transactionConfigurationGasPriceTooHighLong()
-        case .tooLowCustomGasPrice:
-            return R.string.localizable.transactionConfigurationGasPriceTooLowLong()
-        }
-    }
+//    var longTitle: String {
+//        switch self {
+//        case .tooHighCustomGasPrice, .networkCongested:
+//            return R.string.localizable.transactionConfigurationGasPriceTooHighLong()
+//        case .tooLowCustomGasPrice:
+//            return R.string.localizable.transactionConfigurationGasPriceTooLowLong()
+//        }
+//    }
 
-    var description: String {
-        switch self {
-        case .tooHighCustomGasPrice:
-            return R.string.localizable.transactionConfigurationGasPriceTooHighDescription()
-        case .networkCongested:
-            return R.string.localizable.transactionConfigurationGasPriceCongestedDescription()
-        case .tooLowCustomGasPrice:
-            return R.string.localizable.transactionConfigurationGasPriceTooLowDescription()
-        }
-    }
+//    var description: String {
+//        switch self {
+//        case .tooHighCustomGasPrice:
+//            return R.string.localizable.transactionConfigurationGasPriceTooHighDescription()
+//        case .networkCongested:
+//            return R.string.localizable.transactionConfigurationGasPriceCongestedDescription()
+//        case .tooLowCustomGasPrice:
+//            return R.string.localizable.transactionConfigurationGasPriceTooLowDescription()
+//        }
+//    }
 }
 
 extension TransactionConfigurator.GasLimitWarning {

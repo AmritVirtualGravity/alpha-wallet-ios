@@ -393,6 +393,38 @@ struct Configuration {
             static let secureIcon = UIColor { trait in
                 return colorFrom(trait: trait, lightColor: R.color.black()!, darkColor: R.color.white()!)
             }
+            
+            static let buttonBorderlessBorder = UIColor.clear
+            static let buttonBackgroundSystem = UIColor.clear
+            static let buttonBackgroundHighlighted = UIColor.clear
+            static let blockChainHeco = UIColor(hex: "1253FC")
+            static let blockChainCronosMainnet = UIColor(hex: "#002D74")
+            static let blockChainKlaytnCypress = UIColor(hex: "FE3300")
+            static let blockChainKlaytnBaobabTestnet = UIColor(hex: "313557")
+            static let blockChainIoTeX = UIColor(hex: "00D4D5")
+            static let blockChainIoTeXTestnet = UIColor(hex: "00D4D5")
+            static let blockChainMain = UIColor(red: 41, green: 134, blue: 175)
+            static let blockChainClassic = UIColor(red: 55, green: 137, blue: 55)
+            static let blockChainCallisto = UIColor(red: 88, green: 56, blue: 163)
+            static let blockChainPoa = UIColor(red: 88, green: 56, blue: 163)
+            static let blockChainGoerli = UIColor(red: 187, green: 174, blue: 154)
+            static let blockChainXDai = UIColor(red: 253, green: 176, blue: 61)
+            static let blockChainBinanceSmartChain = UIColor(red: 255, green: 211, blue: 0)
+            static let blockChainFantom = UIColor.red
+            static let blockChainFantomTestnet = UIColor.red
+            static let blockChainAvalanche = UIColor.red
+            static let blockChainAvalancheTestnet = UIColor.red
+            static let blockChainPolygon = UIColor(red: 130, green: 71, blue: 229)
+            static let blockChainOptimistic = UIColor.red
+            static let blockChainCronosTestnet = UIColor.red
+            static let blockChainArbitrum = UIColor.red
+            static let blockChainPalm = UIColor.red
+            static let blockChainPalmTestnet = UIColor.red
+            static let blockChainOptimismGoerli = UIColor.red
+            static let blockChainArbitrumGoerli = UIColor.red
+            static let blockChainCustom = UIColor.red
+            static let blockChainOkx = UIColor.black
+            static let blockChainSepolia = UIColor(hex: "87ff65")
         }
     }
 }

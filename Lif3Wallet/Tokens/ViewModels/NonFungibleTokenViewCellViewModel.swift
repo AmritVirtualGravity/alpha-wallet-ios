@@ -19,7 +19,8 @@ struct NonFungibleTokenViewCellViewModel {
     init(token: TokenViewModel, isVisible: Bool = true, accessoryType: UITableViewCell.AccessoryType = .none) {
         self.contract = token.contractAddress
         self.server = token.server
-        self.iconImage = token.icon(withSize: .s750)
+        #warning("Handle Later")
+//        self.iconImage = token.icon(withSize: .s750)
         self.nonZeroBalanceCount = token.nonZeroBalance.count
         self.symbol = token.symbol
         self.safeShortTitleInPluralForm = token.tokenScriptOverrides?.safeShortTitleInPluralForm ?? ""
@@ -55,4 +56,4 @@ struct NonFungibleTokenViewCellViewModel {
 
 }
 
-extension NonFungibleTokenViewCellViewModel: Hashable { }
+//extension NonFungibleTokenViewCellViewModel: Hashable { }
